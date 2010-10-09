@@ -1,4 +1,6 @@
 class WordsController < ApplicationController
+  respond_to :html, :json
+
   def index
   end
 
@@ -7,7 +9,17 @@ class WordsController < ApplicationController
   end
 
   def starts_with
-    @start = params[:start]
-    @words = Word.paginate :page => params[:page], :conditions => [ 'name ilike ?', @start + '%' ], :order => 'name'
+    search_options = {
+      :conditions => [ 'name ilike ?', params[:start] + '%' ],
+      :order => 'name'
+    }
+
+    respond_to do |format|
+      format.html { @words = Word.paginate({ :page => params[:page] }.merge(search_options)) }
+      format.json do
+        @words = Word.all search_options
+        respond_with(@words.map{ |w| w.name })
+      end
+    end
   end
 end
