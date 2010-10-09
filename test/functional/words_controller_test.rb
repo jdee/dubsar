@@ -12,8 +12,8 @@ class WordsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:words)
   end
 
-  should "get by_letter view" do
-    get :by_letter, 'letter' => 'E'
+  should "get starts_with view" do
+    get :starts_with, 'start' => 'E'
     assert_response :success
     assert_not_nil assigns(:words)
   end

@@ -1,7 +1,0 @@
-%table
-  %tr
-    - ('A'..'Z').each do |letter|
-      %td
-        = link_to letter, url_for(:action => :by_letter, :letter => letter)
-%hr/
-= render :partial => 'lookup'

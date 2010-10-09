@@ -20,8 +20,25 @@ dd,dt {
   padding: 2px;
 }
 
-.word-lookup {
-  font-family: Geneva, Helvetica, Arial, sans-serif;
+#header-bar {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  height: 6ex;
   background-color: #fc9;
+}
+
+#header-bar > table {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.word-lookup {
+  position: absolute;
+  display: block;
+  top: 0px;
+  right: 0px;
+  font-family: Geneva, Helvetica, Arial, sans-serif;
   padding: 2px;
 }

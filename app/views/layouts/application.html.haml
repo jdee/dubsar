@@ -13,4 +13,16 @@
   %body
     %h3
       =link_to 'Dubsar Dictionary', root_path, :class => "undecorated"
-    = yield
+    #header-bar
+      %table
+        %tr
+          - ('A'..'Z').each do |letter|
+            %td
+              = link_to letter, url_for(:action => :starts_with, :start => letter)
+      .word-lookup
+        = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
+          = label_tag :name, 'enter a word:'
+          = text_field_tag :name
+          = submit_tag 'look up'
+    %hr/
+    =yield

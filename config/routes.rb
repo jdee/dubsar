@@ -1,7 +1,7 @@
 Dubsar::Application.routes.draw do
   get 'words' => 'words#index'
 
-  match 'words/by_letter/:letter' => 'words#by_letter'
+  match 'words/starts_with/:start' => 'words#starts_with'
   match 'words/show' => 'words#show'
 
   # The priority is based upon order of creation:
