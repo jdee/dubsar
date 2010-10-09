@@ -1,9 +1,3 @@
-%dl
-  %dt
-    =h @word.name
-    %em
-      =h "(#{@word.part_of_speech})"
-  %dd
-    - @word.definitions.each do |definition|
-      =h definition.body
-      %br/
+= render :partial => 'word', :object => @word
+%hr/
+= render :partial => 'lookup'
