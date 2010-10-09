@@ -5,3 +5,24 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+%w{adj adv noun verb}.each do |part|
+  part_of_speech = case part
+  when 'adj'
+    'adjective'
+  when 'adv'
+    'adverb'
+  else
+    part
+  end
+
+  File.open(File.join(File.dirname(__FILE__), 'defaults', "data.#{part}")).each do |line|
+    name = line.split(' ').fifth
+    defn = line.split('| ').second
+
+    w = Word.new :name => name, :part_of_speech => part_of_speech
+    w.definitions.build :body => defn
+
+    w.save
+  end
+end
