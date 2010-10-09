@@ -2,8 +2,8 @@ require 'test_helper'
 
 class WordTest < ActiveSupport::TestCase
   should validate_presence_of   :name
-  should validate_uniqueness_of :name
   should validate_presence_of :part_of_speech
+  should have_many :definitions
 
   should 'accept a valid adjective' do
     assert_valid words(:noun)
@@ -35,6 +35,11 @@ class WordTest < ActiveSupport::TestCase
 
   should 'accept a valid verb' do
     assert_valid words(:verb)
+  end
+
+  should 'not accept a word with an invalid part of speech' do
+    w = words(:bad_part_of_speech)
+    assert_equal w.valid?, false
   end
 
 end

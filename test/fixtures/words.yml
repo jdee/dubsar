@@ -33,3 +33,7 @@ verb:
 slang:
   name: slang
   part_of_speech: noun
+
+bad_part_of_speech:
+  name: fudge
+  part_of_speech: thingy
