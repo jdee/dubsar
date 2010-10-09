@@ -17,7 +17,7 @@ interjection:
 noun:
   name: food
   part_of_speech: noun
-  synonyms: grub
+  synset: food
 
 preposition:
   name: from
@@ -46,4 +46,4 @@ bad_part_of_speech:
 grub:
   name: grub
   part_of_speech: noun
-  synonyms: food
+  synset: food

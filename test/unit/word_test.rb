@@ -4,6 +4,7 @@ class WordTest < ActiveSupport::TestCase
   should validate_presence_of   :name
   should validate_presence_of :part_of_speech
   should have_many :definitions
+  should belong_to :synset
 
   should 'accept a valid adjective' do
     assert_valid words(:noun)
@@ -57,8 +58,7 @@ class WordTest < ActiveSupport::TestCase
     food = words :noun
     grub = words :grub
 
-    assert food.include_synonym?(grub.name)
-    assert grub.include_synonym?(food.name)
+    assert_equal food.synset, grub.synset
   end
 
 end

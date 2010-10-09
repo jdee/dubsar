@@ -3,6 +3,7 @@ class CreateWords < ActiveRecord::Migration
     create_table :words do |t|
       t.string :name, :null => false
       t.string :part_of_speech, :null => false
+      t.references :synset
 
       t.timestamps
     end

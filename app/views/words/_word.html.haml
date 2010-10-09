@@ -1,5 +1,5 @@
 %dt
-  =h word.name.humanize
+  =h word.name
   %em
     =h "(#{word.part_of_speech})"
 %dd
@@ -7,3 +7,7 @@
     - word.definitions.each do |definition|
       %li
         =h definition.body
+    - unless word.synset.blank?
+      %li
+        %strong synonyms:
+        =h word.synset.words.reject{ |w| w == word }.map{ |w| w.name}.join(',')
