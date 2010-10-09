@@ -18,7 +18,7 @@
         %tr
           - ('A'..'Z').each do |letter|
             %td
-              = link_to letter, url_for(:action => :starts_with, :start => letter)
+              = link_to letter, url_for(:action => :starts_with, :term => letter)
       .word-lookup
         = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
           // = label_tag :name, 'enter a word:'
