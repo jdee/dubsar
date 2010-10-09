@@ -21,6 +21,7 @@ end
     part
   end
 
+  puts "#{Time.now} loading #{part_of_speech.pluralize}"
   File.open(File.join(File.dirname(__FILE__), 'defaults', "data.#{part}")).each do |line|
     next if line =~ /^\s/
 
@@ -31,7 +32,7 @@ end
     w = find_or_create_word name, part_of_speech
     w.definitions.build :body => defn
 
-    rest.slice(2, 2*(w_cnt-1)).each do |a|
+    rest.slice(0, 2*(w_cnt-1)).each_slice(2) do |a|
       s = a[0]
       synset = w.synset
       synonym = Word.find_by_name_and_part_of_speech s, part_of_speech
@@ -41,6 +42,7 @@ end
       next if synonym and synset.words << synonym
 
       synset.words.build :name => s, :part_of_speech => part_of_speech
+      synset.save
     end if w_cnt > 1
     w.save
   end

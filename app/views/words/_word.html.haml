@@ -10,4 +10,5 @@
     - unless word.synset.blank?
       %li
         %strong synonyms:
-        =h word.synset.words.reject{ |w| w == word }.map{ |w| w.name}.join(',')
+        - word.synset.words.reject{ |w| w == word }.map{ |w| w.name }.each do |synonym|
+          =link_to synonym, url_for(:action => :show, :name => synonym)
