@@ -1,11 +1,35 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+adjective:
+  name: foul
+  part_of_speech: adjective
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+adverb:
+  name: well
+  part_of_speech: adverb
+
+conjunction:
+  name: but
+  part_of_speech: conjunction
+
+interjection:
+  name: hey
+  part_of_speech: interjection
+
+noun:
+  name: food
+  part_of_speech: noun
+
+preposition:
+  name: from
+  part_of_speech: preposition
+
+pronoun:
+  name: you
+  part_of_speech: pronoun
+
+verb:
+  name: follow
+  part_of_speech: verb
+
+slang:
+  name: slang
+  part_of_speech: noun

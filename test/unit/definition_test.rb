@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class DefinitionTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  should validate_presence_of :body
+
+  should 'accept a valid definition' do
+    assert_valid definitions(:slang)
   end
 end
