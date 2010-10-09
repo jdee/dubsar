@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101009013851) do
+ActiveRecord::Schema.define(:version => 20101009173622) do
 
   create_table "definitions", :force => true do |t|
     t.integer  "word_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20101009013851) do
     t.string   "part_of_speech", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "synonyms"
   end
 
   add_index "words", ["name", "part_of_speech"], :name => "index_words_on_name_and_part_of_speech"

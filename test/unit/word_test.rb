@@ -53,4 +53,12 @@ class WordTest < ActiveSupport::TestCase
     assert_not_equal well_adverb.part_of_speech, well_noun.part_of_speech
   end
 
+  should 'recognize synonyms' do
+    food = words :noun
+    grub = words :grub
+
+    assert food.include_synonym?(grub.name)
+    assert grub.include_synonym?(food.name)
+  end
+
 end

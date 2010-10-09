@@ -12,4 +12,18 @@ class Word < ActiveRecord::Base
        preposition
        pronoun
        verb} }
+
+  def add_synonym(synonym)
+    # first check to see if it's already there
+    return if include_synonym?(synonym)
+    synonyms += ',' + synonym
+  end
+
+  def each_synonym
+    synonyms.split(',').each { |synonym| yield synonym }
+  end
+
+  def include_synonym?(synonym)
+    synonyms.split(',').include?(synonym)
+  end
 end

@@ -17,6 +17,7 @@ interjection:
 noun:
   name: food
   part_of_speech: noun
+  synonyms: grub
 
 preposition:
   name: from
@@ -41,3 +42,8 @@ well_noun:
 bad_part_of_speech:
   name: fudge
   part_of_speech: thingy
+
+grub:
+  name: grub
+  part_of_speech: noun
+  synonyms: food
