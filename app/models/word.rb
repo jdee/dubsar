@@ -13,4 +13,8 @@ class Word < ActiveRecord::Base
        preposition
        pronoun
        verb} }
+
+  def synonyms
+    synset.words.reject{ |w| w == self }.map{ |w| w.name } if synset
+  end
 end

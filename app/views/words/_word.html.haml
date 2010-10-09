@@ -7,8 +7,8 @@
     - word.definitions.each do |definition|
       %li
         =h definition.body
-    - unless word.synset.blank?
+    - unless word.synonyms.blank?
       %li
         %strong synonyms:
-        - word.synset.words.reject{ |w| w == word }.map{ |w| w.name }.each do |synonym|
+        - word.synonyms.each do |synonym|
           =link_to synonym, url_for(:action => :show, :name => synonym)

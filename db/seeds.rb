@@ -22,18 +22,20 @@ end
   end
 
   puts "#{Time.now} loading #{part_of_speech.pluralize}"
+  total_count = Word.count
   File.open(File.join(File.dirname(__FILE__), 'defaults', "data.#{part}")).each do |line|
     next if line =~ /^\s/
 
     left, defn = line.split('| ')
     synset_offset, lex_filenum, ss_type, w_cnt, name, lex_id, *rest = left.split(' ')
     w_cnt = w_cnt.to_i
+    name.gsub!('_', ' ')
 
     w = find_or_create_word name, part_of_speech
     w.definitions.build :body => defn
 
     rest.slice(0, 2*(w_cnt-1)).each_slice(2) do |a|
-      s = a[0]
+      s = a[0].gsub('_', ' ')
       synset = w.synset
       synonym = Word.find_by_name_and_part_of_speech s, part_of_speech
       next if synonym and synset and synset.words.include?(synonym)
@@ -46,4 +48,7 @@ end
     end if w_cnt > 1
     w.save
   end
+  new_count = Word.count
+  puts "#{Time.now} loaded #{new_count-total_count} #{part_of_speech.pluralize}"
+  total_count = new_count
 end
