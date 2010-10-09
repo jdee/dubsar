@@ -1,5 +1,17 @@
-%dl
+%table
+  %tr
+    %th name
+    %th part of speech
+    %th definition
   - @words.each do |word|
-    = render :partial => 'word', :object => word
+    %tr
+      %td
+        =h word.name.humanize
+      %td
+        =h word.part_of_speech
+      %td
+        - word.definitions.each do |definition|
+          =h definition.body
+          %br/
 
 = will_paginate @words

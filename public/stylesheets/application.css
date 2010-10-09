@@ -3,15 +3,20 @@
   font-size: 12pt;
 }
 
+a.undecorated {
+  color: inherit;
+  text-decoration: none;
+}
+
 label {
   display: block;
 }
 
-dl {
+dl,table {
   background-color: #fc9;
 }
 
-dd,dt {
+dd,dt,tr {
   padding: 2px;
 }
 

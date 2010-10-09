@@ -8,7 +8,6 @@ class WordsController < ApplicationController
 
   def by_letter
     @letter = params[:letter]
-    @words = Word.all :conditions => [ 'name like ?', @letter.downcase + '%' ],
-      :order => 'name'
+    @words = Word.paginate :page => params[:page], :conditions => [ 'name like ?', @letter.downcase + '%' ], :order => 'name'
   end
 end
