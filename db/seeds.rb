@@ -20,7 +20,8 @@
     name = line.split(' ').fifth
     defn = line.split('| ').second
 
-    w = Word.new :name => name, :part_of_speech => part_of_speech
+    w = Word.find_by_name_and_part_of_speech(name, part_of_speech) ||
+      Word.new(:name => name, :part_of_speech => part_of_speech)
     w.definitions.build :body => defn
 
     w.save

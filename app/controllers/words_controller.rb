@@ -3,7 +3,7 @@ class WordsController < ApplicationController
   end
 
   def show
-    @word = Word.find_by_name params[:name]
+    @words = Word.all :conditions => { :name => params[:name] }
   end
 
   def by_letter

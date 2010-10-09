@@ -6,6 +6,9 @@ class CreateWords < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :words, :name
+    add_index :words, [ :name, :part_of_speech ]
   end
 
   def self.down
