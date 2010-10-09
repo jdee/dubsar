@@ -1,15 +1,5 @@
-%table
-  %tr
-    %th name
-    %th part of speech
-    %th definition
+%dl
   - @words.each do |word|
-    %tr
-      %td
-        =h word.name
-      %td
-        =h word.part_of_speech
-      %td
-        =h word.definitions.map{ |d| d.body }.join('; ')
+    = render :partial => 'word', :object => word
 
 = will_paginate @words

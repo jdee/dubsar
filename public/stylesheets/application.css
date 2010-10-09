@@ -1,0 +1,22 @@
+* {
+  font-family: Monaco, Menlo, Monospace;
+  font-size: 12pt;
+}
+
+label {
+  display: block;
+}
+
+dl {
+  background-color: #fc9;
+}
+
+dd,dt {
+  padding: 2px;
+}
+
+.word-lookup {
+  font-family: Geneva, Helvetica, Arial, sans-serif;
+  background-color: #fc9;
+  padding: 2px;
+}
