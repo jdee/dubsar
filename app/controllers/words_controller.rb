@@ -9,8 +9,9 @@ class WordsController < ApplicationController
   end
 
   def starts_with
+    # TODO: Handle a request without a ?term
     search_options = {
-      :conditions => [ 'name ilike ?', params[:start] + '%' ],
+      :conditions => [ 'name ilike ?', params[:term] + '%' ],
       :order => 'name'
     }
 

@@ -5,9 +5,9 @@
       Dubsar
     = stylesheet_link_tag 'jquery-ui-1.8.5.custom'
     = stylesheet_link_tag 'application'
-    = javascript_include_tag :defaults
     = javascript_include_tag 'jquery-1.4.2.min'
     = javascript_include_tag 'jquery-ui-1.8.5.custom.min'
+    = javascript_include_tag :defaults
     = csrf_meta_tag
 
   %body
@@ -21,8 +21,8 @@
               = link_to letter, url_for(:action => :starts_with, :start => letter)
       .word-lookup
         = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
-          = label_tag :name, 'enter a word:'
-          = text_field_tag :name
+          // = label_tag :name, 'enter a word:'
+          = text_field_tag :name, '', :id => 'word-input'
           = submit_tag 'look up'
     %hr/
     =yield
