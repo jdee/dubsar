@@ -42,4 +42,15 @@ class WordTest < ActiveSupport::TestCase
     assert_equal w.valid?, false
   end
 
+  should 'recognize words with different parts of speech as distinct' do
+    well_adverb = words :adverb
+    well_noun   = words :well_noun
+
+    assert_valid well_adverb
+    assert_valid well_noun
+
+    assert_equal well_adverb.name, well_noun.name
+    assert_not_equal well_adverb.part_of_speech, well_noun.part_of_speech
+  end
+
 end
