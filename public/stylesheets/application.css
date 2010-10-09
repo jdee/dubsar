@@ -12,11 +12,11 @@ label {
   display: block;
 }
 
-dl,table {
+dl {
   background-color: #fc9;
 }
 
-dd,dt,tr {
+dd,dt {
   padding: 2px;
 }
 
