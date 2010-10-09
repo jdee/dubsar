@@ -1,0 +1,9 @@
+%h3 Dubsar Dictionary
+
+%dl
+  %dt
+    =h @word.name
+  %dd
+    - @word.definitions.each do |definition|
+      =h definition.body
+      %br

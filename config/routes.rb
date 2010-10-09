@@ -1,5 +1,8 @@
 Dubsar::Application.routes.draw do
-  get "words/index"
+  get 'words' => 'words#index'
+
+  match 'words/by_letter/:letter' => 'words#by_letter'
+  match 'words/:name' => 'words#show'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -50,7 +53,8 @@ Dubsar::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+
+  root :to => "words#index"
 
   # See how all your routes lay out with "rake routes"
 

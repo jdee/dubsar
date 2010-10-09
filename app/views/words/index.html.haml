@@ -5,4 +5,4 @@
   %tr
     - ('A'..'Z').each do |letter|
       %td
-        = letter # don't need h with a single letter
+        = link_to letter, url_for(:action => :by_letter, :controller => :words, :letter => letter)
