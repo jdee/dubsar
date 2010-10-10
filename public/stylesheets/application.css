@@ -54,6 +54,10 @@ label {
   white-space: nowrap;
 }
 
+*.ui-state-active > span.ui-button-text {
+  color: #eb8f00;
+}
+
 #word-lookup-buttonset {
   position: absolute;
   bottom: 2px;
