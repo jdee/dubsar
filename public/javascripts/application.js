@@ -57,5 +57,12 @@
     $(':submit').button({
       icons: { primary:'ui-icon-search' }
     });
+
+    $('#word-starts-with').button({
+      icons:{
+        secondary: 'ui-icon-arrowthick-1-e'
+      }
+    });
+    $('#word-lookup-buttonset').buttonset();
   });
 })(jQuery);

@@ -54,15 +54,10 @@ label {
   white-space: nowrap;
 }
 
-#word-starts-with {
+#word-lookup-buttonset {
   position: absolute;
-  bottom: 8px;
-  right: 345px;
-}
-
-#word-starts-with-label {
-  bottom: 0.9ex;
-  right: 365px;
+  bottom: 2px;
+  right: 340px;
 }
 
 #word-input {
