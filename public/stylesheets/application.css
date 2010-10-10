@@ -58,6 +58,10 @@ label {
   color: #eb8f00;
 }
 
+#word-lookup-buttonset span.ui-button-text {
+  font-size: 0.6em;
+}
+
 #word-lookup-buttonset {
   position: absolute;
   bottom: 2px;
