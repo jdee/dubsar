@@ -59,28 +59,32 @@ user name and password in <tt>config/database.yml</tt>.
 
 === Dubsar
 
-Install gems with the bundler
+Install the bundler gem.
+
+  gem install bundler
+
+Install gems with the bundler.
 
   bundle install
 
-Set up the database
+Set up the database.
 
   rake db:create
   rake db:schema:load
 
-Run unit tests
+Run unit tests.
 
   rake test
 
-Seed the database
+Seed the database.
 
   rake db:seed
 
 This takes about twenty minutes on my dual-core 64-bit Pentium
 desktop.
 
-Run the server
+Run the server.
 
   rails server
 
-Connect a browser to port 3000
+Connect a browser to port 3000.
