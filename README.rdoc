@@ -1,4 +1,4 @@
-:title: Dubsar
+# :title: Dubsar
 
 = Dubsar
 
@@ -6,9 +6,42 @@ Dubsar is a dictionary web application using Ruby on Rails 3.0.  The
 content is taken from the Princeton University
 WordNet[http://wordnet.princeton.edu/] project.
 
+== Functionality, Features and Content
+
 The functionality is limited by availability of content (or at least by
 my understanding of the available content).  For example, WordNet only
 includes adjectives, adverbs, nouns and verbs (the other parts of
 speech being represented by relatively few words and being often
 considered less important or directly relevant to certain sorts of
 content).
+
+Currently, a user can:
+Browse entries by first letter:: Via links in the navigation bar, you
+                                 can retrieve a list of all words
+                                 beginning with that letter.
+Search for a word:: Type a word into the text box and press return or
+                    click the _search_ button.  There is also a toggle
+                    button (like a check box) to search for words that
+                    <i>start with</i> the search term.  When the button
+                    is not selected (by default), Dubsar returns only
+                    exact matches.
+View a word's definitions and part of speech::
+                            In the active accordion pane for each
+                            word, all available definitions are
+                            displayed.  An abbreviation for the part of
+                            speech is displayed in the accordion header
+                            (<i>adj., adv., n.</i> or <i>v.</i>).  If a
+                            word may be used as multiple parts of
+                            speech (e.g., _run_ as both a noun and a
+                            verb), two entries will be made.  Each
+                            Dubsar dictionary entry has a single part
+                            of speech.
+View a word's synonyms:: All available synonyms for a word are listed
+                         after its definitions.  Also, for many words,
+                         it is possible to hover over them where they
+                         appear in word definitions and see a list of
+                         synonyms.  This only happens in the defintion
+                         accordion pane.
+See suggestions for search terms in an autocompleter::
+                         The autocompleter shows available matches
+                         while a user is typing.
