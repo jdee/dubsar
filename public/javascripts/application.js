@@ -3,6 +3,11 @@
 
 (function($){
   $(function(){
-    $('#word-input').autocomplete({source:'/words/starts_with.json/'});
+    $('#word-input').autocomplete({
+      source:'/words/starts_with.json/',
+      close:function(){
+        $('#word-submit').click();
+      }
+    });
   });
 })(jQuery);
