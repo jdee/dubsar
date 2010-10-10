@@ -13,4 +13,4 @@
       %li
         %strong synonyms:
         - word.synonyms.each do |synonym|
-          =link_to synonym, url_for(:action => :show, :name => synonym), :title => synonym
+          =link_to synonym, url_for(:action => :show, :term => synonym), :title => synonym
