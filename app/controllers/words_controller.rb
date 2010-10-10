@@ -16,10 +16,12 @@ class WordsController < ApplicationController
     }
 
     respond_to do |format|
-      format.html { @words = Word.paginate({ :page => params[:page] }.merge(search_options)) }
+      format.html do
+        @words = Word.paginate({ :page => params[:page] }.merge(search_options))
+      end
       format.json do
         @words = Word.all search_options
-        respond_with(@words.map{ |w| w.name })
+        respond_with @words.map{ |w| w.name }.uniq
       end
     end
   end
