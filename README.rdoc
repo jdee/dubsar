@@ -1,0 +1,14 @@
+:title: Dubsar
+
+= Dubsar
+
+Dubsar is a dictionary web application using Ruby on Rails 3.0.  The
+content is taken from the Princeton University
+WordNet[http://wordnet.princeton.edu/] project.
+
+The functionality is limited by availability of content (or at least by
+my understanding of the available content).  For example, WordNet only
+includes adjectives, adverbs, nouns and verbs (the other parts of
+speech being represented by relatively few words and being often
+considered less important or directly relevant to certain sorts of
+content).

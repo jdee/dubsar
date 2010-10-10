@@ -65,10 +65,12 @@
     });
     $('#word-lookup-buttonset').buttonset();
 
+    /* This animation is fun, but a little annoying.
     $('a', '#header-bar').hover(function(){
       $(this).effect('pulsate', { times: 1, speed: 'fast' });
     }).mouseout(function(){
       $(this).stop();
     });
+     */
   });
 })(jQuery);
