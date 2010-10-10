@@ -7,15 +7,8 @@
   %ol
     - word.definitions.each do |definition|
       %li
-        // TODO: Handle words with multiple matches
         - definition.body.split(' ').each do |w|
-          - words = Word.all :conditions => { :name => w }
-          - _w = words.first if words and words.count == 1
-          - if _w and _w.synonyms
-            %span{:title=>"synonyms: #{_w.synonyms.join(',')}"}
-              =h w
-          - else
-            =h w
+          =render :partial => 'synspan', :locals => { :w => w }
     - unless word.synonyms.blank?
       %li
         %strong synonyms:

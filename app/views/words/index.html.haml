@@ -6,9 +6,11 @@
   #content_div_1
     %ol
       %li
-        the Sumerian word for
+        - %w{the Sumerian word for}.each do |w|
+          =render :partial => 'synspan', :locals => { :w => w }
         %em scribe.
       %li
-        a Rails dictionary application using content from the Princeton University
-        =link_to 'WordNet', 'http://wordnet.princeton.edu', :title => 'WordNet'
+        - %w{a Rails dictionary application using content from the Princeton University}.each do |w|
+          =render :partial => 'synspan', :locals => { :w => w }
+        = link_to 'WordNet', 'http://wordnet.princeton.edu', :title => 'WordNet'
         project.
