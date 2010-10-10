@@ -6,7 +6,8 @@ class WordsController < ApplicationController
   end
 
   def show
-    @words = Word.all :conditions => [ 'name ilike ?', params[:name] ]
+    @words = Word.paginate :page => params[:page],
+      :conditions => [ 'name ilike ?', params[:name] ]
   end
 
   def starts_with
@@ -19,6 +20,7 @@ class WordsController < ApplicationController
     respond_to do |format|
       format.html do
         @words = Word.paginate({ :page => params[:page] }.merge(search_options))
+        render :action => 'show'
       end
       format.json do
         @words = Word.all search_options
