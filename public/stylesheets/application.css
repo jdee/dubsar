@@ -3,6 +3,14 @@
   font-size: 12pt;
 }
 
+a:link {
+  color: #543
+}
+
+a:visited {
+  color: #000
+}
+
 a.undecorated {
   color: inherit;
   text-decoration: none;
@@ -40,4 +48,9 @@ dd,dt {
   top: 0px;
   right: 0px;
   padding: 2px;
+}
+
+.ui-menu {
+  max-height: 40%;
+  overflow: auto;
 }
