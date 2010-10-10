@@ -112,6 +112,8 @@ Dubsar does not work with:
   menu.  Something related to AJAX and JavaScript event handling is
   not entirely right, and these things do not always work
   consistently.
+- Even after the word-entry field is cleared, sometimes an AJAX
+  response trickles in and pops up the autocompleter again.
 - There is not much error handling in the controller.  If the user
   submits a badly-formed request (by manually editing the URL), she
   can get an unpleasant error message.  But navigating normally
@@ -121,7 +123,7 @@ Dubsar does not work with:
 
 It's a simple enough matter to extend the <i>starts with</i> search
 functionality.  I intend to change the toggle button to a set of four
-radio buttons, also including <i>exact match</i>, <i>ends with<i> and
+radio buttons, also including <i>exact match</i>, <i>ends with</i> and
 _contains_.  The <i>starts with</i> request was already implemented
 for purposes of the autocompleter and the navigation bar.  It worked
 with a manually well-formed URL.  So it was a simple matter to add the
