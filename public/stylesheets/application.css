@@ -9,8 +9,12 @@ a:link {
 }
 
 a:visited {
-  /* color: #0e4a62; */
   color: #333333;
+}
+
+a:hover,active {
+  color: #eb8f00;
+  font-weight: bolder;
 }
 
 a.undecorated {
@@ -22,19 +26,11 @@ label {
   display: block;
 }
 
-dl {
-  background-color: #fc9;
-}
-
-dd,dt {
-  padding: 2px;
-}
-
 #header-bar {
   position: relative;
   top: 0px;
   left: 0px;
-  height: 6.5ex;
+  height: 7ex;
   background-color: #fc9;
 }
 

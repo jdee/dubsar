@@ -17,5 +17,6 @@
     });
 
     $('#accordion').accordion({});
+    $(':submit').button({})
   });
 })(jQuery);
