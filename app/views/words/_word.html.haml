@@ -6,9 +6,18 @@
   %ol
     - word.definitions.each do |definition|
       %li
-        =h definition.body
+        // DEBT: factor this into a helper?
+        // TODO: Handle words with multiple matches
+        - definition.body.split(' ').each do |w|
+          - words = Word.all :conditions => { :name => w }
+          - _w = words.first if words and words.count == 1
+          - if _w and _w.synonyms
+            %span{:title=>"synonyms: #{_w.synonyms.join(',')}"}
+              =h w
+          - else
+            =h w
     - unless word.synonyms.blank?
       %li
         %strong synonyms:
         - word.synonyms.each do |synonym|
-          =link_to synonym, url_for(:action => :show, :name => synonym)
+          =link_to synonym, url_for(:action => :show, :name => synonym), :title => synonym

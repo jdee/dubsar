@@ -12,13 +12,13 @@
 
   %body
     %h3
-      =link_to 'Dubsar Dictionary', root_path, :class => "undecorated"
+      =link_to 'Dubsar Dictionary', root_path, :class => "undecorated", :title => 'home'
     #header-bar
       %table
         %tr
           - ('A'..'Z').each do |letter|
             %td
-              = link_to letter, url_for(:action => :starts_with, :term => letter)
+              = link_to letter, url_for(:action => :starts_with, :term => letter), :title => "words starting with #{letter}"
       .word-lookup
         = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
           = label_tag :name, 'enter a word:'
