@@ -102,3 +102,27 @@ Dubsar does not work with:
 - Internet Explorer 8
 - Opera 10
 - Konqueror 4
+
+== Known Issues
+
+- There are some small glitches with the autocompleter and the
+  word-entry text field.  Usually it will submit a search if that
+  element has focus, and the user presses return.  It will also
+  submit a search if the user selects an item from the autocomplete
+  menu.  Something related to AJAX and JavaScript event handling is
+  not entirely right, and these things do not always work
+  consistently.
+- There is not much error handling in the controller.  If the user
+  submits a badly-formed request (by manually editing the URL), she
+  can get an unpleasant error message.  But navigating normally
+  through the application does not produce such problems.
+
+== Future Plans
+
+It's a simple enough matter to extend the <i>starts with</i> search
+functionality.  I intend to change the toggle button to a set of four
+radio buttons, also including <i>exact match</i>, <i>ends with<i> and
+_contains_.  The <i>starts with</i> request was already implemented
+for purposes of the autocompleter and the navigation bar.  It worked
+with a manually well-formed URL.  So it was a simple matter to add the
+single search option first.  The others will follow.
