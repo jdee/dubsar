@@ -24,7 +24,7 @@ dd,dt {
   position: relative;
   top: 0px;
   left: 0px;
-  height: 4.5ex;
+  height: 6ex;
   background-color: #fc9;
 }
 
@@ -39,6 +39,5 @@ dd,dt {
   display: block;
   top: 0px;
   right: 0px;
-  font-family: Geneva, Helvetica, Arial, sans-serif;
   padding: 2px;
 }
