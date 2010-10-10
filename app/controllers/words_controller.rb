@@ -2,18 +2,10 @@ class WordsController < ApplicationController
   respond_to :html, :json
   before_filter :init_count
 
-  def index
-  end
-
   def show
-    @words = Word.paginate :page => params[:page],
-      :conditions => [ 'name ilike ?', params[:name] ]
-  end
-
-  def starts_with
     # TODO: Handle a request without a ?term
     search_options = {
-      :conditions => [ 'name ilike ?', params[:term] + '%' ],
+      :conditions => [ 'name ilike ?', params[:term] ],
       :order => 'name'
     }
 

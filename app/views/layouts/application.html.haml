@@ -18,11 +18,11 @@
         %tr
           - ('A'..'Z').each do |letter|
             %td
-              = link_to letter, url_for(:action => :starts_with, :term => letter), :title => "words starting with #{letter}"
+              = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}"
       .word-lookup
         = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
-          = label_tag :name, 'enter a word:'
-          = text_field_tag :name, '', :id => 'word-input', :tabindex => '1'
+          = label_tag :term, 'enter a word:'
+          = text_field_tag :term, '', :id => 'word-input', :tabindex => '1'
           %button{:type => 'submit', :id => 'word-submit', :tabindex => '2'} search
     %hr/
     =yield

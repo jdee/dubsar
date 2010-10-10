@@ -12,10 +12,4 @@ class WordsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:words)
   end
 
-  should "get starts_with view" do
-    get :starts_with, 'term' => 'E'
-    assert_response :success
-    assert_not_nil assigns(:words)
-  end
-
 end
