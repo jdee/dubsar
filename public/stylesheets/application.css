@@ -21,10 +21,6 @@ a.undecorated {
   text-decoration: none;
 }
 
-label {
-  display: block;
-}
-
 #header-bar {
   position: relative;
   top: 0px;
@@ -50,4 +46,33 @@ label {
 .ui-menu {
   max-height: 40%;
   overflow: auto;
+}
+
+label {
+  position: absolute;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#word-starts-with {
+  position: absolute;
+  bottom: 8px;
+  right: 345px;
+}
+
+#word-starts-with-label {
+  bottom: 0.9ex;
+  right: 365px;
+}
+
+#word-input {
+  position: absolute;
+  width: 200px;
+  bottom: 5px;
+  right: 125px;
+}
+
+#word-input-label {
+  bottom: 3.8ex;
+  right: 125px;
 }

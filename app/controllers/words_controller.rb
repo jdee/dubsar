@@ -6,6 +6,7 @@ class WordsController < ApplicationController
     # TODO: Handle a(n erroneous) request without a ?term
     page = params[:page]
     term = params[:term]
+    term += '%' if term and params[:starts_with] == 'yes'
     search_options = {
       :conditions => [ 'name ilike ?', term ],
       :order => 'name'
