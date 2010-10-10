@@ -1,14 +1,16 @@
 * {
   font-family: Monaco, Menlo, Monospace;
   font-size: 12pt;
+  color: #1c94c4;
 }
 
 a:link {
-  color: #543
+  color: #1c94c4;
 }
 
 a:visited {
-  color: #000
+  /* color: #0e4a62; */
+  color: #333333;
 }
 
 a.undecorated {
@@ -32,7 +34,7 @@ dd,dt {
   position: relative;
   top: 0px;
   left: 0px;
-  height: 6ex;
+  height: 6.5ex;
   background-color: #fc9;
 }
 
@@ -45,7 +47,7 @@ dd,dt {
 .word-lookup {
   position: absolute;
   display: block;
-  top: 0px;
+  bottom: 2px;
   right: 0px;
   padding: 2px;
 }

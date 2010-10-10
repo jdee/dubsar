@@ -15,5 +15,7 @@
       change:ac_handler,
       close:ac_handler
     });
+
+    $('#accordion').accordion({});
   });
 })(jQuery);

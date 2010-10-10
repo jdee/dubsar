@@ -1,5 +1,6 @@
 class WordsController < ApplicationController
   respond_to :html, :json
+  before_filter :init_count
 
   def index
   end
@@ -24,5 +25,10 @@ class WordsController < ApplicationController
         respond_with @words.map{ |w| w.name }.uniq
       end
     end
+  end
+
+  def init_count
+    # count accordion divs
+    @count = 0
   end
 end

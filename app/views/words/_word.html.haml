@@ -1,12 +1,12 @@
-%dt
-  =h word.name
-  %em
-    =h "(#{word.part_of_speech})"
-%dd
+%h2
+  %a{:href => '#'}
+    =h word.name
+    %em
+      =h "(#{word.part_of_speech})"
+%div{:id => "content_div_#{@count += 1}"}
   %ol
     - word.definitions.each do |definition|
       %li
-        // DEBT: factor this into a helper?
         // TODO: Handle words with multiple matches
         - definition.body.split(' ').each do |w|
           - words = Word.all :conditions => { :name => w }
