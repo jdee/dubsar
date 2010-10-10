@@ -2,7 +2,7 @@
   %a{:href => '#'}
     =h word.name
     %em
-      =h "(#{word.part_of_speech})"
+      =h "(#{word.pos}.)"
 %div{:id => "content_div_#{@count += 1}"}
   %ol
     - word.definitions.each do |definition|
