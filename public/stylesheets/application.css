@@ -13,7 +13,7 @@ a:visited {
 }
 
 a:hover,active {
-  color: #eb8f00;
+  color: #c77405;
   font-weight: bolder;
 }
 
@@ -30,7 +30,7 @@ label {
   position: relative;
   top: 0px;
   left: 0px;
-  height: 7ex;
+  height: 7.2ex;
   background-color: #fc9;
 }
 
