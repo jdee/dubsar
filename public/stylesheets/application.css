@@ -33,6 +33,17 @@ a.undecorated {
   position: absolute;
   bottom: 0px;
   left: 0px;
+  table-layout: fixed;
+  width: 500px;
+  text-align: center;
+}
+
+#header-bar > table a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+
+#header-bar > table a:hover, a:active {
+  font-weight: bolder;
 }
 
 .word-lookup {

@@ -64,5 +64,11 @@
       }
     });
     $('#word-lookup-buttonset').buttonset();
+
+    $('a', '#header-bar').hover(function(){
+      $(this).effect('pulsate', { times: 1, speed: 'fast' });
+    }).mouseout(function(){
+      $(this).stop();
+    });
   });
 })(jQuery);
