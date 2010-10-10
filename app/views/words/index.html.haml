@@ -8,9 +8,10 @@
       %li
         - %w{the Sumerian word for}.each do |w|
           =render :partial => 'synspan', :locals => { :w => w }
-        %em scribe.
+        %em
+          =render :partial => 'synspan', :locals => { :w => 'scribe' }
       %li
         - %w{a Rails dictionary application using content from the Princeton University}.each do |w|
           =render :partial => 'synspan', :locals => { :w => w }
         = link_to 'WordNet', 'http://wordnet.princeton.edu', :title => 'WordNet'
-        project.
+        =render :partial => 'synspan', :locals => { :w => 'project' }
