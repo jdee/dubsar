@@ -3,20 +3,24 @@ class WordsController < ApplicationController
   before_filter :init_count
 
   def show
-    # TODO: Handle a request without a ?term
+    # TODO: Handle a(n erroneous) request without a ?term
+    page = params[:page]
+    term = params[:term]
     search_options = {
-      :conditions => [ 'name ilike ?', params[:term] ],
+      :conditions => [ 'name ilike ?', term ],
       :order => 'name'
     }
+    @words = Word.paginate({ :page => page }.merge(search_options))
 
     respond_to do |format|
-      format.html do
-        @words = Word.paginate({ :page => params[:page] }.merge(search_options))
-        render :action => 'show'
-      end
+      format.html { render :action => 'show' }
       format.json do
-        @words = Word.all search_options
-        respond_with @words.map{ |w| w.name }.uniq
+        respond_with({
+          :page  => page ? page.to_i + 1 : 2,
+          :total => @words.total_pages,
+          :term  => term.sub(/%$/, ''),
+          :list  => @words.map{ |w| w.name }.uniq
+        }.to_json)
       end
     end
   end
