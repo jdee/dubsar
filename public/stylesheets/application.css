@@ -13,8 +13,7 @@ a:visited {
 }
 
 a:hover,active {
-  color: #c77405;
-  font-weight: bolder;
+  color: #eb8f00;
 }
 
 a.undecorated {

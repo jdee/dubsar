@@ -17,6 +17,8 @@
     });
 
     $('#accordion').accordion({});
-    $(':submit').button({})
+    $(':submit').button({
+      icons: { primary:'ui-icon-search' }
+    });
   });
 })(jQuery);

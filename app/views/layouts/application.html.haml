@@ -23,6 +23,6 @@
         = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
           = label_tag :name, 'enter a word:'
           = text_field_tag :name, '', :id => 'word-input', :tabindex => '1'
-          = submit_tag 'search', :id => 'word-submit', :tabindex => '2'
+          %button{:type => 'submit', :id => 'word-submit', :tabindex => '2'} search
     %hr/
     =yield
