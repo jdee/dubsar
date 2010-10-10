@@ -88,3 +88,17 @@ Run the server.
   rails server
 
 Connect a browser to port 3000.
+
+== Supported Browsers
+
+Currently, Dubsar works well with:
+- Firefox 3 on all platforms (Ubuntu, Vista, OS X)
+- Google Chrome 6 on all platforms
+- Safari 5 on OS X and Vista
+- Camino 2 on OS X
+- OmniWeb 5 on OS X
+
+Dubsar does not work with:
+- Internet Explorer 8
+- Opera 10
+- Konqueror 4
