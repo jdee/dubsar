@@ -3,8 +3,9 @@
   %head
     %title
       Dubsar
-    = stylesheet_link_tag 'jquery-ui-1.8.5.custom'
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag "ui-#{@theme}ness/jquery-ui-1.8.5.custom"
+    = stylesheet_link_tag "ui-#{@theme}ness/application"
+    = stylesheet_link_tag 'common'
     = javascript_include_tag 'jquery-1.4.2.min'
     = javascript_include_tag 'jquery-ui-1.8.5.custom.min'
     = javascript_include_tag :defaults
@@ -13,7 +14,19 @@
   %body
     %h3
       =link_to 'Dubsar Dictionary', root_path, :class => "undecorated", :title => 'home'
-    #header-bar
+    #theme-picker
+      #theme-picker-buttonset.small-buttonset
+        - if @theme == 'light'
+          %input{:type => 'radio', :id => 'light-radio', :checked => 'checked'}
+        - else
+          %input{:type => 'radio', :id => 'light-radio' }
+        %label{:for => 'light-radio', :id => 'dark-other'} light
+        - if @theme == 'light'
+          %input{:type => 'radio', :id => 'dark-radio' }
+        - else
+          %input{:type => 'radio', :id => 'dark-radio', :checked => 'checked'}
+        %label{:for => 'dark-radio', :id => 'light-other'} dark
+    #header-bar.ui-corner-all
       %table
         %tr
           - ('A'..'Z').each do |letter|
@@ -21,7 +34,7 @@
               = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}"
       .word-lookup
         = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
-          #word-lookup-buttonset
+          #word-lookup-buttonset.small-buttonset
             = check_box_tag :starts_with, 'yes', false, :id => 'word-starts-with', :tabindex => '1'
             = label_tag 'word-starts-with', 'starts with'
 

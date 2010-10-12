@@ -65,6 +65,15 @@
     });
     $('#word-lookup-buttonset').buttonset();
 
+    $('#theme-picker-buttonset > input').button().click(function(){
+      var theme = $(this).attr('id').match(/^(.*)-radio$/)[1];
+      pick_theme(theme);
+      $('label#'+theme+'-other').removeClass('ui-state-active');
+
+      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path="/"';
+    });
+    $('#theme-picker-buttonset').buttonset();
+
     /* This animation is fun, but a little annoying.
     $('a', '#header-bar').hover(function(){
       $(this).effect('pulsate', { times: 1, speed: 'fast' });
@@ -72,5 +81,14 @@
       $(this).stop();
     });
      */
+
+    /* 'light' or 'dark' */
+    function pick_theme(theme) {
+      $('link[rel="stylesheet"]').replaceWith(
+'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/jquery-ui-1.8.5.custom.css"/>'+
+'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/application.css"/>'+
+'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/common.css"/>'
+      );
+    }
   });
 })(jQuery);

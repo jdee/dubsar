@@ -43,6 +43,9 @@ View a word's synonyms:: All available synonyms for a word are listed
 See suggestions for search terms in an autocompleter::
                          The autocompleter shows available matches
                          while a user is typing.
+Choose between two canned jQuery themes using a pair of radio buttons::
+                         The application uses a cookie to store the
+                         selected theme.
 
 == Building and Running
 
@@ -128,3 +131,16 @@ _contains_.  The <i>starts with</i> request was already implemented
 for purposes of the autocompleter and the navigation bar.  It worked
 with a manually well-formed URL.  So it was a simple matter to add the
 single search option first.  The others will follow.
+
+It might be interesting to write a Dubsar AJAX plug-in, using the
+WordNet data set, for looking up definitions and synonyms of key words
+in the text of any web page.
+
+Beyond that, I'd like to add more content to the application by further
+exploring the data set or finding others.  This kind of application is
+only as good as its data.  Here's a wish list of things to add:
+- Etymology
+- Pronunciation
+- Remaining parts of speech (conjunctions, interjections, prepositions,
+  pronouns)
+- Illustrations (somewhat rare in online dictionaries)

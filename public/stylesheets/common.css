@@ -1,23 +1,9 @@
 * {
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
   font-size: 12pt;
-  color: #1c94c4;
-}
-
-a:link {
-  color: #1c94c4;
-}
-
-a:visited {
-  color: #333333;
-}
-
-a:hover,active {
-  color: #eb8f00;
 }
 
 a.undecorated {
-  color: inherit;
   text-decoration: none;
 }
 
@@ -26,7 +12,6 @@ a.undecorated {
   top: 0px;
   left: 0px;
   height: 7.2ex;
-  background-color: #fc9;
 }
 
 #header-bar > table {
@@ -65,11 +50,7 @@ label {
   white-space: nowrap;
 }
 
-*.ui-state-active > span.ui-button-text {
-  color: #eb8f00;
-}
-
-#word-lookup-buttonset span.ui-button-text {
+.small-buttonset span.ui-button-text {
   font-size: 0.6em;
 }
 
@@ -89,4 +70,10 @@ label {
 #word-input-label {
   bottom: 4ex;
   right: 125px;
+}
+
+#theme-picker {
+  position: fixed;
+  top: 2px;
+  right: 2px;
 }

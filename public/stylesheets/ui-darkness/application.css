@@ -1,0 +1,31 @@
+* {
+  color: #eeeeee;
+}
+
+a:link {
+  color: #eeeeee;
+}
+
+a:visited {
+  color: #666; /* color of the beast */
+}
+
+a:hover,active {
+  color: #ffffff;
+}
+
+#header-bar {
+  background-color: #f58400;
+}
+
+*.ui-state-active > span.ui-button-text {
+  color: #ffffff;
+}
+
+a.undecorated {
+  color: #f58400;
+}
+
+#word-input {
+  color: #f58400;
+}

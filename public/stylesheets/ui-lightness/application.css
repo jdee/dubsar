@@ -1,0 +1,23 @@
+*, a:link {
+  color: #1c94c4;
+}
+
+a:visited {
+  color: #333333;
+}
+
+a:hover,active {
+  color: #fbc90b;
+}
+
+#header-bar {
+  background-color: #e0e0ff;
+}
+
+*.ui-state-active > span.ui-button-text {
+  color: #eb8f00;
+}
+
+a.undecorated {
+  color: inherit;
+}
