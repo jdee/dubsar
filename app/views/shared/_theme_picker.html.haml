@@ -1,0 +1,12 @@
+#theme-picker
+  #theme-picker-buttonset.small-buttonset
+    - if @theme == 'light'
+      %input{:type => 'radio', :id => 'light-radio', :value => 'light', :checked => 'checked'}
+    - else
+      %input{:type => 'radio', :id => 'light-radio', :value => 'light'}
+    %label{:for => 'light-radio', :id => 'dark-other', :title => 'light display theme'} light
+    - if @theme == 'light'
+      %input{:type => 'radio', :id => 'dark-radio', :value => 'dark'}
+    - else
+      %input{:type => 'radio', :id => 'dark-radio', :value => 'dark', :checked => 'checked'}
+    %label{:for => 'dark-radio', :id => 'light-other', :title => 'dark display theme'} dark

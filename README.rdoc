@@ -145,6 +145,14 @@ only as good as its data.  Here's a wish list of things to add:
   pronouns)
 - Illustrations (somewhat rare in online dictionaries)
 
+I want to review the use of the <tt>will_paginate</tt> gem to pace the
+AJAX requests and responses for the autocompleter.  It makes for good
+code re-use, but thirty words per batch may be too few for the
+autocompleter.  A web page containing thirty words with definitions,
+synonyms and markup is a large payload, but the JSON response is very
+small, and rather than being an optimization, the small chunk size may
+end up adding too much overhead.
+
 == Screenshots
 
 (Available by running <tt>rake doc:app</tt>.)
