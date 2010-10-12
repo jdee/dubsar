@@ -132,9 +132,9 @@ for purposes of the autocompleter and the navigation bar.  It worked
 with a manually well-formed URL.  So it was a simple matter to add the
 single search option first.  The others will follow.
 
-It might be interesting to write a Dubsar AJAX plug-in, using the
-WordNet data set, for looking up definitions and synonyms of key words
-in the text of any web page.
+It might be interesting to write a Dubsar plug-in for looking up
+definitions and synonyms of key words in the text of any web page.  The
+WordNet data set is well suited to that task.
 
 Beyond that, I'd like to add more content to the application by further
 exploring the data set or finding others.  This kind of application is

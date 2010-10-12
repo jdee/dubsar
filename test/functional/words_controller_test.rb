@@ -12,4 +12,8 @@ class WordsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:words)
   end
 
+  teardown do
+    assert_not_nil assigns(:theme)
+  end
+
 end

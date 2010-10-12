@@ -66,11 +66,9 @@
     $('#word-lookup-buttonset').buttonset();
 
     $('#theme-picker-buttonset > input').button().click(function(){
-      var theme = $(this).attr('id').match(/^(.*)-radio$/)[1];
+      var theme = $(this).val();
       pick_theme(theme);
       $('label#'+theme+'-other').removeClass('ui-state-active');
-
-      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path="/"';
     });
     $('#theme-picker-buttonset').buttonset();
 
@@ -89,6 +87,7 @@
 '<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/application.css"/>'+
 '<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/common.css"/>'
       );
+      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path="/"';
     }
   });
 })(jQuery);

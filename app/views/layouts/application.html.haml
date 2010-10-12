@@ -17,14 +17,14 @@
     #theme-picker
       #theme-picker-buttonset.small-buttonset
         - if @theme == 'light'
-          %input{:type => 'radio', :id => 'light-radio', :checked => 'checked'}
+          %input{:type => 'radio', :id => 'light-radio', :checked => 'checked', :value => 'light'}
         - else
-          %input{:type => 'radio', :id => 'light-radio' }
+          %input{:type => 'radio', :id => 'light-radio', :value => 'light'}
         %label{:for => 'light-radio', :id => 'dark-other'} light
         - if @theme == 'light'
-          %input{:type => 'radio', :id => 'dark-radio' }
+          %input{:type => 'radio', :id => 'dark-radio', :value => 'dark'}
         - else
-          %input{:type => 'radio', :id => 'dark-radio', :checked => 'checked'}
+          %input{:type => 'radio', :id => 'dark-radio', :checked => 'checked', :value => 'dark'}
         %label{:for => 'dark-radio', :id => 'light-other'} dark
     #header-bar.ui-corner-all
       %table
