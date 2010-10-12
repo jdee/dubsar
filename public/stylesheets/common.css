@@ -19,7 +19,7 @@ a.undecorated {
   bottom: 0px;
   left: 0px;
   table-layout: fixed;
-  width: 500px;
+  width: 55ex;
   text-align: center;
 }
 
@@ -34,9 +34,9 @@ a.undecorated {
 .word-lookup {
   position: absolute;
   display: block;
-  bottom: 2px;
+  bottom: 0.25ex;
   right: 0px;
-  padding: 2px;
+  padding: 0.25ex;
 }
 
 .ui-menu {
@@ -56,26 +56,30 @@ label {
 
 #word-lookup-buttonset {
   position: absolute;
-  bottom: 2px;
-  right: 340px;
+  bottom: 0.55ex;
+  right: 35.5ex;
 }
 
 #word-input {
   position: absolute;
-  width: 200px;
-  bottom: 5px;
-  right: 125px;
+  width: 20ex;
+  bottom: 0.55ex;
+  right: 14ex;
 }
 
 #word-input-label {
   bottom: 4ex;
-  right: 125px;
+  right: 14ex;
+}
+
+#word-submit {
+  width: 10.5ex;
 }
 
 #theme-picker {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 0.7ex;
+  right: 0.7ex;
 }
 
 .pagination {
