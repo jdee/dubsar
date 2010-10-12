@@ -73,7 +73,7 @@ label {
 }
 
 #theme-picker {
-  position: fixed;
+  position: absolute;
   top: 2px;
   right: 2px;
 }
