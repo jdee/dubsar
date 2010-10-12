@@ -1,13 +1,9 @@
-* {
-  color: #eeeeee;
-}
-
-a:link {
+*, a:link {
   color: #eeeeee;
 }
 
 a:visited {
-  color: #666; /* color of the beast */
+  color: #555555;
 }
 
 a:hover,active {
@@ -18,14 +14,14 @@ a:hover,active {
   background-color: #f58400;
 }
 
-*.ui-state-active > span.ui-button-text {
+a:hover,active, *.ui-state-active > span.ui-button-text {
   color: #ffffff;
 }
 
-a.undecorated {
+a.undecorated, #word-input {
   color: #f58400;
 }
 
-#word-input {
-  color: #f58400;
+.pagination * {
+  color: #f58400!important;
 }

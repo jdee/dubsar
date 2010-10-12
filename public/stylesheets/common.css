@@ -77,3 +77,8 @@ label {
   top: 2px;
   right: 2px;
 }
+
+.pagination {
+  position: relative;
+  top: 1.5em;
+}

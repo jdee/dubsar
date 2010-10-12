@@ -144,3 +144,21 @@ only as good as its data.  Here's a wish list of things to add:
 - Remaining parts of speech (conjunctions, interjections, prepositions,
   pronouns)
 - Illustrations (somewhat rare in online dictionaries)
+
+== Screenshots
+
+(Available by running {{rake doc:app}}.)
+
+=== Home page
+[link:../screenshot-1.png]
+
+=== Autocompleter
+[link:../screenshot-2.png]
+
+=== Result list
+[link:../screenshot-3.png]
+
+=== Synonym highlighting
+[link:../screenshot-4.png]
+
+== The End
