@@ -147,7 +147,7 @@ only as good as its data.  Here's a wish list of things to add:
 
 == Screenshots
 
-(Available by running {{rake doc:app}}.)
+(Available by running <tt>rake doc:app</tt>.)
 
 === Home page
 [link:../screenshot-1.png]
