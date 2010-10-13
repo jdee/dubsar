@@ -71,6 +71,7 @@
       $('label#'+theme+'-other').removeClass('ui-state-active');
     });
     $('#theme-picker-buttonset').buttonset();
+    $('#theme-picker-buttonset > input:checked').click();
 
     /* This animation is fun, but a little annoying.
     $('a', '#header-bar').hover(function(){

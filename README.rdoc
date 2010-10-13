@@ -132,6 +132,9 @@ for purposes of the autocompleter and the navigation bar.  It worked
 with a manually well-formed URL.  So it was a simple matter to add the
 single search option first.  The others will follow.
 
+By default, all searches are case-sensitive.  Case-insensitive
+searching is an easy option to add as well.
+
 It might be interesting to write a Dubsar plug-in for looking up
 definitions and synonyms of key words in the text of any web page.  The
 WordNet data set is well suited to that task.
