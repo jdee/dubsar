@@ -4,6 +4,7 @@ class WordsController < ApplicationController
 
   def index
     @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
+    @dubsar_alt = 'dub-sar'
   end
 
   # Retrieve all words matching the specified +term+ and render as

@@ -88,6 +88,7 @@ label {
 }
 
 #cuneiform-signs {
-  position: relative;
-  left: 0.3em;
+  height: 2.5ex;
+  padding: 0.3ex;
+  vertical-align: bottom;
 }
