@@ -6,6 +6,8 @@ class WordsController < ApplicationController
     @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
   end
 
+  # Retrieve all words matching the specified +term+ and render as
+  # HTML or JSON, one page at a time.
   def show
     # TODO: Handle a(n erroneous) request without a ?term
     page = params[:page]
@@ -30,8 +32,8 @@ class WordsController < ApplicationController
     end
   end
 
+  # count accordion divs
   def init_count
-    # count accordion divs
     @count = 0
   end
 end

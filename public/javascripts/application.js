@@ -1,12 +1,15 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-
 (function($){
+  /* ready handler */
   $(function(){
+
+    /******** AJAX for autocompleter ********/
+
     var list;
     var word_input;
     var request_term;
 
+    /* if an item was selected (and popped into the text box), submit
+       the request */
     function ac_handler(event,ui){
       if (ui.item) {
         word_input.val($(ui.item).val());
@@ -14,6 +17,7 @@
       }
     }
 
+    /* new autocomplete search begins */
     function ac_search_handler(event,ui){
       list = new Array();
       request_term = word_input.val();
@@ -36,13 +40,16 @@
 
           if (!data.page || !data.total || data.page > data.total) return;
 
-          // recursively invoke this function to request the next page
+          // recursively invoke outer function to request the next page
           request.term = request_term;
           ajax_handler(request, response, data.page);
         }
       });
     }
 
+    /* attach these functions to the autocompleter */
+    /* register_autocomplete can be called to supply any other source
+       (like a local array) */
     (function register_autocomplete($source) {
       word_input = $('#word-input').autocomplete({
         source:$source,
@@ -53,11 +60,15 @@
       });
     })(ajax_handler);
 
+    /******** end autocompleter ********/
+
+    /* set up definition accordion divs */
     $('#accordion').accordion({});
     $(':submit').button({
       icons: { primary:'ui-icon-search' }
     });
 
+    /* starts-with toggle button */
     $('#word-starts-with').button({
       icons:{
         secondary: 'ui-icon-arrowthick-1-e'
@@ -65,6 +76,10 @@
     });
     $('#word-lookup-buttonset').buttonset();
 
+    /* Set up the theme picker */
+    /* The unselected button often continues to appear active even
+       after a page reload, so we strip that class on each button
+       click and fire the event on page load. */
     $('#theme-picker-buttonset > input').button().click(function(){
       var theme = $(this).val();
       pick_theme(theme);
@@ -73,6 +88,19 @@
     $('#theme-picker-buttonset').buttonset();
     $('#theme-picker-buttonset > input:checked').click();
 
+    /* 'light' or 'dark' */
+    function pick_theme(theme) {
+      // replace the stylesheet links in the <head> element
+      $('link[rel="stylesheet"]').replaceWith(
+'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/jquery-ui-1.8.5.custom.css"/>'+
+'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/application.css"/>'+
+'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/common.css"/>'
+      );
+
+      // save the choice as a cookie
+      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path="/"';
+    }
+
     /* This animation is fun, but a little annoying.
     $('a', '#header-bar').hover(function(){
       $(this).effect('pulsate', { times: 1, speed: 'fast' });
@@ -80,15 +108,5 @@
       $(this).stop();
     });
      */
-
-    /* 'light' or 'dark' */
-    function pick_theme(theme) {
-      $('link[rel="stylesheet"]').replaceWith(
-'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/jquery-ui-1.8.5.custom.css"/>'+
-'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/application.css"/>'+
-'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/common.css"/>'
-      );
-      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path="/"';
-    }
   });
 })(jQuery);
