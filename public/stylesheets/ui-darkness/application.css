@@ -10,6 +10,14 @@ a:hover,active {
   color: #ffffff;
 }
 
+a:visited > img {
+  border-color: #555555;
+}
+
+a > img:hover,active {
+  border-color: #ffffff;
+}
+
 #header-bar {
   background-color: #f58400;
 }

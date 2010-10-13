@@ -1,14 +1,13 @@
 %h2
   %a{:href => '#'}
-    =h word.name
+    &= word.name
     %em
-      =h "(#{word.pos}.)"
+      &= "(#{word.pos}.)"
 %div{:id => "content_div_#{@count += 1}"}
   %ol
     - word.definitions.each do |definition|
       %li
-        - definition.body.split(' ').each do |w|
-          =render :partial => 'synspan', :locals => { :w => w }
+        =render :partial => 'synspans', :object => definition.body
     - unless word.synonyms.blank?
       %li
         %strong synonyms:

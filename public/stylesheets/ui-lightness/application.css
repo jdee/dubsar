@@ -6,8 +6,16 @@ a:visited {
   color: #333333;
 }
 
-a:hover,active {
+a:hover,active, img:hover,active {
   color: #fbc90b;
+}
+
+a:visited > img {
+  border-color: #333333;
+}
+
+a > img:hover,active {
+  border-color: #fbc90b;
 }
 
 #header-bar {

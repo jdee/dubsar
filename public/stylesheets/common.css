@@ -86,3 +86,8 @@ label {
   position: relative;
   top: 1.5em;
 }
+
+#cuneiform-signs {
+  position: relative;
+  left: 0.3em;
+}

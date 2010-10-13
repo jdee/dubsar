@@ -2,6 +2,10 @@ class WordsController < ApplicationController
   respond_to :html, :json
   before_filter :init_count
 
+  def index
+    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
+  end
+
   def show
     # TODO: Handle a(n erroneous) request without a ?term
     page = params[:page]
