@@ -10,7 +10,6 @@ class WordsController < ApplicationController
   # Retrieve all words matching the specified +term+ and render as
   # HTML or JSON, one page at a time.
   def show
-    # TODO: Handle a(n erroneous) request without a ?term
     page = params[:page]
     @term = params[:term]
     @term += '%' if @term and params[:starts_with] == 'yes'
@@ -21,7 +20,14 @@ class WordsController < ApplicationController
     @words = Word.paginate({ :page => page }.merge(search_options))
 
     respond_to do |format|
-      format.html { render :action => 'show' }
+      format.html {
+        if @words.count > 0
+          render :action => 'show'
+        else
+          flash[:error] = "no results for \"#{@term}\""
+          redirect_to :back
+        end
+      }
       format.json do
         respond_with({
           :page  => page ? page.to_i + 1 : 2,
