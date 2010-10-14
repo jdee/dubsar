@@ -88,6 +88,10 @@ input#word-input {
 }
 
 #term-not-found {
-  text-align: center;
-  font-size: x-large;
+  font-size: large;
+}
+
+#term-not-found > span.ui-icon {
+  float: left;
+  margin-right: 0.3em;
 }
