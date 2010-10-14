@@ -3,6 +3,7 @@ body {
   font-size: 10pt;
 }
 
+/* make OmniWeb draw a border around linked images */
 a[href] > img {
   border-style: solid;
   border-width: 0.2em;
@@ -18,7 +19,7 @@ label {
   white-space: nowrap;
 }
 
-.small-buttonset span.ui-button-text {
+.small-buttonset .ui-button-text {
   font-size: x-small;
 }
 
@@ -32,7 +33,7 @@ label {
   position: relative;
   top: 0px;
   left: 0px;
-  height: 7.2ex;
+  height: 8.5ex;
 }
 
 #header-bar > table {
@@ -53,44 +54,26 @@ label {
   font-weight: bolder;
 }
 
-#header-bar table * {
-  font-size: inherit;
-}
-
-.word-lookup {
-  position: absolute;
-  display: block;
-  bottom: 0.25ex;
-  right: 0px;
-  padding: 0.25ex;
-}
-
+/* autocompleter menu styling */
 .ui-menu {
   max-height: 40%;
   overflow: auto;
 }
 
-#word-lookup-buttonset {
+table#word-search-term {
   position: absolute;
-  bottom: 0.55ex;
-  right: 36ex;
+  bottom: 0ex;
+  right: 0ex;
+  width: auto;
+  table-layout: fixed;
 }
 
-#word-input {
-  position: absolute;
-  width: 20ex;
-  bottom: 0.55ex;
-  right: 14.5ex;
+col#c1, col#c3 {
+  width: 12ex;
+}
+
+input#word-input {
   font-size: small;
-}
-
-#word-input-label {
-  bottom: 4ex;
-  right: 14.5ex;
-}
-
-#word-submit {
-  width: 11ex;
 }
 
 .pagination {

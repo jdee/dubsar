@@ -4,12 +4,24 @@
       - ('A'..'Z').each do |letter|
         %td
           = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}"
-  .word-lookup
-    = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
-      #word-lookup-buttonset.small-buttonset
-        = check_box_tag :starts_with, 'yes', false, :id => 'word-starts-with', :tabindex => '1'
-        = label_tag 'word-starts-with', 'starts with', :title => 'search for words starting with this term'
+  = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
 
-      = label_tag :term, 'enter a word:', :id => 'word-input-label'
-      = text_field_tag :term, '', :id => 'word-input', :tabindex => '2'
-      %button{:type => 'submit', :id => 'word-submit', :tabindex => '3', :title => 'submit search'} search
+    %table#word-search-term
+      %colgroup
+        %col#c1
+        %col#c2
+        %col#c3
+      %tr
+        %td &nbsp;
+        %td
+          = label_tag :term, 'enter a word:', :id => 'word-input-label'
+        %td &nbsp;
+      %tr
+        %td
+          #word-search-options-buttonset.small-buttonset
+            = check_box_tag :starts_with, 'yes', false, :id => 'word-starts-with', :tabindex => '1'
+            = label_tag 'word-starts-with', 'starts with', :title => 'search for words starting with this term'
+        %td
+          = text_field_tag :term, '', :id => 'word-input', :tabindex => '2'
+        %td
+          %button{:type => 'submit', :id => 'word-submit', :tabindex => '3', :title => 'submit search'} search
