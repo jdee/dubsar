@@ -1,4 +1,10 @@
-#accordion
-  = render @words
+- if @words.count > 0
+  #accordion
+    = render @words
+- else
+  #term-not-found.ui-corner-all.ui-state-error
+    no results found for &quot;
+    =h @term
+    &quot;
 
 = will_paginate @words
