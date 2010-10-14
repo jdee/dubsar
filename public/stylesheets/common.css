@@ -88,11 +88,12 @@ input#word-input {
   border-style: solid;
 }
 
-#term-not-found {
+#error {
   font-size: large;
+  margin-bottom: 0.8em;
 }
 
-#term-not-found > span.ui-icon {
+#error > span.ui-icon {
   float: left;
   margin-right: 0.3em;
 }
