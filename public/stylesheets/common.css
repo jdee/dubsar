@@ -1,10 +1,31 @@
-* {
+body {
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-  font-size: 12pt;
+  font-size: 10pt;
+}
+
+a[href] > img {
+  border-style: solid;
+  border-width: 0.2em;
 }
 
 a.undecorated {
   text-decoration: none;
+}
+
+label {
+  position: absolute;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.small-buttonset span.ui-button-text {
+  font-size: x-small;
+}
+
+#theme-picker {
+  position: absolute;
+  top: 0.7ex;
+  right: 0.7ex;
 }
 
 #header-bar {
@@ -21,6 +42,7 @@ a.undecorated {
   table-layout: fixed;
   width: 55ex;
   text-align: center;
+  font-size: 120%;
 }
 
 #header-bar > table a:link, a:visited, a:hover, a:active {
@@ -29,6 +51,10 @@ a.undecorated {
 
 #header-bar > table a:hover, a:active {
   font-weight: bolder;
+}
+
+#header-bar table * {
+  font-size: inherit;
 }
 
 .word-lookup {
@@ -44,42 +70,27 @@ a.undecorated {
   overflow: auto;
 }
 
-label {
-  position: absolute;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.small-buttonset span.ui-button-text {
-  font-size: 0.6em;
-}
-
 #word-lookup-buttonset {
   position: absolute;
   bottom: 0.55ex;
-  right: 35.5ex;
+  right: 36ex;
 }
 
 #word-input {
   position: absolute;
   width: 20ex;
   bottom: 0.55ex;
-  right: 14ex;
+  right: 14.5ex;
+  font-size: small;
 }
 
 #word-input-label {
   bottom: 4ex;
-  right: 14ex;
+  right: 14.5ex;
 }
 
 #word-submit {
-  width: 10.5ex;
-}
-
-#theme-picker {
-  position: absolute;
-  top: 0.7ex;
-  right: 0.7ex;
+  width: 11ex;
 }
 
 .pagination {
