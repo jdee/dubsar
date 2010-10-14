@@ -98,7 +98,7 @@
       );
 
       // save the choice as a cookie
-      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path="/"';
+      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path=/';
     }
 
     /* This animation is fun, but a little annoying.

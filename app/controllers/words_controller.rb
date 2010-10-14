@@ -12,10 +12,10 @@ class WordsController < ApplicationController
   def show
     # TODO: Handle a(n erroneous) request without a ?term
     page = params[:page]
-    term = params[:term]
-    term += '%' if term and params[:starts_with] == 'yes'
+    @term = params[:term]
+    @term += '%' if @term and params[:starts_with] == 'yes'
     search_options = {
-      :conditions => [ 'name ilike ?', term ],
+      :conditions => [ 'name ilike ?', @term ],
       :order => 'name'
     }
     @words = Word.paginate({ :page => page }.merge(search_options))
@@ -26,7 +26,7 @@ class WordsController < ApplicationController
         respond_with({
           :page  => page ? page.to_i + 1 : 2,
           :total => @words.total_pages,
-          :term  => term.sub(/%$/, ''),
+          :term  => @term.sub(/%$/, ''),
           :list  => @words.map{ |w| w.name }.uniq
         }.to_json)
       end

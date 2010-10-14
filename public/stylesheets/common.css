@@ -86,3 +86,8 @@ input#word-input {
   padding: 0.3ex;
   vertical-align: bottom;
 }
+
+#term-not-found {
+  text-align: center;
+  font-size: x-large;
+}
