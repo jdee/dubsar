@@ -1,17 +1,39 @@
-* {
+body {
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-  font-size: 12pt;
+  font-size: 10pt;
+}
+
+/* make OmniWeb draw a border around linked images */
+a[href] > img {
+  border-style: solid;
+  border-width: 0.2em;
 }
 
 a.undecorated {
   text-decoration: none;
 }
 
+label {
+  position: absolute;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.small-buttonset .ui-button-text {
+  font-size: x-small;
+}
+
+#theme-picker {
+  position: absolute;
+  top: 0.7ex;
+  right: 0.7ex;
+}
+
 #header-bar {
   position: relative;
   top: 0px;
   left: 0px;
-  height: 7.2ex;
+  height: 8.5ex;
 }
 
 #header-bar > table {
@@ -21,6 +43,7 @@ a.undecorated {
   table-layout: fixed;
   width: 55ex;
   text-align: center;
+  font-size: 120%;
 }
 
 #header-bar > table a:link, a:visited, a:hover, a:active {
@@ -31,55 +54,26 @@ a.undecorated {
   font-weight: bolder;
 }
 
-.word-lookup {
-  position: absolute;
-  display: block;
-  bottom: 0.25ex;
-  right: 0px;
-  padding: 0.25ex;
-}
-
+/* autocompleter menu styling */
 .ui-menu {
   max-height: 40%;
   overflow: auto;
 }
 
-label {
+table#word-search-term {
   position: absolute;
-  text-align: right;
-  white-space: nowrap;
+  bottom: 0ex;
+  right: 0ex;
+  width: auto;
+  table-layout: fixed;
 }
 
-.small-buttonset span.ui-button-text {
-  font-size: 0.6em;
+col#c1, col#c3 {
+  width: 12ex;
 }
 
-#word-lookup-buttonset {
-  position: absolute;
-  bottom: 0.55ex;
-  right: 35.5ex;
-}
-
-#word-input {
-  position: absolute;
-  width: 20ex;
-  bottom: 0.55ex;
-  right: 14ex;
-}
-
-#word-input-label {
-  bottom: 4ex;
-  right: 14ex;
-}
-
-#word-submit {
-  width: 10.5ex;
-}
-
-#theme-picker {
-  position: absolute;
-  top: 0.7ex;
-  right: 0.7ex;
+input#word-input {
+  font-size: small;
 }
 
 .pagination {
