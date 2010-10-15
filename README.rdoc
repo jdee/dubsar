@@ -53,6 +53,9 @@ See flash-based error messages::
                          The application redirects to the previous page
                          (if internal) or the index with a reasonable
                          error message in case of exception.
+Scroll through search results without losing the page header or footer::
+                         A framelike fixed-position display allows a
+                         user to scroll the results.
 
 == Building and Running
 
@@ -132,12 +135,6 @@ The server has been tested both on Ubuntu and OS X.
   trickles in and pops up the autocompleter again.
 
 == Future Plans
-
-=== UI and views
-
-A frame-based view would be ideal, to allow the result set to scroll
-while the header (and possibly the pagination footer) remain
-stationary.
 
 === Functionality and implementation
 

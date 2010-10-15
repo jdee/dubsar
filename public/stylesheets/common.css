@@ -23,6 +23,25 @@ label {
   font-size: x-small;
 }
 
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 19ex;
+  margin: 0.5ex;
+}
+
+#main {
+  position: absolute;
+  overflow: auto;
+  top: 19ex;
+  bottom: 3ex;
+  left: 0;
+  right: 0;
+  margin: 0.5ex;
+}
+
 #theme-picker {
   position: absolute;
   top: 0.7ex;
@@ -77,8 +96,12 @@ input#word-input {
 }
 
 .pagination {
-  position: relative;
-  top: 1.5em;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3ex;
+  z-index: 1;
 }
 
 #cuneiform-signs {

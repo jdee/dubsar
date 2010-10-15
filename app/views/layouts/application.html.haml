@@ -17,13 +17,15 @@
     = csrf_meta_tag
 
   %body{:class => "style-#{@theme}"}
-    %h2
-      =link_to 'Dubsar Dictionary', root_path, :class => "undecorated", :title => 'home'
-    =render :partial => 'shared/theme_picker'
-    =render :partial => 'shared/header_bar'
-    %hr/
-    -if flash[:error]
-      #error.ui-state-error.ui-corner-all
-        %span.ui-icon.ui-icon-alert
-        =h flash[:error]
-    =yield
+    #header
+      %h2
+        =link_to 'Dubsar Dictionary', root_path, :class => "undecorated", :title => 'home'
+      =render :partial => 'shared/theme_picker'
+      =render :partial => 'shared/header_bar'
+      %hr/
+    #main
+      - if flash[:error]
+        #error.ui-state-error.ui-corner-all
+          %span.ui-icon.ui-icon-alert
+          =h flash[:error]
+      =yield
