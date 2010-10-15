@@ -168,7 +168,7 @@ associated with those individual meanings.  This may result in a word
 having synonyms that are not synonymous with each other.  When
 identifying synonyms for a word in a page of text, they all have to
 be considered.  For example, the entry for <i>gag (v.)</i> is:
-1. make an make an unsuccessful effort to vomit; strain to vomit
+1. make an unsuccessful effort to vomit; strain to vomit
 2. cause to retch or choke
 3. struggle for breath; have insufficient oxygen intake; "he swallowed
    a fishbone and gagged"
