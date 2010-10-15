@@ -153,6 +153,41 @@ end up adding too much overhead.
 
 === Content
 
+==== Synonym identification
+
+If a word has multiple parts of speech associated with it, its synonym
+list may be a little surprising.  For example, the only synonym WordNet
+associates with _tree_ is _corner_, obviously synonymous with the verb
+sense of _tree_.  Unfortunately, when attempting to find the synonyms
+associated with a word in a piece of text, it is not always obvious
+which part of speech that word is and how to identify its synonyms.
+
+In fact, the problem is a bit more pervasive.  Even within a single
+part of speech, meanings may vary considerably.  Synonyms are
+associated with those individual meanings.  This may result in a word
+having synonyms that are not synonymous with each other.  When
+identifying synonyms for a word in a page of text, they all have to
+be considered.  For example, the entry for <i>gag (v.)</i> is:
+1. make an make an unsuccessful effort to vomit; strain to vomit
+2. cause to retch or choke
+3. struggle for breath; have insufficient oxygen intake; "he swallowed
+   a fishbone and gagged"
+4. make jokes or quips; "The students were gagging during dinner"
+5. tie a gag around someone's mouth in order to silence them; "The
+   burglars gagged the home owner and tied him to a chair"
+6. prevent from speaking out; "The press was gagged"
+7. <b>synonyms:</b> choke plume constipate overload clog choke off foul
+   hook surcharge cop muzzle clog up congest overcharge fleece gazump
+   glom rob snitch thieve
+The list of synonyms results from the (false) assumption that the
+relationship of being synonymous is a mathematical equivalence and in
+particular is transitive, i.e. if _a_ is synonymous with _b_ and _b_ is
+synonymous with _c_, then _a_ is synonymous with _c_.
+
+This matter requires some review.
+
+==== Other content issues
+
 It's clear from a closer look at the WordNet materials that the sample
 sentences contained within glosses (<tt>:definitions</tt>) are intended
 to be displayed separately.  In particular, there is a simple online
