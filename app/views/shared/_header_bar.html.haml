@@ -20,8 +20,8 @@
       %tr
         %td
           #word-search-options-buttonset.small-buttonset
-            = check_box_tag :starts_with, 'yes', false, :id => 'word-starts-with', :tabindex => '1'
-            = label_tag 'word-starts-with', 'starts with', :title => 'search for words starting with this term'
+            = check_box_tag :case, 'case', false, :id => 'word-case', :tabindex => '1'
+            = label_tag 'word-case', 'match case', :title => 'case-sensitive search'
         %td
           = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term'
         %td

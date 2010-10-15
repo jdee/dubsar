@@ -19,10 +19,10 @@ Browse entries by first letter:: Via links in the navigation bar, you
                                  beginning with that letter.
 Search for a word:: Type a word into the text box and press return or
                     click the _search_ button.  There is also a toggle
-                    button (like a check box) to search for words that
-                    <i>start with</i> the search term.  When the button
-                    is not selected (by default), Dubsar returns only
-                    exact matches.
+                    button (like a check box) to <i>match case</i>.
+                    SQL wild cards may be used at any position, e.g.
+                    <i>%one%</i> will search for all words containing
+                    _one_.
 View a word's definitions and part of speech::
                             In the active accordion pane for each
                             word, all available definitions are
@@ -42,7 +42,10 @@ View a word's synonyms:: All available synonyms for a word are listed
                          accordion pane.
 See suggestions for search terms in an autocompleter::
                          The autocompleter shows available matches
-                         while a user is typing.
+                         while a user is typing.  It honors the
+                         <i>match case</i> selection, only suggesting
+                         case-sensitive matches when the button is
+                         selected.
 Choose between two canned jQuery themes using a pair of radio buttons::
                          The application uses a cookie to store the
                          selected theme.
@@ -123,17 +126,6 @@ Dubsar does not work with:
   response trickles in and pops up the autocompleter again.
 
 == Future Plans
-
-It's a simple enough matter to extend the <i>starts with</i> search
-functionality.  I intend to change the toggle button to a set of four
-radio buttons, also including <i>exact match</i>, <i>ends with</i> and
-_contains_.  The <i>starts with</i> request was already implemented
-for purposes of the autocompleter and the navigation bar.  It worked
-with a manually well-formed URL.  So it was a simple matter to add the
-single search option first.  The others will follow.
-
-By default, all searches are case-sensitive.  Case-insensitive
-searching is an easy option to add as well.
 
 A frame-based view would be ideal, to allow the result set to scroll
 while the header (and possibly the pagination footer) remain

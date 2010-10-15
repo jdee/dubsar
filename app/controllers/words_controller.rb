@@ -16,9 +16,9 @@ class WordsController < ApplicationController
     # show and index use the same URL
     render(:action => :index) and return unless @term
 
-    @term += '%' if params[:starts_with] == 'yes'
+    operator = params[:case].blank? ? 'ilike' : 'like'
     search_options = {
-      :conditions => [ 'name ilike ?', @term ],
+      :conditions => [ "name #{operator} ?", @term ],
       :order => 'name'
     }
     @words = Word.paginate({ :page => page }.merge(search_options))
@@ -33,6 +33,7 @@ class WordsController < ApplicationController
       }
       format.json do
         respond_with({
+          :case  => params[:case] || '',
           :page  => page ? page.to_i + 1 : 2,
           :total => @words.total_pages,
           :term  => @term.sub(/%$/, ''),
