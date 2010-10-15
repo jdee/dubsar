@@ -94,7 +94,7 @@ Seed the database.
 
   rake db:seed
 
-*Note:* Seeding the DB takes about twenty minutes on my dual-core
+<b>Note:</b> Seeding the DB takes about twenty minutes on my dual-core
 64-bit Pentium desktop.
 
 Run the server.
