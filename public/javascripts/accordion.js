@@ -7,6 +7,7 @@
         return 0;
       }
       else {
+        location.hash = '#' + starting_pane;
         return $('+ div', '#' + starting_pane).attr('id').match(/_(\d)+$/)[1] - 0;
       }
     }

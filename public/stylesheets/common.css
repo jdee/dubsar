@@ -33,8 +33,13 @@ label {
 }
 
 #error {
+  position: fixed;
   font-size: 120%;
-  margin-bottom: 0.4ex;
+  margin: 0.4ex;
+  height: 2.5ex;
+  top: 15.7ex;
+  left: 0;
+  right: 0;
 }
 
 #error > span.ui-icon {
@@ -45,7 +50,7 @@ label {
 #main {
   position: absolute;
   overflow: auto;
-  top: 18.3ex;
+  top: 22.8ex;
   bottom: 5ex;
   left: 0;
   right: 0;
