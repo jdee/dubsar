@@ -14,12 +14,12 @@
 
     /* 'light' or 'dark' */
     function pick_theme(theme) {
-      // replace the stylesheet links in the <head> element
-      $('link[rel="stylesheet"]').replaceWith(
-'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/jquery-ui-1.8.5.custom.css"/>'+
-'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/ui-'+theme+'ness/application.css"/>'+
-'<link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/common.css"/>'
-      );
+      if (theme == 'dark') {
+        $('body').removeClass('style-light').addClass('style-dark');
+      }
+      else {
+        $('body').removeClass('style-dark').addClass('style-light');
+      }
 
       // save the choice as a cookie
       document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path=/';

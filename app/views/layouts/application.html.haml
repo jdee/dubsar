@@ -3,8 +3,10 @@
   %head
     %title
       Dubsar
-    = stylesheet_link_tag "ui-#{@theme}ness/jquery-ui-1.8.5.custom"
-    = stylesheet_link_tag "ui-#{@theme}ness/application"
+    = stylesheet_link_tag "ui-darkness/jquery-ui-1.8.5.custom"
+    = stylesheet_link_tag "ui-darkness/application"
+    = stylesheet_link_tag "ui-lightness/jquery-ui-1.8.5.custom"
+    = stylesheet_link_tag "ui-lightness/application"
     = stylesheet_link_tag 'common'
     = javascript_include_tag 'jquery-1.4.2.min'
     = javascript_include_tag 'jquery-ui-1.8.5.custom.min'
@@ -14,7 +16,7 @@
     = javascript_include_tag 'theme_picker'
     = csrf_meta_tag
 
-  %body
+  %body{:class => "style-#{@theme}"}
     %h2
       =link_to 'Dubsar Dictionary', root_path, :class => "undecorated", :title => 'home'
     =render :partial => 'shared/theme_picker'

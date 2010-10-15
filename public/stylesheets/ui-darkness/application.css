@@ -1,35 +1,36 @@
-body, a:link {
+.style-dark, .style-dark a:link {
   color: #eeeeee;
 }
 
-a:visited {
+.style-dark a:visited {
   color: #555555;
 }
 
-a:hover,active {
+.style-dark a:hover,active {
   color: #ffffff;
 }
 
-a:visited > img {
+.style-dark a:visited > img {
   border-color: #555555;
 }
 
-a > img:hover,active {
+.style-dark a > img:hover,active {
   border-color: #ffffff;
 }
 
-#header-bar {
+.style-dark #header-bar {
   background-color: #f58400;
 }
 
-a:hover,active, *.ui-state-active > span.ui-button-text {
+.style-dark a:hover,active,
+.style-dark *.ui-state-active > span.ui-button-text {
   color: #ffffff;
 }
 
-a.undecorated {
+.style-dark a.undecorated {
   color: #f58400;
 }
 
-.pagination * {
+.style-dark .pagination * {
   color: #f58400!important;
 }

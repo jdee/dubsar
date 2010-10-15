@@ -1,31 +1,31 @@
-body, a:link {
+.style-light, .style-light a:link {
   color: #1c94c4;
 }
 
-a:visited {
+.style-light a:visited {
   color: #333333;
 }
 
-a:hover,active, img:hover,active {
+.style-light a:hover,active, .style-light img:hover,active {
   color: #fbc90b;
 }
 
-a:visited > img {
+.style-light a:visited > img {
   border-color: #333333;
 }
 
-a > img:hover,active {
+.style-light a > img:hover,active {
   border-color: #fbc90b;
 }
 
-#header-bar {
+.style-light #header-bar {
   background-color: #e0e0ff;
 }
 
-*.ui-state-active > span.ui-button-text {
+.style-light *.ui-state-active > span.ui-button-text {
   color: #eb8f00;
 }
 
-a.undecorated {
+.style-light a.undecorated {
   color: inherit;
 }
