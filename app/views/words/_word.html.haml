@@ -1,9 +1,9 @@
 %h2
-  %a{:href => '#'}
+  %a{:href => "##{word.unique_name}"}
     &= word.name
     %em
       &= "(#{word.pos}.)"
-%div{:id => "content_div_#{@count += 1}"}
+%div{:id => word.unique_name}
   %ol
     - word.definitions.each do |definition|
       %li

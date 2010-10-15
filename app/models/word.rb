@@ -1,3 +1,5 @@
+require 'string'
+
 # A single +Word+ entry represents a word and part of speech.  For
 # example, _run_ will have two separate entries as a noun and a verb.
 class Word < ActiveRecord::Base
@@ -25,6 +27,12 @@ class Word < ActiveRecord::Base
   def pos
     sym = self.class.pos(part_of_speech)
     sym ? sym.to_s : ''
+  end
+
+  # generates an identifier (no spaces) from the word's name and
+  # part of speech
+  def unique_name
+    (name.capitalized? ? 'cap-' : '') + "#{name.gsub(' ', '_')}_#{pos}"
   end
 
   class << self

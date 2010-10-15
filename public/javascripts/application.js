@@ -1,7 +1,9 @@
 (function($){
   $(function(){
     /* set up definition accordion divs */
-    $('#accordion').accordion({});
+    $('#accordion').accordion({
+      navigation: true
+    });
 
     /* style the search button */
     $(':submit').button({

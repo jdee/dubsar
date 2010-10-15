@@ -1,6 +1,5 @@
 class WordsController < ApplicationController
   respond_to :html, :json
-  before_filter :init_count
   before_filter :setup_captions
 
   def error
@@ -40,11 +39,6 @@ class WordsController < ApplicationController
         }.to_json)
       end
     end
-  end
-
-  # count accordion divs
-  def init_count
-    @count = 0
   end
 
   def setup_captions
