@@ -16,7 +16,7 @@
       else {
         return '';
       }
-    }
+    };
 
     /* style the search button */
     $(':submit').button({
