@@ -86,12 +86,16 @@ Run unit tests.
 
   rake test
 
+Generate local HTML documentation in <tt>doc/app/index.html</tt>:
+
+  rake doc:app
+
 Seed the database.
 
   rake db:seed
 
-This takes about twenty minutes on my dual-core 64-bit Pentium
-desktop.
+*Note:* Seeding the DB takes about twenty minutes on my dual-core
+64-bit Pentium desktop.
 
 Run the server.
 
@@ -117,19 +121,23 @@ Dubsar does not work with:
 
 - There are some small glitches with the autocompleter and the
   word-entry text field.  Usually it will submit a search if that
-  element has focus, and the user presses return.  It will also
-  submit a search if the user selects an item from the autocomplete
-  menu.  Something related to AJAX and JavaScript event handling is
-  not entirely right, and these things do not always work
-  consistently.
-- Even after the word-entry field is cleared, sometimes an AJAX
-  response trickles in and pops up the autocompleter again.
+  element has focus, and the user presses return.  Something related to
+  AJAX and JavaScript event handling is not entirely right, and this
+  does not always work properly.  If the user presses return before the
+  first AJAX request, the form works normally.  Once the autocompleter
+  pops up, the return key will no longer trigger a search.
+- Even after the word-entry field is cleared, an AJAX response often
+  trickles in and pops up the autocompleter again.
 
 == Future Plans
+
+=== UI and views
 
 A frame-based view would be ideal, to allow the result set to scroll
 while the header (and possibly the pagination footer) remain
 stationary.
+
+=== Functionality and implementation
 
 It might be interesting to write a Dubsar plug-in for looking up
 definitions and synonyms of key words in the text of any web page.  The
@@ -142,6 +150,8 @@ autocompleter.  A web page containing thirty words with definitions,
 synonyms and markup is a large payload, but the JSON response is very
 small, and rather than being an optimization, the small chunk size may
 end up adding too much overhead.
+
+=== Content
 
 It's clear from a closer look at the WordNet materials that the sample
 sentences contained within glosses (<tt>:definitions</tt>) are intended
