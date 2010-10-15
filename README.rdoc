@@ -46,6 +46,10 @@ See suggestions for search terms in an autocompleter::
 Choose between two canned jQuery themes using a pair of radio buttons::
                          The application uses a cookie to store the
                          selected theme.
+See flash-based error messages::
+                         The application redirects to the previous page
+                         (if internal) or the index with a reasonable
+                         error message in case of exception.
 
 == Building and Running
 
@@ -117,10 +121,6 @@ Dubsar does not work with:
   consistently.
 - Even after the word-entry field is cleared, sometimes an AJAX
   response trickles in and pops up the autocompleter again.
-- There is not much error handling in the controller.  If the user
-  submits a badly-formed request (by manually editing the URL), she
-  can get an unpleasant error message.  But navigating normally
-  through the application does not produce such problems.
 
 == Future Plans
 
@@ -155,21 +155,3 @@ autocompleter.  A web page containing thirty words with definitions,
 synonyms and markup is a large payload, but the JSON response is very
 small, and rather than being an optimization, the small chunk size may
 end up adding too much overhead.
-
-== Screenshots
-
-(Available by running <tt>rake doc:app</tt>.)
-
-=== Home page
-[link:../screenshot-1.png]
-
-=== Autocompleter
-[link:../screenshot-2.png]
-
-=== Result list
-[link:../screenshot-3.png]
-
-=== Synonym highlighting
-[link:../screenshot-4.png]
-
-== The End
