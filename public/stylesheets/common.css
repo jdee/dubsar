@@ -9,7 +9,7 @@ a[href] > img {
   border-width: 0.2em;
 }
 
-a.undecorated {
+a.undecorated, a:hover,active {
   text-decoration: none;
 }
 
@@ -50,7 +50,7 @@ label {
   text-decoration: none;
 }
 
-#header-bar > table a:hover, a:active {
+#header-bar > table a:hover, #header-bar > table a:active {
   font-weight: bolder;
 }
 
