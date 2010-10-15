@@ -121,6 +121,14 @@ Dubsar does not work with:
   consistently.
 - Even after the word-entry field is cleared, sometimes an AJAX
   response trickles in and pops up the autocompleter again.
+- When the Dubsar index page is first loaded by visiting the URL, the
+  initial open accordion pane is a little too small for its content.
+  It gains a scrollbar on the right, and the second line of text is not
+  entirely visible.  This is corrected by clicking on the _h1_ element
+  in the upper left-hand corner (''Dubsar Dictionary'').  In both cases,
+  jQuery seems to add a <i>style='height: value;'</i> attribute to
+  the _div_ for this pane, but the supplied <i>value</i> is different
+  in each case.  It's not clear why.
 
 == Future Plans
 
@@ -139,6 +147,22 @@ It might be interesting to write a Dubsar plug-in for looking up
 definitions and synonyms of key words in the text of any web page.  The
 WordNet data set is well suited to that task.
 
+I want to review the use of the <tt>will_paginate</tt> gem to pace the
+AJAX requests and responses for the autocompleter.  It makes for good
+code re-use, but thirty words per batch may be too few for the
+autocompleter.  A web page containing thirty words with definitions,
+synonyms and markup is a large payload, but the JSON response is very
+small, and rather than being an optimization, the small chunk size may
+end up adding too much overhead.
+
+It's clear from a closer look at the WordNet materials that the sample
+sentences contained within glosses (<tt>:definitions</tt>) are intended
+to be displayed separately.  In particular, there is a simple online
+{WordNet application}[http://wordnetweb.princeton.edu/perl/webwn] that
+does a number of things with the data.  Quite a few of the features
+there are related to WordNet's home-grown index, which is not used or
+very relevant to this project.
+
 Beyond that, I'd like to add more content to the application by further
 exploring the data set or finding others.  This kind of application is
 only as good as its data.  Here's a wish list of things to add:
@@ -147,11 +171,3 @@ only as good as its data.  Here's a wish list of things to add:
 - Remaining parts of speech (conjunctions, interjections, prepositions,
   pronouns)
 - Illustrations (somewhat rare in online dictionaries)
-
-I want to review the use of the <tt>will_paginate</tt> gem to pace the
-AJAX requests and responses for the autocompleter.  It makes for good
-code re-use, but thirty words per batch may be too few for the
-autocompleter.  A web page containing thirty words with definitions,
-synonyms and markup is a large payload, but the JSON response is very
-small, and rather than being an optimization, the small chunk size may
-end up adding too much overhead.
