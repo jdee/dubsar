@@ -28,7 +28,7 @@
       request.term += '%';
 
       // get one page at a time
-      url = '/words/show.json';
+      url = '/.json';
       if (page) url += '?page=' + page;
 
       $.getJSON(url, request, function(data){
@@ -100,6 +100,8 @@
       // save the choice as a cookie
       document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path=/';
     }
+
+    $('#error').delay(3000).fadeOut('slow');
 
     /* This animation is fun, but a little annoying.
     $('a', '#header-bar').hover(function(){

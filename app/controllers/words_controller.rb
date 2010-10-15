@@ -1,10 +1,10 @@
 class WordsController < ApplicationController
   respond_to :html, :json
   before_filter :init_count
+  before_filter :setup_captions
 
-  def index
-    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
-    @dubsar_alt = 'dub-sar'
+  def error
+    redirect_with_error 'bad request'
   end
 
   # Retrieve all words matching the specified +term+ and render as
@@ -12,9 +12,11 @@ class WordsController < ApplicationController
   def show
     page = params[:page]
     @term = params[:term]
-    flash[:error] = 'bad request' and redirect_to(:action => :index) and return unless @term
 
-    @term += '%' if @term and params[:starts_with] == 'yes'
+    # show and index use the same URL
+    render(:action => :index) and return unless @term
+
+    @term += '%' if params[:starts_with] == 'yes'
     search_options = {
       :conditions => [ 'name ilike ?', @term ],
       :order => 'name'
@@ -26,8 +28,7 @@ class WordsController < ApplicationController
         if @words.count > 0
           render :action => 'show'
         else
-          flash[:error] = "no results for \"#{@term}\""
-          redirect_to :action => :index
+          redirect_with_error "no results for \"#{@term}\""
         end
       }
       format.json do
@@ -44,5 +45,15 @@ class WordsController < ApplicationController
   # count accordion divs
   def init_count
     @count = 0
+  end
+
+  def setup_captions
+    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
+    @dubsar_alt = 'dub-sar'
+  end
+
+  def redirect_with_error(errmsg)
+    flash[:error] = errmsg
+    redirect_to(params[:back] == 'yes' ? :back : :root)
   end
 end

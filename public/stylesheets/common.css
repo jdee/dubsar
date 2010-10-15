@@ -46,7 +46,7 @@ label {
   font-size: 120%;
 }
 
-#header-bar > table a:link, a:visited, a:hover, a:active {
+#header-bar > table a:link, #header-bar > table a:visited, #header-bar > table a:hover, #header-bar > table a:active {
   text-decoration: none;
 }
 

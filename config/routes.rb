@@ -1,7 +1,5 @@
 Dubsar::Application.routes.draw do
-  get 'words' => 'words#index'
-
-  match 'words/show(.:format)' => 'words#show'
+  match '/(.:format)' => 'words#show'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -54,6 +52,8 @@ Dubsar::Application.routes.draw do
   # just remember to delete public/index.html.
 
   root :to => "words#index"
+
+  match '*junk' => "words#error"
 
   # See how all your routes lay out with "rake routes"
 
