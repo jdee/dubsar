@@ -12,6 +12,8 @@ class WordsController < ApplicationController
   def show
     page = params[:page]
     @term = params[:term]
+    flash[:error] = 'bad request' and redirect_to(:action => :index) and return unless @term
+
     @term += '%' if @term and params[:starts_with] == 'yes'
     search_options = {
       :conditions => [ 'name ilike ?', @term ],
@@ -25,7 +27,7 @@ class WordsController < ApplicationController
           render :action => 'show'
         else
           flash[:error] = "no results for \"#{@term}\""
-          redirect_to :back
+          redirect_to :action => :index
         end
       }
       format.json do
