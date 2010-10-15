@@ -94,8 +94,8 @@ Seed the database.
 
   rake db:seed
 
-<b>Note:</b> Seeding the DB takes about twenty minutes on my dual-core
-64-bit Pentium desktop.
+<b>Note:</b> Seeding the DB takes about twenty minutes on a decent
+64-bit processor.
 
 Run the server.
 
@@ -111,11 +111,13 @@ Currently, Dubsar works well with:
 - Safari 5 on OS X and Vista
 - Camino 2 on OS X
 - OmniWeb 5 on OS X
+- Internet Explorer 8 on Vista
 
 Dubsar does not work with:
-- Internet Explorer 8
 - Opera 10
 - Konqueror 4
+
+The server has been tested both on Ubuntu and OS X.
 
 == Known Issues
 
