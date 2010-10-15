@@ -1,9 +1,22 @@
 (function($){
   $(function(){
-    /* set up definition accordion divs */
-    $('#accordion').accordion({
-      navigation: true
-    });
+    /* find the value currently associated with a cookie by name */
+    /* (blank string if not found) */
+    $.find_cookie = function(name){
+      var allcookies = document.cookie;
+      var pos = allcookies.indexOf(name);
+      if (pos != -1) {
+        var start = pos + name.length + 1;
+        var end = allcookies.indexOf(';', start);
+        if (end == -1) {
+          end = allcookies.length;
+        }
+        return decodeURIComponent(allcookies.substring(start, end));
+      }
+      else {
+        return '';
+      }
+    }
 
     /* style the search button */
     $(':submit').button({

@@ -1,5 +1,6 @@
 class WordsController < ApplicationController
   respond_to :html, :json
+  before_filter :init_count
   before_filter :setup_captions
 
   def error
@@ -49,5 +50,9 @@ class WordsController < ApplicationController
   def redirect_with_error(errmsg)
     flash[:error] = errmsg
     redirect_to(params[:back] == 'yes' ? :back : :root)
+  end
+
+  def init_count
+    @count = -1
   end
 end
