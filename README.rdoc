@@ -203,3 +203,9 @@ only as good as its data.  Here's a wish list of things to add:
 - Remaining parts of speech (conjunctions, interjections, prepositions,
   pronouns)
 - Illustrations (somewhat rare in online dictionaries)
+
+== Copyright
+
+Copyright (C) 2010 Jimmy Dee except as otherwise attributed.
+
+WordNet Copyright (C) 2010 The Trustees of Princeton University.
