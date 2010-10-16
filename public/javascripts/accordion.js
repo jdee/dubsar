@@ -1,7 +1,7 @@
 (function($){
   $(function(){
     function find_starting_pane() {
-      var starting_pane = $.find_cookie('starting_pane');
+      var starting_pane = $.find_cookie('dubsar_starting_pane');
       if (!starting_pane || $('#' + starting_pane).size() == 0) {
         set_starting_pane('');
         return 0;
@@ -13,7 +13,7 @@
     }
 
     function set_starting_pane(id) {
-      document.cookie = 'starting_pane='+id+'; path=/';
+      document.cookie = 'dubsar_starting_pane='+id+'; path=/';
     }
 
     $('#accordion').accordion({
