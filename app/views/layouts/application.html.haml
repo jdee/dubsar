@@ -19,7 +19,9 @@
   %body{:class => "style-#{@theme}"}
     #header
       %h2
-        =link_to 'Dubsar Dictionary', root_path, :class => "undecorated", :title => 'home'
+        %a{:href => "#{root_path}", :class => "undecorated", :title => 'home'}
+          =image_tag '../favicon.ico', :alt => 'favicon', :id => 'favicon'
+          Dubsar Dictionary
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
       %hr/
