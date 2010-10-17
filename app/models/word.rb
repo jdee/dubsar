@@ -27,7 +27,7 @@ class Word < ActiveRecord::Base
   # part of speech
   def unique_name
     (name.capitalized? ? 'cap-' : '') +
-      "#{name.downcase.gsub(/[\s.]/, '_')}_#{pos}"
+      "#{name.downcase.gsub(/[\s.']/, '_')}_#{pos}"
   end
 
   class << self
