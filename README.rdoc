@@ -166,6 +166,9 @@ only as good as its data.  Here's a wish list of things to add:
 - Remaining parts of speech (conjunctions, interjections, prepositions,
   pronouns)
 - Illustrations (somewhat rare in online dictionaries)
+- Inflected word match (match other noun and verb forms, including
+  irregulars)
+- Inexact searching (soundex, metaphone, etc.)
 
 == Copyright
 

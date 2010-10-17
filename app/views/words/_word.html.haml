@@ -5,4 +5,4 @@
       &= "(#{word.pos}.)"
 %div{:id => "pane_#{@count+=1}"}
   %ol
-    =render word.synsets
+    =render partial: 'synset', collection: word.synsets, locals: { :word => word }
