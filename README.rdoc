@@ -138,6 +138,9 @@ The server has been tested both on Ubuntu and OS X.
 
 === Functionality and implementation
 
+I want to review web servers (options with Rack) and deployment options
+(Tomcat via war file, e.g.).
+
 It might be interesting to write a Dubsar plug-in for looking up
 definitions and synonyms of key words in the text of any web page.  The
 WordNet data set is well suited to that task.  This could take the form
@@ -147,6 +150,8 @@ of:
   data model.
 - A plug-in for applications and controls that perform spellchecking or
   similar text-handling functions.
+See below regarding better lexical identification of words from
+context to narrow synonym lists.
 
 === Content
 
@@ -169,6 +174,9 @@ only as good as its data.  Here's a wish list of things to add:
 - Inflected word match (match other noun and verb forms, including
   irregulars)
 - Inexact searching (soundex, metaphone, etc.)
+- Better lexical word identification: If Dubsar can better recognize a
+  word's part of speech from its context (e.g., inflection, position
+  relative to other words, etc.), its synonym list can be narrowed.
 
 == Copyright
 
