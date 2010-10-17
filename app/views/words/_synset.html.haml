@@ -1,6 +1,4 @@
 %li
   - synset.words_except(word).each do |w|
     =link_to w.name, url_for(action: :show, term: w.name), title: w.name
-  - if synset.words_except(word).count > 0
-    %br/
-  =h synset.definition
+  &= synset.definition
