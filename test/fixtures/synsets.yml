@@ -1,2 +1,39 @@
+slang:
+  definition: informal speech
+  words: slang
+
 food:
-  id: 1
+  definition: something edible
+  words: noun, grub
+
+foul:
+  definition: bad
+  words: adjective
+
+well:
+  definition: in a good way
+  words: adverb
+
+but:
+  definition: logical conjunction
+  words: conjunction
+
+hey:
+  definition: something you yell
+  words: interjection
+
+from:
+  definition: some preposition
+  words: preposition
+
+you:
+  definition: second-person pronoun
+  words: pronoun
+
+follow:
+  definition: chase, pursue, trail
+  words: verb
+
+well_noun:
+  definition: a hole in the ground
+  words: well_noun

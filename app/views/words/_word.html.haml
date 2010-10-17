@@ -5,11 +5,4 @@
       &= "(#{word.pos}.)"
 %div{:id => "pane_#{@count+=1}"}
   %ol
-    - word.definitions.each do |definition|
-      %li
-        =render :partial => 'synspans', :object => definition.body
-    - unless word.synonyms.blank?
-      %li
-        %strong synonyms:
-        - word.synonyms.each do |synonym|
-          =link_to synonym, url_for(:action => :show, :term => synonym), :title => synonym
+    =render word.synsets

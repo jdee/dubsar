@@ -1,54 +1,32 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
-
-def find_or_create_word(name, part_of_speech)
-    w = Word.find_by_name_and_part_of_speech(name, part_of_speech) ||
-      Word.new(:name => name, :part_of_speech => part_of_speech)
-end
-
-%w{adj adv noun verb}.each do |part|
-  part_of_speech = case part
+%w{adj adv noun verb}.each do |sfx|
+  part_of_speech = case sfx
   when 'adj'
     'adjective'
   when 'adv'
     'adverb'
   else
-    part
+    sfx
   end
 
   puts "#{Time.now} loading #{part_of_speech.pluralize}"
-  total_count = Word.count
-  File.open(File.join(File.dirname(__FILE__), 'defaults', "data.#{part}")).each do |line|
+  synset_count = 0
+  File.open(File.join(File.dirname(__FILE__), 'defaults', "data.#{sfx}")).each do |line|
     next if line =~ /^\s/
 
     left, defn = line.split('| ')
-    synset_offset, lex_filenum, ss_type, w_cnt, name, lex_id, *rest = left.split(' ')
+    synset_offset, lex_filenum, ss_type, w_cnt, *rest = left.split(' ')
     w_cnt = w_cnt.to_i
-    name.gsub!('_', ' ')
 
-    w = find_or_create_word name, part_of_speech
-    w.definitions.build :body => defn
-
-    rest.slice(0, 2*(w_cnt-1)).each_slice(2) do |a|
+    synset = Synset.new definition: defn
+    rest.slice(0, 2*w_cnt).each_slice(2) do |a|
       s = a[0].gsub('_', ' ')
-      synset = w.synset
       synonym = Word.find_by_name_and_part_of_speech s, part_of_speech
-      next if synonym and synset and synset.words.include?(synonym)
-
-      synset = w.build_synset unless synset
       next if synonym and synset.words << synonym
 
-      synset.words.build :name => s, :part_of_speech => part_of_speech
-      synset.save
-    end if w_cnt > 1
-    w.save
+      synset.words.build name: s, part_of_speech: part_of_speech
+    end
+    synset.save
+    synset_count += 1
   end
-  new_count = Word.count
-  puts "#{Time.now} loaded #{new_count-total_count} #{part_of_speech.pluralize}"
-  total_count = new_count
+  puts "#{Time.now} loaded #{Word.count(:conditions => { :part_of_speech => part_of_speech})} #{part_of_speech.pluralize} (#{synset_count} synsets)"
 end

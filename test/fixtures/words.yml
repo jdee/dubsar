@@ -1,49 +1,59 @@
 adjective:
   name: foul
   part_of_speech: adjective
+  synsets: foul
 
 adverb:
   name: well
   part_of_speech: adverb
+  synsets: well
 
 conjunction:
   name: but
   part_of_speech: conjunction
+  synsets: but
 
 interjection:
   name: hey
   part_of_speech: interjection
+  synsets: hey
 
 noun:
   name: food
   part_of_speech: noun
-  synset: food
+  synsets: food
 
 preposition:
   name: from
   part_of_speech: preposition
+  synsets: from
 
 pronoun:
   name: you
   part_of_speech: pronoun
+  synsets: you
 
 verb:
   name: follow
   part_of_speech: verb
+  synsets: follow
 
 slang:
   name: slang
   part_of_speech: noun
+  synsets: slang
 
 well_noun:
   name: well
   part_of_speech: noun
+  synsets: well_noun
 
 bad_part_of_speech:
   name: fudge
   part_of_speech: thingy
+  synsets: food
 
 grub:
   name: grub
   part_of_speech: noun
-  synset: food
+  synsets: food

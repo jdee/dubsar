@@ -1,8 +1,0 @@
-- synspans.split(' ').each do |w|
-  - words = Word.all :conditions => { :name => w }
-  - _w = words.first if words and words.count == 1
-  - if _w and _w.synonyms
-    %span{ :title => "synonyms: #{_w.synonyms.join(', ')}" }
-      &= w
-  - else
-    &= w

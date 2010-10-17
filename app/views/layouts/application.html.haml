@@ -20,10 +20,10 @@
     #header
       %h2
         %a{:href => "#{root_path}", :class => "undecorated", :title => 'home'}
-          =image_tag 'dubsar.png', :alt => 'Dubsar', :id => 'favicon'
+          =image_tag 'dubsar.png', alt: 'Dubsar', id: 'favicon'
           Dubsar Dictionary
-      =render :partial => 'shared/theme_picker'
-      =render :partial => 'shared/header_bar'
+      =render partial: 'shared/theme_picker'
+      =render partial: 'shared/header_bar'
       %hr/
     - if flash[:error]
       #error.ui-state-error.ui-corner-all

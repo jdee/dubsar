@@ -1,8 +1,7 @@
 class CreateSynsets < ActiveRecord::Migration
   def self.up
     create_table :synsets do |t|
-
-      t.timestamps
+      t.text :definition, :null => false
     end
   end
 

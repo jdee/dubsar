@@ -1,10 +1,9 @@
 require 'test_helper'
 
 class WordTest < ActiveSupport::TestCase
-  should validate_presence_of   :name
+  should validate_presence_of :name
   should validate_presence_of :part_of_speech
-  should have_many :definitions
-  should belong_to :synset
+  should have_and_belong_to_many :synsets
 
   should 'accept a valid adjective' do
     assert_valid words(:noun)
@@ -52,13 +51,14 @@ class WordTest < ActiveSupport::TestCase
 
     assert_equal well_adverb.name, well_noun.name
     assert_not_equal well_adverb.part_of_speech, well_noun.part_of_speech
+    assert_not_equal well_adverb, well_noun
   end
 
   should 'recognize synonyms' do
     food = words :noun
     grub = words :grub
 
-    assert_equal food.synset, grub.synset
+    assert food.synsets.any? { |s| s.words.include? grub }
   end
 
 end

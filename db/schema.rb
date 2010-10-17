@@ -10,29 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101009191559) do
-
-  create_table "definitions", :force => true do |t|
-    t.integer  "word_id"
-    t.text     "body",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20101017043743) do
 
   create_table "synsets", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text "definition", :null => false
+  end
+
+  create_table "synsets_words", :id => false, :force => true do |t|
+    t.integer "synset_id"
+    t.integer "word_id"
   end
 
   create_table "words", :force => true do |t|
-    t.string   "name",           :null => false
-    t.string   "part_of_speech", :null => false
-    t.integer  "synset_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "name",           :null => false
+    t.string "part_of_speech", :null => false
   end
-
-  add_index "words", ["name", "part_of_speech"], :name => "index_words_on_name_and_part_of_speech"
-  add_index "words", ["name"], :name => "index_words_on_name"
 
 end

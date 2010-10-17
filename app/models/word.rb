@@ -3,12 +3,11 @@ require 'string'
 # A single +Word+ entry represents a word and part of speech.  For
 # example, _run_ will have two separate entries as a noun and a verb.
 class Word < ActiveRecord::Base
-  belongs_to :synset
-  has_many :definitions, :dependent => :delete_all
+  has_and_belongs_to_many :synsets
 
-  validates :name, :presence => true
-  validates :part_of_speech, :presence => true,
-    :inclusion => { :in =>
+  validates :name, presence: true
+  validates :part_of_speech, presence: true,
+    inclusion: { :in =>
     %w{adjective
        adverb
        conjunction
@@ -17,11 +16,6 @@ class Word < ActiveRecord::Base
        preposition
        pronoun
        verb} }
-
-  # Array of strings
-  def synonyms
-    synset.words.reject{ |w| w == self }.map{ |w| w.name } if synset
-  end
 
   # Abbreviation for the full part_of_speech
   def pos

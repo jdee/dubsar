@@ -6,13 +6,13 @@
   #content_div_1
     %ol
       %li
-        =render :partial => 'synspans', :object => 'the Sumerian word for'
+        the Sumerian word for
         %em
-          =render :partial => 'synspans', :object => 'scribe'
-        &mdash;
-        =render :partial => 'synspans', :object => 'cuneiform'
-        =link_to image_tag('http://psd.museum.upenn.edu/epsd/psl/img/thumb/Obel.png', :id => 'cuneiform-signs', :alt => @dubsar_alt), 'http://psd.museum.upenn.edu/epsd/epsd/e1050.html', :title => @dubsar_caption
+          scribe
+        &mdash; cuneiform
+        =link_to image_tag('http://psd.museum.upenn.edu/epsd/psl/img/thumb/Obel.png', id: 'cuneiform-signs', alt: @dubsar_alt), 'http://psd.museum.upenn.edu/epsd/epsd/e1050.html', title: @dubsar_caption
       %li
-        =render :partial => 'synspans', :object => 'a Rails dictionary application using content from the Princeton University'
-        =link_to 'WordNet', 'http://wordnet.princeton.edu', :title => 'WordNet'
-        =render :partial => 'synspans', :object => 'project'
+        a Rails dictionary application using content from the Princeton
+        University
+        =link_to 'WordNet', 'http://wordnet.princeton.edu', title: 'WordNet'
+        project
