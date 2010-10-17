@@ -23,8 +23,22 @@
       icons: { primary:'ui-icon-search' }
     });
 
+    /* position the main div depending on whether the error div is
+       present */
+    var $error_div = $('#error');
+    var $header_div = $('#header');
+    var $main_div = $('#main');
+    var $header_bottom = $header_div.outerHeight();
+    var $starting_offset = $header_bottom;
+    $error_div.each(function(){
+      $starting_offset = $(this).position().bottom;
+    });
+    $main_div.css({ top: $starting_offset });
+
     /* fade the error div */
-    $('#error').delay(3000).fadeOut('slow');
+    $error_div.delay(3000).fadeOut('slow', function(){
+      $main_div.animate({ top: $header_bottom }, 'fast');
+    });
 
     /* This animation is fun, but a little annoying.
     $('a', '#header-bar').hover(function(){
