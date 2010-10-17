@@ -1,7 +1,6 @@
 %li
-  - synonyms = synset.words.find :all, conditions: [ 'name not ilike ?', word.name ]
-  - synonyms.each do |w|
+  - synset.words_except(word).each do |w|
     =link_to w.name, url_for(action: :show, term: w.name), title: w.name
-  - if synonyms.count > 0
+  - if synset.words_except(word).count > 0
     %br/
   =h synset.definition

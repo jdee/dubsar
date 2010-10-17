@@ -17,11 +17,12 @@
     }
 
     $('#accordion').accordion({
-      navigation: true,
       active: find_starting_pane(),
+      autoHeight: false,
       change: function(event, info) {
         set_starting_pane(info.newHeader.attr('id'));
-      }
+      },
+      navigation: true
     });
   });
 })(jQuery);

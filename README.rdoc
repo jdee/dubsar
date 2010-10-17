@@ -22,7 +22,7 @@ Search for a word:: Type a word into the text box and press return or
                     button (like a check box) to <i>match case</i>.
                     SQL wild cards may be used at any position, e.g.
                     <i>%one%</i> will search for all words containing
-                    _one_.
+                    _one_, and <i>c_t</i> matches both _cat_ and _cot_.
 View a word's definitions and part of speech::
                             In the active accordion pane for each
                             word, all available definitions are
