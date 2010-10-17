@@ -37,7 +37,7 @@
 
     /* fade the error div */
     $error_div.delay(3000).fadeOut('slow', function(){
-      $main_div.animate({ top: $header_bottom }, 'fast');
+      $main_div.animate({ top: $header_bottom }, 1000, 'easeOutBounce');
     });
 
     /* This animation is fun, but a little annoying.
