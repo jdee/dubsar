@@ -20,7 +20,7 @@ label {
 }
 
 .small-buttonset .ui-button-text {
-  font-size: x-small;
+  font-size: x-small!important;
 }
 
 #header {
@@ -75,8 +75,8 @@ label {
 
 #theme-picker {
   position: absolute;
-  top: 0.7ex;
-  right: 0.7ex;
+  top: 0ex;
+  right: 0ex;
 }
 
 #header-bar {

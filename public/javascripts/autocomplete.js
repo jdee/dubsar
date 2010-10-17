@@ -82,6 +82,8 @@
       });
     })(ajax_handler);
 
+    $word_input.watermark('enter a word');
+
     /******** end autocompleter ********/
 
   });
