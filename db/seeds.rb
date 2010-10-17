@@ -17,7 +17,7 @@
     synset_offset, lex_filenum, ss_type, w_cnt, *rest = left.split(' ')
     w_cnt = w_cnt.to_i
 
-    synset = Synset.new definition: defn
+    synset = Synset.new definition: defn.chomp
     rest.slice(0, 2*w_cnt).each_slice(2) do |a|
       s = a[0].gsub('_', ' ')
       synonym = Word.find_by_name_and_part_of_speech s, part_of_speech
