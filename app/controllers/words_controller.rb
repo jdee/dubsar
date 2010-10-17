@@ -21,25 +21,32 @@ class WordsController < ApplicationController
       :conditions => [ "name #{operator} ?", @term ],
       :order => 'name'
     }
-    @words = Word.paginate({ :page => page }.merge(search_options))
 
     respond_to do |format|
+
       format.html {
+        @words = Word.paginate({ :page => page }.merge(search_options))
         if @words.count > 0
           render :action => 'show'
         else
           redirect_with_error "no results for \"#{@term}\""
         end
       }
+
       format.json do
+        page ||= 1
+
+        total_pages = Word.count(search_options)/100 + 1;
+        @words = Word.all({:offset => 100*(page.to_i-1), :limit => 100}.merge(search_options));
         respond_with({
-          :case  => params[:case] || '',
-          :page  => page ? page.to_i + 1 : 2,
-          :total => @words.total_pages,
-          :term  => @term.sub(/%$/, ''),
-          :list  => @words.map{ |w| w.name }.uniq
+          :case      => params[:case] || '',
+          :next_page => page.to_i + 1,
+          :total     => total_pages,
+          :term      => @term.sub(/%$/, ''),
+          :list      => @words.map{ |w| w.name }.uniq
         }.to_json)
       end
+
     end
   end
 

@@ -124,15 +124,12 @@ The server has been tested both on Ubuntu and OS X.
 
 == Known Issues
 
-- There are some small glitches with the autocompleter and the
-  word-entry text field.  Usually it will submit a search if that
-  element has focus, and the user presses return.  Something related to
-  AJAX and JavaScript event handling is not entirely right, and this
-  does not always work properly.  If the user presses return before the
-  first AJAX request, the form works normally.  Once the autocompleter
-  pops up, the return key will no longer trigger a search.
-- Even after the word-entry field is cleared, an AJAX response often
-  trickles in and pops up the autocompleter again.
+- Pressing _enter_ after typing a word into the search box does not
+  trigger a search as long as the autocomplete list is showing, even if
+  the text field has focus.  It is possible to trigger a search by
+  selecting an item from the autocomplete list.  The _enter_ key works
+  if you first press _escape_ to remove the autocomplete list.  You can
+  also transfer focus to the _search_ button using the _tab_ key.
 
 == Future Plans
 
@@ -140,15 +137,13 @@ The server has been tested both on Ubuntu and OS X.
 
 It might be interesting to write a Dubsar plug-in for looking up
 definitions and synonyms of key words in the text of any web page.  The
-WordNet data set is well suited to that task.
-
-I want to review the use of the <tt>will_paginate</tt> gem to pace the
-AJAX requests and responses for the autocompleter.  It makes for good
-code re-use, but thirty words per batch may be too few for the
-autocompleter.  A web page containing thirty words with definitions,
-synonyms and markup is a large payload, but the JSON response is very
-small, and rather than being an optimization, the small chunk size may
-end up adding too much overhead.
+WordNet data set is well suited to that task.  This could take the form
+of:
+- A Rails plug-in for looking up words and providing things like
+  synonym spans for template rendering or general-purpose access to the
+  data model.
+- A plug-in for applications and controls that perform spellchecking or
+  similar text-handling functions.
 
 === Content
 
