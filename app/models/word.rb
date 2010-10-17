@@ -32,7 +32,8 @@ class Word < ActiveRecord::Base
   # generates an identifier (no spaces) from the word's name and
   # part of speech
   def unique_name
-    (name.capitalized? ? 'cap-' : '') + "#{name.gsub(/[\s.]/, '_')}_#{pos}"
+    (name.capitalized? ? 'cap-' : '') +
+      "#{name.downcase.gsub(/[\s.]/, '_')}_#{pos}"
   end
 
   class << self

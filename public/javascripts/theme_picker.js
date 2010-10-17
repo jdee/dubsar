@@ -14,14 +14,7 @@
 
     /* 'light' or 'dark' */
     function pick_theme(theme) {
-      if (theme == 'dark') {
-        $('body').removeClass('style-light').addClass('style-dark');
-      }
-      else {
-        $('body').removeClass('style-dark').addClass('style-light');
-      }
-
-      // save the choice as a cookie
+      $('body').removeClass('style-light style-dark').addClass('style-'+theme);
       document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path=/';
     }
   });
