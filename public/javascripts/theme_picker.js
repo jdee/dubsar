@@ -23,8 +23,6 @@
 
     /* jquery.watermark adds a span within a span, resulting in extra
        margins and huge buttons; we remove the inner span */
-    $('.small-buttonset span > span').each(function(){
-      $(this).unwrap();
-    });
+    $('.small-buttonset span > span').unwrap();
   });
 })(jQuery);
