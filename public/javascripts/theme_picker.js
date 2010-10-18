@@ -7,7 +7,8 @@
     $('#theme-picker-buttonset > input').button().click(function(){
       var theme = $(this).val();
       pick_theme(theme);
-      $('label#'+theme+'-other').removeClass('ui-state-active');
+      $('+ label', this).removeClass('ui-state-default').addClass('ui-state-active');
+      $('label#'+theme+'-other').removeClass('ui-state-active').addClass('ui-state-default');
     });
     $('#theme-picker-buttonset').buttonset();
     $('#theme-picker-buttonset > input:checked').click();
