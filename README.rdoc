@@ -66,7 +66,7 @@ The following instructions are for a vanilla Ubuntu 10.04 installation.
 ==== PostgreSQL
 
   sudo apt-get install postgresql-8.4 libpq-dev
-  sudo -iHu postgres createuser $LOGNAME
+  sudo -u postgres createuser $LOGNAME
 
 Make the new user (yourself) a superuser.  Edit the user name and
 password (if any) in <tt>config/database.yml</tt> to agree with the
