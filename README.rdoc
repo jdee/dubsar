@@ -81,7 +81,7 @@ for you:
 
 Follow the instructions at the end to initialize a default database.
 
-*All:*
+<b>All:</b>
 
 Once PostgreSQL is installed and running:
 
