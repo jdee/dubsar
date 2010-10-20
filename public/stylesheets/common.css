@@ -67,12 +67,6 @@ label {
   margin-bottom: 2ex;
 }
 
-#favicon {
-  float: left;
-  border-style: none;
-  margin: 0.15em;
-}
-
 #theme-picker {
   position: absolute;
   top: 0ex;
