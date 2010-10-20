@@ -13,12 +13,14 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 default_run_options[:pty] = true
 
 namespace :deploy do
+  desc 'start the remote Dubsar instance'
   task :start, :roles => :app, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
   task :stop do ; end
 
+  desc 'start the remote Dubsar instance'
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
