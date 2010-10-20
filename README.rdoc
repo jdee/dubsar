@@ -57,7 +57,8 @@ Scroll through search results without losing the page header or footer::
 
 === Prerequisites
 
-The following instructions are for a vanilla Ubuntu 10.04 installation.
+The following instructions are for a vanilla Ubuntu 10.04 installation
+except where otherwise noted.
 
 ==== System packages
 
@@ -65,7 +66,25 @@ The following instructions are for a vanilla Ubuntu 10.04 installation.
 
 ==== PostgreSQL
 
+<b>Ubuntu:</b>
+
   sudo apt-get install postgresql-8.4 libpq-dev
+
+<b>OS X:</b> (MacPorts)
+
+You cannot build the +pg+ gem againt a precompiled PostgreSQL
+installation.  MacPorts builds it locally from source and installs it
+for you:
+
+  sudo port install postgresql84
+  sudo port install postgresql84-server
+
+Follow the instructions at the end to initialize a default database.
+
+*All:*
+
+Once PostgreSQL is installed and running:
+
   sudo -u postgres createuser $LOGNAME
 
 Make the new user (yourself) a superuser.  Edit the user name and
@@ -185,8 +204,8 @@ The server has been tested both on Ubuntu and OS X.
 
 === Functionality and implementation
 
-I want to review web servers (options with Rack) and deployment options
-(Tomcat via war file, e.g.).
+I want to review Rails web servers (options with Rack), though it may
+make little difference when deploying with Passenger.
 
 It might be interesting to write a Dubsar plug-in for looking up
 definitions and synonyms of key words in the text of any web page.  The
