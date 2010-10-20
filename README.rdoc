@@ -184,9 +184,9 @@ Currently, Dubsar works well with:
 - Camino 2 on OS X
 - OmniWeb 5 on OS X
 - Internet Explorer 8 on Vista
+- Opera 10.63
 
 Dubsar does not work with:
-- Opera 10
 - Konqueror 4
 
 The server has been tested both on Ubuntu and OS X.
