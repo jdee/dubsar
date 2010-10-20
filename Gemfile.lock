@@ -31,15 +31,29 @@ GEM
     arel (1.0.1)
       activesupport (~> 3.0.0)
     builder (2.1.2)
+    capistrano (2.5.19)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     haml (3.0.21)
+    highline (1.6.1)
     i18n (0.4.1)
     mail (2.2.7)
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
     mime-types (1.16)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.0.23)
+    net-ssh-gateway (1.0.1)
+      net-ssh (>= 1.99.1)
     pg (0.9.0)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -72,6 +86,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  capistrano
   haml
   pg
   rails (= 3.0.0)
