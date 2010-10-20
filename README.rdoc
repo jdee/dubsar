@@ -55,7 +55,7 @@ Scroll through search results without losing the page header or footer::
 
 == Viewing
 
-Dubsar is deployed at http://dubsar-dictionary.com/.  You can also
+Dubsar is deployed at http://dubsar-dictionary.com.  You can also
 build your own local copy from source by following the directions
 below.
 
