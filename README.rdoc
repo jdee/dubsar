@@ -53,6 +53,12 @@ Scroll through search results without losing the page header or footer::
                          A framelike fixed-position display allows a
                          user to scroll the results.
 
+== Viewing
+
+Dubsar is deployed at http://dubsar-dictionary.com/.  You can also
+build your own local copy from source by following the directions
+below.
+
 == Building and Running
 
 === Prerequisites
