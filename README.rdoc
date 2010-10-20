@@ -222,8 +222,8 @@ context to narrow synonym lists.
 === Content
 
 It's clear from a closer look at the WordNet materials that the sample
-sentences contained within glosses (<tt>:definitions</tt>) are intended
-to be parsed separately.  In particular, there is a simple online
+sentences contained within glosses are itended to be parsed separately.
+In particular, there is a simple online
 {WordNet application}[http://wordnetweb.princeton.edu/perl/webwn] that
 does a number of things with the data.  The WordNet data set includes
 additional information about semantic and lexical relationships among
