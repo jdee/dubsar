@@ -29,7 +29,7 @@ class WordsController < ApplicationController
         if @words.count > 0
           render :action => 'show'
         else
-          redirect_with_error "no results for \"#{@term}\""
+          redirect_with_error "no results for \"#{CGI.escapeHTML @term}\""
         end
       }
 
