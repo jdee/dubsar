@@ -3,13 +3,13 @@
     function find_starting_pane() {
       var starting_pane = $.find_cookie('dubsar_starting_pane');
       if (!starting_pane || $('#' + starting_pane).size() == 0 ||
-        ! $('+ div', '#' + starting_pane).attr('id')) {
+        ! $('#' + starting_pane + '+ div').attr('id')) {
         set_starting_pane('');
         return 0;
       }
       else {
         location.hash = '#' + starting_pane;
-        return $('+ div', '#' + starting_pane).attr('id').match(/_(\d+)$/)[1] - 0;
+        return $('#' + starting_pane + '+ div').attr('id').match(/_(\d+)$/)[1] - 0;
       }
     }
 
