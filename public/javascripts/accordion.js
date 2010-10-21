@@ -2,7 +2,8 @@
   $(function(){
     function find_starting_pane() {
       var starting_pane = $.find_cookie('dubsar_starting_pane');
-      if (!starting_pane || $('#' + starting_pane).size() == 0) {
+      if (!starting_pane || $('#' + starting_pane).size() == 0 ||
+        ! $('+ div', '#' + starting_pane).attr('id')) {
         set_starting_pane('');
         return 0;
       }
