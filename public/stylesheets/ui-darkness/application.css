@@ -23,7 +23,7 @@
   color: #ffffff;
 }
 
-.style-dark a.undecorated {
+.style-dark a.undecorated, .style-dark #footer, .style-dark #about {
   color: #f58400;
 }
 

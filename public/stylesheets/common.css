@@ -126,3 +126,20 @@ input#word-input {
   vertical-align: bottom;
   border-style: solid;
 }
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: auto;
+  margin-bottom: 0.2em;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+#about {
+  margin: 1em 6em;
+  font-size: large;
+  text-align: justify;
+}

@@ -1,4 +1,6 @@
 Dubsar::Application.routes.draw do
+  match '/about' => 'words#about'
+
   match '/(.:format)' => 'words#show'
 
   # The priority is based upon order of creation:
