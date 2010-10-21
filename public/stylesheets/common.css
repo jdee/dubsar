@@ -51,7 +51,7 @@ label {
   position: absolute;
   overflow: auto;
   top: 22.8ex;
-  bottom: 5ex;
+  bottom: 9.6ex;
   left: 0;
   right: 0;
   margin: 1.9ex 0.5ex;
@@ -61,10 +61,20 @@ label {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 6.2ex;
   height: 3ex;
-  margin: 0.5ex;
-  margin-bottom: 2ex;
+  margin: 0.2ex;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6ex;
+  margin: 0.2ex;
+  font-size: 0.9em;
+  text-align: center;
 }
 
 #theme-picker {
@@ -125,17 +135,6 @@ input#word-input {
   padding: 0.3ex;
   vertical-align: bottom;
   border-style: solid;
-}
-
-#footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: auto;
-  margin-bottom: 0.2em;
-  font-size: 0.9em;
-  text-align: center;
 }
 
 #about {
