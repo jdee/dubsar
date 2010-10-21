@@ -9,12 +9,12 @@ class StringTest < ActiveSupport::TestCase
 
   should 'detect all-uppercase words' do
     assert 'ABC'.upcase?
-    assert not('Abc'.upcase?)
+    assert(!'Abc'.upcase?)
   end
 
   should 'detect capitalized words' do
     assert 'ABC'.capitalized?
     assert 'Abc'.capitalized?
-    assert not('aBc'.capitalized?)
+    assert(!'aBc'.capitalized?)
   end
 end

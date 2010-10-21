@@ -3,8 +3,8 @@
     %tr
       - ('A'..'Z').each do |letter|
         %td
-          = link_to letter, url_for(action: :show, term: letter + '%'), title: "words starting with #{letter}"
-  = form_tag(url_for(controller: :words, action: :show), method: :get) do
+          = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}"
+  = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
 
     =hidden_field_tag :back, 'yes'
     %table#word-search-term
@@ -15,9 +15,9 @@
       %tr
         %td
           #word-search-options-buttonset.small-buttonset
-            = check_box_tag :case, 'case', false, id: 'word-case', tabindex: '1'
-            = label_tag 'word-case', 'match case', title: 'case-sensitive search'
+            = check_box_tag :case, 'case', false, :id => 'word-case', :tabindex => '1'
+            = label_tag 'word-case', 'match case', :title => 'case-sensitive search'
         %td
-          = text_field_tag :term, '', id: 'word-input', tabindex: '2', title: 'enter a word or search term (SQL wildcards accepted)'
+          = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
         %td
           %button{:type => 'submit', :id => 'word-submit', :tabindex => '3', :title => 'submit search'} search

@@ -121,6 +121,16 @@ and add
 at the end of the <tt>~/.bashrc</tt> file.  Exit your shell and start
 a new one.
 
+==== Install desired rubies
+
+Dubsar has been tested with MRI 1.9.2 and REE 1.8.7.  Both are easily
+installed using RVM:
+
+  rvm install ree-1.8.7
+  rvm install 1.9.2
+
+But see the following section for notes on installing MRI.
+
 ==== Install RVM packages and MRI 1.9.2
 
 Usually in an Ubuntu installation, MRI requires the following steps:
@@ -130,6 +140,13 @@ Usually in an Ubuntu installation, MRI requires the following steps:
   rvm install 1.9.2 --with-readline-dir=~/.rvm/usr --with-openssl-dir=~/.rvm/usr
 
 ==== Set up RVM
+
+Choose a ruby to use (for the remainder of this shell or until changed
+manually):
+
+  rvm use ree
+
+Choose a default (and use it now):
 
   rvm --default 1.9.2
 
