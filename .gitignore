@@ -1,5 +1,14 @@
+.bash*
 .bundle
+.cache
+.gitconfig
+.profile
+.ssh
 *.swp
+.viminfo
+current
+releases
+shared
 db/*.sqlite3
 db/*.sqlite3-journal
 log/*.log
