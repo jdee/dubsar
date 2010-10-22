@@ -3,7 +3,7 @@
     %tr
       - ('A'..'Z').each do |letter|
         %td
-          = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}"
+          = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}", :class => 'search-link'
   = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
 
     =hidden_field_tag :back, 'yes'
@@ -20,4 +20,4 @@
         %td
           = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
         %td
-          %button{:type => 'submit', :id => 'word-submit', :tabindex => '3', :title => 'submit search'} search
+          %button{:type => 'submit', :id => 'word-submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search

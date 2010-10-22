@@ -23,6 +23,8 @@
       icons: { primary:'ui-icon-search' }
     });
 
+    $('.search-link').click(post_info);
+
     /* position the main div depending on whether the error div is
        present */
     var $error_div = $('#error');
@@ -30,22 +32,20 @@
     var $main_div = $('#main');
     var $header_bottom = $header_div.outerHeight();
     var $starting_offset = $header_bottom;
-    $error_div.each(function(){
+    $error_div.filter(':visible').each(function(){
       $starting_offset = $(this).position().bottom;
     });
     $main_div.css({ top: $starting_offset });
 
     /* fade the error div */
-    $error_div.delay(3000).fadeOut('slow', function(){
+    $error_div.filter(':visible').delay(3000).fadeOut('slow', function(){
       $main_div.animate({ top: $header_bottom }, 1000, 'easeOutBounce');
     });
 
-    /* This animation is fun, but a little annoying.
-    $('a', '#header-bar').hover(function(){
-      $(this).effect('pulsate', { times: 1, speed: 'fast' });
-    }).mouseout(function(){
-      $(this).stop();
-    });
-     */
+    function post_info(){
+      /* just cheat off the stylesheet and don't try to compute the offset */
+      $main_div.stop().animate({ top: '22.8ex' }, 'fast');
+      $error_div.stop().replaceWith('<div id="error" class="ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info"></span>searching...</div>');
+    }
   });
 })(jQuery);

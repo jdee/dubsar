@@ -1,4 +1,4 @@
 %li
   - synset.words_except(word).each do |w|
-    =link_to w.name, url_for(:action => :show, :term => w.name), :title => w.name
+    =link_to w.name, url_for(:action => :show, :term => w.name), :title => w.name, :class => 'search-link'
   &= synset.definition

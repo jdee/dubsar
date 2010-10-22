@@ -52,6 +52,10 @@ See flash-based error messages::
 Scroll through search results without losing the page header or footer::
                          A framelike fixed-position display allows a
                          user to scroll the results.
+See a "searching..." message when a search request is submitted::
+                         A message is temporarily displayed below the
+                         header bar while waiting for the next page to
+                         load.
 
 == Viewing
 
@@ -222,6 +226,10 @@ The server has been tested both on Ubuntu and OS X.
   selecting an item from the autocomplete list.  The _enter_ key works
   if you first press _escape_ to remove the autocomplete list.  You can
   also transfer focus to the _search_ button using the _tab_ key.
+- When a search is submitted (via the _search_ button or a link letter
+  at the top), an message is displayed below the header bar reading,
+  "searching...."  An _info_ icon is displayed, but it does not show up
+  due to its color.
 
 == Future Plans
 

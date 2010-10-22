@@ -29,6 +29,10 @@
       #error.ui-state-error.ui-corner-all
         %span.ui-icon.ui-icon-alert
         =h flash[:error]
+    - else
+      #error.ui-state-highlight.ui-corner-all{:style => 'display: none;'}
+        %span.ui-icon.ui-icon-info
+        searching...
     #main
       =yield
     #footer
