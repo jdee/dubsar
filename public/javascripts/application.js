@@ -23,6 +23,8 @@
       icons: { primary:'ui-icon-search' }
     });
 
+    $('.pagination a').addClass('search-link');
+
     $('.search-link').click(post_info);
 
     /* position the main div depending on whether the error div is
