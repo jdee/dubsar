@@ -34,10 +34,10 @@ label {
 
 #error {
   position: fixed;
-  font-size: 120%;
-  margin: 0.4ex;
-  height: 2.5ex;
-  top: 15.7ex;
+  /* font-size: 120%; */
+  margin: 0.5ex;
+  height: 3ex;
+  top: 18.8ex;
   left: 0;
   right: 0;
 }
