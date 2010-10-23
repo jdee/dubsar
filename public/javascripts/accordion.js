@@ -9,14 +9,17 @@
       }
       else {
         var _top = $.find_cookie('dubsar_starting_offset');
-        if (_top) $('main').css({ top: _top });
+        if (_top) $('#main').scrollTop(_top);
         return $('#' + starting_pane + '+ div').attr('id').match(/_(\d+)$/)[1] - 0;
       }
     }
 
     function set_starting_pane(id) {
       document.cookie = 'dubsar_starting_pane='+id;
-      document.cookie = 'dubsar_starting_offset='+$('main').css('top');
+      if (id) {
+        var offset = $('#main').scrollTop() + $('#' + id).position().top;
+        document.cookie = 'dubsar_starting_offset='+offset;
+      }
     }
 
     $('#accordion').accordion({
