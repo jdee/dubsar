@@ -3,6 +3,7 @@
   %head
     %title
       Dubsar
+    %link{:rel => 'thumbnail', :href => '/images/dubsar.png', :type => 'image/png'}
     = stylesheet_link_tag "ui-darkness/jquery-ui-1.8.5.custom"
     = stylesheet_link_tag "ui-darkness/application"
     = stylesheet_link_tag "ui-lightness/jquery-ui-1.8.5.custom"
@@ -21,7 +22,7 @@
     #header
       %h2
         %a{:href => "#{root_path}", :class => "undecorated", :title => 'home'}
-          %img{:src => '/images/dubsar.png', :alt => 'dubsar', :id => 'dubsar-image'}
+          %img{:src => '/images/dubsar.png', :alt => 'Dubsar', :id => 'dubsar-image'}
           Dubsar Dictionary Project
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
