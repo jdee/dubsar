@@ -1,5 +1,5 @@
 /* Copyright (C) 2010 Jimmy Dee */
-(function($){
+;(function($){
   var $list;
   var $word_input;
   var $request_term;
