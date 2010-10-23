@@ -27,3 +27,10 @@
           ="(last updated #{@last_news_update})"
   #pane_1
     =render :partial => 'news'
+  %h2#cap-tour_n
+    %a{:href => '#cap-tour_n'}
+      Tour
+      %em (n.)
+  #pane_2
+    Take a quick
+    =link_to 'tour of Dubsar', tour_path

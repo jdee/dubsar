@@ -63,6 +63,8 @@ See the time of the last news update::
                          The timestamp is automatically taken from the
                          <i>_news.html.haml</i> file's modification
                          time.
+Take a tour of the application:: Dubsar now has a /tour path,
+                                 accessible from the index view.
 
 == Viewing
 

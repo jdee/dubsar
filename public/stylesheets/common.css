@@ -158,3 +158,23 @@ input#word-input {
   position: relative;
   left: 5ex;
 }
+
+#tour table {
+  table-layout: fixed;
+  width: 90%;
+}
+
+#tour a {
+  text-decoration: none;
+}
+
+#tour img {
+  display: block;
+  float: left;
+  clear: right;
+}
+
+.tour-dialog img {
+  height: 600px;
+  width: 900px;
+}

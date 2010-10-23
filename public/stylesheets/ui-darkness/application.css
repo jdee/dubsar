@@ -23,7 +23,8 @@
   color: #ffffff;
 }
 
-.style-dark a.undecorated, .style-dark #footer, .style-dark #about {
+.style-dark a.undecorated, .style-dark #footer, .style-dark #about,
+.style-dark #tour, .style-dark #tour * {
   color: #f58400;
 }
 

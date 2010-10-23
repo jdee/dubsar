@@ -186,4 +186,21 @@
   /* jquery.watermark adds a span within a span, resulting in extra
      margins and huge buttons; we remove the inner span */
   $('.small-buttonset span > span').unwrap();
+
+  $('#tour a').each(function(){
+    var id  = $(this).attr('id');
+    var url = $(this).attr('href');
+    var title = $('h3', this).text() || '';
+    $('<div id="'+id+'-dialog"><img src="'+url+'"/></div>').dialog({
+      autoOpen   : false        ,
+      dialogClass: 'tour-dialog',
+      height     : 655,
+      width      : 930,
+      title      : title
+    });
+    $(this).click(function(){
+      $('#'+id+'-dialog').dialog('open');
+      return false;
+    });
+  });
 })(jQuery);
