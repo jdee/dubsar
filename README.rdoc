@@ -221,20 +221,23 @@ The server has been tested both on Ubuntu and OS X.
 == Known Issues
 
 - Pressing _enter_ after typing a word into the search box does not
-  trigger a search as long as the autocomplete list is showing, even if
-  the text field has focus.  It is possible to trigger a search by
-  selecting an item from the autocomplete list.  The _enter_ key works
-  if you first press _escape_ to remove the autocomplete list.  You can
-  also transfer focus to the _search_ button using the _tab_ key.
+  usually trigger a search as long as the autocomplete list is showing,
+  even if the text field has focus.  It is possible to trigger a search
+  by selecting an item from the autocomplete list.  The _enter_ key
+  works if you first press _escape_ to remove the autocomplete list.
+  You can also transfer focus to the _search_ button using the _tab_
+  key.
 - When a search is submitted (via the _search_ button or a link letter
   at the top), an message is displayed below the header bar reading,
-  "searching...."  An _info_ icon is displayed, but it does not show up
-  due to its color.
-- In many scenarios, it is possible to go back to the previous page and
-  still see the "searching..." message in the error div, which does not
-  fade (fading is only done on page load, which doesn't happen when you
-  click back).  This is easily seen if you click one of the letters in
-  the header bar; then click another; then click back.
+  "searching...."  An _info_ icon is displayed, but it does not usually
+  show up.  It consistently shows up in Camino 2 on OS X, but most
+  other browsers display it intermittently.  If you go into the
+  JavaScript console in Chrome or into Firebug and examine the error
+  div and its child <tt>ui-icon</tt> span, it will have the correct
+  background image, background offset, etc.  After examining those
+  things, the icon will begin showing up correctly in all requests
+  during that browser session.  This seems like it might be a jquery-ui
+  bug.
 - When a user is viewing a list of results in an accordion, if they
   submit an invalid search term through the search form (e.g., "foo"),
   they will be redirected back to the page they were viewing, with an
@@ -243,9 +246,7 @@ The server has been tested both on Ubuntu and OS X.
   information is stored in a cookie).  This does not work when you
   click the back button after following a link (in the header bar,
   pagination footer or in a definition pane).  The first pane in the
-  accordion will be open after clicking back in this case.  (And as
-  mentioned above, the "searching..." message will be displayed in the
-  error div.)
+  accordion will be open after clicking back in this case.
 - After being successfully redirected to the correct accordion pane
   after an unsuccessful search, the application will not open the
   correct pane if the page is refreshed.
