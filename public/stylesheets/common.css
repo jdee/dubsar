@@ -34,7 +34,6 @@ label {
 
 #error {
   position: fixed;
-  /* font-size: 120%; */
   margin: 0.5ex;
   height: 3ex;
   top: 18.8ex;
@@ -75,6 +74,13 @@ label {
   margin: 0.2ex;
   font-size: 0.9em;
   text-align: center;
+}
+
+#dubsar-image {
+  /* display: inline-block; */
+  vertical-align: bottom;
+  padding: 0.2ex;
+  height: 2ex;
 }
 
 #theme-picker {
