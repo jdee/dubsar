@@ -250,9 +250,6 @@ The server has been tested both on Ubuntu and OS X.
   click the back button after following a link (in the header bar,
   pagination footer or in a definition pane).  The first pane in the
   accordion will be open after clicking back in this case.
-- After being successfully redirected to the correct accordion pane
-  after an unsuccessful search, the application will not open the
-  correct pane if the page is refreshed.
 
 == Future Plans
 
