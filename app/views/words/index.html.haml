@@ -20,7 +20,10 @@
     %a{:href => '#cap-news_n'}
       News
       %em (n.)
-      %span#news-icon-span
+      #news-icon-div
         %span#news-icon.ui-icon.ui-icon-star
+      %span#news-update
+        %em
+          ="(last updated #{@last_news_update})"
   #pane_1
     =render :partial => 'news'

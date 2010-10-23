@@ -149,6 +149,12 @@ input#word-input {
   text-align: justify;
 }
 
-#news-icon-span {
+#news-icon-div {
+  display: inline;
   position: relative;
+}
+
+#news-update {
+  position: relative;
+  left: 5ex;
 }

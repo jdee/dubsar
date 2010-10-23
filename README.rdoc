@@ -59,6 +59,10 @@ See a "searching..." message when a search request is submitted::
 Read news about the site in the index view::
                          A "News <i>(n.)</i>" accordion pane has been
                          added.
+See the time of the last news update::
+                         The timestamp is automatically taken from the
+                         <i>_news.html.haml</i> file's modification
+                         time.
 
 == Viewing
 

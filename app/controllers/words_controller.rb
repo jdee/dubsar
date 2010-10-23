@@ -13,6 +13,8 @@ class WordsController < ApplicationController
     page = params[:page]
     @term = params[:term]
 
+    set_time_of_news_update
+
     # show and index use the same URL
     render(:action => :index) and return unless @term
 
@@ -50,17 +52,23 @@ class WordsController < ApplicationController
     end
   end
 
-  def setup_captions
-    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
-    @dubsar_alt = 'dub-sar'
+  def init_count
+    @count = -1
   end
+
+  private
 
   def redirect_with_error(errmsg)
     flash[:error] = errmsg
     redirect_to(params[:back] == 'yes' ? :back : :root)
   end
 
-  def init_count
-    @count = -1
+  def setup_captions
+    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
+    @dubsar_alt = 'dub-sar'
+  end
+
+  def set_time_of_news_update
+    @last_news_update = File.stat(File.join(File.dirname(__FILE__), '..', 'views', 'words', '_news.html.haml')).mtime.strftime("%d-%b-%Y");
   end
 end
