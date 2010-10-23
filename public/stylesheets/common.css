@@ -77,7 +77,7 @@ label {
 }
 
 #dubsar-image {
-  /* display: inline-block; */
+  border-style: none;
   vertical-align: bottom;
   padding: 0.2ex;
   height: 2ex;
