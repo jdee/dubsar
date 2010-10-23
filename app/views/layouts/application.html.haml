@@ -14,11 +14,15 @@
     %meta{:name => 'google-site-verification', :content => 'aPKdnlmOZBptpZB2LHSiA1Jd8Jm_dWaKGh4Z38R6dJo'}
 
   %body{:class => "style-#{@theme}"}
-    #header
+    #header.ui-widget
       %h2
         %a{:href => "#{root_path}", :class => "undecorated", :title => 'home'}
           %img{:src => '/images/dubsar.png', :alt => 'Dubsar', :id => 'dubsar-image'}
           Dubsar Project
+      #tour-link-div.ui-corner-all.ui-state-default{:style => 'position: fixed!important;'}
+        %a#tour-link.search-link{:href => "#{tour_path}", :title => 'take a tour'}
+          %span#tour-link-icon.ui-icon.ui-icon-flag
+          tour
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
       %hr/

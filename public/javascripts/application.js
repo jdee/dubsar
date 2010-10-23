@@ -203,4 +203,10 @@
       return false;
     });
   });
+
+  $('#tour-link-div').hover(function(){
+    $(this).addClass('ui-state-active');
+  }).mouseleave(function(){
+    $(this).removeClass('ui-state-active');
+  });
 })(jQuery);
