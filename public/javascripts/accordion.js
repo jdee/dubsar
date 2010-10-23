@@ -14,7 +14,7 @@
     }
 
     function set_starting_pane(id) {
-      document.cookie = 'dubsar_starting_pane='+id+'; path=/';
+      document.cookie = 'dubsar_starting_pane='+id;
     }
 
     $('#accordion').accordion({
