@@ -148,3 +148,7 @@ input#word-input {
   font-size: large;
   text-align: justify;
 }
+
+#news-icon-span {
+  position: relative;
+}

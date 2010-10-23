@@ -56,6 +56,9 @@ See a "searching..." message when a search request is submitted::
                          A message is temporarily displayed below the
                          header bar while waiting for the next page to
                          load.
+Read news about the site in the index view::
+                         A "News <i>(n.)</i>" accordion pane has been
+                         added.
 
 == Viewing
 

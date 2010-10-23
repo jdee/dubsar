@@ -1,9 +1,9 @@
 #accordion
-  %h2
-    %a{:href => '#'}
+  %h2#cap-dubsar_n
+    %a{:href => '#cap-dubsar_n'}
       Dubsar
       %em (n.)
-  #content_div_1
+  #pane_0
     %ol
       %li
         the Sumerian word for
@@ -16,3 +16,11 @@
         University
         %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'} WordNet&reg;
         project
+  %h2#cap-news_n
+    %a{:href => '#cap-news_n'}
+      News
+      %em (n.)
+      %span#news-icon-span
+        %span#news-icon.ui-icon.ui-icon-star
+  #pane_1
+    =render :partial => 'news'
