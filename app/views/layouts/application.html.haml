@@ -20,11 +20,7 @@
     %title
       Dubsar
     %link{:rel => 'thumbnail', :href => '/images/dubsar.png', :type => 'image/png'}
-    = stylesheet_link_tag "ui-darkness/jquery-ui-1.8.5.custom"
-    = stylesheet_link_tag "ui-darkness/application"
-    = stylesheet_link_tag "ui-lightness/jquery-ui-1.8.5.custom"
-    = stylesheet_link_tag "ui-lightness/application"
-    = stylesheet_link_tag 'common'
+    = stylesheet_link_tag 'ui-darkness/jquery-ui-1.8.5.custom', 'ui-darkness/application', 'ui-lightness/jquery-ui-1.8.5.custom', 'ui-lightness/application', 'common', :concat => true, :cache => 'dubsar'
     = csrf_meta_tag
 
   %body{:class => "style-#{@theme}"}
