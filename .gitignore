@@ -1,6 +1,7 @@
 .bash*
 .bundle
 .cache
+.gem
 .gitconfig
 .profile
 .ssh
