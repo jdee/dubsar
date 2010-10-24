@@ -205,8 +205,10 @@
   });
 
   $('#tour-link-div').hover(function(){
-    $(this).addClass('ui-state-active');
+    $(this).addClass('ui-state-hover');
   }).mouseleave(function(){
-    $(this).removeClass('ui-state-active');
+    $(this).removeClass('ui-state-hover');
+  }).click(function(){
+    $(this).addClass('ui-state-active');
   });
 })(jQuery);
