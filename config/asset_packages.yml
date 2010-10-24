@@ -1,0 +1,12 @@
+---
+javascripts:
+- base:
+  - jquery.watermark.min
+  - application
+stylesheets:
+- base:
+  - ui-darkness/jquery-ui-1.8.5.custom
+  - ui-darkness/application
+  - ui-lightness/jquery-ui-1.8.5.custom
+  - ui-lightness/application
+  - common
