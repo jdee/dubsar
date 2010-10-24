@@ -13,7 +13,7 @@
 
   function post_info(){
     /* just cheat off the stylesheet and don't try to compute the offset */
-    $main_div.stop().animate({ top: '22.8ex' }, 'fast');
+    $main_div.stop().animate({ top: '24.7ex' }, 'fast');
     $error_div.stop().replaceWith('<div id="error" class="ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info"></span>working...</div>');
   }
 

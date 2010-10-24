@@ -36,7 +36,7 @@ label {
   position: fixed;
   margin: 0.5ex;
   height: 3ex;
-  top: 18.8ex;
+  top: 20.7ex;
   left: 0;
   right: 0;
 }
@@ -49,7 +49,7 @@ label {
 #main {
   position: absolute;
   overflow: auto;
-  top: 22.8ex;
+  top: 24.7ex;
   bottom: 9.6ex;
   left: 0;
   right: 0;
