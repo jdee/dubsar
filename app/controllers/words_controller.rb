@@ -69,6 +69,8 @@ class WordsController < ApplicationController
   end
 
   def set_time_of_news_update
-    @last_news_update = File.stat(File.join(File.dirname(__FILE__), '..', 'views', 'words', '_news.html.haml')).mtime.strftime("%d-%b-%Y");
+    # This doesn't work with Capistrano.
+    # @last_news_update = File.stat(File.join(File.dirname(__FILE__), '..', 'views', 'words', '_news.html.haml')).mtime.strftime("%d-%b-%Y");
+    @last_news_update = '23-Oct-2010'
   end
 end
