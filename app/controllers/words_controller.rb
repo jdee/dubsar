@@ -24,6 +24,10 @@ class WordsController < ApplicationController
     redirect_with_error 'bad request'
   end
 
+  def qunit
+    render :layout => false
+  end
+
   # Retrieve all words matching the specified +term+ and render as
   # HTML or JSON, one page at a time.
   def show

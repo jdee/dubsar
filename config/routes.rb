@@ -18,6 +18,7 @@
 Dubsar::Application.routes.draw do
   match '/about'   => 'words#about'
   match '/license' => 'words#license'
+  match '/qunit'   => 'words#qunit'
   match '/tour'    => 'words#tour'
 
   match '/(.:format)' => 'words#show'

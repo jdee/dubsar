@@ -65,6 +65,8 @@ See the time of the last news update::
                          time.
 Take a tour of the application:: Dubsar now has a /tour path,
                                  accessible from the index view.
+See a list of QUnit tests in a browser::
+                         Visit http://dubsar-dictionary.com/qunit
 
 == Viewing
 

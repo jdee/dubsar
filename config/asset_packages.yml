@@ -19,10 +19,11 @@ javascripts:
 - base:
   - jquery.watermark.min
   - application
+  - application-ui
 stylesheets:
 - base:
-  - ui-darkness/jquery-ui-1.8.5.custom
-  - ui-darkness/application
-  - ui-lightness/jquery-ui-1.8.5.custom
-  - ui-lightness/application
+  - jquery-ui-1.8.5.dark
+  - application-dark
+  - jquery-ui-1.8.5.light
+  - application-light
   - common
