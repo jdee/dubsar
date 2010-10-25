@@ -220,3 +220,7 @@ div#tour-link-div {
 #dubsar-image {
   padding-left: 0.1em;
 }
+
+#about ul {
+  list-style-type: none;
+}
