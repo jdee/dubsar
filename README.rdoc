@@ -67,6 +67,20 @@ Take a tour of the application:: Dubsar now has a /tour path,
                                  accessible from the index view.
 See a list of QUnit tests in a browser::
                          Visit http://dubsar-dictionary.com/qunit
+Get better visual notification when a search is in progress::
+                         A "working..." message is displayed any time
+                         a search request is made to the server for a
+                         new page.  Whenever the AJAX autocompleter is
+                         active, the mouse cursor for the search box
+                         and autocompleter menu is changed to a wait
+                         cursor for the duration of the request.
+See a reasonable number of responses in the autocompleter::
+                         Since the header bar already provides a means
+                         of browsing all words starting with a given
+                         letter, and the number of autocomplete
+                         responses for a single letter is enormous, the
+                         autocompleter now only fires when two or more
+                         letters have been typed in.
 
 == Viewing
 

@@ -61,8 +61,13 @@
 
     /* new autocomplete search begins */
     function ac_search_handler(){
+      if ($request_term === $word_input.val()) {
+        return false;
+      }
+
       $list = new Array();
       $request_term = $word_input.val();
+      $word_input.add('.ui-menu').css('cursor', 'wait');
     }
 
     /* cancel any search when the autocompleter closes */
@@ -87,7 +92,10 @@
           for (var j=0; j<data.list.length; ++j) $list.push(data.list[j]);
           response($list);
 
-          if (!data.next_page || !data.total || data.next_page > data.total) return;
+          if (!data.next_page || !data.total || data.next_page > data.total) {
+            $word_input.add('.ui-menu').css('cursor', 'auto');
+            return;
+          }
 
           // recursively invoke outer function to request the next page
           request.term = $request_term;
@@ -102,6 +110,7 @@
     (function register_autocomplete($source) {
       $word_input = $('#word-input').autocomplete({
         close :ac_close_handler,
+        minLength: 2,
         search:ac_search_handler,
         select:ac_select_handler,
         source:$source
