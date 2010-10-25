@@ -17,7 +17,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-test('find_cookie test', function(){
+test('find_cookie', function(){
   var find_cookie = $.find_cookie;
   ok(find_cookie, 'test for find_cookie function');
   document.cookie = 'dubsar_test_cookie=foo';
@@ -26,4 +26,15 @@ test('find_cookie test', function(){
   /* remove the cookie now */
   document.cookie = 'dubsar_test_cookie=; max-age=0';
   equal(find_cookie('dubsar_test_cookie'), '', 'test blank result');
+});
+
+test('.pagination link class', function(){
+  ok($('.pagination a').hasClass('search-link'), 'test for .search-link class');
+});
+
+test('search-link generates working message', function(){
+  $('.pagination a').click();
+  var text = $('#error').text();
+  $('#error').hide();
+  ok(/working/.test(text), 'look for working message');
 });

@@ -26,12 +26,18 @@
     =javascript_include_tag 'application_test'
 
   %body
-    #main
-      %h1#qunit-header Dubsar QUnit Test Suite
-      %h2#qunit-banner
-      %h2#qunit-testrunner-toolbar
-      %h2#qunit-userAgent
-      %ol#qunit-tests
-      #current-test-output
-        %div
-      #qunit-fixture
+    %h1#qunit-header Dubsar QUnit Test Suite
+    %h2#qunit-banner
+    %h2#qunit-testrunner-toolbar
+    %h2#qunit-userAgent
+    %ol#qunit-tests
+    #current-test-output
+      %div
+    #qunit-fixture
+    / Anatomy of a Dubsar page
+    #header{:style => 'position: fixed; top: 0; height: 17.8ex; margin: 0.5ex;'}
+    #error{:style => 'position: fixed; margin: 0.5ex; height: 3ex; top: 20.7ex;'}
+    #main{:style => 'position: absolute; top: 24.7ex; bottom: 9.6ex; margin: 1.9ex 0.5ex;'}
+    .pagination{:style => 'position: fixed; bottom: 6.2ex; height: 3ex; margin: 0.2ex;'}
+      %a{:href => '#'}
+    #footer{:style => 'position: fixed; bottom: 0; height: 6ex; margin: 0.2ex; font-size: 0.9em;'}
