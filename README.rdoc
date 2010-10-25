@@ -341,4 +341,4 @@ the GNU General Public License (GPL):
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-WordNet is available under the {WordNet 3.0 License}[http://wordnet.princeton.edu/wordnet/license/].
+WordNet(R) is available under the {WordNet 3.0 License}[http://wordnet.princeton.edu/wordnet/license/].
