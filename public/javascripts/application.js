@@ -25,9 +25,9 @@
     var $starting_offset = $header_bottom;
 
     function post_info(){
+      $('#error').stop(true).replaceWith('<div id="error" class="ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info"></span>working...</div>');
       /* just cheat off the stylesheet and don't try to compute the offset */
       $main_div.stop().animate({ top: '24.7ex' }, 'fast');
-      $('#error').stop().replaceWith('<div id="error" class="ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info"></span>working...</div>');
     }
 
     /* find the value currently associated with a cookie by name */

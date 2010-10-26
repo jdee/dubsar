@@ -68,8 +68,8 @@
       $list = new Array();
       $request_term = $word_input.val();
       $word_input.add('.ui-menu').css('cursor', 'wait');
+      $('#error').stop(true).replaceWith('<div id="error" class="ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info"></span>working...</div>');
       $('#main').stop().animate({ top: '24.7ex' }, 'fast');
-      $('#error').stop().replaceWith('<div id="error" class="ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info"></span>working...</div>');
     }
 
     /* cancel any search when the autocompleter closes */
