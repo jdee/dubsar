@@ -16,7 +16,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-module('application');
+module('core');
 test('find_cookie', function(){
   var find_cookie = $.find_cookie;
   ok(find_cookie, 'test for find_cookie function');

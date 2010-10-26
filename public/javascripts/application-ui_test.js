@@ -20,7 +20,7 @@
 /* test setup */
 document.cookie = 'dubsar_starting_pane=cap_News_n';
 
-module('application-ui');
+module('accordion');
 
 test('accordion starting pane', function(){
   var starting_pane = $.find_cookie('dubsar_starting_pane');
