@@ -18,26 +18,48 @@
 %html
   %head
     %title Dubsar QUnit Test Suite
+    =stylesheet_link_tag 'jquery-ui-1.8.5.light'
     =javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
+    =javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'
     =stylesheet_link_tag 'http://github.com/jquery/qunit/raw/master/qunit/qunit.css'
     =javascript_include_tag 'http://github.com/jquery/qunit/raw/master/qunit/qunit.js'
 
+    =javascript_include_tag 'jquery.watermark.min'
     =javascript_include_tag 'application'
     =javascript_include_tag 'application_test'
+    =javascript_include_tag 'application-ui'
+    =javascript_include_tag 'application-ui_test'
 
-  %body
+  %body.style-light
     %h1#qunit-header Dubsar QUnit Test Suite
     %h2#qunit-banner
-    %h2#qunit-testrunner-toolbar
     %h2#qunit-userAgent
     %ol#qunit-tests
-    #current-test-output
-      %div
-    #qunit-fixture
+
     / Anatomy of a Dubsar page
     #header{:style => 'position: fixed; top: 0; height: 17.8ex; margin: 0.5ex;'}
-    #error{:style => 'position: fixed; margin: 0.5ex; height: 3ex; top: 20.7ex;'}
+    #error{:style => 'display: none; position: fixed; margin: 0.5ex; height: 3ex; top: 20.7ex;'}
     #main{:style => 'position: absolute; top: 24.7ex; bottom: 9.6ex; margin: 1.9ex 0.5ex;'}
-    .pagination{:style => 'position: fixed; bottom: 6.2ex; height: 3ex; margin: 0.2ex;'}
-      %a{:href => '#'}
+      #accordion
+        %h2#cap_Dubsar_n
+          %a{:href => '#cap_Dubsar_n'}
+            Dubsar
+            %em (n.)
+        #pane_0
+          %ol
+            %li
+              the Sumerian word for
+              %em scribe
+            %li
+              a dictionary application
+        %h2#cap_News_n
+          %a{:href => 'cap_News_n'}
+            News
+            %em (n.)
+        #pane_1
+          %ol
+            %li some news
+            %li more news
+      .pagination{:style => 'position: fixed; bottom: 6.2ex; height: 3ex; margin: 0.2ex;'}
+        %a{:href => '#'} &nbsp;
     #footer{:style => 'position: fixed; bottom: 0; height: 6ex; margin: 0.2ex; font-size: 0.9em;'}
