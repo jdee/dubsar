@@ -31,7 +31,6 @@ class WordsController < ApplicationController
   # Retrieve all words matching the specified +term+ and render as
   # HTML or JSON, one page at a time.
   def show
-    page = params[:page]
     @term = params[:term]
 
     set_time_of_news_update
@@ -52,7 +51,7 @@ class WordsController < ApplicationController
     respond_to do |format|
 
       format.html {
-        @words = Word.paginate({ :page => page }.merge(search_options))
+        @words = Word.paginate({ :page => params[:page] }.merge(search_options))
         if @words.count > 0
           render :action => 'show'
         else
@@ -61,14 +60,20 @@ class WordsController < ApplicationController
       }
 
       format.json do
-        page ||= 1
+        @total_words = flash[:last_count] if flash[:last_term] == @term and flash[:last_case] == params[:case]
+        @total_words ||= Word.count(search_options)
 
-        total_pages = Word.count(search_options)/100 + 1;
-        @words = Word.all({:offset => 100*(page.to_i-1), :limit => 100}.merge(search_options));
+        flash[:last_term ] = @term
+        flash[:last_case ] = params[:case]
+        flash[:last_count] = @total_words
+
+        @words = Word.all({:offset => params[:offset], :limit => params[:limit]}.merge(search_options));
+
         respond_with({
           :case      => params[:case] || '',
-          :next_page => page.to_i + 1,
-          :total     => total_pages,
+          :offset    => params[:offset],
+          :limit     => params[:limit],
+          :total     => @total_words,
           :term      => @term.sub(/%$/, ''),
           :list      => @words.map{ |w| w.name }.uniq
         }.to_json)

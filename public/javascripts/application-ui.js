@@ -74,17 +74,29 @@
 
     /* cancel any search when the autocompleter closes */
     function ac_close_handler(){
-      $request_term = null;
+      ac_stop_search();
     }
 
-    function ajax_handler(request,response,page){
+    function ac_stop_search(){
+      $word_input.add('.ui-menu').css('cursor', 'auto');
+      $('#error').stop().fadeOut('slow', function(){
+        $('#main').stop().animate({ top: $('#header').outerHeight()}, 1000, 'easeOutBounce');
+      });
+    }
+
+    function ajax_handler(request,response,offset,limit){
       // search for words that start with the search term
       request.term += '%';
-      if (page) {
-        request.page = page;
-      }
       if ($_case) {
         request['case'] = $_case;
+      }
+
+      /* to start with */
+      if (!request.offset) {
+        request.offset = 0;
+      }
+      if (!request.limit) {
+        request.limit = 100;
       }
 
       $.getJSON('/.json', request, function(data){
@@ -94,16 +106,24 @@
           for (var j=0; j<data.list.length; ++j) $list.push(data.list[j]);
           response($list);
 
-          if (!data.next_page || !data.total || data.next_page > data.total) {
-            $word_input.add('.ui-menu').css('cursor', 'auto');
-            $('#error').stop().fadeOut('slow', function(){
-              $('#main').stop().animate({ top: $('#header').outerHeight()}, 1000, 'easeOutBounce');
-            });
+          if (request.offset + request.limit >= data.total) {
+            ac_stop_search();
             return;
           }
 
           // recursively invoke outer function to request the next page
           request.term = $request_term;
+          request.offset += request.limit;
+          if ($list.length < 400) {
+            request.limit = 100;
+          }
+          else if ($list.length < 1000) {
+            request.limit = 200;
+          }
+          else {
+            request.limit = 500;
+          }
+
           ajax_handler(request, response, data.next_page);
         }
       });
