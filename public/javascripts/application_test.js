@@ -33,7 +33,8 @@ test('.pagination link class', function(){
 });
 
 test('#main div starting position', function(){
-  equal($('#main').position().top, $('#header').outerHeight(), 'header bottom == main top');
+  var diff = Math.abs($('#main').position().top - $('#header').outerHeight());
+  ok(diff < 1, 'header bottom == main top');
 });
 
 test('search-link generates working message', function(){
