@@ -33,6 +33,13 @@ class WordsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:words)
   end
 
+  should "ignore excess white space" do
+    get :show, 'term' => '  World   War         2  '
+
+    assert_not_nil assigns(:term)
+    assert_equal assigns(:term), 'World War 2'
+  end
+
   teardown do
     assert_not_nil assigns(:theme)
   end

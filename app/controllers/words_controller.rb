@@ -39,6 +39,10 @@ class WordsController < ApplicationController
     # show and index use the same URL
     render(:action => :index) and return unless @term
 
+    # strip leading and trailing white space and compress internal
+    # whitespace
+    @term = @term.sub(/^\s+/, '').sub(/\s+$/, '').gsub(/\s+/, ' ')
+
     operator = params[:case].blank? ? 'ilike' : 'like'
     search_options = {
       :conditions => [ "name #{operator} ?", @term ],

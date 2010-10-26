@@ -81,6 +81,11 @@ See a reasonable number of responses in the autocompleter::
                          responses for a single letter is enormous, the
                          autocompleter now only fires when two or more
                          letters have been typed in.
+Include extra white space in a request::
+                         The application strips all leading and
+                         trailing white space in a request and
+                         compresses multiple internal white space
+                         characters to a single space.
 
 == Viewing
 
