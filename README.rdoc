@@ -229,17 +229,17 @@ Connect a browser to port 3000.
 
 == Supported Browsers
 
-Currently, Dubsar works well with:
+Currently, Dubsar works with every browser it's been tested with,
+though there are small style glitches from one to the next.  The QUnit
+test suite currently passes on all browsers.
 - Firefox 3 on all platforms (Ubuntu, Vista, OS X)
 - Google Chrome 6 on all platforms
 - Safari 5 on OS X and Vista
 - Camino 2 on OS X
 - OmniWeb 5 on OS X
 - Internet Explorer 8 on Vista
-- Opera 10.63
-
-Dubsar does not work with:
-- Konqueror 4
+- Opera 10 on all platforms
+- Konqueror 4 on Ubuntu Linux
 
 The server has been tested both on Ubuntu and OS X.
 
