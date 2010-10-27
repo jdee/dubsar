@@ -46,7 +46,16 @@ class WordsController < ApplicationController
     # whitespace
     @term = @term.sub(/^\s+/, '').sub(/\s+$/, '').gsub(/\s+/, ' ')
 
-    operator = params[:case].blank? ? 'ilike' : 'like'
+    if params[:match].blank?
+      operator = 'ilike' if params[:match].blank?
+    elsif params[:match] == 'case'
+      operator = 'like'
+    elsif params[:match] == 'regexp'
+      operator = '~'
+    else
+      redirect_with_error 'bad request' and return
+    end
+
     search_options = {
       :conditions => [ "name #{operator} ?", @term ],
       :order => 'name'
@@ -74,11 +83,11 @@ class WordsController < ApplicationController
         # every time
         @total_words = flash[:last_count] if
           flash[:last_term] == @term and
-          flash[:last_case] == params[:case]
+          flash[:last_match] == params[:match]
         @total_words ||= Word.count(search_options)
 
         flash[:last_term ] = @term
-        flash[:last_case ] = params[:case]
+        flash[:last_match ] = params[:match]
         flash[:last_count] = @total_words
 
         # protect myself against stupid requests
@@ -94,7 +103,7 @@ class WordsController < ApplicationController
           :order => 'hit_count DESC, name ASC')
 
         respond_with({
-          :case      => params[:case] || '',
+          :match      => params[:match] || '',
           :offset    => params[:offset],
           :limit     => limit,
           :total     => @total_words,

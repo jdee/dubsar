@@ -21,7 +21,7 @@
     var $list;
     var $word_input;
     var $request_term;
-    var $_case='';
+    var $match='';
 
     /* 'light' or 'dark' */
     function pick_theme(theme) {
@@ -84,8 +84,8 @@
     function ajax_handler(request,response,offset,limit){
       // search for words that start with the search term
       request.term += '%';
-      if ($_case) {
-        request['case'] = $_case;
+      if ($match) {
+        request.match = $match;
       }
 
       /* to start with */
@@ -99,7 +99,7 @@
       $.getJSON('/.json', request, function(data){
         // make sure the search term hasn't changed (this might be an
         // old response)
-        if (data.term == $request_term && data['case'] == $_case) {
+        if (data.term == $request_term && data.match == $match) {
           for (var j=0; j<data.list.length; ++j) $list.push(data.list[j]);
           response($list);
 
@@ -161,10 +161,10 @@
     }).click(function(){
       $list = new Array();
       if ($(this).is(':checked')) {
-        $_case = $(this).val();
+        $match = $(this).val();
       }
       else {
-        $_case = '';
+        $match = '';
       }
     });
     $('#word-lookup-buttonset').buttonset();
