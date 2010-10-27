@@ -38,21 +38,14 @@
       }
       else {
         var _top = $.find_cookie('dubsar_starting_offset');
-        if (_top) {
-          if ($('#error').is(':visible')) _top -= $('#error').outerHeight();
-          $('#main').scrollTop(_top);
-        }
+        if (_top) $('#main').scrollTop(_top);
         return $('#' + starting_pane + '+ div').attr('id').match(/_(\d+)$/)[1] - 0;
       }
     }
 
     function set_starting_pane(id) {
       document.cookie = 'dubsar_starting_pane='+id;
-      if (id) {
-        var offset = $('#main').scrollTop() + $('#' + id).position().top - $('#main').offset().top - $('#header').outerHeight();
-        if ($('#error').is(':visible')) offset -= $('#error').outerHeight();
-        document.cookie = 'dubsar_starting_offset='+offset;
-      }
+      if (id) document.cookie = 'dubsar_starting_offset='+$('#main').scrollTop();
     }
 
     /* if an item was selected, submit the request */
