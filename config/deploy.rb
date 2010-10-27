@@ -17,6 +17,12 @@
 
 require 'bundler/capistrano'
 
+# From rvm.beginrescueend.com
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+
+set :rvm_ruby_string, 'ree@rails3'        # Or whatever env you want it to run in.
+
 set :user, 'dubsar'
 set :domain, 'dubsar-dictionary.com'
 set :application, "dubsar"
