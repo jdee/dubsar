@@ -18,18 +18,26 @@
  */
 
 /* test setup */
-document.cookie = 'dubsar_starting_pane=cap_News_n';
+document.cookie = 'dubsar_starting_pane=header_pane_15';
+document.cookie = 'dubsar_starting_offset=150';
 
 module('accordion');
 
 test('accordion starting pane', function(){
   var starting_pane = $.find_cookie('dubsar_starting_pane');
   ok(starting_pane, 'dubsar_starting_pane found');
-  equal(starting_pane, 'cap_News_n', 'dubsar_starting_pane correct');
+  equal(starting_pane, 'header_pane_15', 'dubsar_starting_pane correct');
   ok($('#'+starting_pane+'+div').is(':visible'), 'dubsar_starting_pane open');
 
   /* a little klugey, but */
-  ok($('#pane_0').not(':visible'), 'other pane closed');
+  ok($('#pane_0').not(':visible'), 'first pane closed');
+
+});
+
+test('accordion starting offset', function(){
+  var starting_offset = $.find_cookie('dubsar_starting_offset');
+  ok(starting_offset, 'dubsar_starting_offset found');
+  equal($('#main').scrollTop(), starting_offset, 'check starting offset');
 
   $('#main').add('#error').hide();
 });

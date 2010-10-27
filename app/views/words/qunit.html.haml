@@ -39,27 +39,15 @@
     / Anatomy of a Dubsar page
     #header.ui-widget{:style => 'position: fixed; top: 0; height: 17.8ex; margin: 0.5ex;'}
     #error.ui-state-highlight.ui-corner-all{:style => 'display: none; position: fixed; margin: 0.5ex; height: 3ex; top: 20.7ex;'}
-    #main{:style => 'position: absolute; top: 24.7ex; bottom: 9.6ex; margin: 1.9ex 0.5ex;'}
+    #main{:style => 'overflow: auto; position: absolute; top: 24.7ex; bottom: 9.6ex; margin: 1.9ex 0.5ex;'}
       #accordion
-        %h2#cap_Dubsar_n
-          %a{:href => '#cap_Dubsar_n'}
-            Dubsar
-            %em (n.)
-        #pane_0
-          %ol
-            %li
-              the Sumerian word for
-              %em scribe
-            %li
-              a dictionary application
-        %h2#cap_News_n
-          %a{:href => 'cap_News_n'}
-            News
-            %em (n.)
-        #pane_1
-          %ol
-            %li some news
-            %li more news
+        - (0...30).each do |i|
+          %h2{:id => "header_pane_#{i}"}
+            %a{:href => "#header_pane_#{id}"}
+              &="pane #{i}"
+          %div{:id => "pane_#{i}"}
+            &="something in pane #{i}"
+
       .pagination{:style => 'position: fixed; bottom: 6.2ex; height: 3ex; margin: 0.2ex;'}
         %a{:href => '#'} &nbsp;
     #footer{:style => 'position: fixed; bottom: 0; height: 6ex; margin: 0.2ex; font-size: 0.9em;'}
