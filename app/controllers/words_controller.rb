@@ -20,6 +20,12 @@ class WordsController < ApplicationController
   before_filter :init_count
   before_filter :setup_captions
 
+  @max_json_limit = 1000
+
+  class << self
+    attr_reader :max_json_limit
+  end
+
   def error
     redirect_with_error 'bad request'
   end
@@ -49,7 +55,7 @@ class WordsController < ApplicationController
     respond_to do |format|
 
       format.html do
-        @words = Word.paginate({ :page => params[:page] }.merge(search_options))
+        @words = Word.paginate({:page => params[:page]}.merge(search_options))
         if @words.count > 0
           @words.each do |w|
             w.hit_count += 1
@@ -57,27 +63,40 @@ class WordsController < ApplicationController
           end
           render :action => 'show'
         else
-          redirect_with_error "no results for \"#{CGI.escapeHTML @term}\""
+          redirect_with_error(
+            "no results for \"#{CGI.escapeHTML @term}\"")
         end
       end
 
       format.json do
-        @total_words = flash[:last_count] if flash[:last_term] == @term and flash[:last_case] == params[:case]
+        # when the autocompleter makes many successive requests for
+        # the same thing, use the flash to avoid counting all matches
+        # every time
+        @total_words = flash[:last_count] if
+          flash[:last_term] == @term and
+          flash[:last_case] == params[:case]
         @total_words ||= Word.count(search_options)
 
         flash[:last_term ] = @term
         flash[:last_case ] = params[:case]
         flash[:last_count] = @total_words
 
-        @words = Word.all :offset => params[:offset],
-          :limit => params[:limit],
+        # protect myself against stupid requests
+        limit = params[:limit].to_i if params[:limit]
+        limit ||= self.class.max_json_limit
+        limit = self.class.max_json_limit if
+          limit > self.class.max_json_limit
+
+        @words = Word.all(
+          :offset => params[:offset],
+          :limit => limit,
           :conditions => [ "name #{operator} ?", @term ],
-          :order => 'hit_count DESC, name ASC'
+          :order => 'hit_count DESC, name ASC')
 
         respond_with({
           :case      => params[:case] || '',
           :offset    => params[:offset],
-          :limit     => params[:limit],
+          :limit     => limit,
           :total     => @total_words,
           :term      => @term.sub(/%$/, ''),
           :list      => @words.map{ |w| w.name }.uniq
@@ -99,7 +118,8 @@ class WordsController < ApplicationController
   end
 
   def setup_captions
-    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
+    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania" +
+      " Sumerian Dictionary'
     @dubsar_alt = 'dub-sar'
   end
 end
