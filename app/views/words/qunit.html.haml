@@ -43,7 +43,7 @@
       #accordion
         - (0...30).each do |i|
           %h2{:id => "header_pane_#{i}"}
-            %a{:href => "#header_pane_#{id}"}
+            %a{:href => "#header_pane_#{i}"}
               &="pane #{i}"
           %div{:id => "pane_#{i}"}
             &="something in pane #{i}"
