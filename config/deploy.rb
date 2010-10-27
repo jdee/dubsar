@@ -42,7 +42,7 @@ namespace :deploy do
   desc 'Create asset packages for production'
   task :package_assets, :roles => :app do
     run <<-EOF
-      cd #{deploy_to}/current && /usr/local/rvm/gems/ree-1.8.7-2010.02/bin/bundle exec rake RAILS_ENV=production asset:packager:build_all
+      cd #{deploy_to}/current && bundle exec rake RAILS_ENV=production asset:packager:build_all
     EOF
   end
 
