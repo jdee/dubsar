@@ -168,12 +168,12 @@ input#word-input {
   text-align: justify;
 }
 
-#news-icon-div {
+.dubsar-star-icon-div {
   display: inline;
   position: relative;
 }
 
-#news-update {
+.index-update {
   position: relative;
   left: 5ex;
 }

@@ -97,18 +97,34 @@ class WordsController < ApplicationController
           limit > self.class.max_json_limit
 
         @words = Word.all(
-          :offset => params[:offset],
-          :limit => limit,
+          :offset     => params[:offset],
+          :limit      => limit,
           :conditions => [ "name #{operator} ?", @term ],
-          :order => 'hit_count DESC, name ASC')
+          :order      => 'hit_count DESC, name ASC')
+
+        # The uniq method call is case-sensitive.  It has the effect of
+        # collapsing multiple parts of speech, e.g. cold (n.) and cold
+        # (adj.).  But we still have the issue of Jack and jack, which
+        # we address with the inject.
+        word_list = @words.map{ |w| w.name }.uniq.inject([]) do |list, w|
+          if ! list.empty? and list.last.casecmp(w) == 0
+            if w < list.last
+              list.pop
+              list << w
+            end
+          else
+            list << w
+          end
+          list
+        end
 
         respond_with({
-          :match      => params[:match] || '',
-          :offset    => params[:offset],
-          :limit     => limit,
-          :total     => @total_words,
-          :term      => @term.sub(/%$/, ''),
-          :list      => @words.map{ |w| w.name }.uniq
+          :match  => params[:match] || '',
+          :offset => params[:offset],
+          :limit  => limit,
+          :total  => @total_words,
+          :term   => @term.sub(/%$/, ''),
+          :list   => word_list
         }.to_json)
       end
 

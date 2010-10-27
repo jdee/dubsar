@@ -22,6 +22,8 @@
     var $word_input;
     var $request_term;
     var $match='';
+    var $starting_header=$.find_cookie('dubsar_starting_pane');
+    var $top_ten_interval;
 
     /* 'light' or 'dark' */
     function pick_theme(theme) {
@@ -30,22 +32,61 @@
     }
 
     function find_starting_pane() {
-      var starting_pane = $.find_cookie('dubsar_starting_pane');
-      if (!starting_pane || $('#' + starting_pane).size() == 0 ||
-        ! $('#' + starting_pane + '+ div').attr('id')) {
+      if (!$starting_header || $('#' + $starting_header).size() == 0 ||
+        ! $('#' + $starting_header + '+ div').attr('id')) {
         set_starting_pane('');
         return 0;
       }
       else {
         var _top = $.find_cookie('dubsar_starting_offset');
         if (_top) $('#main').scrollTop(_top);
-        return $('#' + starting_pane + '+ div').attr('id').match(/_(\d+)$/)[1] - 0;
+        return $('#' + $starting_header + '+ div').attr('id').match(/_(\d+)$/)[1] - 0;
       }
     }
 
     function set_starting_pane(id) {
       document.cookie = 'dubsar_starting_pane='+id;
       if (id) document.cookie = 'dubsar_starting_offset='+$('#main').scrollTop();
+    }
+
+    function kickoff_top_ten(wrapped_div) {
+      load_top_ten();
+      wrapped_div.css('opacity', 0.4);
+      $top_ten_interval = setInterval(load_top_ten, 30000);
+    }
+
+    function stop_top_ten() {
+      if ($top_ten_interval) clearInterval($top_ten_interval);
+    }
+
+    function load_top_ten() {
+      /* DEBT:
+       * 80 is overkill, but:
+       * Each word can have up to 4 parts of speech and can be
+       * capitalized or not.  The offset and limit parameters refer
+       * directly to the SQL table index.  For the moment, this is
+       * the easiest place to put this log.  It needs to be
+       * improved.
+       */
+      $.getJSON('/.json', {term:'%', limit:80}, function(data) {
+        var results = '<ol>';
+        for (var i=0; i<data.list.length && i<10; ++i) {
+          var word = data.list[i];
+          results += '<li><a href="/?term=' + word + '" title="' +
+            word + '">' + word+'</a></li>';
+        }
+        results += '</ol>';
+        $('div.top-ten-pane').html(results).css('opacity', 1.0);
+      });
+    }
+
+    function check_top_ten_pane(event, info) {
+      if (info.newHeader.attr('id') == 'cap-top_ten_n') {
+        kickoff_top_ten(info.newContent);
+      }
+      else {
+        stop_top_ten();
+      }
     }
 
     /* if an item was selected, submit the request */
@@ -150,8 +191,12 @@
       change: function(event, info) {
         set_starting_pane(info.newHeader.attr('id'));
       },
+      changestart: check_top_ten_pane,
       navigation: true
     });
+
+    /* awfully klugey, but */
+    if ($starting_header == 'cap-top_ten_n') load_top_ten($('div.top-ten-pane'));
 
     /* case toggle button */
     $('#word-case').button({

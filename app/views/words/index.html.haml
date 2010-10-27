@@ -32,12 +32,12 @@
         %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'} WordNet&reg;
         project
   =render :partial => 'news'
-  %h2#cap-tour_n
-    %a{:href => '#cap-tour_n'}
-      Tour
+  %h2#cap-top_ten_n
+    %a{:href => '#cap-top_ten_n'}
+      Top Ten
       %em (n.)
-  #pane_2
-    %ol
-      %li
-        Take a quick
-        =link_to 'tour of Dubsar', tour_path, :title => 'take a tour'
+      .dubsar-star-icon-div
+        %span.ui-icon.ui-icon-star
+      %span.index-update
+        %em new!
+  #pane_2.top-ten-pane
