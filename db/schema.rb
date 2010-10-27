@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101017043743) do
+ActiveRecord::Schema.define(:version => 20101026234437) do
 
   create_table "synsets", :force => true do |t|
     t.text "definition", :null => false
@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(:version => 20101017043743) do
   end
 
   create_table "words", :force => true do |t|
-    t.string "name",           :null => false
-    t.string "part_of_speech", :null => false
+    t.string  "name",                          :null => false
+    t.string  "part_of_speech",                :null => false
+    t.integer "hit_count",      :default => 0, :null => false
   end
 
 end

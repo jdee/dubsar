@@ -33,8 +33,6 @@ class WordsController < ApplicationController
   def show
     @term = params[:term]
 
-    set_time_of_news_update
-
     # show and index use the same URL
     render(:action => :index) and return unless @term
 
@@ -50,14 +48,18 @@ class WordsController < ApplicationController
 
     respond_to do |format|
 
-      format.html {
+      format.html do
         @words = Word.paginate({ :page => params[:page] }.merge(search_options))
         if @words.count > 0
+          @words.each do |w|
+            w.hit_count += 1
+            w.save
+          end
           render :action => 'show'
         else
           redirect_with_error "no results for \"#{CGI.escapeHTML @term}\""
         end
-      }
+      end
 
       format.json do
         @total_words = flash[:last_count] if flash[:last_term] == @term and flash[:last_case] == params[:case]
@@ -67,7 +69,10 @@ class WordsController < ApplicationController
         flash[:last_case ] = params[:case]
         flash[:last_count] = @total_words
 
-        @words = Word.all({:offset => params[:offset], :limit => params[:limit]}.merge(search_options));
+        @words = Word.all :offset => params[:offset],
+          :limit => params[:limit],
+          :conditions => [ "name #{operator} ?", @term ],
+          :order => 'hit_count DESC, name ASC'
 
         respond_with({
           :case      => params[:case] || '',
@@ -96,11 +101,5 @@ class WordsController < ApplicationController
   def setup_captions
     @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania Sumerian Dictionary'
     @dubsar_alt = 'dub-sar'
-  end
-
-  def set_time_of_news_update
-    # This doesn't work with Capistrano.
-    # @last_news_update = File.stat(File.join(File.dirname(__FILE__), '..', 'views', 'words', '_news.html.haml')).mtime.strftime("%d-%b-%Y");
-    @last_news_update = '23-Oct-2010'
   end
 end

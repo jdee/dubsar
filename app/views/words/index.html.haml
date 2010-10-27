@@ -31,17 +31,7 @@
         University
         %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'} WordNet&reg;
         project
-  %h2#cap-news_n
-    %a{:href => '#cap-news_n'}
-      News
-      %em (n.)
-      #news-icon-div
-        %span#news-icon.ui-icon.ui-icon-star
-      %span#news-update
-        %em
-          ="(last updated #{@last_news_update})"
-  #pane_1
-    =render :partial => 'news'
+  =render :partial => 'news'
   %h2#cap-tour_n
     %a{:href => '#cap-tour_n'}
       Tour

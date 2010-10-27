@@ -86,6 +86,9 @@ Include extra white space in a request::
                          trailing white space in a request and
                          compresses multiple internal white space
                          characters to a single space.
+See most popular words at the top of the autocompleter::
+                         Now the autocompleter sorts words by hit
+                         count.
 
 == Viewing
 
@@ -281,6 +284,12 @@ The server has been tested both on Ubuntu and OS X.
 == Future Plans
 
 === Functionality and implementation
+
+Dubsar now tracks the hit count of each word.  A word is considered hit
+any time it is rendered into HTML on a page.  The autocompleter now
+sorts results by popularity.  Once a decent statistical sample
+accumulates, the autocompleter will only display top results and not
+attempt to list all matches to potentially enormous searches.
 
 An advanced search option would be nice.  Users who are familiar with
 SQL can choose quite a few search options by typing wildcards into the

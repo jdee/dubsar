@@ -14,14 +14,29 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-%ol
-  %li
-    Dubsar is nearing launch.  Once the full
-    %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'}
-      WordNet&reg;
-    content is available in the application, it will be ready.
-  %li
-    You can now take a
-    =link_to 'tour of Dubsar', tour_path, :title => 'take a tour'
-  %li
-    Watch this space for information about changes to the site.
+%h2#cap-news_n
+  %a{:href => '#cap-news_n'}
+    News
+    %em (n.)
+    #news-icon-div
+      %span#news-icon.ui-icon.ui-icon-star
+    %span#news-update
+      %em
+        ="(last updated 26-Oct-2010)"
+#pane_1
+  %ol
+    %li
+      Dubsar is nearing launch.  Once the full
+      %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'}
+        WordNet&reg;
+      content is available in the application, it will be ready.
+    %li
+      Dubsar is now tracking the hit count of each word in its
+      database.  Results in the autocompleter are ordered by
+      popularity.  Later, the autocompleter will only return top
+      matches as you type, for efficiency, rather than potentially
+      thousands of words at a time.  Don't be alarmed if the words in
+      the autocompleter are not always ordered alphabetically.  It just
+      means the most popular ones are rising to the top.
+    %li
+      Watch this space for information about changes to the site.
