@@ -89,6 +89,8 @@ Include extra white space in a request::
 See most popular words at the top of the autocompleter::
                          Now the autocompleter sorts words by hit
                          count.
+See the ten most popular words in a pane on the index page::
+                         The list is updated in real time via AJAX.
 
 == Viewing
 
