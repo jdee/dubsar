@@ -51,7 +51,7 @@
 
     function kickoff_top_ten(wrapped_div) {
       load_top_ten();
-      wrapped_div.css('opacity', 0.4);
+      $('div.top-ten-pane').css('opacity', 0.4);
       $top_ten_interval = setInterval(load_top_ten, 30000);
     }
 
