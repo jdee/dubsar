@@ -65,7 +65,7 @@
        * Each word can have up to 4 parts of speech and can be
        * capitalized or not.  The offset and limit parameters refer
        * directly to the SQL table index.  For the moment, this is
-       * the easiest place to put this log.  It needs to be
+       * the easiest place to put this logic.  It needs to be
        * improved.
        */
       $.ajax({
