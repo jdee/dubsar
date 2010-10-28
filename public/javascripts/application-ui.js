@@ -49,9 +49,9 @@
       if (id) document.cookie = 'dubsar_starting_offset='+$('#main').scrollTop();
     }
 
-    function kickoff_top_ten(wrapped_div) {
+    function kickoff_top_ten() {
       load_top_ten();
-      $('div.top-ten-pane').css('opacity', 0.4);
+      $('div#top-ten-pane').css('opacity', 0.4);
       $top_ten_interval = setInterval(load_top_ten, 30000);
     }
 
@@ -68,23 +68,32 @@
        * the easiest place to put this log.  It needs to be
        * improved.
        */
-      $.getJSON('/.json', {term:'%', limit:80}, function(data) {
-        var results = '<ol>';
-        for (var i=0; i<data.list.length && i<10; ++i) {
-          var word = data.list[i];
-          results += '<li><a href="/?term=' + word + '" title="' +
-            word + '">' + word+'</a></li>';
+      $.ajax({
+        type: 'GET',
+        url: '/.json',
+        dataType: 'json',
+        data: {term:'%', limit:80},
+        success: function(response) {
+          var results = '<ol>';
+          for (var i=0; i<response.list.length && i<10; ++i) {
+            var word = response.list[i];
+            results += '<li><a href="/?term=' + word + '" title="' +
+              word + '">' + word+'</a></li>';
+          }
+          results += '</ol>';
+          $('div#top-ten-pane').html(results).fadeTo('slow', 1.0);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          $('div#top-ten-pane').fadeTo('fast', 0.4);
         }
-        results += '</ol>';
-        $('div.top-ten-pane').html(results).css('opacity', 1.0);
       });
     }
 
     function check_top_ten_pane(event, info) {
       if (info.newHeader.attr('id') == 'cap-top_ten_n') {
-        kickoff_top_ten(info.newContent);
+        kickoff_top_ten();
       }
-      else {
+      else if (info.oldHeader.attr('id') == 'cap-top_ten_n') {
         stop_top_ten();
       }
     }
@@ -196,7 +205,7 @@
     });
 
     /* awfully klugey, but */
-    if ($starting_header == 'cap-top_ten_n') load_top_ten($('div.top-ten-pane'));
+    if ($starting_header == 'cap-top_ten_n') kickoff_top_ten();
 
     /* case toggle button */
     $('#word-case').button({
