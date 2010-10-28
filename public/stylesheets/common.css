@@ -168,7 +168,7 @@ input#word-input {
   text-align: justify;
 }
 
-.dubsar-star-icon-div {
+span.star-icon-span {
   display: inline;
   position: relative;
 }
