@@ -17,6 +17,8 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+var $dubsar_original_theme;
+
 /* test setup */
 document.cookie = 'dubsar_starting_pane=header_pane_15';
 document.cookie = 'dubsar_starting_offset=150';
@@ -38,6 +40,24 @@ test('accordion starting offset', function(){
   var starting_offset = $.find_cookie('dubsar_starting_offset');
   ok(starting_offset, 'dubsar_starting_offset found');
   equal($('#main').scrollTop(), starting_offset, 'check starting offset');
+});
 
-  $('#main').add('#error').hide();
+
+module('theme picker');
+test('theme picker button clicks', function(){
+  $dubsar_original_theme = $.find_cookie('dubsar_theme');
+  var body = $('body');
+  $('#light-radio').click();
+  ok(body.hasClass('style-light'), 'check for style-light');
+  ok(!body.hasClass('style-dark'), 'check for no style-dark');
+  $('#dark-radio').click();
+  ok(body.hasClass('style-dark'), 'check for style-dark');
+  ok(!body.hasClass('style-light'), 'check for no style-light');
+});
+
+module('teardown');
+test('teardown, no test', function(){
+  $('#header').add('#main').add('#error').hide();
+  document.cookie = 'dubsar_theme='+$dubsar_original_theme+
+    '; max-age='+30*86400+'; path=/';
 });

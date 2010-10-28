@@ -18,6 +18,7 @@
 %html
   %head
     %title Dubsar QUnit Test Suite
+    =stylesheet_link_tag 'jquery-ui-1.8.5.dark'
     =stylesheet_link_tag 'jquery-ui-1.8.5.light'
     =javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
     =javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'
@@ -38,6 +39,12 @@
 
     / Anatomy of a Dubsar page
     #header.ui-widget{:style => 'position: fixed; top: 0; height: 17.8ex; margin: 0.5ex;'}
+      #theme-picker
+        #theme-picker-buttonset.small-buttonset
+          %input{:type => 'radio', :id => 'light-radio', :value => 'light', :checked => 'checked'}
+          %label#dark-other{:for => 'light-radio', :title => 'light display theme'} light
+          %input{:type => 'radio', :id => 'dark-radio', :value => 'dark'}
+          %label#light-other{:for => 'dark-radio', :title => 'dark display theme'} light
     #error.ui-state-highlight.ui-corner-all{:style => 'display: none; position: fixed; margin: 0.5ex; height: 3ex; top: 20.7ex;'}
     #main{:style => 'overflow: auto; position: absolute; top: 24.7ex; bottom: 9.6ex; margin: 1.9ex 0.5ex;'}
       #accordion
