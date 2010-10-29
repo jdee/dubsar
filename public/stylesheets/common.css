@@ -237,6 +237,7 @@ div#tour-link-div {
   right: 15ex;
   text-decoration: none;
   display: none;
+  font-size: 90%;
 }
 
 #sql-help-dialog-template {
