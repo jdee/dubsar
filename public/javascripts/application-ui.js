@@ -20,12 +20,13 @@
   $(function(){
     var $list;
     var $word_input;
+    var $word_input_has_focus=false;
     var $request_term;
     var $match='';
     var $starting_header=$.find_cookie('dubsar_starting_pane');
     var $top_ten_interval;
-    var $show_help_link_timer;
-    var $hide_help_link_timer;
+    var $show_help_link_timer=null;
+    var $hide_help_link_timer=null;
     var $sql_help_link=$('#sql-help-link');
     var $sql_help_dialog;
 
@@ -104,10 +105,12 @@
 
     function show_sql_help_link() {
       $sql_help_link.fadeIn('slow');
+      $show_help_link_timer = null;
     }
 
     function hide_sql_help_link() {
       $sql_help_link.fadeOut('fast');
+      $hide_help_link_timer = null;
     }
 
     /* if an item was selected, submit the request */
@@ -249,37 +252,42 @@
     });
 
     $word_input.watermark('enter a word');
-    $word_input.mouseover(function(){
-      if ($hide_help_link_timer) {
-        clearTimeout($hide_help_link_timer);
+    $word_input.hover(function(){
+      if ($hide_help_link_timer !== null) {
+        window.clearTimeout($hide_help_link_timer);
         $hide_help_link_timer = null;
       }
-      if (!$word_input.is(':focus') && !$sql_help_link.is(':visible')) {
-        $show_help_link_timer = setTimeout(show_sql_help_link, 3000);
+      if (!$word_input_has_focus && !$sql_help_link.is(':visible')) {
+        $show_help_link_timer = window.setTimeout(show_sql_help_link, 3000);
       }
-    }).mouseout(function(){
-      clearTimeout($show_help_link_timer);
-      $show_help_link_timer = null;
+    }, function(){
+      if ($show_help_link_timer !== null) {
+        window.clearTimeout($show_help_link_timer);
+        $show_help_link_timer = null;
+      }
       if ($sql_help_link.is(':visible')) {
-        $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
+        $hide_help_link_timer = window.setTimeout(hide_sql_help_link, 20000);
       }
     }).focus(function(){
-      if ($show_help_link_timer) {
-        clearTimeout($show_help_link_timer);
+      $word_input_has_focus = true;
+      if ($show_help_link_timer !== null) {
+        window.clearTimeout($show_help_link_timer);
         $show_help_link_timer = null;
       }
       if ($sql_help_link.is(':visible')) {
         hide_sql_help_link();
       }
+    }).blur(function(){
+      $word_input_has_focus = false;
     });
 
-    $sql_help_link.mouseover(function(){
-      if ($hide_help_link_timer) {
-        clearTimeout($hide_help_link_timer);
+    $sql_help_link.hover(function(){
+      if ($hide_help_link_timer !== null) {
+        window.clearTimeout($hide_help_link_timer);
         $hide_help_link_timer = null;
       }
-    }).mouseout(function(){
-      $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
+    }, function(){
+      $hide_help_link_timer = window.setTimeout(hide_sql_help_link, 20000);
     }).click(function(){
       $sql_help_dialog.dialog('open');
       return false;
@@ -323,7 +331,7 @@
 
     $('#tour-link-div').hover(function(){
       $(this).addClass('ui-state-hover');
-    }).mouseleave(function(){
+    }, function(){
       $(this).removeClass('ui-state-hover');
     }).click(function(){
       $(this).addClass('ui-state-active');
