@@ -37,13 +37,12 @@ test('#main div starting position', function(){
   ok(diff < 1, 'header bottom == main top');
 });
 
-test('search-link generates working message', function(){
-  /* $('#main > .pagination > a.search-link').trigger('click'); */
-  equal($('#main .pagination a').size(), 1, 'test pagination link count');
-  equal($('#main .pagination .search-link').size(), 1, 'test .search-link count');
+asyncTest('search-link generates working message', 1, function(){
+  $('#pagination-link').trigger('click');
 
-  equal($('#error').size(), 1, 'test #error div count');
-  var text = $('#error').text();
-  /* this test is not passing for some reason... */
-  /* ok(/working/.test(text), 'look for working message'); */
+  setTimeout(function(){
+    var text = $('#error').text();
+    ok(/working/.test(text), 'look for working message');
+    start();
+  }, 200);
 });
