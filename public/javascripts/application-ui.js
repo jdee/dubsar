@@ -254,7 +254,7 @@
         clearTimeout($hide_help_link_timer);
         $hide_help_link_timer = null;
       }
-      if (!$sql_help_link.is(':visible')) {
+      if (!$word_input.is(':focus') && !$sql_help_link.is(':visible')) {
         $show_help_link_timer = setTimeout(show_sql_help_link, 3000);
       }
     }).mouseout(function(){
