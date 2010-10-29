@@ -4,7 +4,7 @@ Dubsar is a dictionary web application using Ruby on Rails 3.0.  The
 content is taken from the Princeton University
 WordNet[http://wordnet.princeton.edu/] project.
 
-Dubsar is deployed at http://dubsar-dictionary.com/.
+Dubsar is deployed at http://dubsar-dictionary.com.
 
 For more information, see the
 {Dubsar wiki on GitHub}[http://github.com/jdee/dubsar/wiki/].
