@@ -258,11 +258,19 @@
         $show_help_link_timer = setTimeout(show_sql_help_link, 3000);
       }
     }).mouseout(function(){
+      clearTimeout($show_help_link_timer);
+      $show_help_link_timer = null;
+      if ($sql_help_link.is(':visible')) {
+        $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
+      }
+    }).focus(function(){
       if ($show_help_link_timer) {
         clearTimeout($show_help_link_timer);
         $show_help_link_timer = null;
       }
-      $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
+      if ($sql_help_link.is(':visible')) {
+        hide_sql_help_link();
+      }
     });
 
     $sql_help_link.mouseover(function(){
