@@ -117,20 +117,26 @@ label {
 
 #header-bar > table {
   position: absolute;
-  bottom: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
+  height: inherit;
+  width: 100%;
   table-layout: fixed;
+}
+
+#alphabet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 55ex;
+  table-layout: fixed;
   text-align: center;
   font-size: 120%;
 }
 
-#header-bar > table a:link, #header-bar > table a:visited, #header-bar > table a:hover, #header-bar > table a:active {
+#header-bar a:link, #header-bar a:visited, #header-bar a:hover,
+#header-bar a:active {
   text-decoration: none;
-}
-
-#header-bar > table a:hover, #header-bar > table a:active {
-  font-weight: bolder;
 }
 
 /* autocompleter menu styling */
@@ -221,6 +227,18 @@ div#tour-link-div {
   padding-left: 0.1em;
 }
 
-#about ul {
+#about ul, .sql-help-dialog ul {
   list-style-type: none;
+}
+
+#sql-help-link {
+  position: absolute;
+  top: 1ex;
+  right: 15ex;
+  text-decoration: none;
+  display: none;
+}
+
+#sql-help-dialog-template {
+  display: none;
 }

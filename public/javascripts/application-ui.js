@@ -24,6 +24,10 @@
     var $match='';
     var $starting_header=$.find_cookie('dubsar_starting_pane');
     var $top_ten_interval;
+    var $show_help_link_timer;
+    var $hide_help_link_timer;
+    var $sql_help_link=$('#sql-help-link');
+    var $sql_help_dialog;
 
     /* 'light' or 'dark' */
     function pick_theme(theme) {
@@ -96,6 +100,22 @@
       else if (info.oldHeader.attr('id') == 'cap-top_ten_n') {
         stop_top_ten();
       }
+    }
+
+    function show_sql_help_link() {
+      if ($sql_help_link.is(':visible')) {
+        return;
+      }
+      $sql_help_link.fadeIn('slow');
+      if ($hide_help_link_timer) clearTimeout($hide_help_link_timer);
+      $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
+    }
+
+    function hide_sql_help_link() {
+      if (!$sql_help_link.is(':visible')) {
+        return;
+      }
+      $sql_help_link.fadeOut('fast');
     }
 
     /* if an item was selected, submit the request */
@@ -204,7 +224,6 @@
       navigation: true
     });
 
-    /* awfully klugey, but */
     if ($starting_header == 'cap-top_ten_n') kickoff_top_ten();
 
     /* case toggle button */
@@ -223,7 +242,34 @@
     });
     $('#word-lookup-buttonset').buttonset();
 
+    $sql_help_dialog = $('#sql-help-dialog-template').clone().dialog({
+      autoOpen   : false        ,
+      dialogClass: 'sql-help-dialog',
+      height     : 350,
+      width      : 450,
+      resizable  : false,
+      title      : 'SQL wildcards',
+      buttons    : {
+        ok: function() {
+          $(this).dialog('close');
+        }
+      }
+    });
+
     $word_input.watermark('enter a word');
+    $word_input.mouseover(function(){
+      $show_help_link_timer = setTimeout(show_sql_help_link, 5000);
+    }).mouseout(function(){
+      clearTimeout($show_help_link_timer);
+    });
+    $sql_help_link.mouseover(function(){
+      if ($hide_help_link_timer) clearTimeout($hide_help_link_timer);
+    }).mouseout(function(){
+      $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
+    }).click(function(){
+      $sql_help_dialog.dialog('open');
+      return false;
+    });
 
     /* Set up the theme picker */
     $('#theme-picker-buttonset > input').button().click(function(){

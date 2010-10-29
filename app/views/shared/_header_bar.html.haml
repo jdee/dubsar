@@ -16,27 +16,56 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #header-bar.ui-corner-all
   %table
-    %tr
-      - ('A'..'Z').each do |letter|
-        %td
-          = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}", :class => 'search-link'
-      %td
-        %a.search-link{:href => url_for(:action => :show, :term => '^[^A-Za-z]', :match => 'regexp'), :title => 'words not starting with a letter'}
-          &hellip;
-  = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
-
-    =hidden_field_tag :back, 'yes'
-    %table#word-search-term
-      %colgroup
-        %col#c1
-        %col#c2
-        %col#c3
+    %tbody
       %tr
         %td
-          #word-search-options-buttonset.small-buttonset
-            = check_box_tag :match, 'case', false, :id => 'word-case', :tabindex => '1'
-            = label_tag 'word-case', 'match case', :title => 'case-sensitive search'
+          %table#alphabet
+            %tbody
+              %tr
+                - ('A'..'Z').each do |letter|
+                  %td
+                    = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}", :class => 'search-link'
+                %td
+                  %a.search-link{:href => url_for(:action => :show, :term => '^[^A-Za-z]', :match => 'regexp'), :title => 'words not starting with a letter'}
+                    &hellip;
         %td
-          = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
-        %td
-          %button{:type => 'submit', :id => 'word-submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search
+          = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
+
+            =hidden_field_tag :back, 'yes'
+            %table#word-search-term
+              %colgroup
+                %col#c1
+                %col#c2
+                %col#c3
+              %tr
+                %td &nbsp;
+                %td
+                  %a{:href => '#', :id => 'sql-help-link', :title => 'explain'}
+                    Huh?  SQL wilcards?
+                %td &nbsp;
+              %tr
+                %td
+                  #word-search-options-buttonset.small-buttonset
+                    = check_box_tag :match, 'case', false, :id => 'word-case', :tabindex => '1'
+                    = label_tag 'word-case', 'match case', :title => 'case-sensitive search'
+                %td
+                  = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
+                %td
+                  %button{:type => 'submit', :id => 'word-submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search
+#sql-help-dialog-template
+  The Structured Query Language used by Dubsar&apos;s
+  PostgreSQL database accepts the following wildcards in
+  searches:
+  %ul
+    %li % matches anything, including nothing at all
+    %li _ matches any single character
+  For example:
+  %ul
+    %li
+      %%count% matches all words containing
+      %em count
+    %li
+      c_t matches
+      %em cat, cot
+      and
+      %em cut
