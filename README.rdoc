@@ -1,7 +1,11 @@
 = Dubsar
 
-Dubsar is a dictionary web application using Ruby on Rails 3.0.  The
-content is taken from the Princeton University
+Dubsar is a dictionary web application using
+- Ruby on Rails 3.0
+- PostgreSQL 8.4
+- jQuery 1.4.3
+- jQuery UI 1.8.5
+The content is taken from the Princeton University
 WordNet[http://wordnet.princeton.edu/] project.
 
 Dubsar is deployed at http://dubsar-dictionary.com.
