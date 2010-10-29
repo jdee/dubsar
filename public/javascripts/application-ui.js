@@ -103,18 +103,10 @@
     }
 
     function show_sql_help_link() {
-      if ($sql_help_link.is(':visible')) {
-        return;
-      }
       $sql_help_link.fadeIn('slow');
-      if ($hide_help_link_timer) clearTimeout($hide_help_link_timer);
-      $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
     }
 
     function hide_sql_help_link() {
-      if (!$sql_help_link.is(':visible')) {
-        return;
-      }
       $sql_help_link.fadeOut('fast');
     }
 
@@ -258,12 +250,26 @@
 
     $word_input.watermark('enter a word');
     $word_input.mouseover(function(){
-      $show_help_link_timer = setTimeout(show_sql_help_link, 3000);
+      if ($hide_help_link_timer) {
+        clearTimeout($hide_help_link_timer);
+        $hide_help_link_timer = null;
+      }
+      if (!$sql_help_link.is(':visible')) {
+        $show_help_link_timer = setTimeout(show_sql_help_link, 3000);
+      }
     }).mouseout(function(){
-      clearTimeout($show_help_link_timer);
+      if ($show_help_link_timer) {
+        clearTimeout($show_help_link_timer);
+        $show_help_link_timer = null;
+      }
+      $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
     });
+
     $sql_help_link.mouseover(function(){
-      if ($hide_help_link_timer) clearTimeout($hide_help_link_timer);
+      if ($hide_help_link_timer) {
+        clearTimeout($hide_help_link_timer);
+        $hide_help_link_timer = null;
+      }
     }).mouseout(function(){
       $hide_help_link_timer = setTimeout(hide_sql_help_link, 20000);
     }).click(function(){
