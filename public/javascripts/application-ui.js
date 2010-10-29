@@ -258,7 +258,7 @@
 
     $word_input.watermark('enter a word');
     $word_input.mouseover(function(){
-      $show_help_link_timer = setTimeout(show_sql_help_link, 5000);
+      $show_help_link_timer = setTimeout(show_sql_help_link, 3000);
     }).mouseout(function(){
       clearTimeout($show_help_link_timer);
     });
