@@ -20,5 +20,10 @@
     %em
       &= "(#{word.pos}.)"
 %div{:id => "pane_#{@count+=1}"}
+  %em other forms:
+  - if word.other_forms.length > 0
+    =h word.other_forms
+  - else
+    (none)
   %ol
     =render :partial => 'synset', :collection => word.synsets, :locals => { :word => word }

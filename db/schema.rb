@@ -10,24 +10,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101028010805) do
+ActiveRecord::Schema.define(:version => 20101031170413) do
 
-  create_table "synsets", :force => true do |t|
-    t.text "definition", :null => false
+  create_table "inflections", :force => true do |t|
+    t.string  "name",    :null => false
+    t.integer "word_id"
   end
 
-  create_table "synsets_words", :id => false, :force => true do |t|
+  add_index "inflections", ["name"], :name => "index_inflections_on_name"
+
+  create_table "senses", :force => true do |t|
     t.integer "synset_id"
     t.integer "word_id"
+    t.integer "freq_cnt",  :default => 0, :null => false
+  end
+
+  create_table "synsets", :force => true do |t|
+    t.text    "definition",     :null => false
+    t.integer "offset"
+    t.string  "part_of_speech"
   end
 
   create_table "words", :force => true do |t|
     t.string  "name",                          :null => false
     t.string  "part_of_speech",                :null => false
-    t.integer "hit_count",      :default => 0, :null => false
+    t.integer "freq_cnt",       :default => 0, :null => false
   end
 
-  add_index "words", ["name", "hit_count"], :name => "index_words_on_name_and_hit_count"
+  add_index "words", ["freq_cnt", "name"], :name => "index_words_on_freq_cnt_and_name"
   add_index "words", ["name", "part_of_speech"], :name => "index_words_on_name_and_part_of_speech"
   add_index "words", ["name"], :name => "index_words_on_name"
 

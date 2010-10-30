@@ -1,0 +1,71 @@
+#  Dubsar Dictionary Project
+#  Copyright (C) 2010 Jimmy Dee
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version 2
+#  of the License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+slang:
+  synset: slang
+  word: slang
+  freq_cnt: 10
+
+noun:
+  synset: food
+  word: noun
+  freq_cnt: 10
+
+grub:
+  synset: food
+  word: grub
+  freq_cnt: 10
+
+foul:
+  synset: foul
+  word: adjective
+  freq_cnt: 10
+
+well:
+  synset: well
+  word: adverb
+  freq_cnt: 10
+
+but:
+  synset: but
+  word: conjunction
+  freq_cnt: 10
+
+hey:
+  synset: hey
+  word: interjection
+  freq_cnt: 10
+
+from:
+  synset: from
+  word: preposition
+  freq_cnt: 10
+
+you:
+  synset: you
+  word: pronoun
+  freq_cnt: 10
+
+follow:
+  synset: follow
+  word: verb
+  freq_cnt: 10
+
+well_noun:
+  synset: well_noun
+  word: well_noun
+  freq_cnt: 10

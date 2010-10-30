@@ -24,7 +24,6 @@
     var $request_term;
     var $match='';
     var $starting_header=$.find_cookie('dubsar_starting_pane');
-    var $top_ten_interval;
     var $show_help_link_timer=null;
     var $hide_help_link_timer=null;
     var $sql_help_link=$('#sql-help-link');
@@ -54,55 +53,6 @@
       if (id) document.cookie = 'dubsar_starting_offset='+$('#main').scrollTop();
     }
 
-    function kickoff_top_ten() {
-      load_top_ten();
-      $('div#top-ten-pane').css('opacity', 0.4);
-      $top_ten_interval = setInterval(load_top_ten, 30000);
-    }
-
-    function stop_top_ten() {
-      if ($top_ten_interval) clearInterval($top_ten_interval);
-    }
-
-    function load_top_ten() {
-      /* DEBT:
-       * 80 is overkill, but:
-       * Each word can have up to 4 parts of speech and can be
-       * capitalized or not.  The offset and limit parameters refer
-       * directly to the SQL table index.  For the moment, this is
-       * the easiest place to put this logic.  It needs to be
-       * improved.
-       */
-      $.ajax({
-        type: 'GET',
-        url: '/.json',
-        dataType: 'json',
-        data: {term:'%', limit:80},
-        success: function(response) {
-          var results = '<ol>';
-          for (var i=0; i<response.list.length && i<10; ++i) {
-            var word = response.list[i];
-            results += '<li><a href="/?term=' + word + '" title="' +
-              word + '">' + word+'</a></li>';
-          }
-          results += '</ol>';
-          $('div#top-ten-pane').html(results).fadeTo('slow', 1.0);
-        },
-        error: function(xhr, textStatus, errorThrown) {
-          $('div#top-ten-pane').fadeTo('fast', 0.4);
-        }
-      });
-    }
-
-    function check_top_ten_pane(event, info) {
-      if (info.newHeader.attr('id') == 'cap-top_ten_n') {
-        kickoff_top_ten();
-      }
-      else if (info.oldHeader.attr('id') == 'cap-top_ten_n') {
-        stop_top_ten();
-      }
-    }
-
     function show_sql_help_link() {
       $sql_help_link.fadeIn('slow');
       $show_help_link_timer = null;
@@ -130,8 +80,6 @@
       $list = new Array();
       $request_term = $word_input.val();
       $word_input.add('.ui-menu').css('cursor', 'wait');
-      $('#error').stop(true).replaceWith('<div id="error" class="ui-state-highlight ui-corner-all"><span class="ui-icon ui-icon-info"></span>working...</div>');
-      $('#main').stop().animate({ top: '24.7ex' }, 'fast');
     }
 
     /* cancel any search when the autocompleter closes */
@@ -141,9 +89,6 @@
 
     function ac_stop_search(){
       $word_input.add('.ui-menu').css('cursor', 'auto');
-      $('#error').stop().fadeOut('slow', function(){
-        $('#main').stop().animate({ top: $('#header').outerHeight()}, 1000, 'easeOutBounce');
-      });
     }
 
     function ajax_handler(request,response,offset,limit){
@@ -153,40 +98,39 @@
         request.match = $match;
       }
 
-      /* to start with */
-      if (!request.offset) {
-        request.offset = 0;
-      }
-      if (!request.limit) {
-        request.limit = 100;
-      }
+      request.offset = 0;
+      /*
+       * 80 is overkill, but for the moment we're hiding some ugly
+       * logic here in the client; each word can be in up to four
+       * parts of speech and can be capitalized or not, so we ensure
+       * that when the controller weeds out duplicates, we have at
+       * least 10 matches.
+       */
+      request.limit = 80;
 
-      $.getJSON('/.json', request, function(data){
-        // make sure the search term hasn't changed (this might be an
-        // old response)
-        if (data.term == $request_term && data.match == $match) {
-          for (var j=0; j<data.list.length; ++j) $list.push(data.list[j]);
-          response($list);
+      $.ajax({
+        type: 'GET',
+        url: '/.json',
+        dataType: 'json',
+        data: request,
+        success: function(data){
+          // make sure the search term hasn't changed (this might be an
+          // old response)
+          if (data.term == $request_term && data.match == $match) {
+            for (var j=0; j<10 && j<data.list.length; ++j) $list.push(data.list[j]);
+            response($list);
+          }
+          ac_stop_search();
+        },
+        error: function() {
+          $('#error').stop(true).replaceWith('<div id="error" class="ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert"></span>error communicating with Dubsar server</div>');
+          $('#main').stop().animate({ top: '24.7ex' }, 'fast');
+          setTimeout(function(){
+            $('#error').fadeOut('slow', function(){
+              $('#main').animate({ top: '20.7ex' }, 1000, 'easeOutBounce');
+            });
+          }, 3000);
 
-          if (request.offset + request.limit >= data.total) {
-            ac_stop_search();
-            return;
-          }
-
-          // recursively invoke outer function to request the next page
-          request.term = $request_term;
-          request.offset += request.limit;
-          if ($list.length < 400) {
-            request.limit = 100;
-          }
-          else if ($list.length < 1000) {
-            request.limit = 200;
-          }
-          else {
-            request.limit = 500;
-          }
-
-          ajax_handler(request, response, data.next_page);
         }
       });
     }
@@ -197,7 +141,7 @@
     (function register_autocomplete($source) {
       $word_input = $('#word-input').autocomplete({
         close :ac_close_handler,
-        minLength: 2,
+        minLength: 1,
         search:ac_search_handler,
         select:ac_select_handler,
         source:$source
@@ -215,11 +159,8 @@
       change: function(event, info) {
         set_starting_pane(info.newHeader.attr('id'));
       },
-      changestart: check_top_ten_pane,
       navigation: true
     });
-
-    if ($starting_header == 'cap-top_ten_n') kickoff_top_ten();
 
     /* case toggle button */
     $('#word-case').button({

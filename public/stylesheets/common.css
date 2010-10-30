@@ -240,6 +240,6 @@ div#tour-link-div {
   font-size: 90%;
 }
 
-#sql-help-dialog-template {
+.template {
   display: none;
 }

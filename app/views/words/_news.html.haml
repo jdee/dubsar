@@ -22,7 +22,7 @@
       %span.ui-icon.ui-icon-star
     %span.index-update
       %em
-        ="(last updated 27-Oct-2010)"
+        ="(last updated 31-Oct-2010)"
 #pane_1
   %ol
     %li
@@ -31,15 +31,21 @@
         WordNet&reg;
       content is available in the application, it will be ready.
     %li
-      Dubsar is now tracking the hit count of each word in its
-      database.  Results in the autocompleter are ordered by
-      popularity.  Later, the autocompleter will only return top
-      matches as you type, for efficiency, rather than potentially
-      thousands of words at a time.  Don't be alarmed if the words in
-      the autocompleter are not always ordered alphabetically.  It just
-      means the most popular ones are rising to the top.
+      Dubsar now shows alternate forms for many words and will accept
+      searches for inflected forms.  For example, if you search for
+      %em looks
+      , you will find both "look"
+      %em (n.)
+      and "look"
+      %em (v.).
     %li
-      Dubsar now shows you its current top ten words by hit count here
-      on the index page.  The list is live and updates in real time.
+      Dubsar is no longer tracking hit counts but ranks words according
+      to their frequency counts in the
+      %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'}
+        WordNet&reg;
+      database.  The autocompleter now always completes the top ten
+      results (if that many are available) as you type, even for a
+      single letter.  This means it always suggests the most common
+      words first.
     %li
       Watch this space for information about changes to the site.

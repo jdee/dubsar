@@ -14,6 +14,29 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+@sense_index = Hash.new(0)
+
+File.open(File.expand_path('defaults/index.sense', File.dirname(__FILE__))).each do |line|
+  sense_key, synset_offset, sense_number, tag_cnt = line.chomp.split
+  next if tag_cnt == '0'
+
+  lemma, lex_sense = sense_key.split '%'
+  ss_type, lex_filenum, lex_id, head_word, head_id = lex_sense.split ':'
+  part_of_speech= case ss_type.to_i
+  when 1
+    'noun'
+  when 2
+    'verb'
+  when 3,5
+    'adjective'
+  when 4
+    'adverb'
+  end
+
+  # one big string
+  key = part_of_speech + '_' + synset_offset + '_' + lemma
+  @sense_index[key.to_s] = tag_cnt.to_i
+end
 
 %w{adj adv noun verb}.each do |sfx|
   part_of_speech = case sfx
@@ -25,25 +48,45 @@
     sfx
   end
 
+  @irregular_inflections = {}
+  File.open(File.expand_path("defaults/#{sfx}.exc", File.dirname(__FILE__))).each do |line|
+    i, w = line.chomp.split
+
+    @irregular_inflections[w.to_sym] ||= []
+    inflections = @irregular_inflections[w.to_sym]
+
+    inflections << i.gsub('_', ' ')
+  end
+  puts "#{Time.now} loaded irregular #{part_of_speech} inflections"
+
   puts "#{Time.now} loading #{part_of_speech.pluralize}"
   synset_count = 0
-  File.open(File.join(File.dirname(__FILE__), 'defaults', "data.#{sfx}")).each do |line|
+  sense_count = 0
+  File.open(File.expand_path("defaults/data.#{sfx}", File.dirname(__FILE__))).each do |line|
     next if line =~ /^\s/
 
     left, defn = line.split('| ')
     synset_offset, lex_filenum, ss_type, w_cnt, *rest = left.split(' ')
-    w_cnt = w_cnt.to_i
+    w_cnt = w_cnt.to_i(16)
 
-    synset = Synset.new :definition => defn.chomp
+    synset = Synset.new :definition => defn.chomp,
+      :offset => synset_offset.sub(/^0+/, '').to_i,
+      :part_of_speech => part_of_speech
     rest.slice(0, 2*w_cnt).each_slice(2) do |a|
       s = a[0].gsub('_', ' ')
-      synonym = Word.find_by_name_and_part_of_speech s, part_of_speech
-      next if synonym and synset.words << synonym
-
-      synset.words.build :name => s, :part_of_speech => part_of_speech
+      synonym = Word.find_by_name_and_part_of_speech(s, part_of_speech) ||
+        Word.create(:name => s, :part_of_speech => part_of_speech, :irregular => @irregular_inflections[s.gsub(' ', '_').to_sym])
+      key = part_of_speech + '_' + synset_offset + '_' + s
+      synonym.senses.create :synset => synset, :freq_cnt => @sense_index[key.to_s]
+      # recompute freq_cnt for synonym
+      synonym.save
+      sense_count += 1
     end
     synset.save
     synset_count += 1
   end
-  puts "#{Time.now} loaded #{Word.count(:conditions => { :part_of_speech => part_of_speech})} #{part_of_speech.pluralize} (#{synset_count} synsets)"
+  puts "#{Time.now} loaded #{Word.count(:conditions => { :part_of_speech => part_of_speech})} #{part_of_speech.pluralize} (#{synset_count} synsets, #{sense_count} senses)"
+
+  puts "#{Time.now} done"
 end
+puts "#{Time.now} ### Dubsar DB seed complete ###"

@@ -38,6 +38,13 @@ class WordsController < ApplicationController
   # HTML or JSON, one page at a time.
   def show
     @term = params[:term]
+    match = params[:match]
+
+    case match
+    when nil, '', 'case', 'exact', 'regexp'
+    else
+      redirect_with_error('bad request') and return
+    end
 
     # show and index use the same URL
     render(:action => :index) and return unless @term
@@ -46,30 +53,10 @@ class WordsController < ApplicationController
     # whitespace
     @term = @term.sub(/^\s+/, '').sub(/\s+$/, '').gsub(/\s+/, ' ')
 
-    if params[:match].blank?
-      operator = 'ilike' if params[:match].blank?
-    elsif params[:match] == 'case'
-      operator = 'like'
-    elsif params[:match] == 'regexp'
-      operator = '~'
-    else
-      redirect_with_error 'bad request' and return
-    end
-
-    search_options = {
-      :conditions => [ "name #{operator} ?", @term ],
-      :order => 'name'
-    }
-
     respond_to do |format|
-
       format.html do
-        @words = Word.paginate({:page => params[:page]}.merge(search_options))
+        @words = Word.search params.merge(:page => params[:page], :order => 'name ASC, part_of_speech ASC')
         if @words.count > 0
-          @words.each do |w|
-            w.hit_count += 1
-            w.save
-          end
           render :action => 'show'
         else
           redirect_with_error(
@@ -78,29 +65,26 @@ class WordsController < ApplicationController
       end
 
       format.json do
+        local_params = params.clone
         # when the autocompleter makes many successive requests for
         # the same thing, use the flash to avoid counting all matches
         # every time
         @total_words = flash[:last_count] if
           flash[:last_term] == @term and
-          flash[:last_match] == params[:match]
-        @total_words ||= Word.count(search_options)
+          flash[:last_match] == local_params[:match]
+        @total_words ||= Word.search_count local_params
 
         flash[:last_term ] = @term
-        flash[:last_match ] = params[:match]
+        flash[:last_match ] = local_params[:match]
         flash[:last_count] = @total_words
 
         # protect myself against stupid requests
-        limit = params[:limit].to_i if params[:limit]
-        limit ||= self.class.max_json_limit
-        limit = self.class.max_json_limit if
-          limit > self.class.max_json_limit
+        local_params[:limit] = local_params[:limit].to_i if local_params[:limit]
+        local_params[:limit] ||= self.class.max_json_limit
+        local_params[:limit] = self.class.max_json_limit if
+          local_params[:limit] > self.class.max_json_limit
 
-        @words = Word.all(
-          :offset     => params[:offset],
-          :limit      => limit,
-          :conditions => [ "name #{operator} ?", @term ],
-          :order      => 'hit_count DESC, name ASC')
+        @words = Word.search local_params.merge(:order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
 
         # The uniq method call is case-sensitive.  It has the effect of
         # collapsing multiple parts of speech, e.g. cold (n.) and cold
@@ -119,9 +103,9 @@ class WordsController < ApplicationController
         end
 
         respond_with({
-          :match  => params[:match] || '',
-          :offset => params[:offset],
-          :limit  => limit,
+          :match  => local_params[:match] || '',
+          :offset => local_params[:offset],
+          :limit  => local_params[:limit],
           :total  => @total_words,
           :term   => @term.sub(/%$/, ''),
           :list   => word_list

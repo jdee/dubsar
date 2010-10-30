@@ -18,59 +18,59 @@
 adjective:
   name: foul
   part_of_speech: adjective
-  synsets: foul
+  freq_cnt: 10
 
 adverb:
   name: well
   part_of_speech: adverb
-  synsets: well
+  freq_cnt: 10
 
 conjunction:
   name: but
   part_of_speech: conjunction
-  synsets: but
+  freq_cnt: 10
 
 interjection:
   name: hey
   part_of_speech: interjection
-  synsets: hey
+  freq_cnt: 10
 
 noun:
   name: food
   part_of_speech: noun
-  synsets: food
+  freq_cnt: 10
 
 preposition:
   name: from
   part_of_speech: preposition
-  synsets: from
+  freq_cnt: 10
 
 pronoun:
   name: you
   part_of_speech: pronoun
-  synsets: you
+  freq_cnt: 10
 
 verb:
   name: follow
   part_of_speech: verb
-  synsets: follow
+  freq_cnt: 10
 
 slang:
   name: slang
   part_of_speech: noun
-  synsets: slang
+  freq_cnt: 10
 
 well_noun:
   name: well
   part_of_speech: noun
-  synsets: well_noun
+  freq_cnt: 10
 
 bad_part_of_speech:
   name: fudge
   part_of_speech: thingy
-  synsets: food
+  freq_cnt: 10
 
 grub:
   name: grub
   part_of_speech: noun
-  synsets: food
+  freq_cnt: 10

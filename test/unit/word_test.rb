@@ -20,7 +20,9 @@ require 'test_helper'
 class WordTest < ActiveSupport::TestCase
   should validate_presence_of :name
   should validate_presence_of :part_of_speech
-  should have_and_belong_to_many :synsets
+  should validate_presence_of :freq_cnt
+  should have_many :senses
+  should have_many :inflections
 
   should 'accept a valid adjective' do
     assert_valid words(:noun)

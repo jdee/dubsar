@@ -24,7 +24,7 @@
               %tr
                 - ('A'..'Z').each do |letter|
                   %td
-                    = link_to letter, url_for(:action => :show, :term => letter + '%'), :title => "words starting with #{letter}", :class => 'search-link'
+                    = link_to letter, url_for(:action => :show, :term =>"^[#{letter}#{letter.downcase}]", :match => 'regexp'), :title => "words starting with #{letter}", :class => 'search-link'
                 %td
                   %a.search-link{:href => url_for(:action => :show, :term => '^[^A-Za-z]', :match => 'regexp'), :title => 'words not starting with a letter'}
                     &hellip;
@@ -52,7 +52,7 @@
                   = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
                 %td
                   %button{:type => 'submit', :id => 'word-submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search
-#sql-help-dialog-template
+#sql-help-dialog-template.template
   The Structured Query Language used by Dubsar&apos;s
   PostgreSQL database accepts the following wildcards in
   searches:

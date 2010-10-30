@@ -41,5 +41,9 @@
       %span.index-update
         %em new!
   #pane_2
-    The ten most popular entries on Dubsar, ranked by hit count:
+    The ten top-ranked entries in Dubsar:
     #top-ten-pane
+      %ol
+        - Word.search(:term => '%', :order => 'freq_cnt DESC', :offset => 0, :limit => 10).each do |w|
+          %li
+            =link_to w.name, url_for(:action => :show, :term => w.name), :title => w.name
