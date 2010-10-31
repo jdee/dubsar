@@ -130,7 +130,7 @@
               $('#main').animate({ top: '20.7ex' }, 1000, 'easeOutBounce');
             });
           }, 3000);
-
+          ac_stop_search();
         }
       });
     }
