@@ -38,3 +38,11 @@ production:
   pool: 5
   username: dubsar
   password: admin
+
+backup:
+  adapter: postgresql
+  encoding: unicode
+  database: dubsar_backup
+  pool: 5
+  username: dubsar
+  password: admin
