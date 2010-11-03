@@ -50,12 +50,14 @@ end
 
   @irregular_inflections = {}
   File.open(File.expand_path("defaults/#{sfx}.exc", File.dirname(__FILE__))).each do |line|
-    i, w = line.chomp.split
+    i, *_w = line.chomp.split
 
-    @irregular_inflections[w.to_sym] ||= []
-    inflections = @irregular_inflections[w.to_sym]
+    _w.each do |w|
+      @irregular_inflections[w.to_sym] ||= []
+      inflections = @irregular_inflections[w.to_sym]
 
-    inflections << i.gsub('_', ' ')
+      inflections << i.gsub('_', ' ')
+    end
   end
   puts "#{Time.now} loaded irregular #{part_of_speech} inflections"
 

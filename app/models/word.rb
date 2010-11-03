@@ -61,11 +61,21 @@ class Hash
 end
 
 class String
-  def double_r?
+  def double_consonant?
     case self
     when /mortar$/
       false
-    when /[bs]lur$/, /spur$/, /[bc]ur$/, /demur$/, /[i]r$/, /[ens]fer$/, /^(dis|)inter$/, /deter$/, /abhor$/, /^aver$/, /char$/, /[bcjmptw]ar$/
+    when /[bs]lur$/, /spur$/, /[bc]ur$/, /demur$/, /[i]r$/,
+      /[ens]fer$/, /^(dis|)inter$/, /deter$/, /abhor$/, /^aver$/,
+      /char$/, /[bcjmptw]ar$/
+      true
+    when /^grin$/, /^[cd]on$/, /^t[hw]in$/, /^[bcfw]an$/, /^[dgps]un$/,
+      /^[bdfgstw]in$/, /^stun$/, /^s[hkp]in$/, /^chin$/, /^scan$/,
+      /^plan$/, /^shun$/, /^swan$/, /^[py]en$/, /^begin$/, /tan$/,
+      /run$/, /man$/, /pin$/, /pan$/
+      true
+    when /^gel$/, /^fulfil$/, /^corral$/, /^instal$/, /^appal$/,
+      /^enthral$/, /^pal$/, /^excel$/, /pel$/, /stil$/
       true
     else
       false
@@ -248,14 +258,13 @@ class Word < ActiveRecord::Base
       build_new_inflection name + 'ing'
     when /[^e]e$/
       build_new_inflection name.sub(/e$/, 'ing')
-    when /[^aeiou][aeiouy]r$/
-      r = name.double_r? ? 'r' : ''
-      build_new_inflection name + r + 'ing'
+    when /[^aeiou][aeiouy][lnr]$/
+      c = /[^aeiou][aeiouy]([lnr])$/.match(name)[1]
+      l = name.double_consonant? ? c : ''
+      build_new_inflection name + l + 'ing'
     else
       case pad
-      when /^[n]$/
-        build_new_inflection name + 'ing'
-      when /^[ls]$/
+      when 's'
         build_new_inflection name + pad + 'ing'
         build_new_inflection name + 'ing'
       else
@@ -304,9 +313,10 @@ class Word < ActiveRecord::Base
       build_new_inflection name + 'd'
     when /y$/
       build_new_inflection name.sub(/y$/, 'ied')
-    when /[^aeiou][aeiouy]r$/
-      r = name.double_r? ? 'r' : ''
-      build_new_inflection name + r + 'ed'
+    when /[^aeiou][aeiouy][lnr]$/
+      c = /[^aeiou][aeiouy]([lnr])$/.match(name)[1]
+      l = name.double_consonant? ? c : ''
+      build_new_inflection name + l + 'ed'
     else
       case pad
       when /^[n]$/
