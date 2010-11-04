@@ -65,7 +65,7 @@ class String
     case self
     when /mortar$/
       false
-    when /[bs]lur$/, /spur$/, /[bc]ur$/, /demur$/, /[i]r$/,
+    when /[bs]lur$/, /spur$/, /[bc]ur$/, /demur$/, /ir$/,
       /[ens]fer$/, /^(dis|)inter$/, /deter$/, /abhor$/, /^aver$/,
       /char$/, /[bcjmptw]ar$/
       true
@@ -212,8 +212,9 @@ class Word < ActiveRecord::Base
   end
 
   def remove_duplicate_inflections
-    inflections.each do |inflection|
-      inflections.delete(inflection) if inflections.count(:all, :conditions => { :name, inflection.name }) > 1
+    inflections.each do |i|
+      inflections.delete(i) if
+        inflections.count(:all, :conditions => [ "name = ?",  i.name ]) > 1
     end
   end
 
