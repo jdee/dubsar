@@ -15,6 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 %li
-  - synset.words_except(word).each do |w|
+  - sense.synset.words_except(word).each do |w|
     =link_to w.name, url_for(:action => :show, :term => w.name), :title => w.name, :class => 'search-link'
-  &= synset.definition
+  %span{:title => "freq. cnt.: #{sense.freq_cnt}"}
+    &= sense.synset.definition
