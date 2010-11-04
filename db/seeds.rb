@@ -15,6 +15,12 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @sense_index = Hash.new(0)
+@lexnames = {}
+
+File.open(File.expand_path('defaults/lexnames', File.dirname(__FILE__))).each do |line|
+  number, name, pos_index = line.chomp.split
+  @lexnames[number] = name
+end
 
 File.open(File.expand_path('defaults/index.sense', File.dirname(__FILE__))).each do |line|
   sense_key, synset_offset, sense_number, tag_cnt = line.chomp.split
@@ -73,6 +79,7 @@ end
 
     synset = Synset.new :definition => defn.chomp,
       :offset => synset_offset.sub(/^0+/, '').to_i,
+      :lexname => @lexnames[lex_filenum],
       :part_of_speech => part_of_speech
     rest.slice(0, 2*w_cnt).each_slice(2) do |a|
       s = a[0].gsub('_', ' ')

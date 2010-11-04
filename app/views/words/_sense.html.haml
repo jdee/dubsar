@@ -17,5 +17,5 @@
 %li
   - sense.synset.words_except(word).each do |w|
     =link_to w.name, url_for(:action => :show, :term => w.name), :title => w.name, :class => 'search-link'
-  %span{:title => "freq. cnt.: #{sense.freq_cnt}"}
+  %span{:title => "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"}
     &= sense.synset.definition
