@@ -60,7 +60,7 @@ label {
   right: 0;
 }
 
-#error > span.ui-icon {
+span.ui-icon {
   float: left;
   margin-right: 0.3em;
 }

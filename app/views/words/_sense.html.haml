@@ -19,7 +19,8 @@
     =link_to w.name, "#{url_for(:action => :show, :term => w.name)}##{w.unique_name}", :title => w.name, :class => 'search-link'
   %span.tooltip
     &= sense.synset.gloss
-    .template
+    .template.ui-state-highlight
+      %span.ui-icon.ui-icon-info
       &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
       - unless sense.synset.samples.blank?
         %ul

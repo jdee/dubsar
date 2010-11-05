@@ -285,7 +285,7 @@
 
     /* simplification of a recipe from the O'Reilly jQuery Cookbook */
     if ($('span.tooltip').length) {
-      $('body').append('<div class="ui-widget"><div id="tooltip" class="ui-state-default ui-corner-all"></div></div>');
+      $('body').append('<div class="ui-widget"><div id="tooltip" class="ui-state-highlight ui-corner-all"></div></div>');
       var $tt = $('#tooltip');
       $('span.tooltip').hover(function(){
         $tt.html($('div.template', this).html());
