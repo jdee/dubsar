@@ -25,7 +25,8 @@
   color: #333333;
 }
 
-.style-light a:hover,active, .style-light img:hover,active {
+.style-light a:hover,active, .style-light img:hover,active,
+.style-light #header-bar a:hover,active {
   color: #fbc90b;
 }
 

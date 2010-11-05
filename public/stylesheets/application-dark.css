@@ -37,6 +37,7 @@
   background-color: #f58400;
 }
 
+.style-dark #header-bar a:hover,active,
 .style-dark a:hover,active,
 .style-dark *.ui-state-active > span.ui-button-text {
   color: #ffffff;
