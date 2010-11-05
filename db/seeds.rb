@@ -98,6 +98,7 @@ end
 end
 
 total = Word.count(:conditions => "part_of_speech = 'verb'")
+puts "#{Time.now} removing duplicate verb inflections"
 puts "#{Time.now} processing #{total} verbs"
 @chunk = (total*0.1).to_i
 @verb_cnt = 0
