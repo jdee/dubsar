@@ -16,6 +16,6 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 %li
   - sense.synset.words_except(word).each do |w|
-    =link_to w.name, url_for(:action => :show, :term => w.name), :title => w.name, :class => 'search-link'
+    =link_to w.name, "#{url_for(:action => :show, :term => w.name)}##{w.unique_name}", :title => w.name, :class => 'search-link'
   %span{:title => "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"}
     &= sense.synset.definition
