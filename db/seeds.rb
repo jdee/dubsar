@@ -22,6 +22,9 @@ File.open(File.expand_path('defaults/lexnames', File.dirname(__FILE__))).each do
   @lexnames[number] = name
 end
 
+puts "#{Time.now} loaded lexical names"
+STDOUT.flush
+
 File.open(File.expand_path('defaults/index.sense', File.dirname(__FILE__))).each do |line|
   sense_key, synset_offset, sense_number, tag_cnt = line.chomp.split
   next if tag_cnt == '0'
@@ -43,6 +46,9 @@ File.open(File.expand_path('defaults/index.sense', File.dirname(__FILE__))).each
   key = part_of_speech + '_' + synset_offset + '_' + lemma
   @sense_index[key.to_s] = tag_cnt.to_i
 end
+
+puts "#{Time.now} loaded sense index"
+STDOUT.flush
 
 %w{adj adv noun verb}.each do |sfx|
   part_of_speech = case sfx
@@ -66,8 +72,10 @@ end
     end
   end
   puts "#{Time.now} loaded irregular #{part_of_speech} inflections"
+  STDOUT.flush
 
   puts "#{Time.now} loading #{part_of_speech.pluralize}"
+  STDOUT.flush
   synset_count = 0
   sense_count = 0
   File.open(File.expand_path("defaults/data.#{sfx}", File.dirname(__FILE__))).each do |line|
@@ -95,11 +103,14 @@ end
     synset_count += 1
   end
   puts "#{Time.now} loaded #{Word.count(:conditions => { :part_of_speech => part_of_speech})} #{part_of_speech.pluralize} (#{synset_count} synsets, #{sense_count} senses)"
+  STDOUT.flush
 end
 
 total = Word.count(:conditions => "part_of_speech = 'verb'")
 puts "#{Time.now} removing duplicate verb inflections"
 puts "#{Time.now} processing #{total} verbs"
+STDOUT.flush
+
 @chunk = (total*0.1).to_i
 @verb_cnt = 0
 @last_report = Time.now
@@ -115,6 +126,7 @@ Word.all(:conditions => "part_of_speech = 'verb'").each do |w|
     now = Time.now
     i = @verb_cnt/@chunk
     puts "#{now} #{i*10}% done, est. complete at #{now+(now-@last_report)*(10-i)}"
+    STDOUT.flush
     @last_report = now
   end
 end
