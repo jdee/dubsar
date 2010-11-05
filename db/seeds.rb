@@ -122,7 +122,7 @@ Word.all(:conditions => "part_of_speech = 'verb'").each do |w|
   w.save
 
   @verb_cnt += 1
-  if @verb_cnt % @chunk == 0
+  if @verb_cnt % @chunk == 0 and @verb_cnt/@chunk < 10
     now = Time.now
     i = @verb_cnt/@chunk
     puts "#{now} #{i*10}% done, est. complete at #{now+(now-@last_report)*(10-i)}"
