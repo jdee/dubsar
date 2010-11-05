@@ -26,7 +26,7 @@ set :rvm_ruby_string, 'ree'        # Or whatever env you want it to run in.
 set :user, 'dubsar'
 set :domain, 'dubsar-dictionary.com'
 set :application, "dubsar"
-set :repository,  "git@github.com:jdee/dubsar.git"
+set :repository,  "http://github.com/jdee/dubsar.git"
 set :use_sudo, false
 set :deploy_to, "/var/lib/#{application}"
 set :scm, :git
