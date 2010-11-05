@@ -17,5 +17,12 @@
 %li
   - sense.synset.words_except(word).each do |w|
     =link_to w.name, "#{url_for(:action => :show, :term => w.name)}##{w.unique_name}", :title => w.name, :class => 'search-link'
-  %span{:title => "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"}
-    &= sense.synset.definition
+  %span.tooltip
+    &= sense.synset.gloss
+    .template
+      &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
+      - unless sense.synset.samples.blank?
+        %ul
+          - sense.synset.samples.each do |sample|
+            %li
+              &= sample

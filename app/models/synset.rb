@@ -29,4 +29,14 @@ class Synset < ActiveRecord::Base
     words.find :all, :conditions => [ "LOWER(name) != LOWER(?)", word.name ],
       :order => 'name'
   end
+
+  def gloss
+    definition.sub(/;\s*".*$/, '')
+  end
+
+  def samples
+    matches = /;\s*(".*)$/.match definition
+    s = matches ? matches[1] : ''
+    s.split(';')
+  end
 end

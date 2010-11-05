@@ -243,3 +243,11 @@ div#tour-link-div {
 .template {
   display: none;
 }
+
+#tooltip {
+  position: absolute;
+  max-width: 40ex;
+  padding: 5px;
+  border: 1px solid;
+  z-index: 99999;
+}
