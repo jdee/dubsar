@@ -95,7 +95,27 @@ end
     synset_count += 1
   end
   puts "#{Time.now} loaded #{Word.count(:conditions => { :part_of_speech => part_of_speech})} #{part_of_speech.pluralize} (#{synset_count} synsets, #{sense_count} senses)"
-
-  puts "#{Time.now} done"
 end
+
+total = Word.count(:conditions => "part_of_speech = 'verb'")
+puts "#{Time.now} processing #{total} verbs"
+@chunk = (total*0.1).to_i
+@verb_cnt = 0
+@last_report = Time.now
+Word.all(:conditions => "part_of_speech = 'verb'").each do |w|
+  w.inflections.each do |i|
+    w.inflections.delete(i) if
+      w.inflections.count(:conditions => [ "name = ?", i.name ]) > 1
+  end
+  w.save
+
+  @verb_cnt += 1
+  if @verb_cnt % @chunk == 0
+    now = Time.now
+    i = @verb_cnt/@chunk
+    puts "#{now} #{i*10}% done, est. complete at #{now+(now-@last_report)*(10-i)}"
+    @last_report = now
+  end
+end
+
 puts "#{Time.now} ### Dubsar DB seed complete ###"
