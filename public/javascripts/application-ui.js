@@ -306,6 +306,8 @@
           'left': $('#main').position().left = ($ev_x + $tt_x + 20 > $bd_x ? $ev_x - $tt_x - 10 : $ev_x + 15)
         });
       });
+
+      $tt.hide();
     }
   });
 })(jQuery);
