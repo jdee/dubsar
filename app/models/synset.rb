@@ -21,6 +21,7 @@ class Synset < ActiveRecord::Base
   has_many :words, :through => :senses
 
   validates :definition, :presence => true
+  validates :lexname, :presence => true
 
   # Return a collection of +Word+ model objects excluding the one
   # passed in as the +word+ argument.

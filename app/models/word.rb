@@ -369,7 +369,8 @@ class Word < ActiveRecord::Base
     # Don't match (so no padding):
     # fail => failing (a is a vowel)
     # cloy => cloying (y is treated like a vowel in the last position)
-    md = name.match /[^aeiou][aeiouy]([^aeiouy])$/
+    # snow => swowing
+    md = name.match /[^aeiou][aeiouy]([^aeiouwy])$/
     md ? md[1] : ''
   end
 end

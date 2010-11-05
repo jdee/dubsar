@@ -19,7 +19,7 @@ class AddLexnameToSynsets < ActiveRecord::Migration
   def self.up
     # Quick and dirty.  Eventually this should probably be a foreign
     # key into a :lexnames table
-    add_column :synsets, :lexname, :string
+    add_column :synsets, :lexname, :string, :null => false
   end
 
   def self.down

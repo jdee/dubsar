@@ -17,30 +17,40 @@
 
 slang:
   definition: informal speech
+  lexname: noun.communication
 
 food:
   definition: something edible
+  lexname: noun.Tops
 
 foul:
   definition: bad
+  lexname: adj.all
 
 well:
   definition: in a good way
+  lexname: adv.all
 
 but:
   definition: logical conjunction
+  lexname: conj.none
 
 hey:
   definition: something you yell
+  lexname: interj.none
 
 from:
   definition: some preposition
+  lexname: prep.none
 
 you:
   definition: second-person pronoun
+  lexname: pron.none
 
 follow:
   definition: chase, pursue, trail
+  lexname: verb.motion
 
 well_noun:
   definition: a hole in the ground
+  lexname: noun.artifact

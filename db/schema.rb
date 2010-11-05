@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20101104214054) do
     t.text    "definition",     :null => false
     t.integer "offset"
     t.string  "part_of_speech"
-    t.string  "lexname"
+    t.string  "lexname",        :null => false
   end
 
   create_table "words", :force => true do |t|

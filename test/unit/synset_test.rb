@@ -20,4 +20,5 @@ require 'test_helper'
 class SynsetTest < ActiveSupport::TestCase
   should have_many :senses
   should validate_presence_of :definition
+  should validate_presence_of :lexname
 end
