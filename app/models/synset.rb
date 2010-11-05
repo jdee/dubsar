@@ -25,7 +25,7 @@ class Synset < ActiveRecord::Base
   # Return a collection of +Word+ model objects excluding the one
   # passed in as the +word+ argument.
   def words_except(word)
-    words.find :all, :conditions => [ 'name not ilike ?', word.name ],
+    words.find :all, :conditions => [ "LOWER(name) != LOWER(?)", word.name ],
       :order => 'name'
   end
 end
