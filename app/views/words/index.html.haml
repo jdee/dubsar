@@ -32,18 +32,3 @@
         %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'} WordNet&reg;
         project
   =render :partial => 'news'
-  %h2#cap-top_ten_n
-    %a{:href => '#cap-top_ten_n'}
-      Top Ten
-      %em (n.)
-      %span.star-icon-span
-        %span.ui-icon.ui-icon-star
-      %span.index-update
-        %em new!
-  #pane_2
-    The ten top-ranked entries in Dubsar:
-    #top-ten-pane
-      %ol
-        - Word.search(:term => '%', :order => 'freq_cnt DESC', :offset => 0, :limit => 10).each do |w|
-          %li
-            =link_to w.name, url_for(:action => :show, :term => w.name), :title => w.name

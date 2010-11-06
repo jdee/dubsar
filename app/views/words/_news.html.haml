@@ -21,34 +21,34 @@
     %span.star-icon-span
       %span.ui-icon.ui-icon-star
     %span.index-update
-      %em
-        ="(last updated 31-Oct-2010)"
+      %em (last updated 5-Nov-2010)
 #pane_1
   %ol
     %li
-      Dubsar is nearing launch.  Once the full
+      Dubsar will be ready for launch when the full
       %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'}
         WordNet&reg;
-      content is available in the application, it will be ready.
+      content is available in the application.  The primary remaining
+      content comprises semantic and lexical pointers among words and
+      synonym sets.  This content will be available in the next few weeks.
+      The site will launch by the end of the year.
     %li
-      Dubsar now shows alternate forms for many words and will accept
-      searches for inflected forms.  For example, if you search for
-      %em looks,
-      you will find both
-      %em look (n.)
-      and
-      %em look (v.).
-      (Note that this new content may be a little buggy.  You may find
-      some incorrect inflections listed.  They will gradually be
-      cleaned up.  Thanks for your patience.)
+      Dubsar now includes
+      %ul
+        %li
+          %strong Lexical file names
+          These are broad categories, like
+          %em noun.food
+          or
+          %em verb.cognition,
+          associated with word senses.
+        %li
+          %strong Verb frames
+          Generic sentence templates for certain verb senses, like
+          %em Someone ----s something.
     %li
-      Dubsar is no longer tracking hit counts but ranks words according
-      to their frequency counts in the
-      %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)'}
-        WordNet&reg;
-      database.  The autocompleter now always completes the top ten
-      results (if that many are available) as you type, even for a
-      single letter.  This means it always suggests the most common
-      words first.
+      Sample sentences have been moved to a new custom tooltip that
+      shows further information about each word sense (frequency count,
+      lexical file name, verb frames, sample sentences).
     %li
       Watch this space for information about changes to the site.
