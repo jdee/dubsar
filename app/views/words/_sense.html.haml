@@ -24,15 +24,16 @@
         %span.ui-icon.ui-icon-info
         &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
         %br/
-        - unless sense.verb_frames.empty?
-          %ul
-            - sense.verb_frames.each do |verb_frame|
-              %li
-                &= verb_frame.frame
-        - unless sense.synset.samples.blank?
-          %table
-            %tbody
-              - sense.synset.samples.each do |sample|
-                %tr
-                  %td
-                    &= sample
+        %div
+          - unless sense.verb_frames.empty?
+            %ul
+              - sense.verb_frames.each do |verb_frame|
+                %li
+                  &= verb_frame.frame
+          - unless sense.synset.samples.blank?
+            %table
+              %tbody
+                - sense.synset.samples.each do |sample|
+                  %tr
+                    %td
+                      &= sample
