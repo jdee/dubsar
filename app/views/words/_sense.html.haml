@@ -29,7 +29,9 @@
               %li
                 &= verb_frame.frame
         - unless sense.synset.samples.blank?
-          %ul
-            - sense.synset.samples.each do |sample|
-              %li
-                &= sample
+          %table
+            %tbody
+              - sense.synset.samples.each do |sample|
+                %tr
+                  %td
+                    &= sample

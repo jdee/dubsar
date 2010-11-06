@@ -255,3 +255,7 @@ div#tour-link-div {
 #tooltip .line {
   padding: 5px;
 }
+
+#tooltip ul {
+  list-style-type: circle;
+}
