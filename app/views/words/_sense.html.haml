@@ -23,6 +23,7 @@
       .ui-state-hover.line
         %span.ui-icon.ui-icon-info
         &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
+        %br/
         - unless sense.verb_frames.empty?
           %ul
             - sense.verb_frames.each do |verb_frame|
