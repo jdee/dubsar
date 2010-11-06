@@ -19,7 +19,7 @@
     =link_to w.name, "#{url_for(:action => :show, :term => w.name)}##{w.unique_name}", :title => w.name, :class => 'search-link'
   %span.tooltip
     &= sense.synset.gloss
-    .template.ui-state-highlight.line
+    .template.ui-state-active.line
       %span.ui-icon.ui-icon-info
       &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
       - unless sense.verb_frames.empty?
