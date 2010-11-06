@@ -21,19 +21,20 @@
     &= sense.synset.gloss
     .template.ui-widget-content.ui-corner-all
       .ui-state-hover.line
-        %span.ui-icon.ui-icon-info
-        &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
-        %br/
         %div
-          - unless sense.verb_frames.empty?
-            %ul
-              - sense.verb_frames.each do |verb_frame|
-                %li
-                  &= verb_frame.frame
-          - unless sense.synset.samples.blank?
-            %table
-              %tbody
-                - sense.synset.samples.each do |sample|
-                  %tr
-                    %td
-                      &= sample
+          %span.ui-icon.ui-icon-info
+          &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
+        - unless sense.verb_frames.empty?
+          %hr/
+          %ul
+            - sense.verb_frames.each do |verb_frame|
+              %li
+                &= verb_frame.frame
+        - unless sense.synset.samples.blank?
+          %hr/
+          %table
+            %tbody
+              - sense.synset.samples.each do |sample|
+                %tr
+                  %td
+                    &= sample
