@@ -88,7 +88,8 @@ end
 class Word < ActiveRecord::Base
   before_save :compute_freq_cnt
   has_many :senses, :order => 'freq_cnt DESC'
-  has_many :synsets, :through => :senses, :order => 'senses.freq_cnt DESC'
+  has_many :synsets, :through => :senses,
+    :order => 'senses.freq_cnt DESC'
   has_many :inflections
 
   validates :name, :presence => true

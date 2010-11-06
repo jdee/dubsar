@@ -20,6 +20,6 @@ class Sense < ActiveRecord::Base
   belongs_to :synset
   has_many :senses_verb_frames
   has_many :verb_frames, :through => :senses_verb_frames,
-    :order => 'verb_frames.number ASC'
+    :order => 'number'
   validates :freq_cnt, :presence => true
 end
