@@ -37,11 +37,11 @@
       =render :partial => 'shared/header_bar'
       %hr/
     - if flash[:error]
-      #error.ui-state-error.ui-corner-all
+      #error.ui-state-error.ui-corner-all.line
         %span.ui-icon.ui-icon-alert
         =h flash[:error]
     - else
-      #error.ui-state-highlight.ui-corner-all{:style => 'display: none;'}
+      #error.ui-state-highlight.ui-corner-all.line{:style => 'display: none;'}
         %span.ui-icon.ui-icon-info
         searching...
     #main

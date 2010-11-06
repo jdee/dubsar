@@ -128,7 +128,7 @@
           ac_stop_search();
         },
         error: function() {
-          $('#error').stop(true).replaceWith('<div id="error" class="ui-state-error ui-corner-all"><span class="ui-icon ui-icon-alert"></span>error communicating with Dubsar server</div>');
+          $('#error').stop(true).replaceWith('<div id="error" class="ui-state-error ui-corner-all line"><span class="ui-icon ui-icon-alert"></span>error communicating with Dubsar server</div>');
           $('#main').stop().animate({ top: '24.7ex' }, 'fast');
           setTimeout(function(){
             $('#error').fadeOut('slow', function(){
@@ -285,7 +285,7 @@
 
     /* simplification of a recipe from the O'Reilly jQuery Cookbook */
     if ($('span.tooltip').length) {
-      $('body').append('<div class="ui-widget"><div id="tooltip" class="ui-state-highlight ui-corner-all"></div></div>');
+      $('body').append('<div class="ui-widget"><div id="tooltip" class="ui-state-highlight ui-corner-all line"></div></div>');
       var $tt = $('#tooltip');
       $('span.tooltip').hover(function(){
         $tt.html($('div.template', this).html());
