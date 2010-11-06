@@ -251,3 +251,7 @@ div#tour-link-div {
   border: 1px solid;
   z-index: 99999;
 }
+
+#tooltip .line {
+  padding: 5px;
+}
