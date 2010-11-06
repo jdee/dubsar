@@ -122,47 +122,53 @@ STDOUT.flush
     next unless more
 
     p_cnt = p_cnt.to_i
-    frames = more.slice(2*p_cnt, more.length-2*p_cnt)
 
-    f_cnt, *more_frames = frames
+    f_cnt, *more_frames = more.slice(4*p_cnt, more.length-4*p_cnt)
     f_cnt = f_cnt.to_i
     next if f_cnt == 0 or more_frames.nil?
 
     more_frames.slice(0, 3*f_cnt).each_slice(3) do |f|
       plus, f_num, w_num = f
       verb_frame_id = @verb_frames[f_num.to_i][0]
-      sense = synset.senses.find :first, :conditions => [ "words.name = ?",
-        @words[w_num.to_i] ], :joins => 'INNER JOIN words ON words.id = senses.word_id'
-      SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+      w_num = w_num.to_i
+      if w_num != 0
+        sense = synset.senses.find :first, :conditions => [ "words.name = ?",
+          @words[w_num-1] ], :joins => 'INNER JOIN words ON words.id = senses.word_id'
+        SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+      else
+        synset.senses.each do |sense|
+          SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+        end
+      end
     end
   end
   puts "#{Time.now} loaded #{Word.count(:conditions => { :part_of_speech => part_of_speech})} #{part_of_speech.pluralize} (#{synset_count} synsets, #{sense_count} senses)"
   STDOUT.flush
 end
 
-total = Word.count(:conditions => "part_of_speech = 'verb'")
-puts "#{Time.now} removing duplicate verb inflections"
-puts "#{Time.now} processing #{total} verbs"
-STDOUT.flush
+# total = Word.count(:conditions => "part_of_speech = 'verb'")
+# puts "#{Time.now} removing duplicate verb inflections"
+# puts "#{Time.now} processing #{total} verbs"
+# STDOUT.flush
 
-@chunk = (total*0.1).to_i
-@verb_cnt = 0
-@last_report = Time.now
-Word.all(:conditions => "part_of_speech = 'verb'").each do |w|
-  w.inflections.each do |i|
-    w.inflections.delete(i) if
-      w.inflections.count(:conditions => [ "name = ?", i.name ]) > 1
-  end
-  w.save
+# @chunk = (total*0.1).to_i
+# @verb_cnt = 0
+# @last_report = Time.now
+# Word.all(:conditions => "part_of_speech = 'verb'").each do |w|
+#   w.inflections.each do |i|
+#     w.inflections.delete(i) if
+#       w.inflections.count(:conditions => [ "name = ?", i.name ]) > 1
+#   end
+#   w.save
 
-  @verb_cnt += 1
-  if @verb_cnt % @chunk == 0 and @verb_cnt/@chunk < 10
-    now = Time.now
-    i = @verb_cnt/@chunk
-    puts "#{now} #{i*10}% done, est. complete at #{now+(now-@last_report)*(10-i)}"
-    STDOUT.flush
-    @last_report = now
-  end
-end
+#   @verb_cnt += 1
+#   if @verb_cnt % @chunk == 0 and @verb_cnt/@chunk < 10
+#     now = Time.now
+#     i = @verb_cnt/@chunk
+#     puts "#{now} #{i*10}% done, est. complete at #{now+(now-@last_report)*(10-i)}"
+#     STDOUT.flush
+#     @last_report = now
+#   end
+# end
 
 puts "#{Time.now} ### Dubsar DB seed complete ###"

@@ -130,11 +130,11 @@ class Word < ActiveRecord::Base
   end
 
   def create_new_inflection(name)
-    inflections.create(:name => name) if inflections.find_by_name(name).nil?
+    inflections.create(:name => name) unless inflections.any? { |i| i.name == name }
   end
 
   def build_new_inflection(name)
-    inflections.build(:name => name) if inflections.find_by_name(name).nil?
+    inflections.build(:name => name) unless inflections.any? { |i| i.name == name }
   end
 
   def add_regular_inflections
@@ -214,7 +214,7 @@ class Word < ActiveRecord::Base
   def remove_duplicate_inflections
     inflections.each do |i|
       inflections.delete(i) if
-        inflections.count(:all, :conditions => [ "name = ?",  i.name ]) > 1
+        inflections.select{|j|j.name == i.name}.length > 1
     end
   end
 
@@ -251,7 +251,7 @@ class Word < ActiveRecord::Base
     return unless part_of_speech == 'verb'
     # Based on vagaries of the WN exceptions, this seems like the
     # right thing to do, but needs review.
-    return unless inflections.find(:all, :conditions => "name ~ '[ny]ing$'").empty?
+    return if inflections.any? { |i| i.name =~ /[ny]ing$/ }
 
     case name
     when /^.e$/

@@ -52,18 +52,24 @@ class CreateVerbFrames < ActiveRecord::Migration
       next unless more
 
       p_cnt = p_cnt.to_i
-      frames = more.slice(2*p_cnt, more.length-2*p_cnt)
 
-      f_cnt, *more_frames = frames
+      f_cnt, *more_frames = more.slice(4*p_cnt, more.length-4*p_cnt)
       f_cnt = f_cnt.to_i
       next if f_cnt == 0 or more_frames.nil?
 
       more_frames.slice(0, 3*f_cnt).each_slice(3) do |f|
         plus, f_num, w_num = f
         verb_frame_id = @verb_frames[f_num.to_i][0]
-        sense = synset.senses.find :first, :conditions => [ "words.name = ?",
-          @words[w_num.to_i] ], :joins => 'INNER JOIN words ON words.id = senses.word_id'
-        SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+        w_num = w_num.to_i
+        if w_num != 0
+          sense = synset.senses.find :first, :conditions => [ "words.name = ?",
+            @words[w_num-1] ], :joins => 'INNER JOIN words ON words.id = senses.word_id'
+          SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+        else
+          synset.senses.each do |sense|
+            SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+          end
+        end
       end
     end
   end
