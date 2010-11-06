@@ -17,6 +17,18 @@
 @sense_index = Hash.new(0)
 @lexnames = {}
 
+@verb_frames = {}
+File.open(File.expand_path('defaults/frames.vrb', File.dirname(__FILE__))).each do |line|
+  matches = /^(\d+)\s+(.*)$/.match(line.chomp)
+  number = matches[1].to_i
+  frame = matches[2]
+  verb_frame = VerbFrame.create :number => number, :frame => frame
+  @verb_frames[number] = [ verb_frame.id, frame ]
+end
+
+puts "#{Time.now} loaded verb frames"
+STDOUT.flush
+
 File.open(File.expand_path('defaults/lexnames', File.dirname(__FILE__))).each do |line|
   number, name, pos_index = line.chomp.split
   @lexnames[number] = name
@@ -89,8 +101,10 @@ STDOUT.flush
       :offset => synset_offset.sub(/^0+/, '').to_i,
       :lexname => @lexnames[lex_filenum],
       :part_of_speech => part_of_speech
+    @words = []
     rest.slice(0, 2*w_cnt).each_slice(2) do |a|
       s = a[0].gsub('_', ' ')
+      @words << s
       synonym = Word.find_by_name_and_part_of_speech(s, part_of_speech) ||
         Word.create(:name => s, :part_of_speech => part_of_speech, :irregular => @irregular_inflections[s.gsub(' ', '_').to_sym])
       key = part_of_speech + '_' + synset_offset + '_' + s
@@ -99,8 +113,28 @@ STDOUT.flush
       synonym.save
       sense_count += 1
     end
-    synset.save
     synset_count += 1
+    synset.save
+
+    next unless part_of_speech == 'verb'
+
+    p_cnt, *more = rest.slice(2*w_cnt, rest.length-2*w_cnt)
+    next unless more
+
+    p_cnt = p_cnt.to_i
+    frames = more.slice(2*p_cnt, more.length-2*p_cnt)
+
+    f_cnt, *more_frames = frames
+    f_cnt = f_cnt.to_i
+    next if f_cnt == 0 or more_frames.nil?
+
+    more_frames.slice(0, 3*f_cnt).each_slice(3) do |f|
+      plus, f_num, w_num = f
+      verb_frame_id = @verb_frames[f_num.to_i][0]
+      sense = synset.senses.find :first, :conditions => [ "words.name = ?",
+        @words[w_num.to_i] ], :joins => 'INNER JOIN words ON words.id = senses.word_id'
+      SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+    end
   end
   puts "#{Time.now} loaded #{Word.count(:conditions => { :part_of_speech => part_of_speech})} #{part_of_speech.pluralize} (#{synset_count} synsets, #{sense_count} senses)"
   STDOUT.flush

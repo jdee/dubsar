@@ -15,11 +15,10 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class Sense < ActiveRecord::Base
-  belongs_to :word
-  belongs_to :synset
-  has_many :senses_verb_frames
-  has_many :verb_frames, :through => :senses_verb_frames,
-    :order => 'verb_frames.number ASC'
-  validates :freq_cnt, :presence => true
+class SensesVerbFrame < ActiveRecord::Base
+  belongs_to :sense
+  belongs_to :verb_frame
+
+  validates :sense, :presence => true
+  validates :verb_frame, :presence => true
 end

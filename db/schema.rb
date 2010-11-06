@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101104214054) do
+ActiveRecord::Schema.define(:version => 20101105231754) do
 
   create_table "inflections", :force => true do |t|
     t.string  "name",    :null => false
@@ -25,11 +25,21 @@ ActiveRecord::Schema.define(:version => 20101104214054) do
     t.integer "freq_cnt",  :default => 0, :null => false
   end
 
+  create_table "senses_verb_frames", :force => true do |t|
+    t.integer "sense_id"
+    t.integer "verb_frame_id"
+  end
+
   create_table "synsets", :force => true do |t|
     t.text    "definition",     :null => false
     t.integer "offset"
     t.string  "part_of_speech"
     t.string  "lexname",        :null => false
+  end
+
+  create_table "verb_frames", :force => true do |t|
+    t.string  "frame"
+    t.integer "number"
   end
 
   create_table "words", :force => true do |t|
