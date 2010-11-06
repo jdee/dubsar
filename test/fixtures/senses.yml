@@ -19,53 +19,64 @@ slang:
   synset: slang
   word: slang
   freq_cnt: 10
+  synset_index: 1
 
 noun:
   synset: food
   word: noun
   freq_cnt: 10
+  synset_index: 1
 
 grub:
   synset: food
   word: grub
   freq_cnt: 10
+  synset_index: 2
 
 foul:
   synset: foul
   word: adjective
   freq_cnt: 10
+  synset_index: 1
 
 well:
   synset: well
   word: adverb
   freq_cnt: 10
+  synset_index: 1
 
 but:
   synset: but
   word: conjunction
   freq_cnt: 10
+  synset_index: 1
 
 hey:
   synset: hey
   word: interjection
   freq_cnt: 10
+  synset_index: 1
 
 from:
   synset: from
   word: preposition
   freq_cnt: 10
+  synset_index: 1
 
 you:
   synset: you
   word: pronoun
   freq_cnt: 10
+  synset_index: 1
 
 follow:
   synset: follow
   word: verb
   freq_cnt: 10
+  synset_index: 1
 
 well_noun:
   synset: well_noun
   word: well_noun
   freq_cnt: 10
+  synset_index: 1

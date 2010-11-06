@@ -14,6 +14,115 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+def pointer_type(symbol)
+  case symbol
+  when '!'
+    'antonym'
+  when '@'
+    'hypernym'
+  when '@i'
+    'instance hypernym'
+  when '~'
+    'hyponym'
+  when '~i'
+    'instance hyponym'
+  when '#m'
+    'member holonym'
+  when '#s'
+    'substance holonym'
+  when '#p'
+    'part holonym'
+  when '%m'
+    'member meronym'
+  when '%s'
+    'substance meronym'
+  when '%p'
+    'part meronym'
+  when '='
+    'attribute'
+  when '+'
+    'derivationally related form'
+  when ';c'
+    'domain of synset (topic)'
+  when '-c'
+    'member of this domain (topic)'
+  when ';r'
+    'domain of synset (region)'
+  when '-r'
+    'member of this domain (region)'
+  when ';u'
+    'domain of synset (usage)'
+  when '-u'
+    'member of this domain (usage)'
+  when '*'
+    'entailment'
+  when '>'
+    'cause'
+  when '^'
+    'also see'
+  when '$'
+    'verb group'
+  when '&'
+    'similar to'
+  when '<'
+    'participle of verb'
+  when '\\'
+    'derived from/pertains to'
+  else
+    ''
+  end
+end
+
+def reflected_pointer_type(symbol)
+  case symbol
+  when '!'
+    'antonym'
+  when '~'
+    'hypernym'
+  when '@'
+    'hyponym'
+  when '~i'
+    'instance hypernym'
+  when '@i'
+    'instance hyponym'
+  when '#m'
+    'member meronym'
+  when '#s'
+    'substance meronym'
+  when '#p'
+    'part meronym'
+  when '%m'
+    'member holonym'
+  when '%s'
+    'substance holonym'
+  when '%p'
+    'part meronym'
+  when '&'
+    'similar to'
+  when '='
+    'attribute'
+  when '$'
+    'verb group'
+  when '+'
+    'derivationally related form'
+  when ';c'
+    'member of this domain (topic)'
+  when '-c'
+    'domain of synset (topic)'
+  when ';r'
+    'member of this domain (region)'
+  when '-r'
+    'domain of synset (region)'
+  when ';u'
+    'member of this domain (usage)'
+  when '-u'
+    'domain of synset (usage)'
+  else
+    ''
+  end
+end
+
 @sense_index = Hash.new(0)
 @lexnames = {}
 
@@ -98,30 +207,32 @@ STDOUT.flush
     w_cnt = w_cnt.to_i(16)
 
     synset = Synset.new :definition => defn.chomp,
-      :offset => synset_offset.sub(/^0+/, '').to_i,
+      :offset => synset_offset.to_i,
       :lexname => @lexnames[lex_filenum],
       :part_of_speech => part_of_speech
-    @words = []
+    synset_index = 0
     rest.slice(0, 2*w_cnt).each_slice(2) do |a|
       s = a[0].gsub('_', ' ')
-      @words << s
+      synset_index += 1
       synonym = Word.find_by_name_and_part_of_speech(s, part_of_speech) ||
         Word.create(:name => s, :part_of_speech => part_of_speech, :irregular => @irregular_inflections[s.gsub(' ', '_').to_sym])
       key = part_of_speech + '_' + synset_offset + '_' + s
-      synonym.senses.create :synset => synset, :freq_cnt => @sense_index[key.to_s]
+      synonym.senses.create :synset => synset,
+        :freq_cnt => @sense_index[key.to_s],
+        :synset_index => synset_index
       # recompute freq_cnt for synonym
       synonym.save
       sense_count += 1
     end
+
     synset_count += 1
     synset.save
-
-    next unless part_of_speech == 'verb'
 
     p_cnt, *more = rest.slice(2*w_cnt, rest.length-2*w_cnt)
     next unless more
 
     p_cnt = p_cnt.to_i
+    next unless part_of_speech == 'verb'
 
     f_cnt, *more_frames = more.slice(4*p_cnt, more.length-4*p_cnt)
     f_cnt = f_cnt.to_i
@@ -132,8 +243,7 @@ STDOUT.flush
       verb_frame_id = @verb_frames[f_num.to_i][0]
       w_num = w_num.to_i
       if w_num != 0
-        sense = synset.senses.find :first, :conditions => [ "words.name = ?",
-          @words[w_num-1] ], :joins => 'INNER JOIN words ON words.id = senses.word_id'
+        sense = synset.senses.find(:first, :conditions => "synset_index = #{w_num}")
         SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
       else
         synset.senses.each do |sense|
@@ -146,29 +256,74 @@ STDOUT.flush
   STDOUT.flush
 end
 
-# total = Word.count(:conditions => "part_of_speech = 'verb'")
-# puts "#{Time.now} removing duplicate verb inflections"
-# puts "#{Time.now} processing #{total} verbs"
-# STDOUT.flush
+%w{adj adv noun verb}.each do |sfx|
+  part_of_speech = case sfx
+  when 'adj'
+    'adjective'
+  when 'adv'
+    'adverb'
+  else
+    sfx
+  end
 
-# @chunk = (total*0.1).to_i
-# @verb_cnt = 0
-# @last_report = Time.now
-# Word.all(:conditions => "part_of_speech = 'verb'").each do |w|
-#   w.inflections.each do |i|
-#     w.inflections.delete(i) if
-#       w.inflections.count(:conditions => [ "name = ?", i.name ]) > 1
-#   end
-#   w.save
+  puts "#{Time.now} loading #{part_of_speech} pointers"
+  STDOUT.flush
+  File.open(File.expand_path("defaults/data.#{sfx}", File.dirname(__FILE__))).each do |line|
+    next if line =~ /^\s/
 
-#   @verb_cnt += 1
-#   if @verb_cnt % @chunk == 0 and @verb_cnt/@chunk < 10
-#     now = Time.now
-#     i = @verb_cnt/@chunk
-#     puts "#{now} #{i*10}% done, est. complete at #{now+(now-@last_report)*(10-i)}"
-#     STDOUT.flush
-#     @last_report = now
-#   end
-# end
+    left, defn = line.split('| ')
+    synset_offset, lex_filenum, ss_type, w_cnt, *rest = left.split(' ')
 
+    synset = Synset.find_by_offset_and_part_of_speech synset_offset.to_i,
+      part_of_speech
+
+    w_cnt = w_cnt.to_i(16)
+    p_cnt, *more = rest.slice(2*w_cnt, rest.length-2*w_cnt)
+    next unless more
+
+    p_cnt = p_cnt.to_i
+    more.slice(0, 4*p_cnt).each_slice(4) do |p|
+      pointer_symbol, target_synset_offset, target_pos, source_target = p
+
+      target_synset =
+        Synset.find_by_offset_and_part_of_speech target_synset_offset.to_i,
+        case target_pos
+        when 'n'
+          'noun'
+        when /^[as]$/
+          'adjective'
+        when 'r'
+          'adverb'
+        when 'v'
+          'verb'
+        end
+
+      if source_target == '0000'
+        ptype = pointer_type(pointer_symbol)
+        synset.senses.each do |sense|
+          Pointer.create :sense => sense, :target => target_synset,
+            :ptype => ptype
+        end
+
+        rtype = reflected_pointer_type(pointer_symbol)
+        target_synset.senses.each do |sense|
+          Pointer.create :sense => sense, :target => synset,
+            :ptype => rtype
+        end unless rtype.blank?
+      else
+        source_no = source_target[0,2]
+        target_no = source_target[2,2]
+        source_no = source_no.to_i(16)
+        target_no = target_no.to_i(16)
+
+        sense = synset.senses.find(:first, :conditions => "synset_index = #{source_no}")
+        target = target_synset.senses.find(:first, :conditions => "synset_index = #{target_no}")
+
+        Pointer.create :sense => sense, :target => target, :ptype => pointer_type(pointer_symbol)
+        rtype = reflected_pointer_type(pointer_symbol)
+        Pointer.create(:sense => target, :target => sense, :ptype => rtype) unless rtype.blank?
+      end
+    end
+  end
+end
 puts "#{Time.now} ### Dubsar DB seed complete ###"

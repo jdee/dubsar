@@ -15,11 +15,11 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+class Pointer < ActiveRecord::Base
+  belongs_to :target, :polymorphic => true
+  belongs_to :sense
 
-class SenseTest < ActiveSupport::TestCase
-  should belong_to :word
-  should belong_to :synset
-  should validate_presence_of :freq_cnt
-  should validate_presence_of :synset_index
+  validates :target, :presence => true
+  validates :sense, :presence => true
+  validates :ptype, :presence => true
 end

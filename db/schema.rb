@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101105231754) do
+ActiveRecord::Schema.define(:version => 20101106181722) do
 
   create_table "inflections", :force => true do |t|
     t.string  "name",    :null => false
@@ -19,10 +19,18 @@ ActiveRecord::Schema.define(:version => 20101105231754) do
 
   add_index "inflections", ["name"], :name => "index_inflections_on_name"
 
+  create_table "pointers", :force => true do |t|
+    t.integer "target_id",   :null => false
+    t.string  "target_type", :null => false
+    t.integer "sense_id",    :null => false
+    t.string  "ptype",       :null => false
+  end
+
   create_table "senses", :force => true do |t|
     t.integer "synset_id"
     t.integer "word_id"
-    t.integer "freq_cnt",  :default => 0, :null => false
+    t.integer "freq_cnt",     :default => 0, :null => false
+    t.integer "synset_index", :default => 0, :null => false
   end
 
   create_table "senses_verb_frames", :force => true do |t|
@@ -36,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20101105231754) do
     t.string  "part_of_speech"
     t.string  "lexname",        :null => false
   end
+
+  add_index "synsets", ["offset", "part_of_speech"], :name => "index_synsets_on_offset_and_part_of_speech"
 
   create_table "verb_frames", :force => true do |t|
     t.string  "frame"

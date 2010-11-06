@@ -17,9 +17,8 @@
 
 require 'test_helper'
 
-class SenseTest < ActiveSupport::TestCase
-  should belong_to :word
-  should belong_to :synset
-  should validate_presence_of :freq_cnt
-  should validate_presence_of :synset_index
+class PointerTest < ActiveSupport::TestCase
+  should validate_presence_of :target
+  should validate_presence_of :sense
+  should validate_presence_of :ptype
 end

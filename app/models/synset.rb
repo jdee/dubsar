@@ -20,6 +20,8 @@ class Synset < ActiveRecord::Base
   has_many :senses
   has_many :words, :through => :senses
 
+  has_one :source, :class_name => 'Pointer', :as => :target
+
   validates :definition, :presence => true
   validates :lexname, :presence => true
 
