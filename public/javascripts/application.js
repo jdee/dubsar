@@ -82,8 +82,8 @@
         var $bd_x = $(window).width();
         var $bd_y = $(window).height();
         $tt.css({
-          'top': $ev_y + $tt_y + 5 > $bd_y ? $ev_y - $tt_y < 10 ? 5 : $ev_y - $tt_y - 5 : $ev_y + 10,
-          'left': $ev_x + $tt_x + 5 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 10
+          'top': $ev_y + $tt_y + 15 > $bd_y ? $ev_y - $tt_y < 10 ? 5 : $ev_y - $tt_y - 5 : $ev_y + 10,
+          'left': $ev_x + $tt_x + 15 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 10
         });
       });
 
