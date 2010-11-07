@@ -70,7 +70,6 @@
       var $tt = $('#tooltip');
       $('span.tooltip').hover(function(){
         $tt.html($('div.template', this).html());
-        $('> div', $tt).add('hr', $tt).add('ul', $tt).add('table', $tt).width($tt.width());
         $tt.show();
       },
       function(){
