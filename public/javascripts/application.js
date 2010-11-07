@@ -80,8 +80,8 @@
         var $ev_y = ev.pageY;
         var $tt_x = $tt.outerWidth();
         var $tt_y = $tt.outerHeight();
-        var $bd_x = $(document).outerWidth();
-        var $bd_y = $('#body').outerHeight();
+        var $bd_x = $main_div.outerWidth();
+        var $bd_y = $('body').outerHeight();
         $tt.css({
           'top': $ev_y + $tt_y > $bd_y ? $ev_y - $tt_y < 0 ? 5 : $ev_y - $tt_y : $ev_y + 10,
           'left': $ev_x + $tt_x + 5 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 5
