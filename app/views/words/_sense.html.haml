@@ -19,33 +19,36 @@
     =link_to w.name, "#{url_for(:action => :show, :term => w.name)}##{w.unique_name}", :title => w.name, :class => 'search-link'
   %span.tooltip
     &= sense.synset.gloss
-    .template.ui-widget-content.ui-corner-all
-      .ui-state-hover.line
-        %div
+    .template
+      .ui-widget-header
+        .ui-state-hover.line
           %span.ui-icon.ui-icon-info
-          &= "freq. cnt.: #{sense.freq_cnt} <#{sense.synset.lexname}>"
-        - unless sense.verb_frames.empty?
-          %hr/
-          %ul
-            - sense.verb_frames.each do |verb_frame|
-              %li
-                &= verb_frame.frame
-        - unless sense.synset.samples.blank?
-          %hr/
-          %table
-            %tbody
-              - sense.synset.samples.each do |sample|
-                %tr
-                  %td
-                    &= sample
-        - unless sense.pointers.blank?
-          %hr/
-          %table
-            %tbody
-              - sense.unique_pointers.each do |ptype, words|
-                %tr
-                  %td
-                    %em
-                      &= ptype
-                  %td
-                    &= words.join(', ')
+          - if sense.freq_cnt > 0
+            &= "freq. cnt.: #{sense.freq_cnt}"
+          %em
+            &="<#{sense.synset.lexname}>"
+      - unless sense.verb_frames.empty?
+        %hr/
+        %ul
+          - sense.verb_frames.each do |verb_frame|
+            %li
+              &= verb_frame.frame
+      - unless sense.synset.samples.blank?
+        %hr/
+        %table
+          %tbody
+            - sense.synset.samples.each do |sample|
+              %tr
+                %td
+                  &= sample
+      - unless sense.pointers.blank?
+        %hr/
+        %table
+          %tbody
+            - sense.unique_pointers.each do |ptype, words|
+              %tr
+                %td
+                  %em
+                    &= ptype
+                %td
+                  &= words.join(', ')

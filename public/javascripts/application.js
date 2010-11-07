@@ -66,15 +66,15 @@
 
     /* simplification of a recipe from the O'Reilly jQuery Cookbook */
     if ($('span.tooltip').length) {
-      $('body').append('<div id="tooltip" class="ui-widget-content ui-corner-all"><div class="ui-state-hover line"></div></div>');
+      $('body').append('<div id="tooltip" class="ui-widget-content ui-corner-all"></div>');
       var $tt = $('#tooltip');
       $('span.tooltip').hover(function(){
         $tt.html($('div.template', this).html());
+        $('> div', $tt).add('hr', $tt).add('ul', $tt).add('table', $tt).width($tt.width());
         $tt.show();
       },
       function(){
         $tt.hide();
-        $tt.html('');
       }).mousemove(function(ev){
         var $ev_x = ev.pageX;
         var $ev_y = ev.pageY;
