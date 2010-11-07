@@ -38,3 +38,14 @@
                 %tr
                   %td
                     &= sample
+        - unless sense.pointers.blank?
+          %hr/
+          %table
+            %tbody
+              - sense.unique_pointers.each do |ptype, words|
+                %tr
+                  %td
+                    %em
+                      &= ptype
+                  %td
+                    &= words.join(', ')

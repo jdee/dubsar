@@ -26,4 +26,20 @@ class Sense < ActiveRecord::Base
     :order => 'number'
   validates :freq_cnt, :presence => true
   validates :synset_index, :presence => true
+
+  def words
+    [ word ]
+  end
+
+  def unique_pointers
+    @unique_pointers = {}
+    pointers.each do |pointer|
+      pointer.target.words.each do |word|
+        @unique_pointers[pointer.ptype] ||= []
+        @unique_pointers[pointer.ptype] << word.name unless @unique_pointers[pointer.ptype].include?(word.name)
+        @unique_pointers[pointer.ptype].sort!
+      end
+    end
+    @unique_pointers
+  end
 end

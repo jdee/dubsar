@@ -127,8 +127,8 @@ class WordsController < ApplicationController
   end
 
   def setup_captions
-    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania" +
-      " Sumerian Dictionary'
+    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania' +
+      ' Sumerian Dictionary'
     @dubsar_alt = 'dub-sar'
   end
 end
