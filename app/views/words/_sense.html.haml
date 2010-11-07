@@ -24,10 +24,12 @@
         .ui-state-default.line
           %span.ui-icon.ui-icon-info
           %span.tooltip-header-text
-            - if sense.freq_cnt > 0
-              &= "freq. cnt.: #{sense.freq_cnt}"
+            &nbsp;
             %em
               &="<#{sense.synset.lexname}>"
+            &nbsp;
+            - if sense.freq_cnt > 0
+              &= "freq. cnt.: #{sense.freq_cnt}"
           %a.close-icon-span.ui-state-default.ui-corner-all{:href => '#', :title => 'close'}
             %span.ui-icon.ui-icon-close
       - unless sense.verb_frames.empty?
