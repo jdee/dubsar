@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101106181722) do
+ActiveRecord::Schema.define(:version => 20101107135403) do
 
   create_table "inflections", :force => true do |t|
     t.string  "name",    :null => false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20101106181722) do
   end
 
   add_index "inflections", ["name"], :name => "index_inflections_on_name"
+  add_index "inflections", ["word_id"], :name => "index_inflections_on_word_id"
 
   create_table "pointers", :force => true do |t|
     t.integer "target_id",   :null => false
@@ -26,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20101106181722) do
     t.string  "ptype",       :null => false
   end
 
+  add_index "pointers", ["sense_id"], :name => "index_pointers_on_sense_id"
+
   create_table "senses", :force => true do |t|
     t.integer "synset_id"
     t.integer "word_id"
@@ -33,10 +36,15 @@ ActiveRecord::Schema.define(:version => 20101106181722) do
     t.integer "synset_index", :default => 0, :null => false
   end
 
+  add_index "senses", ["word_id", "synset_id"], :name => "index_senses_on_word_id_and_synset_id"
+  add_index "senses", ["word_id"], :name => "index_senses_on_word_id"
+
   create_table "senses_verb_frames", :force => true do |t|
     t.integer "sense_id"
     t.integer "verb_frame_id"
   end
+
+  add_index "senses_verb_frames", ["sense_id"], :name => "index_senses_verb_frames_on_sense_id"
 
   create_table "synsets", :force => true do |t|
     t.text    "definition",     :null => false
