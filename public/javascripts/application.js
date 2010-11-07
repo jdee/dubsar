@@ -81,9 +81,8 @@
         var $tt_y = $tt.outerHeight();
         var $bd_x = $(window).width();
         var $bd_y = $(window).height();
-        var $st_y = $(document).scrollTop();
         $tt.css({
-          'top': $ev_y + $tt_y > $bd_y + $st_y ? $ev_y - $tt_y < 0 ? 5 : $ev_y - $tt_y : $ev_y + 10,
+          'top': $ev_y + $tt_y > $bd_y - 5 ? $ev_y - $tt_y < 0 ? 5 : $ev_y - $tt_y : $ev_y + 10,
           'left': $ev_x + $tt_x + 5 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 5
         });
       });
