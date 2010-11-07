@@ -28,7 +28,7 @@
               &= "freq. cnt.: #{sense.freq_cnt}"
             %em
               &="<#{sense.synset.lexname}>"
-          %a.close-icon-span.ui-corner-all{:href => '#'}
+          %a.close-icon-span.ui-corner-all{:href => '#', :title => 'close'}
             %span.ui-icon.ui-icon-close
       - unless sense.verb_frames.empty?
         %hr/
@@ -54,4 +54,5 @@
                   %em
                     &= ptype
                 %td
-                  &= words.join(', ')
+                  - words.each do |word|
+                    =link_to word, url_for(:action => :show, :term => word), :title => word

@@ -260,11 +260,15 @@ div#tour-link-div {
   list-style-type: circle;
 }
 
+#tooltip .ui-widget-header {
+  position: relative;
+}
+
 a.close-icon-span {
   display: none;
   position: absolute;
-  top: 1.5ex;
-  right: 1.5ex;
+  top: 0.8ex;
+  right: 0.8ex;
   padding: 0;
   margin: 0;
 }
