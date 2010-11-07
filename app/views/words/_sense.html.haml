@@ -17,7 +17,7 @@
 %li
   - sense.synset.words_except(word).each do |w|
     =link_to w.name, "#{url_for(:action => :show, :term => w.name)}##{w.unique_name}", :title => w.name, :class => 'search-link'
-  %span.tooltip
+  %span.tooltip.ui-corner-all
     &= sense.synset.gloss
     .template
       .ui-widget-header

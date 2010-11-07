@@ -161,6 +161,7 @@
     $('#accordion').accordion({
       active: find_starting_pane(),
       autoHeight: false,
+      changestart: kill_tooltip,
       change: function(event, info) {
         set_starting_pane(info.newHeader.attr('id'));
       },
@@ -283,26 +284,38 @@
       $(this).addClass('ui-state-active');
     });
 
-    /* simplification of a recipe from the O'Reilly jQuery Cookbook */
+    /* based on a recipe from the O'Reilly jQuery Cookbook */
+    var $tt = null;
+    var $tt_timer = null;
+    var $tt_fixed = false;
+    var $tt_gloss = null;
+    function kill_tooltip(){
+      if ($tt) {
+        $tt.hide();
+      }
+      if ($tt_timer) {
+        clearTimeout($tt_timer);
+        $tt_timer = null;
+      }
+      $tt_fixed = false;
+      if ($tt_gloss) {
+        $tt_gloss.removeClass('ui-state-highlight');
+      }
+    }
+
     if ($('span.tooltip').length) {
       $('body').append('<div id="tooltip" class="ui-widget-content ui-corner-all"></div>');
-      var $tt = $('#tooltip');
-      var $tt_timer = null;
-      var $tt_fixed = false;
+      $tt = $('#tooltip');
 
       $('span.tooltip').hover(function(){
-        if ($tt_timer) {
-          clearTimeout($tt_timer);
-          $tt_timer = null;
-        }
-        $tt.hide();
-        $tt_fixed = false;
+        kill_tooltip();
         $tt.html($('div.template', this).html());
         $('a.close-icon-span', $tt).css({opacity:0});
         $tt.show();
+        $tt_gloss = $(this).addClass('ui-state-highlight');
       },
       function(){
-        if (!$tt_fixed) $tt.hide();
+        if (!$tt_fixed) kill_tooltip();
       }).mousemove(function(ev){
         if (!$tt_fixed) {
           var $ev_x = ev.pageX;
@@ -327,8 +340,7 @@
         $tt_fixed = true;
         $tt_timer = null;
         $('.close-icon-span', $tt).click(function(){
-          $tt_fixed = false;
-          $tt.hide();
+          kill_tooltip();
         }).hover(function(){
           $(this).addClass('ui-state-hover');
         }, function(){
@@ -337,7 +349,7 @@
         $tt.draggable({});
       }
 
-      $tt.hide();
+      kill_tooltip();
     }
   });
 })(jQuery);
