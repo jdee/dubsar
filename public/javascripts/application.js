@@ -76,16 +76,15 @@
         $tt.hide();
         $tt.html('');
       }).mousemove(function(ev){
-        var $hd_y = $('#header').outerHeight();
-        var $ev_x = ev.pageX - $('#main').position().left;
-        var $ev_y = ev.pageY - $('#main').position().top;
+        var $ev_x = ev.pageX;
+        var $ev_y = ev.pageY;
         var $tt_x = $tt.outerWidth();
         var $tt_y = $tt.outerHeight();
-        var $bd_x = $('#main').outerWidth();
-        var $bd_y = $('#main').outerHeight();
+        var $bd_x = $(document).outerWidth();
+        var $bd_y = $('#body').outerHeight();
         $tt.css({
-          'top': $('#main').position().top + ($ev_y + $tt_y > $bd_y ? ev.pageY - $tt_y < -$hd_y ? -$hd_y + 5 : $ev_y - $tt_y : $ev_y + 10),
-          'left': $('#main').position().left = ($ev_x + $tt_x + 20 > $bd_x ? $ev_x - $tt_x - 10 : $ev_x + 15)
+          'top': $ev_y + $tt_y > $bd_y ? $ev_y - $tt_y < 0 ? 5 : $ev_y - $tt_y : $ev_y + 10,
+          'left': $ev_x + $tt_x + 5 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 5
         });
       });
 
