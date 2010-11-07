@@ -342,9 +342,9 @@
         $('.close-icon-span', $tt).click(function(){
           kill_tooltip();
         }).hover(function(){
-          $(this).addClass('ui-state-hover');
+          $(this).addClass('ui-state-hover').removeClass('ui-state-default');
         }, function(){
-          $(this).removeClass('ui-state-hover');
+          $(this).removeClass('ui-state-hover').addClass('ui-state-default');
         }).fadeTo('fast', 1.0);
         $tt.draggable({});
       }

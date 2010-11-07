@@ -270,8 +270,10 @@ div#tour-link-div {
 
 a.close-icon-span {
   position: absolute;
-  top: 0.8ex;
-  right: 0.8ex;
-  padding: 0;
-  margin: 0;
+  top: 5px;
+  right: 5px;
+}
+
+a.close-icon-span > span.ui-icon {
+  margin-right: 0;
 }
