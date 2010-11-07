@@ -282,5 +282,61 @@
     }).click(function(){
       $(this).addClass('ui-state-active');
     });
+
+    /* simplification of a recipe from the O'Reilly jQuery Cookbook */
+    if ($('span.tooltip').length) {
+      $('body').append('<div id="tooltip" class="ui-widget-content ui-corner-all"></div>');
+      var $tt = $('#tooltip');
+      var $tt_timer = null;
+      var $tt_fixed = false;
+
+      $('span.tooltip').hover(function(){
+        if ($tt_timer) {
+          clearTimeout($tt_timer);
+          $tt_timer = null;
+        }
+        $tt.hide();
+        $tt_fixed = false;
+        $tt.html($('div.template', this).html());
+        $tt.show();
+      },
+      function(){
+        if (!$tt_fixed) $tt.hide();
+      }).mousemove(function(ev){
+        if (!$tt_fixed) {
+          var $ev_x = ev.pageX;
+          var $ev_y = ev.pageY;
+          var $tt_x = $tt.outerWidth();
+          var $tt_y = $tt.outerHeight();
+          var $bd_x = $(window).width();
+          var $bd_y = $(window).height();
+          $tt.css({
+            'top': $ev_y + $tt_y + 15 > $bd_y ? $ev_y - $tt_y < 10 ? 5 : $ev_y - $tt_y - 5 : $ev_y + 10,
+            'left': $ev_x + $tt_x + 15 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 10
+          });
+        }
+
+        if ($tt_timer) {
+          clearTimeout($tt_timer);
+        }
+        $tt_timer = setTimeout(fix_tooltip, 2000);
+      });
+
+      function fix_tooltip() {
+        $tt_fixed = true;
+        $tt_timer = null;
+        $('.close-icon-span', $tt).click(function(){
+          $tt_fixed = false;
+          $tt.hide();
+        }).hover(function(){
+          $(this).addClass('ui-state-hover');
+        }, function(){
+          $(this).removeClass('ui-state-hover');
+        }).fadeIn('fast');
+        $tt.draggable({});
+      }
+
+      $tt.hide();
+    }
   });
 })(jQuery);

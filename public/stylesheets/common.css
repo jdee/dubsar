@@ -259,3 +259,12 @@ div#tour-link-div {
 #tooltip ul {
   list-style-type: circle;
 }
+
+a.close-icon-span {
+  display: none;
+  position: absolute;
+  top: 1.5ex;
+  right: 1.5ex;
+  padding: 0;
+  margin: 0;
+}

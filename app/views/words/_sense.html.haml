@@ -21,12 +21,15 @@
     &= sense.synset.gloss
     .template
       .ui-widget-header
-        .ui-state-hover.line
+        .ui-state-default.line
           %span.ui-icon.ui-icon-info
-          - if sense.freq_cnt > 0
-            &= "freq. cnt.: #{sense.freq_cnt}"
-          %em
-            &="<#{sense.synset.lexname}>"
+          %span.tooltip-header-text
+            - if sense.freq_cnt > 0
+              &= "freq. cnt.: #{sense.freq_cnt}"
+            %em
+              &="<#{sense.synset.lexname}>"
+          %a.close-icon-span.ui-corner-all{:href => '#'}
+            %span.ui-icon.ui-icon-close
       - unless sense.verb_frames.empty?
         %hr/
         %ul
