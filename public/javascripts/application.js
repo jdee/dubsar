@@ -25,7 +25,7 @@
     var $starting_offset = $header_bottom;
 
     function post_info(){
-      $('#error').stop(true).replaceWith('<div id="error" class="ui-state-active ui-corner-all line"><span class="ui-icon ui-icon-info"></span>working...</div>');
+      $error_div.stop(true).html('<span class="ui-icon ui-icon-info"></span>working...').addClass('ui-state-active').removeClass('ui-state-error').css({top: $header_bottom}).show();
       /* just cheat off the stylesheet and don't try to compute the offset */
       $main_div.stop().animate({ top: '24.7ex' }, 'fast');
     }
