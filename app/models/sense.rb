@@ -36,7 +36,7 @@ class Sense < ActiveRecord::Base
     pointers.each do |pointer|
       pointer.target.words.each do |word|
         @unique_pointers[pointer.ptype] ||= []
-        @unique_pointers[pointer.ptype] << word.name unless @unique_pointers[pointer.ptype].include?(word.name)
+        @unique_pointers[pointer.ptype] << word unless @unique_pointers[pointer.ptype].include?(word)
         @unique_pointers[pointer.ptype].sort!
       end
     end

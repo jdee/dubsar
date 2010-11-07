@@ -58,4 +58,4 @@
                     &= ptype
                 %td
                   - words.each do |word|
-                    =link_to word, url_for(:action => :show, :term => word), :title => word, :class => 'search-link'
+                    =link_to word.name, "#{url_for(:action => :show, :term => word.name)}##{word.unique_name}", :title => word, :class => 'search-link'

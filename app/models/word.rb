@@ -117,6 +117,10 @@ class Word < ActiveRecord::Base
     remove_duplicate_inflections
   end
 
+  def <=>(other)
+    name <=> other.name
+  end
+
   # Abbreviation for the full part_of_speech
   def pos
     sym = self.class.pos(part_of_speech)
