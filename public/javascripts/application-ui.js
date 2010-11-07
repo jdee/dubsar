@@ -298,6 +298,7 @@
         $tt.hide();
         $tt_fixed = false;
         $tt.html($('div.template', this).html());
+        $('a.close-icon-span', $tt).css({opacity:0});
         $tt.show();
       },
       function(){
@@ -332,7 +333,7 @@
           $(this).addClass('ui-state-hover');
         }, function(){
           $(this).removeClass('ui-state-hover');
-        }).fadeIn('fast');
+        }).fadeTo('fast', 1.0);
         $tt.draggable({});
       }
 

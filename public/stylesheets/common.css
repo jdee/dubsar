@@ -264,8 +264,11 @@ div#tour-link-div {
   position: relative;
 }
 
+.tooltip-header-text {
+  padding-right: 3ex;
+}
+
 a.close-icon-span {
-  display: none;
   position: absolute;
   top: 0.8ex;
   right: 0.8ex;
