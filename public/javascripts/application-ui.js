@@ -341,6 +341,7 @@
         $tt_timer = null;
         $('.close-icon-span', $tt).click(function(){
           kill_tooltip();
+          return false;
         }).hover(function(){
           $(this).addClass('ui-state-hover').removeClass('ui-state-default');
         }, function(){
