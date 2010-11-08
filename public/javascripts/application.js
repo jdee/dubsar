@@ -55,6 +55,7 @@
     /* position the main div depending on whether the error div is
        present */
     $error_div.filter(':visible').each(function(){
+      $(this).css({top: $header_bottom});
       $starting_offset = $(this).position().bottom;
     });
     $main_div.css({ top: $starting_offset });
