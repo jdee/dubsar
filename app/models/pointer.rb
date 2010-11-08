@@ -22,4 +22,16 @@ class Pointer < ActiveRecord::Base
   validates :target, :presence => true
   validates :sense, :presence => true
   validates :ptype, :presence => true
+
+  class << self
+    def create_new(params)
+      search_params = {
+        :sense_id    => params[:sense_id   ] || params[:sense ].id        ,
+        :target_id   => params[:target_id  ] || params[:target].id        ,
+        :target_type => params[:target_type] || params[:target].class.name,
+        :ptype       => params[:ptype      ]
+      }
+      create(params) unless first(:conditions => search_params)
+    end
+  end
 end

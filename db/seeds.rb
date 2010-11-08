@@ -97,7 +97,7 @@ def reflected_pointer_type(symbol)
   when '%s'
     'substance holonym'
   when '%p'
-    'part meronym'
+    'part holonym'
   when '&'
     'similar to'
   when '='
@@ -301,13 +301,13 @@ end
       if source_target == '0000'
         ptype = pointer_type(pointer_symbol)
         synset.senses.each do |sense|
-          Pointer.create :sense => sense, :target => target_synset,
+          Pointer.create_new :sense => sense, :target => target_synset,
             :ptype => ptype
         end
 
         rtype = reflected_pointer_type(pointer_symbol)
         target_synset.senses.each do |sense|
-          Pointer.create :sense => sense, :target => synset,
+          Pointer.create_new :sense => sense, :target => synset,
             :ptype => rtype
         end unless rtype.blank?
       else
@@ -319,9 +319,9 @@ end
         sense = synset.senses.find(:first, :conditions => "synset_index = #{source_no}")
         target = target_synset.senses.find(:first, :conditions => "synset_index = #{target_no}")
 
-        Pointer.create :sense => sense, :target => target, :ptype => pointer_type(pointer_symbol)
+        Pointer.create_new :sense => sense, :target => target, :ptype => pointer_type(pointer_symbol)
         rtype = reflected_pointer_type(pointer_symbol)
-        Pointer.create(:sense => target, :target => sense, :ptype => rtype) unless rtype.blank?
+        Pointer.create_new(:sense => target, :target => sense, :ptype => rtype) unless rtype.blank?
       end
     end
   end
