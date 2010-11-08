@@ -57,7 +57,7 @@ class Pointer < ActiveRecord::Base
         'member of this domain (region)' => 'things said here',
         'domain of synset (usage)' => 'pertinent community',
         'member of this domain (usage)' => 'idioms used by this community',
-        'entailment' => 'result',
+        'entailment' => 'consequence',
         'cause' => 'origin or reason',
         'also see' => 'related entries',
         'verb group' => 'related verbs',
