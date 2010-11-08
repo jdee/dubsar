@@ -10,8 +10,12 @@ WordNet[http://wordnet.princeton.edu/] project.
 
 Dubsar is deployed at http://dubsar-dictionary.com.
 
-For more information, see the
-{Dubsar wiki on GitHub}[http://github.com/jdee/dubsar/wiki/].
+For more information, see
+- The {Dubsar wiki on GitHub}[http://github.com/jdee/dubsar/wiki/].
+- On the Dubsar site:
+-- {About Dubsar}[http://dubsar-dictionary.com/about/]
+-- {FAQ}[http://dubsar-dictionary.com/faq/]
+-- {QUnit test suite}[http://dubsar-dictionary.com/qunit/]
 
 == Copyright
 
