@@ -23,6 +23,14 @@ development:
   username: jdee
   password: admin
 
+backup_dev:
+  adapter: postgresql
+  encoding: unicode
+  database: dubsar_backup_dev
+  pool: 5
+  username: jdee
+  password: admin
+
 test:
   adapter: postgresql
   encoding: unicode
