@@ -37,6 +37,10 @@ class Pointer < ActiveRecord::Base
 
   class << self
     def help_text(ptype)
+      help_list[ptype]
+    end
+
+    def help_list
       {
         'antonym' => 'words opposite in meaning',
         'hypernym' => 'more generic terms',
@@ -64,7 +68,7 @@ class Pointer < ActiveRecord::Base
         'similar to' => 'near in meaning, but not exact',
         'participle of verb' => 'root verb',
         'derived from/pertains to' => 'adj: pertinent noun; adv: source noun'
-      }[ptype]
+      }
     end
   end
 end

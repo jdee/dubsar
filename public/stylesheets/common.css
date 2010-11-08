@@ -277,3 +277,11 @@ a.close-icon-span {
 a.close-icon-span > span.ui-icon {
   margin-right: 0;
 }
+
+th {
+  text-align: left;
+}
+
+dt {
+  font-weight: bold;
+}
