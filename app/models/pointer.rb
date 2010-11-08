@@ -34,4 +34,37 @@ class Pointer < ActiveRecord::Base
       create(params) unless first(:conditions => search_params)
     end
   end
+
+  class << self
+    def help_text(ptype)
+      {
+        'antonym' => 'words opposite in meaning',
+        'hypernym' => 'more generic terms',
+        'instance hypernym' => 'classes of which this is an instance',
+        'hyponym' => 'more specific terms',
+        'instance hyponym' => 'instances of this class',
+        'member holonym' => 'wholes of which this is a member',
+        'substance holonym' => 'wholes of which this is a substance',
+        'part holonym' => 'wholes of which this is a part',
+        'member meronym' => 'constituent members',
+        'substance meronym' => 'constituent substances',
+        'part meronym' => 'constituent parts',
+        'attribute' => 'general quality',
+        'derivationally related form' => 'cognates, etc.',
+        'domain of synset (topic)' => 'more general topics',
+        'member of this domain (topic)' => 'more specific topics',
+        'domain of synset (region)' => 'where this is used',
+        'member of this domain (region)' => 'things said here',
+        'domain of synset (usage)' => 'pertinent community',
+        'member of this domain (usage)' => 'idioms used by this community',
+        'entailment' => 'result',
+        'cause' => 'origin or reason',
+        'also see' => 'related entries',
+        'verb group' => 'related verbs',
+        'similar to' => 'near in meaning, but not exact',
+        'participle of verb' => 'root verb',
+        'derived from/pertains to' => 'adj: pertinent noun; adv: source noun'
+      }[ptype]
+    end
+  end
 end
