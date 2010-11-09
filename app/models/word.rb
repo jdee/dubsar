@@ -247,6 +247,28 @@ class Word < ActiveRecord::Base
     end
   end
 
+  def local_exceptional_verb
+    case name
+    when /^quiz$/
+      build_new_inflection name + 'zes'
+      build_new_inflection name + 'zed'
+      build_new_inflection name + 'zing'
+      true
+    when /quip$/
+      build_new_inflection name + 's'
+      build_new_inflection name + 'ped'
+      build_new_inflection name + 'ping'
+      true
+    when /qui[t]$/, /squat$/
+      build_new_inflection name + 's'
+      build_new_inflection name + 'ted'
+      build_new_inflection name + 'ting'
+      true
+    else
+      false
+    end
+  end
+
   def add_regular_adjective_inflections
     # These end up looking absurd much of the time
   end
@@ -261,6 +283,8 @@ class Word < ActiveRecord::Base
   end
 
   def add_regular_verb_inflections
+    return if local_exceptional_verb
+
     build_past_tense
     build_third_person_singular
     build_present_participle
