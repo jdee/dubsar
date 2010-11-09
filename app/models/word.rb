@@ -146,8 +146,9 @@ class Word < ActiveRecord::Base
     # DEBT: Should subclass and have this handled polymorphically,
     # but for now there's not much here.
 
-    # Only attempt regular inflection of single words for now.
-    if name =~ /^[^ ]+$/
+    # Only attempt regular inflection of words that contain no
+    # capitals, numbers, spaces, hyphens or other punctuation.
+    if name =~ /^[a-z]+$/
       if inflections.empty?
         method = "add_regular_#{part_of_speech}_inflections"
         self.send method
