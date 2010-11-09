@@ -25,11 +25,20 @@ class Hash
     table = :inflections # by default
     operator = case copy.delete(:match)
     when nil, ''
-      table = :words if /[%_]/ =~ copy[:term]
-      'ILIKE'
+      if /[%_]/ =~ copy[:term]
+        table = :words
+        'ILIKE'
+      else
+        copy[:term] = '^' + copy[:term] + '$'
+        '~*'
+      end
     when 'case'
-      table = :words if /[%_]/ =~ copy[:term]
-      'LIKE'
+      if /[%_]/ =~ copy[:term]
+        table = :words
+        'LIKE'
+      else
+        '='
+      end
     when 'regexp'
       table = :words
       '~'
