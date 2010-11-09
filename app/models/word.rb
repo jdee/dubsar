@@ -274,14 +274,14 @@ class Word < ActiveRecord::Base
       build_new_inflection name + 'ting'
       true
     when /[^aeio]et$/
-      if inflections.empty
+      if inflections.empty?
         inflections.build :name => name + 'ed'
         inflections.build :name => name + 'ing'
       end
       build_new_inflection name + 's'
       true
     when /[ai]c$/
-      if inflections.empty
+      if inflections.empty?
         inflections.build :name => name + 'ked'
         inflections.build :name => name + 'king'
       end
