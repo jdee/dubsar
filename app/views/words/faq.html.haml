@@ -175,7 +175,7 @@
         - %w{synset word sense inflection pointer}.each do |model|
           %tr
             %td
-              = eval(model.capitalize).count
+              =model_count(model)
             %td
               =model.pluralize
   %h2#faq_9
