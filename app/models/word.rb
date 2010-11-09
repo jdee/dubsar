@@ -229,6 +229,23 @@ class Word < ActiveRecord::Base
 
   private
 
+  # Handle some things that aren't in WordNet and are not well
+  # handled by active_support.
+  def local_exceptional_noun
+    case name
+    when /^dragoman$/
+      inflections.build :name => name + 's'
+      false
+    when /^brahman$/, /^caiman$/, /^ceriman$/, /^dolman$/,
+      /^hanuman$/, /^human$/, /^liman$/, /^roman$/,
+      /^saman$/, /^shaman$/, /^soman$/, /^talisman$/, /^zaman$/
+      inflections.build :name => name + 's'
+      true
+    else
+      false
+    end
+  end
+
   def add_regular_adjective_inflections
     # These end up looking absurd much of the time
   end
@@ -239,7 +256,7 @@ class Word < ActiveRecord::Base
 
   def add_regular_noun_inflections
     # Use the active_support inflector for regular nouns.
-    inflections.build :name => name.pluralize
+    inflections.build :name => name.pluralize unless local_exceptional_noun
   end
 
   def add_regular_verb_inflections
