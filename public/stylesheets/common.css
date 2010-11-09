@@ -187,6 +187,7 @@ span.star-icon-span {
 #tour table {
   table-layout: fixed;
   width: 90%;
+  text-align: center;
 }
 
 #tour a {
@@ -194,9 +195,8 @@ span.star-icon-span {
 }
 
 #tour img {
-  display: block;
-  float: left;
-  clear: right;
+  display: inline-block;
+  margin: 1em;
 }
 
 .tour-dialog img {
