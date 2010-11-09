@@ -15,24 +15,12 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class CorrectUVerbInflections < ActiveRecord::Migration
-  @words = %w{quit equip quip acquit quiz squat}
-
+class AddIndexToSenses < ActiveRecord::Migration
   def self.up
-    @words.each do |word|
-      w = Word.find_by_name_and_part_of_speech word, 'verb'
-      inflection = w.inflections.find :first, :conditions => "name ~ '[ai][ptz]ing'"
-      w.inflections.delete inflection
-      inflection.destroy
-      w.save
-    end
+    add_index :senses, :synset_id
   end
 
   def self.down
-    @words.each do |word|
-      w = Word.find_by_name_and_part_of_speech word, 'verb'
-      w.inflections.create :name => word.name + 'ing'
-      w.save
-    end
+    remove_index :senses, :synset_id
   end
 end
