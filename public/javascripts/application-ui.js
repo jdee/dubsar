@@ -315,6 +315,7 @@
         $tt.html($('div.template', this).html());
         $('a.close-icon-span', $tt).css({opacity:0});
         $tt.show();
+        $('> *', $tt).width($tt.innerWidth());
         $tt_gloss = $(this).addClass('ui-state-highlight').css({'border-style':'none'});
       },
       function(){
