@@ -55,9 +55,25 @@ test('theme picker button clicks', function(){
   ok(!body.hasClass('style-light'), 'check for no style-light');
 });
 
+module('tooltip');
+test('#tooltip div', function(){
+  equal($('#tooltip').length, 1, 'there should be 1 #tooltip div');
+  equal($('span.tooltip').length, 30, 'there should be 30 .tooltip spans');
+  equal($('#pane_15 span.tooltip').length, 1, 'there should be 1 .tooltip span in #pane_1');
+  ok($('#pane_15 span.tooltip').is(':visible'), '#pane_15 span.tooltip should be visible');
+});
+
+asyncTest('hover test', 1, function(){
+  $('#pane_15 span.tooltip').trigger('mouseover');
+  setTimeout(function(){
+    ok($('#tooltip').is(':visible'), 'hover should show tooltip');
+    start();
+  }, 100);
+});
+
 module('teardown');
 test('teardown, no test', function(){
-  $('#header').add('#main').add('#error').hide();
+  $('#header').add('#main').add('#error').add('#tooltip').hide();
   document.cookie = 'dubsar_theme='+$dubsar_original_theme+
     '; max-age='+30*86400+'; path=/';
 });

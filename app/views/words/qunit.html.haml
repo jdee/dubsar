@@ -53,7 +53,24 @@
             %a{:href => "#header_pane_#{i}"}
               &="pane #{i}"
           %div{:id => "pane_#{i}"}
-            &="something in pane #{i}"
+            %span.tooltip
+              &="something in pane #{i}"
+              .template
+                .ui-widget-header
+                  .ui-state-default.line
+                    %span.ui-icon.ui-icon-info
+                    %span.tooltip-header-text
+                      %em
+                        &="<noun.Tops>"
+                    %a.close-icon-span.ui-state-default{:href => '#'}
+                      %span.ui-icon.ui-icon-close
+                %hr/
+                %strong sample sentences
+                %table
+                  %tbody
+                    %tr
+                      %td
+                        &="you're the Tops"
 
       .pagination{:style => 'position: fixed; bottom: 6.2ex; height: 3ex; margin: 0.2ex;'}
         %a#pagination-link{:href => '#'} &nbsp;

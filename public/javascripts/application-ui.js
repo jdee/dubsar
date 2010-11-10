@@ -310,16 +310,15 @@
       $('body').append('<div id="tooltip" class="ui-widget-content ui-corner-all"></div>');
       $tt = $('#tooltip');
 
-      $('span.tooltip').hover(function(){
+      $('span.tooltip').live('mouseenter', function(){
         kill_tooltip();
         $tt.html($('div.template', this).html());
         $('a.close-icon-span', $tt).css({opacity:0});
         $tt.show();
         $tt_gloss = $(this).addClass('ui-state-highlight').css({'border-style':'none'});
-      },
-      function(){
+      }).live('mouseleave', function(){
         if (!$tt_fixed) kill_tooltip();
-      }).mousemove(function(ev){
+      }).live('mousemove', function(ev){
         if (!$tt_fixed) {
           var $ev_x = ev.pageX;
           var $ev_y = ev.pageY;
