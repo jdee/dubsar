@@ -70,9 +70,27 @@ test('hover test', function(){
   ok(!$('#tooltip').is(':visible'), 'mouseout should hide tooltip');
 });
 
+module('autocompleter');
+test('basics', function(){
+  equal($('.ui-menu').length, 1, 'there should be 1 .ui-menu');
+});
+
+/* This test doesn't currently work.  QUnit generally requires event
+   handlers to be registered as live() event handlers.  All event
+   handling here is done by the autocomplete() method.  I */
+asyncTest('autocompletion', 2, function(){
+  $('#word-input').val('a').keydown();
+  /* the autocompleter doesn't fire for the first 0.3 seconds */
+  setTimeout(function(){
+    ok($('.ui-menu').text(), 'autocompleter menu should have data');
+    ok($('.ui-menu').is(':visible'), 'autocompleter menu should be visible');
+    start();
+  }, 500);
+});
+
 module('teardown');
 test('teardown, no test', function(){
-  $('#header').add('#main').add('#error').add('#tooltip').hide();
+  $('#header').add('#main').add('#error').add('#tooltip').add('.ui-menu').hide();
   document.cookie = 'dubsar_theme='+$dubsar_original_theme+
     '; max-age='+30*86400+'; path=/';
 });
