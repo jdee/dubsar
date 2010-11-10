@@ -59,7 +59,7 @@ module('tooltip');
 test('#tooltip div', function(){
   equal($('#tooltip').length, 1, 'there should be 1 #tooltip div');
   equal($('span.tooltip').length, 30, 'there should be 30 .tooltip spans');
-  equal($('#pane_15 span.tooltip').length, 1, 'there should be 1 .tooltip span in #pane_1');
+  equal($('#pane_15 span.tooltip').length, 1, 'there should be 1 .tooltip span in #pane_15');
   ok($('#pane_15 span.tooltip').is(':visible'), '#pane_15 span.tooltip should be visible');
 });
 
