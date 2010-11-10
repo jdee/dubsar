@@ -264,6 +264,10 @@ div#tour-link-div {
   position: relative;
 }
 
+#tooltip td.pointer-type {
+  white-space: nowrap;
+}
+
 .tooltip-header-text {
   padding-right: 3ex;
 }

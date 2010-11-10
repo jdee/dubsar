@@ -60,7 +60,7 @@
           %tbody
             - sense.unique_pointers.each do |ptype, words|
               %tr
-                %td{:title => Pointer.help_text(ptype)}
+                %td.pointer-type{:title => Pointer.help_text(ptype)}
                   %em
                     &= ptype
                 %td
