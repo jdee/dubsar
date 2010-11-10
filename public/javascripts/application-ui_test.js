@@ -85,7 +85,7 @@ asyncTest('autocompletion', 2, function(){
     ok($('.ui-menu').text(), 'autocompleter menu should have data');
     ok($('.ui-menu').is(':visible'), 'autocompleter menu should be visible');
     start();
-  }, 500);
+  }, 700);
 });
 
 module('teardown');
