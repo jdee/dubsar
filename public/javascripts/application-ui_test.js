@@ -75,9 +75,6 @@ test('basics', function(){
   equal($('.ui-menu').length, 1, 'there should be 1 .ui-menu');
 });
 
-/* This test doesn't currently work.  QUnit generally requires event
-   handlers to be registered as live() event handlers.  All event
-   handling here is done by the autocomplete() method.  I */
 asyncTest('autocompletion', 2, function(){
   $('#word-input').val('a').keydown();
   /* the autocompleter doesn't fire for the first 0.3 seconds */
