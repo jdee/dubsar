@@ -63,12 +63,11 @@ test('#tooltip div', function(){
   ok($('#pane_15 span.tooltip').is(':visible'), '#pane_15 span.tooltip should be visible');
 });
 
-asyncTest('hover test', 1, function(){
+test('hover test', function(){
   $('#pane_15 span.tooltip').trigger('mouseover');
-  setTimeout(function(){
-    ok($('#tooltip').is(':visible'), 'hover should show tooltip');
-    start();
-  }, 100);
+  ok($('#tooltip').is(':visible'), 'hover should show tooltip');
+  $('#pane_15 span.tooltip').trigger('mouseout');
+  ok(!$('#tooltip').is(':visible'), 'mouseout should hide tooltip');
 });
 
 module('teardown');

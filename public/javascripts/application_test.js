@@ -37,12 +37,8 @@ test('#main div starting position', function(){
   ok(diff < 1, 'header bottom == main top');
 });
 
-asyncTest('search-link generates working message', 1, function(){
+test('search-link generates working message', function(){
   $('#pagination-link').trigger('click');
-
-  setTimeout(function(){
-    var text = $('#error').text();
-    ok(/working/.test(text), 'look for working message');
-    start();
-  }, 200);
+  var text = $('#error').text();
+  ok(/working/.test(text), 'look for working message');
 });
