@@ -31,7 +31,8 @@
     =javascript_include_tag 'application-ui'
     =javascript_include_tag 'application-ui_test'
 
-  %body.style-light
+  %body{:class => "style-#{@theme}"}
+    %button#back-to-dubsar{:title => 'home'} Back to Dubsar
     %h1#qunit-header Dubsar QUnit Test Suite
     %h2#qunit-banner
     %h2#qunit-userAgent
@@ -71,12 +72,7 @@
         The Structured Query Language used by Dubsar&apos;s
         PostgreSQL database accepts the following wildcards in
         searches:
-      #theme-picker
-        #theme-picker-buttonset.small-buttonset
-          %input{:type => 'radio', :id => 'light-radio', :value => 'light', :checked => 'checked'}
-          %label#dark-other{:for => 'light-radio', :title => 'light display theme'} light
-          %input{:type => 'radio', :id => 'dark-radio', :value => 'dark'}
-          %label#light-other{:for => 'dark-radio', :title => 'dark display theme'} dark
+      =render :partial => 'shared/theme_picker'
     #error.ui-state-highlight.ui-corner-all{:style => 'display: none; position: fixed; margin: 0.5ex; height: 3ex; top: 20.7ex;'}
     #main{:style => 'overflow: auto; position: absolute; top: 24.7ex; bottom: 9.6ex; margin: 1.9ex 0.5ex;'}
       #accordion
