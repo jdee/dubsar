@@ -150,7 +150,7 @@ test('show dialog', function(){
 /******************* teardown (hide it all) *******************/
 module('teardown');
 test('teardown, no test', function(){
-  $('#header').add('#main').add('#error').hide();
+  $('#header').add('#main').add('#error').add('#footer').hide();
   $('body').removeClass('style-light style-dark').addClass('style-'+$dubsar_original_theme);
   /*
   $('#back-to-dubsar').button({
