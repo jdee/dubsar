@@ -51,7 +51,7 @@
                 %td
                   = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
                 %td
-                  %button{:type => 'submit', :id => 'word-submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search
+                  %button#word-submit{:type => 'submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search
 #sql-help-dialog-template.template
   The Structured Query Language used by Dubsar&apos;s
   PostgreSQL database accepts the following wildcards in

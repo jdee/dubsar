@@ -53,10 +53,24 @@
                       %col#c2
                       %col#c3
                     %tr
+                      %td &nbsp;
+                      %td
+                        %a{:href => '#', :id => 'sql-help-link', :title => 'explain'}
+                          Huh?  SQL wildcards?
+                      %td &nbsp;
                     %tr
                       %td
+                        #word-search-options-buttonset
+                          %input#word-case{:name => 'match', :type => 'checkbox', :tabindex => '1'}
+                          %label{:for => 'word-case'} match case
                       %td
-                        %input#word-input{:name => 'term', :type => 'text'}
+                        %input#word-input{:name => 'term', :type => 'text', :tabindex => '2'}
+                      %td
+                        %button#word-submit{:type => 'submit', :tabindex => '3'}
+      #sql-help-dialog-template.template
+        The Structured Query Language used by Dubsar&apos;s
+        PostgreSQL database accepts the following wildcards in
+        searches:
       #theme-picker
         #theme-picker-buttonset.small-buttonset
           %input{:type => 'radio', :id => 'light-radio', :value => 'light', :checked => 'checked'}

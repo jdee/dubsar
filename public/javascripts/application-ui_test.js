@@ -23,8 +23,8 @@ var $dubsar_original_theme;
 document.cookie = 'dubsar_starting_pane=header_pane_15';
 document.cookie = 'dubsar_starting_offset=150';
 
+/*********** accordion module ***************/
 module('accordion');
-
 test('accordion starting pane', function(){
   var starting_pane = $.find_cookie('dubsar_starting_pane');
   ok(starting_pane, 'dubsar_starting_pane found');
@@ -42,8 +42,14 @@ test('accordion starting offset', function(){
   equal($('#main').scrollTop(), starting_offset, 'check starting offset');
 });
 
+/***************** theme picker module *****************/
+module('theme picker', {
+  teardown: function(){
+    document.cookie = 'dubsar_theme='+$dubsar_original_theme+
+     '; max-age='+30*86400+'; path=/';
+  }
+});
 
-module('theme picker');
 test('theme picker button clicks', function(){
   $dubsar_original_theme = $.find_cookie('dubsar_theme');
   var body = $('body');
@@ -55,7 +61,13 @@ test('theme picker button clicks', function(){
   ok(!body.hasClass('style-light'), 'check for no style-light');
 });
 
-module('tooltip');
+/****************** tooltip module ********************/
+module('tooltip', {
+  teardown: function(){
+    $('#tooltip').hide();
+  }
+});
+
 test('#tooltip div', function(){
   equal($('#tooltip').length, 1, 'there should be 1 #tooltip div');
   equal($('span.tooltip').length, 30, 'there should be 30 .tooltip spans');
@@ -70,24 +82,71 @@ test('hover test', function(){
   ok(!$('#tooltip').is(':visible'), 'mouseout should hide tooltip');
 });
 
-module('autocompleter');
+/************************ autocompleter module ******************/
+module('autocompleter', {
+  teardown: function(){
+    $('.ui-menu').hide();
+  }
+});
+
 test('basics', function(){
   equal($('.ui-menu').length, 1, 'there should be 1 .ui-menu');
 });
 
-asyncTest('autocompletion', 2, function(){
+/* look for the wait cursor when the test fires after 300 ms */
+asyncTest('wait cursor', 2, function(){
   $('#word-input').val('a').keydown();
-  /* the autocompleter doesn't fire for the first 0.3 seconds */
   setTimeout(function(){
-    ok($('.ui-menu').text(), 'autocompleter menu should have data');
-    ok($('.ui-menu').is(':visible'), 'autocompleter menu should be visible');
+    equal($('#word-input').css('cursor'), 'wait', '#word-input should have wait cursor');
+    equal($('.ui-menu').css('cursor'), 'wait', '.ui-menu should have wait cursor');
+    $('#word-input').val('');
     start();
-  }, 700);
+  }, 350);
 });
 
+/* after the test above completes, we give the server time to
+   respond, then look for the autocompleter */
+asyncTest('autocompletion', 5, function(){
+  setTimeout(function(){
+    ok($('.ui-menu').text(), 'autocompleter menu should have data');
+    equal($('.ui-menu li').length, 10, 'autocompleter should have 10 items');
+    ok($('.ui-menu').is(':visible'), 'autocompleter menu should be visible');
+    equal($('#word-input').css('cursor'), 'auto', '#word-input should have auto cursor');
+    equal($('.ui-menu').css('cursor'), 'auto', '.ui-menu should have auto cursor');
+    start();
+  }, 400);
+});
+
+/* can't get this to trigger an autocomplete select event
+   this just tests the ac_select_handler, which triggers the search
+   form
+asyncTest('autocompleter selection', 1, function(){
+  $('#word-submit').live('click', function(){
+    ok(true, 'search submitted');
+    return false;
+  });
+  $('.ui-menu li:first').click();
+  setTimeout(function(){
+    start();
+  },100);
+});
+ */
+
+/********************* sql help dialog module *****************/
+module('sql help dialog', {
+  teardown: function(){
+    $('.sql-help-dialog').hide();
+  }
+});
+
+test('show dialog', function(){
+  $('#sql-help-link').click();
+  equal($('.sql-help-dialog').length, 1, 'there should be 1 .sql-help-dialog');
+  ok($('.sql-help-dialog').is(':visible'), 'it should be visible');
+});
+
+/******************* teardown (hide it all) *******************/
 module('teardown');
 test('teardown, no test', function(){
-  $('#header').add('#main').add('#error').add('#tooltip').add('.ui-menu').hide();
-  document.cookie = 'dubsar_theme='+$dubsar_original_theme+
-    '; max-age='+30*86400+'; path=/';
+  $('#header').add('#main').add('#error').hide();
 });
