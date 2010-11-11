@@ -52,20 +52,3 @@
                   = text_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
                 %td
                   %button#word-submit{:type => 'submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search
-#sql-help-dialog-template.template
-  The Structured Query Language used by Dubsar&apos;s
-  PostgreSQL database accepts the following wildcards in
-  searches:
-  %ul
-    %li % matches anything, including nothing at all
-    %li _ matches any single character
-  For example:
-  %ul
-    %li
-      ="%count% matches all words containing"
-      %em count
-    %li
-      c_t matches
-      %em cat, cot
-      and
-      %em cut
