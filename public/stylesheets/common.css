@@ -253,6 +253,7 @@ div#tour-link-div {
 
 #tooltip .ui-widget-header {
   position: relative;
+  cursor: move;
 }
 
 #tooltip td.pointer-type {
@@ -264,6 +265,7 @@ div#tour-link-div {
 }
 
 a.close-icon-span {
+  cursor: pointer;
   position: absolute;
   top: 5px;
   right: 5px;

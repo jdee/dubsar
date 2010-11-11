@@ -351,9 +351,7 @@
         }, function(){
           $(this).removeClass('ui-state-hover').addClass('ui-state-default');
         }).fadeTo('fast', 1.0);
-        $tt.draggable({});
-        $('.ui-widget-header', $tt).css({ cursor: 'move' });
-        $('a.close-icon-span', $tt).css({ cursor: 'pointer' });
+        $tt.draggable({ cursor: 'move' });
       }
 
       kill_tooltip();
