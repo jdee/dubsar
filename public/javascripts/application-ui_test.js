@@ -78,6 +78,8 @@ test('#tooltip div', function(){
 test('hover test', function(){
   $('#pane_15 span.tooltip').trigger('mouseover');
   ok($('#tooltip').is(':visible'), 'hover should show tooltip');
+  equal($('#tooltip').width(), $('#tooltip .ui-widget-header').width(),
+    'tooltip header should be the right width');
   $('#pane_15 span.tooltip').trigger('mouseout');
   ok(!$('#tooltip').is(':visible'), 'mouseout should hide tooltip');
 });

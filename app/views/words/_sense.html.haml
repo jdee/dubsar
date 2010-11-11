@@ -38,10 +38,12 @@
         %hr/
         %strong{:title => 'generic sentence frames for this verb sense'}
           verb frames
-        %ul
-          - sense.verb_frames.each do |verb_frame|
-            %li
-              != frame_spanner verb_frame.frame
+        %table
+          %tbody
+            - sense.verb_frames.each do |verb_frame|
+              %tr
+                %td
+                  != frame_spanner verb_frame.frame
       - unless sense.synset.samples.blank?
         %hr/
         %strong{:title => 'sample sentences using this word sense (and synonymous ones)'}

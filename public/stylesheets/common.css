@@ -54,6 +54,7 @@ label {
 #error {
   position: fixed;
   margin: 1.5ex 0.5ex;
+  padding: 0.5ex;
   height: 3ex;
   top: 20.7ex;
   left: 0;
@@ -254,10 +255,6 @@ div#tour-link-div {
 
 #tooltip .line {
   padding: 5px;
-}
-
-#tooltip ul {
-  list-style-type: circle;
 }
 
 #tooltip .ui-widget-header {
