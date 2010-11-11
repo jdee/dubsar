@@ -44,14 +44,15 @@ test('accordion starting offset', function(){
 
 /***************** theme picker module *****************/
 module('theme picker', {
+  setup: function(){
+    $dubsar_original_theme = $.find_cookie('dubsar_theme');
+  },
   teardown: function(){
-    document.cookie = 'dubsar_theme='+$dubsar_original_theme+
-     '; max-age='+30*86400+'; path=/';
+    $.pick_theme($dubsar_original_theme);
   }
 });
 
 test('theme picker button clicks', function(){
-  $dubsar_original_theme = $.find_cookie('dubsar_theme');
   var body = $('body');
   $('#light-radio').click();
   ok(body.hasClass('style-light'), 'check for style-light');
@@ -87,6 +88,7 @@ test('hover test', function(){
 /************************ autocompleter module ******************/
 module('autocompleter', {
   teardown: function(){
+    $('#word-input').val('');
     $('.ui-menu').hide();
   }
 });
@@ -101,7 +103,6 @@ asyncTest('wait cursor', 2, function(){
   setTimeout(function(){
     equal($('#word-input').css('cursor'), 'wait', '#word-input should have wait cursor');
     equal($('.ui-menu').css('cursor'), 'wait', '.ui-menu should have wait cursor');
-    $('#word-input').val('');
     start();
   }, 350);
 });
@@ -151,13 +152,4 @@ test('show dialog', function(){
 module('teardown');
 test('teardown, no test', function(){
   $('#header').add('#main').add('#error').add('#footer').hide();
-  $('body').removeClass('style-light style-dark').addClass('style-'+$dubsar_original_theme);
-  /*
-  $('#back-to-dubsar').button({
-    icons: {
-      primary: 'ui-icon-arrowthick-1-w',
-      secondary: 'ui-icon-home'
-    }
-  }).css('margin', '1em').click(function(){ location = '/' });
-   */
 });

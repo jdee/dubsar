@@ -30,9 +30,13 @@
     var $sql_help_dialog;
 
     /* 'light' or 'dark' */
-    function pick_theme(theme) {
+    $.pick_theme = function(theme) {
       $('body').removeClass('style-light style-dark').addClass('style-'+theme);
       document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path=/';
+
+      var other_button_id = $('label#'+theme+'-other').removeClass('ui-state-active').attr('for');
+      $('input#'+theme+'-radio').attr('checked','checked');
+      $('input#'+other_button_id).removeAttr('checked');
     }
 
     function find_starting_pane() {
@@ -245,22 +249,10 @@
 
     /* Set up the theme picker */
     $('#theme-picker-buttonset > input').button().click(function(){
-      var theme = $(this).val();
-      pick_theme(theme);
-      $('label#'+theme+'-other').removeClass('ui-state-active');
-
-      /* DEBT: Review these IDS */
-      /* the 'light' button label */
-      $('#dark-other').addClass('ui-corner-left');
-      /* the 'dark'  button label */
-      $('#light-other').addClass('ui-corner-right');
+      $.pick_theme($(this).val());
     })
     $('#theme-picker-buttonset').buttonset();
     $('#theme-picker-buttonset > input:checked').click();
-
-    /* jquery.watermark adds a span within a span, resulting in extra
-       margins and huge buttons; we remove the inner span */
-    $('.small-buttonset span > span').unwrap();
 
     $('#tour a').each(function(){
       var id  = $(this).attr('id');
