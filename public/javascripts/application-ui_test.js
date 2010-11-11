@@ -152,10 +152,12 @@ module('teardown');
 test('teardown, no test', function(){
   $('#header').add('#main').add('#error').hide();
   $('body').removeClass('style-light style-dark').addClass('style-'+$dubsar_original_theme);
+  /*
   $('#back-to-dubsar').button({
     icons: {
       primary: 'ui-icon-arrowthick-1-w',
       secondary: 'ui-icon-home'
     }
   }).css('margin', '1em').click(function(){ location = '/' });
+   */
 });

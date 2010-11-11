@@ -20,6 +20,8 @@
     %title Dubsar QUnit Test Suite
     =stylesheet_link_tag 'jquery-ui-1.8.5.dark'
     =stylesheet_link_tag 'jquery-ui-1.8.5.light'
+    =stylesheet_link_tag 'application-dark'
+    =stylesheet_link_tag 'application-light'
     =javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'
     =javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'
     =stylesheet_link_tag 'http://github.com/jquery/qunit/raw/master/qunit/qunit.css'
@@ -32,7 +34,10 @@
     =javascript_include_tag 'application-ui_test'
 
   %body{:class => "style-#{@theme}"}
-    %button#back-to-dubsar{:title => 'home'} Back to Dubsar
+    %h2
+      %a{:href => "#{root_path}", :class => "undecorated", :title => 'home', :style => 'text-decoration: none; font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-weight: bold;'}
+        %img#dubsar-image{:src => '/images/dubsar.png', :alt => 'D', :style => 'padding-left: 0.1em; padding: 0.2ex; height: 2ex; vertical-align: bottom; border-style: none;'}
+        Dubsar Project
     %h1#qunit-header Dubsar QUnit Test Suite
     %h2#qunit-banner
     %h2#qunit-userAgent

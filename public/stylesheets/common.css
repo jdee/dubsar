@@ -140,12 +140,6 @@ label {
   text-decoration: none;
 }
 
-/* autocompleter menu styling */
-.ui-menu {
-  max-height: 40%;
-  overflow: auto;
-}
-
 table#word-search-term {
   position: absolute;
   bottom: 0ex;
