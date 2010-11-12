@@ -86,6 +86,14 @@ class String
     when /^gel$/, /^fulfil$/, /^corral$/, /^instal$/, /^appal$/,
       /^enthral$/, /^pal$/, /^excel$/, /pel$/, /stil$/
       true
+    when /^audit$/, /^benefit$/, /^exit$/, /^orbit$/, /^profit$/,
+      /^vomit$/, /credit$/, /habit$/, /comfit$/, /edit$/, /debit$/,
+      /limit$/, /posit$/, /inherit$/, /spirit$/, /licit$/, /hibit$/,
+      /rabbit$/, /merit$/, /visit$/, /^summit$/, /^transit$/
+      false
+    # -uit (like quit) is handled in local_exceptional_verb
+    when /[^aeiou][aeiouy]t$/
+      true
     else
       false
     end
@@ -329,8 +337,8 @@ class Word < ActiveRecord::Base
       build_new_inflection name + 'ing'
     when /[^e]e$/
       build_new_inflection name.sub(/e$/, 'ing')
-    when /[^aeiou][aeiouy][lnr]$/
-      c = /[^aeiou][aeiouy]([lnr])$/.match(name)[1]
+    when /[^aeiou][aeiouy][lnrt]$/
+      c = /[^aeiou][aeiouy]([lnrt])$/.match(name)[1]
       l = name.double_consonant? ? c : ''
       build_new_inflection name + l + 'ing'
     else
@@ -384,8 +392,8 @@ class Word < ActiveRecord::Base
       build_new_inflection name + 'd'
     when /y$/
       build_new_inflection name.sub(/y$/, 'ied')
-    when /[^aeiou][aeiouy][lnr]$/
-      c = /[^aeiou][aeiouy]([lnr])$/.match(name)[1]
+    when /[^aeiou][aeiouy][lnrt]$/
+      c = /[^aeiou][aeiouy]([lnrt])$/.match(name)[1]
       l = name.double_consonant? ? c : ''
       build_new_inflection name + l + 'ed'
     else
