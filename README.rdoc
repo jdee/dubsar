@@ -17,6 +17,7 @@ On the Dubsar site:
 {About Dubsar}[http://dubsar-dictionary.com/about/]
 -- {FAQ}[http://dubsar-dictionary.com/faq/]
 -- {QUnit test suite}[http://dubsar-dictionary.com/qunit/]
+-- {Tour}[http://dubsar-dictionary.com/tour/]
 
 == Copyright
 
