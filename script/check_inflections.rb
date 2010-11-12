@@ -83,6 +83,8 @@ end
   [ 'shoot the breeze', 'verb', [] ],
   [ 'visit', 'verb', %w{visits visited visiting} ],
   [ 'quit', 'verb', %w{quits quitted quitting} ],
+  [ 'hit', 'verb', %w{hits hitting} ],
+  [ 'splat', 'verb', %w{splats splatted splatting} ],
   [ '4', 'noun', [] ],
   [ 'sabbatical', 'adjective', [] ],
   [ 'good', 'adjective', %w{best better} ],
