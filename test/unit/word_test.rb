@@ -105,4 +105,12 @@ class WordTest < ActiveSupport::TestCase
     assert_equal 0, words.count
   end
 
+  should 'find a cluster adjective as a literal' do
+    words = Word.search :term => 'well(p)', :offset => 0
+    assert_equal 1, words.count
+
+    words = Word.search :term => 'well(p)', :match => 'case', :offset => 0
+    assert_equal 1, words.count
+  end
+
 end

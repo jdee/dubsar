@@ -114,3 +114,7 @@ best:
 sweet:
   name: sweet
   word: sweet
+
+cluster:
+  name: well(p)
+  word: cluster
