@@ -35,6 +35,10 @@ noun:
   name: food
   word: noun
 
+foods:
+  name: foods
+  word: noun
+
 preposition:
   name: from
   word: preposition
@@ -47,14 +51,66 @@ verb:
   name: follow
   word: verb
 
+following:
+  name: following
+  word: verb
+
+followed:
+  name: followed
+  word: verb
+
+follows:
+  name: follows
+  word: verb
+
 slang:
   name: slang
+  word: slang
+
+slangs:
+  name: slangs
   word: slang
 
 well_noun:
   name: well
   word: well_noun
 
+wells:
+  name: wells
+  word: well_noun
+
 grub:
   name: grub
   word: grub
+
+grubs:
+  name: grubs
+  word: grub
+
+bad:
+  name: bad
+  word: bad
+
+worse:
+  name: worse
+  word: bad
+
+worst:
+  name: worst
+  word: bad
+
+good:
+  name: good
+  word: good
+
+better:
+  name: better
+  word: good
+
+best:
+  name: best
+  word: good
+
+sweet:
+  name: sweet
+  word: sweet

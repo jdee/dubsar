@@ -22,4 +22,8 @@ class SenseTest < ActiveSupport::TestCase
   should belong_to :synset
   should validate_presence_of :freq_cnt
   should validate_presence_of :synset_index
+
+  should 'return its word in an array as :words' do
+    assert_equal senses(:noun).words.first, senses(:noun).word
+  end
 end

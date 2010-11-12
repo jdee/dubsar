@@ -54,3 +54,11 @@ follow:
 well_noun:
   definition: a hole in the ground
   lexname: noun.artifact
+
+bad:
+  definition: 'the opposite of good; "a bad boy"; "a bad thing"'
+  lexname: adj.all
+
+good:
+  definition: the opposite of bad
+  lexname: adj.all

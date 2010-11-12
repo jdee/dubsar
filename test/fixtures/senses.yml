@@ -80,3 +80,21 @@ well_noun:
   word: well_noun
   freq_cnt: 10
   synset_index: 1
+
+bad:
+  synset: bad
+  word: bad
+  freq_cnt: 11
+  synset_index: 1
+
+good:
+  synset: good
+  word: good
+  freq_cnt: 9
+  synset_index: 1
+
+sweet:
+  synset: good
+  word: sweet
+  freq_cnt: 8
+  synset_index: 2

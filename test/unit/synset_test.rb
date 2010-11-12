@@ -21,4 +21,17 @@ class SynsetTest < ActiveSupport::TestCase
   should have_many :senses
   should validate_presence_of :definition
   should validate_presence_of :lexname
+
+  should 'return gloss and definition separately' do
+    bad = synsets(:bad)
+    assert_equal bad.gloss, 'the opposite of good'
+    assert_equal bad.samples.count, 2
+  end
+
+  should 'return words_except a certain word from the synset' do
+    good = synsets(:good)
+    assert_equal good.words.count, 2
+    assert_equal good.words_except(words(:good)).count, 1
+    assert_equal good.words_except(words(:good)).first, words(:sweet)
+  end
 end

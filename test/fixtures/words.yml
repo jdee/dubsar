@@ -74,3 +74,18 @@ grub:
   name: grub
   part_of_speech: noun
   freq_cnt: 10
+
+bad:
+  name: bad
+  part_of_speech: adjective
+  freq_cnt: 11
+
+good:
+  name: good
+  part_of_speech: adjective
+  freq_cnt: 9
+
+sweet:
+  name: sweet
+  part_of_speech: adjective
+  freq_cnt: 8
