@@ -308,7 +308,8 @@
         $tt.html($('div.template', this).html());
         $('a.close-icon-span', $tt).css({opacity:0});
         $tt.show();
-        $('> *', $tt).width($tt.width());
+        /* 1 pixel border on each side */
+        $('> *', $tt).width($tt.width()-2);
         $tt_gloss = $(this).addClass('ui-state-highlight').css({'border-style':'none'});
       }).live('mouseleave', function(){
         if (!$tt_fixed && !$tt.hasClass('ui-draggable-dragging')) kill_tooltip();
