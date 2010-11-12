@@ -58,7 +58,7 @@ class WordTest < ActiveSupport::TestCase
 
   should 'not accept a word with an invalid part of speech' do
     w = words(:bad_part_of_speech)
-    assert_equal w.valid?, false
+    assert !w.valid?
   end
 
   should 'recognize words with different parts of speech as distinct' do
@@ -78,6 +78,31 @@ class WordTest < ActiveSupport::TestCase
     grub = words :grub
 
     assert food.synsets.any? { |s| s.words.include? grub }
+  end
+
+  should 'match literals by inflection' do
+    words = Word.search :term => 'followed', :offset => 0
+    assert_equal 1, words.count
+  end
+
+  should 'not match inflections in wild-card searches' do
+    words = Word.search :term => 'followe_', :offset => 0
+    assert_equal 0, words.count
+
+    words = Word.search :term => 'follo_', :offset => 0
+  end
+
+  should 'default to a case-insensitive search' do
+    words = Word.search :term => 'Followed', :offset => 0
+    assert_equal 1, words.count
+  end
+
+  should 'honor a case-sensitive search' do
+    words = Word.search :term => 'followed', :match => 'case', :offset => 0
+    assert_equal 1, words.count
+
+    words = Word.search :term => 'Followed', :match => 'case', :offset => 0
+    assert_equal 0, words.count
   end
 
 end
