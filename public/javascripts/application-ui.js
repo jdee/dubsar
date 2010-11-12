@@ -311,7 +311,7 @@
         $('> *', $tt).width($tt.width());
         $tt_gloss = $(this).addClass('ui-state-highlight').css({'border-style':'none'});
       }).live('mouseleave', function(){
-        if (!$tt_fixed) kill_tooltip();
+        if (!$tt_fixed && !$tt.hasClass('ui-draggable-dragging')) kill_tooltip();
       }).live('mousemove', function(ev){
         if (!$tt_fixed) {
           var $ev_x = ev.pageX;
@@ -346,7 +346,8 @@
         $tt.draggable({
           containment: 'window',
           cursor: 'move',
-          handle: '.ui-widget-header'
+          handle: '.ui-widget-header',
+          scroll: false
         });
       }
 
