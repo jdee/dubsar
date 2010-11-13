@@ -47,16 +47,16 @@ label {
   top: 0;
   left: 0;
   right: 0;
-  height: 17.8ex;
+  height: 19.5ex;
   margin: 0.5ex;
 }
 
 #error {
   position: fixed;
-  margin: 1.5ex 0.5ex;
-  padding: 0.5ex;
-  height: 3ex;
-  top: 20.7ex;
+  margin: 0.5ex;
+  padding: 0.4ex;
+  height: 2.8ex;
+  top: 20.5ex;
   left: 0;
   right: 0;
 }
@@ -69,20 +69,20 @@ label {
 #main {
   position: absolute;
   overflow: auto;
-  top: 24.7ex;
-  bottom: 9.6ex;
+  top: 25.1ex;
+  bottom: 10.3ex;
   left: 0;
   right: 0;
-  margin: 2ex 0.5ex;
+  margin: 0.5ex;
 }
 
 .pagination {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 6.2ex;
+  bottom: 6.6ex;
   height: 3ex;
-  margin: 0.2ex;
+  margin: 0.2ex 0.5ex;
 }
 
 #footer {

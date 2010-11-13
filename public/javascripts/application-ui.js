@@ -132,16 +132,6 @@
           ac_stop_search();
         },
         error: function() {
-          /* This is irritating and happens too often.  Need a better
-             way of indicating this to the user.
-          $('#error').stop(true).replaceWith('<div id="error" class="ui-state-error ui-corner-all line"><span class="ui-icon ui-icon-alert"></span>error communicating with Dubsar server</div>');
-          $('#main').stop().animate({ top: '24.7ex' }, 'fast');
-          setTimeout(function(){
-            $('#error').fadeOut('slow', function(){
-              $('#main').animate({ top: '20.7ex' }, 1000, 'easeOutBounce');
-            });
-          }, 3000);
-           */
           ac_stop_search();
         }
       });

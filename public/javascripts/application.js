@@ -25,9 +25,8 @@
     var $starting_offset = $header_bottom;
 
     function post_info(){
-      $error_div.stop(true).html('<span class="ui-icon ui-icon-info"></span>working...').addClass('ui-state-active').removeClass('ui-state-error').css({top: $header_bottom}).show();
-      /* just cheat off the stylesheet and don't try to compute the offset */
-      $main_div.stop().animate({ top: '24.7ex' }, 'fast');
+      $error_div.stop(true).html('<span class="ui-icon ui-icon-info"></span>working...').addClass('ui-state-active').removeClass('ui-state-error').show();
+      $main_div.stop().animate({ top: $header_bottom+$error_div.outerHeight()}, 'fast');
     }
 
     /* find the value currently associated with a cookie by name */
@@ -54,9 +53,13 @@
 
     /* position the main div depending on whether the error div is
        present */
+    /* no more hard-coding positions, but can't leave it to CSS either */
+    /* The only way to stabilize this display is to manually place
+       these fixed-position elements here. */
+    $error_div.css({position: 'fixed', top: $header_bottom});
     $error_div.filter(':visible').each(function(){
       $(this).css({top: $header_bottom});
-      $starting_offset = $(this).position().bottom;
+      $starting_offset += $(this).outerHeight();
     });
     $main_div.css({ top: $starting_offset });
 
