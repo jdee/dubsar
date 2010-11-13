@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101109043654) do
+ActiveRecord::Schema.define(:version => 20101113185359) do
 
   create_table "inflections", :force => true do |t|
     t.string  "name",    :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20101109043654) do
     t.integer "word_id"
     t.integer "freq_cnt",     :default => 0, :null => false
     t.integer "synset_index", :default => 0, :null => false
+    t.string  "marker"
   end
 
   add_index "senses", ["synset_id"], :name => "index_senses_on_synset_id"

@@ -214,12 +214,20 @@ STDOUT.flush
     rest.slice(0, 2*w_cnt).each_slice(2) do |a|
       s = a[0].gsub('_', ' ')
       synset_index += 1
+
+      md = /^(.+)\(([a-z]+)\)\s*$/.match s
+      if md
+        marker = md[2]
+        s = md[1]
+      end
+
       synonym = Word.find_by_name_and_part_of_speech(s, part_of_speech) ||
         Word.create(:name => s, :part_of_speech => part_of_speech, :irregular => @irregular_inflections[s.gsub(' ', '_').to_sym])
       key = part_of_speech + '_' + synset_offset + '_' + s
-      synonym.senses.create :synset => synset,
+      sense = synonym.senses.create :synset => synset,
         :freq_cnt => @sense_index[key.to_s],
         :synset_index => synset_index
+      sense.update_attribute(:marker, marker) if marker
       # recompute freq_cnt for synonym
       synonym.save
       sense_count += 1
