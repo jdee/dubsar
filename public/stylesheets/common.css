@@ -19,7 +19,7 @@
 
 body {
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-  font-size: 10pt;
+  font-size: 9pt;
 }
 
 /* make OmniWeb draw a border around linked images */
@@ -100,7 +100,8 @@ label {
   border-style: none;
   vertical-align: bottom;
   padding: 0.2ex;
-  height: 2ex;
+  height: 2.1ex;
+  width: 2.25ex;
 }
 
 #theme-picker {
@@ -242,13 +243,13 @@ div#tour-link-div {
 #tooltip {
   position: absolute;
   max-width: 45%;
-  padding: 5px;
+  padding: 0.7ex;
   border: 1px solid;
   z-index: 99999;
 }
 
 #tooltip .line {
-  padding: 5px;
+  padding: 0.8ex;
 }
 
 #tooltip .ui-widget-header {
@@ -267,8 +268,8 @@ div#tour-link-div {
 a.close-icon-span {
   cursor: pointer;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 0.7ex;
+  right: 0.7ex;
 }
 
 a.close-icon-span > span.ui-icon {
