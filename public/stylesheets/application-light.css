@@ -21,6 +21,10 @@
   color: #1c94c4;
 }
 
+.style-light hr {
+  background-color: #1c94c4;
+}
+
 .style-light a:visited {
   color: #333333;
 }

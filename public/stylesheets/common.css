@@ -22,6 +22,12 @@ body {
   font-size: 9pt;
 }
 
+hr {
+  border-style: none;
+  size: 1px;
+  height: 1px;
+}
+
 /* make OmniWeb draw a border around linked images */
 a[href] > img {
   border-style: solid;
