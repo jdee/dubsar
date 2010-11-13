@@ -32,48 +32,179 @@
     %li
       =link_to 'jQuery UI', 'http://jqueryui.com', :title => 'jQuery UI', :class => 'undecorated'
       1.8.5.
-  The ready availability of the
-  %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)', :class => 'undecorated'} WordNet&reg;
-  3.0 data set made it the perfect candidate for inclusion in Dubsar.
-  Dubsar is a work in progress.  Over time, it will grow to include
-  more content from
-  %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)', :class => 'undecorated'} WordNet&reg;
-  and perhaps other sources.  Stay tuned.
+  %p
+    The ready availability of the
+    %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)', :class => 'undecorated'} WordNet&reg;
+    3.0 data set made it the perfect candidate for inclusion in Dubsar.
+    Dubsar is a work in progress.  Over time, it may grow to include
+    other data sources.
+
+  %p
+    Dubsar is above all a technology project, a place to prove and
+    explore open-source application software like the jQuery family.
+    A jQuery Mobile edition of Dubsar is likely to emerge in the
+    foreseeable future. While the features of the site will certainly
+    evolve in coming releases, it will also grow to include more
+    technical content like the hosted
+    =link_to 'QUnit test suite.', qunit_path, :title => 'QUnit test suite', :class => 'undecorated'
 
   %h4
     %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)', :class => 'undecorated'} WordNet&reg;
-  The
-  %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)', :class => 'undecorated'} WordNet&reg;
-  3.0 data set includes only adjectives, adverbs, nouns and verbs.  It
-  does not include conjunctions, interjections, prepositions or
-  pronouns.  It includes many proper nouns and technical terms.
+  %p
+    The
+    %a{:href => 'http://wordnet.princeton.edu/', :title => 'WordNet(R)', :class => 'undecorated'} WordNet&reg;
+    3.0 data set includes only adjectives, adverbs, nouns and verbs.  It
+    does not include conjunctions, interjections, prepositions or
+    pronouns.  It includes many proper nouns and technical terms.
 
-  %h4 Supported Browsers
-  Dubsar works well in all the following browsers:
-  %ul
-    %li
-      Firefox 3 on all tested platforms (Ubuntu Linux, Mac OS X,
-      Windows Vista)
-    %li Google Chrome 6 &amp; 7 on all platforms
-    %li Safari 5 on OS X and Vista
-    %li Camino 2 on OS X
-    %li OmniWeb 5 on OS X
-    %li Internet Explorer 8 on Vista
+  %p
+    The WordNet&reg; content governs the Dubsar feature set by limiting
+    what can be shown.  A user might expect a dictionary to include
+    etymology and pronunciation information, for example, maybe also
+    illustrations for some entries.  And of course, she'll expect to
+    find common auxiliary verbs like
+    %em should
+    and all parts of speech.
 
-  Dubsar works in the following browsers, but with significant styling
-  glitches.
-  %ul
-    %li Opera 10 on all platforms
-    %li Konqueror 4 on Ubuntu Linux
-  The
-  =link_to 'QUnit test suite', qunit_path, :title => 'QUnit', :class => 'undecorated'
-  currently passes in all tested browsers.
+  %p
+    By contrast, WordNet&reg; is aimed at automated text processing and
+    identification of lexical and semantic textual information via
+    salient terms (represented by the four major parts of speech
+    WordNet&reg; comprises).  As a result, the content makes
+    WordNet&reg; (and Dubsar) at times more closely resemble a
+    thesaurus than a dictionary.
 
-  %h4 See also
-  %ul
-    %li
-      =link_to 'Dubsar on GitHub', 'http://github.com/jdee/dubsar', :title => 'Dubsar on GitHub', :class => 'undecorated'
-    %li
-      =link_to 'Dubsar wiki on GitHub', 'http://github.com/jdee/dubsar/wiki', :title => 'Dubsar wiki on GitHub', :class => 'undecorated'
-    %li
-      =link_to 'Dubsar QUnit Test Suite', qunit_path, :title => 'QUnit', :class => 'undecorated'
+  %h4 Inflections
+
+  %p
+    It is worth noting that Dubsar provides one important class of
+    information not present in WordNet&reg;.  While WordNet&reg; does
+    provide exceptional inflections for irregular words, it does not
+    offer much help with regular inflections.  WordNet&reg; makes use
+    of the Morphy algorithm to make a morphological determination of
+    the head term associated with an inflected form.  For example, the
+    head term for
+    %em queried
+    is the verb
+    %em query,
+    the former being the past tense and past participle of the latter.
+    WordNet&reg; applications like the
+    %a.undecorated{:href => 'http://wordnetweb.princeton.edu/perl/webwn', :title => 'WordNet(R) online'}
+      WordNet&reg; online interface
+    will match inflected forms when searching
+    for a word.  For example, if you search for
+    %em happening,
+    you'll find the verb
+    %em happen.
+    But if you search for the misspelled
+    %em happenning,
+    you'll find the same verb. The Morphy rules are overly broad. When
+    searching for words, this can have the effect at times of
+    correcting one's spelling.  It helps the user find the intended
+    dictionary entry.  But it is not possible for applications using
+    Morphy to display all inflections associated with a word, since
+    many of them (like
+    %em happenning
+    above) are invalid.
+
+  %p
+    Dubsar, on the other hand, does just this and displays all known
+    inflections for each word.  It can do this because it does not use
+    rules to determine inflections when looking up words.  It maintains
+    a database table containing every inflected form of every word it
+    knows.  When a user performs a search without wild cards, the
+    search is matched against all known inflected word forms.  However,
+    only exact matches are performed.  So if you search Dubsar for
+    %em happening,
+    you'll find
+    %em happen.
+    But you'll get no results for
+    %em happenning.
+
+  %p
+    These inflections are indeed generated by rules, at the time the
+    database is built.  However, while the WordNet&reg; data set is
+    large, it is also finite.  It is quite possible to build, over
+    time, a complete and exhaustive table of inflections that may
+    simply be stored and loaded whenever a new database needs to be
+    built.  It is not necessary to anticipate every possible English
+    word, only those found in the current data set. Rule-based
+    inflection generation is extremely buggy and error-prone, as
+    evidenced in Dubsar's own database.  In particular, verbs ending in
+    a short syllable with
+    %em l
+    or
+    %em s
+    often (but not always) may be conjugated with or without
+    reduplication of the final consonant.  For example,
+    %em traveling
+    and
+    %em travelling; bused
+    and
+    %em bussed.
+    Dubsar generally allows both forms in all such cases.  Errors are
+    gradually being weeded out.
+
+  %p
+    For this reason, Dubsar currently only provides inflected forms
+    for words found in the WordNet&reg; exception list and for nouns
+    and verbs made up entirely of lower-case letters (i.e., not
+    capitalized and containing no spaces, hyphens or other
+    punctuation).  It does not attempt to pluralize
+    %em Briton
+    or
+    %em 4,
+    and it does not attempt to conjugate
+    %em log-in
+    or
+    %em chew the fat.
+    It does not attempt regular inflection of adjectives.  While this
+    is nowhere near as challenging morphologically as regular verb
+    inflections, it results in comparative and superlative degrees like
+    %em sabbaticaller
+    and
+    %em sabbaticallest.
+    But regular comparative and superlative degrees of adjectives are
+    easy enough for a user to identify.  All these gaps will gradually
+    be filled in over time.  (Note there are no regular inflections of
+    English adverbs.  Only irregular inflections, like
+    %em best
+    for
+    %em well,
+    are provided.)
+
+  %p
+    Dubsar uses the ActiveSupport Inflector from Ruby on Rails&reg; to
+    pluralize nouns not found in the WordNet&reg; exception list.  The
+    ActiveSupport Inflector is a mature and stable piece of software,
+    though its results must also be cleaned up.  In particular, it
+    generates erroneous plurals like
+    %em shamen
+    for
+    %em shaman.
+    Dubsar is gradually correcting these errors as well.
+
+  %p
+    The database currently contains
+    =model_count 'inflection'
+    inflection entries for
+    =model_count 'word'
+    words.  Note that each word, uninflected, is listed in the
+    Inflections table.  For example, the verb
+    %em be
+    has eight inflected forms:
+
+    %ul
+      %li am
+      %li are
+      %li be
+      %li been
+      %li being
+      %li is
+      %li was
+      %li were
+
+    WordNet&reg; provides 5,952 irregular inflections. Dubsar's
+    Inflections table offers
+    =(Inflection.count-Word.count-5952).to_s :comma_delimited
+    not listed in WordNet&reg;
