@@ -204,7 +204,9 @@
       %li was
       %li were
 
-    WordNet&reg; provides 5,952 irregular inflections. Dubsar's
-    Inflections table offers
-    =(Inflection.count-Word.count-5952).to_s :comma_delimited
-    not listed in WordNet&reg;
+    Dubsar generates
+    =(part_of_speech_count(:inflection, 'verb')-part_of_speech_count(:word, 'verb')-1_967).to_s :comma_delimited
+    verb inflections and
+    =(part_of_speech_count(:inflection, 'noun')-part_of_speech_count(:word, 'noun')-1_455).to_s :comma_delimited
+    noun inflections not found in WordNet&reg;. Most of the latter are
+    from the ActiveSupport Inflector.

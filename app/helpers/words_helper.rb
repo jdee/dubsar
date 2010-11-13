@@ -21,4 +21,13 @@ module WordsHelper
   def model_count(model)
     eval(model.capitalize).count.to_s :comma_delimited
   end
+
+  def part_of_speech_count(model, part_of_speech)
+    case model.to_sym
+    when :inflection
+      Inflection.count :conditions => [ 'words.part_of_speech = ?', part_of_speech ], :joins => 'INNER JOIN words ON words.id = inflections.word_id'
+    when :word
+      Word.count :conditions => [ 'part_of_speech = ?', part_of_speech ]
+    end
+  end
 end
