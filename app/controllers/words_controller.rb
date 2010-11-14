@@ -47,7 +47,11 @@ class WordsController < ApplicationController
     end
 
     # show and index use the same URL
-    render(:action => :index) and return unless @term
+    unless @term
+      # @announcement = "Dubsar is now officially launched"
+      render(:action => :index)
+      return
+    end
 
     # strip leading and trailing white space and compress internal
     # whitespace

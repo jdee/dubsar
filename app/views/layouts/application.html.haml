@@ -36,14 +36,7 @@
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
       %hr/
-    - if flash[:error]
-      #error.ui-state-error.ui-corner-all.line
-        %span.ui-icon.ui-icon-alert
-        =h flash[:error]
-    - else
-      #error.ui-state-active.ui-corner-all.line.template
-        %span.ui-icon.ui-icon-info
-        working...
+    =render :partial => 'shared/error'
     #main
       =yield
     #footer
