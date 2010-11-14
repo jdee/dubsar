@@ -19,6 +19,8 @@ On the Dubsar site:
 -- {QUnit test suite}[http://dubsar-dictionary.com/qunit/]
 -- {Tour}[http://dubsar-dictionary.com/tour/]
 
+Also see the {Dubsar group on Google}[http://groups.google.com/group/dubsar/]
+
 == Copyright
 
 Copyright (C) 2010 Jimmy Dee except as otherwise attributed.
