@@ -210,3 +210,22 @@
     databases in the production environment so that Dubsar can stay
     running while the database is being reseeded, and they have to be
     seeded sequentially.
+  %h2#faq_10
+    %a{:href => '#faq_10'}
+      Q. How are the autocompleter results determined?
+  #pane_9
+    A. WordNet&reg; assigns frequency counts to some word senses based
+    on the number of times that sense of that word occurs in "various
+    semantic concordance texts."  By far most of the word senses in
+    WordNet&reg; are untagged.  Dubsar treats these as having a
+    frequency count of 0 and assigns a frequency count to each word
+    which is the sum of the frequency counts associated with each of
+    that word's senses.
+
+    The autocompleter displays the top ten words beginning with the
+    current search term, ordered by frequency count.  However, it
+    collapses multiple parts of speech.  So if you type in
+    %em loo,
+    Dubsar will only display nine results, since
+    %em look
+    occurs twice in the top ten.
