@@ -87,6 +87,18 @@ test('hover test', function(){
 
 /************************ autocompleter module ******************/
 module('autocompleter', {
+  setup: function() {
+    $.mockjax({
+      url: '/.json',
+      contentType: 'text/json',
+      responseText: {
+        term: 'a',
+        match: '',
+        list: [ 'ask', 'also', 'appear', 'all', 'again', 'area', 'add', 'almost', 'always', 'allow' ]
+      },
+      responseTime: 300
+    });
+  },
   teardown: function(){
     $('#word-input').val('');
     $('.ui-menu').hide();
