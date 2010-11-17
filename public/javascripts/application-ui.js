@@ -123,13 +123,6 @@
         dataType: 'json',
         data: request,
         success: function(data){
-          /*
-          alert('$request_term = ' + $request_term + '\n' +
-                'data.term = ' + data.term + '\n' +
-                '$match = ' + $match + '\n' +
-                'data.match = ' + data.match + '\n' +
-                'data.list.length = ' + data.list.length);
-           */
           // make sure the search term hasn't changed (this might be an
           // old response)
           if (data.term == $request_term && data.match == $match) {
