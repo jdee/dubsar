@@ -51,6 +51,12 @@
 
     $('.search-link').live('click', post_info);
 
+    $('#qunit-link').hover(function(){
+      $(this).removeClass('ui-state-default').addClass('ui-state-hover');
+    }, function(){
+      $(this).removeClass('ui-state-hover').addClass('ui-state-default');
+    });
+
     /* position the main div depending on whether the error div is
        present */
     /* no more hard-coding positions, but can't leave it to CSS either */
