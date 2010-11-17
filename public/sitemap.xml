@@ -29,5 +29,6 @@
   <url>
     <loc>http://dubsar-dictionary.com/qunit/</loc>
     <priority>0.1</priority>
+    <changefreq>weekly</changefreq>
   </url>
 </urlset>
