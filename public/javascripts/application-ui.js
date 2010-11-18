@@ -293,6 +293,8 @@
       $tt = $('#tooltip');
 
       $('span.tooltip').live('mouseenter', function(){
+        if ($tt.hasClass('ui-draggable-dragging')) return;
+
         kill_tooltip();
         $tt.html('');
         $tt.html($('div.template', this).html());
