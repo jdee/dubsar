@@ -18,10 +18,11 @@
 %html
   %head
     %title
-      Dubsar
+      =yield :title
     %link{:rel => 'thumbnail', :href => '/images/dubsar.png', :type => 'image/png'}
     != stylesheet_link_merged :base
     = csrf_meta_tag
+    =yield :description
 
   %body{:class => "style-#{@theme}"}
     #header.ui-widget

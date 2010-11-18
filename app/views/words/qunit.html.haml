@@ -19,6 +19,8 @@
   %head
     %title Dubsar QUnit Test Suite
     !=stylesheet_link_merged :qunit
+    =csrf_meta_tag
+    %meta{:name => 'Description', :content => 'Hosted QUnit test suite for the Dubsar Project.'}
 
   %body{:class => "style-#{@theme}"}
     %h2
