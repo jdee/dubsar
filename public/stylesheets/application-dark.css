@@ -17,41 +17,41 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-.style-dark, .style-dark a:link, .style-dark #header-bar a:visited {
+body.style-dark, body.style-dark a:link, body.style-dark #header-bar a:visited {
   color: #eeeeee;
 }
 
-.style-dark a:visited {
+body.style-dark a:visited {
   color: #555555;
 }
 
-.style-dark a:visited > img {
+body.style-dark a:visited > img {
   border-color: #555555;
 }
 
-.style-dark a > img:hover,active {
+body.style-dark a > img:hover,active {
   border-color: #ffffff;
 }
 
-.style-dark #header-bar {
+body.style-dark #header-bar {
   background-color: #f58400;
 }
 
-.style-dark hr {
+body.style-dark hr {
   background-color: #555555;
 }
 
-.style-dark #header-bar a:hover,active,
-.style-dark a:hover,active,
-.style-dark *.ui-state-active > span.ui-button-text {
+body.style-dark #header-bar a:hover,active,
+body.style-dark a:hover,active,
+body.style-dark *.ui-state-active > span.ui-button-text {
   color: #ffffff;
 }
 
-.style-dark a.undecorated, .style-dark #footer, .style-dark #about,
-.style-dark #tour, .style-dark #tour * {
+body.style-dark a.undecorated, body.style-dark #footer, body.style-dark #about,
+body.style-dark #tour, body.style-dark #tour * {
   color: #f58400;
 }
 
-.style-dark .pagination * {
+body.style-dark .pagination * {
   color: #f58400!important;
 }

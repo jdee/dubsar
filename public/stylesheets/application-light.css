@@ -17,39 +17,39 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-.style-light, .style-light a:link, .style-light #header-bar a:visited {
+body.style-light, body.style-light a:link, body.style-light #header-bar a:visited {
   color: #1c94c4;
 }
 
-.style-light hr {
+body.style-light hr {
   background-color: #1c94c4;
 }
 
-.style-light a:visited {
+body.style-light a:visited {
   color: #333333;
 }
 
-.style-light a:hover,active, .style-light img:hover,active,
-.style-light #header-bar a:hover,active {
+body.style-light a:hover,active, body.style-light img:hover,active,
+body.style-light #header-bar a:hover,active {
   color: #fbc90b;
 }
 
-.style-light a:visited > img {
+body.style-light a:visited > img {
   border-color: #333333;
 }
 
-.style-light a > img:hover,active {
+body.style-light a > img:hover,active {
   border-color: #fbc90b;
 }
 
-.style-light #header-bar {
+body.style-light #header-bar {
   background-color: #e0e0ff;
 }
 
-.style-light *.ui-state-active > span.ui-button-text {
+body.style-light *.ui-state-active > span.ui-button-text {
   color: #eb8f00;
 }
 
-.style-light a.undecorated {
+body.style-light a.undecorated {
   color: inherit;
 }
