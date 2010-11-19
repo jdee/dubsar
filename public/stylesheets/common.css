@@ -110,9 +110,10 @@ span#wrench-icon {
   left: 0;
   right: 0;
   height: 6ex;
-  margin: 0.2ex;
+  margin: 0;
   font-size: 0.9em;
   text-align: center;
+  line-height: 130%;
 }
 
 #dubsar-image {

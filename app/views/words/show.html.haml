@@ -23,4 +23,5 @@
 #accordion
   = render @words
 
-= will_paginate @words
+- content_for :pagination do
+  = will_paginate @words
