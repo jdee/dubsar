@@ -26,19 +26,11 @@
         %h3 Using Dubsar, you can
       %tr
         %td
-          %a#tour-browse{:href => '/images/browse.png', :title => 'browse'}
-            %h3 browse by letter
-            =image_tag 'browse-thumbnail.png', :alt => 'browse'
+          !=tour_link_tag 'browse', 'browse by letter'
         %td
-          %a#tour-autocomplete{:href => '/images/autocomplete.png', :title => 'autocomplete'}
-            %h3 get top suggestions from an autocompleter
-            =image_tag 'autocomplete-thumbnail.png', :alt => 'autocomplete'
+          !=tour_link_tag 'autocomplete', 'get top suggestions from an autocompleter'
       %tr
         %td
-          %a#tour-view{:href => '/images/view.png', :title => 'view'}
-            %h3 view search results
-            =image_tag 'view-thumbnail.png', :alt => 'view'
+          !=tour_link_tag 'view', 'view search results'
         %td
-          %a#tour-dark{:href => '/images/tooltip.png', :title => 'tooltip'}
-            %h3 see related information in a custom tooltip
-            =image_tag 'tooltip-thumbnail.png', :alt => 'tooltip'
+          !=tour_link_tag 'tooltip', 'see related information in a custom tooltip'
