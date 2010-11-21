@@ -38,13 +38,6 @@ class WordsController < ApplicationController
   # HTML or JSON, one page at a time.
   def show
     @term = params[:term]
-    match = params[:match]
-
-    case match
-    when nil, '', 'case', 'exact', 'regexp'
-    else
-      redirect_with_error('bad request') and return
-    end
 
     # show and index use the same URL
     unless @term
@@ -55,7 +48,17 @@ class WordsController < ApplicationController
 
     # strip leading and trailing white space and compress internal
     # whitespace
-    @term = @term.sub(/^\s+/, '').sub(/\s+$/, '').gsub(/\s+/, ' ')
+    @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
+
+    redirect_with_error('bad request') and return if @term.blank?
+
+    match = params[:match]
+
+    case match
+    when nil, '', 'case', 'exact', 'regexp'
+    else
+      redirect_with_error('bad request') and return
+    end
 
     respond_to do |format|
       format.html do
