@@ -281,6 +281,10 @@ class Word < ActiveRecord::Base
       build_new_inflection name + 'ted'
       build_new_inflection name + 'ting'
       true
+    when /hurt$/
+      build_new_inflection name + 's'
+      build_new_inflection name + 'ing'
+      true
     when /[^aeio]et$/
       if inflections.empty?
         inflections.build :name => name + 'ed'
