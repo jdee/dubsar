@@ -24,7 +24,7 @@
               %tr
                 - ('A'..'Z').each do |letter|
                   %td
-                    = link_to letter, url_for(:action => :show, :term =>"^[#{letter}#{letter.downcase}]", :match => 'regexp'), :title => "words starting with #{letter}", :class => 'search-link'
+                    = link_to letter, url_for(:action => :show, :term =>"^[#{letter}#{letter.downcase}]", :match => 'regexp', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link'
                 %td
                   %a.search-link{:href => url_for(:action => :show, :term => '^[^A-Za-z]', :match => 'regexp'), :title => 'words not starting with a letter'}
                     &hellip;

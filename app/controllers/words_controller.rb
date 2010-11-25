@@ -62,6 +62,7 @@ class WordsController < ApplicationController
 
     respond_to do |format|
       format.html do
+        @title = params[:title]
         @words = Word.search params.merge(:page => params[:page], :order => 'name ASC, part_of_speech ASC')
         if @words.count > 0
           render :action => 'show'

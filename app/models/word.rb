@@ -64,6 +64,7 @@ class Hash
     copy.delete(:back)
     copy.delete(:controller)
     copy.delete(:format)
+    copy.delete(:title)
     copy.delete(:utf8)
     copy
   end
