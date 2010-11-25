@@ -1,6 +1,14 @@
 require 'fixnum'
 
 module WordsHelper
+  def page_title
+    page = ''
+    unless @words.blank? or @words.total_pages <= 1
+      page = " (p. #{params[:page] || 1})"
+    end
+    "Dubsar Results - #{@title || @term}#{page}"
+  end
+
   def frame_spanner(frame)
     frame.gsub('PP', '<span title="prepositional phrase">PP</span>')
   end
