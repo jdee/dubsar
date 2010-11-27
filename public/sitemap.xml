@@ -8,6 +8,7 @@
   </url>
   <url>
     <loc>http://dubsar-dictionary.com/about/</loc>
+    <lastmod>2010-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -19,6 +20,7 @@
   </url>
   <url>
     <loc>http://dubsar-dictionary.com/faq/</loc>
+    <lastmod>2010-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
