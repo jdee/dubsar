@@ -26,7 +26,7 @@
 
   %body{:class => "style-#{@theme}"}
     %h2
-      %a{:href => "#{root_path}", :class => "undecorated", :title => 'home', :style => 'text-decoration: none; font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;'}
+      %a{:href => root_path, :class => "undecorated", :title => 'home', :style => 'text-decoration: none; font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;'}
         =image_tag 'dubsar.png', :alt => 'D', :style => 'padding-left: 0.1em; padding: 0.2ex; height: 2ex; vertical-align: bottom; border-style: none;', :id => 'dubsar-image'
         Dubsar Project
     %h1#qunit-header Dubsar QUnit Test Suite
