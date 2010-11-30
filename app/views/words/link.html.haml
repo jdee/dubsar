@@ -14,27 +14,17 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-%h2#cap-news_n
-  %a{:href => '#cap-news_n'}
-    News
-    %em (n.)
-    %span.star-icon-span
-      %span.ui-icon.ui-icon-star
-    %span.index-update
-      %em (last updated 29-Nov-2010)
-#pane_1
-  %ol
-    %li
-      Dubsar is now officially launched.
-    %li
-      The entire content of
-      %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet®'}
-        WordNet&reg;
-      is now available in the application.
-    %li
-      Now it's easy to
-      =link_to 'Link to Dubsar', link_path, :title => 'Link to Dubsar'
-      from your website.
-    %li
-      Watch this space for information about continued changes to the
-      site.
+- content_for :title do
+  Link to Dubsar
+
+#about
+  %h3 Link to Dubsar from your website:
+
+  %p
+    Just copy this HTML snippet to add a link like the one below:
+
+  %textarea#link-snippet{:name => "link-snippet", :rows => "4", :cols => "80"}
+    =html_for_link
+
+  %p
+    !=html_for_link

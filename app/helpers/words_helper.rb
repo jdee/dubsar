@@ -38,4 +38,10 @@ module WordsHelper
       Word.count :conditions => [ 'part_of_speech = ?', part_of_speech ]
     end
   end
+
+  def html_for_link
+    s = <<EOF
+<a href="http://dubsar-dictionary.com" title="Dubsar Project" target="_blank"><img src="#{asset_host}/images/dubsar-link.png" alt="Dubsar" height="20" width="88" style="vertical-align: top;"/></a>
+EOF
+  end
 end

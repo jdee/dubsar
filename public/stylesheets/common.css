@@ -308,3 +308,13 @@ th {
 dt {
   font-weight: bold;
 }
+
+#about a > img {
+  border-style: none;
+}
+
+textarea#link-snippet {
+  font-family: Menlo, Monaco, Courier, Monospace;
+  font-size: 60%;
+  text-align: left;
+}
