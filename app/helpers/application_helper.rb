@@ -16,7 +16,8 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 module ApplicationHelper
   def thumbnail_link_tags
-    "<link rel='thumbnail' href='#{asset_host}/images/dubsar.png' type='image/png'/><link rel='thumbnail' href='#{asset_host}/images/dubsar-link.png' type='image/png'/>"
+    "<link rel='thumbnail' href='#{asset_host}/images/dubsar.png' type='image/png'/>"
+    # "<link rel='thumbnail' href='#{asset_host}/images/dubsar-link.png' type='image/png'/>"
   end
 
   def tour_link_tag(name, description)
