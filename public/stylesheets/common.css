@@ -321,6 +321,6 @@ textarea#link-snippet {
 
 #fb-like-button {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 1ex;
+  right: 0.5ex;
 }
