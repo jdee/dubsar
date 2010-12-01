@@ -325,3 +325,7 @@ table#social-links {
   left: 42ex;
   table-layout: fixed;
 }
+
+.twitter-share-button {
+  vertical-align: top;
+}
