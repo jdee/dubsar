@@ -40,7 +40,7 @@ TAG
 
   def facebook_like_button
     s = <<EOF
-<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://dubsar-dictionary.com" layout="button_count" colorscheme="light" ref="dubsar"></fb:like>
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://dubsar-dictionary.com" layout="button_count" colorscheme="light"></fb:like>
 EOF
   end
 end
