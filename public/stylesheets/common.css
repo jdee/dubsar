@@ -319,8 +319,9 @@ textarea#link-snippet {
   text-align: left;
 }
 
-#fb-like-button {
+table#social-links {
   position: absolute;
-  top: 1.5ex;
+  top: 1.2ex;
   left: 42ex;
+  table-layout: fixed;
 }

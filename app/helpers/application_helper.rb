@@ -49,4 +49,10 @@ EOF
 <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/pages/Dubsar/155561501154946" width="200" connections="0" stream="false" header="false"></fb:like-box>
 EOF
   end
+
+  def tweet_link
+    s = <<EOF
+<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dubsar-dictionary.com" data-text="Dubsar" data-count="none" data-via="redmenace07">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+EOF
+  end
 end

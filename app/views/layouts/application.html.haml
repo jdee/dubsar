@@ -36,8 +36,13 @@
           %span#tour-link-icon.ui-icon.ui-icon-flag
           tour
 
-      #fb-like-button
-        !=facebook_like_button
+      %table#social-links
+        %tbody
+          %tr
+            %td
+              !=facebook_like_button
+            %td
+              !=tweet_link
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
       %hr/
