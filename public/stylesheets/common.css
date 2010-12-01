@@ -318,3 +318,9 @@ textarea#link-snippet {
   font-size: 60%;
   text-align: left;
 }
+
+#fb-like-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}

@@ -37,4 +37,10 @@ TAG
       host = ''
     end
   end
+
+  def facebook_like_button
+    s = <<EOF
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://www.facebook.com/pages/Dubsar/155561501154946" layout="button_count" show_faces="false" width="50" colorscheme="light"></fb:like>
+EOF
+  end
 end
