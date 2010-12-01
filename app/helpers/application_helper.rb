@@ -43,4 +43,10 @@ TAG
 <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://dubsar-dictionary.com" layout="button_count" colorscheme="light"></fb:like>
 EOF
   end
+
+  def facebook_like_box
+    s = <<EOF
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/pages/Dubsar/155561501154946" width="200" connections="0" stream="false" header="false"></fb:like-box>
+EOF
+  end
 end
