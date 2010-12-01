@@ -320,7 +320,7 @@ textarea#link-snippet {
 }
 
 #fb-like-button {
-  position: fixed;
-  bottom: 1ex;
-  right: 0.5ex;
+  position: absolute;
+  top: 1.3ex;
+  left: 40ex;
 }
