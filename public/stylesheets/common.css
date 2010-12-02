@@ -179,6 +179,7 @@ input#word-input {
 
 #cuneiform-signs {
   height: 2.5ex;
+  width: 6.6ex;
   padding: 0.3ex;
   vertical-align: bottom;
   border-style: solid;
