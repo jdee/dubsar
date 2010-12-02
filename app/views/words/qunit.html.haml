@@ -23,14 +23,6 @@
     =csrf_meta_tag
     %meta{:name => 'Description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
     %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub'}
-    %meta{:property => 'og:title', :content => 'QUnit'}
-    %meta{:property => 'og:type', :content => 'website'}
-    %meta{:property => 'og:url', :content => 'http://dubsar-dictionary.com/qunit'}
-    %meta{:property => 'og:image', :content => "#{asset_host}/images/dubsar.png"}
-    %meta{:property => 'og:site_name', :content => 'The Dubsar Project'}
-    %meta{:property => 'fb:admins', :content => '1015821519'}
-    %meta{:property => 'og:description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
-    %meta{:property => 'og:email', :content => 'dubsar@dubsar-dictionary.com'}
 
   %body{:class => "style-#{@theme}"}
     %h2
@@ -41,11 +33,10 @@
       %tbody
         %tr
           %td
-            - # Point this at the root for now
             !=facebook_like_button('http://dubsar-dictionary.com')
           %td
             !=tweet_link('http://dubsar-dictionary.com/qunit', 'QUnit')
-    %p{:style => 'font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;'}
+    %h4{:style => "font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; color: #{theme_color};"}
       The Dubsar QUnit test suite puts elements of Dubsar through a
       sequence of automated tests.
     %h1#qunit-header Dubsar QUnit Test Suite

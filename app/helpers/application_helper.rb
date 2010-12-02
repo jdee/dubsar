@@ -55,4 +55,13 @@ EOF
 <a href="http://twitter.com/share" class="twitter-share-button" data-url="#{url}" data-text="#{text}" data-count="none" data-via="redmenace07">Tweet</a>
 EOF
   end
+
+  def theme_color
+    case @theme
+    when 'light'
+      '#1c94c4'
+    when 'dark'
+      '#f58400'
+    end
+  end
 end
