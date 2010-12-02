@@ -50,7 +50,7 @@ EOF
 EOF
   end
 
-  def tweet_link(url='http://dubsar-dictionary.com', text='Dubsar')
+  def tweet_link(url='http://dubsar-dictionary.com', text='#dubsar')
     s = <<EOF
 <a href="http://twitter.com/share" class="twitter-share-button" data-url="#{url}" data-text="#{text}" data-count="none" data-via="redmenace07">Tweet</a>
 EOF
