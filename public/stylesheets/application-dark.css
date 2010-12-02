@@ -21,6 +21,10 @@ body.style-dark, body.style-dark a:link, body.style-dark #header-bar a:visited {
   color: #eeeeee;
 }
 
+body.style-dark #about a:link, body.style-dark #about a:hover, body.style-dark #about a:active {
+  color: #f58400;
+}
+
 body.style-dark a:visited {
   color: #555555;
 }
