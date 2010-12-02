@@ -23,12 +23,30 @@
     =csrf_meta_tag
     %meta{:name => 'Description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
     %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub'}
+    %meta{:property => 'og:title', :content => 'QUnit'}
+    %meta{:property => 'og:type', :content => 'website'}
+    %meta{:property => 'og:url', :content => 'http://dubsar-dictionary.com'}
+    %meta{:property => 'og:image', :content => "#{asset_host}/images/dubsar.png"}
+    %meta{:property => 'og:site_name', :content => 'The Dubsar Project'}
+    %meta{:property => 'fb:admins', :content => '1015821519'}
+    %meta{:property => 'og:description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
+    %meta{:property => 'og:email', :content => 'dubsar@dubsar-dictionary.com'}
 
   %body{:class => "style-#{@theme}"}
     %h2
       %a{:href => root_path, :class => "undecorated", :title => 'home', :style => 'text-decoration: none; font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;'}
         =image_tag 'dubsar.png', :alt => 'D', :style => 'padding-left: 0.1em; padding: 0.2ex; height: 2ex; vertical-align: bottom; border-style: none;', :id => 'dubsar-image'
         Dubsar Project
+    %table#social-links{:style => 'display: inline-box; position: absolute; top: 1.5ex; left: 50ex;'}
+      %tbody
+        %tr
+          %td
+            !=facebook_like_button('http://dubsar-dictionary.com/qunit')
+          %td
+            !=tweet_link('http://dubsar-dictionary.com/qunit', 'QUnit')
+    %p{:style => 'font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;'}
+      The Dubsar QUnit test suite puts elements of Dubsar through a
+      sequence of automated tests.
     %h1#qunit-header Dubsar QUnit Test Suite
     %h2#qunit-banner
     %h2#qunit-userAgent
@@ -71,3 +89,5 @@
       =render 'shared/footer'
 
     !=javascript_include_merged :qunit
+    =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
+    =javascript_include_tag 'http://platform.twitter.com/widgets.js'

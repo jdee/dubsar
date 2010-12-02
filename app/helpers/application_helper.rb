@@ -38,9 +38,9 @@ TAG
     end
   end
 
-  def facebook_like_button
+  def facebook_like_button(url='http://dubsar-dictionary.com')
     s = <<EOF
-<fb:like href="http://dubsar-dictionary.com" layout="button_count" colorscheme="light"></fb:like>
+<fb:like href="#{url}" layout="button_count" colorscheme="light"></fb:like>
 EOF
   end
 
@@ -50,9 +50,9 @@ EOF
 EOF
   end
 
-  def tweet_link
+  def tweet_link(url='http://dubsar-dictionary.com', text='Dubsar')
     s = <<EOF
-<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dubsar-dictionary.com" data-text="Dubsar" data-count="none" data-via="redmenace07">Tweet</a>
+<a href="http://twitter.com/share" class="twitter-share-button" data-url="#{url}" data-text="#{text}" data-count="none" data-via="redmenace07">Tweet</a>
 EOF
   end
 end
