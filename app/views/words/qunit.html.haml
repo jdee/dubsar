@@ -18,6 +18,7 @@
 %html{'xmlns:dubsar_og' => 'http://dubsar-dictionary.com/og/1.0'}
   %head
     %title Dubsar QUnit Test Suite
+    %link{:rel => 'alternate', :type => 'application/rss+xml', :title => 'Dubsar News Feed', :href => '/rss_news.xml'}
     !=thumbnail_link_tags
     !=stylesheet_link_merged :qunit
     =csrf_meta_tag
