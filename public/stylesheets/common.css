@@ -327,6 +327,14 @@ table#social-links {
   table-layout: fixed;
 }
 
+td#facebook-like-button {
+  width: 90px;
+}
+
+td#tweet-link {
+  width: 55px;
+}
+
 .twitter-share-button {
   vertical-align: top;
 }
