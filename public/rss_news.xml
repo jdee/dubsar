@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Sat, 04 Dec 2010 16:00:00 GMT</lastBuildDate>
-    <pubDate>Sat, 04 Dec 2010 16:00:00 GMT</pubDate>
+    <lastBuildDate>Sat, 04 Dec 2010 17:15:00 GMT</lastBuildDate>
+    <pubDate>Sat, 04 Dec 2010 17:15:00 GMT</pubDate>
     <image>
       <url>http://static.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,20 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar Mobile Edition</title>
+      <description>Look for a mobile edition of Dubsar in 2011. In preparation for the project, the Dubsar team has to procure a better mobile device, but he&apos;s not allowed to buy himself anything till after Christmas.  Happy Holidays!</description>
+      <link>http://dubsar-dictionary.com</link>
+      <guid permaLink="false">6</guid>
+      <pubDate>Sat, 04 Dec 2010 17:15:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>RSS News Feed</title>
+      <description>Dubsar now has its own RSS news feed, making it easy to subscribe to these notifications.</description>
+      <link>http://dubsar-dictionary.com</link>
+      <guid permaLink="false">5</guid>
+      <pubDate>Sat, 04 Dec 2010 17:15:00 GMT</pubDate>
+    </item>
     <item>
       <title>Social Links</title>
       <description>Dubsar now sports a number of social links near the top of the page, making it easy to share.  Dubsar has also taken up residence on Facebook.</description>
