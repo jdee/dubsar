@@ -4,14 +4,14 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Sat, 04 Dec 2010</lastBuildDate>
-    <pubDate>Sat, 04 Dec 2010</pubDate>
+    <lastBuildDate>Sat, 04 Dec 2010 16:00:00</lastBuildDate>
+    <pubDate>Sat, 04 Dec 2010 16:00:00</pubDate>
     <image>
-      <url>http://static.dubsar-dictionary.com/images/dubsar-link.png</url>
+      <url>http://static.dubsar-dictionary.com/images/dubsar.png</url>
       <title>Dubsar<title>
       <link>http://dubsar-dictionary.com</link>
       <description>Dubsar Project</description>
-      <width>88</width>
+      <width>20</width>
       <height>20</height>
     </image>
     <item>
