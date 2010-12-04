@@ -19,6 +19,7 @@
   %head
     %title
       =yield :title
+    %link{:rel => 'alternate', :type => 'application/rss+xml', :title => 'Dubsar News Feed', :href => '/rss_news.xml'}
     != thumbnail_link_tags
     != stylesheet_link_merged :base
     =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
