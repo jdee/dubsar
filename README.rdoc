@@ -6,20 +6,20 @@ Dubsar is a dictionary web application using
 - jQuery 1.4.4
 - jQuery UI 1.8.6
 The content is taken from the Princeton University
-WordNet[http://wordnet.princeton.edu/] project.
+WordNet[http://wordnet.princeton.edu] project.
 
 Dubsar is deployed at http://dubsar-dictionary.com.
 
 For more information, see the
-{Dubsar wiki on GitHub}[http://github.com/jdee/dubsar/wiki/].
+{Dubsar wiki on GitHub}[http://github.com/jdee/dubsar/wiki].
 
 On the Dubsar site:
-{About Dubsar}[http://dubsar-dictionary.com/about/]
--- {FAQ}[http://dubsar-dictionary.com/faq/]
--- {QUnit test suite}[http://dubsar-dictionary.com/qunit/]
--- {Tour}[http://dubsar-dictionary.com/tour/]
+{About Dubsar}[http://dubsar-dictionary.com/about]
+-- {FAQ}[http://dubsar-dictionary.com/faq]
+-- {QUnit test suite}[http://dubsar-dictionary.com/qunit]
+-- {Tour}[http://dubsar-dictionary.com/tour]
 
-Also see the {Dubsar group on Google}[http://groups.google.com/group/dubsar/]
+Also see the {Dubsar group on Google}[http://groups.google.com/group/dubsar]
 
 == Copyright
 
@@ -50,4 +50,4 @@ the GNU General Public License (GPL):
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-WordNet(R) is available under the {WordNet 3.0 License}[http://wordnet.princeton.edu/wordnet/license/].
+WordNet(R) is available under the {WordNet 3.0 License}[http://wordnet.princeton.edu/wordnet/license].
