@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Sat, 04 Dec 2010 17:15:00 GMT</lastBuildDate>
-    <pubDate>Sat, 04 Dec 2010 17:15:00 GMT</pubDate>
+    <lastBuildDate>Sun, 05 Dec 2010 15:30:00 GMT</lastBuildDate>
+    <pubDate>Sun, 05 Dec 2010 15:30:00 GMT</pubDate>
     <image>
       <url>http://static.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -37,7 +37,7 @@
     </item>
     <item>
       <title>Link to Dubsar</title>
-      <description>Now it's easy to link to Dubsar from your website.</description>
+      <description>Now it&apos;s easy to link to Dubsar from your website.</description>
       <link>http://dubsar-dictionary.com/link</link>
       <guid isPermaLink="false">3</guid>
       <pubDate>Mon, 29 Nov 2010 15:00:00 GMT</pubDate>
