@@ -62,6 +62,20 @@ EOF
 EOF
   end
 
+  def su_link(url='http://dubsar-dictionary.com')
+    s = <<EOF
+<script src="http://www.stumbleupon.com/hostedbadge.php?s=4&r=#{url}"></script>
+EOF
+  end
+
+  def delicious_link
+    s = <<EOF
+<a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;">
+  <img src="http://l.yimg.com/hr/img/delicious.small.gif" height="10" width="10" alt="Delicious" />
+</a>
+EOF
+  end
+
   def theme_color
     case @theme
     when 'light'

@@ -310,7 +310,7 @@ dt {
   font-weight: bold;
 }
 
-#about a > img {
+#about a > img, #delicious-link a > img {
   border-style: none;
 }
 

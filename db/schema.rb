@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101123171834) do
+ActiveRecord::Schema.define(:version => 20101206002039) do
 
   create_table "inflections", :force => true do |t|
     t.string  "name",    :null => false
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20101123171834) do
     t.string  "frame"
     t.integer "number"
   end
+
+  add_index "verb_frames", ["number"], :name => "index_verb_frames_on_number"
 
   create_table "words", :force => true do |t|
     t.string  "name",                          :null => false

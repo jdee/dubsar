@@ -42,4 +42,11 @@ class Sense < ActiveRecord::Base
     end
     @unique_pointers
   end
+
+  def frames
+    verb_frames.map do |frame|
+      matches = /^(.*)%s(.*)$/.match frame.frame
+      matches ? matches[1] + word.name + matches[2] : frame.frame
+    end
+  end
 end

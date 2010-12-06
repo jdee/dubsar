@@ -37,16 +37,16 @@
               &nbsp;
           %a.close-icon-span.ui-state-default.ui-corner-all{:title => 'close'}
             %span.ui-icon.ui-icon-close
-      - unless sense.verb_frames.empty?
+      - unless sense.frames.empty?
         %hr/
         %strong{:title => 'generic sentence frames for this verb sense'}
           verb frames
         %table
           %tbody
-            - sense.verb_frames.each do |verb_frame|
+            - sense.frames.each do |frame|
               %tr
                 %td
-                  != frame_spanner verb_frame.frame
+                  != frame_spanner frame
       - unless sense.synset.samples.blank?
         %hr/
         %strong{:title => 'sample sentences using this word sense (and synonymous ones)'}
