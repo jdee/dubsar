@@ -247,7 +247,7 @@ STDOUT.flush
         :synset_index => synset_index
       sense.update_attribute(:marker, marker) if marker
 
-      if part_of_speech = 'verb'
+      if part_of_speech == 'verb'
         lex_id = case a[1].to_i
         when (0..9)
           '0' + a[1]
