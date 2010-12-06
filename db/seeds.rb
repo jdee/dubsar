@@ -248,6 +248,12 @@ STDOUT.flush
       sense.update_attribute(:marker, marker) if marker
 
       if part_of_speech = 'verb'
+        lex_id = case a[1].to_i
+        when (0..9)
+          '0' + a[1]
+        else
+          a[1]
+        end
         sense_key = "#{a[0]}%2:#{lex_filenum}:#{lex_id}::"
         sentences = @verb_sentences[sense_key]
 
