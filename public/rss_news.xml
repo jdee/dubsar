@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Sun, 05 Dec 2010 15:30:00 GMT</lastBuildDate>
-    <pubDate>Sun, 05 Dec 2010 15:30:00 GMT</pubDate>
+    <lastBuildDate>Mon, 06 Dec 2010 02:30:00 GMT</lastBuildDate>
+    <pubDate>Mon, 06 Dec 2010 02:30:00 GMT</pubDate>
     <image>
       <url>http://static.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>The Lost Sentences</title>
+      <description>Some sample verb sentences from WordNet® were accidentally left out of Dubsar.  They&apos;ve now been included.  Look for them in the tooltips.
+      <link>http://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">7</guid>
+      <pubDate>Mon, 06 Dec 2010 02:30:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar Mobile Edition</title>
       <description>Look for a mobile edition of Dubsar in 2011. In preparation for the project, the Dubsar team has to procure a better mobile device, but he&apos;s not allowed to buy himself anything till after Christmas.  Happy Holidays!</description>
