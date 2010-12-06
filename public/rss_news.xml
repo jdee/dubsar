@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Mon, 06 Dec 2010 02:50:00 GMT</lastBuildDate>
-    <pubDate>Mon, 06 Dec 2010 02:50:00 GMT</pubDate>
+    <lastBuildDate>Mon, 06 Dec 2010 14:30:00 GMT</lastBuildDate>
+    <pubDate>Mon, 06 Dec 2010 14:30:00 GMT</pubDate>
     <image>
       <url>http://static.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar Release 1.0.2</title>
+      <description>Release 1.0.2 of Dubsar is available.  This release provides a number of bug fixes, adds some missing content and integrates with social networks.</description>
+      <link>https://github.com/jdee/dubsar/wiki/Release-Notes-1.0.2</link>
+      <guid isPermaLink="false">8</guid>
+      <pubDate>Mon, 06 Dec 2010 14:30:00 GMT</pubDate>
+    </item>
     <item>
       <title>The Lost Sentences</title>
       <description>Some sample verb sentences from WordNet® were accidentally left out of Dubsar.  They&apos;ve now been included.  Look for them in the tooltips.</description>
