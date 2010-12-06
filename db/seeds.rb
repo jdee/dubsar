@@ -146,6 +146,24 @@ end
 puts "#{Time.now} loaded lexical names"
 STDOUT.flush
 
+File.open(File.expand_path('../defaults/sents.vrb', __FILE__)).each do |line|
+  matches = /^(\d+) (.*)$/.match(line.chomp)
+  index = matches[1].to_i + 1000
+  frame = matches[2]
+
+  VerbFrame.create :frame => frame, :number => index
+end
+
+@verb_sentences = Hash.new []
+File.open(File.expand_path('../defaults/sentidx.vrb', __FILE__)).each do |line|
+  sense_key, sentences = line.chomp.split
+  next unless sentences
+  @verb_sentences[sense_key] = sentences.split(',')
+end
+
+puts "#{Time.now} loaded verb sentences"
+STDOUT.flush
+
 File.open(File.expand_path('defaults/index.sense', File.dirname(__FILE__))).each do |line|
   sense_key, synset_offset, sense_number, tag_cnt = line.chomp.split
   next if tag_cnt == '0'
@@ -228,6 +246,19 @@ STDOUT.flush
         :freq_cnt => @sense_index[key.to_s],
         :synset_index => synset_index
       sense.update_attribute(:marker, marker) if marker
+
+      if part_of_speech = 'verb'
+        sense_key = "#{a[0]}%2:#{lex_filenum}:#{lex_id}::"
+        sentences = @verb_sentences[sense_key]
+
+        if sentences
+          sentences.each do |number|
+            frame = VerbFrame.find_by_number(number.to_i+1000)
+            SensesVerbFrame.create :sense => sense, :verb_frame => frame
+          end
+        end
+      end
+
       # recompute freq_cnt for synonym
       synonym.save
       sense_count += 1
