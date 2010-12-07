@@ -42,16 +42,18 @@
     %table#social-links{:style => 'display: inline-box; position: absolute; top: 1.5ex; left: 50ex;'}
       %tbody
         %tr
-          %td
-            !=facebook_like_button('http://dubsar-dictionary.com/qunit')
-          %td
-            !=tweet_link('http://dubsar-dictionary.com/qunit', '#dubsar #qunit')
-          %td
-            !=su_link('http://dubsar-dictionary.com/qunit')
-          %td
+          %td#delicious-link
             !=delicious_link
-          %td
+          %td#reddit-button
             !=reddit_button('http://dubsar-dictionary.com/qunit')
+          %td#su-link
+            !=su_link('http://dubsar-dictionary.com/qunit')
+          %td#buzz-link
+            !=buzz_link('http://dubsar-dictionary.com/qunit')
+          %td#tweet-link
+            !=tweet_link('http://dubsar-dictionary.com/qunit', '#dubsar #qunit')
+          %td#facebook-like-button
+            !=facebook_like_button('http://dubsar-dictionary.com/qunit')
     %h4{:style => "font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; color: #{theme_color};"}
       The Dubsar QUnit test suite puts elements of Dubsar through a
       sequence of automated tests.
