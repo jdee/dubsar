@@ -85,7 +85,6 @@ EOF
   def buzz_link(url='http://dubsar-dictionary.com')
     s = <<EOF
 <a title="Post to Google Buzz" class="google-buzz-button" href="http://www.google.com/buzz/post" data-admin-site="true" data-button-style="normal-button" data-url="#{url}" data-imageurl="#{asset_host}/images/dubsar.png"></a>
-<script type="text/javascript" src="http://www.google.com/buzz/api/button.js"></script>
 EOF
   end
 

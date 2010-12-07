@@ -22,6 +22,7 @@
     %link{:rel => 'alternate', :type => 'application/rss+xml', :title => 'Dubsar News Feed', :href => '/rss_news.xml'}
     !=thumbnail_link_tags
     !=stylesheet_link_merged :qunit
+    =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
     =csrf_meta_tag
     %meta{:name => 'Description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
     %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, Coral CDN, English'}
@@ -99,5 +100,5 @@
       =render 'shared/footer'
 
     !=javascript_include_merged :qunit
-    =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
+    =javascript_include_tag 'http://www.google.com/buzz/api/button.js'
     =javascript_include_tag 'http://platform.twitter.com/widgets.js'
