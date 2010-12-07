@@ -78,7 +78,7 @@ EOF
 
   def reddit_button(url='http://dubsar-dictionary.com')
     s = <<EOF
-<a href="http://reddit.com/r/technology/submit?url=#{url}"> <img src="http://reddit.com/static/spreddit1.gif" alt="submit to reddit" style="border-style: none;" /> </a>
+<a href="http://reddit.com/r/all/submit?url=#{url}"> <img src="http://reddit.com/static/spreddit1.gif" alt="submit to reddit" style="border-style: none;" /> </a>
 EOF
   end
 
