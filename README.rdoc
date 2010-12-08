@@ -1,3 +1,8 @@
+= Notice
+
+Dubsar is trying out the {Coral CDN}[http://www.coralcdn.org].
+Please report any problems to dubsar@dubsar-dictionary.com.
+
 = Dubsar
 
 Dubsar is a dictionary web application using
