@@ -21,7 +21,7 @@ body.style-dark, body.style-dark a:link, body.style-dark #header-bar a:visited {
   color: #eeeeee;
 }
 
-body.style-dark #about a:link, body.style-dark #about a:hover, body.style-dark #about a:active {
+body.style-dark #about a:link, body.style-dark #about a:hover, body.style-dark #about a:active, body.style-dark span.buzz-link {
   color: #f58400;
 }
 
