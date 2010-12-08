@@ -18,7 +18,7 @@
 %html{'xmlns:dubsar_og' => 'http://dubsar-dictionary.com/og/1.0'}
   %head
     %title Dubsar QUnit Test Suite
-    %link{:rel => 'shortcut icon', :href => "#{asset_host}/favicon.ico"}
+    =favicon_link_tag
     %link{:rel => 'alternate', :type => 'application/rss+xml', :title => 'Dubsar News Feed', :href => '/rss_news.xml'}
     !=thumbnail_link_tags
     !=stylesheet_link_merged :qunit
@@ -29,7 +29,7 @@
     %meta{:property => 'og:title', :content => 'QUnit'}
     %meta{:property => 'og:type', :content => 'dubsar_og:feature'}
     %meta{:property => 'og:url', :content => 'http://dubsar-dictionary.com/qunit'}
-    %meta{:property => 'og:image', :content => "#{asset_host}/images/dubsar.jpg"}
+    %meta{:property => 'og:image', :content => "#{image_path 'dubsar.jpg'}"}
     %meta{:property => 'og:site_name', :content => 'The Dubsar Project'}
     %meta{:property => 'fb:admins', :content => '1015821519'}
     %meta{:property => 'og:description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
@@ -44,7 +44,7 @@
       %tbody
         %tr
           %td#delicious-link
-            !=delicious_link
+            !=delicious_link('http://dubsar-dictionary.com/qunit','Dubsar QUnit Test Suite')
           %td#reddit-button
             !=reddit_button('http://dubsar-dictionary.com/qunit')
           %td#su-link

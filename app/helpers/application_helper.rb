@@ -17,12 +17,12 @@
 module ApplicationHelper
   def thumbnail_link_tags
     s = <<EOF
-<link rel="thumbnail" href="#{asset_host}/images/dubsar.png" type="image/png"/>
-<link rel="thumbnail" href="#{asset_host}/images/dubsar.jpg" type="image/jpg"/>
-<link rel="thumbnail" href="#{asset_host}/images/autocomplete-thumbnail.png" type="image/png"/>
-<link rel="thumbnail" href="#{asset_host}/images/browse-thumbnail.png" type="image/png"/>
-<link rel="thumbnail" href="#{asset_host}/images/tooltip-thumbnail.png" type="image/png"/>
-<link rel="thumbnail" href="#{asset_host}/images/view-thumbnail.png" type="image/png"/>
+<link rel="thumbnail" href="#{image_path 'dubsar.png'}" type="image/png"/>
+<link rel="thumbnail" href="#{image_path 'dubsar.jpg'}" type="image/jpg"/>
+<link rel="thumbnail" href="#{image_path 'autocomplete-thumbnail.png'}" type="image/png"/>
+<link rel="thumbnail" href="#{image_path 'browse-thumbnail.png'}" type="image/png"/>
+<link rel="thumbnail" href="#{image_path 'tooltip-thumbnail.png'}" type="image/png"/>
+<link rel="thumbnail" href="#{image_path 'view-thumbnail.png'}" type="image/png"/>
 EOF
   end
 
@@ -68,9 +68,9 @@ EOF
 EOF
   end
 
-  def delicious_link
+  def delicious_link(url='http://dubsar-dictionary.com', title='Dubsar')
     s = <<EOF
-<a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;">
+<a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent('#{url}')+'&title='+encodeURIComponent('#{title}'), 'delicious','toolbar=no,width=550,height=550'); return false;">
   <img src="http://l.yimg.com/hr/img/delicious.small.gif" height="10" width="10" alt="Delicious" style="border-style: none;" />
 </a>
 EOF
