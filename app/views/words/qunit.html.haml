@@ -19,7 +19,7 @@
   %head
     %title Dubsar QUnit Test Suite
     =favicon_link_tag
-    %link{:rel => 'alternate', :type => 'application/rss+xml', :title => 'Dubsar News Feed', :href => '/rss_news.xml'}
+    =auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
     !=thumbnail_link_tags
     !=stylesheet_link_merged :qunit
     =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
