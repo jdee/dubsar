@@ -30,7 +30,7 @@ EOF
     tag = <<TAG
 <a href="#{image_path(name+'.png')}" title='#{name}' id='tour-#{name}'>
   <h3>#{CGI.escapeHTML description}</h3>
-  #{image_tag(name+'-thumbnail.png', :alt => name)}
+  #{image_tag(name+'-thumbnail.png', :alt => name, :width => '150', :height => '100')}
 </a>
 TAG
   end
@@ -84,7 +84,7 @@ EOF
 
   def reddit_button(url='http://dubsar-dictionary.com')
     s = <<EOF
-<a href="http://reddit.com/r/all/submit?url=#{url}"> <img src="http://www.reddit.com/static/spreddit1.gif" alt="submit to reddit" style="border-style: none;" /> </a>
+<a href="http://reddit.com/r/all/submit?url=#{url}"> <img src="http://www.reddit.com/static/spreddit1.gif" alt="submit to reddit" width="19" height="15" style="border-style: none;" /> </a>
 EOF
   end
 

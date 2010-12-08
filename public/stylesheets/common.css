@@ -327,6 +327,22 @@ table#social-links {
   table-layout: fixed;
 }
 
+td#reddit-button {
+  width: 19px;
+}
+
+td#delicious-link {
+  width: 10px;
+}
+
+td#su-link {
+  width: 20px;
+}
+
+td#buzz-link {
+  width: 52px;
+}
+
 td#facebook-like-button {
   width: 90px;
 }
