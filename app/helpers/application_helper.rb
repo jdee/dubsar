@@ -28,9 +28,9 @@ EOF
 
   def tour_link_tag(name, description)
     tag = <<TAG
-<a href='#{asset_host}/images/#{name}.png' title='#{name}' id='tour-#{name}'>
+<a href="#{image_path(name+'.png')}" title='#{name}' id='tour-#{name}'>
   <h3>#{CGI.escapeHTML description}</h3>
-  <img src='#{asset_host}/images/#{name}-thumbnail.png' alt='#{name}'/>
+  #{image_tag(name+'-thumbnail.png', :alt => name)}
 </a>
 TAG
   end
