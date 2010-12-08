@@ -35,6 +35,12 @@ EOF
 TAG
   end
 
+  def html_for_link
+    s = <<EOF
+<a href="http://dubsar-dictionary.com" title="Dubsar Project" target="_blank"><img src="#{asset_host}/images/dubsar-link.png" alt="Dubsar" height="20" width="88" style="vertical-align: top; border-style: none;"/></a>
+EOF
+  end
+
   def asset_host
     host = ActionController::Base.asset_host
     if host

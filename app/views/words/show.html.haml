@@ -17,6 +17,9 @@
 - content_for :title do
   &= page_title
 
+- content_for :description do
+  %meta{:name => 'Description', :content => meta_description(search_title, @words)}
+
 #accordion
   = render @words
 

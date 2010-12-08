@@ -2,11 +2,15 @@ require 'fixnum'
 
 module WordsHelper
   def page_title
+    "Dubsar - #{search_title}"
+  end
+
+  def search_title
     page = ''
     unless @words.blank? or @words.total_pages <= 1
       page = " (p. #{params[:page] || 1})"
     end
-    "Dubsar - #{@title || @term}#{page}"
+    "#{@title || @term}#{page}"
   end
 
   def frame_spanner(frame)
@@ -39,9 +43,14 @@ module WordsHelper
     end
   end
 
-  def html_for_link
-    s = <<EOF
-<a href="http://dubsar-dictionary.com" title="Dubsar Project" target="_blank"><img src="#{asset_host}/images/dubsar-link.png" alt="Dubsar" height="20" width="88" style="vertical-align: top; border-style: none;"/></a>
-EOF
+  def meta_description(title, words)
+    "Dubsar Dictionary Project search results for #{title}: " +
+    words.map do |word|
+      entry = word.name + ', ' + word.pos + '.'
+      unless word.other_forms.blank?
+        entry += " (#{word.other_forms})"
+      end
+      entry
+    end.join('; ')
   end
 end
