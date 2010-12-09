@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Thu, 09 Dec 2010 13:30:00 GMT</lastBuildDate>
-    <pubDate>Thu, 09 Dec 2010 13:30:00 GMT</pubDate>
+    <lastBuildDate>Thu, 09 Dec 2010 13:35:00 GMT</lastBuildDate>
+    <pubDate>Thu, 09 Dec 2010 13:35:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -16,7 +16,7 @@
     </image>
     <item>
       <title>Dubsar no longer on Coral</title>
-      <description>Dubsar&amp;s performance on the Coral CDN was terrible.  The experiment has been abandoned.</description>
+      <description>Dubsar&apos;s performance on the Coral CDN was terrible.  The experiment has been abandoned.</description>
       <link>http://dubsar-dictionary.com</link>
       <guid isPermaLink="false">11</guid>
       <pubDate>Thu, 09 Dec 2010 11:30:00 GMT</pubDate>
