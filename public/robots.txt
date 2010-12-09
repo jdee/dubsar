@@ -1,2 +1,1 @@
 Sitemap: http://dubsar-dictionary.com/sitemap.xml
-Sitemap: http://dubsar-dictionary.com/links.xml
