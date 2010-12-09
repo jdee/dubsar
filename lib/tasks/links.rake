@@ -34,7 +34,7 @@ def results(term, words)
   end.join("; ")
 
   lines = []
-  3.times do
+  4.times do
     line = get_line @s
     lines << line
     break if line.length == @s.length
@@ -68,13 +68,14 @@ task :links => :environment do
 
       # Don't need :select => 'DISTINCT name' here because everything
       # is all lower case and only nouns, so the names are all unique.
+      word_count = 0
       Word.all(:conditions => "name ~ '^[a-z]{10}[a-z]*$' AND part_of_speech = 'noun' AND freq_cnt = 0",
         :order => 'name').each do |word|
         term = word.name
 
         xml.ResultSpec :id => term do |xml|
           xml.Query term
-          xml.Response do
+          xml.Response :format => 'image' do
             xml.Output "Dubsar - #{term}", :name => 'title'
             xml.Output "dubsar-dictionary.com/?term=#{URI.escape term}", :name => 'more_url'
             xml.Output "http://s.dubsar-dictionary.com/images/dg.png", :name => 'image_src'
@@ -87,8 +88,9 @@ task :links => :environment do
             end
           end
         end
+        word_count += 1
       end
     end
   end
-  puts "#{Time.now} Done"
+  puts "#{Time.now} Processed #{word_count} words"
 end
