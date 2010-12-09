@@ -4,16 +4,23 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Thu, 09 Dec 2010 07:00:00 GMT</lastBuildDate>
-    <pubDate>Thu, 09 Dec 2010 07:00:00 GMT</pubDate>
+    <lastBuildDate>Thu, 09 Dec 2010 11:30:00 GMT</lastBuildDate>
+    <pubDate>Thu, 09 Dec 2010 11:30:00 GMT</pubDate>
     <image>
-      <url>http://s.dubsar-dictionary.com.nyud.net/images/dubsar-link.png</url>
+      <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
       <link>http://dubsar-dictionary.com</link>
       <description>Dubsar Project News Feed</description>
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar no loner on Coral</title>
+      <description>Dubsar&amp;s performance on the Coral CDN was terrible.  The experiment has been abandoned.</description>
+      <link>http://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">11</guid>
+      <pubDate>Thu, 09 Dec 2010 11:30:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar subscribed links on Google</title>
       <description>Dubsar now offers subscribed links on Google, so you can add selected Dubsar results to your web searches. </description>
