@@ -50,6 +50,7 @@ task :links => :environment do
   puts "#{Time.now} Starting"
   STDOUT.flush
 
+  word_count = 0
   File.open('public/links.xml', 'w') do |file|
     xml = Builder::XmlMarkup.new :target => file
     xml.Results do |xml|
@@ -65,11 +66,8 @@ task :links => :environment do
       # uncapitalized, unpunctuated words, i.e. all lower case with no
       # hyphens or other punctuation.  We select only those with a
       # frequency count of 0 and at least a certain number of letters.
-
-      # Don't need :select => 'DISTINCT name' here because everything
-      # is all lower case and only nouns, so the names are all unique.
-      word_count = 0
-      Word.all(:conditions => "name ~ '^[a-z]{10}[a-z]*$' AND part_of_speech = 'noun' AND freq_cnt = 0",
+      Word.all(:select => 'DISTINCT name',
+        :conditions => "name ~ '^[a-z]{10}[a-z]*$' AND freq_cnt = 0",
         :order => 'name').each do |word|
         term = word.name
 

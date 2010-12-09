@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Wed, 08 Dec 2010 04:30:00 GMT</lastBuildDate>
-    <pubDate>Wed, 08 Dec 2010 04:30:00 GMT</pubDate>
+    <lastBuildDate>Thu, 09 Dec 2010 07:00:00 GMT</lastBuildDate>
+    <pubDate>Thu, 09 Dec 2010 07:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com.nyud.net/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar subscribed links on Google</title>
+      <description>Dubsar now offers subscribed links on Google, so you can add selected Dubsar results to your web searches. </description>
+      <link>http://www.google.com/coop/trust/add?user=012127914215357268281&amp;sig=__LsaFMfvM095yLOpMWfHSTKVhy7U=</link>
+      <guid isPermaLink="false">10</guid>
+      <pubDate>Thu, 09 Dec 2010 07:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar on Coral CDN</title>
       <description>Dubsar is trying out the Coral CDN.  Please report any problems to dubsar@dubsar-dictionary.com.</description>

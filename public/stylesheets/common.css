@@ -354,3 +354,12 @@ td#tweet-link {
 .twitter-share-button {
   vertical-align: top;
 }
+
+#footer img.subscribe-button {
+  position: absolute;
+  border-style: none;
+  right: 0;
+  bottom: 0;
+  height: 48px;
+  width: 138px;
+}

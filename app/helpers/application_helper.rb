@@ -94,6 +94,12 @@ EOF
 EOF
   end
 
+  def slinks_button
+    s = <<EOF
+<a href="http://www.google.com/coop/trust/add?user=012127914215357268281&sig=__LsaFMfvM095yLOpMWfHSTKVhy7U="><img src="http://www.google.com/coop/images/addmyexpertisebadge.gif" class="subscribe-button" border="0" alt="Add my expertise to your Google search results"/></a>
+EOF
+  end
+
   def theme_color
     case @theme
     when 'light'
