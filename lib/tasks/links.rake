@@ -65,7 +65,7 @@ task :links => :environment do
       # with at least a certain number of letters and a low frequency
       # count.
       Word.all(:select => 'DISTINCT name',
-        :conditions => "name ~ '^[a-z]{10}[a-z]*$' AND freq_cnt < 25",
+        :conditions => "name ~ '^[a-z]{10}[a-z]*$'",
         :order => 'name').each do |word|
         term = word.name
 
