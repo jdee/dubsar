@@ -61,13 +61,11 @@ task :links => :environment do
       # interesting and likely to be searched for.  There's little
       # point in having a subscribed link for "well."  To limit the
       # data sample and meet the overall limit, while still
-      # representing the lion's share of the data, we select nouns
-      # (which make up the bulk of WordNet) that are single,
-      # uncapitalized, unpunctuated words, i.e. all lower case with no
-      # hyphens or other punctuation.  We select only those with a
-      # frequency count of 0 and at least a certain number of letters.
+      # representing the lion's share of the data, we select only words
+      # with at least a certain number of letters and a low frequency
+      # count.
       Word.all(:select => 'DISTINCT name',
-        :conditions => "name ~ '^[a-z]{10}[a-z]*$' AND freq_cnt = 0",
+        :conditions => "name ~ '^[a-z]{10}[a-z]*$' AND freq_cnt < 25",
         :order => 'name').each do |word|
         term = word.name
 
@@ -76,7 +74,7 @@ task :links => :environment do
           xml.Response :format => 'image' do
             xml.Output "Dubsar - #{term}", :name => 'title'
             xml.Output "dubsar-dictionary.com/?term=#{URI.escape term}", :name => 'more_url'
-            xml.Output "http://s.dubsar-dictionary.com/images/dg.png", :name => 'image_src'
+            xml.Output "http://s.dubsar-dictionary.com/images/dubsar-big.jpg", :name => 'image_src'
             xml.Output 'mini_square', :name => 'image_size'
 
             count = 1
