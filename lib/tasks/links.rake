@@ -62,8 +62,7 @@ task :links => :environment do
       # point in having a subscribed link for "well."  To limit the
       # data sample and meet the overall limit, while still
       # representing the lion's share of the data, we select only words
-      # with at least a certain number of letters and a low frequency
-      # count.
+      # with at least a certain number of letters.
       Word.all(:select => 'DISTINCT name',
         :conditions => "name ~ '^[a-z]{10}[a-z]*$'",
         :order => 'name').each do |word|
