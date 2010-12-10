@@ -74,7 +74,7 @@ task :links => :environment do
           xml.Response :format => 'image' do
             xml.Output "Dubsar - #{term}", :name => 'title'
             xml.Output "dubsar-dictionary.com/?term=#{URI.escape term}", :name => 'more_url'
-            xml.Output "http://s.dubsar-dictionary.com/images/dubsar-big.jpg", :name => 'image_src'
+            xml.Output "http://s.dubsar-dictionary.com/images/dg.png", :name => 'image_src'
             xml.Output 'mini_square', :name => 'image_size'
 
             count = 1
