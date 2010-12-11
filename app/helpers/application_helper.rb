@@ -18,7 +18,6 @@ module ApplicationHelper
   def thumbnail_link_tags
     s = <<EOF
 <link rel="thumbnail" href="#{image_path 'dubsar.png'}" type="image/png"/>
-<link rel="thumbnail" href="#{image_path 'dubsar.jpg'}" type="image/jpg"/>
 <link rel="thumbnail" href="#{image_path 'autocomplete-thumbnail.png'}" type="image/png"/>
 <link rel="thumbnail" href="#{image_path 'browse-thumbnail.png'}" type="image/png"/>
 <link rel="thumbnail" href="#{image_path 'tooltip-thumbnail.png'}" type="image/png"/>
