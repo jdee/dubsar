@@ -58,7 +58,7 @@
     }
 
     function show_sql_help_link() {
-      $sql_help_link.fadeIn('slow');
+      $sql_help_link.html('Huh? SQL wildcards?').fadeIn('slow');
       $show_help_link_timer = null;
     }
 
@@ -181,7 +181,7 @@
     });
     $('#word-lookup-buttonset').buttonset();
 
-    $sql_help_dialog = $('#sql-help-dialog-template').clone().dialog({
+    $sql_help_dialog = $('<div>The Structured Query Language used by Dubsar&apos;s PostgreSQL database accepts the following wildcards in searches:<ul><li>% matches anything, including nothing at all</li><li>_ matches any single character</li></ul>For example:<ul><li>%count% matches all words containing <em>count</em></li><li>c_t matches <em>cat, cot</em> and <em>cut</em></li></ul></div>').dialog({
       autoOpen   : false        ,
       dialogClass: 'sql-help-dialog',
       height     : 350,
