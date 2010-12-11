@@ -26,6 +26,8 @@ def get_line(text)
   text[0,80].sub(/\s[^\s]*$/, '')
 end
 
+# Generates a description, breaking it into 80-character lines
+# Returns those lines as an array.
 def results(term, words)
   @s = words.map do |word|
     result = "#{word.name}, #{word.pos}."
@@ -51,22 +53,19 @@ task :links => :environment do
   STDOUT.flush
 
   word_count = 0
-  File.open('public/links.xml', 'w') do |file|
+  File.open(ENV['FILE'] || 'public/links.xml', 'w') do |file|
     xml = Builder::XmlMarkup.new :target => file
     xml.Results do |xml|
-      xml.AuthorInfo :description => 'Dubsar Dictionary Project subscribed links', :author => 'Dubsar Dictionary Project'
+      xml.AuthorInfo :description => 'Dubsar Dictionary Project subscribed links',
+        :author => 'Dubsar Dictionary Project'
 
-      # We're limited to an overall total of 10 MB.  This condition is
-      # an effort at identifying words that are obscure, hence both
-      # interesting and likely to be searched for.  There's little
-      # point in having a subscribed link for "well."  To limit the
-      # data sample and meet the overall limit, while still
-      # representing the lion's share of the data, we select only words
-      # with at least a certain number of letters.
+      terms = Set.new
       Word.all(:select => 'DISTINCT name',
-        :conditions => "name ~ '^[a-z]{9}[a-z]*$'",
+        :conditions => "name ~* '^[a-z]{9}[a-z]*$'",
         :order => 'name').each do |word|
-        term = word.name
+        term = word.name.downcase
+        next if terms.include?(term)
+        terms << term
 
         xml.ResultSpec :id => term do |xml|
           xml.Query term
