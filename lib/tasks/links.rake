@@ -34,7 +34,7 @@ def results(term, words)
   end.join("; ")
 
   lines = []
-  4.times do
+  3.times do
     line = get_line @s
     lines << line
     break if line.length == @s.length
@@ -64,22 +64,18 @@ task :links => :environment do
       # representing the lion's share of the data, we select only words
       # with at least a certain number of letters.
       Word.all(:select => 'DISTINCT name',
-        :conditions => "name ~ '^[a-z]{10}[a-z]*$'",
+        :conditions => "name ~ '^[a-z]{9}[a-z]*$'",
         :order => 'name').each do |word|
         term = word.name
 
         xml.ResultSpec :id => term do |xml|
           xml.Query term
-          xml.Response :format => 'image' do
+          xml.Response do
             xml.Output "Dubsar - #{term}", :name => 'title'
             xml.Output "dubsar-dictionary.com/?term=#{URI.escape term}", :name => 'more_url'
-            xml.Output "http://s.dubsar-dictionary.com/images/dg.png", :name => 'image_src'
-            xml.Output 'mini_square', :name => 'image_size'
 
-            count = 1
-            results(term, Word.search(:term => term, :page => nil)).each do |line|
-              xml.Output line, :name => "text#{count}"
-              count += 1
+            results(term, Word.search(:term => term, :page => nil)).each_with_index do |line, count|
+              xml.Output line, :name => "text#{count+1}"
             end
           end
         end
