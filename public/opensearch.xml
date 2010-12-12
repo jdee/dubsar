@@ -10,5 +10,5 @@
   <Query role="example" searchTerms="iconoclast"/>
   <Language>en-us</Language>
   <InputEncoding>UTF-8</InputEncoding>
-  <moz:SearchForm>http://dubsar-dictionary.com<moz:Searchform>
+  <moz:SearchForm>http://dubsar-dictionary.com</moz:Searchform>
 </OpenSearchDescription>
