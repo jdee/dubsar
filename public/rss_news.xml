@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Sun, 12 Dec 2010 04:30:00 GMT</lastBuildDate>
-    <pubDate>Sun, 12 Dec 2010 04:30:00 GMT</pubDate>
+    <lastBuildDate>Sun, 12 Dec 2010 15:30:00 GMT</lastBuildDate>
+    <pubDate>Sun, 12 Dec 2010 15:30:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -16,7 +16,7 @@
     </image>
     <item>
       <title>Dubsar is a Search Engine</title>
-      <description>Dubsar now supports the OpenSearch protocol and can be added to your browser&apos;s list of search engines.  Stay tuned for autocompletion.</description>
+      <description>Dubsar now supports the OpenSearch protocol and can be added to your browser&apos;s list of search engines.</description>
       <link>http://dubsar-dictionary.com</link>
       <guid isPermaLink="false">12</guid>
       <pubDate>Sun, 12 Dec 2010 04:30:00 GMT</pubDate>
