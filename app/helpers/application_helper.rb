@@ -49,58 +49,12 @@ EOF
     end
   end
 
-=begin
-  def facebook_like_button(url='http://dubsar-dictionary.com')
-    s = <<EOF
-<fb:like href="#{url}" layout="button_count" colorscheme="light"></fb:like>
-EOF
-  end
-
-  def facebook_like_box
-    s = <<EOF
-<fb:like-box href="http://www.facebook.com/pages/Dubsar/155561501154946" width="200" connections="0" stream="false" header="false" colorscheme="dark"></fb:like-box>
-EOF
-  end
-
-  def tweet_link(url='http://dubsar-dictionary.com', text='#dubsar')
-    s = <<EOF
-<a href="http://twitter.com/share" class="twitter-share-button" data-url="#{url}" data-text="#{text}" data-count="none" data-via="redmenace07">Tweet</a>
-EOF
-  end
-
-  def su_link(url='http://dubsar-dictionary.com')
-    s = <<EOF
-<script src="http://www.stumbleupon.com/hostedbadge.php?s=4&r=#{url}"></script>
-EOF
-  end
-=end
-
   def delicious_link(url='http://dubsar-dictionary.com', title='Dubsar')
     s = <<EOF
 <img src="http://l.yimg.com/hr/img/delicious.small.gif" height="10" width="10" alt="Delicious" style="border-style: none;" />
 <a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent('#{url}')+'&title='+encodeURIComponent('#{title}'), 'delicious','toolbar=no,width=550,height=550'); return false;" id="delicious-text">
   Bookmark this on Delicious
 </a>
-EOF
-  end
-
-=begin
-  def reddit_button(url='http://dubsar-dictionary.com')
-    s = <<EOF
-<a href="http://reddit.com/r/all/submit?url=#{url}"> <img src="http://www.reddit.com/static/spreddit1.gif" alt="submit to reddit" width="19" height="15" style="border-style: none;" /> </a>
-EOF
-  end
-
-  def buzz_link(url='http://dubsar-dictionary.com')
-    s = <<EOF
-<a title="Post to Google Buzz" class="google-buzz-button" href="http://www.google.com/buzz/post" data-admin-site="true" data-button-style="link" data-url="#{url}" data-imageurl="#{asset_host}/images/dubsar.png"></a>
-EOF
-  end
-=end
-
-  def slinks_button
-    s = <<EOF
-<a href="http://www.google.com/coop/trust/add?user=012127914215357268281&sig=__LsaFMfvM095yLOpMWfHSTKVhy7U="><img src="http://www.google.com/coop/images/addmyexpertisebadge.gif" class="subscribe-button" border="0" alt="Add my expertise to your Google search results"/></a>
 EOF
   end
 

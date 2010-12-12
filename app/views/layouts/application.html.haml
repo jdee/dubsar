@@ -24,7 +24,6 @@
     %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
     != thumbnail_link_tags
     != stylesheet_link_merged :base
-    -# =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
     = csrf_meta_tag
     =yield :description
     %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, Coral CDN, English'}
@@ -39,22 +38,11 @@
         %a#tour-link.search-link{:href => tour_path, :title => 'take a tour'}
           %span#tour-link-icon.ui-icon.ui-icon-flag
           tour
-
       %table#social-links
-        %tbody
-          %tr
-            %td#delicious-link
-              !=delicious_link
-            -# %td#reddit-button
-            -#   !=reddit_button
-            -# %td#su-link
-            -#   !=su_link
-            -# %td#buzz-link
-            -#   !=buzz_link
-            -# %td#tweet-link
-            -#   !=tweet_link
-            -# %td#facebook-like-button
-            -#   !=facebook_like_button
+        %tr
+          %td
+            !=delicious_link
+
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
       %hr/
@@ -66,5 +54,3 @@
       =render :partial => 'shared/footer'
 
     != javascript_include_merged :base
-    -# =javascript_include_tag 'http://www.google.com/buzz/api/button.js'
-    -# =javascript_include_tag 'http://platform.twitter.com/widgets.js'
