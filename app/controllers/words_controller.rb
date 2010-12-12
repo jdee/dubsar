@@ -34,6 +34,41 @@ class WordsController < ApplicationController
     render :layout => false
   end
 
+  def os
+    respond_to do |format|
+      format.json do
+        @term = params[:term]
+
+        # strip leading and trailing white space and compress internal
+        # whitespace
+        @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
+
+        local_params = params.clone
+        local_params[:term] = "#{@term}%"
+        @words = Word.search local_params.merge(:offset => 0, :limit => 10,
+          :order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
+
+        # The uniq method call is case-sensitive.  It has the effect of
+        # collapsing multiple parts of speech, e.g. cold (n.) and cold
+        # (adj.).  But we still have the issue of Jack and jack, which
+        # we address with the inject.
+        word_list = @words.map{ |w| w.name }.uniq.inject([]) do |list, w|
+          unless list.empty? or list.last.casecmp(w) != 0
+            if w < list.last
+              list.pop
+              list << w
+            end
+          else
+            list << w
+          end
+          list
+        end
+
+        respond_with [ @term, word_list ]
+      end
+    end
+  end
+
   # Retrieve all words matching the specified +term+ and render as
   # HTML or JSON, one page at a time.
   def show
@@ -99,7 +134,7 @@ class WordsController < ApplicationController
         # (adj.).  But we still have the issue of Jack and jack, which
         # we address with the inject.
         word_list = @words.map{ |w| w.name }.uniq.inject([]) do |list, w|
-          if ! list.empty? and list.last.casecmp(w) == 0
+          unless list.empty? or list.last.casecmp(w) != 0
             if w < list.last
               list.pop
               list << w

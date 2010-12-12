@@ -6,6 +6,7 @@
   <Contact>dubsar@dubsar-dictionary.com</Contact>
   <LongName>Dubsar Dictionary Project search</LongName>
   <Url type="text/html" template="http://dubsar-dictionary.com/?term={searchTerms}"/>
+  <Url type="application/x-suggestions+json" template="http://dubsar-dictionary.com/os.json?term={searchTerms}"/>
   <Image height="64" width="64" type="image/png">http://s.dubsar-dictionary.com/images/dubsar_64x64.png</Image>
   <Image height="16" width="16" type="image/x-icon">http://s.dubsar-dictionary.com/favicon.ico</Image>
   <Query role="example" searchTerms="iconoclast"/>

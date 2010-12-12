@@ -37,7 +37,7 @@ class WordsControllerTest < ActionController::TestCase
     get :show, 'term' => '  World   War         2  '
 
     assert_not_nil assigns(:term)
-    assert_equal assigns(:term), 'World War 2'
+    assert_equal 'World War 2', assigns(:term)
   end
 
   teardown do

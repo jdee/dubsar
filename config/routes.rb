@@ -24,6 +24,7 @@ Dubsar::Application.routes.draw do
   match '/tour'    => 'words#tour'
 
   match '/(.:format)' => 'words#show'
+  match '/os(.:format)' => 'words#os'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
