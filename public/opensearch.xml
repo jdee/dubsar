@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1./">
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1./"
+                       xmlns="http://www.mozilla.org/2006/browser/search">
   <ShortName>Dubsar</ShortName>
   <Description>Search Dubsar</Description>
   <Contact>dubsar@dubsar-dictionary.com</Contact>
@@ -8,4 +9,6 @@
   <Image height="16" width="16" type="image/vnd.microsoft.icon">http://s.dubsar-dictionary.com/favicon.ico"</Image>
   <Query role="example" searchTerms="iconoclast"/>
   <Language>en-us</Language>
+  <InputEncoding>UTF-8</InputEncoding>
+  <moz:SearchForm>http://dubsar-dictionary.com<moz:Searchform>
 </OpenSearchDescription>
