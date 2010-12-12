@@ -18,6 +18,8 @@
 # For details on the Google subscribed link XML protocol, see
 # http://www.google.com/coop/docs/subscribedlinks/xml-simple.html
 
+require 'set'
+
 # assume text does not start with a space
 def get_line(text)
   return text if text.length <= 80
@@ -67,7 +69,7 @@ task :links => :environment do
         next if terms.include?(term)
         terms << term
 
-        xml.ResultSpec :id => term do |xml|
+        xml.ResultSpec :id => word.name do |xml|
           xml.Query term
           xml.Response do
             xml.Output "Dubsar - #{term}", :name => 'title'
