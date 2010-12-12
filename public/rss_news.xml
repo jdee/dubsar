@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Sun, 12 Dec 2010 15:30:00 GMT</lastBuildDate>
-    <pubDate>Sun, 12 Dec 2010 15:30:00 GMT</pubDate>
+    <lastBuildDate>Sun, 12 Dec 2010 16:00:00 GMT</lastBuildDate>
+    <pubDate>Sun, 12 Dec 2010 16:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>No more Facebook widgets on Dubsar</title>
+      <description>The Facebook &quot;Like&quot; button and box left a tracking cookie behind, allowing Facebook to know whenever you visited Dubsar.  They have been removed.  Please visit Dubsar on Facebook, but Dubsar will not use Facebook&apos;s widgets again until they are free of tracking cookies.</description>
+      <link>http://www.facebook.com/pages/Dubsar/155561501154946</link>
+      <guid isPermaLink="false">13</guid>
+      <pubDate>Sun, 12 Dec 2010 16:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar is a Search Engine</title>
       <description>Dubsar now supports the OpenSearch protocol and can be added to your browser&apos;s list of search engines.</description>

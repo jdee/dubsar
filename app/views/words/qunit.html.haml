@@ -23,7 +23,7 @@
     %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
     !=thumbnail_link_tags
     !=stylesheet_link_merged :qunit
-    =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
+    -# =javascript_include_tag 'http://connect.facebook.net/en_US/all.js#xfbml=1'
     =csrf_meta_tag
     %meta{:name => 'Description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
     %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, Coral CDN, English'}
@@ -54,8 +54,8 @@
             !=buzz_link('http://dubsar-dictionary.com/qunit')
           %td#tweet-link{:style => 'width: 55px;'}
             !=tweet_link('http://dubsar-dictionary.com/qunit', '#dubsar #qunit')
-          %td#facebook-like-button{:style => 'width: 90px;'}
-            !=facebook_like_button('http://dubsar-dictionary.com/qunit')
+          -# %td#facebook-like-button{:style => 'width: 90px;'}
+          -#   !=facebook_like_button('http://dubsar-dictionary.com/qunit')
     %h4{:style => "font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; color: #{theme_color};"}
       The Dubsar QUnit test suite puts elements of Dubsar through a
       sequence of automated tests.

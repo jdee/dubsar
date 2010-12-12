@@ -49,6 +49,7 @@ EOF
     end
   end
 
+=begin
   def facebook_like_button(url='http://dubsar-dictionary.com')
     s = <<EOF
 <fb:like href="#{url}" layout="button_count" colorscheme="light"></fb:like>
@@ -60,6 +61,7 @@ EOF
 <fb:like-box href="http://www.facebook.com/pages/Dubsar/155561501154946" width="200" connections="0" stream="false" header="false" colorscheme="dark"></fb:like-box>
 EOF
   end
+=end
 
   def tweet_link(url='http://dubsar-dictionary.com', text='#dubsar')
     s = <<EOF
