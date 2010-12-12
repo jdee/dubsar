@@ -69,7 +69,9 @@ task :links => :environment do
         next if terms.include?(term)
         terms << term
 
-        xml.ResultSpec :id => word.name do |xml|
+        term = word.name
+
+        xml.ResultSpec :id => term do |xml|
           xml.Query term
           xml.Response do
             xml.Output "Dubsar - #{term}", :name => 'title'
