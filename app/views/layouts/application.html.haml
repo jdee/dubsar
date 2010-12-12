@@ -45,14 +45,14 @@
           %tr
             %td#delicious-link
               !=delicious_link
-            %td#reddit-button
-              !=reddit_button
-            %td#su-link
-              !=su_link
-            %td#buzz-link
-              !=buzz_link
-            %td#tweet-link
-              !=tweet_link
+            -# %td#reddit-button
+            -#   !=reddit_button
+            -# %td#su-link
+            -#   !=su_link
+            -# %td#buzz-link
+            -#   !=buzz_link
+            -# %td#tweet-link
+            -#   !=tweet_link
             -# %td#facebook-like-button
             -#   !=facebook_like_button
       =render :partial => 'shared/theme_picker'
@@ -66,5 +66,5 @@
       =render :partial => 'shared/footer'
 
     != javascript_include_merged :base
-    =javascript_include_tag 'http://www.google.com/buzz/api/button.js'
-    =javascript_include_tag 'http://platform.twitter.com/widgets.js'
+    -# =javascript_include_tag 'http://www.google.com/buzz/api/button.js'
+    -# =javascript_include_tag 'http://platform.twitter.com/widgets.js'

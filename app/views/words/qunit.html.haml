@@ -44,16 +44,16 @@
     %table#social-links{:style => 'display: inline-box; position: absolute; top: 1.5ex; left: 50ex;'}
       %tbody
         %tr
-          %td#delicious-link{:style => 'width: 10px;'}
+          %td#delicious-link{:style => "color: #{theme_color}"}
             !=delicious_link('http://dubsar-dictionary.com/qunit','Dubsar QUnit Test Suite')
-          %td#reddit-button{:style => 'width: 19px;'}
-            !=reddit_button('http://dubsar-dictionary.com/qunit')
-          %td#su-link{:style => 'width: 20px;'}
-            !=su_link('http://dubsar-dictionary.com/qunit')
-          %td#buzz-link{:style => 'width: 52px;'}
-            !=buzz_link('http://dubsar-dictionary.com/qunit')
-          %td#tweet-link{:style => 'width: 55px;'}
-            !=tweet_link('http://dubsar-dictionary.com/qunit', '#dubsar #qunit')
+          -# %td#reddit-button{:style => 'width: 19px;'}
+          -#   !=reddit_button('http://dubsar-dictionary.com/qunit')
+          -# %td#su-link{:style => 'width: 20px;'}
+          -#   !=su_link('http://dubsar-dictionary.com/qunit')
+          -# %td#buzz-link{:style => 'width: 52px;'}
+          -#   !=buzz_link('http://dubsar-dictionary.com/qunit')
+          -# %td#tweet-link{:style => 'width: 55px;'}
+          -#   !=tweet_link('http://dubsar-dictionary.com/qunit', '#dubsar #qunit')
           -# %td#facebook-like-button{:style => 'width: 90px;'}
           -#   !=facebook_like_button('http://dubsar-dictionary.com/qunit')
     %h4{:style => "font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; color: #{theme_color};"}
@@ -101,5 +101,5 @@
       =render 'shared/footer'
 
     !=javascript_include_merged :qunit
-    =javascript_include_tag 'http://www.google.com/buzz/api/button.js'
-    =javascript_include_tag 'http://platform.twitter.com/widgets.js'
+    -# =javascript_include_tag 'http://www.google.com/buzz/api/button.js'
+    -# =javascript_include_tag 'http://platform.twitter.com/widgets.js'
