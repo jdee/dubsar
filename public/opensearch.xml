@@ -4,8 +4,7 @@
   <Description>Search Dubsar</Description>
   <Tags>dubsar dict</Tags>
   <Contact>dubsar@dubsar-dictionary.com</Contact>
-  <Url type="text/html" template="http://dubsar-dictionary.com/?q={searchTerms}&amp;page={startPage}">
-  </Url>
+  <Url type="text/html" template="http://dubsar-dictionary.com/?term={searchTerms}&amp;page={startPage}"/>
   <Image height="16" width="16" type="image/vnd.microsoft.icon">http://s.dubsar-dictionary.com/favicon.ico"</Image>
   <Query role="example" searchTerms="iconoclast"/>
   <Language>en-us</Language>
