@@ -298,3 +298,69 @@
   #pane_13
     A. Yes.  Visit
     =link_to 'Dubsar on Facebook', 'http://www.facebook.com/pages/Dubsar/155561501154946', :title => 'Dubsar on Facebook'
+  %h2#faq_15
+    %a{:href => '#faq_15'}
+      Q. Does Dubsar use Cookies?
+  #pane_14
+    %p
+      A. Yes.  Dubsar uses four cookies, one of which is persistent:
+    %table
+      %tbody
+        %tr
+          %td
+            %em name
+          %td
+            %em type
+          %td
+            %em purpose
+        %tr
+          %td dubsar_theme
+          %td persistent
+          %td store the user&apos;s choice of light or dark display theme
+        %tr
+          %td dubsar_starting_pane
+          %td transient
+          %td store the open accordion pane
+        %tr
+          %td dubsar_starting_offset
+          %td transient
+          %td store the scroll offset of the result accordion
+        %tr
+          %td _dubsar_session
+          %td transient
+          %td maintain session state (used by Ruby on Rails&reg;)
+    %p
+      The only persistent cookie Dubsar uses is
+      %em dubsar_theme,
+      which simply registers your choice of display theme. The first
+      time the page is visited, this cookie is set to
+      &quot;light.&quot; It has a lifetime of thirty days.
+    %p
+      The other three cookies are transient, limited to a single
+      browser session.
+    %p
+      The
+      %em dubsar_starting_pane
+      and
+      %em dubsar_starting_offset
+      cookies are used to redraw the screen correctly on refresh, in
+      particular when returning an error (when no matching results are
+      found).
+    %p
+      Dubsar has no knowledge of your identity when you visit the site.
+      There is no authentication, no login, no user ID.  The
+      %em _dubsar_session
+      cookie identifies you to the server in an anonymous way, which is
+      useful, for example, when returning error messages.  This is a
+      standard technique, and it&apos;s built into Ruby on Rails&reg;.
+    %p
+      Dubsar conducted a brief experiment with links to social
+      networks, but eventually abandoned them because of a number of
+      problems involving cookies.  Now when you browse Dubsar, all
+      content loaded into your browser is hosted by Dubsar until you
+      leave the site.  All static content is hosted on the separate
+      sub-domain s.dubsar-dictionary.com, which will not serve web
+      pages and assigns no cookies, so if you
+      =link_to 'Link to Dubsar', link_path, :title => 'Link to Dubsar'
+      using the supplied HTML snippet, visitors to your site will not
+      acquire or transmit any additional cookies.
