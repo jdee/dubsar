@@ -310,7 +310,7 @@ dt {
   font-weight: bold;
 }
 
-#about a > img, span#delicious-link > a > img {
+#about a > img {
   border-style: none;
 }
 
@@ -318,19 +318,4 @@ textarea#link-snippet {
   font-family: Menlo, Monaco, Courier, Monospace;
   font-size: 60%;
   text-align: left;
-}
-
-span#delicious-link {
-  position: absolute;
-  top: 1.7ex;
-  left: 42.4ex;
-}
-
-#footer img.subscribe-button {
-  position: absolute;
-  border-style: none;
-  right: 0;
-  bottom: 0;
-  height: 48px;
-  width: 138px;
 }
