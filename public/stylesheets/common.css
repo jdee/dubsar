@@ -178,9 +178,9 @@ input#word-input {
 }
 
 #cuneiform-signs {
-  height: 2.5ex;
-  width: 6.6ex;
-  padding: 0.3ex;
+  height: 17px;
+  width: 46px;
+  padding: 0.4ex;
   vertical-align: bottom;
   border-style: solid;
 }
