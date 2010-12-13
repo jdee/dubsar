@@ -310,7 +310,7 @@ dt {
   font-weight: bold;
 }
 
-#about a > img, #delicious-link a > img {
+#about a > img, span#delicious-link > a > img {
   border-style: none;
 }
 
@@ -320,11 +320,10 @@ textarea#link-snippet {
   text-align: left;
 }
 
-table#social-links {
+span#delicious-link {
   position: absolute;
-  top: 1.2ex;
-  left: 42ex;
-  table-layout: fixed;
+  top: 1.7ex;
+  left: 42.4ex;
 }
 
 #footer img.subscribe-button {
