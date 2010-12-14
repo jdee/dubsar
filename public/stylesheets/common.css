@@ -191,11 +191,6 @@ input#word-input {
   text-align: justify;
 }
 
-#thoreau {
-  font-size: small;
-  margin: 0 6em;
-}
-
 span.star-icon-span {
   display: inline;
   position: relative;

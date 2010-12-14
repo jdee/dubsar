@@ -76,7 +76,7 @@ class WordsController < ApplicationController
 
     # show and index use the same URL
     unless @term
-      @announcement = "Dubsar is now officially launched"
+      @announcement = nil
       render(:action => :index)
       return
     end

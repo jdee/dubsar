@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Sun, 12 Dec 2010 16:45:00 GMT</lastBuildDate>
-    <pubDate>Sun, 12 Dec 2010 16:45:00 GMT</pubDate>
+    <lastBuildDate>Tue, 14 Dec 2010 00:00:00 GMT</lastBuildDate>
+    <pubDate>Tue, 14 Dec 2010 00:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,18 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Thirty Days of Dubsar</title>
+      In its first thirty days, Dubsar carried on a brief, ill-fated
+      flirtation with social networks that collapsed in a heap of
+      JavaScript and tracking cookies. After washing them out of its
+      hair, Dubsar has undergone a number of upgrades and performance
+      improvements and gained some new features.
+      <description>No, it&apos;s not a Kurosawa film.  In its first thirty days, Dubsar carried on a brief, ill-fated flirtation with social networks that collapsed in a heap of JavaScript and tracking cookies. Having washed them out of its hair, Dubsar has undergone a number of upgrades and performance improvements and gained some new features, like OpenSearch support so that you can add it to your browser&apos;s list of search engines and search Dubsar, complete with live suggestions, right from your browser&apos;s search box. This is Release 1.0.3 of Dubsar. Look for further improvements in 2011, notably a mobile edition.  Happy Holidays!</description>
+      <link>https://github.com/jdee/dubsar/wiki/Release-Notes-1.0.3</link>
+      <guid isPermaLink="false">14</guid>
+      <pubDate>Tue, 14 Dec 2010 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>No more Social widgets on Dubsar</title>
       <description>The Facebook &quot;Like&quot; button and box left a tracking cookie behind, allowing Facebook to know whenever you visited Dubsar.  They have been removed.  Please visit Dubsar on Facebook, but Dubsar will not use Facebook&apos;s widgets again until they are free of tracking cookies. While Facebook was the worst offender, sending a cookie even if you were not logged in, most of the other networks were also notified whenever you visited the site. Only Delicious provides a cookie-free image, so it remains.</description>
