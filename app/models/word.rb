@@ -52,9 +52,10 @@ class Hash
         :conditions => [ "inflections.name #{operator} ?", copy.delete(:term) ],
         :joins => 'INNER JOIN inflections ON words.id = inflections.word_id')
     when :words
-      copy.merge! :conditions => [ "name #{operator} ?", copy.delete(:term) ]
+      copy.merge! :conditions => [ "words.name #{operator} ?", copy.delete(:term) ]
     end
     copy.merge!(:page => copy[:page]) if copy.has_key?(:page)
+    copy.merge!(:include => [:inflections, { :senses => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ] } ])
     copy.symbolize_keys
   end
 
