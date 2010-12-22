@@ -55,7 +55,6 @@ class Hash
       copy.merge! :conditions => [ "words.name #{operator} ?", copy.delete(:term) ]
     end
     copy.merge!(:page => copy[:page]) if copy.has_key?(:page)
-    copy.merge!(:include => [:inflections, { :senses => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ] } ])
     copy.symbolize_keys
   end
 

@@ -45,7 +45,8 @@ class WordsController < ApplicationController
 
         local_params = params.clone
         local_params[:term] = "#{@term}%"
-        @words = Word.search local_params.merge(:offset => 0, :limit => 10,
+        @words = Word.search local_params.merge(:select => 'name',
+          :offset => 0, :limit => 10,
           :order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
 
         # The uniq method call is case-sensitive.  It has the effect of
@@ -98,7 +99,18 @@ class WordsController < ApplicationController
     respond_to do |format|
       format.html do
         @title = params[:title]
-        @words = Word.search params.merge(:page => params[:page], :order => 'name ASC, part_of_speech ASC')
+        options = params.symbolize_keys
+        @words = Word.search options.merge(:page => params[:page],
+          :order => 'words.name ASC, words.part_of_speech ASC',
+          :include => [
+            :inflections,
+            { :senses => [
+              { :synset => :words },
+              { :senses_verb_frames => :verb_frame },
+              :pointers ]
+            }
+          ]
+        )
         if @words.count > 0
           render :action => 'show'
         else
@@ -127,7 +139,8 @@ class WordsController < ApplicationController
         local_params[:limit] = self.class.max_json_limit if
           local_params[:limit] > self.class.max_json_limit
 
-        @words = Word.search local_params.merge(:order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
+        @words = Word.search local_params.merge(:select => 'name',
+          :order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
 
         # The uniq method call is case-sensitive.  It has the effect of
         # collapsing multiple parts of speech, e.g. cold (n.) and cold
