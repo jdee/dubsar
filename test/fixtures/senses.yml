@@ -98,15 +98,3 @@ sweet:
   word: sweet
   freq_cnt: 8
   synset_index: 2
-
-cluster:
-  synset: cluster
-  word: cluster
-  freq_cnt: 0
-  synset_index: 1
-
-good_well:
-  synset: cluster
-  word: good
-  freq_cnt: 0
-  synset_index: 2

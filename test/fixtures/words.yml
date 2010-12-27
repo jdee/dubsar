@@ -89,8 +89,3 @@ sweet:
   name: sweet
   part_of_speech: adjective
   freq_cnt: 8
-
-cluster:
-  name: well(p)
-  part_of_speech: adjective
-  freq_cnt: 0
