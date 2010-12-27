@@ -28,8 +28,8 @@ class Synset < ActiveRecord::Base
   # Return a collection of +Word+ model objects excluding the one
   # passed in as the +word+ argument.
   def words_except(word)
-    words.find :all, :conditions => [ "name NOT ILIKE ?", word.name ],
-      :order => 'name'
+    words.find :all, :order => 'name',
+      :conditions => [ "name != ?", word.name ]
   end
 
   def gloss
