@@ -264,9 +264,15 @@ div#tour-link-div {
 #tooltip {
   position: absolute;
   max-width: 45%;
+  max-height: 90%;
+  overflow: auto;
   padding: 0.7ex;
   border: 1px solid;
   z-index: 99999;
+}
+
+#tooltip-container {
+  max-width: 100%;
 }
 
 #tooltip .line {
