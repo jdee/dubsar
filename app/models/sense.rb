@@ -32,15 +32,12 @@ class Sense < ActiveRecord::Base
   end
 
   def unique_pointers
+    return @unique_pointers if @unique_pointers
     @unique_pointers = {}
-    pointers.each do |pointer|
-      pointer.target.words.each do |word|
-        @unique_pointers[pointer.ptype] ||= []
-        @unique_pointers[pointer.ptype] << word unless @unique_pointers[pointer.ptype].include?(word)
-      end
-    end
-    @unique_pointers.each do |ptype, list|
-      list.sort!
+    pointers.group_by(&:ptype).each do |ptype, ptrs|
+      @unique_pointers[ptype] = ptrs.inject([]) do |result, p|
+        result.concat p.target.words
+      end.uniq.sort
     end
     @unique_pointers
   end
