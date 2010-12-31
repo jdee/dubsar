@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Tue, 14 Dec 2010 00:00:00 GMT</lastBuildDate>
-    <pubDate>Tue, 14 Dec 2010 00:00:00 GMT</pubDate>
+    <lastBuildDate>Sat, 01 Jan 2011 00:00:00 GMT</lastBuildDate>
+    <pubDate>Sat, 01 Jan 2011 00:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Happy New Year</title>
+      <description>Dubsar is open New Year&apos;s Day!</description>
+      <link>http://dubsar-dictionary.com</link>
+      <pubDate>Sat, 01 Jan 2011 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">15</guid>
+    </item>
     <item>
       <title>Thirty Days of Dubsar</title>
       <description>No, it&apos;s not a Kurosawa film.  In its first thirty days, Dubsar carried on a brief, ill-fated flirtation with social networks that collapsed in a heap of JavaScript and tracking cookies. Having washed them out of its hair, Dubsar has undergone a number of upgrades and performance improvements and gained some new features, like OpenSearch support so that you can add it to your browser&apos;s list of search engines and search Dubsar, complete with live suggestions, right from your browser&apos;s search box. This is Release 1.0.3 of Dubsar. Look for further improvements in 2011, notably a mobile edition.  Happy Holidays!</description>
