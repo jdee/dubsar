@@ -19,6 +19,7 @@
 
 - content_for :description do
   %meta{:name => 'Description', :content => meta_description(search_title, @words)}
+  !=canonical_link_tag
 
 #accordion
   = render @words

@@ -53,4 +53,14 @@ module WordsHelper
       entry
     end.join('; ')
   end
+
+  def canonical_link_tag
+    url = "http://dubsar-dictionary.com?term=#{URI.encode @term}"
+    url += "&match=#{@match}" unless @match.blank?
+    url += "&title=#{URI.encode @title}" unless @title.blank?
+
+    s = <<EOF
+<link rel="canonical" href="#{url}"/>
+EOF
+  end
 end

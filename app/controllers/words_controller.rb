@@ -88,9 +88,9 @@ class WordsController < ApplicationController
 
     redirect_with_error('bad request') and return if @term.blank?
 
-    match = params[:match]
+    @match = params[:match]
 
-    case match
+    case @match
     when nil, '', 'case', 'exact', 'regexp'
     else
       redirect_with_error('bad request') and return
