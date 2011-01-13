@@ -63,4 +63,10 @@ module WordsHelper
 <link rel="canonical" href="#{url}"/>
 EOF
   end
+
+  def word_link(word)
+    s = <<EOF
+<a href="/?term=#{URI.encode word.name}##{word.unique_name}" title="#{word.name}" class="search-link">#{word.name}</a>
+EOF
+  end
 end
