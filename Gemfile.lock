@@ -28,7 +28,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
-    arel (2.0.6)
+    arel (2.0.7)
     builder (2.1.2)
     capistrano (2.5.19)
       highline
@@ -51,10 +51,10 @@ GEM
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.0.23)
+    net-ssh (2.0.24)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
-    pg (0.10.0)
+    pg (0.10.1)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -79,7 +79,7 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.23)
+    tzinfo (0.3.24)
     will_paginate (3.0.pre2)
 
 PLATFORMS
