@@ -18,13 +18,13 @@
 javascripts:
 - base:
   - jquery-1.4.4.min
-  - jquery-ui-1.8.7.custom.min
+  - jquery-ui-1.8.9.custom.min
   - jquery.watermark.min
   - application
   - application-ui
 - qunit:
   - jquery-1.4.4.min
-  - jquery-ui-1.8.7.custom.min
+  - jquery-ui-1.8.9.custom.min
   - qunit
   - jquery.watermark.min
   - jquery.mockjax.min
@@ -34,14 +34,14 @@ javascripts:
   - application-ui_test
 stylesheets:
 - base:
-  - jquery-ui-1.8.7.dark
+  - jquery-ui-1.8.9.dark
   - application-dark
-  - jquery-ui-1.8.7.light
+  - jquery-ui-1.8.9.light
   - application-light
   - common
 - qunit:
-  - jquery-ui-1.8.7.dark
-  - jquery-ui-1.8.7.light
+  - jquery-ui-1.8.9.dark
+  - jquery-ui-1.8.9.light
   - application-dark
   - application-light
   - qunit
