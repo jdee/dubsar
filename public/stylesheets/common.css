@@ -244,7 +244,7 @@ div#tour-link-div {
   padding-left: 0.1em;
 }
 
-#about ul, .sql-help-dialog ul {
+#about ul, #fairies ul, .sql-help-dialog ul {
   list-style-type: none;
 }
 
@@ -319,4 +319,10 @@ textarea#link-snippet {
   font-family: Menlo, Monaco, Courier, Monospace;
   font-size: 60%;
   text-align: left;
+}
+
+#fairy_text {
+  width: 75%;
+  float: left;
+  display: inline-block;
 }

@@ -77,7 +77,7 @@ class WordsController < ApplicationController
 
     # show and index use the same URL
     unless @term
-      @announcement = nil
+      # flash[:notice] = 'An announcement'
       render(:action => :index)
       return
     end
