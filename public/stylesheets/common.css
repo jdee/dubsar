@@ -321,8 +321,15 @@ textarea#link-snippet {
   text-align: left;
 }
 
-#fairy_text {
+table#fairies td {
+  vertical-align: top;
+}
+
+td#fairy_text {
   width: 75%;
-  float: left;
-  display: inline-block;
+}
+
+img#fairies-image {
+  width: 80px;
+  height: 80px;
 }

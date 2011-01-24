@@ -20,6 +20,7 @@
 
 - content_for :description do
   %meta{:name => 'Description', :content => 'The Austin Guardian Fairies are dedicated to keeping LGBT Austin safe.'}
+  %meta{:name => 'Keywords', :content => 'Austin, LGBT, gay, lesbian, community watch'}
   %meta{:property => 'og:title', :content => 'Austin Guardian Fairies'}
   %meta{:property => 'og:type', :content => 'non_profit'}
   %meta{:property => 'og:url', :content => 'http://dubsar-dictionary.com/fairies'}
@@ -31,23 +32,25 @@
   %link{:rel => 'canonical', :href => 'http://dubsar-dictionary.com/fairies'}
   !=thumbnail_link_tag 'fairies-big.png'
 
-#fairies
-  #fairy_text
-    =render :partial => 'fairy_text'
-  #fairy_form
-    =form_for @fairy do |f|
-      =hidden_field_tag :back, 'yes', :id => 'fairy_back'
-      %p
-        =f.text_field :name, :id => 'fairy_name', :title => 'name'
-      %p
-        =f.text_field :email, :id => 'fairy_email', :title => 'e-mail'
-      %p
-        =f.text_field :phone_number, :id => 'fairy_phone_number', :title => 'phone number'
-      %p
-        %button#volunteer{:type => 'submit', :title => 'volunteer'} volunteer
-    %p
-      By clicking
-      %em volunteer,
-      you consent to be contacted by the Austin Guardian Fairies. This
-      is not a secure web form. Your contact information will be sent
-      unencrypted to our server.
+%table#fairies
+  %tbody
+    %tr
+      %td#fairy_text
+        =render :partial => 'fairy_text'
+      %td#fairy_form
+        =form_for @fairy do |f|
+          =hidden_field_tag :back, 'yes', :id => 'fairy_back'
+          %p
+            =f.text_field :name, :id => 'fairy_name', :title => 'name'
+          %p
+            =f.text_field :email, :id => 'fairy_email', :title => 'e-mail'
+          %p
+            =f.text_field :phone_number, :id => 'fairy_phone_number', :title => 'phone number'
+          %p
+            %button#volunteer{:type => 'submit', :title => 'volunteer'} volunteer
+        %p
+          By clicking
+          %em volunteer,
+          you consent to be contacted by the Austin Guardian Fairies. This
+          is not a secure web form. Your contact information will be sent
+          unencrypted to our server.
