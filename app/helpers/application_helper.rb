@@ -15,14 +15,16 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 module ApplicationHelper
+  def thumbnail_link_tag(src, type="image/png")
+    "<link rel=\"thumbnail\" href=\"#{image_path src}\" type=\"#{type}\"/>"
+  end
+
   def thumbnail_link_tags
-    s = <<EOF
-<link rel="thumbnail" href="#{image_path 'dubsar.png'}" type="image/png"/>
-<link rel="thumbnail" href="#{image_path 'autocomplete-thumbnail.png'}" type="image/png"/>
-<link rel="thumbnail" href="#{image_path 'browse-thumbnail.png'}" type="image/png"/>
-<link rel="thumbnail" href="#{image_path 'tooltip-thumbnail.png'}" type="image/png"/>
-<link rel="thumbnail" href="#{image_path 'view-thumbnail.png'}" type="image/png"/>
-EOF
+    thumbnail_link_tag('dubsar.png') + "\n" +
+    thumbnail_link_tag('autocomplete-thumbnail.png') + "\n" +
+    thumbnail_link_tag('browse-thumbnail.png') + "\n" +
+    thumbnail_link_tag('tooltip-thumbnail.png') + "\n" +
+    thumbnail_link_tag('view-thumbnail.png')
   end
 
   def tour_link_tag(name, description)
