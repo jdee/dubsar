@@ -14,33 +14,3 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-class ApplicationController < ActionController::Base
-  protect_from_forgery
-
-  before_filter :get_theme_cookie
-
-  # Retrieve the user's <tt>dubsar_theme</tt> cookie before rendering
-  # any view.
-  def get_theme_cookie
-    @theme = cookies['dubsar_theme'] || default_theme
-  end
-
-  def default_theme
-    'light'
-  end
-
-  def redirect_with_error(errmsg)
-    flash[:error] = errmsg
-    redirect_to redirect_target
-  end
-
-  def redirect_with_info(infomsg)
-    flash[:notice] = infomsg
-    redirect_to redirect_target
-  end
-
-  def redirect_target
-    params[:back] == 'yes' ? :back : :root
-  end
-end

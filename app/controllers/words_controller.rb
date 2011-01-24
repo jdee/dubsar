@@ -177,11 +177,6 @@ class WordsController < ApplicationController
 
   private
 
-  def redirect_with_error(errmsg)
-    flash[:error] = errmsg
-    redirect_to(params[:back] == 'yes' ? :back : :root)
-  end
-
   def setup_captions
     @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania' +
       ' Sumerian Dictionary'

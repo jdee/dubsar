@@ -15,32 +15,18 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class ApplicationController < ActionController::Base
-  protect_from_forgery
+class CreateFairies < ActiveRecord::Migration
+  def self.up
+    create_table :fairies do |t|
+      t.string :name , :null => false
+      t.string :email, :null => false
+      t.string :phone_number
 
-  before_filter :get_theme_cookie
-
-  # Retrieve the user's <tt>dubsar_theme</tt> cookie before rendering
-  # any view.
-  def get_theme_cookie
-    @theme = cookies['dubsar_theme'] || default_theme
+      t.timestamps
+    end
   end
 
-  def default_theme
-    'light'
-  end
-
-  def redirect_with_error(errmsg)
-    flash[:error] = errmsg
-    redirect_to redirect_target
-  end
-
-  def redirect_with_info(infomsg)
-    flash[:notice] = infomsg
-    redirect_to redirect_target
-  end
-
-  def redirect_target
-    params[:back] == 'yes' ? :back : :root
+  def self.down
+    drop_table :fairies
   end
 end

@@ -16,6 +16,8 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Dubsar::Application.routes.draw do
+  resources :fairies, :only => [ :index, :create ]
+
   match '/about'   => 'words#about'
   match '/faq'     => 'words#faq'
   match '/license' => 'words#license'
