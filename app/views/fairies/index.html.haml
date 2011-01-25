@@ -38,6 +38,9 @@
       %td#fairy_text
         =render :partial => 'fairy_text'
       %td#fairy_form
+        %h4 Join us
+        %p
+          Sign up to help the Austin Guardian Fairies.
         =form_for @fairy do |f|
           =hidden_field_tag :back, 'yes', :id => 'fairy_back'
           %p
@@ -54,3 +57,26 @@
           you consent to be contacted by the Austin Guardian Fairies. This
           is not a secure web form. Your contact information will be sent
           unencrypted to our server.
+
+        %h4
+          Contact us at
+          =link_to 'fairies@dubsar-dictionary.com.', 'mailto:fairies@dubsar-dictionary.com', :title => 'Contact us', :class => 'undecorated'
+
+        %h4
+          Find us on
+          =link_to 'Facebook', 'http://www.facebook.com/pages/Austin-Guardian-Fairies/176377635737398', :title => 'Austin Guardian Fairies on Facebook'
+
+        %h4
+          Follow us on
+          =link_to 'Twitter', 'http://twitter.com/guardianfairies', :title => 'Austin Guardian Fairies on Twitter'
+
+        %h4 Link to us from your website
+
+        %p
+          Just copy the HTML snippet below to add a link like this one:
+
+        %p
+          !=html_for_fairies_link
+
+        %textarea#fairies-snippet{:name => "fairies-snippet", :rows => "8", :cols => "40"}
+          =html_for_fairies_link

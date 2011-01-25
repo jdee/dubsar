@@ -42,6 +42,12 @@ TAG
 EOF
   end
 
+  def html_for_fairies_link
+    s = <<EOF
+<a href="http://dubsar-dictionary.com/fairies" title="Austin Guardian Fairies" target="_blank"><img src="#{asset_host}/images/fairies-20x20.png" alt="AGF" height="20" width="20" style="vertical-align: top; border-style: none;"/></a>
+EOF
+  end
+
   def asset_host
     host = ActionController::Base.asset_host
     if host

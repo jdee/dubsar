@@ -327,9 +327,14 @@ table#fairies td {
 
 td#fairy_text {
   width: 75%;
+  font-size: large;
 }
 
 img#fairies-image {
   width: 80px;
   height: 80px;
+}
+
+textarea#fairies-snippet {
+  font-size: small;
 }
