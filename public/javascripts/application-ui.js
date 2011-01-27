@@ -329,7 +329,7 @@
         if ($tt_timer) {
           clearTimeout($tt_timer);
         }
-        $tt_timer = setTimeout(fix_tooltip, 1500);
+        $tt_timer = setTimeout(fix_tooltip, 300);
       });
 
       function fix_tooltip() {
