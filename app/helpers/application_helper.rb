@@ -44,7 +44,7 @@ EOF
 
   def html_for_fairies_link
     s = <<EOF
-<a href="http://austinguardianfairies.org" title="Austin Guardian Fairies" target="_blank"><img src="#{asset_host}/images/fairies-20x20.png" alt="AGF" height="20" width="20" style="vertical-align: top; border-style: none;"/></a>
+<a href="#{fairies_url}" title="Austin Guardian Fairies" target="_blank"><img src="#{asset_host}/images/fairies-20x20.png" alt="AGF" height="20" width="20" style="vertical-align: top; border-style: none;"/></a>
 EOF
   end
 
@@ -55,6 +55,10 @@ EOF
     else
       host = ''
     end
+  end
+
+  def fairies_url
+    'http://austinguardianfairies.org'
   end
 
   def theme_color
