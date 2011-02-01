@@ -61,6 +61,10 @@ EOF
     'http://austinguardianfairies.org'
   end
 
+  def fairies_email
+    'fairies@austinguardianfairies.org'
+  end
+
   def theme_color
     case @theme
     when 'light'

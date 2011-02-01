@@ -29,7 +29,7 @@
   %meta{:property => 'og:site_name', :content => 'The Dubsar Project'}
   %meta{:property => 'fb:admins', :content => '1015821519'}
   %meta{:property => 'og:description', :content => 'The Austin Guardian Fairies are a volunteer community watch group dedicated to keeping LGBT Austin safe.'}
-  %meta{:property => 'og:email', :content => 'fairies@dubsar-dictionary.com'}
+  %meta{:property => 'og:email', :content => fairies_email}
   %link{:rel => 'canonical', :href => 'http://dubsar-dictionary.com/fairies'}
   !=thumbnail_link_tag 'fairies-big.png'
 
@@ -61,7 +61,7 @@
 
         %h4
           Contact us at
-          =link_to 'fairies@dubsar-dictionary.com.', 'mailto:fairies@dubsar-dictionary.com', :title => 'Contact us', :class => 'undecorated'
+          =link_to fairies_email, "mailto:#{fairies_email}", :title => 'Contact us', :class => 'undecorated'
 
         %h4
           Find us on
