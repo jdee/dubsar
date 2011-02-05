@@ -48,7 +48,7 @@ class Pointer < ActiveRecord::Base
         'hyponym' => 'more specific terms',
         'instance hyponym' => 'instances of this class',
         'member holonym' => 'wholes of which this is a member',
-        'substance holonym' => 'wholes of which this is a substance',
+        'substance holonym' => 'wholes of which this is an ingredient',
         'part holonym' => 'wholes of which this is a part',
         'member meronym' => 'constituent members',
         'substance meronym' => 'constituent substances',
