@@ -15,13 +15,11 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require 'bundler/capistrano'
+require 'rvm/capistrano'
 
-# From rvm.beginrescueend.com
-$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-
-set :rvm_ruby_string, 'ree'        # Or whatever env you want it to run in.
+set :rvm_ruby_string, 'ree-1.8.7-2011.01'
 
 set :user, 'dubsar'
 set :domain, 'dubsar-dictionary.com'
