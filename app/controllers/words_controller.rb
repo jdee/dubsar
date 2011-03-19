@@ -19,6 +19,7 @@ class WordsController < ApplicationController
   respond_to :html, :json
   before_filter :init_count
   before_filter :setup_captions
+  before_filter :munge_search_params
 
   @max_json_limit = 1000
 
@@ -171,15 +172,18 @@ class WordsController < ApplicationController
     end
   end
 
-  def init_count
-    @count = -1
-  end
-
   private
 
   def setup_captions
     @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania' +
       ' Sumerian Dictionary'
     @dubsar_alt = 'dub-sar'
+  end
+
+  def init_count
+    @count = -1
+  end
+
+  def munge_search_params
   end
 end
