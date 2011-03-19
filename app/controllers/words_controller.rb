@@ -19,7 +19,7 @@ class WordsController < ApplicationController
   respond_to :html, :json
   before_filter :init_count
   before_filter :setup_captions
-  before_filter :munge_search_params
+  before_filter :munge_search_params, :only => [ :show ]
 
   @max_json_limit = 1000
 
@@ -74,32 +74,8 @@ class WordsController < ApplicationController
   # Retrieve all words matching the specified +term+ and render as
   # HTML or JSON, one page at a time.
   def show
-    @term = params[:term]
-
-    # show and index use the same URL
-    unless @term
-      # flash[:notice] = 'An announcement'
-      render(:action => :index)
-      return
-    end
-
-    # strip leading and trailing white space and compress internal
-    # whitespace
-    @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
-
-    redirect_with_error('bad request') and return if @term.blank?
-
-    @match = params[:match]
-
-    case @match
-    when nil, '', 'case', 'exact', 'regexp'
-    else
-      redirect_with_error('bad request') and return
-    end
-
     respond_to do |format|
       format.html do
-        @title = params[:title]
         options = params.symbolize_keys
         @words = Word.search options.merge(:page => params[:page],
           :order => 'words.name ASC, words.part_of_speech ASC',
@@ -185,5 +161,39 @@ class WordsController < ApplicationController
   end
 
   def munge_search_params
+    # DEBT: This is an unpleasant kluge, but refining this will
+    # gradually help weed duplicates out of search engine indices.
+    @term = params[:term]
+
+    # show and index use the same URL
+    unless @term
+      # flash[:notice] = 'An announcement'
+      render(:action => :index)
+      return
+    end
+
+    # strip leading and trailing white space and compress internal
+    # whitespace
+    @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
+
+    redirect_with_error('bad request') and return false if @term.blank?
+
+    @match = params[:match]
+    @title = params[:title]
+
+    case @match
+    when nil, ''
+      if @term =~ /^[A-Z]%$/
+        letter = /^([A-Z])%$/.match(@term)[1]
+        puts "letter = #{letter.inspect}"
+        @match = 'regexp'
+        @term = "^[#{letter}#{letter.downcase}]"
+        @title = letter
+      end
+    when 'case', 'exact', 'regexp'
+    else
+      redirect_with_error('bad request') and return false
+    end
+
   end
 end

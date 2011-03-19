@@ -58,6 +58,7 @@ module WordsHelper
     url = "http://dubsar-dictionary.com#{url_for :action => :show, :term => @term}"
     url += "&match=#{@match}" unless @match.blank?
     url += "&title=#{URI.encode @title}" unless @title.blank?
+    url += "&page=#{params[:page]}" unless params[:page].blank? or params[:page].to_i == 1
 
     s = <<EOF
 <link rel="canonical" href="#{url}"/>
