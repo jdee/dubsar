@@ -17,13 +17,13 @@
 ---
 javascripts:
 - base:
-  - jquery-1.5.1.min
+  - jquery-1.6.min
   - jquery-ui-1.8.9.custom.min
   - jquery.watermark.min
   - application
   - application-ui
 - qunit:
-  - jquery-1.5.1.min
+  - jquery-1.6.min
   - jquery-ui-1.8.9.custom.min
   - qunit
   - jquery.watermark.min
