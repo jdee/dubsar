@@ -167,7 +167,7 @@ class WordsController < ApplicationController
 
     # show and index use the same URL
     unless @term
-      flash[:notice] = 'Dubsar is undergoing a number of changes. Thanks for your patience.'
+      flash.now[:notice] = 'Dubsar is undergoing a number of changes. Thanks for your patience.'
       render :action => :index
       return
     end
