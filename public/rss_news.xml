@@ -4,8 +4,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Tue, 25 Jan 2011 00:00:00 GMT</lastBuildDate>
-    <pubDate>Tue, 25 Jan 2011 00:00:00 GMT</pubDate>
+    <lastBuildDate>Mon, 23 May 2011 13:00:00 GMT</lastBuildDate>
+    <pubDate>Mon, 23 May 2011 13:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -14,6 +14,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Changes to Dubsar</title>
+      <description>Dubsar is undergoing a number of changes over the next few weeks, some visible, some not. The site may not be as reliable as usual. If it seems to be down, don&apos;t fret. It will be back up soon.</description>
+      <link>http://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">17</guid>
+      <pubDate>Mon, 23 May 2011 13:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Austin Guardian Fairies</title>
       <description>Dubsar is temporarily hosting the Austin Guardian Fairies online.</description>
