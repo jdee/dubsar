@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,23 +15,32 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+require 'spec_helper'
 
-class SynsetTest < ActiveSupport::TestCase
-  should have_many :senses
-  should validate_presence_of :definition
-  should validate_presence_of :lexname
+describe Synset do
+  let(:no_definition) { Synset.new :definition => nil, :lexname => 'Noun.tops' }
+  let(:no_lexname) { Synset.new :definition => 'a conundrum', :lexname => nil }
 
-  should 'return gloss and definition separately' do
-    bad = synsets(:bad)
-    assert_equal bad.gloss, 'the opposite of good'
-    assert_equal bad.samples.count, 2
+  fixtures :synsets, :words
+
+  it 'validates presence of :definition' do
+    no_definition.should_not be_valid
   end
 
-  should 'return words_except a certain word from the synset' do
+  it 'validates presence of :lexname' do
+    no_lexname.should_not be_valid
+  end
+
+  it 'returns gloss and definition separately' do
+    bad = synsets(:bad)
+    bad.gloss.should == 'the opposite of good'
+    bad.samples.count.should == 2
+  end
+
+  it 'returns words_except a certain word from the synset' do
     good = synsets(:good)
-    assert_equal good.words.count, 2
-    assert_equal good.words_except(words(:good)).count, 1
-    assert_equal good.words_except(words(:good)).first, words(:sweet)
+    good.words.count.should == 2
+    good.words_except(words(:good)).count.should == 1
+    good.words_except(words(:good)).first.should == words(:sweet)
   end
 end

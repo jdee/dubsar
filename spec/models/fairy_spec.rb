@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,10 +15,17 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+require 'spec_helper'
 
-class PointerTest < ActiveSupport::TestCase
-  should validate_presence_of :target
-  should validate_presence_of :sense
-  should validate_presence_of :ptype
+describe Fairy do
+  let(:no_name) { Fairy.new :name => nil, :email => 'user@example.com' }
+  let(:no_email) { Fairy.new :name => 'Fairy Nuff', :email => nil }
+
+  it 'validates presence of :name' do
+    no_name.should_not be_valid
+  end
+
+  it 'validates presence of :email' do
+    no_email.should_not be_valid
+  end
 end

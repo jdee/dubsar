@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -167,10 +167,13 @@ class Word < ActiveRecord::Base
     # Only attempt regular inflection of words that contain no
     # capitals, numbers, spaces, hyphens or other punctuation.
     if name =~ /^[a-z]+$/
-      if inflections.empty?
+      case
+      when part_of_speech.blank?
+        return # invalid anyway
+      when inflections.empty?
         method = "add_regular_#{part_of_speech}_inflections"
         self.send method
-      elsif part_of_speech == 'verb'
+      when part_of_speech == 'verb'
         # verbs have to be handled in more detail
         add_regular_verb_inflections
       end

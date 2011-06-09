@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,23 +15,23 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'string'
-require 'test_helper'
+require 'spec_helper'
 
-class StringTest < ActiveSupport::TestCase
-  should 'respond_to new methods' do
-    assert 'foo'.respond_to?(:upcase?)
-    assert 'bar'.respond_to?(:capitalized?)
+describe Sense do
+  fixtures :senses
+
+  let(:no_freq_cnt) { Sense.new :freq_cnt => nil, :synset_index => 1 }
+  let(:no_synset_index) { Sense.new :freq_cnt => 10, :synset_index => nil }
+
+  it 'validates presence of :freq_cnt' do
+    no_freq_cnt.should_not be_valid
   end
 
-  should 'detect all-uppercase words' do
-    assert 'ABC'.upcase?
-    assert(!'Abc'.upcase?)
+  it 'validates presence of :synset_index' do
+    no_synset_index.should_not be_valid
   end
 
-  should 'detect capitalized words' do
-    assert 'ABC'.capitalized?
-    assert 'Abc'.capitalized?
-    assert(!'aBc'.capitalized?)
+  it 'returns its word in an array as :words' do
+    senses(:noun).words.should == [ senses(:noun).word ]
   end
 end

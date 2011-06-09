@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,15 +15,11 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+require 'spec_helper'
 
-class SenseTest < ActiveSupport::TestCase
-  should belong_to :word
-  should belong_to :synset
-  should validate_presence_of :freq_cnt
-  should validate_presence_of :synset_index
-
-  should 'return its word in an array as :words' do
-    assert_equal senses(:noun).words.first, senses(:noun).word
+describe FairiesController do
+  it "gets :index" do
+    get :index
+    response.should be_success
   end
 end

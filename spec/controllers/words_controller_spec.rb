@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,33 +15,32 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+require 'spec_helper'
 
-class WordsControllerTest < ActionController::TestCase
-  setup do
+describe WordsController do
+  before :each do
     request.env['HTTP_REFERER'] = '/'
   end
 
-  should "get index" do
+  it "gets :index" do
     get :index
-    assert_response :success
+    response.should be_success
   end
 
-  should "get show view" do
+  it "gets :show view" do
     get :show, 'term' => 'slang'
-    assert_response :success
-    assert_not_nil assigns(:words)
+    response.should be_success
+    assigns(:words).should_not be_nil
   end
 
-  should "ignore excess white space" do
+  it "ignores excess white space" do
     get :show, 'term' => '  World   War         2  '
 
-    assert_not_nil assigns(:term)
-    assert_equal 'World War 2', assigns(:term)
+    assigns(:term).should_not be_nil
+    assigns(:term).should == 'World War 2'
   end
 
-  teardown do
-    assert_not_nil assigns(:theme)
+  after :each do
+    assigns(:theme).should_not be_nil
   end
-
 end

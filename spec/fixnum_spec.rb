@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,9 +15,19 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+require 'fixnum'
+require 'spec_helper'
 
-class FairyTest < ActiveSupport::TestCase
-  should validate_presence_of :name
-  should validate_presence_of :email
+describe Fixnum, "with comma-delimited thousands" do
+  before :each do
+    @number = 5_652
+  end
+
+  it 'produces the usual string by default' do
+    @number.to_s.should == "5652"
+  end
+
+  it 'produces a comma-delimited string when requested' do
+    @number.to_s(:comma_delimited).should == "5,652"
+  end
 end

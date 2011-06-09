@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,11 +15,12 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+require 'spec_helper'
 
-class FairiesControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+describe Inflection do
+  let(:no_name) { Inflection.new :name => nil }
+
+  it 'validates presence of :name' do
+    no_name.should_not be_valid
   end
 end

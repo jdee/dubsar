@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,86 +15,77 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-slang:
-  synset: slang
-  word: slang
+adjective:
+  name: foul
+  part_of_speech: adjective
   freq_cnt: 10
-  synset_index: 1
+
+adverb:
+  name: well
+  part_of_speech: adverb
+  freq_cnt: 10
+
+conjunction:
+  name: but
+  part_of_speech: conjunction
+  freq_cnt: 10
+
+interjection:
+  name: hey
+  part_of_speech: interjection
+  freq_cnt: 10
 
 noun:
-  synset: food
-  word: noun
+  name: food
+  part_of_speech: noun
   freq_cnt: 10
-  synset_index: 1
 
-grub:
-  synset: food
-  word: grub
+preposition:
+  name: from
+  part_of_speech: preposition
   freq_cnt: 10
-  synset_index: 2
 
-foul:
-  synset: foul
-  word: adjective
+pronoun:
+  name: you
+  part_of_speech: pronoun
   freq_cnt: 10
-  synset_index: 1
 
-well:
-  synset: well
-  word: adverb
+verb:
+  name: follow
+  part_of_speech: verb
   freq_cnt: 10
-  synset_index: 1
 
-but:
-  synset: but
-  word: conjunction
+slang:
+  name: slang
+  part_of_speech: noun
   freq_cnt: 10
-  synset_index: 1
-
-hey:
-  synset: hey
-  word: interjection
-  freq_cnt: 10
-  synset_index: 1
-
-from:
-  synset: from
-  word: preposition
-  freq_cnt: 10
-  synset_index: 1
-
-you:
-  synset: you
-  word: pronoun
-  freq_cnt: 10
-  synset_index: 1
-
-follow:
-  synset: follow
-  word: verb
-  freq_cnt: 10
-  synset_index: 1
 
 well_noun:
-  synset: well_noun
-  word: well_noun
+  name: well
+  part_of_speech: noun
   freq_cnt: 10
-  synset_index: 1
+
+bad_part_of_speech:
+  name: fudge
+  part_of_speech: thingy
+  freq_cnt: 10
+
+grub:
+  name: grub
+  part_of_speech: noun
+  freq_cnt: 10
 
 bad:
-  synset: bad
-  word: bad
+  name: bad
+  part_of_speech: adjective
   freq_cnt: 11
-  synset_index: 1
 
 good:
-  synset: good
-  word: good
+  name: good
+  part_of_speech: adjective
   freq_cnt: 9
-  synset_index: 1
 
 sweet:
-  synset: good
-  word: sweet
+  name: sweet
+  part_of_speech: adjective
   freq_cnt: 8
-  synset_index: 2

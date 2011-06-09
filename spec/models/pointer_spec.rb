@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,7 +15,24 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'test_helper'
+require 'spec_helper'
 
-class FairiesHelperTest < ActionView::TestCase
+describe Pointer do
+  fixtures :senses
+
+  let(:no_target) { Pointer.new :target => nil, :sense => senses(:slang), :ptype => 'attribute' }
+  let(:no_sense) { Pointer.new :target => senses(:grub), :sense => nil, :ptype => 'attribute' }
+  let(:no_ptype) { Pointer.new :target => senses(:grub), :sense => senses(:slang), :ptype => nil }
+
+  it 'validates presence of :target' do
+    no_target.should_not be_valid
+  end
+
+  it 'validates presence of :sense' do
+    no_sense.should_not be_valid
+  end
+
+  it 'validates presence of :ptype' do
+    no_ptype.should_not be_valid
+  end
 end

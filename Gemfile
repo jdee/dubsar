@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010 Jimmy Dee
+#  Copyright (C) 2010-11 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -26,5 +26,5 @@ gem 'pg'
 gem 'will_paginate', '~> 3.0.pre2'
 
 group :development, :test do
-  gem 'shoulda'
+  gem 'rspec-rails', '>= 2.0.0'
 end
