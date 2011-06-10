@@ -19,15 +19,13 @@ require 'fixnum'
 require 'spec_helper'
 
 describe Fixnum, "with comma-delimited thousands" do
-  before :each do
-    @number = 5_652
-  end
+  let(:number) { 5_652 }
 
   it 'produces the usual string by default' do
-    @number.to_s.should == "5652"
+    number.to_s.should == "5652"
   end
 
   it 'produces a comma-delimited string when requested' do
-    @number.to_s(:comma_delimited).should == "5,652"
+    number.to_s(:comma_delimited).should == "5,652"
   end
 end
