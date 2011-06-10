@@ -39,36 +39,10 @@ describe Word do
   end
 
   context 'parts of speech' do
-    it 'accepts a valid adjective' do
-      words(:noun).should be_valid
-    end
-
-    it 'accepts a valid adverb' do
-      words(:adverb).should be_valid
-    end
-
-    it 'accepts a valid conjunction' do
-      words(:conjunction).should be_valid
-    end
-
-    it 'accepts a valid interjection' do
-      words(:interjection).should be_valid
-    end
-
-    it 'accepts a valid noun' do
-      words(:noun).should be_valid
-    end
-
-    it 'accepts a valid preposition' do
-      words(:preposition).should be_valid
-    end
-
-    it 'accepts a valid pronoun' do
-      words(:pronoun).should be_valid
-    end
-
-    it 'accepts a valid verb' do
-      words(:verb).should be_valid
+    it 'accepts all valid parts of speech' do
+      %w{adjective adverb conjunction interjection noun preposition pronoun verb}.each do |part_of_speech|
+        words(part_of_speech).should be_valid
+      end
     end
 
     it 'does not accept a word with an invalid part of speech' do
