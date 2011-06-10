@@ -23,24 +23,28 @@ describe Synset do
 
   fixtures :synsets, :words
 
-  it 'validates presence of :definition' do
-    no_definition.should_not be_valid
+  context 'validation' do
+    it 'validates presence of :definition' do
+      no_definition.should_not be_valid
+    end
+
+    it 'validates presence of :lexname' do
+      no_lexname.should_not be_valid
+    end
   end
 
-  it 'validates presence of :lexname' do
-    no_lexname.should_not be_valid
-  end
+  context 'general data model' do
+    it 'returns gloss and definition separately' do
+      bad = synsets(:bad)
+      bad.gloss.should == 'the opposite of good'
+      bad.samples.count.should == 2
+    end
 
-  it 'returns gloss and definition separately' do
-    bad = synsets(:bad)
-    bad.gloss.should == 'the opposite of good'
-    bad.samples.count.should == 2
-  end
-
-  it 'returns words_except a certain word from the synset' do
-    good = synsets(:good)
-    good.words.count.should == 2
-    good.words_except(words(:good)).count.should == 1
-    good.words_except(words(:good)).first.should == words(:sweet)
+    it 'returns words_except a certain word from the synset' do
+      good = synsets(:good)
+      good.words.count.should == 2
+      good.words_except(words(:good)).count.should == 1
+      good.words_except(words(:good)).first.should == words(:sweet)
+    end
   end
 end

@@ -18,20 +18,23 @@
 require 'spec_helper'
 
 describe Sense do
-  fixtures :senses
+  context 'validation' do
+    let(:no_freq_cnt) { Sense.new :freq_cnt => nil, :synset_index => 1 }
+    let(:no_synset_index) { Sense.new :freq_cnt => 10, :synset_index => nil }
 
-  let(:no_freq_cnt) { Sense.new :freq_cnt => nil, :synset_index => 1 }
-  let(:no_synset_index) { Sense.new :freq_cnt => 10, :synset_index => nil }
+    it 'validates presence of :freq_cnt' do
+      no_freq_cnt.should_not be_valid
+    end
 
-  it 'validates presence of :freq_cnt' do
-    no_freq_cnt.should_not be_valid
+    it 'validates presence of :synset_index' do
+      no_synset_index.should_not be_valid
+    end
   end
 
-  it 'validates presence of :synset_index' do
-    no_synset_index.should_not be_valid
-  end
-
-  it 'returns its word in an array as :words' do
-    senses(:noun).words.should == [ senses(:noun).word ]
+  context 'general data model' do
+    fixtures :senses
+    it 'returns its word in an array as :words' do
+      senses(:noun).words.should == [ senses(:noun).word ]
+    end
   end
 end
