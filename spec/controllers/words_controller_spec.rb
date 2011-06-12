@@ -22,6 +22,8 @@ describe WordsController do
     request.env['HTTP_REFERER'] = '/'
   end
 
+  fixtures :words, :inflections
+
   it "gets :index" do
     get :index
     response.should be_success
