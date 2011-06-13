@@ -15,18 +15,11 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-source 'http://rubygems.org'
+require 'spec_helper'
 
-gem 'rails', '>=3.0.0'
-
-gem 'builder'
-gem 'capistrano'
-gem 'haml'
-gem 'pg'
-gem 'will_paginate', '~> 3.0.pre2'
-
-group :development, :test do
-  gem 'rspec-rails', '>= 2.0.0'
-  gem 'rcov'
-  gem 'webrat'
+describe '/words/index.html.haml' do
+  it 'should have an #accordion div' do
+    render
+    rendered.should have_selector(:div, :id => 'accordion')
+  end
 end
