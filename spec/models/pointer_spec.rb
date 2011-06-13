@@ -35,4 +35,27 @@ describe Pointer do
   it 'validates presence of :ptype' do
     no_ptype.should_not be_valid
   end
+
+  describe 'create_new' do
+    # used when seeding the DB
+
+    it 'creates a new pointer' do
+      lambda do
+        Pointer.create_new(:sense => senses(:slang), :target => senses(:grub), :ptype => 'attribute')
+      end.should change(Pointer, :count).by(1)
+    end
+
+    it 'does not create a new pointer if the same entry exists' do
+      Pointer.create_new(:sense => senses(:slang), :target => senses(:grub), :ptype => 'attribute')
+      lambda do
+        Pointer.create_new(:sense => senses(:slang), :target => senses(:grub), :ptype => 'attribute')
+      end.should_not change(Pointer, :count)
+    end
+  end
+
+  describe '#help_text' do
+    it 'returns a description of the pointer type' do
+      Pointer.help_text('attribute').should == 'general quality'
+    end
+  end
 end

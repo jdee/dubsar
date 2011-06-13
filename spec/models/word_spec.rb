@@ -17,6 +17,30 @@
 
 require 'spec_helper'
 
+describe Hash, "#search_options extension" do
+  it 'raises an exception if no :term specified' do
+    lambda do
+      {}.search_options
+    end.should raise_error('no search term specified')
+  end
+
+  it 'uses the :words table in wildcard searches' do
+    options = { :term => 'slan_', :match => 'case' }.search_options
+    conditions = options[:conditions]
+    conditions.join.should match /words\.name LIKE/
+
+    options = { :term => 'slan.', :match => 'regexp' }.search_options
+    conditions = options[:conditions]
+    conditions.join.should match /words\.name ~/
+  end
+
+  it 'uses the :inflections table in an exact search' do
+    options = { :term => 'slan_', :match => 'exact' }.search_options
+    conditions = options[:conditions]
+    conditions.join.should match /inflections\.name =/
+  end
+end
+
 describe Word do
   fixtures :words, :synsets, :senses, :inflections
 
@@ -59,6 +83,21 @@ describe Word do
       well_adverb.name.should == well_noun.name
       well_adverb.part_of_speech.should_not == well_noun.part_of_speech
       well_adverb.should_not == well_noun
+    end
+
+    it 'maps parts of speech to abbreviated names' do
+      {
+        'adjective'    => 'adj'   ,
+        'adverb'       => 'adv'   ,
+        'conjunction'  => 'conj'  ,
+        'interjection' => 'interj',
+        'noun'         => 'n'     ,
+        'preposition'  => 'prep'  ,
+        'pronoun'      => 'pron'  ,
+        'verb'         => 'v'
+      }.each do |name, abbr|
+        Word.pos(name).should == abbr.to_sym
+      end
     end
   end
 

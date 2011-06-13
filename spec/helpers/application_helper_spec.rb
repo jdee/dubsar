@@ -33,6 +33,56 @@ describe ApplicationHelper do
     end
   end
 
+  describe 'link helpers' do
+    describe '#html_for_link' do
+      let (:html) { helper.html_for_link }
+
+      it 'links to Dubsar' do
+        html.should match %r{href="http://dubsar-dictionary.com"}
+      end
+
+      it 'uses the dubsar-link image' do
+        html.should match /dubsar-link\.png/
+      end
+    end
+
+    describe '#html_for_fairies_link' do
+      let (:html) { helper.html_for_fairies_link }
+
+      it 'links to the :fairies_url' do
+        html.should match /#{helper.fairies_url}/
+      end
+
+      it 'uses the fairies-20x20.png image' do
+        html.should match /fairies-20x20\.png/
+      end
+    end
+
+    describe '#tour_link_tag' do
+      let (:tag) { helper.tour_link_tag 'image-name', 'image description' }
+
+      it 'links to the specified image' do
+        tag.should match %r{href=".*image-name\.png"}
+      end
+
+      it 'contains the specified description' do
+        tag.should match %r{<h3>image description</h3>}
+      end
+    end
+  end
+
+  describe '#asset_host' do
+    it 'returns a URL when the host is set' do
+      ActionController::Base.stub(:asset_host).and_return('s.dubsar-dictionary.com')
+      helper.asset_host.should == 'http://s.dubsar-dictionary.com'
+    end
+
+    it 'returns blank when the host is not set' do
+      ActionController::Base.stub(:asset_host).and_return(nil)
+      helper.asset_host.should be_blank
+    end
+  end
+
   describe 'fairies helpers' do
     it 'gives the right url' do
       helper.fairies_url.should == 'http://austinguardianfairies.org'

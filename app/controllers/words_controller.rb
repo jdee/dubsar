@@ -185,7 +185,6 @@ class WordsController < ApplicationController
     when nil, ''
       if @term =~ /^[A-Z]%$/
         letter = /^([A-Z])%$/.match(@term)[1]
-        puts "letter = #{letter.inspect}"
         @match = 'regexp'
         @term = "^[#{letter}#{letter.downcase}]"
         @title = letter

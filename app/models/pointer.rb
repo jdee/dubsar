@@ -31,11 +31,9 @@ class Pointer < ActiveRecord::Base
         :target_type => params[:target_type] || params[:target].class.name,
         :ptype       => params[:ptype      ]
       }
-      create(params) unless first(:conditions => search_params)
+      first(:conditions => search_params) || create(params)
     end
-  end
 
-  class << self
     def help_text(ptype)
       help_list[ptype]
     end

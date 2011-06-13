@@ -58,6 +58,8 @@ class Hash
     copy.symbolize_keys
   end
 
+  private
+
   def clone_without_controller_params
     copy = clone
     copy.delete(:action)
