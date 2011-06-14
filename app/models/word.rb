@@ -213,7 +213,7 @@ class Word < ActiveRecord::Base
     end
 
     # Search for words matching the specified term.
-    # Takes a has of options:
+    # Takes a hash of options:
     #   <tt>:term</tt> _required_ search term
     #   <tt>:match</tt> one of 'browse', 'case', 'exact', 'regexp' or '' (default - case insensitive)
     #   <tt>:page</tt> optional page number (for will_paginate)

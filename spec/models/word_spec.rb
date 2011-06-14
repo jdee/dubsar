@@ -144,7 +144,7 @@ describe Word do
     end
 
     it 'matches literals by inflection' do
-      Word.search(:term => 'followed', :offset => 0).count.should == 1
+      Word.search_count(:term => 'followed', :offset => 0).should == 1
     end
 
     it 'does not match inflections in wild-card searches' do
@@ -157,8 +157,8 @@ describe Word do
     end
 
     it 'honors a case-sensitive search' do
-      Word.search(:term => 'followed', :match => 'case', :offset => 0).count.should == 1
-      Word.search(:term => 'Followed', :match => 'case', :offset => 0).count.should == 0
+      Word.search_count(:term => 'followed', :match => 'case', :offset => 0).should == 1
+      Word.search_count(:term => 'Followed', :match => 'case', :offset => 0).should == 0
     end
   end
 end
