@@ -51,6 +51,10 @@ describe Pointer do
         Pointer.create_new(:sense => source, :target => target, :ptype => 'attribute')
       end.should_not change(Pointer, :count)
     end
+
+    after :each do
+      Pointer.delete_all
+    end
   end
 
   describe '#help_text' do

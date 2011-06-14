@@ -41,6 +41,30 @@ describe Hash, "with #search_options extension" do
   end
 end
 
+describe String, "with #double_consonant? extension" do
+  it 'returns false for mortar' do
+    'mortar'.should_not be_a_double_consonant
+  end
+
+  it 'returns true for certain verbs ending in L, N or R' do
+    'gel'.should be_a_double_consonant
+    'grin'.should be_a_double_consonant
+    'spur'.should be_a_double_consonant
+  end
+
+  it 'returns true for verbs ending in -CVt' do
+    'fit'.should be_a_double_consonant
+  end
+
+  it 'returns false for certain verbs ending in -CVt' do
+    'exit'.should_not be_a_double_consonant
+  end
+
+  it 'returns false otherwise' do
+    'cry'.should_not be_a_double_consonant
+  end
+end
+
 describe Word do
   context 'when validating' do
     let(:no_name) { Word.new :name => nil, :part_of_speech => 'noun', :freq_cnt => 10 }
