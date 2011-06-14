@@ -17,25 +17,12 @@
 
 require 'spec_helper'
 
-describe '/words/show.html.haml' do
-  let (:word) { Factory.create :noun }
-
-  before :each do
-    grub = Factory.create :grub
-    synset = Factory.create :food_synset
-    Factory.create :sense, :word => word, :synset => synset
-    Factory.create :sense, :word => grub, :synset => synset, :synset_index => 2
-    words = [ word ]
-    words.stub(:total_pages).and_return(1)
-    assign(:words, words)
-    assign(:count, -1)
+describe 'Dubsar routes' do
+  it 'routes the root URL to #show' do
+    get("/").should route_to("words#show")
   end
 
-  it 'should have an #accordion div' do
-    word.senses.count.should == 1
-    render
-    rendered.should have_selector(:div, :id => 'accordion') do |div|
-      div.should have_selector(:h2, :id => word.unique_name)
-    end
+  it 'routes garbage to #error' do
+    get("/foo").should route_to(:controller => "words", :action => "error", :junk => "foo")
   end
 end

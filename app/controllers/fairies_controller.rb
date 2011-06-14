@@ -22,7 +22,7 @@ class FairiesController < ApplicationController
 
   def create
     Fairy.create! params[:fairy]
-    redirect_with_info 'Successfully saved.  Thank you.'
+    redirect_with_info 'Successfully saved. Thank you.'
   rescue => errmsg
     redirect_with_error errmsg.to_s
   end
