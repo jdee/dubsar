@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    ZenTest (4.4.2)
     abstract (1.0.0)
     actionmailer (3.0.8)
       actionpack (= 3.0.8)
@@ -29,6 +30,8 @@ GEM
       activesupport (= 3.0.8)
     activesupport (3.0.8)
     arel (2.0.10)
+    autotest-rails (4.1.0)
+      ZenTest
     builder (2.1.2)
     capistrano (2.6.0)
       highline
@@ -109,13 +112,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest (~> 4.4.2)
+  autotest-rails (~> 4.1.0)
   builder
   capistrano
   factory_girl_rails
   haml
   pg
-  rails
-  rcov
-  rspec-rails
+  rails (>= 3.0)
+  rcov (~> 0.9.9)
+  rspec-rails (>= 2.0)
   webrat
-  will_paginate
+  will_paginate (~> 3.0.pre2)

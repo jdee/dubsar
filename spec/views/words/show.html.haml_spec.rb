@@ -36,6 +36,9 @@ describe '/words/show.html.haml' do
     render
     rendered.should have_selector(:div, :id => 'accordion') do |div|
       div.should have_selector(:h2, :id => word.unique_name)
+      pending 'still working on this' do
+        div.should have_selector(:span, :class => 'tooltip')
+      end
     end
   end
 end

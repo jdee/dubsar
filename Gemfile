@@ -19,14 +19,16 @@ source 'http://rubygems.org'
 
 gem 'haml'
 gem 'pg'
-gem 'rails'
-gem 'will_paginate'
+gem 'rails', '>= 3.0'
+gem 'will_paginate', '~> 3.0.pre2'
 
 group :development, :test do
+  gem 'ZenTest', '~> 4.4.2'
+  gem 'autotest-rails', '~> 4.1.0'
   gem 'builder'
   gem 'capistrano'
   gem 'factory_girl_rails'
-  gem 'rcov'
-  gem 'rspec-rails'
+  gem 'rcov', '~> 0.9.9'
+  gem 'rspec-rails', '>= 2.0'
   gem 'webrat'
 end

@@ -27,6 +27,11 @@ describe WordsController do
     response.should be_success
   end
 
+  it "gets :qunit" do
+    get :qunit
+    response.should be_success
+  end
+
   it "gets :show view" do
     Factory.create :slang
     get :show, 'term' => 'slang'
