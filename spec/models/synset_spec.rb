@@ -18,12 +18,10 @@
 require 'spec_helper'
 
 describe Synset do
-  let(:no_definition) { Synset.new :definition => nil, :lexname => 'Noun.tops' }
-  let(:no_lexname) { Synset.new :definition => 'a conundrum', :lexname => nil }
+  context 'when validating' do
+    let(:no_definition) { Synset.new :definition => nil, :lexname => 'Noun.tops' }
+    let(:no_lexname) { Synset.new :definition => 'a conundrum', :lexname => nil }
 
-  fixtures :synsets, :words
-
-  context 'validation' do
     it 'validates presence of :definition' do
       no_definition.should_not be_valid
     end
@@ -33,18 +31,24 @@ describe Synset do
     end
   end
 
-  context 'general data model' do
+  context 'in the general data model' do
     it 'returns gloss and definition separately' do
-      bad = synsets(:bad)
+      bad = Factory.create :bad_synset
       bad.gloss.should == 'the opposite of good'
       bad.samples.count.should == 2
     end
 
     it 'returns words_except a certain word from the synset' do
-      good = synsets(:good)
+      good = Factory :good_synset
+      good_word = Factory.create :good
+      sweet_word = Factory.create :sweet
+      good.words << good_word
+      good.words << sweet_word
+      good.save!
+
       good.words.count.should == 2
-      good.words_except(words(:good)).count.should == 1
-      good.words_except(words(:good)).first.should == words(:sweet)
+      good.words_except(good_word).count.should == 1
+      good.words_except(good_word).first.should == sweet_word
     end
   end
 end

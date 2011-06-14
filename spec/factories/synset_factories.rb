@@ -15,14 +15,17 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-good_antonym:
-  ptype: antonym
-  sense: good
-  target_type: Synset
-  target: bad
+Factory.define :food_synset, :class => Synset, :default_strategy => :build do |s|
+  s.definition 'something edible'
+  s.lexname 'noun.Tops'
+end
 
-bad_antonym:
-  ptype: antonym
-  sense: bad
-  target_type: Synset
-  target: good
+Factory.define :bad_synset, :class => Synset, :default_strategy => :build do |s|
+  s.definition 'the opposite of good; "a bad boy"; "a bad thing"'
+  s.lexname 'adj.all'
+end
+
+Factory.define :good_synset, :class => Synset, :default_strategy => :build do |s|
+  s.definition 'the opposite of bad'
+  s.lexname 'adj.all'
+end

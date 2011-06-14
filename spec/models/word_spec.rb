@@ -17,7 +17,7 @@
 
 require 'spec_helper'
 
-describe Hash, "#search_options extension" do
+describe Hash, "with #search_options extension" do
   it 'raises an exception if no :term specified' do
     lambda do
       {}.search_options
@@ -42,9 +42,7 @@ describe Hash, "#search_options extension" do
 end
 
 describe Word do
-  fixtures :words, :synsets, :senses, :inflections
-
-  context 'validation' do
+  context 'when validating' do
     let(:no_name) { Word.new :name => nil, :part_of_speech => 'noun', :freq_cnt => 10 }
     let(:no_part_of_speech) { Word.new :name => 'pass', :part_of_speech => nil, :freq_cnt => 10 }
     let(:no_freq_cnt) { Word.new :name => 'pass', :part_of_speech => 'noun', :freq_cnt => nil }
@@ -62,20 +60,20 @@ describe Word do
     end
   end
 
-  context 'parts of speech' do
+  context 'when handling parts of speech' do
     it 'accepts all valid parts of speech' do
       %w{adjective adverb conjunction interjection noun preposition pronoun verb}.each do |part_of_speech|
-        words(part_of_speech).should be_valid
+        Factory(part_of_speech.to_sym).should be_valid
       end
     end
 
     it 'does not accept a word with an invalid part of speech' do
-      words(:bad_part_of_speech).should_not be_valid
+      Factory(:bad_part_of_speech).should_not be_valid
     end
 
     it 'recognizes words with different parts of speech as distinct' do
-      well_adverb = words :adverb
-      well_noun   = words :well_noun
+      well_adverb = Factory :adverb
+      well_noun   = Factory :well_noun
 
       well_adverb.should be_valid
       well_noun.should be_valid
@@ -101,16 +99,26 @@ describe Word do
     end
   end
 
-  context 'general data model' do
+  context 'in the general data model' do
     it 'recognizes synonyms' do
-      food = words :noun
-      grub = words :grub
+      food_synset = Factory.create :food_synset
+      food = Factory :noun
+      grub = Factory :grub
+
+      food.senses << Factory(:sense, :synset => food_synset)
+      grub.senses << Factory(:sense, :synset => food_synset, :synset_index => 2)
+      food.save!
+      grub.save!
 
       food.synsets.any?{|s|s.words.include?(grub)}.should be_true
     end
   end
 
-  context 'searching' do
+  context 'when searching' do
+    before :each do
+      Factory.create :verb
+    end
+
     it 'matches literals by inflection' do
       Word.search(:term => 'followed', :offset => 0).count.should == 1
     end

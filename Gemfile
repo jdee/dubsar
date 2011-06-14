@@ -17,16 +17,16 @@
 
 source 'http://rubygems.org'
 
-gem 'rails', '>=3.0.0'
-
-gem 'builder'
-gem 'capistrano'
 gem 'haml'
 gem 'pg'
-gem 'will_paginate', '~> 3.0.pre2'
+gem 'rails'
+gem 'will_paginate'
 
 group :development, :test do
-  gem 'rspec-rails', '>= 2.0.0'
+  gem 'builder'
+  gem 'capistrano'
+  gem 'factory_girl_rails'
   gem 'rcov'
+  gem 'rspec-rails'
   gem 'webrat'
 end

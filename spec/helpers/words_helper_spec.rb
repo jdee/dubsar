@@ -18,8 +18,6 @@
 require 'spec_helper'
 
 describe WordsHelper do
-  fixtures :words, :inflections
-
   describe "#search_title" do
     before :each do
       words = stub('words')
@@ -65,31 +63,37 @@ describe WordsHelper do
   end
 
   describe 'counters' do
+    before :each do
+      %w{adjective adverb conjunction interjection noun preposition pronoun verb}.each do |part_of_speech|
+        Factory.create part_of_speech.to_sym
+      end
+    end
+
     describe '#model_count' do
       it 'counts the number of entries for any given model' do
-        helper.model_count('word').should == "15"
+        helper.model_count('word').should == "8"
       end
     end
 
     describe '#part_of_speech_count' do
       it 'counts the part of speech for words' do
-        helper.part_of_speech_count('word', 'adjective').should == 4
+        helper.part_of_speech_count('word', 'adjective').should == 1
       end
 
       it 'counts the part of speech for inflections' do
-        helper.part_of_speech_count('inflection', 'adjective').should == 8
+        helper.part_of_speech_count('inflection', 'verb').should == 4
       end
     end
   end
 
   describe '#meta_description' do
     it 'includes the title and resulting words' do
-      words = [ words(:adverb) ]
+      words = [ Factory.create(:adverb) ]
       helper.meta_description('a title', words).should match /a title: well, adv\.$/
     end
 
     it 'includes inflections when appropriate' do
-      words = [ words(:noun) ]
+      words = [ Factory.create(:noun) ]
       helper.meta_description('food', words).should match /food: food, n\. \(foods\)$/
     end
   end

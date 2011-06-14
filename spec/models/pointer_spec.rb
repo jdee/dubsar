@@ -18,11 +18,9 @@
 require 'spec_helper'
 
 describe Pointer do
-  fixtures :senses
-
-  let(:no_target) { Pointer.new :target => nil, :sense => senses(:slang), :ptype => 'attribute' }
-  let(:no_sense) { Pointer.new :target => senses(:grub), :sense => nil, :ptype => 'attribute' }
-  let(:no_ptype) { Pointer.new :target => senses(:grub), :sense => senses(:slang), :ptype => nil }
+  let(:no_target) { Pointer.new :target => nil, :sense => Factory(:sense), :ptype => 'attribute' }
+  let(:no_sense) { Pointer.new :target => Factory(:sense), :sense => nil, :ptype => 'attribute' }
+  let(:no_ptype) { Pointer.new :target => Factory(:sense), :sense => Factory(:sense), :ptype => nil }
 
   it 'validates presence of :target' do
     no_target.should_not be_valid
@@ -41,14 +39,16 @@ describe Pointer do
 
     it 'creates a new pointer' do
       lambda do
-        Pointer.create_new(:sense => senses(:slang), :target => senses(:grub), :ptype => 'attribute')
+        Pointer.create_new(:sense => Factory(:sense), :target => Factory(:sense), :ptype => 'attribute')
       end.should change(Pointer, :count).by(1)
     end
 
     it 'does not create a new pointer if the same entry exists' do
-      Pointer.create_new(:sense => senses(:slang), :target => senses(:grub), :ptype => 'attribute')
+      source = Factory(:sense)
+      target = Factory(:sense)
+      Pointer.create_new(:sense => source, :target => target, :ptype => 'attribute')
       lambda do
-        Pointer.create_new(:sense => senses(:slang), :target => senses(:grub), :ptype => 'attribute')
+        Pointer.create_new(:sense => source, :target => target, :ptype => 'attribute')
       end.should_not change(Pointer, :count)
     end
   end

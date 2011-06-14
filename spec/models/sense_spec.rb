@@ -32,9 +32,9 @@ describe Sense do
   end
 
   context 'general data model' do
-    fixtures :senses
     it 'returns its word in an array as :words' do
-      senses(:noun).words.should == [ senses(:noun).word ]
+      sense = Factory.create :sense, :synset => Factory.create(:food_synset), :word => Factory.create(:noun)
+      sense.words.should == [ sense.word ]
     end
   end
 end
