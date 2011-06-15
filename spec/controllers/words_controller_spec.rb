@@ -33,7 +33,7 @@ describe WordsController do
   end
 
   it "gets :show view" do
-    Factory.create :slang
+    Factory :slang
     get :show, 'term' => 'slang'
     response.should be_success
     assigns(:words).should_not be_nil

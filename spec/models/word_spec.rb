@@ -87,17 +87,17 @@ describe Word do
   context 'when handling parts of speech' do
     it 'accepts all valid parts of speech' do
       %w{adjective adverb conjunction interjection noun preposition pronoun verb}.each do |part_of_speech|
-        Factory(part_of_speech.to_sym).should be_valid
+        Factory.build(part_of_speech.to_sym).should be_valid
       end
     end
 
     it 'does not accept a word with an invalid part of speech' do
-      Factory(:bad_part_of_speech).should_not be_valid
+      Factory.build(:bad_part_of_speech).should_not be_valid
     end
 
     it 'recognizes words with different parts of speech as distinct' do
-      well_adverb = Factory :adverb
-      well_noun   = Factory :well_noun
+      well_adverb = Factory.build :adverb
+      well_noun   = Factory.build :well_noun
 
       well_adverb.should be_valid
       well_noun.should be_valid
@@ -125,12 +125,12 @@ describe Word do
 
   context 'in the general data model' do
     it 'recognizes synonyms' do
-      food_synset = Factory.create :food_synset
-      food = Factory :noun
-      grub = Factory :grub
+      food_synset = Factory :food_synset
+      food = Factory.build :noun
+      grub = Factory.build :grub
 
-      food.senses << Factory(:sense, :synset => food_synset)
-      grub.senses << Factory(:sense, :synset => food_synset, :synset_index => 2)
+      food.senses << Factory.build(:sense, :synset => food_synset)
+      grub.senses << Factory.build(:sense, :synset => food_synset, :synset_index => 2)
       food.save!
       grub.save!
 
@@ -140,7 +140,7 @@ describe Word do
 
   context 'when searching' do
     before :each do
-      Factory.create :verb
+      Factory :verb
     end
 
     it 'matches literals by inflection' do

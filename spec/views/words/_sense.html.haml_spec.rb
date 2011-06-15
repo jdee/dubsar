@@ -18,18 +18,46 @@
 require 'spec_helper'
 
 describe '/words/_sense.html.haml' do
-  let (:word) { Factory.create :noun }
-  let (:synset) { Factory.create :food_synset }
-  let (:sense) { Factory.create :sense, :word => word, :synset => synset }
+  let (:word) { Factory :noun }
+  let (:synset) { Factory :food_synset }
+  let (:sense) { Factory :sense, :word => word, :synset => synset }
 
   before :each do
-    grub = Factory.create :grub
-    Factory.create :sense, :word => grub, :synset => synset, :synset_index => 2
+    # define 'grub' as a synonym for word (food)
+    grub = Factory :grub
+    Factory :sense, :word => grub, :synset => synset, :synset_index => 2
+
+    # define 'substance' as a hypernym for word
+    substance = Factory :substance
+    substance_sense = Factory :sense, :word => substance, :synset => Factory(:substance_synset)
+    Factory :pointer, :sense => sense, :target => substance_sense, :ptype => 'hypernym'
+  end
+
+  let (:verb) { Factory :verb }
+  let (:verb_synset) { Factory :follow_synset }
+  let (:verb_sense) { Factory :sense, :word => verb, :synset => verb_synset }
+  let (:verb_frame) { Factory :verb_frame, :number => 1, :frame => 'Something ----s' }
+
+  before :each do
+    # associate a verb frame with this sense
+    Factory :senses_verb_frame, :sense => verb_sense, :verb_frame => verb_frame
   end
 
   it 'should have a .tooltip div' do
     sense.should_not be_nil
-    render :partial => 'words/sense', :locals => {:sense => sense}
+    render :partial => 'words/sense', :locals => { :sense => sense }
     rendered.should have_selector('span.tooltip')
+  end
+
+  it 'should include verb frames' do
+    verb_sense.should_not be_nil
+    render :partial => 'words/sense', :locals => { :sense => verb_sense }
+    rendered.should have_selector('span.tooltip') do |span|
+      span.should have_selector(:table) do |table|
+        table.should have_selector(:td) do |td|
+          td.should contain(verb_frame.frame)
+        end
+      end
+    end
   end
 end

@@ -33,7 +33,7 @@ describe Sense do
 
   context 'general data model' do
     it 'returns its word in an array as :words' do
-      sense = Factory.create :sense, :synset => Factory.create(:food_synset), :word => Factory.create(:noun)
+      sense = Factory :sense, :synset => Factory(:food_synset), :word => Factory(:noun)
       sense.words.should == [ sense.word ]
     end
   end

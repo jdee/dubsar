@@ -18,9 +18,9 @@
 require 'spec_helper'
 
 describe Pointer do
-  let(:no_target) { Pointer.new :target => nil, :sense => Factory(:sense), :ptype => 'attribute' }
-  let(:no_sense) { Pointer.new :target => Factory(:sense), :sense => nil, :ptype => 'attribute' }
-  let(:no_ptype) { Pointer.new :target => Factory(:sense), :sense => Factory(:sense), :ptype => nil }
+  let(:no_target) { Pointer.new :target => nil, :sense => Factory.build(:sense), :ptype => 'attribute' }
+  let(:no_sense) { Pointer.new :target => Factory.build(:sense), :sense => nil, :ptype => 'attribute' }
+  let(:no_ptype) { Pointer.new :target => Factory.build(:sense), :sense => Factory.build(:sense), :ptype => nil }
 
   it 'validates presence of :target' do
     no_target.should_not be_valid

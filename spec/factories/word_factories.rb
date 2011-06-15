@@ -19,39 +19,39 @@ Factory.define :word do |w|
   w.freq_cnt 10
 end
 
-Factory.define :sense, :default_strategy => :build do |s|
+Factory.define :sense do |s|
   s.freq_cnt 10
   s.synset_index 1
 end
 
-Factory.define :inflection, :default_strategy => :build do |i|
+Factory.define :inflection do |i|
 end
 
-Factory.define :adjective, :parent => :word, :default_strategy => :build do |w|
+Factory.define :adjective, :parent => :word do |w|
   w.name 'foul'
   w.part_of_speech 'adjective'
   w.inflections { |i| [ i.association(:inflection, :name => 'foul') ] }
 end
 
-Factory.define :adverb, :parent => :word, :default_strategy => :build do |w|
+Factory.define :adverb, :parent => :word do |w|
   w.name 'well'
   w.part_of_speech 'adverb'
   w.inflections { |i| [ i.association(:inflection, :name => 'well') ] }
 end
 
-Factory.define :conjunction, :parent => :word, :default_strategy => :build do |w|
+Factory.define :conjunction, :parent => :word do |w|
   w.name 'but'
   w.part_of_speech 'conjunction'
   w.inflections { |i| [ i.association(:inflection, :name => 'but') ] }
 end
 
-Factory.define :interjection, :parent => :word, :default_strategy => :build do |w|
+Factory.define :interjection, :parent => :word do |w|
   w.name 'hey'
   w.part_of_speech 'interjection'
   w.inflections { |i| [ i.association(:inflection, :name => 'hey') ] }
 end
 
-Factory.define :noun, :parent => :word, :default_strategy => :build do |w|
+Factory.define :noun, :parent => :word do |w|
   w.name 'food'
   w.part_of_speech 'noun'
   w.inflections do |i|
@@ -62,19 +62,19 @@ Factory.define :noun, :parent => :word, :default_strategy => :build do |w|
   end
 end
 
-Factory.define :preposition, :parent => :word, :default_strategy => :build do |w|
+Factory.define :preposition, :parent => :word do |w|
   w.name 'from'
   w.part_of_speech 'preposition'
   w.inflections { |i| [ i.association(:inflection, :name => 'from') ] }
 end
 
-Factory.define :pronoun, :parent => :word, :default_strategy => :build do |w|
+Factory.define :pronoun, :parent => :word do |w|
   w.name 'you'
   w.part_of_speech 'pronoun'
   w.inflections { |i| [ i.association(:inflection, :name => 'you') ] }
 end
 
-Factory.define :verb, :parent => :word, :default_strategy => :build do |w|
+Factory.define :verb, :parent => :word do |w|
   w.name 'follow'
   w.part_of_speech 'verb'
   w.inflections do |i|
@@ -87,7 +87,7 @@ Factory.define :verb, :parent => :word, :default_strategy => :build do |w|
   end
 end
 
-Factory.define :slang, :parent => :word, :default_strategy => :build do |w|
+Factory.define :slang, :parent => :word do |w|
   w.name 'slang'
   w.part_of_speech 'noun'
   w.inflections do |i|
@@ -98,7 +98,7 @@ Factory.define :slang, :parent => :word, :default_strategy => :build do |w|
   end
 end
 
-Factory.define :well_noun, :parent => :word, :default_strategy => :build do |w|
+Factory.define :well_noun, :parent => :word do |w|
   w.name 'well'
   w.part_of_speech 'noun'
   w.inflections do |i|
@@ -109,7 +109,7 @@ Factory.define :well_noun, :parent => :word, :default_strategy => :build do |w|
   end
 end
 
-Factory.define :bad_part_of_speech, :parent => :word, :default_strategy => :build do |w|
+Factory.define :bad_part_of_speech, :parent => :word do |w|
   w.name 'fudge'
   w.part_of_speech 'thingy'
   w.inflections do |i|
@@ -120,7 +120,7 @@ Factory.define :bad_part_of_speech, :parent => :word, :default_strategy => :buil
   end
 end
 
-Factory.define :grub, :parent => :word, :default_strategy => :build do |w|
+Factory.define :grub, :parent => :word do |w|
   w.name 'grub'
   w.part_of_speech 'noun'
   w.inflections do |i|
@@ -131,7 +131,7 @@ Factory.define :grub, :parent => :word, :default_strategy => :build do |w|
   end
 end
 
-Factory.define :bad, :parent => :word, :default_strategy => :build do |w|
+Factory.define :bad, :parent => :word do |w|
   w.name 'bad'
   w.part_of_speech 'adjective'
   w.freq_cnt 11
@@ -144,7 +144,7 @@ Factory.define :bad, :parent => :word, :default_strategy => :build do |w|
   end
 end
 
-Factory.define :good, :parent => :word, :default_strategy => :build do |w|
+Factory.define :good, :parent => :word do |w|
   w.name 'good'
   w.part_of_speech 'adjective'
   w.freq_cnt 9
@@ -157,9 +157,20 @@ Factory.define :good, :parent => :word, :default_strategy => :build do |w|
   end
 end
 
-Factory.define :sweet, :parent => :word, :default_strategy => :build do |w|
+Factory.define :sweet, :parent => :word do |w|
   w.name 'sweet'
   w.part_of_speech 'adjective'
   w.freq_cnt 8
   w.inflections { |i| [ i.association(:inflection, :name => 'sweet') ] }
+end
+
+Factory.define :substance, :parent => :word do |w|
+  w.name 'substance'
+  w.part_of_speech 'noun'
+  w.inflections do |i|
+    [
+      i.association(:inflection, :name => 'substance'),
+      i.association(:inflection, :name => 'substances')
+    ]
+  end
 end

@@ -33,15 +33,15 @@ describe Synset do
 
   context 'in the general data model' do
     it 'returns gloss and definition separately' do
-      bad = Factory.create :bad_synset
+      bad = Factory :bad_synset
       bad.gloss.should == 'the opposite of good'
       bad.samples.count.should == 2
     end
 
     it 'returns words_except a certain word from the synset' do
-      good = Factory :good_synset
-      good_word = Factory.create :good
-      sweet_word = Factory.create :sweet
+      good = Factory.build :good_synset
+      good_word = Factory :good
+      sweet_word = Factory :sweet
       good.words << good_word
       good.words << sweet_word
       good.save!

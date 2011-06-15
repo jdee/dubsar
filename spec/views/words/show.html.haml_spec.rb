@@ -18,13 +18,13 @@
 require 'spec_helper'
 
 describe '/words/show.html.haml' do
-  let (:word) { Factory.create :noun }
+  let (:word) { Factory :noun }
 
   before :each do
-    grub = Factory.create :grub
-    synset = Factory.create :food_synset
-    Factory.create :sense, :word => word, :synset => synset
-    Factory.create :sense, :word => grub, :synset => synset, :synset_index => 2
+    grub = Factory :grub
+    synset = Factory :food_synset
+    Factory :sense, :word => word, :synset => synset
+    Factory :sense, :word => grub, :synset => synset, :synset_index => 2
     words = [ word ]
     words.stub(:total_pages).and_return(1)
     assign(:words, words)
