@@ -31,6 +31,14 @@ describe '/words/show.html.haml' do
     assign(:count, -1)
   end
 
+  it 'should have a search form' do
+    render :layout => 'layouts/application', :template => 'words/show.html.haml'
+    rendered.should have_selector('form', :method => 'get', :action => root_path) do |form|
+      form.should have_selector('input', :type => 'text')
+      form.should have_selector('button', :type => 'submit')
+    end
+  end
+
   it 'should have an #accordion div' do
     word.senses.count.should == 1
     render
