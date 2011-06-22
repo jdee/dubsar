@@ -155,11 +155,11 @@ class Word < ActiveRecord::Base
   end
 
   def create_new_inflection(name)
-    inflections.create(:name => name) unless inflections.any? { |i| i.name == name }
+    inflections.create(:name => name) unless inflections.map(&:name).include?(name)
   end
 
   def build_new_inflection(name)
-    inflections.build(:name => name) unless inflections.any? { |i| i.name == name }
+    inflections.build(:name => name) unless inflections.map(&:name).include?(name)
   end
 
   def add_regular_inflections
@@ -282,7 +282,7 @@ class Word < ActiveRecord::Base
       build_new_inflection name + 'ped'
       build_new_inflection name + 'ping'
       true
-    when /qui[t]$/, /squat$/
+    when /quit$/, /squat$/
       build_new_inflection name + 's'
       build_new_inflection name + 'ted'
       build_new_inflection name + 'ting'
@@ -419,6 +419,8 @@ class Word < ActiveRecord::Base
     end
   end
 
+=begin
+  # This code is unused.
   def comparative_degree
     return '' unless part_of_speech == 'adjective'
     case name
@@ -442,6 +444,7 @@ class Word < ActiveRecord::Base
       name + pad + 'est'
     end
   end
+=end
 
   def pad
     # A word taking an -e... (-ed, -es, etc.) or -ing ending that ends
@@ -457,7 +460,7 @@ class Word < ActiveRecord::Base
     # Don't match (so no padding):
     # fail => failing (a is a vowel)
     # cloy => cloying (y is treated like a vowel in the last position)
-    # snow => swowing
+    # snow => snowing
     md = name.match /[^aeiou][aeiouy]([^aeiouwy])$/
     md ? md[1] : ''
   end

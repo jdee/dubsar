@@ -161,4 +161,88 @@ describe Word do
       Word.search_count(:term => 'Followed', :match => 'case', :offset => 0).should == 0
     end
   end
+
+  context "building inflections when seeding the DB" do
+    context "calling #create_new_inflection" do
+      let(:slang) { Factory :slang }
+
+      it 'builds the specified inflection if it does not exist' do
+        lambda { slang.create_new_inflection :name => 'slangy' }.should change(slang.inflections, :count).by(1)
+      end
+
+      it 'does not build the specified inflection if it exists' do
+        slang.inflections.map(&:name).should include('slangs')
+        lambda { slang.create_new_inflection('slangs') }.should_not change(slang.inflections, :count)
+      end
+    end
+
+    context "building regular inflections" do
+      # DEBT: Setting up these inflections in a factory defeats the
+      # purpose of these tests, which build the inflections. But
+      # without adding the inflections to the appropriate factory, the
+      # resulting models are not valid. I'd like to find a better way
+      # to do this using FactoryGirl. For now, I just create!
+      # everything and delete it all in an after :each block.
+
+      it 'adds regular noun inflections' do
+        word = Word.create! :part_of_speech => 'noun', :freq_cnt => 0, :name => 'fool'
+        word.inflections.map(&:name).sort.should == %w{fool fools}
+      end
+
+      it 'adds regular verb inflections' do
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'fit'
+        word.inflections.map(&:name).sort.should == %w{fit fits fitted fitting}
+      end
+
+      it 'recognizes some noun irregularities' do
+        word = Word.create! :part_of_speech => 'noun', :freq_cnt => 0, :name => 'dragoman'
+        word.inflections.map(&:name).sort.should == %w{dragoman dragomans dragomen}
+
+        # ActiveSupport::Inflector will pluralize this as talismen
+        word = Word.create! :part_of_speech => 'noun', :freq_cnt => 0, :name => 'talisman'
+        word.inflections.map(&:name).sort.should == %w{talisman talismans}
+      end
+
+      it 'recognizes some verb irregularities' do
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'quiz'
+        word.inflections.map(&:name).sort.should == %w{quiz quizzed quizzes quizzing}
+
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'equip'
+        word.inflections.map(&:name).sort.should == %w{equip equipped equipping equips}
+
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'squat'
+        word.inflections.map(&:name).sort.should == %w{squat squats squatted squatting}
+
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'hurt'
+        word.inflections.map(&:name).sort.should == %w{hurt hurting hurts}
+
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'crochet'
+        word.inflections.map(&:name).sort.should == %w{crochet crocheted crocheting crochets}
+
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'panic'
+        word.inflections.map(&:name).sort.should == %w{panic panicked panicking panics}
+
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'pad'
+        word.inflections.map(&:name).sort.should == %w{pad padded padding pads}
+      end
+
+      it 'builds multiple participles when appropriate' do
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'bus'
+        word.inflections.map(&:name).sort.should == %w{bus bused buses busing bussed busses bussing}
+      end
+
+      it 'handles be and have as completely irregular' do
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'be', :irregular => %w{am are been is was were}
+        word.inflections.map(&:name).sort.should == %w{am are be been being is was were}
+
+        word = Word.create! :part_of_speech => 'verb', :freq_cnt => 0, :name => 'have', :irregular => %w{had has}
+        word.inflections.map(&:name).sort.should == %w{had has have having}
+      end
+    end
+
+    after :each do
+      Inflection.delete_all
+      Word.delete_all
+    end
+  end
 end
