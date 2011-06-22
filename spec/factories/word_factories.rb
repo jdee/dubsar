@@ -174,3 +174,15 @@ Factory.define :substance, :parent => :word do |w|
     ]
   end
 end
+
+Factory.define :list_entry, :class => Word do |w|
+  w.sequence(:name) { |n| @name = "word_#{n}" }
+  w.part_of_speech 'noun'
+  w.inflections { |i| [ i.association(:inflection, :name => @name) ] }
+end
+
+Factory.define :capitalized_word, :class => Word do |w|
+  w.name 'Word_1'
+  w.part_of_speech 'noun'
+  w.inflections { |i| [ i.association(:inflection, :name => 'Word_1') ] }
+end

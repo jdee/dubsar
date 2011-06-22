@@ -98,17 +98,7 @@ class WordsController < ApplicationController
 
       format.json do
         local_params = params.clone
-        # when the autocompleter makes many successive requests for
-        # the same thing, use the flash to avoid counting all matches
-        # every time
-        @total_words = flash[:last_count] if
-          flash[:last_term] == @term and
-          flash[:last_match] == local_params[:match]
-        @total_words ||= Word.search_count local_params
-
-        flash[:last_term ] = @term
-        flash[:last_match ] = local_params[:match]
-        flash[:last_count] = @total_words
+        @total_words = Word.search_count local_params
 
         # protect myself against stupid requests
         local_params[:limit] = local_params[:limit].to_i if local_params[:limit]

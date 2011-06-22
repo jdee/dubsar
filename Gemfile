@@ -28,6 +28,7 @@ group :development, :test do
   gem 'builder'
   gem 'capistrano'
   gem 'factory_girl_rails'
+  gem 'json'
   gem 'rcov', '~> 0.9.9'
   gem 'rspec-rails', '>= 2.0'
   gem 'webrat'
