@@ -39,4 +39,15 @@ describe Delimiter do
   it 'works for strings as well as numbers' do
     '1234567890'.to_s(:delimiter => ',').should == "1,234,567,890"
   end
+
+  it 'works for Bignums' do
+    # 2^128
+    bigun = 65_536 * 65_536 * 65_536 * 65_536
+    bigun *= bigun
+    bigun.should be_a(Bignum)
+
+    # 2^128 ~ 3 x 10^38
+    # Hence 12 delimiters + 39 digits:
+    bigun.to_s(:delimiter => ',').length.should == 51
+  end
 end

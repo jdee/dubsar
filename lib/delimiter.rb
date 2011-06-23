@@ -18,11 +18,16 @@
 require 'active_support/core_ext'
 
 # The Delimiter module may be included in any class, since it relies
-# only on the #to_s method. It is automatically included in Fixnum and
-# String. Any class that mixes in Delimiter gains an option to #to_s,
-# :delimiter => string, which will group the digits of the number by
-# thousands using the specified string as a delimiter. See
-# spec/lib/delimiter_spec.rb for examples.
+# only on the <tt>#to_s</tt> method. It is automatically included in
+# Bignum, Fixnum and String. Any class that mixes in Delimiter gains an
+# option to <tt>#to_s</tt>, <tt>:delimiter => string</tt>, which will
+# group the digits of the number by thousands using the specified
+# +string+ as a delimiter. See <tt>spec/lib/delimiter_spec.rb</tt> for
+# detailed examples.
+#
+#   require 'delimiter'
+#   1_234.to_s(:delimiter => ',') # => '1,234'
+
 module Delimiter
 
   protected
@@ -49,6 +54,10 @@ module Delimiter
     base.class_eval { alias_method_chain :to_s, :delimiter }
   end
 
+end
+
+class Bignum
+  include Delimiter
 end
 
 class Fixnum
