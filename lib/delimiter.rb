@@ -15,17 +15,36 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'fixnum'
-require 'spec_helper'
+require 'active_support/core_ext'
 
-describe Fixnum, "with comma-delimited thousands" do
-  let(:number) { 5_652 }
+module Delimiter
 
-  it 'produces the usual string by default' do
-    number.to_s.should == "5652"
+  protected
+
+  def delimit_number(delimiter=',')
+    md = /^(\d+)(\d{3})$/.match to_s_without_delimiter
+    md ? md[1].to_i.delimit_number(delimiter) + delimiter + md[2] : to_s_without_delimiter
   end
 
-  it 'produces a comma-delimited string when requested' do
-    number.to_s(:comma_delimited).should == "5,652"
+  private
+
+  def to_s_with_delimiter(*args)
+    options = args.first if args && args.first && args.first.is_a?(Hash)
+    delimiter = options[:delimiter] if options
+
+    if delimiter
+      delimit_number delimiter
+    else
+      to_s_without_delimiter
+    end
   end
+
+  def self.included(base)
+    base.class_eval { alias_method_chain :to_s, :delimiter }
+  end
+
+end
+
+class Fixnum
+  include Delimiter
 end

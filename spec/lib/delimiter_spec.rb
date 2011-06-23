@@ -15,19 +15,24 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'active_support/core_ext/module'
+require 'spec_helper'
 
-class Fixnum
-  def to_s_with_delimiter(*args)
-    if args && args.first && args.first.to_sym == :comma_delimited
-      # there must be a more standard method, but for now I'm kluging this
-      # obviously only works up to 999,999.
-      md = /^(\d+)(\d{3})$/.match to_s_without_delimiter
-      md ? md[1] + ',' + md[2] : to_s_without_delimiter
-    else
-      to_s_without_delimiter
-    end
+describe Delimiter do
+  let(:number) { 5_652 }
+
+  it 'produces the usual string by default' do
+    number.to_s.should == "5652"
   end
 
-  alias_method_chain :to_s, :delimiter
+  it 'produces a comma-delimited string when requested' do
+    number.to_s(:delimiter => ',').should == "5,652"
+  end
+
+  it 'honors other delimiters' do
+    number.to_s(:delimiter => '.').should == "5.652"
+  end
+
+  it 'delimits by thousands' do
+    1_234_567_890.to_s(:delimiter => ',').should == "1,234,567,890"
+  end
 end

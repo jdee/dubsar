@@ -20,6 +20,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 require File.expand_path('../../vendor/plugins/asset_packager/lib/synthesis/asset_package', __FILE__)
+require File.expand_path('../../lib/delimiter', __FILE__)
+
 Synthesis::AssetPackage.merge_environments = %w{backup production}
 
 # If you have a Gemfile, require the gems listed there, including any gems

@@ -15,8 +15,6 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'fixnum'
-
 module WordsHelper
   def page_title
     "Dubsar - #{search_title}"
@@ -48,7 +46,7 @@ module WordsHelper
   end
 
   def model_count(model)
-    eval(model.capitalize).count.to_s :comma_delimited
+    eval(model.capitalize).count.to_s :delimiter => ','
   end
 
   def part_of_speech_count(model, part_of_speech)
