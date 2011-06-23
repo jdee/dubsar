@@ -17,13 +17,19 @@
 
 require 'active_support/core_ext'
 
+# The Delimiter module may be included in any class, since it relies
+# only on the #to_s method. It is automatically included in Fixnum and
+# String. Any class that mixes in Delimiter gains an option to #to_s,
+# :delimiter => string, which will group the digits of the number by
+# thousands using the specified string as a delimiter. See
+# spec/lib/delimiter_spec.rb for examples.
 module Delimiter
 
   protected
 
   def delimit_number(delimiter=',')
     md = /^(\d+)(\d{3})$/.match to_s_without_delimiter
-    md ? md[1].to_i.delimit_number(delimiter) + delimiter + md[2] : to_s_without_delimiter
+    md ? md[1].delimit_number(delimiter) + delimiter + md[2] : to_s_without_delimiter
   end
 
   private
@@ -46,5 +52,9 @@ module Delimiter
 end
 
 class Fixnum
+  include Delimiter
+end
+
+class String
   include Delimiter
 end

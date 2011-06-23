@@ -35,4 +35,8 @@ describe Delimiter do
   it 'delimits by thousands' do
     1_234_567_890.to_s(:delimiter => ',').should == "1,234,567,890"
   end
+
+  it 'works for strings as well as numbers' do
+    '1234567890'.to_s(:delimiter => ',').should == "1,234,567,890"
+  end
 end
