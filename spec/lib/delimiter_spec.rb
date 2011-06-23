@@ -50,4 +50,16 @@ describe Delimiter do
     # Hence 12 delimiters + 39 digits:
     bigun.to_s(:delimiter => ',').length.should == 51
   end
+
+  it 'works for negative numbers' do
+    -1_100.to_s(:delimiter => ',').should == "-1,100"
+  end
+
+  it 'works with a plus (+) prefix' do
+    '+1100'.to_s(:delimiter => ',').should == "+1,100"
+  end
+
+  it 'works with fractions' do
+    12345.678.to_s(:delimiter => ',').should == "12,345.678"
+  end
 end

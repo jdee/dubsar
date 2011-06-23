@@ -19,11 +19,11 @@ require 'active_support/core_ext'
 
 # The Delimiter module may be included in any class, since it relies
 # only on the <tt>#to_s</tt> method. It is automatically included in
-# Bignum, Fixnum and String. Any class that mixes in Delimiter gains an
-# option to <tt>#to_s</tt>, <tt>:delimiter => string</tt>, which will
-# group the digits of the number by thousands using the specified
-# +string+ as a delimiter. See <tt>spec/lib/delimiter_spec.rb</tt> for
-# detailed examples.
+# Bignum, Fixnum, Float and String. Any class that mixes in Delimiter
+# gains an option to <tt>#to_s</tt>, <tt>:delimiter => string</tt>,
+# which will group the digits of the number by thousands using the
+# specified +string+ as a delimiter. See
+# <tt>spec/lib/delimiter_spec.rb</tt> for detailed examples.
 #
 #   require 'delimiter'
 #   1_234.to_s(:delimiter => ',') # => '1,234'
@@ -33,7 +33,17 @@ module Delimiter
   protected
 
   def delimit_number(delimiter=',')
-    md = /^(\d+)(\d{3})$/.match to_s_without_delimiter
+    # DEBT: The delimiter used for the number should really be tied to
+    # the locale, rather than specified as an option. In particular,
+    # in European locales that use the period (.) to delimit thousands,
+    # usually the decimal point is indicated with a comma (,) instead.
+    # Here, when recognizing a fractional decimal, we will accept both
+    # the comma and the period as decimal points. This might have some
+    # screwy consequences, like:
+    #
+    # '5652,45'.to_s(:delimiter => ',') # => '5,652,45'
+
+    md = /^([+-]?\d+)(\d{3}([\.,]\d+)?)$/.match to_s_without_delimiter
     md ? md[1].delimit_number(delimiter) + delimiter + md[2] : to_s_without_delimiter
   end
 
@@ -56,14 +66,8 @@ module Delimiter
 
 end
 
-class Bignum
-  include Delimiter
-end
-
-class Fixnum
-  include Delimiter
-end
-
-class String
-  include Delimiter
+[Bignum, Fixnum, Float, String].each do |base|
+  base.class_eval do
+    include Delimiter
+  end
 end
