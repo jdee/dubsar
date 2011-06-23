@@ -15,17 +15,19 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class Fixnum
-  alias :orig_to_s :to_s
+require 'active_support/core_ext/module'
 
-  def to_s(*args)
+class Fixnum
+  def to_s_with_delimiter(*args)
     if args && args.first && args.first.to_sym == :comma_delimited
       # there must be a more standard method, but for now I'm kluging this
       # obviously only works up to 999,999.
-      md = /^(\d+)(\d{3})$/.match orig_to_s
-      md ? md[1] + ',' + md[2] : orig_to_s
+      md = /^(\d+)(\d{3})$/.match to_s_without_delimiter
+      md ? md[1] + ',' + md[2] : to_s_without_delimiter
     else
-      orig_to_s
+      to_s_without_delimiter
     end
   end
+
+  alias_method_chain :to_s, :delimiter
 end
