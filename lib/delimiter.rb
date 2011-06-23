@@ -43,7 +43,7 @@ module Delimiter
     #
     # '5652,45'.to_s(:delimiter => ',') # => '5,652,45'
 
-    md = /^([+-]?\d+)(\d{3}([\.,]\d+)?)$/.match to_s_without_delimiter
+    md = /^([+-]?\d+)(\d{3}([.,]\d+)?)$/.match to_s_without_delimiter
     md ? md[1].delimit_number(delimiter) + delimiter + md[2] : to_s_without_delimiter
   end
 

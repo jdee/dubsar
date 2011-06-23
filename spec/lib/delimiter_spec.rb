@@ -62,4 +62,8 @@ describe Delimiter do
   it 'works with fractions' do
     12345.678.to_s(:delimiter => ',').should == "12,345.678"
   end
+
+  it 'only recognizes period and comma as decimal delimiters' do
+    '12345x678'.to_s(:delimiter => ',').should == '12345x678'
+  end
 end
