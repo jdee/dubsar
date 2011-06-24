@@ -82,7 +82,9 @@ module Delimiter
     base = args.shift if args.first.is_a?(Fixnum)
     base ||= 10
 
-    return to_i_without_delimiter(*args) unless base == 10
+    raise ArgumentError, "invalid argument: expected Hash, got #{args.first.class.name}" if args && args.first && !args.first.is_a?(Hash)
+
+    return to_i_without_delimiter(base) unless base == 10
 
     options = args.first if args && args.first && args.first.is_a?(Hash)
     delimiter = options[:delimiter] if options
@@ -97,6 +99,8 @@ module Delimiter
 
   def to_f_with_delimiter(*args)
     return to_f_without_delimiter(*args) unless is_a?(String)
+
+    raise ArgumentError, "invalid argument: expected Hash, got #{args.first.class.name}" if args && args.first && !args.first.is_a?(Hash)
 
     options = args.first if args && args.first && args.first.is_a?(Hash)
     delimiter = options[:delimiter] if options

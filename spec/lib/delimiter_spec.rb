@@ -72,6 +72,8 @@ describe Delimiter do
     it 'does not accept invalid arguments' do
       lambda { 'a'.to_s(10) }.should raise_error(ArgumentError, "invalid argument: expected Hash, got Fixnum")
       lambda { 25.to_s(10, %w{a b c}) }.should raise_error(ArgumentError, "invalid argument: expected Hash, got Array")
+      lambda { 'a'.to_f(10) }.should raise_error(ArgumentError, "invalid argument: expected Hash, got Fixnum")
+      lambda { 'a'.to_i(10, %w{a b c}) }.should raise_error(ArgumentError, "invalid argument: expected Hash, got Array")
     end
   end
 
@@ -91,7 +93,7 @@ describe Delimiter do
     end
 
     it 'ignores delimiters for any other base' do
-      lambda { '1,234'.to_i(8, :delimiter => ',') }.should raise_error
+      '1,234'.to_i(8, :delimiter => ',').should == 1
     end
   end
 
