@@ -50,11 +50,22 @@ module Delimiter
   private
 
   def to_s_with_delimiter(*args)
+    integer = is_a?(Integer)
+    if integer
+      base = args.shift if args.first.is_a?(Fixnum)
+      base ||= 10
+    end
+
+    raise ArgumentError, "invalid argument: expected Hash, got #{args.first.class.name}" if args && args.first && !args.first.is_a?(Hash)
+
     options = args.first if args && args.first && args.first.is_a?(Hash)
     delimiter = options[:delimiter] if options
 
-    if delimiter
+    case
+    when delimiter && (! integer || base == 10)
       delimit_number delimiter
+    when integer
+      to_s_without_delimiter base
     else
       to_s_without_delimiter
     end

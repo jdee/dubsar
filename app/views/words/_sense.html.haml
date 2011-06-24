@@ -34,7 +34,7 @@
                 &nbsp;
               - if sense.freq_cnt > 0
                 %span{:title => 'frequency count of this word sense in a reference text'}
-                  &= "freq. cnt.: #{sense.freq_cnt.to_s :comma_delimited}"
+                  &= "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
                 &nbsp;
             %a.close-icon-span.ui-state-default.ui-corner-all{:title => 'close'}
               %span.ui-icon.ui-icon-close
