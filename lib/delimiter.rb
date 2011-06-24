@@ -27,6 +27,11 @@ require 'active_support/core_ext'
 #
 #   require 'delimiter'
 #   1_234.to_s(:delimiter => ',') # => '1,234'
+#
+# String also gains the <tt>:delimiter => string</tt> option to
+# <tt>#to_i</tt> and <tt>#to_f</tt>:
+#
+#   '1,234'.to_i(:delimiter => ',') # => 1_234
 
 module Delimiter
 
@@ -71,8 +76,45 @@ module Delimiter
     end
   end
 
+  def to_i_with_delimiter(*args)
+    return to_i_without_delimiter(*args) unless is_a?(String)
+
+    base = args.shift if args.first.is_a?(Fixnum)
+    base ||= 10
+
+    return to_i_without_delimiter(*args) unless base == 10
+
+    options = args.first if args && args.first && args.first.is_a?(Hash)
+    delimiter = options[:delimiter] if options
+
+    case
+    when delimiter
+      gsub(delimiter, '').to_i_without_delimiter
+    else
+      to_i_without_delimiter
+    end
+  end
+
+  def to_f_with_delimiter(*args)
+    return to_f_without_delimiter(*args) unless is_a?(String)
+
+    options = args.first if args && args.first && args.first.is_a?(Hash)
+    delimiter = options[:delimiter] if options
+
+    case
+    when delimiter
+      gsub(delimiter, '').to_f_without_delimiter
+    else
+      to_f_without_delimiter
+    end
+  end
+
   def self.included(base)
-    base.class_eval { alias_method_chain :to_s, :delimiter }
+    base.class_eval do
+      alias_method_chain :to_f, :delimiter
+      alias_method_chain :to_i, :delimiter
+      alias_method_chain :to_s, :delimiter
+    end
   end
 
 end
