@@ -24,39 +24,11 @@ describe WordsController do
       request.env['HTTP_REFERER'] = '/'
     end
 
-    it "gets :about" do
-      get :about
-      response.should be_success
-    end
-
-    it "gets :faq" do
-      get :faq
-      response.should be_success
-    end
-
-    it "gets :index" do
-      get :index
-      response.should be_success
-    end
-
-    it "gets :license" do
-      get :license
-      response.should be_success
-    end
-
-    it "gets :link" do
-      get :link
-      response.should be_success
-    end
-
-    it "gets :tour" do
-      get :tour
-      response.should be_success
-    end
-
-    it "gets :qunit" do
-      get :qunit
-      response.should be_success
+    it "gets all defined routes" do
+      %w{about faq index license link qunit tour}.each do |route|
+        get route
+        response.should be_success
+      end
     end
 
     it "gets :show view" do
