@@ -39,7 +39,7 @@ describe '/words/_m_word.html.haml' do
 
   it 'lists all senses' do
     render :partial => 'words/m_word', :collection => @words
-    rendered.should have_selector("ol a[href='##{@words.first.unique_name}_0']")
-    rendered.should have_selector("ol a[href='##{@words.last.unique_name}_0']")
+    rendered.should have_selector("ol a[href='##{@words.first.unique_name}_0'][data-transition='slideup']")
+    rendered.should have_selector("ol a[href='##{@words.last.unique_name}_0'][data-transition='slideup']")
   end
 end

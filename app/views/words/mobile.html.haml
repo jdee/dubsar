@@ -27,7 +27,7 @@
       %ul
         - @words.each do |word|
           %li
-            = link_to "#{word.name} (#{word.pos}.)", "##{word.unique_name}"
+            = link_to "#{word.name} (#{word.pos}.)", "##{word.unique_name}", 'data-transition' => 'slideup'
       = will_paginate @words
   %div{'data-role' => 'footer'}
     %p

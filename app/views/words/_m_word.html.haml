@@ -27,7 +27,7 @@
     %ol
       - m_word.senses.each_with_index do |sense, index|
         %li
-          = link_to sense.synset.gloss, "##{m_word.unique_name}_#{index}"
+          = link_to sense.synset.gloss, "##{m_word.unique_name}_#{index}", 'data-transition' => 'slideup'
 
   %div{'data-role' => 'footer'}
     %p
