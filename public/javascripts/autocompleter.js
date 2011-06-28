@@ -27,11 +27,7 @@
     /* if an item was selected, submit the request */
     function ac_select_handler(event,ui){
       if (ui.item) {
-        if (ui.item.value) {
-          $word_input.val(ui.item.value);
-        } else {
-          $word_input.val($(ui.item).val());
-        }
+        $word_input.val(ui.item.value);
         $('#word-submit').click();
       }
     }
