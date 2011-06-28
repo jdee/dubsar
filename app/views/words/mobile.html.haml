@@ -22,7 +22,7 @@
     %p
       =link_to 'Dubsar Mobile', m_path, :rel => 'external'
   %div{'data-role' => 'content'}
-    = render :partial => 'mobile_form'
+    = render :partial => 'mobile_form', :locals => { :term => @term }
     - unless @words.blank?
       %ul
         - @words.each do |word|
