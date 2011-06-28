@@ -27,7 +27,11 @@
     /* if an item was selected, submit the request */
     function ac_select_handler(event,ui){
       if (ui.item) {
-        $word_input.val(ui.item.value);
+        if (ui.item.value) {
+          $word_input.val(ui.item.value);
+        } else {
+          $word_input.val($(ui.item).val());
+        }
         $('#word-submit').click();
       }
     }
@@ -53,7 +57,7 @@
     }
 
     function ajax_handler(request,response,offset,limit){
-      // search for words that start with the search term
+      /* search for words that start with the search term */
       request.term += '%';
       if ($match) {
         request.match = $match;
@@ -80,8 +84,7 @@
         dataType: 'json',
         data: request,
         success: function(data){
-          // make sure the search term hasn't changed (this might be an
-          // old response)
+          /* make sure the search term hasn't changed (this might be an old response) */
           if (data.term == $request_term && data.match == $match) {
             for (var j=0; j<data.list.length; ++j) $list.push(data.list[j]);
             response($list);
