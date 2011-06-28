@@ -155,9 +155,9 @@
       %li were
 
     Dubsar generates
-    =(part_of_speech_count(:inflection, 'verb')-part_of_speech_count(:word, 'verb')-1_967).to_s :comma_delimited
+    =(part_of_speech_count(:inflection, 'verb')-part_of_speech_count(:word, 'verb')-1_967).to_s :delimiter => ','
     verb inflections and
-    =(part_of_speech_count(:inflection, 'noun')-part_of_speech_count(:word, 'noun')-1_455).to_s :comma_delimited
+    =(part_of_speech_count(:inflection, 'noun')-part_of_speech_count(:word, 'noun')-1_455).to_s :delimiter => ','
     noun inflections not found in WordNet&reg;. Most of the latter are
     from the ActiveSupport Inflector.
 
