@@ -22,9 +22,12 @@ javascripts:
   - jquery.watermark.min
   - application
   - application-ui
+  - autocompleter
 - mobile:
   - jquery-1.6.1.min
+  - jquery-ui-1.8.13.autocompleter.min
   - jquery.mobile-1.0b1.min
+  - autocompleter
 - qunit:
   - jquery-1.6.1.min
   - jquery-ui-1.8.13.custom.min
@@ -34,6 +37,7 @@ javascripts:
   - application
   - application_test
   - application-ui
+  - autocompleter
   - application-ui_test
 stylesheets:
 - base:
@@ -43,6 +47,7 @@ stylesheets:
   - application-light
   - common
 - mobile:
+  - mobile/jquery-ui-1.8.13.autocompleter
   - mobile/jquery.mobile-1.0b1.min
   - mobile/application
 - qunit:
