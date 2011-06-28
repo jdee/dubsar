@@ -37,4 +37,4 @@
         WordNet&reg;
       &copy; 2011 The Trustees of Princeton University
 
-= render :partial => 'm_word', :collection => @words
+= render :partial => 'm_word', :collection => @words, :locals => { :term => @term }

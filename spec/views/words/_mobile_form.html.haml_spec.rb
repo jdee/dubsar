@@ -25,4 +25,9 @@ describe '/words/_mobile_form.html.haml' do
       form.should have_selector(:button, :id => 'word-submit')
     end
   end
+
+  it 'is prepopulated with the search term' do
+    render :partial => 'words/mobile_form', :locals => { :term => 'halo' }
+    rendered.should have_selector('input#word-input[value="halo"]')
+  end
 end
