@@ -21,8 +21,10 @@
       =yield :title
     =favicon_link_tag
     =csrf_meta_tag
-    != stylesheet_link_merged :mobile
+    = stylesheet_link_tag 'mobile/jquery.mobile-1.0b1.min'
+    = stylesheet_link_tag 'mobile/application'
 
   %body
     = yield
-    != javascript_include_merged :mobile
+    = javascript_include_tag 'jquery-1.6.1.min'
+    = javascript_include_tag 'jquery.mobile-1.0b1.min'
