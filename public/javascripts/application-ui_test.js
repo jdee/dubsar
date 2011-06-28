@@ -98,10 +98,6 @@ module('autocompleter', {
       },
       responseTime: 300
     });
-  },
-  teardown: function(){
-    $('#word-input').val('');
-    $('.ui-menu').hide();
   }
 });
 
@@ -119,9 +115,8 @@ asyncTest('wait cursor', 2, function(){
   }, 350);
 });
 
-/* after the test above completes, we give the server time to
-   respond, then look for the autocompleter */
 asyncTest('autocompletion', 5, function(){
+  $('#word-input').val('a').keydown();
   setTimeout(function(){
     ok($('.ui-menu').text(), 'autocompleter menu should have data');
     equal($('.ui-menu li').length, 10, 'autocompleter should have 10 items');
@@ -129,23 +124,34 @@ asyncTest('autocompletion', 5, function(){
     equal($('#word-input').css('cursor'), 'auto', '#word-input should have auto cursor');
     equal($('.ui-menu').css('cursor'), 'auto', '.ui-menu should have auto cursor');
     start();
-  }, 400);
+  }, 800);
 });
 
-/* can't get this to trigger an autocomplete select event
-   this just tests the ac_select_handler, which triggers the search
-   form
 asyncTest('autocompleter selection', 1, function(){
+  var input = $('#word-input');
+  var menu = input.autocomplete('widget');
+
   $('#word-submit').live('click', function(){
     ok(true, 'search submitted');
     return false;
   });
-  $('.ui-menu li:first').click();
+
+  input.val('a').keydown();
+
   setTimeout(function(){
-    start();
-  },100);
+    var ev = $.Event('keydown');
+    ev.keyCode = $.ui.keyCode.DOWN;
+    input.trigger(ev);
+
+    ev = $.Event('keydown');
+    ev.keyCode = $.ui.keyCode.ENTER;
+    input.trigger(ev);
+
+    setTimeout(function(){
+      start();
+    }, 100);
+  }, 800);
 });
- */
 
 /********************* sql help dialog module *****************/
 module('sql help dialog', {

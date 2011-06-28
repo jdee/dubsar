@@ -1,5 +1,5 @@
 /*
- * jQuery UI CSS Framework 1.8.9
+ * jQuery UI CSS Framework 1.8.13
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -24,7 +24,7 @@ body.style-dark .ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; po
 
 /* Interaction Cues
 ----------------------------------*/
-.ui-state-disabled { cursor: default !important; }
+body.style-dark .ui-state-disabled { cursor: default !important; }
 
 
 /* Icons
@@ -42,7 +42,7 @@ body.style-dark .ui-widget-overlay { position: absolute; top: 0; left: 0; width:
 
 
 /*
- * jQuery UI CSS Framework 1.8.9
+ * jQuery UI CSS Framework 1.8.13
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -58,7 +58,7 @@ body.style-dark .ui-widget-overlay { position: absolute; top: 0; left: 0; width:
 ----------------------------------*/
 body.style-dark .ui-widget { font-family: Segoe UI, Arial, sans-serif; font-size: 1.1em; }
 body.style-dark .ui-widget .ui-widget { font-size: 1em; }
-body.style-dark .ui-widget input, body.style-dark .ui-widget select, body.style-dark .ui-widget textarea, body.style-dark .ui-widget button { font-family: Segoe UI, Arial, sans-serif; font-size: 1em; }
+body.style-dark .ui-widget input, body.style-dark .ui-widget select, body.style-dark .ui-widget textarea, .ui-widget button { font-family: Segoe UI, Arial, sans-serif; font-size: 1em; }
 body.style-dark .ui-widget-content { border: 1px solid #666666; background: #000000 url(ui-darkness/images/ui-bg_inset-soft_25_000000_1x100.png) 50% bottom repeat-x; color: #ffffff; }
 body.style-dark .ui-widget-content a { color: #ffffff; }
 body.style-dark .ui-widget-header { border: 1px solid #333333; background: #333333 url(ui-darkness/images/ui-bg_gloss-wave_25_333333_500x100.png) 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
@@ -292,8 +292,8 @@ body.style-dark .ui-corner-all { -moz-border-radius: 6px; -webkit-border-radius:
 
 /* Overlays */
 body.style-dark .ui-widget-overlay { background: #5c5c5c url(ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png) 50% 50% repeat-x; opacity: .80;filter:Alpha(Opacity=80); }
-.ui-widget-shadow { margin: -7px 0 0 -7px; padding: 7px; background: #cccccc url(ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png) 50% 50% repeat-x; opacity: .60;filter:Alpha(Opacity=60); -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }/*
- * jQuery UI Accordion 1.8.9
+body.style-dark .ui-widget-shadow { margin: -7px 0 0 -7px; padding: 7px; background: #cccccc url(ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png) 50% 50% repeat-x; opacity: .60;filter:Alpha(Opacity=60); -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }/*
+ * jQuery UI Accordion 1.8.13
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -312,7 +312,7 @@ body.style-dark .ui-accordion .ui-accordion-header .ui-icon { position: absolute
 body.style-dark .ui-accordion .ui-accordion-content { padding: 1em 2.2em; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; zoom: 1; }
 body.style-dark .ui-accordion .ui-accordion-content-active { display: block; }
 /*
- * jQuery UI Autocomplete 1.8.9
+ * jQuery UI Autocomplete 1.8.13
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -326,7 +326,7 @@ body.style-dark .ui-autocomplete { position: absolute; cursor: default; }
 body.style-dark * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
 
 /*
- * jQuery UI Menu 1.8.9
+ * jQuery UI Menu 1.8.13
  *
  * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -365,7 +365,7 @@ body.style-dark .ui-menu .ui-menu-item a.ui-state-active {
 	margin: -1px;
 }
 /*
- * jQuery UI Button 1.8.9
+ * jQuery UI Button 1.8.13
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -385,7 +385,7 @@ body.style-dark .ui-button-text-only .ui-button-text { padding: .4em 1em; }
 body.style-dark .ui-button-icon-only .ui-button-text, body.style-dark .ui-button-icons-only .ui-button-text { padding: .4em; text-indent: -9999999px; }
 body.style-dark .ui-button-text-icon-primary .ui-button-text, body.style-dark .ui-button-text-icons .ui-button-text { padding: .4em 1em .4em 2.1em; }
 body.style-dark .ui-button-text-icon-secondary .ui-button-text, body.style-dark .ui-button-text-icons .ui-button-text { padding: .4em 2.1em .4em 1em; }
-.ui-button-text-icons .ui-button-text { padding-left: 2.1em; padding-right: 2.1em; }
+body.style-dark .ui-button-text-icons .ui-button-text { padding-left: 2.1em; padding-right: 2.1em; }
 /* no icon support for input elements, provide padding by default */
 body.style-dark input.ui-button { padding: .4em 1em; }
 
@@ -403,7 +403,7 @@ body.style-dark .ui-buttonset .ui-button { margin-left: 0; margin-right: -.3em; 
 /* workarounds */
 body.style-dark button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra padding in Firefox */
 /*
- * jQuery UI Dialog 1.8.9
+ * jQuery UI Dialog 1.8.13
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
