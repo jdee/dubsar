@@ -21,7 +21,7 @@ class WordsController < ApplicationController
   before_filter :setup_captions
   before_filter :munge_search_params, :only => [ :show ]
 
-  @max_json_limit = 1000
+  @max_json_limit = 25
 
   class << self
     attr_reader :max_json_limit
@@ -33,6 +33,26 @@ class WordsController < ApplicationController
 
   def qunit
     render :layout => false
+  end
+
+  def mobile
+    @term = params['term']
+
+    options = params.symbolize_keys
+    if @term
+      @words = Word.search options.merge(:page => params[:page], :per_page => 10,
+        :order => 'words.name ASC, words.part_of_speech ASC',
+        :include => [
+          :inflections,
+          { :senses => [
+            { :synset => :words },
+            { :senses_verb_frames => :verb_frame },
+            :pointers ]
+          }
+        ]
+      )
+    end
+    render :layout => 'mobile'
   end
 
   def os

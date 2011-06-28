@@ -1,0 +1,74 @@
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+- word = m_sense.word
+%div{'data-role' => 'page', :id => "#{word.unique_name}_#{index}"}
+  %div{'data-role' => 'header'}
+    %p
+      =link_to 'Dubsar Mobile', m_path, :rel => 'external'
+    %p
+      ="#{word.name} (#{word.pos}.)"
+      - unless word.other_forms.empty?
+        %em
+          =" #{word.other_forms}"
+      %br/
+      &nbsp;
+      = "#{index.next}. #{m_sense.synset.gloss}"
+  %div{'data-role' => 'content'}
+    %h3
+      &="<#{m_sense.synset.lexname}>"
+      &nbsp;
+      - if m_sense.marker
+        = "(#{m_sense.marker})"
+        &nbsp;
+      - if m_sense.freq_cnt > 0
+        &= "freq. cnt.: #{m_sense.freq_cnt.to_s :delimiter => ','}"
+    - synonyms = m_sense.synset.words_except(word)
+    - unless synonyms.empty?
+      %h3 synonyms
+      &nbsp;
+      - synonyms.each do |synonym|
+        != m_word_link synonym
+    - unless m_sense.frames.empty?
+      %h3 verb frames
+      %ul
+        - m_sense.frames.each do |frame|
+          %li= frame
+    - unless m_sense.synset.samples.blank?
+      %h3 sample sentences
+      %ul
+        - m_sense.synset.samples.each do |sample|
+          %li= sample
+    - unless m_sense.pointers.blank?
+      %h3 pointers
+      %table
+        %tbody
+          - m_sense.unique_pointers.each do |ptype, words|
+            %tr
+              %td
+                &= ptype
+              %td
+                - words.each do |word|
+                  != m_word_link word
+
+  %div{'data-role' => 'footer'}
+    %p
+      &copy; 2011 Jimmy Dee
+      &middot;
+      %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet&reg;', :rel => 'external'}
+        WordNet&reg;
+      &copy; 2011 The Trustees of Princeton University

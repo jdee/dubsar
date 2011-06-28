@@ -18,12 +18,13 @@
 Dubsar::Application.routes.draw do
   resources :fairies, :only => [ :index, :create ]
 
-  match '/about'   => 'words#about'
-  match '/faq'     => 'words#faq'
-  match '/license' => 'words#license'
-  match '/link'    => 'words#link'
-  match '/qunit'   => 'words#qunit'
-  match '/tour'    => 'words#tour'
+  match '/about'    => 'words#about'
+  match '/faq'      => 'words#faq'
+  match '/license'  => 'words#license'
+  match '/m'        => 'words#mobile'
+  match '/link'     => 'words#link'
+  match '/qunit'    => 'words#qunit'
+  match '/tour'     => 'words#tour'
 
   match '/(.:format)' => 'words#show'
   match '/os(.:format)' => 'words#os'

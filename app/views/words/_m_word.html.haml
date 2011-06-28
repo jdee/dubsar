@@ -1,0 +1,41 @@
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+%div{'data-role' => 'page', :id => m_word.unique_name}
+  %div{'data-role' => 'header'}
+    %p
+      =link_to 'Dubsar Mobile', m_path, :rel => 'external'
+    %p
+      ="#{m_word.name} (#{m_word.pos}.)"
+      - unless m_word.other_forms.empty?
+        %em
+          =" #{m_word.other_forms}"
+  %div{'data-role' => 'content'}
+    %ol
+      - m_word.senses.each_with_index do |sense, index|
+        %li
+          = link_to sense.synset.gloss, "##{m_word.unique_name}_#{index}"
+
+  %div{'data-role' => 'footer'}
+    %p
+      &copy; 2011 Jimmy Dee
+      &middot;
+      %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet&reg;', :rel => 'external'}
+        WordNet&reg;
+      &copy; 2011 The Trustees of Princeton University
+
+- m_word.senses.each_with_index do |sense, index|
+  = render :partial => 'm_sense', :object => sense, :locals => { :index => index }

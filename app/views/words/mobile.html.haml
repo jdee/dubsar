@@ -1,0 +1,40 @@
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- content_for :title do
+  Dubsar Mobile
+
+%div{'data-role' => 'page', :id => '_mobile'}
+  %div{'data-role' => 'header'}
+    %p
+      =link_to 'Dubsar Mobile', m_path, :rel => 'external'
+  %div{'data-role' => 'content'}
+    = render :partial => 'mobile_form'
+    - unless @words.blank?
+      %ul
+        - @words.each do |word|
+          %li
+            = link_to "#{word.name} (#{word.pos}.)", "##{word.unique_name}"
+      = will_paginate @words
+  %div{'data-role' => 'footer'}
+    %p
+      &copy; 2011 Jimmy Dee
+      &middot;
+      %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet&reg;', :rel => 'external'}
+        WordNet&reg;
+      &copy; 2011 The Trustees of Princeton University
+
+= render :partial => 'm_word', :collection => @words

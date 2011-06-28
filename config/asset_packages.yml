@@ -22,6 +22,9 @@ javascripts:
   - jquery.watermark.min
   - application
   - application-ui
+- mobile:
+  - jquery-1.6.1.min
+  - jquery.mobile-1.0b1.min
 - qunit:
   - jquery-1.6.1.min
   - jquery-ui-1.8.13.custom.min
@@ -39,6 +42,9 @@ stylesheets:
   - jquery-ui-1.8.13.light
   - application-light
   - common
+- mobile:
+  - mobile/jquery.mobile-1.0b1.min
+  - mobile/application
 - qunit:
   - jquery-ui-1.8.13.dark
   - jquery-ui-1.8.13.light

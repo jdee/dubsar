@@ -64,6 +64,7 @@ describe WordsHelper do
 
   describe 'counters' do
     before :each do
+      Word.delete_all
       %w{adjective adverb conjunction interjection noun preposition pronoun verb}.each do |part_of_speech|
         Factory.create part_of_speech.to_sym
       end

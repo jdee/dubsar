@@ -64,6 +64,7 @@ class Hash
     copy = clone
     copy.delete(:action)
     copy.delete(:back)
+    copy.delete(:commit)
     copy.delete(:controller)
     copy.delete(:format)
     copy.delete(:title)
