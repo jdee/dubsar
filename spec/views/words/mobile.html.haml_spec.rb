@@ -15,21 +15,29 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-def create_word!(name, part_of_speech, options={})
-  params = { :part_of_speech => part_of_speech.to_s, :freq_cnt => 0, :name => name }
-  params.merge!(options)
-  Word.create! params
-end
+require 'spec_helper'
 
-def create_synonyms!
-  food_synset = Factory :food_synset
-  food = Factory.build :noun
-  grub = Factory.build :grub
+describe '/words/mobile.html.haml' do
+  before :each do
+    food, grub = create_synonyms!
+    @words = [ food, grub ]
+    @words.stub(:total_pages).and_return(1)
+  end
 
-  food.senses << Factory.build(:sense, :synset => food_synset)
-  grub.senses << Factory.build(:sense, :synset => food_synset, :synset_index => 2)
-  food.save!
-  grub.save!
+  it 'has basic jquery mobile page structure' do
+    render
+    rendered.should have_selector(:div, 'data-role' => 'page') do |page|
+      page.should have_selector(:div, 'data-role' => 'header')
+      page.should have_selector(:div, 'data-role' => 'content')
+      page.should have_selector(:div, 'data-role' => 'footer')
+    end
+  end
 
-  [ food, grub ]
+  it 'lists all words' do
+    render
+    rendered.should have_selector(:ul) do |ul|
+      ul.should have_selector(:a, :href => "##{@words.first.unique_name}")
+      ul.should have_selector(:a, :href => "##{@words.last.unique_name}")
+    end
+  end
 end

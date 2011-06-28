@@ -15,21 +15,26 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-def create_word!(name, part_of_speech, options={})
-  params = { :part_of_speech => part_of_speech.to_s, :freq_cnt => 0, :name => name }
-  params.merge!(options)
-  Word.create! params
-end
+require 'spec_helper'
 
-def create_synonyms!
-  food_synset = Factory :food_synset
-  food = Factory.build :noun
-  grub = Factory.build :grub
+describe '/words/_m_sense.html.haml' do
+  before :each do
+    @food, grub = create_synonyms!
+  end
 
-  food.senses << Factory.build(:sense, :synset => food_synset)
-  grub.senses << Factory.build(:sense, :synset => food_synset, :synset_index => 2)
-  food.save!
-  grub.save!
+  it 'has basic jquery mobile page structure' do
+    render :partial => 'words/m_sense', :object => @food.senses.first, :locals => { :index => 0 }
+    rendered.should have_selector(:div, 'data-role' => 'page') do |page|
+      page.should have_selector(:div, 'data-role' => 'header')
+      page.should have_selector(:div, 'data-role' => 'content')
+      page.should have_selector(:div, 'data-role' => 'footer')
+    end
+  end
 
-  [ food, grub ]
+  it 'lists the lexname' do
+    render :partial => 'words/m_sense', :object => @food.senses.first, :locals => { :index => 0 }
+    rendered.should have_selector(:h3) do |h3|
+      h3.should contain(@food.synsets.first.lexname)
+    end
+  end
 end

@@ -125,15 +125,7 @@ describe Word do
 
   context 'in the general data model' do
     it 'recognizes synonyms' do
-      food_synset = Factory :food_synset
-      food = Factory.build :noun
-      grub = Factory.build :grub
-
-      food.senses << Factory.build(:sense, :synset => food_synset)
-      grub.senses << Factory.build(:sense, :synset => food_synset, :synset_index => 2)
-      food.save!
-      grub.save!
-
+      food, grub = create_synonyms!
       food.synsets.any?{|s|s.words.include?(grub)}.should be_true
     end
   end

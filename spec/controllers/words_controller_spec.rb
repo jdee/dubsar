@@ -25,17 +25,19 @@ describe WordsController do
     end
 
     it "gets all defined routes" do
-      %w{about faq index license link mobile qunit tour}.each do |route|
+      %w{about faq index license link qunit tour}.each do |route|
         get route
         response.should be_success
       end
     end
 
-    it "gets :show view" do
-      Factory :slang
-      get :show, 'term' => 'slang'
-      response.should be_success
-      assigns(:words).should_not be_nil
+    it "gets :show and :mobile views" do
+      create_synonyms!
+      %w{show mobile}.each do |route|
+        get route, 'term' => 'food'
+        response.should be_success
+        assigns(:words).should_not be_blank
+      end
     end
 
     it "ignores excess white space" do

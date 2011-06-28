@@ -108,9 +108,9 @@ end
 # example, _run_ will have two separate entries as a noun and a verb.
 class Word < ActiveRecord::Base
   before_save :compute_freq_cnt
-  has_many :senses, :order => 'freq_cnt DESC'
+  has_many :senses, :order => 'freq_cnt DESC, id ASC'
   has_many :synsets, :through => :senses,
-    :order => 'senses.freq_cnt DESC'
+    :order => 'senses.freq_cnt DESC, senses.id ASC'
   has_many :inflections
 
   validates :name, :presence => true

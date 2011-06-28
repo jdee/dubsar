@@ -15,21 +15,14 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-def create_word!(name, part_of_speech, options={})
-  params = { :part_of_speech => part_of_speech.to_s, :freq_cnt => 0, :name => name }
-  params.merge!(options)
-  Word.create! params
-end
+require 'spec_helper'
 
-def create_synonyms!
-  food_synset = Factory :food_synset
-  food = Factory.build :noun
-  grub = Factory.build :grub
-
-  food.senses << Factory.build(:sense, :synset => food_synset)
-  grub.senses << Factory.build(:sense, :synset => food_synset, :synset_index => 2)
-  food.save!
-  grub.save!
-
-  [ food, grub ]
+describe '/words/_mobile_form.html.haml' do
+  it 'has a form' do
+    render :partial => 'words/mobile_form'
+    rendered.should have_selector(:form, 'data-ajax' => 'false') do |form|
+      form.should have_selector(:input, :type => 'text', :name => 'term', :id => 'word-input')
+      form.should have_selector(:button, :id => 'word-submit')
+    end
+  end
 end
