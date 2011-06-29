@@ -25,6 +25,14 @@
     != thumbnail_link_tag 'dubsar.png'
     != thumbnail_link_tag 'dubsar-full.png'
     %meta{:name => 'Description', :content => 'The Dubsar Project is an open-source dictionary application using content from the Princeton University WordNet® project. It has a rich mobile interface for smart phones, tablets and other mobile devices.'}
+    %meta{:property => 'og:title', :content => 'Dubsar Mobile'}
+    %meta{:property => 'og:type', :content => 'website'}
+    %meta{:property => 'og:url', :content => 'http://dubsar-dictionary.com/m'}
+    %meta{:property => 'og:image', :content => "#{image_path 'dubsar-big.jpg'}"}
+    %meta{:property => 'og:site_name', :content => 'The Dubsar Project'}
+    %meta{:property => 'fb:admins', :content => '1015821519'}
+    %meta{:property => 'og:description', :content => 'The Dubsar Project is an open-source dictionary application using content from the Princeton University WordNet® project. It has a rich mobile interface for smart phones, tablets and other mobile devices.'}
+    %meta{:property => 'og:email', :content => 'dubsar@dubsar-dictionary.com'}
 
     = csrf_meta_tag
     = stylesheet_link_tag 'mobile/ui-lightness/jquery-ui-1.8.14.custom'
