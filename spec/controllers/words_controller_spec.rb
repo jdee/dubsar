@@ -40,6 +40,22 @@ describe WordsController do
       end
     end
 
+    it "gets :m_word view" do
+      word = Factory :noun
+      get :m_word, 'word_id' => word.id
+      response.should be_success
+      assigns(:word).should_not be_blank
+    end
+
+    it "gets :m_sense view" do
+      food, grub = create_synonyms!
+      sense = food.senses.first
+      get :m_sense, 'sense_id' => sense.id, 'index' => 0
+      response.should be_success
+      assigns(:sense).should_not be_blank
+      assigns(:index).should_not be_blank
+    end
+
     it "ignores excess white space" do
       get :show, 'term' => '  World   War         2  '
 
