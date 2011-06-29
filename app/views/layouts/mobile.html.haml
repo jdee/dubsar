@@ -21,6 +21,11 @@
       = yield :title
     = favicon_link_tag
     = auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
+    %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
+    != thumbnail_link_tag 'dubsar.png'
+    != thumbnail_link_tag 'dubsar-full.png'
+    %meta{:name => 'Description', :content => 'The Dubsar Project is an open-source dictionary application using content from the Princeton University WordNet® project. It has a rich mobile interface for smart phones, tablets and other mobile devices.'}
+
     = csrf_meta_tag
     = stylesheet_link_tag 'mobile/ui-lightness/jquery-ui-1.8.14.custom'
     = stylesheet_link_tag 'mobile/jquery.mobile-1.0b1.min'
