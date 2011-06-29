@@ -88,7 +88,7 @@ EOF
 
   def m_word_link(word)
     s = <<EOF
-<a href="#{url_for :action => :mobile, :term => word.name}##{word.unique_name}" rel="external" class="undecorated">#{word.name}</a>
+<a href="#{url_for :action => :mobile, :term => word.name}" rel="external" class="undecorated">#{word.name}</a>
 EOF
   end
 end
