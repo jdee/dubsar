@@ -19,6 +19,7 @@
 ;(function($){
   $(function(){
     var $word_input = $('#word-input');
+    var $word_input_has_focus=false;
     var $starting_header=$.find_cookie('dubsar_starting_pane');
     var $show_help_link_timer=null;
     var $hide_help_link_timer=null;
@@ -115,6 +116,8 @@
       }
     });
 
+    /* DEBT: Need a better test for this without actually triggering
+       the 3-second timer and waiting. */
     $word_input.watermark('enter a word');
     $word_input.live('mouseenter', function(){
       if ($hide_help_link_timer !== null) {
