@@ -33,6 +33,6 @@ describe '/words/_mobile_form.html.haml' do
 
   it 'uses a placeholder tag' do
     render :partial => 'words/mobile_form', :locals => { :term => 'halo' }
-    rendered.should have_selector('input#word-input[placeholder="search term"]')
+    rendered.should have_selector('input#word-input[placeholder]')
   end
 end
