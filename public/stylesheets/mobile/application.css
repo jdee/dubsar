@@ -18,7 +18,7 @@
  */
 
 body, input#word-input, a[data-role='button'] span {
-  font-size: 24pt;
+  font-size: 18pt;
 }
 
 a.undecorated, a:hover,active {
