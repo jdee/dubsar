@@ -36,13 +36,13 @@ class WordsController < ApplicationController
   end
 
   def m_sense
-    @sense = Sense.find params[:sense_id]
+    @sense = Sense.find params[:sense_id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
     @index = params[:index]
     render :layout => false
   end
 
   def m_word
-    @word = Word.find params[:word_id]
+    @word = Word.find params[:word_id], :include => [ :inflections, { :senses => :synset } ]
     render :layout => false
   end
 
@@ -52,15 +52,7 @@ class WordsController < ApplicationController
     options = params.symbolize_keys
     if @term
       @words = Word.search options.merge(:page => params[:page], :per_page => 10,
-        :order => 'words.name ASC, words.part_of_speech ASC',
-        :include => [
-          :inflections,
-          { :senses => [
-            { :synset => :words },
-            { :senses_verb_frames => :verb_frame },
-            :pointers ]
-          }
-        ]
+        :order => 'words.name ASC, words.part_of_speech ASC'
       )
     end
     render :layout => 'mobile'
