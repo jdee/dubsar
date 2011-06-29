@@ -25,7 +25,7 @@ javascripts:
   - autocompleter
 - mobile:
   - jquery-1.6.1.min
-  - jquery-ui-1.8.13.autocompleter.min
+  - jquery-ui-1.8.14.autocomplete.min
   - jquery.mobile-1.0b1.min
   - autocompleter
 - qunit:
@@ -47,7 +47,7 @@ stylesheets:
   - application-light
   - common
 - mobile:
-  - mobile/jquery-ui-1.8.13.autocompleter
+  - mobile/ui-lightness/jquery-ui-1.8.14.custom
   - mobile/jquery.mobile-1.0b1.min
   - mobile/application
 - qunit:
