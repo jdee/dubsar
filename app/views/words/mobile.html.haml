@@ -17,17 +17,20 @@
 - content_for :title do
   Dubsar Mobile
 
-%div{'data-role' => 'page'}
-  %div{'data-role' => 'header', 'data-theme' => 'b', 'data-position' => 'inline'}
+%div{'data-role' => 'page', 'data-theme' => 'b'}
+  %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'dubsar_mobile_header'
   %div{'data-role' => 'content'}
     = render :partial => 'mobile_form', :locals => { :term => @term }
     %br/
-    - unless @words.blank?
-      %ul{'data-role' => 'listview', 'data-theme' => 'b'}
+    - if not @words.blank?
+      %ul{'data-role' => 'listview'}
         - @words.each do |word|
           %li
             = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_word, :word_id => word.id), 'data-transition' => 'slideup'
       = will_paginate @words
-  %div{'data-role' => 'footer', 'data-theme' => 'b'}
+    - elsif not @words.nil?
+      %em
+        &="no results for \"#{@term}\""
+  %div{'data-role' => 'footer'}
     = render :partial => 'mobile_footer'

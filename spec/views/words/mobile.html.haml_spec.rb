@@ -40,4 +40,16 @@ describe '/words/mobile.html.haml' do
       ul.should have_selector(:a, :href => url_for(:action => :m_word, :word_id => @words.last.id), 'data-transition' => 'slideup')
     end
   end
+
+  it 'indicates when no results are found' do
+    assign(:words, [])
+    render
+    rendered.should contain("no results")
+  end
+
+  it 'does not display an error when not displaying search results' do
+    assign(:words, nil)
+    render
+    rendered.should_not contain("no results")
+  end
 end

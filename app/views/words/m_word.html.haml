@@ -14,8 +14,8 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-%div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)}"}
-  %div{'data-role' => 'header', 'data-theme' => 'b', 'data-position' => 'inline'}
+%div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)}", 'data-theme' => 'b'}
+  %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'dubsar_mobile_header'
     %br/
     ="#{@word.name} (#{@word.pos}.)"
@@ -23,10 +23,10 @@
       %em
         =" #{@word.other_forms}"
   %div{'data-role' => 'content'}
-    %ol{'data-role' => 'listview', 'data-theme' => 'b'}
+    %ol{'data-role' => 'listview'}
       - @word.senses.each_with_index do |sense, index|
         %li
           = link_to sense.synset.gloss, url_for(:action => :m_sense, :sense_id => sense.id, :index => index), 'data-transition' => 'slideup'
 
-  %div{'data-role' => 'footer', 'data-theme' => 'b'}
+  %div{'data-role' => 'footer'}
     = render :partial => 'mobile_footer'

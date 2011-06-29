@@ -16,8 +16,8 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - word = @sense.word
-%div{'data-role' => 'page'}
-  %div{'data-role' => 'header', 'data-theme' => 'b', 'data-position' => 'inline'}
+%div{'data-role' => 'page', 'data-theme' => 'b'}
+  %div{'data-role' => 'header'}
     =render :partial => 'dubsar_mobile_header'
     =link_to h("#{word.name} (#{word.pos}.)"), "/m_sense/#{@sense.id}?index=#{@index}", 'data-icon' => 'arrow-u', 'data-rel' => 'back'
     %br/
@@ -65,5 +65,5 @@
                 - words.each do |word|
                   != m_word_link word
 
-  %div{'data-role' => 'footer', 'data-theme' => 'b'}
+  %div{'data-role' => 'footer'}
     = render :partial => 'mobile_footer'
