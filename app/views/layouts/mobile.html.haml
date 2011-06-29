@@ -15,7 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 !!! 5
-%html
+%html{'xmlns:dubsar_og' => 'http://dubsar-dictionary.com/og/1.0'}
   %head
     %title
       = yield :title
@@ -26,7 +26,7 @@
     != thumbnail_link_tag 'dubsar-full.png'
     %meta{:name => 'Description', :content => 'The Dubsar Project is an open-source dictionary application using content from the Princeton University WordNet® project. It has a rich mobile interface for smart phones, tablets and other mobile devices.'}
     %meta{:property => 'og:title', :content => 'Dubsar Mobile'}
-    %meta{:property => 'og:type', :content => 'website'}
+    %meta{:property => 'og:type', :content => 'dubsar_og:feature'}
     %meta{:property => 'og:url', :content => 'http://dubsar-dictionary.com/m'}
     %meta{:property => 'og:image', :content => "#{image_path 'dubsar-big.jpg'}"}
     %meta{:property => 'og:site_name', :content => 'The Dubsar Project'}
