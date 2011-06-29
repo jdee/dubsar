@@ -19,7 +19,7 @@
 %div{'data-role' => 'page'}
   %div{'data-role' => 'header'}
     %p
-      =link_to 'Dubsar Mobile', m_path, :rel => 'external'
+      =render :partial => 'dubsar_mobile_header'
     %p
       ="#{word.name} (#{word.pos}.)"
       - unless word.other_forms.empty?
@@ -66,9 +66,4 @@
                   != m_word_link word
 
   %div{'data-role' => 'footer'}
-    %p
-      &copy; 2011 Jimmy Dee
-      &middot;
-      %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet&reg;', :rel => 'external'}
-        WordNet&reg;
-      &copy; 2011 The Trustees of Princeton University
+    = render :partial => 'mobile_footer'

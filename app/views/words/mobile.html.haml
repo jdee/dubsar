@@ -19,8 +19,7 @@
 
 %div{'data-role' => 'page', :id => '_mobile'}
   %div{'data-role' => 'header'}
-    %p
-      =link_to 'Dubsar Mobile', m_path, :rel => 'external'
+    = render :partial => 'dubsar_mobile_header'
   %div{'data-role' => 'content'}
     = render :partial => 'mobile_form', :locals => { :term => @term }
     - unless @words.blank?
@@ -30,9 +29,4 @@
             = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_word, :word_id => word.id), 'data-transition' => 'slideup'
       = will_paginate @words
   %div{'data-role' => 'footer'}
-    %p
-      &copy; 2011 Jimmy Dee
-      &middot;
-      %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet&reg;', :rel => 'external'}
-        WordNet&reg;
-      &copy; 2011 The Trustees of Princeton University
+    = render :partial => 'mobile_footer'

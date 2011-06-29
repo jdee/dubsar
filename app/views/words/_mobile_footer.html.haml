@@ -14,20 +14,10 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-%div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)}"}
-  %div{'data-role' => 'header'}
-    %p
-      = render :partial => 'dubsar_mobile_header'
-    %p
-      ="#{@word.name} (#{@word.pos}.)"
-      - unless @word.other_forms.empty?
-        %em
-          =" #{@word.other_forms}"
-  %div{'data-role' => 'content'}
-    %ol
-      - @word.senses.each_with_index do |sense, index|
-        %li
-          = link_to sense.synset.gloss, url_for(:action => :m_sense, :sense_id => sense.id, :index => index), 'data-transition' => 'slideup'
 
-  %div{'data-role' => 'footer'}
-    = render :partial => 'mobile_footer'
+%p
+  &copy; 2011 Jimmy Dee
+  &middot;
+  %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet&reg;', :rel => 'external'}
+    WordNet&reg;
+  &copy; 2011 The Trustees of Princeton University
