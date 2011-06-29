@@ -20,6 +20,8 @@
     %title
       =yield :title
     =favicon_link_tag
+    =auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
+    %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
     =csrf_meta_tag
     = stylesheet_link_tag 'mobile/jquery.mobile-1.0b1.min'
     = stylesheet_link_tag 'mobile/application'
