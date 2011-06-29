@@ -21,6 +21,15 @@ body, input#word-input, a[data-role='button'] span {
   font-size: 18pt;
 }
 
-a.undecorated, a:hover,active {
+div[data-role='footer'] {
+  font-size: 12pt;
+  text-align: center;
+}
+
+a.undecorated {
   text-decoration: none;
+}
+
+a.undecorated:hover,active {
+  color: #f90;
 }
