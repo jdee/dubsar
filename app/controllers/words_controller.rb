@@ -35,6 +35,17 @@ class WordsController < ApplicationController
     render :layout => false
   end
 
+  def m_sense
+    @sense = Sense.find params[:sense_id]
+    @index = params[:index]
+    render :layout => false
+  end
+
+  def m_word
+    @word = Word.find params[:word_id]
+    render :layout => false
+  end
+
   def mobile
     @term = params['term']
 

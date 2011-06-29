@@ -36,8 +36,8 @@ describe '/words/mobile.html.haml' do
   it 'lists all words' do
     render
     rendered.should have_selector(:ul) do |ul|
-      ul.should have_selector(:a, :href => "##{@words.first.unique_name}", 'data-transition' => 'slideup')
-      ul.should have_selector(:a, :href => "##{@words.last.unique_name}", 'data-transition' => 'slideup')
+      ul.should have_selector(:a, :href => url_for(:action => :m_word, :word_id => @words.first.id), 'data-transition' => 'slideup')
+      ul.should have_selector(:a, :href => url_for(:action => :m_word, :word_id => @words.last.id), 'data-transition' => 'slideup')
     end
   end
 end

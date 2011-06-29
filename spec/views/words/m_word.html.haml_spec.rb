@@ -17,13 +17,14 @@
 
 require 'spec_helper'
 
-describe '/words/_m_sense.html.haml' do
+describe '/words/m_word.html.haml' do
   before :each do
-    @food, grub = create_synonyms!
+    @word, other = create_synonyms!
+    assign(:word, @word)
   end
 
   it 'has basic jquery mobile page structure' do
-    render :partial => 'words/m_sense', :object => @food.senses.first, :locals => { :index => 0 }
+    render
     rendered.should have_selector(:div, 'data-role' => 'page') do |page|
       page.should have_selector(:div, 'data-role' => 'header')
       page.should have_selector(:div, 'data-role' => 'content')
@@ -31,10 +32,8 @@ describe '/words/_m_sense.html.haml' do
     end
   end
 
-  it 'lists the lexname' do
-    render :partial => 'words/m_sense', :object => @food.senses.first, :locals => { :index => 0 }
-    rendered.should have_selector(:h3) do |h3|
-      h3.should contain(@food.synsets.first.lexname)
-    end
+  it 'lists all senses' do
+    render
+    rendered.should have_selector("ol a[href='#{url_for(:action => :m_sense, :sense_id => @word.sense_ids.first, :index => 0)}'][data-transition='slideup']")
   end
 end

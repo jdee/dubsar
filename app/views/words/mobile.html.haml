@@ -27,7 +27,7 @@
       %ul
         - @words.each do |word|
           %li
-            = link_to "#{word.name} (#{word.pos}.)", "##{word.unique_name}", 'data-transition' => 'slideup'
+            = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_word, :word_id => word.id), 'data-transition' => 'slideup'
       = will_paginate @words
   %div{'data-role' => 'footer'}
     %p
@@ -36,5 +36,3 @@
       %a{:href => 'http://wordnet.princeton.edu', :title => 'WordNet&reg;', :rel => 'external'}
         WordNet&reg;
       &copy; 2011 The Trustees of Princeton University
-
-= render :partial => 'm_word', :collection => @words, :locals => { :term => @term }

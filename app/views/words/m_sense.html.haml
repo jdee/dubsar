@@ -15,8 +15,8 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-- word = m_sense.word
-%div{'data-role' => 'page', :id => "#{word.unique_name}_#{index}"}
+- word = @sense.word
+%div{'data-role' => 'page'}
   %div{'data-role' => 'header'}
     %p
       =link_to 'Dubsar Mobile', m_path, :rel => 'external'
@@ -27,37 +27,37 @@
           =" #{word.other_forms}"
       %br/
       &nbsp;
-      = "#{index.next}. #{m_sense.synset.gloss}"
+      = "#{@index.next}. #{@sense.synset.gloss}"
   %div{'data-role' => 'content'}
     %h3
-      &="<#{m_sense.synset.lexname}>"
+      &="<#{@sense.synset.lexname}>"
       &nbsp;
-      - if m_sense.marker
-        = "(#{m_sense.marker})"
+      - if @sense.marker
+        = "(#{@sense.marker})"
         &nbsp;
-      - if m_sense.freq_cnt > 0
-        &= "freq. cnt.: #{m_sense.freq_cnt.to_s :delimiter => ','}"
-    - synonyms = m_sense.synset.words_except(word)
+      - if @sense.freq_cnt > 0
+        &= "freq. cnt.: #{@sense.freq_cnt.to_s :delimiter => ','}"
+    - synonyms = @sense.synset.words_except(word)
     - unless synonyms.empty?
       %h3 synonyms
       &nbsp;
       - synonyms.each do |synonym|
         != m_word_link synonym
-    - unless m_sense.frames.empty?
+    - unless @sense.frames.empty?
       %h3 verb frames
       %ul
-        - m_sense.frames.each do |frame|
+        - @sense.frames.each do |frame|
           %li= frame
-    - unless m_sense.synset.samples.blank?
+    - unless @sense.synset.samples.blank?
       %h3 sample sentences
       %ul
-        - m_sense.synset.samples.each do |sample|
+        - @sense.synset.samples.each do |sample|
           %li= sample
-    - unless m_sense.pointers.blank?
+    - unless @sense.pointers.blank?
       %h3 pointers
       %table
         %tbody
-          - m_sense.unique_pointers.each do |ptype, words|
+          - @sense.unique_pointers.each do |ptype, words|
             %tr
               %td
                 &= ptype

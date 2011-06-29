@@ -17,29 +17,26 @@
 
 require 'spec_helper'
 
-describe '/words/_m_word.html.haml' do
+describe '/words/m_sense.html.haml' do
   before :each do
-    food, grub = create_synonyms!
-    @words = [ food, grub ]
+    @food, grub = create_synonyms!
+    assign(:sense, @food.senses.first)
+    assign(:index, 0)
   end
 
   it 'has basic jquery mobile page structure' do
-    render :partial => 'words/m_word', :collection => @words
-    rendered.should have_selector(:div, 'data-role' => 'page', :id => @words.first.unique_name) do |page|
-      page.should have_selector(:div, 'data-role' => 'header')
-      page.should have_selector(:div, 'data-role' => 'content')
-      page.should have_selector(:div, 'data-role' => 'footer')
-    end
-    rendered.should have_selector(:div, 'data-role' => 'page', :id => @words.last.unique_name) do |page|
+    render
+    rendered.should have_selector(:div, 'data-role' => 'page') do |page|
       page.should have_selector(:div, 'data-role' => 'header')
       page.should have_selector(:div, 'data-role' => 'content')
       page.should have_selector(:div, 'data-role' => 'footer')
     end
   end
 
-  it 'lists all senses' do
-    render :partial => 'words/m_word', :collection => @words
-    rendered.should have_selector("ol a[href='##{@words.first.unique_name}_0'][data-transition='slideup']")
-    rendered.should have_selector("ol a[href='##{@words.last.unique_name}_0'][data-transition='slideup']")
+  it 'lists the lexname' do
+    render
+    rendered.should have_selector(:h3) do |h3|
+      h3.should contain(@food.synsets.first.lexname)
+    end
   end
 end
