@@ -216,6 +216,23 @@ describe Word do
 
         word = create_word! 'pad', :verb
         word.inflections.map(&:name).sort.should == %w{pad padded padding pads}
+
+        # The following tests address GitHub issue #29:
+        # https://github.com/jdee/dubsar/issues/29
+        word = create_word! 'lay', :verb, :irregular => %w{laid}
+        word.inflections.map(&:name).sort.should == %w{laid lay laying lays}
+
+        word = create_word! 'play', :verb
+        word.inflections.map(&:name).sort.should == %w{play played playing plays}
+
+        word = create_word! 'toy', :verb
+        word.inflections.map(&:name).sort.should == %w{toy toyed toying toys}
+
+        word = create_word! 'buy', :verb, :irregular => %w{bought}
+        word.inflections.map(&:name).sort.should == %w{bought buy buying buys}
+
+        word = create_word! 'bogey', :verb
+        word.inflections.map(&:name).sort.should == %w{bogey bogeyed bogeying bogeys}
       end
 
       it 'builds multiple participles when appropriate' do

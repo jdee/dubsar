@@ -51,7 +51,14 @@
   [ 'sabbatical', 'adjective', [] ],
   [ 'good', 'adjective', %w{best better} ],
   [ 'plainly', 'adverb', [] ],
-  [ 'well', 'adverb', %w{best better} ]
+  [ 'well', 'adverb', %w{best better} ],
+  # The following tests address GitHub issue #29:
+  # https://github.com/jdee/dubsar/issues/29
+  [ 'lay', 'verb', %w{laid laying lays} ],
+  [ 'play', 'verb', %w{played playing plays} ],
+  [ 'toy', 'verb', %w{toyed toying toys} ],
+  [ 'buy', 'verb', %w{bought buying buys} ],
+  [ 'bogey', 'verb', %w{bogeyed bogeying bogeys} ]
 ]
 
 def check_inflections(test_case)

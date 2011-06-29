@@ -379,7 +379,7 @@ class Word < ActiveRecord::Base
         inflections.build :name => name + 'es'
         inflections.build :name => name + pad + 'es'
       end
-    when /y$/
+    when /[^aeou]y$/
       inflections.build :name => name.sub(/y$/, 'ies')
     else
       inflections.build :name => name + 's'
@@ -401,7 +401,7 @@ class Word < ActiveRecord::Base
     case name
     when /e$/
       build_new_inflection name + 'd'
-    when /y$/
+    when /[^aeou]y$/
       build_new_inflection name.sub(/y$/, 'ied')
     when /[^aeiou][aeiouy][lnrt]$/
       c = /[^aeiou][aeiouy]([lnrt])$/.match(name)[1]
