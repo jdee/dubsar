@@ -17,17 +17,17 @@
 
 - word = @sense.word
 %div{'data-role' => 'page'}
-  %div{'data-role' => 'header'}
-    %p
-      =render :partial => 'dubsar_mobile_header'
-    %p
-      ="#{word.name} (#{word.pos}.)"
-      - unless word.other_forms.empty?
-        %em
-          =" #{word.other_forms}"
-      %br/
-      &nbsp;
-      = "#{@index.next}. #{@sense.synset.gloss}"
+  %div{'data-role' => 'header', 'data-theme' => 'b', 'data-position' => 'inline'}
+    =render :partial => 'dubsar_mobile_header'
+    =link_to "#{word.name} (#{word.pos}.)", "/m_word/#{word.id}", 'data-icon' => 'arrow-u', 'data-transition' => 'slidedown'
+    %br/
+    ="#{word.name} (#{word.pos}.)"
+    - unless word.other_forms.empty?
+      %em
+        =" #{word.other_forms}"
+    %br/
+    &nbsp;
+    = "#{@index.next}. #{@sense.synset.gloss}"
   %div{'data-role' => 'content'}
     %h3
       &="<#{@sense.synset.lexname}>"
@@ -65,5 +65,5 @@
                 - words.each do |word|
                   != m_word_link word
 
-  %div{'data-role' => 'footer'}
+  %div{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'mobile_footer'

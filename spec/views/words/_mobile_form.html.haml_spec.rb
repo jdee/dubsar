@@ -21,7 +21,7 @@ describe '/words/_mobile_form.html.haml' do
   it 'has a form' do
     render :partial => 'words/mobile_form'
     rendered.should have_selector(:form, 'data-ajax' => 'false') do |form|
-      form.should have_selector(:input, :type => 'text', :name => 'term', :id => 'word-input')
+      form.should have_selector(:input, :type => 'search', :name => 'term', :id => 'word-input')
       form.should have_selector(:button, :id => 'word-submit')
     end
   end
