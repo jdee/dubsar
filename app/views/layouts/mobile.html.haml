@@ -18,15 +18,18 @@
 %html
   %head
     %title
-      =yield :title
-    =favicon_link_tag
-    =auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
-    %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
-    =csrf_meta_tag
+      = yield :title
+    = favicon_link_tag
+    = auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
+    = csrf_meta_tag
+    = stylesheet_link_tag 'mobile/ui-lightness/jquery-ui-1.8.14.custom'
     = stylesheet_link_tag 'mobile/jquery.mobile-1.0b1.min'
     = stylesheet_link_tag 'mobile/application'
 
   %body
     = yield
+
     = javascript_include_tag 'jquery-1.6.1.min'
+    = javascript_include_tag 'jquery-ui-1.8.14.autocomplete.min'
     = javascript_include_tag 'jquery.mobile-1.0b1.min'
+    = javascript_include_tag 'autocompleter'

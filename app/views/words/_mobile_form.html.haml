@@ -20,6 +20,6 @@
     %tbody
       %tr
         %td
-          = search_field_tag :term, defined?(term) ? term : '', :id => 'word-input', :tabindex => 1, :placeholder => 'search term(s)'
+          = text_field_tag :term, defined?(term) ? term : '', :id => 'word-input', :tabindex => 1, :placeholder => 'search term(s)'
         %td
           %button#word-submit{:tabindex => 2, 'data-theme' => 'b', 'data-icon' => 'search'} search
