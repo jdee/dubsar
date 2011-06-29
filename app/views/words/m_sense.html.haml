@@ -19,7 +19,7 @@
 %div{'data-role' => 'page', 'data-theme' => 'b'}
   %div{'data-role' => 'header'}
     =render :partial => 'dubsar_mobile_header'
-    =link_to h("#{word.name} (#{word.pos}.)"), "/m_sense/#{@sense.id}?index=#{@index}", 'data-icon' => 'arrow-u', 'data-rel' => 'back'
+    =link_to h("#{word.name} (#{word.pos}.)"), "/m_sense/#{@sense.id}?index=#{@index}", 'data-icon' => 'arrow-u', 'data-rel' => 'back', 'data-role' => 'button'
     %br/
     &="#{word.name} (#{word.pos}.)"
     - unless word.other_forms.empty?
