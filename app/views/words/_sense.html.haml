@@ -55,9 +55,11 @@
           %table
             %tbody
               - sense.synset.samples.each do |sample|
-                %tr
-                  %td
-                    &= sample
+                - s = sample.strip
+                - unless s.blank?
+                  %tr
+                    %td
+                      &= s
         - unless sense.pointers.blank?
           %hr/
           %strong{:title => 'links to related words of different types'}

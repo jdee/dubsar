@@ -52,7 +52,8 @@
       %h3 sample sentences
       %ul
         - @sense.synset.samples.each do |sample|
-          %li=h sample
+          - unless sample.blank?
+            %li=h sample
     - unless @sense.pointers.blank?
       %h3 pointers
       %table
