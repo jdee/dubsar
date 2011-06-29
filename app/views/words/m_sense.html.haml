@@ -19,16 +19,16 @@
 %div{'data-role' => 'page'}
   %div{'data-role' => 'header', 'data-theme' => 'b', 'data-position' => 'inline'}
     =render :partial => 'dubsar_mobile_header'
-    =link_to "#{word.name} (#{word.pos}.)", "/m_sense/#{@sense.id}?index=#{@index}", 'data-icon' => 'arrow-u', 'data-rel' => 'back
+    =link_to h("#{word.name} (#{word.pos}.)"), "/m_sense/#{@sense.id}?index=#{@index}", 'data-icon' => 'arrow-u', 'data-rel' => 'back'
     %br/
-    ="#{word.name} (#{word.pos}.)"
+    &="#{word.name} (#{word.pos}.)"
     - unless word.other_forms.empty?
       %em
-        =" #{word.other_forms}"
+        &=" #{word.other_forms}"
     %br/
     &nbsp;
-    = "#{@index.next}. #{@sense.synset.gloss}"
-  %div{'data-role' => 'content'}
+    &= "#{@index.next}. #{@sense.synset.gloss}"
+  %div{'data-role' => "content"}
     %h3
       &="<#{@sense.synset.lexname}>"
       &nbsp;
@@ -47,12 +47,12 @@
       %h3 verb frames
       %ul
         - @sense.frames.each do |frame|
-          %li= frame
+          %li=h frame
     - unless @sense.synset.samples.blank?
       %h3 sample sentences
       %ul
         - @sense.synset.samples.each do |sample|
-          %li= sample
+          %li=h sample
     - unless @sense.pointers.blank?
       %h3 pointers
       %table
