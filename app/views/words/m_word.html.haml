@@ -17,7 +17,7 @@
 %div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)}", 'data-theme' => 'b'}
   %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'dubsar_mobile_header'
-    - # = link_to 'search results', @back, 'data-rel' => 'back', 'data-role' => 'button', 'data-icon' => 'arrow-u'
+    = link_to 'search results', @back, 'data-rel' => 'back', 'data-role' => 'button', 'data-icon' => 'arrow-u'
     %br/
     ="#{@word.name} (#{@word.pos}.)"
     - unless @word.other_forms.empty?
