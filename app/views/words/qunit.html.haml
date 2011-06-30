@@ -53,8 +53,8 @@
     #header.ui-widget{:style => 'position: fixed; top: 0; height: 17.8ex; margin: 0.5ex;'}
       - # Slimmed down version without all the tables, etc.
       .header-link-div.ui-corner-all.ui-state-default
-        %a.header-link.search-link{:href => tour_path, :title => 'take a tour'}
-          %span.header-link-icon.ui-icon.ui-icon-flag
+        %a.line.header-link.search-link{:href => tour_path, :title => 'take a tour'}
+          %span.ui-icon.ui-icon-flag
           tour
       =render :partial => 'shared/header_bar'
       =render :partial => 'shared/theme_picker'
