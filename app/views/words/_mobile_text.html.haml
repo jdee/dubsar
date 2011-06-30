@@ -14,25 +14,9 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-- content_for :title do
-  Dubsar Mobile
 
-%div{'data-role' => 'page', 'data-theme' => 'b'}
-  %div{'data-role' => 'header', 'data-position' => 'inline'}
-    = render :partial => 'dubsar_mobile_header'
-  %div{'data-role' => 'content'}
-    - if @words.nil?
-      = render :partial => 'mobile_text'
-    = render :partial => 'mobile_form', :locals => { :term => @term }
-    %br/
-    - if not @words.blank?
-      %ul{'data-role' => 'listview'}
-        - @words.each do |word|
-          %li
-            = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_word, :word_id => word.id), 'data-transition' => 'slideup'
-      = will_paginate @words
-    - elsif not @words.nil?
-      %em
-        &="no results for \"#{@term}\""
-  %div{'data-role' => 'footer'}
-    = render :partial => 'mobile_footer'
+%p
+  Welcome to the Dubsar Project, an online dictionary application using
+  content from the Princeton University
+  %a.undecorated{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
+  project. Use this form to search the dictionary for words.
