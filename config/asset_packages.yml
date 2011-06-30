@@ -18,7 +18,7 @@
 javascripts:
 - base:
   - jquery-1.6.1.min
-  - jquery-ui-1.8.13.custom.min
+  - jquery-ui-1.8.14.custom.min
   - jquery.watermark.min
   - application
   - application-ui
@@ -29,7 +29,7 @@ javascripts:
   - autocompleter
 - qunit:
   - jquery-1.6.1.min
-  - jquery-ui-1.8.13.custom.min
+  - jquery-ui-1.8.14.custom.min
   - qunit
   - jquery.watermark.min
   - jquery.mockjax
@@ -40,17 +40,17 @@ javascripts:
   - application-ui_test
 stylesheets:
 - base:
-  - jquery-ui-1.8.13.dark
+  - jquery-ui-1.8.14.dark
   - application-dark
-  - jquery-ui-1.8.13.light
+  - jquery-ui-1.8.14.light
   - application-light
   - common
 - mobile:
   - jquery-ui-1.8.14.autocomplete
   - mobile
 - qunit:
-  - jquery-ui-1.8.13.dark
-  - jquery-ui-1.8.13.light
+  - jquery-ui-1.8.14.dark
+  - jquery-ui-1.8.14.light
   - application-dark
   - application-light
   - qunit
