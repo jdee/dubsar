@@ -174,7 +174,7 @@
       $('<div id="'+id+'-dialog"><img src="'+url+'"/></div>').dialog({
         autoOpen   : false        ,
         dialogClass: 'tour-dialog',
-        height     : 498,
+        height     : 500,
         width      : 878,
         title      : title
       });
