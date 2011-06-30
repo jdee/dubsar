@@ -32,7 +32,7 @@ module ApplicationHelper
     tag = <<TAG
 <a href="#{image_path(name+'.png')}" title='#{name}' id='tour-#{name}'>
   <h3>#{CGI.escapeHTML description}</h3>
-  #{image_tag(name+'-thumbnail.png', :alt => name, :width => '150', :height => '100')}
+  #{image_tag(name+'-thumbnail.png', :alt => name, :width => '188', :height => '100')}
 </a>
 TAG
   end
