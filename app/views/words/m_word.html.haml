@@ -23,6 +23,8 @@
     - unless @word.other_forms.empty?
       %em
         =" #{@word.other_forms}"
+    %br/
+    definitions (tap for more information)
   %div{'data-role' => 'content'}
     %ol{'data-role' => 'listview'}
       - @word.senses.each_with_index do |sense, index|

@@ -26,6 +26,7 @@
     = render :partial => 'mobile_form', :locals => { :term => @term }
     %br/
     - if not @words.blank?
+      %h4=h "search results for \"#{@term}\" (tap to view)"
       %ul{'data-role' => 'listview'}
         - @words.each do |word|
           %li
