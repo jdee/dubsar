@@ -221,19 +221,29 @@ span.star-icon-span {
   width: 900px;
 }
 
-div#tour-link-div {
-  display: fixed!important;
-  top: 2ex;
-  left: 28ex;
-  padding-right: 0.6ex;
+table.banner-container {
+  border-spacing: 0px;
 }
 
-#tour-link-icon {
+table.banner-container td {
+  padding: 0px;
+}
+
+td.header-link-cell {
+  vertical-align: top;
+}
+
+.header-link-div {
+  margin-top: 0.5em;
+  margin-left: 1.2em;
+  padding: 0.15em 0.25em;
+}
+
+.header-link-icon {
   float: left;
 }
 
-#tour-link {
-  position: relative;
+.header-link {
   display: inline;
   vertical-align: top;
   font-variant: small-caps;

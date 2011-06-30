@@ -28,14 +28,24 @@
 
   %body{:class => "style-#{@theme}"}
     #header.ui-widget
-      %h2
-        %a{:href => root_path, :class => "undecorated", :title => 'home'}
-          =image_tag 'dubsar.png', :alt => 'D', :id => 'dubsar-image'
-          Dubsar Project
-      #tour-link-div.ui-corner-all.ui-state-default{:style => 'position: fixed!important;'}
-        %a#tour-link.search-link{:href => tour_path, :title => 'take a tour'}
-          %span#tour-link-icon.ui-icon.ui-icon-flag
-          tour
+      %table.banner-container
+        %tbody
+          %tr
+            %td
+              %h2
+                %a{:href => root_path, :class => "undecorated", :title => 'home'}
+                  =image_tag 'dubsar.png', :alt => 'D', :id => 'dubsar-image'
+                  Dubsar Project
+            %td.header-link-cell
+              .header-link-div.ui-corner-all.ui-state-default
+                %a.header-link.search-link{:href => tour_path, :title => 'take a tour'}
+                  %span.header-link-icon.ui-icon.ui-icon-flag
+                  tour
+            %td.header-link-cell
+              .header-link-div.ui-corner-all.ui-state-default
+                %a.header-link.search-link{:href => m_path, :title => 'Dubsar Mobile Edition'}
+                  %span.header-link-icon.ui-icon.ui-icon-signal
+                  mobile
 
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
