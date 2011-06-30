@@ -132,7 +132,7 @@ asyncTest('autocompleter selection', 1, function(){
   var menu = input.autocomplete('widget');
 
   $('form').live('submit', function(){
-    ok(true, 'search submitted');
+    ok(input.val() == 'ask', 'correct search submitted');
     return false;
   });
 

@@ -26,6 +26,7 @@
 
     /* if an item was selected, submit the request */
     function ac_select_handler(event,ui){
+      if (ui.item) { $('#word-input').val(ui.item.value); }
       $(this).closest('form').submit();
     }
 
