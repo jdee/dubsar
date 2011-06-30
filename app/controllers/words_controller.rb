@@ -42,6 +42,7 @@ class WordsController < ApplicationController
   end
 
   def m_word
+    @back = request.env['HTTP_REFERER']
     @word = Word.find params[:word_id], :include => [ :inflections, { :senses => :synset } ]
     render :layout => false
   end

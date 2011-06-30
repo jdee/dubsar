@@ -45,6 +45,7 @@ describe WordsController do
       get :m_word, 'word_id' => word.id
       response.should be_success
       assigns(:word).should_not be_blank
+      assigns(:back).should == '/'
     end
 
     it "gets :m_sense view" do
