@@ -47,7 +47,8 @@
       %h3 verb frames
       %ul
         - @sense.frames.each do |frame|
-          %li=h frame
+          %li
+            != frame
     - unless @sense.synset.samples.blank?
       %h3 sample sentences
       %ul

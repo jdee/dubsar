@@ -45,7 +45,7 @@ class Sense < ActiveRecord::Base
   def frames
     verb_frames.map do |frame|
       matches = /^(.*)%s(.*)$/.match frame.frame
-      matches ? matches[1] + word.name + matches[2] : frame.frame
+      matches ? matches[1] + '<strong>' + word.name + '</strong>' + matches[2] : frame.frame
     end
   end
 end
