@@ -239,10 +239,6 @@ td.header-link-cell {
   padding: 0.15em 0.25em;
 }
 
-.header-link-icon {
-  float: left;
-}
-
 .header-link {
   display: inline;
   vertical-align: top;
