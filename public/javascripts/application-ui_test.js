@@ -131,7 +131,7 @@ asyncTest('autocompleter selection', 1, function(){
   var input = $('#word-input');
   var menu = input.autocomplete('widget');
 
-  $('#word-submit').live('click', function(){
+  $('form').live('submit', function(){
     ok(true, 'search submitted');
     return false;
   });
