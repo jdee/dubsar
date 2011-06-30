@@ -31,5 +31,5 @@
         %li
           = link_to sense.synset.gloss, url_for(:action => :m_sense, :sense_id => sense.id, :index => index), 'data-transition' => 'slideup'
 
-  %div{'data-role' => 'footer'}
+  %div.ui-bar{'data-role' => 'footer'}
     = render :partial => 'mobile_footer'

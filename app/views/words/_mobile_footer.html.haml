@@ -15,7 +15,10 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-%p
+%span{'data-role' => 'controlgroup', 'data-type' => 'horizontal'}
+  = link_to 'faq', faq_path, :rel => 'external', 'data-role' => 'button', 'data-icon' => 'info'
+  = link_to 'license', m_license_path, 'data-role' => 'button', 'data-icon' => 'info', 'data-transition' => 'slideup'
+%span
   &copy; 2011 Jimmy Dee
   &middot;
   %a.undecorated{:href => 'http://wordnet.princeton.edu', :rel => 'external'}

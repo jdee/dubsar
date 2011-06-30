@@ -35,6 +35,10 @@ class WordsController < ApplicationController
     render :layout => false
   end
 
+  def m_license
+    render :layout => false
+  end
+
   def m_sense
     @sense = Sense.find params[:sense_id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
     @index = params[:index]

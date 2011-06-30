@@ -22,6 +22,7 @@ Dubsar::Application.routes.draw do
   match '/faq'               => 'words#faq'
   match '/license'           => 'words#license'
   match '/m'                 => 'words#mobile'
+  match '/m_license'         => 'words#m_license'
   match '/m_sense/:sense_id' => 'words#m_sense'
   match '/m_word/:word_id'   => 'words#m_word'
   match '/link'              => 'words#link'

@@ -21,13 +21,16 @@ body, input#word-input, a[data-role='button'] span {
   font-size: 18pt;
 }
 
-div[data-role='footer'] {
+div[data-role='footer'], div[data-role='footer'] a[data-role='button'] span {
   font-size: 12pt;
-  text-align: center;
 }
 
-a.undecorated {
+a.undecorated, a.result-link {
   text-decoration: none;
+}
+
+a.undecorated:link,visited {
+  color: #aaa;
 }
 
 a.undecorated:hover,active {
