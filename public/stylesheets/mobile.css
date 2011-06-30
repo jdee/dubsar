@@ -30,7 +30,7 @@ a.undecorated, a.result-link {
 }
 
 a.undecorated:link,visited {
-  color: #aaa;
+  color: #888;
 }
 
 a.undecorated:hover,active {
