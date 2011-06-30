@@ -184,7 +184,7 @@
       });
     });
 
-    $('#tour-link-div').hover(function(){
+    $('.header-link-div').hover(function(){
       $(this).addClass('ui-state-hover');
     }, function(){
       $(this).removeClass('ui-state-hover');

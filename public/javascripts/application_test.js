@@ -42,3 +42,15 @@ test('search-link generates working message', function(){
   var text = $('#error').text();
   ok(/working/.test(text), 'look for working message');
 });
+
+asyncTest('.header-link-div responds to hover', 1, function(){
+  $('.header-link-div').live('hover', function(){
+    ok($(this).hasClass('ui-state-hover'), 'div has ui-state-hover class');
+  });
+
+  $('.header-link-div').trigger('mouseover');
+
+  setTimeout(function(){
+    start();
+  }, 100);
+});
