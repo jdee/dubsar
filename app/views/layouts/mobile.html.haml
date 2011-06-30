@@ -37,11 +37,13 @@
     %meta{:property => 'og:email', :content => 'dubsar@dubsar-dictionary.com'}
 
     = csrf_meta_tag
-    = stylesheet_link_tag 'http://code.jquery.com/mobile/latest/jquery.mobile.min.css'
     != stylesheet_link_merged :mobile
+    = stylesheet_link_tag "http://code.jquery.com/mobile/latest/jquery.mobile.min.css"
+    - # = stylesheet_link_tag "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css"
 
   %body
     = yield
 
     != javascript_include_merged :mobile
-    = javascript_include_tag 'http://code.jquery.com/mobile/latest/jquery.mobile.min.js'
+    = javascript_include_tag "http://code.jquery.com/mobile/latest/jquery.mobile.min.js"
+    - # / = javascript_include_tag "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"
