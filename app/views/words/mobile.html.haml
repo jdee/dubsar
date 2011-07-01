@@ -31,7 +31,7 @@
         - @words.each do |word|
           %li
             = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_word, :word_id => word.id), 'data-transition' => 'slideup'
-      = will_paginate @words
+      %h4= will_paginate @words
     - elsif not @words.nil?
       %em
         &="no results for \"#{@term}\""
