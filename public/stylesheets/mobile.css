@@ -36,3 +36,7 @@ a.undecorated:link,visited {
 a.undecorated:hover,active {
   color: #f90;
 }
+
+div.ui-bar[data-role='footer'] {
+  width: auto;
+}
