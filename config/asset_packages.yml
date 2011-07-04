@@ -17,18 +17,18 @@
 ---
 javascripts:
 - base:
-  - jquery-1.6.1.min
+  - jquery-1.6.2.min
   - jquery-ui-1.8.14.custom.min
   - jquery.watermark.min
   - application
   - application-ui
   - autocompleter
 - mobile:
-  - jquery-1.6.1.min
+  - jquery-1.6.2.min
   - jquery-ui-1.8.14.autocomplete.min
   - autocompleter
 - qunit:
-  - jquery-1.6.1.min
+  - jquery-1.6.2.min
   - jquery-ui-1.8.14.custom.min
   - qunit
   - jquery.watermark.min
