@@ -25,15 +25,15 @@ describe WordsController do
     end
 
     it "gets all defined routes" do
-      %w{about faq index license link m_license m_search qunit tour}.each do |route|
+      %w{about faq index license link m_license mobile qunit tour}.each do |route|
         get route
         response.should be_success
       end
     end
 
-    it "gets :show and :mobile views" do
+    it "gets :show and :m_search views" do
       create_synonyms!
-      %w{show mobile}.each do |route|
+      %w{show m_search}.each do |route|
         get route, 'term' => 'food'
         response.should be_success
         assigns(:words).should_not be_blank
