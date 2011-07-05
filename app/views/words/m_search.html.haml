@@ -14,14 +14,21 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-- content_for :title do
-  Dubsar Mobile
-
 %div{'data-role' => 'page', 'data-theme' => 'b'}
   %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'dubsar_mobile_header'
   %div{'data-role' => 'content'}
-    = render :partial => 'mobile_text'
     = render :partial => 'mobile_form', :locals => { :term => @term }
+    %br/
+    - if not @words.blank?
+      %h4=h "search results for \"#{@term}\" (tap to view)"
+      %ul{'data-role' => 'listview'}
+        - @words.each do |word|
+          %li
+            = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_word, :word_id => word.id), 'data-transition' => 'slideup'
+      %h4= will_paginate @words
+    - elsif not @words.nil?
+      %em
+        &="no results for \"#{@term}\""
   %div.ui-bar{'data-role' => 'footer'}
     = render :partial => 'mobile_footer'

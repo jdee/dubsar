@@ -1,5 +1,4 @@
 Sitemap: http://dubsar-dictionary.com/sitemap.xml
 
 User-agent: *
-Disallow: /m?*
 Disallow: /m_*

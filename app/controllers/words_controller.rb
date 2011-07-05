@@ -39,6 +39,10 @@ class WordsController < ApplicationController
     render :layout => false
   end
 
+  def mobile
+    render :layout => 'mobile'
+  end
+
   def m_sense
     @sense = Sense.find params[:sense_id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
     @index = params[:index]
@@ -51,7 +55,7 @@ class WordsController < ApplicationController
     render :layout => false
   end
 
-  def mobile
+  def m_search
     @term = params['term']
 
     options = params.symbolize_keys
@@ -60,7 +64,7 @@ class WordsController < ApplicationController
         :order => 'words.name ASC, words.part_of_speech ASC'
       )
     end
-    render :layout => 'mobile'
+    render :layout => false
   end
 
   def os

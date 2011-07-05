@@ -15,7 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-= form_tag(url_for(:controller => :words, :action => :mobile), :method => :get, 'data-ajax' => 'false') do
+= form_tag(url_for(:controller => :words, :action => :m_search), :method => :get, 'data-transition' => 'slideup') do
   %table
     %tbody
       %tr

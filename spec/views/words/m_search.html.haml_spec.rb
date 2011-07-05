@@ -17,7 +17,13 @@
 
 require 'spec_helper'
 
-describe '/words/mobile.html.haml' do
+describe '/words/m_search.html.haml' do
+  before :each do
+    food, grub = create_synonyms!
+    @words = [ food, grub ]
+    @words.stub(:total_pages).and_return(1)
+  end
+
   it 'has basic jquery mobile page structure' do
     render
     rendered.should have_selector(:div, 'data-role' => 'page') do |page|
@@ -25,5 +31,25 @@ describe '/words/mobile.html.haml' do
       page.should have_selector(:div, 'data-role' => 'content')
       page.should have_selector(:div, 'data-role' => 'footer')
     end
+  end
+
+  it 'lists all words' do
+    render
+    rendered.should have_selector(:ul, 'data-role' => 'listview') do |ul|
+      ul.should have_selector(:a, :href => url_for(:action => :m_word, :word_id => @words.first.id), 'data-transition' => 'slideup')
+      ul.should have_selector(:a, :href => url_for(:action => :m_word, :word_id => @words.last.id), 'data-transition' => 'slideup')
+    end
+  end
+
+  it 'indicates when no results are found' do
+    assign(:words, [])
+    render
+    rendered.should contain("no results")
+  end
+
+  it 'does not display an error when not displaying search results' do
+    assign(:words, nil)
+    render
+    rendered.should_not contain("no results")
   end
 end
