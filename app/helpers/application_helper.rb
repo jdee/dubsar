@@ -74,10 +74,4 @@ EOF
       '#f58400'
     end
   end
-
-  def facebook_like_button
-    <<-FBML
-<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fdubsar-dictionary.com%2Fm" scrolling="no" frameborder="0" style="height: 62px; width: 100%" allowTransparency="true"></iframe>
-    FBML
-  end
 end
