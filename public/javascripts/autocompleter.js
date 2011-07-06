@@ -103,11 +103,5 @@
         source:$source
       });
     })(ajax_handler);
-
-    $('form#word-form').live('submit', function(){
-      /* alert('form submitted'); */
-      $list = null;
-      $('input#word-input').autocomplete('widget').hide();
-    });
   });
 })(jQuery);

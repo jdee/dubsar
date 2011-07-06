@@ -64,7 +64,7 @@ class WordsController < ApplicationController
         :order => 'words.name ASC, words.part_of_speech ASC'
       )
     end
-    render :layout => false
+    render :layout => 'mobile'
   end
 
   def os

@@ -15,11 +15,11 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-= form_tag(url_for(:controller => :words, :action => :m_search), :method => :get, 'data-transition' => 'slideup') do
+= form_tag(url_for(:controller => :words, :action => :m_search), :method => :get, 'data-ajax' => 'false') do
   %table
     %tbody
       %tr
         %td
-          = text_field_tag :term, defined?(term) ? term : '', :id => 'word-input', :tabindex => 1, :placeholder => 'search term(s)'
+          = text_field_tag :term, defined?(@term) ? @term : '', :id => 'word-input', :tabindex => 1, :placeholder => 'search term(s)'
         %td
           %button#word-submit{:tabindex => 2, 'data-theme' => 'b', 'data-icon' => 'search'} search

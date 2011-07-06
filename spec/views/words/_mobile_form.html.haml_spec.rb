@@ -27,12 +27,14 @@ describe '/words/_mobile_form.html.haml' do
   end
 
   it 'is prepopulated with the search term' do
-    render :partial => 'words/mobile_form', :locals => { :term => 'halo' }
+    assign(:term, 'halo')
+    render :partial => 'words/mobile_form'
     rendered.should have_selector('input#word-input[value="halo"]')
   end
 
   it 'uses a placeholder tag' do
-    render :partial => 'words/mobile_form', :locals => { :term => 'halo' }
+    assign(:term, 'halo')
+    render :partial => 'words/mobile_form'
     rendered.should have_selector('input#word-input[placeholder]')
   end
 end
