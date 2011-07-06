@@ -30,7 +30,7 @@
                   %a.search-link{:href => url_for(:controller => :words, :action => :show, :term => '^[^A-Za-z]', :match => 'regexp', :title =>'...'), :title => 'words not starting with a letter'}
                     &hellip;
         %td
-          = form_tag(url_for(:controller => :words, :action => :show), :method => :get) do
+          = form_tag(url_for(:controller => :words, :action => :show), :method => :get, :id => 'word-form') do
 
             =hidden_field_tag :back, 'yes'
             %table#word-search-term

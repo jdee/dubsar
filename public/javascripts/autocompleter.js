@@ -26,7 +26,7 @@
 
     /* if an item was selected, submit the request */
     function ac_select_handler(event,ui){
-      if (ui.item) { $('#word-input').val(ui.item.value); }
+      if (ui.item) { $word_input.val(ui.item.value); }
       $(this).closest('form').submit();
     }
 
@@ -79,7 +79,7 @@
         data: request,
         success: function(data){
           /* make sure the search term hasn't changed (this might be an old response) */
-          if (data.term == $request_term && data.match == $match) {
+          if ($list && data.term == $request_term && data.match == $match) {
             for (var j=0; j<data.list.length; ++j) $list.push(data.list[j]);
             response($list);
           }
@@ -95,7 +95,7 @@
     /* register_autocomplete can be called to supply any other source
        (like a local array) */
     (function register_autocomplete($source) {
-      $word_input = $('#word-input').autocomplete({
+      $word_input = $('input#word-input').autocomplete({
         close :ac_close_handler,
         minLength: 1,
         search:ac_search_handler,
@@ -103,5 +103,11 @@
         source:$source
       });
     })(ajax_handler);
+
+    $('form#word-form').live('submit', function(){
+      /* alert('form submitted'); */
+      $list = null;
+      $('input#word-input').autocomplete('widget').hide();
+    });
   });
 })(jQuery);

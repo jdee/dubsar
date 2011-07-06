@@ -46,10 +46,4 @@ describe '/words/m_search.html.haml' do
     render
     rendered.should contain("no results")
   end
-
-  it 'does not display an error when not displaying search results' do
-    assign(:words, nil)
-    render
-    rendered.should_not contain("no results")
-  end
 end
