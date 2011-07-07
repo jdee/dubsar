@@ -98,4 +98,11 @@ describe WordsHelper do
       helper.meta_description('food', words).should match /food: food, n\. \(foods\)$/
     end
   end
+
+  describe '#search_term' do
+    it 'returns blank for a regexp search' do
+      assign(:match, 'regexp')
+      helper.search_term.should be_blank
+    end
+  end
 end

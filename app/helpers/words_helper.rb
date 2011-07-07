@@ -91,4 +91,17 @@ EOF
 <a href="#{url_for :action => :m_search, :term => word.name}" class="result-link" rel="external">#{word.name}</a>
 EOF
   end
+
+  def search_term
+    case @match
+    when 'regexp'
+      return ''
+    end
+
+    defined?(@term) ? @term : ''
+  end
+
+  def case_checked?
+    defined?(@match) && @match == 'case'
+  end
 end
