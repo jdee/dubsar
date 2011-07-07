@@ -153,6 +153,17 @@ asyncTest('autocompleter selection', 1, function(){
   }, 800);
 });
 
+asyncTest('hide menu on clear', 1, function(){
+  var input = $('input#word-input');
+  var menu = input.autocomplete('widget');
+
+  input.val('').trigger('input');
+  setTimeout(function(){
+    ok(!menu.is(':visible'), 'menu should not be visible');
+    start();
+  }, 100);
+});
+
 /********************* sql help dialog module *****************/
 module('sql help dialog', {
   teardown: function(){

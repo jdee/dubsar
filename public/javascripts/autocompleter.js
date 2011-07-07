@@ -103,5 +103,12 @@
         source:$source
       });
     })(ajax_handler);
+
+    /* handle the deletion X in an HTML 5 search field */
+    $word_input.live('input', function() {
+      if (! $word_input.val()) {
+        $word_input.autocomplete('widget').hide();
+      }
+    });
   });
 })(jQuery);
