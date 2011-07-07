@@ -109,6 +109,10 @@
       if (! $word_input.val()) {
         $word_input.autocomplete('widget').hide();
       }
+    }).live('click', function() {
+      if (! $word_input.val()) {
+        $word_input.autocomplete('widget').hide();
+      }
     });
   });
 })(jQuery);
