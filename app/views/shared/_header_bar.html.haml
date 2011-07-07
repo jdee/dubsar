@@ -49,6 +49,6 @@
                     = check_box_tag :match, 'case', false, :id => 'word-case', :tabindex => '1'
                     = label_tag 'word-case', 'match case', :title => 'case-sensitive search'
                 %td
-                  = search_field_tag :term, '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
+                  = search_field_tag :term, defined?(@term) ? @term : '', :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)'
                 %td
                   %button#word-submit{:type => 'submit', :class => 'search-link', :tabindex => '3', :title => 'submit search'} search
