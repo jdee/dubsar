@@ -104,4 +104,8 @@ EOF
   def case_checked?
     defined?(@match) && @match == 'case'
   end
+
+  def mobile_url
+    "http://m.dubsar-dictionary.com/m"
+  end
 end
