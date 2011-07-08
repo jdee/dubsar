@@ -18,7 +18,7 @@
  */
 
 div[data-role='page'] {
-  width: 525px!important;
+  width: 550px!important;
 }
 
 div[data-role='footer'] a[data-role='button'] span {
