@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Thu, 30 Jun 2011 21:00:00 GMT</lastBuildDate>
-    <pubDate>Thu, 30 Jun 2011 21:00:00 GMT</pubDate>
+    <lastBuildDate>Fri, 08 Jul 2011 12:00:00 GMT</lastBuildDate>
+    <pubDate>Fri, 08 Jul 2011 12:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar Mobile Applications</title>
+      <description>With the arrival of the Dubsar Mobile Edition, it has become clear that Dubsar will not be fully available on mobile platforms until it includes applications for iPhone and Android. Look for these rather soon, in the summer of 2011.</description>
+      <link>http://dubsar-dictionary.com/m</link>
+      <guid isPermaLink="false">19</guid>
+      <pubDate>Fri, 08 Jul 2011 12:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar Mobile Edition</title>
       <description>The long-promised Dubsar Mobile Edition has finally arrived.</description>
