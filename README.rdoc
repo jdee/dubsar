@@ -10,6 +10,8 @@ WordNet[http://wordnet.princeton.edu] project.
 
 Dubsar is deployed at http://dubsar-dictionary.com.
 
+Dubsar Mobile is deployed at http://m.dubsar-dictionary.com/m.
+
 For more information, see the
 {Dubsar wiki on GitHub}[http://github.com/jdee/dubsar/wiki].
 
