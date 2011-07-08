@@ -20,16 +20,16 @@
     %title
       = yield :title
     = favicon_link_tag
-    = auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
-    %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
-    %link{:rel => 'canonical', :href => 'http://dubsar-dictionary.com/m'}
+    = auto_discovery_link_tag :rss, 'http://dubsar-dictionary.com/rss_news.xml', :title => 'Dubsar News Feed'
+    %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "http://dubsar-dictionary.com/opensearch.xml"}
+    %link{:rel => 'canonical', :href => mobile_url}
     != thumbnail_link_tag 'dubsar.png'
     != thumbnail_link_tag 'dubsar-full.png'
     %meta{:name => 'Description', :content => 'The Dubsar Project is an open-source dictionary application using content from the Princeton University WordNet® project. It has a rich mobile interface for smart phones, tablets and other mobile devices.'}
     %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, English, mobile, iPhone, iPad, Android, tablet, smart phone'}
     %meta{:property => 'og:title', :content => 'Dubsar Mobile'}
     %meta{:property => 'og:type', :content => 'website'}
-    %meta{:property => 'og:url', :content => 'http://m.dubsar-dictionary.com/m'}
+    %meta{:property => 'og:url', :content => mobile_url}
     %meta{:property => 'og:image', :content => "#{image_path 'dubsar-big.jpg'}"}
     %meta{:property => 'og:site_name', :content => 'Dubsar Mobile'}
     %meta{:property => 'fb:admins', :content => '1015821519'}
