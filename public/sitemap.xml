@@ -7,12 +7,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://dubsar-dictionary.com/m</loc>
-    <lastmod>2011-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
     <loc>http://dubsar-dictionary.com/about</loc>
     <lastmod>2011-07-08</lastmod>
     <changefreq>monthly</changefreq>
