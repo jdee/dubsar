@@ -25,6 +25,7 @@ body, input#word-input, a[data-role='button'] span {
 
 div[data-role='footer'], div[data-role='footer'] a[data-role='button'] span {
   font-size: x-small;
+  white-space: nowrap;
 }
 
 img#dubsar-mobile-image {
