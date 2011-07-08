@@ -80,6 +80,15 @@ module WordsHelper
 EOF
   end
 
+  def mobile_canonical_link_tag
+    url = "http://m.dubsar-dictionary.com#{url_for :action => :m_search, :term => @term}"
+    url += "&page=#{params[:page]}" unless params[:page].blank? or params[:page].to_i == 1
+
+    s = <<EOF
+<link rel="canonical" href="#{url}"/>
+EOF
+  end
+
   def word_link(word)
     s = <<EOF
 <a href="#{url_for :action => :show, :term => word.name}##{word.unique_name}" title="#{word.name}" class="search-link">#{word.name}</a>
