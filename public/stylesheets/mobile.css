@@ -24,7 +24,11 @@ body, input#word-input, a[data-role='button'] span {
  */
 
 div[data-role='footer'], div[data-role='footer'] a[data-role='button'] span {
-  font-size: small;
+  font-size: x-small;
+}
+
+img#dubsar-mobile-image {
+  height: 3.5ex;
 }
 
 a.undecorated, a.result-link {
