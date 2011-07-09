@@ -17,12 +17,13 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-div[data-role='page'] {
-  width: 100%;
+div.ui-page[data-role='page'] {
+  font-size: x-large;
+  width: 64ex;
 }
 
 div[data-role='footer'] a[data-role='button'] span {
-  font-size: x-small;
+  font-size: small;
 }
 
 img#dubsar-mobile-image {
@@ -42,7 +43,7 @@ a.undecorated:hover,active {
 }
 
 div.ui-bar[data-role='footer'] {
-  font-size: x-small;
+  font-size: small;
   white-space: nowrap;
   width: auto;
 }
