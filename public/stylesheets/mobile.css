@@ -19,11 +19,11 @@
 
 div.ui-page[data-role='page'], input#word-input, div[data-role='header'] h1.ui-title,
 div[data-role='header'] a[data-role='button'] > span, ul.ui-menu {
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 div[data-role='footer'] a[data-role='button'] span {
-  font-size: normal;
+  font-size: small;
 }
 
 img#dubsar-mobile-image {
@@ -47,6 +47,6 @@ a.undecorated:hover,active {
 }
 
 div.ui-bar[data-role='footer'] {
-  font-size: normal;
+  font-size: small;
   width: auto;
 }
