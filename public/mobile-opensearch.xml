@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search">
-  <ShortName>Dubsar</ShortName>
-  <Description>Search Dubsar</Description>
+  <ShortName>Dubsar Mobile</ShortName>
+  <Description>Search Dubsar Mobile</Description>
   <Contact>dubsar@dubsar-dictionary.com</Contact>
-  <LongName>Dubsar Dictionary Project search</LongName>
+  <LongName>Dubsar Mobile Edition search</LongName>
   <Url type="text/html" template="http://m.dubsar-dictionary.com/m_search?term={searchTerms}"/>
   <Url type="application/x-suggestions+json" template="http://dubsar-dictionary.com/os.json?term={searchTerms}"/>
   <Image height="64" width="64" type="image/png">http://s.dubsar-dictionary.com/images/dubsar_64x64.png</Image>
