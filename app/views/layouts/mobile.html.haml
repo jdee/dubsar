@@ -21,7 +21,7 @@
       = yield :title
     = favicon_link_tag
     = auto_discovery_link_tag :rss, 'http://dubsar-dictionary.com/rss_news.xml', :title => 'Dubsar News Feed'
-    %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "http://dubsar-dictionary.com/mobile-opensearch.xml"}
+    %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar Mobile", :href => "http://dubsar-dictionary.com/mobile-opensearch.xml"}
     != thumbnail_link_tag 'dubsar.png'
     != thumbnail_link_tag 'dubsar-full.png'
     = yield :description
