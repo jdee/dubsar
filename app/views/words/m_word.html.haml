@@ -14,7 +14,7 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-%div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)}", 'data-theme' => 'b'}
+%div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)} (#{@word.pos}.)", 'data-theme' => 'b'}
   %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'dubsar_mobile_header'
     = link_to 'search results', @back, 'data-rel' => 'back', 'data-role' => 'button', 'data-icon' => 'arrow-u'
