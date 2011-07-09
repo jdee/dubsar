@@ -19,7 +19,6 @@
 
 div.ui-page[data-role='page'] {
   font-size: x-large;
-  width: 64ex;
 }
 
 div[data-role='footer'] a[data-role='button'] span {
