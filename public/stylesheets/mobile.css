@@ -23,7 +23,11 @@ div[data-role='header'] a[data-role='button'] > span, ul.ui-menu {
 }
 
 div[data-role='footer'] a[data-role='button'] span {
-  font-size: x-small;
+  font-size: xx-small;
+}
+
+div.ui-content[data-role='content'] td {
+  padding: 0 1ex;
 }
 
 img#dubsar-mobile-image {
