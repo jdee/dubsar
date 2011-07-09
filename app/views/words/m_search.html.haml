@@ -20,7 +20,7 @@
   !=mobile_canonical_link_tag
   %meta{:name => 'Description', :content => meta_description(search_title, @words)}
 
-%div{'data-role' => 'page', 'data-theme' => 'b'}
+%div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => "Dubsar Mobile - #{search_title}"}
   %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'dubsar_mobile_header'
   %div{'data-role' => 'content'}
