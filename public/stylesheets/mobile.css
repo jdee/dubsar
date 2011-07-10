@@ -26,6 +26,10 @@ div[data-role='header'] a[data-role='button'] > span, ul.ui-menu {
   font-size: large;
 }
 
+div[data-role='header'] a[data-role='button'] {
+  top: 1.35em;
+}
+
 div[data-role='footer'] a[data-role='button'] span {
   font-size: x-small;
 }
@@ -35,10 +39,6 @@ div.ui-content[data-role='content'] td {
 }
 
 img#dubsar-mobile-image {
-  height: 3ex;
-  padding: 0;
-  margin: 0;
-  border-style: none;
   vertical-align: top;
 }
 

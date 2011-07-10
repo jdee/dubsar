@@ -16,7 +16,7 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - word = @sense.word
-%div{'data-role' => 'page', 'data-theme' => 'b'}
+%div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => "Dubsar Mobile - #{word.name} (#{word.pos}.)"}
   %div{'data-role' => 'header'}
     =render :partial => 'dubsar_mobile_header'
     =link_to h("#{word.name} (#{word.pos}.)"), "/m_word/#{word.id}", 'data-icon' => 'arrow-u', 'data-rel' => 'back', 'data-role' => 'button'

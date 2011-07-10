@@ -17,4 +17,5 @@
 
 =link_to 'home', m_path, :rel => 'external', 'data-icon' => 'home', 'data-role' => 'button'
 %h1
-  =image_tag 'dubsar-full.png', :alt => 'Dubsar', :id => 'dubsar-mobile-image'
+  =link_to m_path, :rel => 'external' do
+    =image_tag 'dubsar-full.png', :alt => 'Dubsar', :id => 'dubsar-mobile-image'
