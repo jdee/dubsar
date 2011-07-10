@@ -18,7 +18,7 @@
  */
 
 div.ui-page[data-role='page'] {
-  min-width: 60ex;
+  min-width: 55ex;
 }
 
 div.ui-page[data-role='page'], input#word-input, div[data-role='header'] h1.ui-title,
