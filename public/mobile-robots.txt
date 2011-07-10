@@ -1,4 +1,6 @@
 Sitemap: http://m.dubsar-dictionary.com/mobile-sitemap.xml
 
 User-Agent: *
+Disallow: /
+Allow: /m
 Disallow: /m_*
