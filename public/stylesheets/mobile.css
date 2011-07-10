@@ -27,7 +27,7 @@ div[data-role='header'] a[data-role='button'] > span, ul.ui-menu {
 }
 
 div[data-role='footer'] a[data-role='button'] span {
-  font-size: xx-small;
+  font-size: x-small;
 }
 
 div.ui-content[data-role='content'] td {
