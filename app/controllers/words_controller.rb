@@ -35,6 +35,10 @@ class WordsController < ApplicationController
     render :layout => false
   end
 
+  def m_faq
+    render :layout => false
+  end
+
   def m_license
     render :layout => false
   end

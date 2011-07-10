@@ -25,7 +25,7 @@ describe WordsController do
     end
 
     it "gets all defined routes" do
-      %w{about faq index license link m_license mobile qunit tour}.each do |route|
+      %w{about faq index license link m_faq m_license mobile qunit tour}.each do |route|
         get route
         response.should be_success
       end
