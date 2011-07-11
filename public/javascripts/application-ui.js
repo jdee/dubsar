@@ -19,7 +19,6 @@
 ;(function($){
   $(function(){
     var $word_input = $('#word-input');
-    var $word_input_has_focus=false;
     var $starting_header=$.find_cookie('dubsar_starting_pane');
     var $show_help_link_timer=null;
     var $hide_help_link_timer=null;
@@ -124,7 +123,7 @@
         window.clearTimeout($hide_help_link_timer);
         $hide_help_link_timer = null;
       }
-      if (!$word_input_has_focus && !$sql_help_link.is(':visible')) {
+      if (!$sql_help_link.is(':visible')) {
         $show_help_link_timer = window.setTimeout(show_sql_help_link, 3000);
       }
     }).live('mouseleave', function(){
@@ -135,17 +134,6 @@
       if ($sql_help_link.is(':visible')) {
         $hide_help_link_timer = window.setTimeout(hide_sql_help_link, 20000);
       }
-    }).live('focus', function(){
-      $word_input_has_focus = true;
-      if ($show_help_link_timer !== null) {
-        window.clearTimeout($show_help_link_timer);
-        $show_help_link_timer = null;
-      }
-      if ($sql_help_link.is(':visible')) {
-        hide_sql_help_link();
-      }
-    }).live('blur', function(){
-      $word_input_has_focus = false;
     });
 
     $sql_help_link.live('mouseenter', function(){
