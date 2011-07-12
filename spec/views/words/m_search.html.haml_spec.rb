@@ -36,8 +36,8 @@ describe '/words/m_search.html.haml' do
   it 'lists all words' do
     render
     rendered.should have_selector(:ul, 'data-role' => 'listview') do |ul|
-      ul.should have_selector(:a, :href => url_for(:action => :m_word, :word_id => @words.first.id), 'data-transition' => 'slideup')
-      ul.should have_selector(:a, :href => url_for(:action => :m_word, :word_id => @words.last.id), 'data-transition' => 'slideup')
+      ul.should have_selector(:a, :href => url_for(:action => :m_word, :id => @words.first.id), 'data-transition' => 'slideup')
+      ul.should have_selector(:a, :href => url_for(:action => :m_word, :id => @words.last.id), 'data-transition' => 'slideup')
     end
   end
 

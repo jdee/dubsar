@@ -18,6 +18,10 @@
 Dubsar::Application.routes.draw do
   resources :fairies, :only => [ :index, :create ]
 
+  resources :words  , :only => :show
+  resources :senses , :only => :show
+  resources :synsets, :only => :show
+
   match '/about'             => 'words#about'
   match '/faq'               => 'words#faq'
   match '/license'           => 'words#license'
@@ -25,8 +29,8 @@ Dubsar::Application.routes.draw do
   match '/m_faq'             => 'words#m_faq'
   match '/m_license'         => 'words#m_license'
   match '/m_search'          => 'words#m_search'
-  match '/m_sense/:sense_id' => 'words#m_sense'
-  match '/m_word/:word_id'   => 'words#m_word'
+  match '/m_sense/:id'       => 'words#m_sense'
+  match '/m_word/:id'        => 'words#m_word'
   match '/link'              => 'words#link'
   match '/qunit'             => 'words#qunit'
   match '/tour'              => 'words#tour'

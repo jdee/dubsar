@@ -47,18 +47,20 @@ describe WordsController do
       end
     end
 
-    it "gets :m_word view" do
+    it "gets :show and :m_word views" do
       word = Factory :noun
-      get :m_word, 'word_id' => word.id
-      response.should be_success
-      assigns(:word).should_not be_blank
-      assigns(:back).should == '/'
+      %w{show m_word}.each do |route|
+        get route, 'id' => word.id
+        response.should be_success
+        assigns(:word).should_not be_blank
+        assigns(:back).should == '/'
+      end
     end
 
-    it "gets :m_sense view" do
+    it "gets the :m_sense view" do
       food, grub = create_synonyms!
       sense = food.senses.first
-      get :m_sense, 'sense_id' => sense.id, 'index' => 0
+      get :m_sense, 'id' => sense.id, 'index' => 0
       response.should be_success
       assigns(:sense).should_not be_blank
       assigns(:index).should_not be_blank

@@ -48,15 +48,20 @@ class WordsController < ApplicationController
   end
 
   def m_sense
-    @sense = Sense.find params[:sense_id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
+    @sense = Sense.find params[:id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
     @index = params[:index]
     render :layout => false
   end
 
   def m_word
     @back = request.env['HTTP_REFERER']
-    @word = Word.find params[:word_id], :include => [ :inflections, { :senses => :synset } ]
+    @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
     render :layout => false
+  end
+
+  def show
+    @back = request.env['HTTP_REFERER']
+    @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
   end
 
   def m_search
