@@ -63,3 +63,7 @@ body.style-dark .pagination * {
 body.style-dark .view-heading a:visited {
   color: white;
 }
+
+body.style-dark .view-heading .ui-state-highlight a {
+  color: #1c94c4;
+}

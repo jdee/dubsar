@@ -20,4 +20,4 @@
   %span.tooltip.ui-corner-all
     = link_to accordion_sense, :class => 'undecorated search-link' do
       &= accordion_sense.synset.gloss
-    = render :partial => 'tooltip', :locals => { :sense => accordion_sense }
+    = render :partial => 'shared/tooltip', :locals => { :sense => accordion_sense }

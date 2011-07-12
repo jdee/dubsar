@@ -21,7 +21,9 @@
     %span
       Synset:
       - synset.senses.each do |sense|
-        = link_to h(sense.word.name), sense, :class => 'search-link'
+        %span.tooltip.ui-corner-all
+          = link_to h(sense.word.name), sense, :class => 'search-link'
+          = render :partial => 'shared/tooltip', :locals => { :sense => sense }
       &nbsp;
       %em{:title => 'lexical file name, a broad category associated with this word sense'}
         &= "<#{synset.lexname}>"
