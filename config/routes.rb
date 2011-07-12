@@ -31,6 +31,7 @@ Dubsar::Application.routes.draw do
   match '/m_search'          => 'words#m_search'
   match '/m_senses/:id'      => 'senses#m_show'
   match '/m_words/:id'       => 'words#m_show'
+  match '/m_synsets/:id'     => 'synsets#m_show'
   match '/link'              => 'words#link'
   match '/qunit'             => 'words#qunit'
   match '/tour'              => 'words#tour'

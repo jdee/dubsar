@@ -89,10 +89,33 @@ EOF
 EOF
   end
 
-  def m_word_link(word)
-    s = <<EOF
-<a href="#{url_for :controller => :words, :action => :m_search, :term => word.name}" class="result-link" rel="external">#{word.name}</a>
-EOF
+  def target_link(target)
+    target_text = case target
+    when Sense
+      target.word.name
+    when Synset
+      target.words.map(&:name).join(', ')
+    end
+
+    link_to target_text, target, :class => 'search-link'
+  end
+
+  def m_target_link(target)
+    target_url = case target
+    when Sense
+      url_for(:controller => :senses, :action => :m_show, :id => target.id, :index => 0)
+    when Synset
+      url_for(:controller => :synsets, :action => :m_show, :id => target.id)
+    end
+
+    target_text = case target
+    when Sense
+      target.word.name
+    when Synset
+      target.words.map(&:name).join(', ')
+    end
+
+    link_to target_text, target_url
   end
 
   def search_term

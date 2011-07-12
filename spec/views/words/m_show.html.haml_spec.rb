@@ -37,9 +37,4 @@ describe '/words/m_show.html.haml' do
     render
     rendered.should have_selector("a[href='#{url_for(:controller => :senses, :action => :m_show, :id => @word.sense_ids.first, :index => 0)}'][data-transition='slideup']")
   end
-
-  it 'has a back button' do
-    render
-    rendered.should have_selector("a[href='/m'][data-rel='back']")
-  end
 end

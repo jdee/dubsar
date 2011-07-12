@@ -15,18 +15,22 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-.ui-state-active.ui-corner-top.line
-  %span.ui-icon.ui-icon-star
-  %span
-    - synset.senses.each do |sense|
-      = link_to h(sense.word.name), sense, :class => 'search-link'
+%div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => "Dubsar Mobile"}
+  %div{'data-role' => 'header'}
+    =render :partial => 'shared/mobile_header'
+    %br/
+    &= @synset.gloss
+  %div{'data-role' => "content"}
+    - @synset.senses.each do |sense|
+      = link_to url_for(:controller => :senses, :action => :m_show, :id => sense.id, :index => 0), 'data-transition' => 'slideup' do
+        &= sense.word.name
     &nbsp;
-    &= "<#{synset.lexname}>"
-.ui-state-default.ui-corner-bottom
-  &= synset.gloss
-  - unless synset.samples.empty?
-    %hr/
-    %h4 sample sentences
-    %ul
-      - synset.samples.each do |sample|
-        %li=h sample
+    &= "<#{@synset.lexname}>"
+    - unless @synset.samples.empty?
+      %hr
+      %h4 sample sentences
+      %ul
+        - @synset.samples.each do |sample|
+          %li=h sample
+  %div.ui-bar{'data-role' => 'footer'}
+    = render :partial => 'shared/mobile_footer'

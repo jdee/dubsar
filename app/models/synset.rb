@@ -32,6 +32,13 @@ class Synset < ActiveRecord::Base
       :conditions => [ "name != ?", word.name ]
   end
 
+  # Return a collection of +Sense+ model objects excluding the one
+  # associated with the +word+ argument.
+  def senses_except(word)
+    senses.find :all, :joins => "INNER JOIN words w ON w.id = senses.word_id",
+      :order => 'w.name', :conditions => [ "w.name != ?", word.name ]
+  end
+
   def gloss
     definition.sub(/;\s*".*$/, '')
   end

@@ -23,4 +23,10 @@ class SynsetsController < ApplicationController
   rescue
     redirect_with_error "bad request"
   end
+
+  def m_show
+    @synset = Synset.find params[:id], :include => [ :words, { :senses => [ { :senses_verb_frames => :verb_frame }, :pointers ] } ]
+  rescue
+    redirect_with_error "bad request"
+  end
 end

@@ -15,8 +15,8 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 %li
-  - accordion_sense.synset.words_except(accordion_sense.word).each do |w|
-    = link_to h(w.name), w, :class => 'search-link'
+  - unless accordion_sense.synonyms.empty?
+    = link_to h(accordion_sense.synonyms.map(&:name).join(', ')), accordion_sense.synset, :class => 'search-link'
   %span.tooltip.ui-corner-all
     &= accordion_sense.synset.gloss
     = render :partial => 'tooltip', :locals => { :sense => accordion_sense }

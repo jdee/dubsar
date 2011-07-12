@@ -14,12 +14,7 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-- synonyms = sense.synset.words_except(sense.word)
-- unless synonyms.empty?
+- unless sense.synonyms.empty?
   %br/
   %em
-    - synonyms.each do |w|
-      - link_text = w.name
-      - unless w == synonyms.last
-        - link_text += ","
-      = link_to link_text, w, :class => 'search-link'
+    = link_to h(sense.synonyms.map(&:name).join(', ')), sense.synset, :class => 'search-link'

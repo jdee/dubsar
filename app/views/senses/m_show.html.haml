@@ -19,7 +19,6 @@
 %div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => "Dubsar Mobile - #{word.name} (#{word.pos}.)"}
   %div{'data-role' => 'header'}
     =render :partial => 'shared/mobile_header'
-    =link_to h("#{word.name} (#{word.pos}.)"), "/m_word/#{word.id}", 'data-icon' => 'arrow-u', 'data-rel' => 'back', 'data-role' => 'button', :class => 'ui-btn-right'
     %br/
     &="#{word.name} (#{word.pos}.)"
     - unless word.other_forms.empty?
@@ -29,6 +28,11 @@
     &nbsp;
     &= "#{@index.next}. #{@sense.synset.gloss}"
   %div{'data-role' => "content"}
+    %div{'data-inline' => 'true'}
+      = link_to url_for(:controller => :words, :action => :m_show, :id => @sense.word.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-u', 'data-inline' => 'true' do
+        &= "#{@sense.word.name} (#{@sense.word.pos}.)"
+      = link_to url_for(:controller => :synsets, :action => :m_show, :id => @sense.synset.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-u', 'data-inline' => 'true' do
+        &= "#{@sense.synset.gloss}"
     %h3
       &="<#{@sense.synset.lexname}>"
       &nbsp;
@@ -37,12 +41,11 @@
         &nbsp;
       - if @sense.freq_cnt > 0
         &= "freq. cnt.: #{@sense.freq_cnt.to_s :delimiter => ','}"
-    - synonyms = @sense.synset.words_except(word)
-    - unless synonyms.empty?
-      %h3 synonyms
-      &nbsp;
-      - synonyms.each do |synonym|
-        != m_word_link synonym
+    - unless @sense.synset.senses_except(@sense.word).empty?
+      %hr/
+      - @sense.synset.senses_except(@sense.word).each do |s|
+        = link_to url_for(:action => :m_show, :id => s.id, :index => 0), 'data-transition' => 'slideup' do
+          &= s.word.name
     - unless @sense.frames.empty?
       %h3 verb frames
       %ul
@@ -59,13 +62,13 @@
       %h3 pointers
       %table
         %tbody
-          - @sense.unique_pointers.each do |ptype, words|
+          - @sense.pointers.group_by(&:ptype).each do |ptype, ptrs|
             %tr
+              %td.pointer-type{:title => Pointer.help_text(ptype)}
+                %em
+                  &= ptype
               %td
-                &= ptype
-              %td
-                - words.each do |word|
-                  != m_word_link word
-
+                - ptrs.each do |ptr|
+                  = m_target_link ptr.target
   %div.ui-bar{'data-role' => 'footer'}
     = render :partial => 'shared/mobile_footer'

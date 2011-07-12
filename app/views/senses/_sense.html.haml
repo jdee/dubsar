@@ -30,11 +30,12 @@
           &= "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
         &nbsp;
   .ui-state-default.ui-corner-bottom
-    - unless sense.synset.words_except(sense.word).empty?
-      - sense.synset.words_except(sense.word).each do |w|
-        = link_to w.name, w, :class => 'search-link'
+    = link_to h(sense.word.name+":"), sense.word, :class => 'search-link'
+    = link_to h(sense.synset.gloss), sense.synset, :class => 'search-link'
+    - unless sense.synset.senses_except(sense.word).empty?
       %hr/
-    &= sense.synset.gloss
+      - sense.synset.senses_except(sense.word).each do |s|
+        = link_to h(s.word.name), s, :class => 'search-link'
     - unless sense.frames.empty?
       %hr/
       %strong{:title => 'generic sentence frames for this verb sense'}
@@ -62,11 +63,11 @@
       %strong{:title => 'links to related words of different types'} pointers
       %table
         %tbody
-          - sense.unique_pointers.each do |ptype, words|
+          - sense.pointers.group_by(&:ptype).each do |ptype, ptrs|
             %tr
               %td.pointer-type{:title => Pointer.help_text(ptype)}
                 %em
                   &= ptype
               %td
-                - words.each do |word|
-                  = link_to word.name, word, :class => 'search-link'
+                - ptrs.each do |ptr|
+                  = target_link ptr.target

@@ -31,21 +31,14 @@ class Sense < ActiveRecord::Base
     [ word ]
   end
 
-  def unique_pointers
-    return @unique_pointers if @unique_pointers
-    @unique_pointers = {}
-    pointers.group_by(&:ptype).each do |ptype, ptrs|
-      @unique_pointers[ptype] = ptrs.inject([]) do |result, p|
-        result.concat p.target.words
-      end.uniq.sort
-    end
-    @unique_pointers
-  end
-
   def frames
     verb_frames.map do |frame|
       matches = /^(.*)%s(.*)$/.match frame.frame
       matches ? matches[1] + '<strong>' + word.name + '</strong>' + matches[2] : frame.frame
     end
+  end
+
+  def synonyms
+    synset.words_except(word)
   end
 end

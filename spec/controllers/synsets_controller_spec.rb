@@ -23,15 +23,20 @@ describe SynsetsController do
       request.env['HTTP_REFERER'] = '/'
     end
 
-    it "gets the :show view" do
+    it "gets the :show and :m_show views" do
       food, grub = create_synonyms!
-      get :show, 'id' => food.synsets.first.id
-      response.should be_success
-      assigns(:synset).should_not be_blank
+      %w{show m_show}.each do |route|
+        get route, 'id' => food.synsets.first.id
+        response.should be_success
+        assigns(:synset).should_not be_blank
+      end
     end
 
     it "redirects on bad request" do
       get :show, 'id' => 1_000_000
+      response.should be_redirect
+
+      get :m_show, 'id' => 1_000_000
       response.should be_redirect
     end
   end

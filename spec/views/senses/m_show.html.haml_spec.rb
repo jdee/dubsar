@@ -39,9 +39,4 @@ describe '/senses/m_show.html.haml' do
       h3.should contain(@food.synsets.first.lexname)
     end
   end
-
-  it 'uses data-role="button" for the up link' do
-    render
-    rendered.should have_selector(:a, 'data-rel' => 'back', 'data-role' => 'button')
-  end
 end

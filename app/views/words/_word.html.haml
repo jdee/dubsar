@@ -31,7 +31,6 @@
       - word.senses.each do |sense|
         %li
           %span.tooltip.ui-corner-all
-            = link_to sense, :class => 'search-link' do
-              &= sense.synset.gloss
+            = link_to h(sense.synset.gloss), sense, :class => 'search-link'
             = render :partial => 'tooltip', :locals => { :sense => sense }
           = render :partial => 'sense', :object => sense
