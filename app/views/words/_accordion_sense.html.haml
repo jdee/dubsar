@@ -15,13 +15,6 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 %li
-  = render :partial => 'tooltip', :locals => { :sense => sense }
-  - synonyms = sense.synset.words_except(sense.word)
-  - unless synonyms.empty?
-    %br/
-    %em
-      - synonyms.each do |w|
-        - link_text = w.name
-        - unless w == synonyms.last
-          - link_text += ","
-        = link_to link_text, w, :class => 'search-link'
+  - accordion_sense.synset.words_except(accordion_sense.word).each do |w|
+    = link_to h(w.name), w, :class => 'search-link'
+  = render :partial => 'tooltip', :locals => { :sense => accordion_sense }

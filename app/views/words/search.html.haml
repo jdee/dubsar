@@ -24,7 +24,7 @@
   !=thumbnail_link_tags
 
 #accordion
-  = render @words
+  = render :partial => 'accordion_word', :collection => @words
 
 - content_for :pagination do
   = will_paginate @words

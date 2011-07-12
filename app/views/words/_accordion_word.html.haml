@@ -14,14 +14,21 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-%li
-  = render :partial => 'tooltip', :locals => { :sense => sense }
-  - synonyms = sense.synset.words_except(sense.word)
-  - unless synonyms.empty?
-    %br/
+%h2{:id => "#{accordion_word.unique_name}"}
+  %a{:href => "##{accordion_word.unique_name}"}
+    &= accordion_word.name
     %em
-      - synonyms.each do |w|
-        - link_text = w.name
-        - unless w == synonyms.last
-          - link_text += ","
-        = link_to link_text, w, :class => 'search-link'
+      &= "(#{accordion_word.pos}.)"
+%div{:id => "pane_#{@count+=1}"}
+  %span
+    %em other forms:
+    - if accordion_word.other_forms.length > 0
+      &= accordion_word.other_forms
+    - else
+      (none)
+    &nbsp;
+    = link_to accordion_word, :class => 'search-link' do
+      %em
+        &= "full entry for #{accordion_word.name} (#{accordion_word.pos}.)"
+  %ol
+    =render :partial => 'accordion_sense', :collection => accordion_word.senses
