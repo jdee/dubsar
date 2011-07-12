@@ -17,7 +17,7 @@
 
 require 'spec_helper'
 
-describe '/words/_sense.html.haml' do
+describe '/words/_word.html.haml' do
   let (:word) { Factory :noun }
   let (:synset) { Factory :food_synset }
   let (:sense) { Factory :sense, :word => word, :synset => synset }
@@ -39,19 +39,24 @@ describe '/words/_sense.html.haml' do
   let (:verb_frame) { Factory :verb_frame, :number => 1, :frame => 'Something ----s' }
 
   before :each do
+    word.senses << sense
+    verb.senses << verb_sense
+
     # associate a verb frame with this sense
-    Factory :senses_verb_frame, :sense => verb_sense, :verb_frame => verb_frame
+    verb_sense.senses_verb_frames << Factory(:senses_verb_frame, :sense => verb_sense, :verb_frame => verb_frame)
+
+    verb_sense.save!
+    word.save!
+    verb.save!
   end
 
   it 'should have a .tooltip div' do
-    sense.should_not be_nil
-    render :partial => 'words/sense', :locals => { :sense => sense }
+    render :partial => 'words/word', :object => word
     rendered.should have_selector('span.tooltip')
   end
 
   it 'should include verb frames' do
-    verb_sense.should_not be_nil
-    render :partial => 'words/sense', :locals => { :sense => verb_sense }
+    render :partial => 'words/word', :object => verb
     rendered.should have_selector('span.tooltip') do |span|
       span.should have_selector(:table) do |table|
         table.should have_selector(:td) do |td|

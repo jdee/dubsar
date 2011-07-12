@@ -14,18 +14,24 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-.ui-widget
+.ui-widget-content
   .line.ui-state-active.ui-corner-top
-    %span.ui-icon.ui-icon-info
+    %span.ui-icon.ui-icon-star
     %span
       &= word.name
       %em
         &= "(#{word.pos}.)"
-  #word-info.ui-state-default.ui-corner-bottom
+  .ui-state-default.ui-corner-bottom
     %em other forms:
     - if word.other_forms.length > 0
       &= word.other_forms
     - else
       (none)
     %ol
-      =render :partial => 'sense', :collection => word.senses
+      - word.senses.each do |sense|
+        %li
+          %span.tooltip.ui-corner-all
+            = link_to sense, :class => 'search-link' do
+              &= sense.synset.gloss
+            = render :partial => 'tooltip', :locals => { :sense => sense }
+          = render :partial => 'sense', :object => sense

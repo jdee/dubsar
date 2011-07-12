@@ -14,10 +14,10 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-.ui-widget-header
-  .ui-state-default.line
-    %span.ui-icon.ui-icon-info
-    %span.tooltip-header-text
+.ui-widget-content
+  .line.ui-state-active.ui-corner-top
+    %span.ui-icon.ui-icon-star
+    %span
       &nbsp;
       %em{:title => 'lexical file name, a broad category associated with this word sense'}
         &="<#{sense.synset.lexname}>"
@@ -29,43 +29,44 @@
         %span{:title => 'frequency count of this word sense in a reference text'}
           &= "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
         &nbsp;
-- unless sense.synset.words_except(sense.word).empty?
-  - sense.synset.words_except(sense.word).each do |w|
-    !=word_link w
-  %hr/
-&= sense.synset.gloss
-- unless sense.frames.empty?
-  %hr/
-  %strong{:title => 'generic sentence frames for this verb sense'}
-    verb frames
-  %table
-    %tbody
-      - sense.frames.each do |frame|
-        %tr
-          %td
-            != frame_spanner frame
-- unless sense.synset.samples.blank?
-  %hr/
-  %strong{:title => 'sample sentences using this word sense (and synonymous ones)'}
-    sample sentences
-  %table
-    %tbody
-      - sense.synset.samples.each do |sample|
-        - s = sample.strip
-        - unless s.blank?
-          %tr
-            %td
-              &= s
-- unless sense.pointers.blank?
-  %hr/
-  %strong{:title => 'links to related words of different types'} pointers
-  %table
-    %tbody
-      - sense.unique_pointers.each do |ptype, words|
-        %tr
-          %td.pointer-type{:title => Pointer.help_text(ptype)}
-            %em
-              &= ptype
-          %td
-            - words.each do |word|
-              !=word_link word
+  .ui-state-default.ui-corner-bottom
+    - unless sense.synset.words_except(sense.word).empty?
+      - sense.synset.words_except(sense.word).each do |w|
+        = link_to w.name, w, :class => 'search-link'
+      %hr/
+    &= sense.synset.gloss
+    - unless sense.frames.empty?
+      %hr/
+      %strong{:title => 'generic sentence frames for this verb sense'}
+        verb frames
+      %table
+        %tbody
+          - sense.frames.each do |frame|
+            %tr
+              %td
+                != frame_spanner frame
+    - unless sense.synset.samples.blank?
+      %hr/
+      %strong{:title => 'sample sentences using this word sense (and synonymous ones)'}
+        sample sentences
+      %table
+        %tbody
+          - sense.synset.samples.each do |sample|
+            - s = sample.strip
+            - unless s.blank?
+              %tr
+                %td
+                  &= s
+    - unless sense.pointers.blank?
+      %hr/
+      %strong{:title => 'links to related words of different types'} pointers
+      %table
+        %tbody
+          - sense.unique_pointers.each do |ptype, words|
+            %tr
+              %td.pointer-type{:title => Pointer.help_text(ptype)}
+                %em
+                  &= ptype
+              %td
+                - words.each do |word|
+                  = link_to word.name, word, :class => 'search-link'

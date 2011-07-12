@@ -17,4 +17,6 @@
 %li
   - accordion_sense.synset.words_except(accordion_sense.word).each do |w|
     = link_to h(w.name), w, :class => 'search-link'
-  = render :partial => 'tooltip', :locals => { :sense => accordion_sense }
+  %span.tooltip.ui-corner-all
+    &= accordion_sense.synset.gloss
+    = render :partial => 'tooltip', :locals => { :sense => accordion_sense }
