@@ -30,7 +30,7 @@ Dubsar::Application.routes.draw do
   match '/m_license'         => 'words#m_license'
   match '/m_search'          => 'words#m_search'
   match '/m_sense/:id'       => 'words#m_sense'
-  match '/m_word/:id'        => 'words#m_word'
+  match '/m_words/:id'       => 'words#m_show'
   match '/link'              => 'words#link'
   match '/qunit'             => 'words#qunit'
   match '/tour'              => 'words#tour'

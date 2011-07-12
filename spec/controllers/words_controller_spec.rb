@@ -47,9 +47,9 @@ describe WordsController do
       end
     end
 
-    it "gets :show and :m_word views" do
+    it "gets :show and :m_show views" do
       word = Factory :noun
-      %w{show m_word}.each do |route|
+      %w{show m_show}.each do |route|
         get route, 'id' => word.id
         response.should be_success
         assigns(:word).should_not be_blank

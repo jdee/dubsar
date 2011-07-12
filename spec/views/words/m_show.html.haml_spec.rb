@@ -17,7 +17,7 @@
 
 require 'spec_helper'
 
-describe '/words/m_word.html.haml' do
+describe '/words/m_show.html.haml' do
   before :each do
     @word, other = create_synonyms!
     assign(:word, @word)

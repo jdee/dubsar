@@ -31,7 +31,7 @@
       %ul{'data-role' => 'listview'}
         - @words.each do |word|
           %li
-            = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_word, :id => word.id), 'data-transition' => 'slideup'
+            = link_to "#{word.name} (#{word.pos}.)", url_for(:action => :m_show, :id => word.id), 'data-transition' => 'slideup'
       %h4= will_paginate @words
     - else
       %em
