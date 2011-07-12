@@ -22,7 +22,6 @@
     var $word_input;
     var $word_input_has_focus=false;
     var $request_term;
-    var $match='';
 
     /* if an item was selected, submit the request */
     function ac_select_handler(event,ui){
@@ -51,37 +50,17 @@
     }
 
     function ajax_handler(request,response,offset,limit){
-      /* search for words that start with the search term */
-      request.term += '%';
-      if ($match) {
-        request.match = $match;
-      }
-
-      request.offset = 0;
-      /*
-       * The controller collapses the results by case and part of
-       * speech, e.g. cold (n.) and cold (v.) as well as man (n.) and
-       * Man (n.) (the island).  In order to insure that we always
-       * have ten results to display, we have to request at least 80
-       * each time (four parts of speech, times capitalized vs.
-       * uncapitalized--assuming those are the only case variations
-       * for any word.  But in most cases, we get 80 results back or
-       * nearly so and then display only the first 10.  It seems much
-       * more sensible for the time being to display fewer than 10 in
-       * cases where the controller collapses a result set.
-       */
-      request.limit = 10;
-
       $.ajax({
         type: 'GET',
-        url: '/.json',
+        url: '/os.json',
         dataType: 'json',
         data: request,
         success: function(data){
+          var term = data[0];
+          var results = data[1];
           /* make sure the search term hasn't changed (this might be an old response) */
-          if ($list && data.term == $request_term && data.match == $match) {
-            for (var j=0; j<data.list.length; ++j) $list.push(data.list[j]);
-            response($list);
+          if ($list && term == $request_term) {
+            response(results);
           }
           ac_stop_search();
         },

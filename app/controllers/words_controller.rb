@@ -133,42 +133,7 @@ class WordsController < ApplicationController
       end
 
       format.json do
-        local_params = params.clone
-        @total_words = Word.search_count local_params
-
-        # protect myself against stupid requests
-        local_params[:limit] = local_params[:limit].to_i if local_params[:limit]
-        local_params[:limit] ||= self.class.max_json_limit
-        local_params[:limit] = self.class.max_json_limit if
-          local_params[:limit] > self.class.max_json_limit
-
-        @words = Word.search local_params.merge(:select => 'name',
-          :order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
-
-        # The uniq method call is case-sensitive.  It has the effect of
-        # collapsing multiple parts of speech, e.g. cold (n.) and cold
-        # (adj.).  But we still have the issue of Jack and jack, which
-        # we address with the inject.
-        word_list = @words.map{ |w| w.name }.uniq.inject([]) do |list, w|
-          unless list.empty? or list.last.casecmp(w) != 0
-            if w < list.last
-              list.pop
-              list << w
-            end
-          else
-            list << w
-          end
-          list
-        end
-
-        respond_with({
-          :match  => local_params[:match] || '',
-          :offset => local_params[:offset],
-          :limit  => local_params[:limit],
-          :total  => @total_words,
-          :term   => @term.sub(/%$/, ''),
-          :list   => word_list
-        }.to_json)
+        # TODO: Implement JSON search for native mobile apps.
       end
 
     end

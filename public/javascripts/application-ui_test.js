@@ -89,13 +89,9 @@ test('hover test', function(){
 module('autocompleter', {
   setup: function() {
     $.mockjax({
-      url: '/.json',
+      url: '/os.json',
       contentType: 'text/json',
-      responseText: {
-        term: 'a',
-        match: '',
-        list: [ 'ask', 'also', 'appear', 'all', 'again', 'area', 'add', 'almost', 'always', 'allow' ]
-      },
+      responseText: [ 'a', [ 'ask', 'also', 'appear', 'all', 'again', 'area', 'add', 'almost', 'always', 'allow' ] ],
       responseTime: 300
     });
   }

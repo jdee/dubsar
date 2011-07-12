@@ -25,10 +25,17 @@ describe WordsController do
     end
 
     it "gets all defined routes" do
-      %w{about faq index license link m_faq m_license mobile qunit tour}.each do |route|
+      # :index is actually currently not a real route
+      %w{about faq license link m_faq m_license mobile qunit tour}.each do |route|
         get route
         response.should be_success
       end
+    end
+
+    it "gets the :index view" do
+      get :search
+      response.should be_success
+      assigns(:words).should be_blank
     end
 
     it "gets :search and :m_search views" do
@@ -108,34 +115,11 @@ describe WordsController do
       list.last.should include('Word_1')
     end
 
-    it 'ignores case when removing duplicates in the #search route' do
-      Factory :capitalized_word
-      get :search, :term => 'word%', :limit => 10, :offset => 0
-      list = JSON.parse(response.body)['list']
-      list.should include('Word_1')
-    end
-
     it 'returns at most 10 matches from the #os route' do
       get :os, :term => 'word'
       # returns [ "term", [ "term1", "term2", ... ] ]
       list = JSON.parse response.body
       list.last.count.should == 10
-    end
-
-    it 'honors the specified limit from the #search route' do
-      get :search, :term => 'word%', :offset => 0, :limit => 9
-      hash = JSON.parse response.body
-      list = hash['list']
-      list.count.should == 9
-    end
-
-    it 'honors the maximum request limit in the #search route' do
-      limit = WordsController.max_json_limit
-      (limit+1).times { Factory :list_entry }
-      get :search, :term => 'word%', :offset => 0, :limit => limit+1
-      hash = JSON.parse response.body
-      hash['total'].should > limit
-      hash['list'].count.should == limit
     end
 
     after :all do
