@@ -25,6 +25,9 @@
       &nbsp;
       %em{:title => 'lexical file name, a broad category associated with this word sense'}
         &= "<#{synset.lexname}>"
+      - unless synset.freq_cnt.zero?
+        &nbsp;
+        = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
   .ui-corner-bottom.view-content.ui-widget-content
     %strong gloss
     %br/

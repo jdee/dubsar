@@ -22,6 +22,9 @@
       &= word.name
       %em
         &= "(#{word.pos}.)"
+      - unless word.freq_cnt.zero?
+        &nbsp;
+        = "freq. cnt.: #{word.freq_cnt.to_s :delimiter => ','}"
   .ui-corner-bottom.view-content.ui-widget-content
     %em other forms:
     - if word.other_forms.length > 0

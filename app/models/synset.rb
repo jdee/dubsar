@@ -48,4 +48,8 @@ class Synset < ActiveRecord::Base
     s = matches ? matches[1] : ''
     s.split(';')
   end
+
+  def freq_cnt
+    senses.map(&:freq_cnt).inject(&:+)
+  end
 end
