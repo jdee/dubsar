@@ -15,18 +15,24 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-.ui-state-active.ui-corner-top.line
-  %span.ui-icon.ui-icon-star
-  %span
-    - synset.senses.each do |sense|
-      = link_to h(sense.word.name), sense, :class => 'search-link'
+.ui-widget.ui-corner-all.view-container
+  .ui-state-active.ui-corner-top.line.view-heading
+    %span.ui-icon.ui-icon-star
+    %span
+      - synset.senses.each do |sense|
+        = link_to h(sense.word.name), sense, :class => 'search-link', :title => sense.word.name
+      &nbsp;
+      %em{:title => 'lexical file name, a broad category associated with this word sense'}
+        &= "<#{synset.lexname}>"
+  .ui-corner-bottom.view-content.ui-widget-content
+    %strong gloss
+    %br/
+    %br/
     &nbsp;
-    &= "<#{synset.lexname}>"
-.ui-state-default.ui-corner-bottom
-  &= synset.gloss
-  - unless synset.samples.empty?
-    %hr/
-    %h4 sample sentences
-    %ul
-      - synset.samples.each do |sample|
-        %li=h sample
+    &= synset.gloss
+    - unless synset.samples.empty?
+      %hr/
+      %h4 sample sentences
+      %ul
+        - synset.samples.each do |sample|
+          %li=h sample

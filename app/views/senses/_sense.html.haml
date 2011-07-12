@@ -14,8 +14,8 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-.ui-widget-content
-  .line.ui-state-active.ui-corner-top
+.ui-widget.ui-corner-all.view-container
+  .line.ui-state-active.ui-corner-top.view-heading
     %span.ui-icon.ui-icon-star
     %span
       &nbsp;
@@ -29,11 +29,19 @@
         %span{:title => 'frequency count of this word sense in a reference text'}
           &= "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
         &nbsp;
-  .ui-state-default.ui-corner-bottom
-    = link_to h(sense.word.name+":"), sense.word, :class => 'search-link'
+  .ui-corner-bottom.view-content.ui-widget-content
+    %strong word:
+    %br/
+    = link_to h("#{sense.word.name} (#{sense.word.pos}.)"), sense.word, :class => 'search-link'
+    %br/
+    %br/
+    %strong synset gloss:
+    %br/
     = link_to h(sense.synset.gloss), sense.synset, :class => 'search-link'
     - unless sense.synset.senses_except(sense.word).empty?
       %hr/
+      %strong synonyms
+      %br/
       - sense.synset.senses_except(sense.word).each do |s|
         = link_to h(s.word.name), s, :class => 'search-link'
     - unless sense.frames.empty?

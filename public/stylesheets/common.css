@@ -22,6 +22,16 @@ body {
   font-size: 9pt;
 }
 
+.view-heading {
+  padding: .5em;
+  border-bottom-style: none!important;
+}
+
+.view-content {
+  padding: 1em;
+  border-top-style: none!important;
+}
+
 hr {
   border-style: none;
   size: 1px;
