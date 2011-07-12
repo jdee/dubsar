@@ -47,12 +47,6 @@ class WordsController < ApplicationController
     render :layout => 'mobile'
   end
 
-  def m_sense
-    @sense = Sense.find params[:id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
-    @index = params[:index]
-    render :layout => false
-  end
-
   def show
     @back = request.env['HTTP_REFERER']
     @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]

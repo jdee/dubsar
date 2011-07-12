@@ -17,29 +17,19 @@
 
 require 'spec_helper'
 
-describe '/words/m_show.html.haml' do
-  before :each do
-    @word, other = create_synonyms!
-    assign(:word, @word)
-    @back = '/m'
-  end
-
-  it 'has basic jquery mobile page structure' do
-    render
-    rendered.should have_selector(:div, 'data-role' => 'page') do |page|
-      page.should have_selector(:div, 'data-role' => 'header')
-      page.should have_selector(:div, 'data-role' => 'content')
-      page.should have_selector(:div, 'data-role' => 'footer')
+describe SensesController do
+  context "handling basic routing and requests" do
+    before :each do
+      request.env['HTTP_REFERER'] = '/'
     end
-  end
 
-  it 'lists all senses' do
-    render
-    rendered.should have_selector("a[href='#{url_for(:controller => :senses, :action => :m_show, :id => @word.sense_ids.first, :index => 0)}'][data-transition='slideup']")
-  end
-
-  it 'has a back button' do
-    render
-    rendered.should have_selector("a[href='/m'][data-rel='back']")
+    it "gets the :m_show view" do
+      food, grub = create_synonyms!
+      sense = food.senses.first
+      get :m_show, 'id' => sense.id, 'index' => 0
+      response.should be_success
+      assigns(:sense).should_not be_blank
+      assigns(:index).should_not be_blank
+    end
   end
 end

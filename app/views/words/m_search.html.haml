@@ -22,7 +22,7 @@
 
 %div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => "Dubsar Mobile - #{search_title}"}
   %div{'data-role' => 'header', 'data-position' => 'inline'}
-    = render :partial => 'dubsar_mobile_header'
+    = render :partial => 'shared/mobile_header'
   %div{'data-role' => 'content'}
     = render :partial => 'mobile_form'
     %br/
@@ -37,4 +37,4 @@
       %em
         &="no results for \"#{@term}\""
   %div.ui-bar{'data-role' => 'footer'}
-    = render :partial => 'mobile_footer'
+    = render :partial => 'shared/mobile_footer'

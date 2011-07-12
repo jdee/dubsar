@@ -16,7 +16,7 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 %div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)} (#{@word.pos}.)", 'data-theme' => 'b'}
   %div{'data-role' => 'header', 'data-position' => 'inline'}
-    = render :partial => 'dubsar_mobile_header'
+    = render :partial => 'shared/mobile_header'
     = link_to 'search results', @back, 'data-rel' => 'back', 'data-role' => 'button', 'data-icon' => 'arrow-u', :class => 'ui-btn-right'
     %br/
     ="#{@word.name} (#{@word.pos}.)"
@@ -29,7 +29,7 @@
     %ol{'data-role' => 'listview'}
       - @word.senses.each_with_index do |sense, index|
         %li
-          = link_to sense.synset.gloss, url_for(:action => :m_sense, :id => sense.id, :index => index), 'data-transition' => 'slideup'
+          = link_to sense.synset.gloss, url_for(:controller => :senses, :action => :m_show, :id => sense.id, :index => index), 'data-transition' => 'slideup'
 
   %div.ui-bar{'data-role' => 'footer'}
-    = render :partial => 'mobile_footer'
+    = render :partial => 'shared/mobile_footer'

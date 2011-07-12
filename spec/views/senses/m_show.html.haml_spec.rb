@@ -17,7 +17,7 @@
 
 require 'spec_helper'
 
-describe '/words/m_sense.html.haml' do
+describe '/senses/m_show.html.haml' do
   before :each do
     @food, grub = create_synonyms!
     assign(:sense, @food.senses.first)

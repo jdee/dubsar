@@ -57,15 +57,6 @@ describe WordsController do
       end
     end
 
-    it "gets the :m_sense view" do
-      food, grub = create_synonyms!
-      sense = food.senses.first
-      get :m_sense, 'id' => sense.id, 'index' => 0
-      response.should be_success
-      assigns(:sense).should_not be_blank
-      assigns(:index).should_not be_blank
-    end
-
     it "ignores excess white space" do
       get :search, 'term' => '  World   War         2  '
 

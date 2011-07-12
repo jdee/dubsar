@@ -91,13 +91,13 @@ EOF
 
   def word_link(word)
     s = <<EOF
-<a href="#{url_for :action => :search, :term => word.name}##{word.unique_name}" title="#{word.name}" class="search-link">#{word.name}</a>
+<a href="#{url_for :controller => :words, :action => :search, :term => word.name}##{word.unique_name}" title="#{word.name}" class="search-link">#{word.name}</a>
 EOF
   end
 
   def m_word_link(word)
     s = <<EOF
-<a href="#{url_for :action => :m_search, :term => word.name}" class="result-link" rel="external">#{word.name}</a>
+<a href="#{url_for :controller => :words, :action => :m_search, :term => word.name}" class="result-link" rel="external">#{word.name}</a>
 EOF
   end
 

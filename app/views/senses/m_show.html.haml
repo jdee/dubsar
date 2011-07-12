@@ -18,7 +18,7 @@
 - word = @sense.word
 %div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => "Dubsar Mobile - #{word.name} (#{word.pos}.)"}
   %div{'data-role' => 'header'}
-    =render :partial => 'dubsar_mobile_header'
+    =render :partial => 'shared/mobile_header'
     =link_to h("#{word.name} (#{word.pos}.)"), "/m_word/#{word.id}", 'data-icon' => 'arrow-u', 'data-rel' => 'back', 'data-role' => 'button', :class => 'ui-btn-right'
     %br/
     &="#{word.name} (#{word.pos}.)"
@@ -68,4 +68,4 @@
                   != m_word_link word
 
   %div.ui-bar{'data-role' => 'footer'}
-    = render :partial => 'mobile_footer'
+    = render :partial => 'shared/mobile_footer'

@@ -32,9 +32,9 @@
 
 %div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => 'Dubsar Mobile'}
   %div{'data-role' => 'header', 'data-position' => 'inline'}
-    = render :partial => 'dubsar_mobile_header'
+    = render :partial => 'shared/mobile_header'
   %div{'data-role' => 'content'}
     = render :partial => 'mobile_text'
     = render :partial => 'mobile_form', :locals => { :term => @term }
   %div.ui-bar{'data-role' => 'footer'}
-    = render :partial => 'mobile_footer'
+    = render :partial => 'shared/mobile_footer'
