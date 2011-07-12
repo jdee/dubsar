@@ -53,3 +53,8 @@ body.style-light *.ui-state-active > span.ui-button-text {
 body.style-light a.undecorated {
   color: inherit;
 }
+
+body.style-light .view-heading .ui-state-highlight a,
+body.style-light .view-heading a:hover,active {
+  color: #1c94c4;
+}

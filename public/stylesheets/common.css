@@ -27,11 +27,6 @@ body {
   border-bottom-style: none!important;
 }
 
-/* this color works remarkably well here with both themes */
-.view-heading a:hover,active {
-  color: #1c94c4!important;
-}
-
 .view-content {
   padding: 1em;
   border-top-style: none!important;
