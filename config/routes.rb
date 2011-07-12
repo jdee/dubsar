@@ -31,7 +31,7 @@ Dubsar::Application.routes.draw do
   match '/qunit'             => 'words#qunit'
   match '/tour'              => 'words#tour'
 
-  match '/(.:format)' => 'words#show'
+  match '/(.:format)' => 'words#search'
   match '/os(.:format)' => 'words#os'
 
   root :to => "words#index"

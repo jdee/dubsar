@@ -19,7 +19,7 @@ class WordsController < ApplicationController
   respond_to :html, :json
   before_filter :init_count
   before_filter :setup_captions
-  before_filter :munge_search_params, :only => [ :show ]
+  before_filter :munge_search_params, :only => [ :search ]
 
   @max_json_limit = 25
 
@@ -109,7 +109,7 @@ class WordsController < ApplicationController
 
   # Retrieve all words matching the specified +term+ and render as
   # HTML or JSON, one page at a time.
-  def show
+  def search
     respond_to do |format|
       format.html do
         options = params.symbolize_keys
@@ -125,7 +125,7 @@ class WordsController < ApplicationController
           ]
         )
         if @words.count > 0
-          render :action => 'show'
+          render :action => 'search'
         else
           redirect_with_error(
             "no results for \"#{CGI.escapeHTML @term}\"")
@@ -191,7 +191,7 @@ class WordsController < ApplicationController
     # gradually help weed duplicates out of search engine indices.
     @term = params[:term]
 
-    # show and index use the same URL
+    # search and index use the same URL
     unless @term
       # flash.now[:notice] = 'Dubsar is undergoing a number of changes. Thanks for your patience.'
       render :action => :index

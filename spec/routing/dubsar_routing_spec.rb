@@ -18,8 +18,8 @@
 require 'spec_helper'
 
 describe 'Dubsar routes' do
-  it 'routes the root URL to #show' do
-    get("/").should route_to("words#show")
+  it 'routes the root URL to #search' do
+    get("/").should route_to("words#search")
   end
 
   it 'routes garbage to #error' do

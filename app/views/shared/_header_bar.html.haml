@@ -25,12 +25,12 @@
               %tr
                 - ('A'..'Z').each do |letter|
                   %td
-                    = link_to letter, url_for(:controller => :words, :action => :show, :term =>"^[#{letter}#{letter.downcase}]", :match => 'regexp', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link'
+                    = link_to letter, url_for(:controller => :words, :action => :search, :term =>"^[#{letter}#{letter.downcase}]", :match => 'regexp', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link'
                 %td
-                  %a.search-link{:href => url_for(:controller => :words, :action => :show, :term => '^[^A-Za-z]', :match => 'regexp', :title =>'...'), :title => 'words not starting with a letter'}
+                  %a.search-link{:href => url_for(:controller => :words, :action => :search, :term => '^[^A-Za-z]', :match => 'regexp', :title =>'...'), :title => 'words not starting with a letter'}
                     &hellip;
         %td
-          = form_tag(url_for(:controller => :words, :action => :show), :method => :get, :id => 'word-form') do
+          = form_tag(url_for(:controller => :words, :action => :search), :method => :get, :id => 'word-form') do
 
             =hidden_field_tag :back, 'yes'
             %table#word-search-term

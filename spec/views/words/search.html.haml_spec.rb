@@ -17,7 +17,7 @@
 
 require 'spec_helper'
 
-describe '/words/show.html.haml' do
+describe '/words/search.html.haml' do
   let (:word) { Factory :noun }
 
   before :each do
@@ -32,7 +32,7 @@ describe '/words/show.html.haml' do
   end
 
   it 'should have a search form' do
-    render :layout => 'layouts/application', :template => 'words/show.html.haml'
+    render :layout => 'layouts/application', :template => 'words/search.html.haml'
     rendered.should have_selector('form', :method => 'get', :action => root_path) do |form|
       form.should have_selector('input', :type => 'search', :name => 'term', :id => 'word-input')
       form.should have_selector('button', :type => 'submit', :id => 'word-submit')
@@ -41,9 +41,9 @@ describe '/words/show.html.haml' do
   end
 
   it 'should have alphabet browsing links' do
-    render :layout => 'layouts/application', :template => 'words/show.html.haml'
+    render :layout => 'layouts/application', :template => 'words/search.html.haml'
     ('A'..'Z').each do |letter|
-      rendered.should have_selector('a', :href => url_for(:controller => :words, :action => :show, :term => "^[#{letter}#{letter.downcase}]", :match => 'regexp', :title => "#{letter}")) do |a|
+      rendered.should have_selector('a', :href => url_for(:controller => :words, :action => :search, :term => "^[#{letter}#{letter.downcase}]", :match => 'regexp', :title => "#{letter}")) do |a|
         a.should contain(letter)
       end
     end

@@ -70,7 +70,7 @@ module WordsHelper
   end
 
   def canonical_link_tag
-    url = "http://dubsar-dictionary.com#{url_for :action => :show, :term => @term}"
+    url = "http://dubsar-dictionary.com#{url_for :action => :search, :term => @term}"
     url += "&match=#{@match}" unless @match.blank?
     url += "&title=#{URI.encode @title}" unless @title.blank?
     url += "&page=#{params[:page]}" unless params[:page].blank? or params[:page].to_i == 1
@@ -91,7 +91,7 @@ EOF
 
   def word_link(word)
     s = <<EOF
-<a href="#{url_for :action => :show, :term => word.name}##{word.unique_name}" title="#{word.name}" class="search-link">#{word.name}</a>
+<a href="#{url_for :action => :search, :term => word.name}##{word.unique_name}" title="#{word.name}" class="search-link">#{word.name}</a>
 EOF
   end
 

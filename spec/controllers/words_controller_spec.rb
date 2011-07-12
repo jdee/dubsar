@@ -31,9 +31,9 @@ describe WordsController do
       end
     end
 
-    it "gets :show and :m_search views" do
+    it "gets :search and :m_search views" do
       create_synonyms!
-      %w{show m_search}.each do |route|
+      %w{search m_search}.each do |route|
         get route, 'term' => 'food'
         response.should be_success
         assigns(:words).should_not be_blank
@@ -58,7 +58,7 @@ describe WordsController do
     end
 
     it "ignores excess white space" do
-      get :show, 'term' => '  World   War         2  '
+      get :search, 'term' => '  World   War         2  '
 
       assigns(:term).should_not be_nil
       assigns(:term).should == 'World War 2'
@@ -66,21 +66,21 @@ describe WordsController do
 
     it "honors case, regexp and exact :match paramters" do
       Factory :slang
-      get :show, :term => 'slang', :match => 'exact'
+      get :search, :term => 'slang', :match => 'exact'
       response.should be_success
 
-      get :show, :term => 'slang', :match => 'case'
+      get :search, :term => 'slang', :match => 'case'
       response.should be_success
 
-      get :show, :term => 'slang', :match => 'regexp'
+      get :search, :term => 'slang', :match => 'regexp'
       response.should be_success
 
-      get :show, :term => 'slang', :match => 'foo'
+      get :search, :term => 'slang', :match => 'foo'
       response.should be_redirect
     end
 
     it "uses a regexp search for letter browsing" do
-      get :show, :term => 'A%'
+      get :search, :term => 'A%'
       assigns(:match).should == 'regexp'
       assigns(:title).should == 'A'
       assigns(:term).should == '^[Aa]'
@@ -108,9 +108,9 @@ describe WordsController do
       list.last.should include('Word_1')
     end
 
-    it 'ignores case when removing duplicates in the #show route' do
+    it 'ignores case when removing duplicates in the #search route' do
       Factory :capitalized_word
-      get :show, :term => 'word%', :limit => 10, :offset => 0
+      get :search, :term => 'word%', :limit => 10, :offset => 0
       list = JSON.parse(response.body)['list']
       list.should include('Word_1')
     end
@@ -122,17 +122,17 @@ describe WordsController do
       list.last.count.should == 10
     end
 
-    it 'honors the specified limit from the #show route' do
-      get :show, :term => 'word%', :offset => 0, :limit => 9
+    it 'honors the specified limit from the #search route' do
+      get :search, :term => 'word%', :offset => 0, :limit => 9
       hash = JSON.parse response.body
       list = hash['list']
       list.count.should == 9
     end
 
-    it 'honors the maximum request limit in the #show route' do
+    it 'honors the maximum request limit in the #search route' do
       limit = WordsController.max_json_limit
       (limit+1).times { Factory :list_entry }
-      get :show, :term => 'word%', :offset => 0, :limit => limit+1
+      get :search, :term => 'word%', :offset => 0, :limit => limit+1
       hash = JSON.parse response.body
       hash['total'].should > limit
       hash['list'].count.should == limit
