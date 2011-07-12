@@ -29,5 +29,10 @@ describe SynsetsController do
       response.should be_success
       assigns(:synset).should_not be_blank
     end
+
+    it "redirects on bad request" do
+      get :show, 'id' => 1_000_000
+      response.should be_redirect
+    end
   end
 end

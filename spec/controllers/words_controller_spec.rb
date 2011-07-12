@@ -57,6 +57,11 @@ describe WordsController do
       end
     end
 
+    it "redirects on bad request" do
+      get :show, 'id' => 1_000_000
+      response.should be_redirect
+    end
+
     it "ignores excess white space" do
       get :search, 'term' => '  World   War         2  '
 

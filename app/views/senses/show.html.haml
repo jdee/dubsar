@@ -14,15 +14,7 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-- content_for :title do
-  &= page_title
-
-- content_for :description do
-  %meta{:name => 'Description', :content => meta_description(search_title, [ @word ])}
-  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, English'}
-  !=canonical_link_tag
-  !=thumbnail_link_tags
 
 .ui-widget
-  .ui-state-default.ui-corner-all
-    = render @word
+  .ui-state-active.ui-corner-all
+    = render @sense

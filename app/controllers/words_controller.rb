@@ -50,6 +50,8 @@ class WordsController < ApplicationController
   def show
     @back = request.env['HTTP_REFERER']
     @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
+  rescue
+    redirect_with_error "bad request"
   end
 
   def m_show

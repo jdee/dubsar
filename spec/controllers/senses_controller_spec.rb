@@ -23,6 +23,19 @@ describe SensesController do
       request.env['HTTP_REFERER'] = '/'
     end
 
+    it "gets the :show view" do
+      food, grub = create_synonyms!
+      sense = food.senses.first
+      get :show, 'id' => sense.id, 'index' => 0
+      response.should be_success
+      assigns(:sense).should_not be_blank
+    end
+
+    it "redirects on bad request" do
+      get :show, 'id' => 1_000_000
+      response.should be_redirect
+    end
+
     it "gets the :m_show view" do
       food, grub = create_synonyms!
       sense = food.senses.first
