@@ -59,3 +59,7 @@ body.style-dark #tour, body.style-dark #tour *, body.style-dark #fairies {
 body.style-dark .pagination * {
   color: #f58400!important;
 }
+
+body.style-dark .view-heading a:visited {
+  color: white;
+}

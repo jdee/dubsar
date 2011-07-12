@@ -22,6 +22,11 @@ body {
   font-size: 9pt;
 }
 
+/* remarkably, this color works well with both themes */
+.view-heading a:hover,active {
+  color: #1c94c4!important;
+}
+
 .view-heading {
   padding: .5em;
   border-bottom-style: none!important;
@@ -45,6 +50,10 @@ a[href] > img {
 }
 
 a.undecorated, a:hover,active {
+  text-decoration: none;
+}
+
+a.unstyled {
   text-decoration: none;
 }
 

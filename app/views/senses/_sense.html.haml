@@ -18,6 +18,8 @@
   .line.ui-state-active.ui-corner-top.view-heading
     %span.ui-icon.ui-icon-star
     %span
+      Sense:
+      = link_to h(sense.word.name), sense.word, :class => 'search-link'
       &nbsp;
       %em{:title => 'lexical file name, a broad category associated with this word sense'}
         &="<#{sense.synset.lexname}>"
@@ -30,12 +32,7 @@
           &= "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
         &nbsp;
   .ui-corner-bottom.view-content.ui-widget-content
-    %strong word:
-    %br/
-    = link_to h("#{sense.word.name} (#{sense.word.pos}.)"), sense.word, :class => 'search-link'
-    %br/
-    %br/
-    %strong synset gloss:
+    %strong synset gloss
     %br/
     = link_to h(sense.synset.gloss), sense.synset, :class => 'search-link'
     - unless sense.synset.senses_except(sense.word).empty?
