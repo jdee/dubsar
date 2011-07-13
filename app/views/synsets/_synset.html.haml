@@ -29,7 +29,8 @@
         &= "<#{synset.lexname}>"
       - unless synset.freq_cnt.zero?
         &nbsp;
-        = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
+        %span{:title => 'frequency count of this word sense in a reference text'}
+          = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
   .ui-corner-bottom.view-content.ui-widget-content
     %strong gloss
     %br/
