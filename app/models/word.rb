@@ -142,6 +142,10 @@ class Word < ActiveRecord::Base
     name <=> other.name
   end
 
+  def page_title
+    "Dubsar - #{name} (#{pos}.)"
+  end
+
   # Abbreviation for the full part_of_speech
   def pos
     sym = self.class.pos(part_of_speech)

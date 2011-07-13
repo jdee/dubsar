@@ -24,6 +24,7 @@ class Synset < ActiveRecord::Base
 
   validates :definition, :presence => true
   validates :lexname, :presence => true
+  validates :part_of_speech, :presence => true
 
   # Return a collection of +Word+ model objects excluding the one
   # passed in as the +word+ argument.
@@ -51,5 +52,9 @@ class Synset < ActiveRecord::Base
 
   def freq_cnt
     senses.map(&:freq_cnt).inject(&:+)
+  end
+
+  def page_title
+    "#{words.map(&:name).join(", ")} (#{Word.pos(part_of_speech)}.)"
   end
 end

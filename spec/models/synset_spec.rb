@@ -19,8 +19,9 @@ require 'spec_helper'
 
 describe Synset do
   context 'when validating' do
-    let(:no_definition) { Synset.new :definition => nil, :lexname => 'Noun.tops' }
-    let(:no_lexname) { Synset.new :definition => 'a conundrum', :lexname => nil }
+    let(:no_definition) { Synset.new :definition => nil, :lexname => 'Noun.tops', :part_of_speech => 'noun' }
+    let(:no_lexname) { Synset.new :definition => 'a conundrum', :lexname => nil, :part_of_speech => 'noun' }
+    let(:no_part_of_speech) { Synset.new :definition => 'a conundrum', :lexname => 'Noun.tops', :part_of_speech => nil }
 
     it 'validates presence of :definition' do
       no_definition.should_not be_valid
@@ -28,6 +29,10 @@ describe Synset do
 
     it 'validates presence of :lexname' do
       no_lexname.should_not be_valid
+    end
+
+    it 'validates presence of :part_of_speech' do
+      no_part_of_speech.should_not be_valid
     end
   end
 

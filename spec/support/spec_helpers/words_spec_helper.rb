@@ -33,3 +33,21 @@ def create_synonyms!
 
   [ food, grub ]
 end
+
+def create_antonyms!
+  good = Factory :good
+  bad = Factory :bad
+  good_sense = Factory(:sense, :synset => Factory(:good_synset))
+  bad_sense = Factory(:sense, :synset => Factory(:bad_synset ))
+
+  good_sense.pointers << Factory(:pointer, :ptype => 'antonym', :target => bad_sense.synset , :sense => good_sense)
+  bad_sense.pointers  << Factory(:pointer, :ptype => 'antonym', :target => good_sense.synset, :sense => bad_sense )
+
+  good.senses << good_sense
+  bad.senses  << bad_sense
+
+  good.save!
+  bad.save!
+
+  [ good, bad ]
+end

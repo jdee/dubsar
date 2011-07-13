@@ -27,24 +27,29 @@ end
 Factory.define :food_synset, :class => Synset do |s|
   s.definition 'something edible'
   s.lexname 'noun.Tops'
+  s.part_of_speech 'noun'
 end
 
 Factory.define :substance_synset, :class => Synset do |s|
   s.definition 'a material or thing'
   s.lexname 'noun.Tops'
+  s.part_of_speech 'noun'
 end
 
 Factory.define :bad_synset, :class => Synset do |s|
   s.definition 'the opposite of good; "a bad boy"; "a bad thing"'
   s.lexname 'adj.all'
+  s.part_of_speech 'adjective'
 end
 
 Factory.define :good_synset, :class => Synset do |s|
   s.definition 'the opposite of bad'
   s.lexname 'adj.all'
+  s.part_of_speech 'adjective'
 end
 
 Factory.define :follow_synset, :class => Synset do |s|
   s.definition 'pursue; follow in or as if in pursuit'
   s.lexname 'verb.motion'
+  s.part_of_speech 'verb'
 end

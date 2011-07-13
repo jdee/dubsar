@@ -36,10 +36,6 @@ describe WordsHelper do
       helper.search_title.should match /title/
       helper.search_title.should_not match /term/
     end
-
-    it 'appears in the page title' do
-      helper.page_title.should == "Dubsar - #{helper.search_title}"
-    end
   end
 
   describe 'spanners' do

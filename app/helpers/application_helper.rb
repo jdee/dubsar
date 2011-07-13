@@ -16,14 +16,6 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module ApplicationHelper
-  def page_title
-    return "Dubsar - #{@word.name} (#{@word.pos}.)" unless @word.nil?
-    return "Dubsar - #{@sense.word.name} (#{@sense.word.pos}.)" unless @sense.nil?
-    return "Dubsar - #{@synset.words.map(&:name).join(',')}" unless @synset.nil?
-
-    "Dubsar - #{search_title}"
-  end
-
   def thumbnail_link_tag(src, type="image/png")
     "<link rel=\"thumbnail\" href=\"#{image_path src}\" type=\"#{type}\"/>"
   end

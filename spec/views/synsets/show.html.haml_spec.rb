@@ -15,34 +15,17 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class Sense < ActiveRecord::Base
-  belongs_to :word
-  belongs_to :synset
-  has_one :source, :class_name => 'Pointer', :as => :target
-  has_many :pointers
-  has_many :targets, :through => :pointers
-  has_many :senses_verb_frames
-  has_many :verb_frames, :through => :senses_verb_frames,
-    :order => 'number'
-  validates :freq_cnt, :presence => true
-  validates :synset_index, :presence => true
+require 'spec_helper'
 
-  def words
-    [ word ]
+describe '/synsets/show.html.haml' do
+  before :each do
+    @food, @grub = create_synonyms!
+    assign(:synset, @food.synsets.first)
   end
 
-  def frames
-    verb_frames.map do |frame|
-      matches = /^(.*)%s(.*)$/.match frame.frame
-      matches ? matches[1] + '<strong>' + word.name + '</strong>' + matches[2] : frame.frame
-    end
-  end
-
-  def synonyms
-    synset.words_except(word)
-  end
-
-  def page_title
-    "Dubsar - #{word.name} (#{word.pos}.)"
+  it 'lists all synonyms' do
+    render
+    rendered.should contain(@food.name)
+    rendered.should contain(@grub.name)
   end
 end

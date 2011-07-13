@@ -39,4 +39,12 @@ describe '/senses/m_show.html.haml' do
       h3.should contain(@food.synsets.first.lexname)
     end
   end
+
+  it 'lists pointers' do
+    good, bad = create_antonyms!
+    assign(:sense, good.senses.first)
+    render
+    rendered.should contain("antonym")
+    rendered.should contain(bad.name)
+  end
 end

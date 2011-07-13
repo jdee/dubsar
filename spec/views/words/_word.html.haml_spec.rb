@@ -30,6 +30,8 @@ describe '/words/_word.html.haml' do
     # define 'substance' as a hypernym for word
     substance = Factory :substance
     substance_sense = Factory :sense, :word => substance, :synset => Factory(:substance_synset)
+    substance.senses << substance_sense
+    substance.save!
     Factory :pointer, :sense => sense, :target => substance_sense, :ptype => 'hypernym'
   end
 
