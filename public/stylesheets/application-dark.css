@@ -65,7 +65,8 @@ body.style-dark .view-content a.unstyled:visited {
   color: white;
 }
 
-body.style-dark .view-heading a.unstyled:hover,active {
+body.style-dark .view-heading a.unstyled:hover,active,
+body.style-dark .view-heading .ui-state-highlight a.unstyled:link,visited {
   color: #0078a3;
 }
 
