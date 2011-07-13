@@ -18,21 +18,8 @@
 require 'spec_helper'
 
 describe '/words/_word.html.haml' do
-  let (:word) { Factory :noun }
-  let (:synset) { Factory :food_synset }
-  let (:sense) { Factory :sense, :word => word, :synset => synset }
-
   before :each do
-    # define 'grub' as a synonym for word (food)
-    grub = Factory :grub
-    Factory :sense, :word => grub, :synset => synset, :synset_index => 2
-
-    # define 'substance' as a hypernym for word
-    substance = Factory :substance
-    substance_sense = Factory :sense, :word => substance, :synset => Factory(:substance_synset)
-    substance.senses << substance_sense
-    substance.save!
-    Factory :pointer, :sense => sense, :target => substance_sense, :ptype => 'hypernym'
+    @word, grub = create_synonyms!
   end
 
   let (:verb) { Factory :verb }
@@ -41,19 +28,17 @@ describe '/words/_word.html.haml' do
   let (:verb_frame) { Factory :verb_frame, :number => 1, :frame => 'Something ----s' }
 
   before :each do
-    word.senses << sense
     verb.senses << verb_sense
 
     # associate a verb frame with this sense
     verb_sense.senses_verb_frames << Factory(:senses_verb_frame, :sense => verb_sense, :verb_frame => verb_frame)
 
     verb_sense.save!
-    word.save!
     verb.save!
   end
 
   it 'should have a .tooltip div' do
-    render :partial => 'words/word', :object => word
+    render :partial => 'words/word', :object => @word
     rendered.should have_selector('span.tooltip')
   end
 

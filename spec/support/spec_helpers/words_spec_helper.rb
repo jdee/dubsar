@@ -31,6 +31,13 @@ def create_synonyms!
   food.save!
   grub.save!
 
+  # define 'substance' as a hypernym for food
+  substance = Factory :substance
+  substance_sense = Factory :sense, :word => substance, :synset => Factory(:substance_synset)
+  substance.senses << substance_sense
+  substance.save!
+  Factory :pointer, :sense => food.senses.first, :target => substance_sense, :ptype => 'hypernym'
+
   [ food, grub ]
 end
 
