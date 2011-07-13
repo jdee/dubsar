@@ -34,6 +34,8 @@
       var other_button_id = $('label#'+theme+'-other').removeClass('ui-state-active').attr('for');
       $('input#'+theme+'-radio').attr('checked','checked');
       $('input#'+other_button_id).removeAttr('checked');
+
+      if ($share_dialog.is(":visible")) $share_dialog.load("/share");
     }
 
     function find_starting_pane() {
