@@ -57,9 +57,9 @@ describe WordsController do
       end
     end
 
-    it "redirects on bad request" do
+    it "gives an error when ID not found" do
       get :show, 'id' => 1_000_000
-      response.should be_redirect
+      response.status.should == 404
     end
 
     it "ignores excess white space" do
@@ -81,7 +81,7 @@ describe WordsController do
       response.should be_success
 
       get :search, :term => 'slang', :match => 'foo'
-      response.should be_redirect
+      response.status.should == 404
     end
 
     it "uses a regexp search for letter browsing" do

@@ -27,10 +27,6 @@ class WordsController < ApplicationController
     attr_reader :max_json_limit
   end
 
-  def error
-    redirect_with_error 'bad request'
-  end
-
   def qunit
     render :layout => false
   end
@@ -51,7 +47,7 @@ class WordsController < ApplicationController
     @back = request.env['HTTP_REFERER']
     @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
   rescue
-    redirect_with_error "bad request"
+    error
   end
 
   def m_show
@@ -168,7 +164,7 @@ class WordsController < ApplicationController
     # whitespace
     @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
 
-    redirect_with_error('bad request') and return false if @term.blank?
+    error and return false if @term.blank?
 
     @match = params[:match]
     @title = params[:title]
@@ -183,7 +179,7 @@ class WordsController < ApplicationController
       end
     when 'case', 'exact', 'regexp'
     else
-      redirect_with_error('bad request') and return false
+      error and return false
     end
 
   end

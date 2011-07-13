@@ -41,5 +41,5 @@ Dubsar::Application.routes.draw do
 
   root :to => "words#index"
 
-  match '*junk' => "words#error"
+  match '*junk' => "application#error"
 end

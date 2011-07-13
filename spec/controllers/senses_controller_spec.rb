@@ -31,9 +31,9 @@ describe SensesController do
       assigns(:sense).should_not be_blank
     end
 
-    it "redirects on bad request" do
+    it "gives an error when ID not found" do
       get :show, 'id' => 1_000_000
-      response.should be_redirect
+      response.status.should == 404
     end
 
     it "gets the :m_show view" do

@@ -43,4 +43,8 @@ class ApplicationController < ActionController::Base
   def redirect_target
     params[:back] == 'yes' ? :back : :root
   end
+
+  def error
+    render :file => "#{::Rails.root}/public/404.html", :status => 404
+  end
 end

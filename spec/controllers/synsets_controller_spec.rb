@@ -32,12 +32,9 @@ describe SynsetsController do
       end
     end
 
-    it "redirects on bad request" do
+    it "gives an error when ID not found" do
       get :show, 'id' => 1_000_000
-      response.should be_redirect
-
-      get :m_show, 'id' => 1_000_000
-      response.should be_redirect
+      response.status.should == 404
     end
   end
 end

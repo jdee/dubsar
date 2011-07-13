@@ -21,7 +21,7 @@ class SensesController < ApplicationController
   def show
     @sense = Sense.find params[:id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
   rescue
-    redirect_with_error "bad request"
+    error
   end
 
   def m_show

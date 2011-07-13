@@ -23,6 +23,6 @@ describe 'Dubsar routes' do
   end
 
   it 'routes garbage to #error' do
-    get("/foo").should route_to(:controller => "words", :action => "error", :junk => "foo")
+    get("/foo").should route_to(:controller => "application", :action => "error", :junk => "foo")
   end
 end

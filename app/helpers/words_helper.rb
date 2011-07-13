@@ -16,10 +16,6 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module WordsHelper
-  def page_title
-    "Dubsar - #{search_title}"
-  end
-
   def search_title
     page = ''
     unless @words.blank? or @words.total_pages <= 1
