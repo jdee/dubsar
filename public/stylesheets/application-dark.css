@@ -60,16 +60,15 @@ body.style-dark .pagination * {
   color: #f58400!important;
 }
 
-body.style-dark .view-heading a:visited,
-body.style-dark .view-content a.unstyled {
+body.style-dark .view-heading a.unstyled:link,visited,
+body.style-dark .view-content a.unstyled:link,visited {
   color: white;
 }
 
-body.style-dark .view-heading a:hover,active {
+body.style-dark .view-heading a.unstyled:hover,active {
   color: #0078a3;
 }
 
-body.style-dark .view-content .ui-state-highlight a.unstyled,
 body.style-dark .view-content a.unstyled:hover,active {
   color: #2e7db2;
 }

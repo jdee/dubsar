@@ -18,6 +18,6 @@
   - unless accordion_sense.synonyms.empty?
     = link_to h(accordion_sense.synonyms.map(&:name).join(', ')), accordion_sense.synset, :class => 'search-link'
   %span.tooltip.ui-corner-all
-    = link_to accordion_sense, :class => 'undecorated search-link' do
+    = link_to accordion_sense, :class => 'unstyled search-link' do
       &= accordion_sense.synset.gloss
     = render :partial => 'shared/tooltip', :locals => { :sense => accordion_sense }
