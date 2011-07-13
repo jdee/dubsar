@@ -74,35 +74,6 @@ module WordsHelper
 EOF
   end
 
-  def target_link(target)
-    target_text = case target
-    when Sense
-      target.word.name
-    when Synset
-      target.words.map(&:name).join(', ')
-    end
-
-    link_to target_text, target, :class => 'search-link'
-  end
-
-  def m_target_link(target)
-    target_url = case target
-    when Sense
-      url_for(:controller => :senses, :action => :m_show, :id => target.id, :index => 0)
-    when Synset
-      url_for(:controller => :synsets, :action => :m_show, :id => target.id)
-    end
-
-    target_text = case target
-    when Sense
-      target.word.name
-    when Synset
-      target.words.map(&:name).join(', ')
-    end
-
-    link_to target_text, target_url
-  end
-
   def search_term
     case @match
     when 'regexp'

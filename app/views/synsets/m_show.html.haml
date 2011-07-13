@@ -19,15 +19,23 @@
   %div{'data-role' => 'header'}
     =render :partial => 'shared/mobile_header'
     %br/
+    &= "#{@synset.word_list_and_pos} <#{@synset.lexname}>"
+    %br/
+    &nbsp;
     &= @synset.gloss
   %div{'data-role' => "content"}
-    - @synset.senses.each do |sense|
-      = link_to url_for(:controller => :senses, :action => :m_show, :id => sense.id, :index => 0), 'data-transition' => 'slideup' do
-        &= sense.word.name
-    &nbsp;
-    &= "<#{@synset.lexname}>"
+    - unless @synset.freq_cnt.zero?
+      %h4= "freq. cnt.: #{@synset.freq_cnt.to_s :delimiter => ','}"
+      %hr/
+    %h3 synonyms
+    %br/
+    %ul{'data-role' => "listview"}
+      - @synset.senses.each do |sense|
+        %li
+          = link_to url_for(:controller => :senses, :action => :m_show, :id => sense.id, :index => 0), 'data-transition' => 'slideup' do
+            &= sense.word.name
     - unless @synset.samples.empty?
-      %hr
+      %br/
       %h4 sample sentences
       %ul
         - @synset.samples.each do |sample|

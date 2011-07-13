@@ -28,11 +28,10 @@
     &nbsp;
     &= @sense.synset.gloss
   %div{'data-role' => "content"}
-    %div{'data-inline' => 'true'}
-      = link_to url_for(:controller => :words, :action => :m_show, :id => @sense.word.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-u', 'data-inline' => 'true' do
-        &= "#{@sense.word.name} (#{@sense.word.pos}.)"
-      = link_to url_for(:controller => :synsets, :action => :m_show, :id => @sense.synset.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-u', 'data-inline' => 'true' do
-        &= "#{@sense.synset.gloss}"
+    = link_to url_for(:controller => :words, :action => :m_show, :id => @sense.word.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-u' do
+      &= "Word: #{@sense.word.name} (#{@sense.word.pos}.)"
+    = link_to url_for(:controller => :synsets, :action => :m_show, :id => @sense.synset.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-u' do
+      &= "Synset: #{@sense.synset.gloss}"
     %h3
       &="<#{@sense.synset.lexname}>"
       &nbsp;
@@ -42,11 +41,11 @@
       - if @sense.freq_cnt > 0
         &= "freq. cnt.: #{@sense.freq_cnt.to_s :delimiter => ','}"
     - unless @sense.synset.senses_except(@sense.word).empty?
-      %hr/
-      %h3 synonyms
-      - @sense.synset.senses_except(@sense.word).each do |s|
-        = link_to url_for(:controller => :senses, :action => :m_show, :id => s.id), 'data-transition' => 'slideup' do
-          &= s.word.name
+      %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+        %h3 synonyms
+        - @sense.synset.senses_except(@sense.word).each do |s|
+          = link_to url_for(:controller => :senses, :action => :m_show, :id => s.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-r' do
+            &= s.word.name
     - unless @sense.frames.empty?
       %h3 verb frames
       %ul
@@ -61,15 +60,10 @@
             %li=h sample
     - unless @sense.pointers.blank?
       %h3 pointers
-      %table
-        %tbody
-          - @sense.pointers.group_by(&:ptype).each do |ptype, ptrs|
-            %tr
-              %td.pointer-type{:title => Pointer.help_text(ptype)}
-                %em
-                  &= ptype
-              %td
-                - ptrs.each do |ptr|
-                  = m_target_link ptr.target
+      - @sense.pointers.group_by(&:ptype).each do |ptype, ptrs|
+        %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+          %h3= ptype
+          - ptrs.each do |ptr|
+            = m_target_link ptr.target
   %div.ui-bar{'data-role' => 'footer'}
     = render :partial => 'shared/mobile_footer'
