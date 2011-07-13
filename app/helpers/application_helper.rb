@@ -110,4 +110,10 @@ EOF
 </div>
     HTML
   end
+
+  def dubsar_button
+    <<-HTML
+<a href="#{link_path}" class="unstyled"><h3>or link to &nbsp;<img alt="Dubsar" height="20" width="88" src="#{image_path 'dubsar-link.png'}" style="vertical-align: bottom; border-style: none;" /></h3></a>
+    HTML
+  end
 end
