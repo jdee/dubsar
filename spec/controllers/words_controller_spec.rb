@@ -122,6 +122,12 @@ describe WordsController do
       list.last.count.should == 10
     end
 
+    it 'honors case when specified in the #os route' do
+      get :os, :term => 'Word', :match => 'case'
+      list = JSON.parse response.body
+      list.last.count.should == 0
+    end
+
     after :all do
       Word.delete_all
     end

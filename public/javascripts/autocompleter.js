@@ -50,6 +50,7 @@
     }
 
     function ajax_handler(request,response,offset,limit){
+      request.match = $('input#word-case').val();
       $.ajax({
         type: 'GET',
         url: '/os.json',
