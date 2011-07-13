@@ -358,3 +358,8 @@ img#fairies-image {
 textarea#fairies-snippet {
   font-size: small;
 }
+
+img#dubsar-large {
+  float: left;
+  padding-right: 2em;
+}
