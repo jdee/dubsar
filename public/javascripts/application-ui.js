@@ -107,12 +107,7 @@
     $share_dialog.dialog({
       autoOpen: false,
       open: function() { $(this).load('/share'); },
-      buttons    : {
-        ok: function() {
-          $(this).dialog('close');
-        }
-      },
-      height: 335,
+      height: 300,
       title: 'Share Dubsar'
     });
     $('a#share-link').live('click', function() { $share_dialog.dialog('open'); return false; });
