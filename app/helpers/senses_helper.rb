@@ -37,11 +37,11 @@ module SensesHelper
 
     target_text = case target
     when Sense
-      target.word.name
+      "#{target.word.name} (#{target.word.pos}.)"
     when Synset
-      target.words.map(&:name).join(', ')
+      "#{target.words.map(&:name).join(', ')} (#{Word.pos(target.part_of_speech)}.)"
     end
 
-    link_to target_text, target_url, 'data-role' => 'button', 'data-icon' => 'arrow-r', 'data-transition' => 'slideup'
+    link_to target_text, target_url, 'data-role' => 'button', 'data-icon' => 'arrow-r', 'data-transition' => 'slideup', 'data-iconpos' => 'right'
   end
 end

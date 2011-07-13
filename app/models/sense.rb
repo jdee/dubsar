@@ -19,7 +19,7 @@ class Sense < ActiveRecord::Base
   belongs_to :word
   belongs_to :synset
   has_one :source, :class_name => 'Pointer', :as => :target
-  has_many :pointers
+  has_many :pointers, :order => 'id ASC'
   has_many :targets, :through => :pointers
   has_many :senses_verb_frames
   has_many :verb_frames, :through => :senses_verb_frames,

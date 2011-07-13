@@ -44,7 +44,7 @@
       %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
         %h3 synonyms
         - @sense.synset.senses_except(@sense.word).each do |s|
-          = link_to url_for(:controller => :senses, :action => :m_show, :id => s.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-r' do
+          = link_to url_for(:controller => :senses, :action => :m_show, :id => s.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-r', 'data-iconpos' => 'right' do
             &= s.word.name
     - unless @sense.frames.empty?
       %h3 verb frames

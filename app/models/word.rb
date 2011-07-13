@@ -111,7 +111,7 @@ class Word < ActiveRecord::Base
   has_many :senses, :order => 'freq_cnt DESC, id ASC'
   has_many :synsets, :through => :senses,
     :order => 'senses.freq_cnt DESC, senses.id ASC'
-  has_many :inflections
+  has_many :inflections, :order => 'inflections.name ASC'
 
   validates :name, :presence => true
   validates :freq_cnt, :presence => true

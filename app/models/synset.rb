@@ -17,7 +17,7 @@
 
 # A set of synonymous words.
 class Synset < ActiveRecord::Base
-  has_many :senses
+  has_many :senses, :order => 'freq_cnt DESC, id ASC'
   has_many :words, :through => :senses
 
   has_one :source, :class_name => 'Pointer', :as => :target
