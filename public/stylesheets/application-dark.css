@@ -61,16 +61,15 @@ body.style-dark .pagination * {
 }
 
 body.style-dark .view-heading a:visited,
-body.style-dark .ui-widget-content a.undecorated {
+body.style-dark .view-content a.unstyled {
   color: white;
 }
 
-body.style-dark .view-heading .ui-state-highlight a,
 body.style-dark .view-heading a:hover,active {
   color: #0078a3;
 }
 
-body.style-dark .ui-widget-content .ui-state-highlight a.undecorated,
-body.style-dark .ui-widget-content a.undecorated:hover,active {
+body.style-dark .view-content .ui-state-highlight a.unstyled,
+body.style-dark .view-content a.unstyled:hover,active {
   color: #2e7db2;
 }
