@@ -61,7 +61,7 @@ body.style-dark .pagination * {
 }
 
 body.style-dark .view-heading a.unstyled:link,visited,
-body.style-dark .view-content a.unstyled:link,visited {
+body.style-dark .view-content a.unstyled:visited {
   color: white;
 }
 
