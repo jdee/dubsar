@@ -21,7 +21,6 @@ describe '/senses/m_show.html.haml' do
   before :each do
     @food, grub = create_synonyms!
     assign(:sense, @food.senses.first)
-    assign(:index, 0)
   end
 
   it 'has basic jquery mobile page structure' do

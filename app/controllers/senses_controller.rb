@@ -26,7 +26,6 @@ class SensesController < ApplicationController
 
   def m_show
     @sense = Sense.find params[:id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
-    @index = params[:index]
     render :layout => false
   end
 end

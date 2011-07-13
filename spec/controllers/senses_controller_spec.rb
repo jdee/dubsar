@@ -26,7 +26,7 @@ describe SensesController do
     it "gets the :show view" do
       food, grub = create_synonyms!
       sense = food.senses.first
-      get :show, 'id' => sense.id, 'index' => 0
+      get :show, 'id' => sense.id
       response.should be_success
       assigns(:sense).should_not be_blank
     end
@@ -39,10 +39,9 @@ describe SensesController do
     it "gets the :m_show view" do
       food, grub = create_synonyms!
       sense = food.senses.first
-      get :m_show, 'id' => sense.id, 'index' => 0
+      get :m_show, 'id' => sense.id
       response.should be_success
       assigns(:sense).should_not be_blank
-      assigns(:index).should_not be_blank
     end
   end
 end

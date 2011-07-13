@@ -26,9 +26,9 @@
     definitions (tap for more information)
   %div{'data-role' => 'content'}
     %ol{'data-role' => 'listview'}
-      - @word.senses.each_with_index do |sense, index|
+      - @word.senses.each do |sense|
         %li
-          = link_to h(sense.synset.gloss), url_for(:controller => :senses, :action => :m_show, :id => sense.id, :index => index), 'data-transition' => 'slideup'
-
+          = link_to url_for(:controller => :senses, :action => :m_show, :id => sense.id), 'data-transition' => 'slideup' do
+            &= sense.synset.gloss
   %div.ui-bar{'data-role' => 'footer'}
     = render :partial => 'shared/mobile_footer'

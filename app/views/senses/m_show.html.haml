@@ -26,7 +26,7 @@
         &=" #{word.other_forms}"
     %br/
     &nbsp;
-    &= "#{@index.next}. #{@sense.synset.gloss}"
+    &= @sense.synset.gloss
   %div{'data-role' => "content"}
     %div{'data-inline' => 'true'}
       = link_to url_for(:controller => :words, :action => :m_show, :id => @sense.word.id), 'data-transition' => 'slideup', 'data-role' => 'button', 'data-icon' => 'arrow-u', 'data-inline' => 'true' do
@@ -43,8 +43,9 @@
         &= "freq. cnt.: #{@sense.freq_cnt.to_s :delimiter => ','}"
     - unless @sense.synset.senses_except(@sense.word).empty?
       %hr/
+      %h3 synonyms
       - @sense.synset.senses_except(@sense.word).each do |s|
-        = link_to url_for(:action => :m_show, :id => s.id, :index => 0), 'data-transition' => 'slideup' do
+        = link_to url_for(:controller => :senses, :action => :m_show, :id => s.id), 'data-transition' => 'slideup' do
           &= s.word.name
     - unless @sense.frames.empty?
       %h3 verb frames

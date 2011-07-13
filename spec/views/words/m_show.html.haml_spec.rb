@@ -35,6 +35,6 @@ describe '/words/m_show.html.haml' do
 
   it 'lists all senses' do
     render
-    rendered.should have_selector("a[href='#{url_for(:controller => :senses, :action => :m_show, :id => @word.sense_ids.first, :index => 0)}'][data-transition='slideup']")
+    rendered.should have_selector("a[href='#{url_for :controller => :senses, :action => :m_show, :id => @word.sense_ids.first}'][data-transition='slideup']")
   end
 end
