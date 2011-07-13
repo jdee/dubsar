@@ -20,6 +20,13 @@ class SensesController < ApplicationController
 
   def show
     @sense = Sense.find params[:id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, :pointers ]
+
+    respond_to do |format|
+      format.html
+      format.json do
+        respond_with json_show_response
+      end
+    end
   rescue
     error
   end
@@ -29,5 +36,28 @@ class SensesController < ApplicationController
     render :layout => false
   rescue
     m_error
+  end
+
+  private
+
+  def json_show_response
+    response = [ @sense.id, [ @sense.word.id, @sense.word.name, @sense.word.pos ], [ @sense.synset.id, @sense.synset.gloss ], @sense.synset.lexname, @sense.marker, @sense.freq_cnt ]
+    response << @sense.synonyms.map{|syn|[syn.id,syn.name]}
+    response << @sense.verb_frames.map(&:frame)
+    response << @sense.synset.samples
+    response << pointer_response
+    response
+  end
+
+  def pointer_response
+    @sense.pointers.map do |ptr|
+      response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
+      case ptr.target_type
+      when 'Sense'
+        response << ptr.target.word.name
+      when 'Synset'
+        response << ptr.target.words.map(&:name).sort.join(', ')
+      end
+    end
   end
 end

@@ -39,4 +39,22 @@ describe SynsetsController do
       end
     end
   end
+
+  context "handing JSON requests" do
+    before :each do
+      request.env['HTTP_ACCEPT'] = 'application/json'
+      @food, @grub = create_synonyms!
+    end
+
+    it "returns senses by ID using the :show view" do
+      synset = @food.synsets.first
+      get :show, :id => @food.synsets.first.id
+      response.should be_success
+      # Responds with
+      #   [ id, "pos", "lexname", "gloss", [ "sample sentence 1", "sample sentence 2", ... ],
+      #     [ [ word_id1, "synonym1" ], [ word_id2, "synonym2" ] ] ]
+      JSON.parse(response.body).should ==
+        [ synset.id, 'n', synset.lexname, synset.gloss, synset.samples, synset.words.sort_by(&:name).map{|w|[w.id,w.name]} ]
+    end
+  end
 end

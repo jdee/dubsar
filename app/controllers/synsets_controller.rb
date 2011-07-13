@@ -20,6 +20,12 @@ class SynsetsController < ApplicationController
 
   def show
     @synset = Synset.find params[:id], :include => [ :words, { :senses => [ { :senses_verb_frames => :verb_frame }, :pointers ] } ]
+    respond_to do |format|
+      format.html
+      format.json do
+        respond_with json_show_request
+      end
+    end
   rescue
     error
   end
@@ -28,5 +34,11 @@ class SynsetsController < ApplicationController
     @synset = Synset.find params[:id], :include => [ :words, { :senses => [ { :senses_verb_frames => :verb_frame }, :pointers ] } ]
   rescue
     m_error
+  end
+
+  private
+
+  def json_show_request
+    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.words.sort_by(&:name).map{|w|[w.id,w.name]} ]
   end
 end

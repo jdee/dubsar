@@ -21,12 +21,6 @@ class WordsController < ApplicationController
   before_filter :setup_captions
   before_filter :munge_search_params, :only => [ :search ]
 
-  @max_json_limit = 25
-
-  class << self
-    attr_reader :max_json_limit
-  end
-
   def qunit
     render :layout => false
   end
@@ -46,6 +40,12 @@ class WordsController < ApplicationController
   def show
     @back = request.env['HTTP_REFERER']
     @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
+    respond_to do |format|
+      format.html
+      format.json do
+        respond_with json_show_response
+      end
+    end
   rescue
     error
   end
@@ -109,20 +109,21 @@ class WordsController < ApplicationController
   # Retrieve all words matching the specified +term+ and render as
   # HTML or JSON, one page at a time.
   def search
+    options = params.symbolize_keys
+    @words = Word.search options.merge(:page => params[:page],
+      :order => 'words.name ASC, words.part_of_speech ASC',
+      :include => [
+        :inflections,
+        { :senses => [
+          { :synset => :words },
+          { :senses_verb_frames => :verb_frame },
+          :pointers ]
+        }
+      ]
+    )
+
     respond_to do |format|
       format.html do
-        options = params.symbolize_keys
-        @words = Word.search options.merge(:page => params[:page],
-          :order => 'words.name ASC, words.part_of_speech ASC',
-          :include => [
-            :inflections,
-            { :senses => [
-              { :synset => :words },
-              { :senses_verb_frames => :verb_frame },
-              :pointers ]
-            }
-          ]
-        )
         if @words.count > 0
           render :action => 'search'
         else
@@ -132,7 +133,10 @@ class WordsController < ApplicationController
       end
 
       format.json do
-        # TODO: Implement JSON search for native mobile apps.
+        # Bad requests are kicked back in the munge_search_params
+        # filter. If no search results are found, the result will be an
+        # empty array.
+        respond_with json_search_response
       end
 
     end
@@ -184,5 +188,16 @@ class WordsController < ApplicationController
       error and return false
     end
 
+  end
+
+  def json_search_response
+    [ @term, @words.map { |w| [ w.id, w.name, w.pos ] } ]
+  end
+
+  def json_show_response
+    senses = @word.senses.map do |s|
+      [ s.id, s.synonyms.map{|syn| [ syn.id, syn.name ]}, s.synset.gloss ]
+    end
+    [ @word.id, @word.name, @word.pos, @word.other_forms, senses ]
   end
 end

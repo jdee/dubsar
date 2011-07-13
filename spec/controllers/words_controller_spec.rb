@@ -128,6 +128,33 @@ describe WordsController do
       list.last.count.should == 0
     end
 
+    it 'gets matching words via the :search route' do
+      get :search, :term => 'word%'
+      response.should be_success
+      # returns [ "term", [ id1, "term1", "n" ], [ id2, "term2", "adj" ] ... ] ]
+      list = JSON.parse response.body
+      list.last.count.should == 11
+    end
+
+    it 'returns data for individual words via the :show route' do
+      food, grub = create_synonyms!
+
+      get :show, :id => food.id
+      response.should be_success
+
+      # returns
+      # [ id, "name", "pos", [ "inflection1", "inflection2", ... ],
+      #   [ sense_id1, [ [ word_id1, "synonym1" ], [ word_id2, "synonym2" ], ... ], "gloss1" ],
+      #   [ sense_id2, ... ] ]
+      entry = JSON.parse(response.body)
+      entry.first.should == food.id
+      entry.second.should == food.name
+      entry.third.should == food.pos
+      entry.fourth.should == food.other_forms
+      # only has one sense
+      entry.fifth.should == [ [ food.senses.first.id, [ [ grub.id, grub.name ] ], food.synsets.first.gloss ] ]
+    end
+
     after :all do
       Word.delete_all
     end
