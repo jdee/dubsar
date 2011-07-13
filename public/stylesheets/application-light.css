@@ -58,3 +58,7 @@ body.style-light .view-heading .ui-state-highlight a,
 body.style-light .view-heading a:hover,active {
   color: #1c94c4;
 }
+
+body.style-light .ui-widget-content a.unstyled:link,visited {
+  color: #333;
+}

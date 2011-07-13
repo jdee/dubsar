@@ -29,6 +29,6 @@
     &nbsp;
     = link_to accordion_word, :class => 'search-link' do
       %em
-        &= "full entry for #{accordion_word.name} (#{accordion_word.pos}.)"
+        &= "Word entry for #{accordion_word.name} (#{accordion_word.pos}.)"
   %ol
     = render :partial => 'accordion_sense', :collection => accordion_word.senses

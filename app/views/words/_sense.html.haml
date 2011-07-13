@@ -15,6 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - unless sense.synonyms.empty?
-  %br/
-  %em
-    = link_to h(sense.synonyms.map(&:name).join(', ')), sense.synset, :class => 'search-link'
+  = link_to h(sense.synonyms.map(&:name).join(', ')), sense.synset, :class => 'search-link'
+%span.tooltip.ui-corner-all
+  = link_to h(sense.synset.gloss), sense, :class => 'search-link', :class => 'unstyled'
+  = render :partial => 'shared/tooltip', :locals => { :sense => sense }
