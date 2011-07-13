@@ -22,7 +22,7 @@
       Synset:
       - synset.senses.each do |sense|
         %span.tooltip.ui-corner-all
-          = link_to h(sense.word.name), sense, :class => 'search-link'
+          = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
           = render :partial => 'shared/tooltip', :locals => { :sense => sense }
       &nbsp;
       %em{:title => 'lexical file name, a broad category associated with this word sense'}
