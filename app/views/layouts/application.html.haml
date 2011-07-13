@@ -38,15 +38,21 @@
                   Dubsar Project
             %td.header-link-cell
               .header-link-div.ui-corner-all.ui-state-default
-                %a.line.header-link.search-link{:href => tour_path, :title => 'take a tour'}
+                %a#tour-link.line.header-link.search-link{:href => tour_path, :title => 'take a tour'}
                   %span.ui-icon.ui-icon-flag
                   tour
             %td.header-link-cell
               .header-link-div.ui-corner-all.ui-state-default
-                %a.line.header-link.search-link{:href => mobile_url, :title => 'Dubsar Mobile Edition'}
+                %a#mobile-link.line.header-link.search-link{:href => mobile_url, :title => 'Dubsar Mobile Edition'}
                   %span.ui-icon.ui-icon-signal
                   mobile
+            %td.header-link-cell
+              .header-link-div.ui-corner-all.ui-state-default
+                %a#share-link.line.header-link{:href => '#', :title => 'Tell the people!'}
+                  %span.ui-icon.ui-icon-comment
+                  share
 
+      #share-dialog.template
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
       %hr/

@@ -173,6 +173,31 @@ test('show dialog', function(){
   ok($('.sql-help-dialog').is(':visible'), 'it should be visible');
 });
 
+/******************* share dialog module **********************/
+module('share dialog', {
+  setup: function(){
+    $.mockjax({
+      url: '/share',
+      responseTime: 50,
+      responseText: 'The people have a right to know about Dubsar!'
+    });
+  },
+  teardown: function() {
+    $('div#share-dialog').dialog('close');
+  }
+});
+
+asyncTest('share link shows dialog', 2, function() {
+  var link = $('a#share-link');
+  var dialog = $('div#share-dialog');
+  link.click();
+  setTimeout(function(){
+    ok(dialog.is(':visible'), 'dialog visible');
+    ok(/The people have a right to know about Dubsar!/.test(dialog.text()), 'dialog retrieves AJAX text');
+    start();
+  }, 100);
+});
+
 /******************* teardown (hide it all) *******************/
 module('teardown');
 test('teardown, no test', function(){

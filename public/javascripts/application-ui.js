@@ -24,6 +24,7 @@
     var $hide_help_link_timer=null;
     var $sql_help_link=$('#sql-help-link');
     var $sql_help_dialog;
+    var $share_dialog=$('div#share-dialog');
 
     /* 'light' or 'dark' */
     $.pick_theme = function(theme) {
@@ -101,6 +102,19 @@
     });
     $('#word-lookup-buttonset').buttonset();
 
+    $share_dialog.dialog({
+      autoOpen: false,
+      open: function() { $(this).load('/share'); },
+      buttons    : {
+        ok: function() {
+          $(this).dialog('close');
+        }
+      },
+      height: 250,
+      title: 'Share Dubsar'
+    });
+    $('a#share-link').live('click', function() { $share_dialog.dialog('open'); return false; });
+
     $sql_help_dialog = $('<div>The Structured Query Language used by Dubsar&apos;s PostgreSQL database accepts the following wildcards in searches:<ul><li>% matches anything, including nothing at all</li><li>_ matches any single character</li></ul>For example:<ul><li>%count% matches all words containing <em>count</em></li><li>c_t matches <em>cat, cot</em> and <em>cut</em></li></ul></div>').dialog({
       autoOpen   : false        ,
       dialogClass: 'sql-help-dialog',
@@ -175,7 +189,7 @@
     $('.header-link-div').hover(function(){
       $(this).addClass('ui-state-hover');
     }, function(){
-      $(this).removeClass('ui-state-hover');
+      $(this).removeClass('ui-state-hover ui-state-active');
     }).click(function(){
       $(this).addClass('ui-state-active');
     });

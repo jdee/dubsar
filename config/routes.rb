@@ -34,6 +34,7 @@ Dubsar::Application.routes.draw do
   match '/m_synsets/:id'     => 'synsets#m_show'
   match '/link'              => 'words#link'
   match '/qunit'             => 'words#qunit'
+  match '/share'             => 'application#share'
   match '/tour'              => 'words#tour'
 
   match '/(.:format)' => 'words#search'

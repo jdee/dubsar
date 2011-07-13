@@ -43,7 +43,7 @@ test('search-link generates working message', function(){
   ok(/working/.test(text), 'look for working message');
 });
 
-asyncTest('.header-link-div responds to hover', 1, function(){
+asyncTest('.header-link-div responds to hover', 2, function(){
   $('.header-link-div').live('hover', function(){
     ok($(this).hasClass('ui-state-hover'), 'div has ui-state-hover class');
   });

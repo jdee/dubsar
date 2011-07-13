@@ -88,4 +88,26 @@ EOF
       '#f58400'
     end
   end
+
+  def facebook_button
+    <<-HTML
+<iframe src="http://www.facebook.com/plugins/like.php?app_id=222997521073042&amp;href=http%3A%2F%2Fdubsar-dictionary.com&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+    HTML
+  end
+
+  def google_button
+    <<-HTML
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<g:plusone size="medium" href="http://dubsar-dictionary.com"></g:plusone>
+    HTML
+  end
+
+  def twitter_button
+    <<-HTML
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+<div>
+  <a href="http://twitter.com/share?url=http%3A%2F%2Fdubsar-dictionary.com&text=Dubsar%20Dictionary%20Project" class="twitter-share-button">Tweet</a>
+</div>
+    HTML
+  end
 end

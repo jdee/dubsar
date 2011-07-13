@@ -223,3 +223,7 @@
 	top: -10000px;
 	left: -10000px;
 }
+
+.template {
+  display: none;
+}
