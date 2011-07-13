@@ -50,6 +50,11 @@ body.style-light *.ui-state-active > span.ui-button-text {
   color: #eb8f00;
 }
 
+body.style-light a.undecorated {
+  color: inherit;
+}
+
+body.style-light a.undecorated:link,visited,hover,active,
 body.style-light .view-heading a:hover,active {
   color: #1c94c4;
 }
