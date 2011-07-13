@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Fri, 08 Jul 2011 20:00:00 GMT</lastBuildDate>
-    <pubDate>Fri, 08 Jul 2011 20:00:00 GMT</pubDate>
+    <lastBuildDate>Wed, 13 Jul 2011 23:45:00 GMT</lastBuildDate>
+    <pubDate>Wed, 13 Jul 2011 23:45:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Recent changes to Dubsar</title>
+      <description>The main Dubsar site has much-improved navigation among words, synsets and senses, including individual views of each of those things (as opposed to simply displaying search results). The search field has undergone some improvements. Some of the mobile views have been spruced up. Dubsar now offers a rudimentary JSON web service, in preparation for iPhone and Android apps. And Dubsar now includes a custom share dialog. Click on the &quot;share&quot; link at the top of the page to display a dialog with a number of sharing options. Through an AJAX implementation, Dubsar does not include any markup or content from sites like Facebook, Google and Twitter until the share link is clicked. This speeds page loads and avoids sending browsing history to Facebook or Google except when you're ready to share. Tell the world!</description>
+      <link>http://m.dubsar-dictionary.com</link>
+      <guid isPermaLink="false">21</guid>
+      <pubDate>Wed, 13 Jul 2011 23:45:00 GMT</pubDate>
+    </item>
     <item>
       <title>New Dubsar Mobile Address</title>
       <description>Dubsar Mobile now has its own domain and is deployed at http://m.dubsar-dictionary.com/m. The old address still forwards.</description>
