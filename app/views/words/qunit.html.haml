@@ -21,7 +21,7 @@
     =favicon_link_tag
     =auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
     %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
-    !=thumbnail_link_tags
+    != thumbnail_link_tags
     !=stylesheet_link_merged :qunit
     =csrf_meta_tag
     %meta{:name => 'Description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}

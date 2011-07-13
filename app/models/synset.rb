@@ -55,6 +55,16 @@ class Synset < ActiveRecord::Base
   end
 
   def page_title
+    "Dubsar - #{word_list_and_pos}"
+  end
+
+  def meta_description
+    "Dubsar Dictionary Project Synset entry for #{word_list_and_pos}: #{gloss}"
+  end
+
+  private
+
+  def word_list_and_pos
     "#{words.map(&:name).join(", ")} (#{Word.pos(part_of_speech)}.)"
   end
 end

@@ -18,4 +18,10 @@
 - content_for :title do
   &= @sense.page_title
 
+- content_for :description do
+  %meta{:name => 'Description', :content => @sense.meta_description}
+  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, English'}
+  - canonical_link_tag @sense
+  = thumbnail_link_tags
+
 = render @sense

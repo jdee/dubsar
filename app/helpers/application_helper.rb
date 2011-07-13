@@ -16,8 +16,22 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module ApplicationHelper
+  def canonical_link_tag(object=nil)
+    url = "http://dubsar-dictionary.com"
+    if object
+      url += url_for object
+    else
+      url += url_for :action => :search, :term => @term
+      url += "&match=#{@match}" unless @match.blank?
+      url += "&title=#{URI.encode @title}" unless @title.blank?
+      url += "&page=#{params[:page]}" unless params[:page].blank? or params[:page].to_i == 1
+    end
+
+    haml_tag :link, :rel => 'canonical', :href => url
+  end
+
   def thumbnail_link_tag(src, type="image/png")
-    "<link rel=\"thumbnail\" href=\"#{image_path src}\" type=\"#{type}\"/>"
+    "<link rel=\"thumbnail\" type=\"#{type}\" href=\"#{image_path src}\" />"
   end
 
   def thumbnail_link_tags

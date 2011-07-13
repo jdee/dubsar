@@ -45,4 +45,8 @@ class Sense < ActiveRecord::Base
   def page_title
     "Dubsar - #{word.name} (#{word.pos}.)"
   end
+
+  def meta_description
+    "Dubsar Dictionary Project Sense entry for #{word.name} (#{word.pos}.): #{synset.gloss}"
+  end
 end

@@ -146,6 +146,10 @@ class Word < ActiveRecord::Base
     "Dubsar - #{name} (#{pos}.)"
   end
 
+  def meta_description
+    "Dubsar Dictionary Project Word entry for #{name} (#{pos}.): #{other_forms}"
+  end
+
   # Abbreviation for the full part_of_speech
   def pos
     sym = self.class.pos(part_of_speech)
