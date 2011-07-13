@@ -106,7 +106,7 @@ EOF
     <<-HTML
 <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 <div>
-  <a href="http://twitter.com/share?url=http%3A%2F%2Fdubsar-dictionary.com&text=Dubsar%20Dictionary%20Project" class="twitter-share-button">Tweet</a>
+  <a href="http://twitter.com/share?url=http%3A%2F%2Fdubsar-dictionary.com&text=Dubsar%20Dictionary%20Project%20#dubsar" class="twitter-share-button">Tweet</a>
 </div>
     HTML
   end
