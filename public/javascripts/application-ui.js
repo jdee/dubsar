@@ -110,7 +110,7 @@
           $(this).dialog('close');
         }
       },
-      height: 250,
+      height: 260,
       title: 'Share Dubsar'
     });
     $('a#share-link').live('click', function() { $share_dialog.dialog('open'); return false; });
