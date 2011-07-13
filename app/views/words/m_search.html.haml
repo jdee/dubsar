@@ -24,7 +24,7 @@
   %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'shared/mobile_header'
   %div{'data-role' => 'content'}
-    = render :partial => 'mobile_form'
+    = render :partial => 'shared/mobile_form'
     %br/
     - if not @words.blank?
       %h4=h "search results for \"#{@term}\" (tap to view)"

@@ -48,6 +48,10 @@ class ApplicationController < ActionController::Base
     render :file => "#{::Rails.root}/public/404.html", :status => 404
   end
 
+  def m_error
+    render :file => "#{::Rails.root}/public/m_404.html", :layout => 'mobile', :status => 404
+  end
+
   def share
     render :layout => false
   end

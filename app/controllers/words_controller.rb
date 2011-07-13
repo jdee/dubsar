@@ -54,6 +54,8 @@ class WordsController < ApplicationController
     @back = request.env['HTTP_REFERER']
     @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
     render :layout => false
+  rescue
+    m_error
   end
 
   def m_search

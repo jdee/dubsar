@@ -17,9 +17,9 @@
 
 require 'spec_helper'
 
-describe '/words/_mobile_form.html.haml' do
+describe '/shared/_mobile_form.html.haml' do
   it 'has a form' do
-    render :partial => 'words/mobile_form'
+    render :partial => 'shared/mobile_form'
     rendered.should have_selector(:form) do |form|
       form.should have_selector(:input, :type => 'text', :name => 'term', :id => 'word-input')
       form.should have_selector(:button, :id => 'word-submit')
@@ -28,13 +28,13 @@ describe '/words/_mobile_form.html.haml' do
 
   it 'is prepopulated with the search term' do
     assign(:term, 'halo')
-    render :partial => 'words/mobile_form'
+    render :partial => 'shared/mobile_form'
     rendered.should have_selector('input#word-input[value="halo"]')
   end
 
   it 'uses a placeholder tag' do
     assign(:term, 'halo')
-    render :partial => 'words/mobile_form'
+    render :partial => 'shared/mobile_form'
     rendered.should have_selector('input#word-input[placeholder]')
   end
 end

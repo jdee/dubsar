@@ -26,5 +26,7 @@ class SynsetsController < ApplicationController
 
   def m_show
     @synset = Synset.find params[:id], :include => [ :words, { :senses => [ { :senses_verb_frames => :verb_frame }, :pointers ] } ]
+  rescue
+    m_error
   end
 end

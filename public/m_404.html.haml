@@ -34,7 +34,8 @@
   %div{'data-role' => 'header', 'data-position' => 'inline'}
     = render :partial => 'shared/mobile_header'
   %div{'data-role' => 'content'}
-    = render :partial => 'mobile_text'
+    %h2 404 - Not Found
+    The page you requested was not found on the Dubsar server.
     = render :partial => 'shared/mobile_form', :locals => { :term => @term }
   %div.ui-bar{'data-role' => 'footer'}
     = render :partial => 'shared/mobile_footer'

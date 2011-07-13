@@ -58,8 +58,10 @@ describe WordsController do
     end
 
     it "gives an error when ID not found" do
-      get :show, 'id' => 1_000_000
-      response.status.should == 404
+      %w{show m_show}.each do |route|
+        get route, 'id' => 1_000_000
+        response.status.should == 404
+      end
     end
 
     it "ignores excess white space" do
