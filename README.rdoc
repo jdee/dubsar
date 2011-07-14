@@ -20,6 +20,7 @@ On the Dubsar site:
 -- {FAQ}[http://dubsar-dictionary.com/faq]
 -- {QUnit test suite}[http://dubsar-dictionary.com/qunit]
 -- {Tour}[http://dubsar-dictionary.com/tour]
+-- {RSS News Feed}[http://dubsar-dictionary.com/rss_news.xml]
 
 Also see:
 
