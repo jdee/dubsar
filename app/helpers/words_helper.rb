@@ -21,7 +21,7 @@ module WordsHelper
     unless @words.blank? or @words.total_pages <= 1
       page = " (p. #{params[:page] || 1})"
     end
-    "#{@title || @term}#{page}"
+    "Dubsar - #{@title || @term}#{page}"
   end
 
   def frame_spanner(frame)
