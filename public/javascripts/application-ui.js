@@ -170,11 +170,11 @@
       var id  = $(this).attr('id');
       var url = $(this).attr('href');
       var title = $('h3', this).text() || '';
-      $('<div id="'+id+'-dialog"><img src="'+url+'" height="450" width="846"/></div>').dialog({
+      $('<div id="'+id+'-dialog"><img src="'+url+'" height="600" width="940"/></div>').dialog({
         autoOpen   : false        ,
         dialogClass: 'tour-dialog',
-        height     : 500,
-        width      : 878,
+        height     : 650,
+        width      : 970,
         title      : title
       });
       $(this).click(function(){
