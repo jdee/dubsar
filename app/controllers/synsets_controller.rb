@@ -39,6 +39,6 @@ class SynsetsController < ApplicationController
   private
 
   def json_show_request
-    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.words.sort_by(&:name).map{|w|[w.id,w.name]} ]
+    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.words.all(:order => 'name').map{|w|[w.id,w.name]} ]
   end
 end

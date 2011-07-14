@@ -63,6 +63,6 @@ class Synset < ActiveRecord::Base
   end
 
   def word_list_and_pos
-    "#{words.map(&:name).join(", ")} (#{Word.pos(part_of_speech)}.)"
+    "#{words.all(:order => 'name').map(&:name).join(", ")} (#{Word.pos(part_of_speech)}.)"
   end
 end

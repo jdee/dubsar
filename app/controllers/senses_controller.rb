@@ -56,7 +56,7 @@ class SensesController < ApplicationController
       when 'Sense'
         response << ptr.target.word.name
       when 'Synset'
-        response << ptr.target.words.map(&:name).sort.join(', ')
+        response << ptr.target.words.all(:order => 'name').map(&:name).join(', ')
       end
     end
   end
