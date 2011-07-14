@@ -39,7 +39,9 @@ module ApplicationHelper
     thumbnail_link_tag('autocomplete-thumbnail.png') + "\n" +
     thumbnail_link_tag('browse-thumbnail.png') + "\n" +
     thumbnail_link_tag('tooltip-thumbnail.png') + "\n" +
-    thumbnail_link_tag('view-thumbnail.png')
+    thumbnail_link_tag('view-thumbnail.png') + "\n" +
+    thumbnail_link_tag('sense-thumbnail.png') + "\n" +
+    thumbnail_link_tag('synset-thumbnail.png')
   end
 
   def tour_link_tag(name, description)
