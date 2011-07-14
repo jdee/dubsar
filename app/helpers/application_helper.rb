@@ -36,19 +36,19 @@ module ApplicationHelper
 
   def thumbnail_link_tags
     thumbnail_link_tag('dubsar.png') + "\n" +
-    thumbnail_link_tag('autocomplete-thumbnail.png') + "\n" +
-    thumbnail_link_tag('browse-thumbnail.png') + "\n" +
-    thumbnail_link_tag('tooltip-thumbnail.png') + "\n" +
-    thumbnail_link_tag('view-thumbnail.png') + "\n" +
-    thumbnail_link_tag('sense-thumbnail.png') + "\n" +
-    thumbnail_link_tag('synset-thumbnail.png')
+    thumbnail_link_tag('autocomplete.png') + "\n" +
+    thumbnail_link_tag('browse.png') + "\n" +
+    thumbnail_link_tag('tooltip.png') + "\n" +
+    thumbnail_link_tag('view.png') + "\n" +
+    thumbnail_link_tag('sense.png') + "\n" +
+    thumbnail_link_tag('synset.png')
   end
 
   def tour_link_tag(name, description)
     tag = <<TAG
 <a href="#{image_path(name+'.png')}" title='#{name}' id='tour-#{name}'>
   <h3>#{CGI.escapeHTML description}</h3>
-  #{image_tag(name+'-thumbnail.png', :alt => name, :width => '157', :height => '100')}
+  #{image_tag(name+'.png', :alt => name, :width => '157', :height => '100')}
 </a>
 TAG
   end

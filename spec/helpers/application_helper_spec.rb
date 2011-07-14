@@ -26,8 +26,8 @@ describe ApplicationHelper do
 
   describe '#thumbnail_link_tags' do
     let(:tags) { helper.thumbnail_link_tags }
-    it 'includes five thumbnails' do
-      %w{dubsar autocomplete-thumbnail browse-thumbnail tooltip-thumbnail view-thumbnail}.each do |src|
+    it 'includes seven thumbnails' do
+      %w{dubsar autocomplete browse sense synset tooltip view}.each do |src|
         tags.should match /#{src}/
       end
     end
