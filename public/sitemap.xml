@@ -32,6 +32,90 @@
     <lastmod>2011-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/autocomplete.png
+      </image:loc>
+      <image:title>
+        Dubsar Autocompleter
+      </image:title>
+      <image:caption>
+        Get live suggestions from the Dubsar autocompleter.
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/browse.png
+      </image:loc>
+      <image:title>
+        Browse Dubsar
+      </image:title>
+      <image:caption>
+        Browse the dictionary by letter.
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/sense.png
+      </image:loc>
+      <image:title>
+        Dubsar Sense View
+      </image:title>
+      <image:caption>
+        See detailed information on individual word senses.
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/synset.png
+      </image:loc>
+      <image:title>
+        Dubsar Synset View
+      </image:title>
+      <image:caption>
+        See detailed information on individual synsets.
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/tooltip.png
+      </image:loc>
+      <image:title>
+        Dubsar Tooltip
+      </image:title>
+      <image:caption>
+        See detailed information in a custom tooltip.
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/view.png
+      </image:loc>
+      <image:title>
+        Dubsar Search Results
+      </image:title>
+      <image:caption>
+        View Dubsar search results.
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
   </url>
   <url>
     <loc>http://dubsar-dictionary.com/faq</loc>
@@ -44,6 +128,20 @@
     <lastmod>2011-07-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/dubsar-link.png
+      </image:loc>
+      <image:title>
+        Dubsar
+      </image:title>
+      <image:caption>
+        Dubsar Dictionary Project
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
   </url>
   <url>
     <loc>http://dubsar-dictionary.com/license</loc>
