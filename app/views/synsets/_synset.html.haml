@@ -20,7 +20,7 @@
     %span.ui-icon.ui-icon-document
     %span
       Synset:
-      - synset.senses.each do |sense|
+      - synset.senses.sort_by{|s|s.word.name}.each do |sense|
         %span.tooltip.ui-corner-all
           = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
           = render :partial => 'shared/tooltip', :locals => { :sense => sense }
