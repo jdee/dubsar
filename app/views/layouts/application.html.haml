@@ -51,6 +51,11 @@
                 %a#share-link.line.header-link{:href => '#', :title => 'Tell the people!'}
                   %span.ui-icon.ui-icon-comment
                   share
+            %td.header-link-cell
+              .header-link-div.ui-corner-all.ui-state-default
+                %a#rss-link.line.header-link.search-link{:href => '/rss_news.xml', :title => 'RSS News Feed'}
+                  %span.ui-icon.ui-icon-signal-diag
+                  rss
 
       #share-dialog.template
       =render :partial => 'shared/theme_picker'
