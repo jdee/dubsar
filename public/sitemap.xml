@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>http://dubsar-dictionary.com</loc>
     <lastmod>2011-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>
+        http://s.dubsar-dictionary.com/dubsar.png
+      </image:loc>
+      <image:title>
+        Dubsar
+      </image:title>
+      <image:caption>
+        Dubsar Dictionary Project
+      </image:caption>
+      <image:license>
+        http://dubsar-dictionary.com/license
+      </image:license>
+    </image:image>
   </url>
   <url>
     <loc>http://dubsar-dictionary.com/about</loc>
