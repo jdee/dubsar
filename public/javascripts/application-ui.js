@@ -197,6 +197,9 @@
 
     $('div#sense-tabs').tabs({
       cache: true,
+      select: function(){
+        kill_tooltip();
+      },
       spinner: '[...]'
     });
 
