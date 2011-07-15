@@ -202,4 +202,5 @@ asyncTest('share link shows dialog', 2, function() {
 module('teardown');
 test('teardown, no test', function(){
   $('#header').add('#main').add('#error').add('#footer').hide();
+  $('.header-link-div').removeClass('ui-state-active ui-state-hover').addClass('ui-state-default');
 });
