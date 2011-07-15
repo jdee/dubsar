@@ -60,6 +60,7 @@ body.style-light .view-heading a:hover,active {
 }
 
 /* .view-content divs are also .ui-widget-content */
-body.style-light .ui-widget-content a.unstyled:link,visited {
+body.style-light .view-content a.unstyled:link,visited,
+body.style-light .ui-accordion-content a.unstyled:link,visited {
   color: #333;
 }

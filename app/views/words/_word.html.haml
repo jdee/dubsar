@@ -18,7 +18,7 @@
   .line.ui-state-active.ui-corner-top.view-heading
     %span.ui-icon.ui-icon-document
     %span
-      = link_to_unless_current 'Word', word
+      = link_to_unless_current 'Word:', word
       &= word.name
       %em= "(#{word.pos}.)"
       - unless word.freq_cnt.zero?
