@@ -18,10 +18,9 @@
   .line.ui-state-active.ui-corner-top.view-heading
     %span.ui-icon.ui-icon-document
     %span
-      Word:
+      = link_to_unless_current 'Word', word
       &= word.name
-      %em
-        &= "(#{word.pos}.)"
+      %em= "(#{word.pos}.)"
       - unless word.freq_cnt.zero?
         &nbsp;
         = "freq. cnt.: #{word.freq_cnt.to_s :delimiter => ','}"
