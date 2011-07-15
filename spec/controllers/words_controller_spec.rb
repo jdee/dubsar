@@ -73,6 +73,11 @@ describe WordsController do
       end
     end
 
+    it "gives an error when the tab is not found" do
+      get :tab, :word_id => 1_000_000, :sense_id => 1
+      response.status.should == 404
+    end
+
     it "ignores excess white space" do
       get :search, 'term' => '  World   War         2  '
 

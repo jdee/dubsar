@@ -47,6 +47,11 @@ describe SynsetsController do
         response.status.should == 404
       end
     end
+
+    it "gives an error when the tab is not found" do
+      get :tab, :synset_id => 1_000_000, :sense_id => 1
+      response.status.should == 404
+    end
   end
 
   context "handing JSON requests" do
