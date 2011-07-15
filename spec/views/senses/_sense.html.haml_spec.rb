@@ -17,14 +17,13 @@
 
 require 'spec_helper'
 
-describe '/senses/show.html.haml' do
+describe '/senses/_sense.html.haml' do
   before :each do
     @good, @bad = create_antonyms!
   end
 
   it 'lists pointers' do
-    assign(:sense, @good.senses.first)
-    render
+    render @good.senses.first
     rendered.should contain('antonym')
     rendered.should contain(@bad.name)
   end

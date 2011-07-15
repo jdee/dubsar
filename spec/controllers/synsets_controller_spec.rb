@@ -32,6 +32,15 @@ describe SynsetsController do
       end
     end
 
+    it "gets the :tab view" do
+      food, grub = create_synonyms!
+      sense = food.senses.first
+      synset = sense.synset
+      get :tab, 'synset_id' => synset.id, 'sense_id' => sense.id
+      response.should be_success
+      assigns(:synset).should_not be_blank
+    end
+
     it "gives an error when ID not found" do
       %w{show m_show}.each do |route|
         get route, 'id' => 1_000_000

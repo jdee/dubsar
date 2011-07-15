@@ -25,6 +25,10 @@
     var $sql_help_link=$('#sql-help-link');
     var $sql_help_dialog;
     var $share_dialog=$('div#share-dialog');
+    var $tt = null;
+    var $tt_timer = null;
+    var $tt_fixed = false;
+    var $tt_gloss = null;
 
     /* 'light' or 'dark' */
     $.pick_theme = function(theme) {
@@ -191,11 +195,12 @@
       $(this).addClass('ui-state-active');
     });
 
+    $('div#sense-tabs').tabs({
+      cache: true,
+      spinner: '[...]'
+    });
+
     /* based on a recipe from the O'Reilly jQuery Cookbook */
-    var $tt = null;
-    var $tt_timer = null;
-    var $tt_fixed = false;
-    var $tt_gloss = null;
     function kill_tooltip(){
       if ($tt) {
         $tt.hide();
@@ -210,63 +215,61 @@
       }
     }
 
-    if ($('span.tooltip').length) {
-      $('body').append('<div id="tooltip" class="ui-widget-content ui-corner-all"></div>');
-      $tt = $('#tooltip');
+    $('body').append('<div id="tooltip" class="ui-widget-content ui-corner-all"></div>');
+    $tt = $('#tooltip');
 
-      $('span.tooltip').live('mouseenter', function(){
-        if ($tt.hasClass('ui-draggable-dragging')) return;
+    $('span.tooltip').live('mouseenter', function(){
+      if ($tt.hasClass('ui-draggable-dragging')) return;
 
-        kill_tooltip();
-        $tt.html('');
-        $tt.html($('div.template', this).html());
-        $('a.close-icon-span', $tt).css({opacity:0});
-        $tt.show();
-        /* 1 pixel border on each side */
-        $('> *', $tt).width($tt.width()-2);
-        $tt_gloss = $(this).addClass('ui-state-highlight').css({'border-style':'none'});
-      }).live('mouseleave', function(){
-        if (!$tt_fixed && !$tt.hasClass('ui-draggable-dragging')) kill_tooltip();
-      }).live('mousemove', function(ev){
-        if (!$tt_fixed) {
-          var $ev_x = ev.pageX;
-          var $ev_y = ev.pageY;
-          var $tt_x = $tt.outerWidth();
-          var $tt_y = $tt.outerHeight();
-          var $bd_x = $(window).width();
-          var $bd_y = $(window).height();
-          $tt.css({
-            'top': $ev_y + $tt_y + 15 > $bd_y ? $ev_y - $tt_y < 10 ? 5 : $ev_y - $tt_y - 5 : $ev_y + 10,
-            'left': $ev_x + $tt_x + 15 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 10
-          });
-        }
-
-        if ($tt_timer) {
-          clearTimeout($tt_timer);
-        }
-        $tt_timer = setTimeout(fix_tooltip, 300);
-      });
-
-      function fix_tooltip() {
-        $tt_fixed = true;
-        $tt_timer = null;
-        $('.close-icon-span', $tt).click(function(){
-          kill_tooltip();
-          return false;
-        }).hover(function(){
-          $(this).addClass('ui-state-hover').removeClass('ui-state-default');
-        }, function(){
-          $(this).removeClass('ui-state-hover').addClass('ui-state-default');
-        }).fadeTo('fast', 1.0);
-        $tt.draggable({
-          containment: 'window',
-          cursor: 'move',
-          handle: '.ui-widget-header',
-          scroll: false
+      kill_tooltip();
+      $tt.html('');
+      $tt.html($('div.template', this).html());
+      $('a.close-icon-span', $tt).css({opacity:0});
+      $tt.show();
+      /* 1 pixel border on each side */
+      $('> *', $tt).width($tt.width()-2);
+      $tt_gloss = $(this).addClass('ui-state-highlight').css({'border-style':'none'});
+    }).live('mouseleave', function(){
+      if (!$tt_fixed && !$tt.hasClass('ui-draggable-dragging')) kill_tooltip();
+    }).live('mousemove', function(ev){
+      if (!$tt_fixed) {
+        var $ev_x = ev.pageX;
+        var $ev_y = ev.pageY;
+        var $tt_x = $tt.outerWidth();
+        var $tt_y = $tt.outerHeight();
+        var $bd_x = $(window).width();
+        var $bd_y = $(window).height();
+        $tt.css({
+          'top': $ev_y + $tt_y + 15 > $bd_y ? $ev_y - $tt_y < 10 ? 5 : $ev_y - $tt_y - 5 : $ev_y + 10,
+          'left': $ev_x + $tt_x + 15 > $bd_x ? $ev_x - $tt_x - 5 : $ev_x + 10
         });
       }
 
-      kill_tooltip();
+      if ($tt_timer) {
+        clearTimeout($tt_timer);
+      }
+      $tt_timer = setTimeout(fix_tooltip, 300);
+    });
+
+    function fix_tooltip() {
+      $tt_fixed = true;
+      $tt_timer = null;
+      $('.close-icon-span', $tt).click(function(){
+        kill_tooltip();
+        return false;
+      }).hover(function(){
+        $(this).addClass('ui-state-hover').removeClass('ui-state-default');
+      }, function(){
+        $(this).removeClass('ui-state-hover').addClass('ui-state-default');
+      }).fadeTo('fast', 1.0);
+      $tt.draggable({
+        containment: 'window',
+        cursor: 'move',
+        handle: '.ui-widget-header',
+        scroll: false
+      });
     }
+
+    kill_tooltip();
   });
 })(jQuery);

@@ -23,10 +23,20 @@ describe SensesController do
       request.env['HTTP_REFERER'] = '/'
     end
 
-    it "gets the :show view" do
+    it "gets the :show and :m_show views" do
       food, grub = create_synonyms!
       sense = food.senses.first
-      get :show, 'id' => sense.id
+      %w{show m_show}.each do |route|
+        get :show, 'id' => sense.id
+        response.should be_success
+        assigns(:sense).should_not be_blank
+      end
+    end
+
+    it "gets the :tab view" do
+      food, grub = create_synonyms!
+      sense = food.senses.first
+      get :tab, 'sense_id' => sense.id
       response.should be_success
       assigns(:sense).should_not be_blank
     end
@@ -36,14 +46,6 @@ describe SensesController do
         get route, 'id' => 1_000_000
         response.status.should == 404
       end
-    end
-
-    it "gets the :m_show view" do
-      food, grub = create_synonyms!
-      sense = food.senses.first
-      get :m_show, 'id' => sense.id
-      response.should be_success
-      assigns(:sense).should_not be_blank
     end
   end
 

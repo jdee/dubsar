@@ -24,4 +24,14 @@
   - canonical_link_tag @sense
   != thumbnail_link_tags
 
-= render @sense
+#sense-tabs
+  %ul
+    %li#sense-tab
+      = link_to sense_tab_path(@sense) do
+        %span Sense
+    %li#synset-tab
+      = link_to "#{synset_tab_path(@sense.synset)}?sense_id=#{@sense.id}" do
+        %span Synset
+    %li#word-tab
+      = link_to "#{word_tab_path(@sense.word)}?sense_id=#{@sense.id}" do
+        %span Word

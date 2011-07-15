@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :get_theme_cookie
+  before_filter :set_back
 
   # Retrieve the user's <tt>dubsar_theme</tt> cookie before rendering
   # any view.
@@ -54,5 +55,10 @@ class ApplicationController < ActionController::Base
 
   def share
     render :layout => false
+  end
+
+  def set_back
+    @back = request.env['HTTP_REFERER']
+    true
   end
 end

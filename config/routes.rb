@@ -18,9 +18,15 @@
 Dubsar::Application.routes.draw do
   resources :fairies, :only => [ :index, :create ]
 
-  resources :words  , :only => :show
-  resources :senses , :only => :show
-  resources :synsets, :only => :show
+  resources :words  , :only => :show do
+    match '/tab' => 'words#tab'
+  end
+  resources :senses , :only => :show do
+    match '/tab' => 'senses#tab'
+  end
+  resources :synsets, :only => :show do
+    match '/tab' => 'synsets#tab'
+  end
 
   match '/about'             => 'words#about'
   match '/faq'               => 'words#faq'

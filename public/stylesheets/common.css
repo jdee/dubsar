@@ -358,3 +358,7 @@ img#dubsar-large {
   float: left;
   padding-right: 2em;
 }
+
+ul.ui-tabs-nav > li {
+  width: 10ex;
+}

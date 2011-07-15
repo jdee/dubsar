@@ -17,5 +17,8 @@
 - unless sense.synonyms.empty?
   = link_to h(sense.synonyms.map(&:name).join(', ')), sense.synset, :class => 'search-link'
 %span.tooltip.ui-corner-all
-  = link_to h(sense.synset.gloss), sense, :class => 'search-link', :class => 'unstyled'
+  - if @sense == sense
+    &= sense.synset.gloss
+  - else
+    = link_to h(sense.synset.gloss), sense, :class => 'search-link', :class => 'unstyled'
   = render :partial => 'shared/tooltip', :locals => { :sense => sense }

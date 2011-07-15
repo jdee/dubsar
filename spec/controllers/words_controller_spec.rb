@@ -57,6 +57,15 @@ describe WordsController do
       end
     end
 
+    it "gets the :tab view" do
+      word, other = create_synonyms!
+      word.senses.should_not be_empty
+      get :tab, 'word_id' => word.id, 'sense_id' => word.senses.first.id
+      response.should be_success
+      assigns(:word).should_not be_blank
+      assigns(:back).should == '/'
+    end
+
     it "gives an error when ID not found" do
       %w{show m_show}.each do |route|
         get route, 'id' => 1_000_000

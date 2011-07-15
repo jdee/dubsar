@@ -18,6 +18,18 @@
 class SynsetsController < ApplicationController
   respond_to :html, :json
 
+  def tab
+    @synset = Synset.find params[:synset_id], :include => [ :words, { :senses => [ { :senses_verb_frames => :verb_frame }, :pointers ] } ]
+    @sense = Sense.find params[:sense_id]
+    respond_to do |format|
+      format.html do
+        render @synset
+      end
+    end
+  rescue
+    error
+  end
+
   def show
     @synset = Synset.find params[:id], :include => [ :words, { :senses => [ { :senses_verb_frames => :verb_frame }, :pointers ] } ]
     respond_to do |format|

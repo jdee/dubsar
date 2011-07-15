@@ -82,7 +82,7 @@ body.style-light .ui-state-error, body.style-light .ui-widget-content .ui-state-
 body.style-light .ui-state-error a, body.style-light .ui-widget-content .ui-state-error a, body.style-light .ui-widget-header .ui-state-error a { color: #ffffff; }
 body.style-light .ui-state-error-text, body.style-light .ui-widget-content .ui-state-error-text, body.style-light .ui-widget-header .ui-state-error-text { color: #ffffff; }
 body.style-light .ui-priority-primary, body.style-light .ui-widget-content .ui-priority-primary, body.style-light .ui-widget-header .ui-priority-primary { font-weight: bold; }
-body.style-light .ui-priority-secondary, body.style-light .ui-widget-content .ui-priority-secondary,  body.style-light .ui-widget-header .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
+body.style-light .ui-priority-secondary, body.style-light .ui-widget-content .ui-priority-secondary, body.style-light  .ui-widget-header .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
 body.style-light .ui-state-disabled, body.style-light .ui-widget-content .ui-state-disabled, body.style-light .ui-widget-header .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
 
 /* Icons
@@ -418,3 +418,21 @@ body.style-light .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { float: 
 body.style-light .ui-dialog .ui-dialog-buttonpane button { margin: .5em .4em .5em 0; cursor: pointer; }
 body.style-light .ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
 body.style-light .ui-draggable .ui-dialog-titlebar { cursor: move; }
+/*
+ * jQuery UI Tabs 1.8.14
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Tabs#theming
+ */
+body.style-light .ui-tabs { position: relative; padding: .2em; zoom: 1; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+body.style-light .ui-tabs .ui-tabs-nav { margin: 0; padding: .2em .2em 0; }
+body.style-light .ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 1px; margin: 0 .2em 1px 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; }
+body.style-light .ui-tabs .ui-tabs-nav li a { float: left; padding: .5em 1em; text-decoration: none; }
+body.style-light .ui-tabs .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 1px; }
+body.style-light .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, body.style-light .ui-tabs .ui-tabs-nav li.ui-state-disabled a, body.style-light .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+body.style-light .ui-tabs .ui-tabs-nav li a, body.style-light .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+body.style-light .ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1.4em; background: none; }
+body.style-light .ui-tabs .ui-tabs-hide { display: none !important; }

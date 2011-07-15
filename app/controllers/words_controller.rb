@@ -37,8 +37,19 @@ class WordsController < ApplicationController
     render :layout => 'mobile'
   end
 
+  def tab
+    @word = Word.find params[:word_id], :include => [ :inflections, { :senses => :synset } ]
+    @sense = Sense.find params[:sense_id]
+    respond_to do |format|
+      format.html do
+        render @word
+      end
+    end
+  rescue
+    error
+  end
+
   def show
-    @back = request.env['HTTP_REFERER']
     @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
     respond_to do |format|
       format.html
@@ -51,7 +62,6 @@ class WordsController < ApplicationController
   end
 
   def m_show
-    @back = request.env['HTTP_REFERER']
     @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
     render :layout => false
   rescue
