@@ -42,6 +42,6 @@ module SensesHelper
       "#{target.words.map(&:name).join(', ')} (#{Word.pos(target.part_of_speech)}.)"
     end
 
-    link_to target_text, target_url, 'data-role' => 'button', 'data-icon' => 'arrow-r', 'data-transition' => 'slideup', 'data-iconpos' => 'right'
+    link_to target_text, target_url, 'data-role' => 'button', 'data-icon' => 'arrow-r', 'data-transition' => 'slide', 'data-iconpos' => 'right'
   end
 end
