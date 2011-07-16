@@ -21,12 +21,10 @@
     %span
       = link_to_unless_current 'Synset:', synset
       - synset.senses.sort_by{|s|s.word.name}.each do |sense|
-        %span.tooltip.ui-corner-all
-          - if @sense == sense
-            &= sense.word.name
-          - else
-            = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
-          = render :partial => 'shared/tooltip', :locals => { :sense => sense }
+        - if @sense == sense
+          &= sense.word.name
+        - else
+          = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
       &nbsp;
       %em{:title => 'lexical file name, a broad category associated with this word sense'}
         &= "<#{synset.lexname}>"
