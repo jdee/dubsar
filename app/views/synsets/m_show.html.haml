@@ -32,7 +32,7 @@
     %ul{'data-role' => "listview"}
       - @synset.senses.each do |sense|
         %li
-          = link_to url_for(:controller => :senses, :action => :m_show, :id => sense.id, :index => 0), 'data-transition' => 'slideup' do
+          = link_to url_for(:controller => :senses, :action => :m_show, :id => sense.id, :index => 0), 'data-transition' => 'slide' do
             &= sense.word.name
     - unless @synset.samples.empty?
       %br/
