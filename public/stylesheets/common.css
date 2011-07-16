@@ -266,6 +266,8 @@ td.header-link-cell {
 }
 
 #sql-help-link {
+  position: absolute;
+  top: 0.5em;
   display: none;
   font-size: 90%;
 }
