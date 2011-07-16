@@ -112,6 +112,7 @@
       autoOpen: false,
       open: function() { $(this).load('/share'); },
       height: 300,
+      width: 450,
       title: 'Share Dubsar'
     });
     $('a#share-link').live('click', function() { $share_dialog.dialog('open'); return false; });
