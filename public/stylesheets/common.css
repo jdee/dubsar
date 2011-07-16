@@ -244,7 +244,7 @@ td.header-link-cell {
   vertical-align: top;
 }
 
-.header-link-div {
+.padded-header-div {
   margin-top: 0.5em;
   margin-left: 1.2em;
   padding: 0.15em 0.25em;
@@ -266,12 +266,12 @@ td.header-link-cell {
 }
 
 #sql-help-link {
-  position: absolute;
-  top: 1ex;
-  right: 15ex;
-  text-decoration: none;
   display: none;
   font-size: 90%;
+}
+
+#sql-help-link a {
+  text-decoration: none;
 }
 
 .template {

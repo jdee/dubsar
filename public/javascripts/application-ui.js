@@ -61,7 +61,7 @@
     }
 
     function show_sql_help_link() {
-      $sql_help_link.html('Huh? SQL wildcards?').fadeIn('slow');
+      $sql_help_link.html('<div class="ui-state-default ui-corner-all header-link-div" id="sql-help-link-close" style="float: left; margin-right: 0.3em; position: relative; top: 0.2em;"><span class="ui-icon ui-icon-circlesmall-close"></span></div><a id="sql-help-link-anchor" href="#" title="explain" style="position: relative; top: 0.3em;">Huh? SQL Wildcards?</a>').fadeIn('slow');
       $show_help_link_timer = null;
     }
 
@@ -159,8 +159,11 @@
       }
     }).live('mouseleave', function(){
       $hide_help_link_timer = window.setTimeout(hide_sql_help_link, 20000);
-    }).live('click', function(){
+    });
+
+    $('a#sql-help-link-anchor').live('click', function(){
       $sql_help_dialog.dialog('open');
+      hide_sql_help_link();
       return false;
     });
 
@@ -188,12 +191,16 @@
       });
     });
 
-    $('.header-link-div').hover(function(){
+    $('.header-link-div').live('mouseenter', function(){
       $(this).addClass('ui-state-hover');
-    }, function(){
+    }).live('mouseleave', function(){
       $(this).removeClass('ui-state-hover ui-state-active');
-    }).click(function(){
+    }).live('click', function(){
       $(this).addClass('ui-state-active');
+    });
+
+    $('div#sql-help-link-close').live('click', function(){
+      hide_sql_help_link();
     });
 
     $('div#sense-tabs').tabs({

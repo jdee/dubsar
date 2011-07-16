@@ -167,10 +167,15 @@ module('sql help dialog', {
   }
 });
 
-test('show dialog', function(){
-  $('#sql-help-link').click();
-  equal($('.sql-help-dialog').length, 1, 'there should be 1 .sql-help-dialog');
-  ok($('.sql-help-dialog').is(':visible'), 'it should be visible');
+asyncTest('show dialog', 3, function(){
+  $('input#word-input').trigger('mouseenter');
+  setTimeout(function(){
+    ok($('a#sql-help-link-anchor').is(':visible'), '#sql-help-link-anchor should be visible');
+    $('a#sql-help-link-anchor').click();
+    equal($('.sql-help-dialog').length, 1, 'there should be 1 .sql-help-dialog');
+    ok($('.sql-help-dialog').is(':visible'), 'it should be visible');
+    start();
+  }, 3500);
 });
 
 /******************* share dialog module **********************/
