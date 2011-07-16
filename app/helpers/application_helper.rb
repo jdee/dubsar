@@ -17,6 +17,10 @@
 
 module ApplicationHelper
   def canonical_link_tag(object=nil)
+    haml_tag :link, :rel => 'canonical', :href => canonical_url(object)
+  end
+
+  def canonical_url(object=nil)
     url = "http://dubsar-dictionary.com"
     if object
       url += url_for object
@@ -26,8 +30,6 @@ module ApplicationHelper
       url += "&title=#{URI.encode @title}" unless @title.blank?
       url += "&page=#{params[:page]}" unless params[:page].blank? or params[:page].to_i == 1
     end
-
-    haml_tag :link, :rel => 'canonical', :href => url
   end
 
   def thumbnail_link_tag(src, type="image/png")
@@ -93,14 +95,27 @@ EOF
 
   def facebook_button
     <<-HTML
-<iframe src="http://www.facebook.com/plugins/like.php?app_id=222997521073042&amp;href=http%3A%2F%2Fdubsar-dictionary.com&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;action=like&amp;colorscheme=#{@theme}&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({appId: '222997521073042', status: true, cookie: true,
+             xfbml: true});
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
+<fb:like send="false" layout="button_count" width="150" show_faces="false" font="" colorscheme="#{@theme}"></fb:like>
     HTML
   end
 
   def google_button
     <<-HTML
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-<g:plusone size="medium" href="http://dubsar-dictionary.com"></g:plusone>
+<g:plusone size="medium"></g:plusone>
     HTML
   end
 
@@ -108,7 +123,7 @@ EOF
     <<-HTML
 <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 <div>
-  <a href="http://twitter.com/share?url=http%3A%2F%2Fdubsar-dictionary.com&via=dubsar&text=Dubsar%20Dictionary%20Project%20#dubsar" class="twitter-share-button">Tweet</a>
+  <a href="http://twitter.com/share?via=dubsar&text=Dubsar%20Dictionary%20Project%20#dubsar" class="twitter-share-button">Tweet</a>
 </div>
     HTML
   end
