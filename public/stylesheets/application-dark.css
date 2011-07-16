@@ -39,6 +39,7 @@ body.style-dark a > img:hover,active {
 
 body.style-dark #header-bar {
   background-color: #f58400;
+  border-color: #ffaf0f;
 }
 
 body.style-dark hr {

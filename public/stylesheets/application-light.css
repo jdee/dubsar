@@ -44,6 +44,7 @@ body.style-light a > img:hover,active {
 
 body.style-light #header-bar {
   background-color: #e0e0ff;
+  border-color: #1c94c4;
 }
 
 body.style-light *.ui-state-active > span.ui-button-text {

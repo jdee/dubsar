@@ -149,6 +149,8 @@ span#wrench-icon {
   top: 0px;
   left: 0px;
   height: 8.5ex;
+  border-width: 1px;
+  border-style: solid;
 }
 
 #header-bar > table {
