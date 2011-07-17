@@ -37,6 +37,7 @@ module ApplicationHelper
   end
 
   def thumbnail_link_tags
+    thumbnail_link_tag('dubsar-banner.png') + "\n" +
     thumbnail_link_tag('dubsar.png') + "\n" +
     thumbnail_link_tag('autocomplete.png') + "\n" +
     thumbnail_link_tag('browse.png') + "\n" +
