@@ -29,6 +29,7 @@
     var $tt_timer = null;
     var $tt_fixed = false;
     var $tt_gloss = null;
+    var $opensearch_dialog=$('div#opensearch-dialog');
 
     /* 'light' or 'dark' */
     $.pick_theme = function(theme) {
@@ -284,27 +285,40 @@
     kill_tooltip();
 
     /* OpenSearch dialog */
-    if (window.external && window.external.AddSearchProvider && (!window.chrome || !window.externalHost)) {
-      $('div#opensearch-dialog').html('<div><h3>Add Dubsar to your browser&apos;s search engines?<h3/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
+
+    function reset_opensearch_dialog() {
+      $opensearch_dialog.html('<div><h3>Add Dubsar to your browser&apos;s search providers?<h3/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
+
       $('div#opensearch-buttonset').buttonset();
       $('button#opensearch-add').button({icons:{primary:'ui-icon-plus'}})
-        .live('click', function() {
-        window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href'));
-        $('div#opensearch-dialog').dialog('close');
-        return false;
+        .click(function() {
+          window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href'));
+          $opensearch_dialog.fadeOut('fast').html('<div><h3>Search provider added</h3><br/><button id="opensearch-close">ok</button></div>').fadeIn('fast');
+          $('button#opensearch-close').button({icons:{primary:'ui-icon-check'}})
+              .click(function() {
+              $opensearch_dialog.dialog('close');
+              reset_opensearch_dialog();
+              return false;
+            });
+          return false;
       });
       $('button#opensearch-cancel').button({icons:{primary:'ui-icon-close'}})
-        .live('click', function() {
-        $('div#opensearch-dialog').dialog('close');
+        .click(function() {
+        $opensearch_dialog.dialog('close');
         return false;
       });
-    } else {
-      $('div#opensearch-dialog').html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 7 or 8, Firefox or Chrome.</div>');
     }
-    $('div#opensearch-dialog').dialog({ autoOpen: false, title: 'OpenSearch' });
+
+    if (window.external && window.external.AddSearchProvider) {
+      reset_opensearch_dialog();
+    } else {
+      $opensearch_dialog.html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 7 or 8, Firefox or Chrome.</div>');
+    }
+
+    $opensearch_dialog.dialog({ autoOpen: false, title: 'OpenSearch' });
 
     $('a#opensearch-link').live('click', function() {
-      $('div#opensearch-dialog').dialog('open');
+      $opensearch_dialog.dialog('open');
       return false;
     });
   });
