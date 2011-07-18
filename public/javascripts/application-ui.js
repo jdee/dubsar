@@ -287,7 +287,7 @@
     /* OpenSearch dialog */
 
     function reset_opensearch_dialog() {
-      $opensearch_dialog.html('<div><h3>Add Dubsar to your browser&apos;s search providers?</h3><br/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
+      $opensearch_dialog.html('<div><h3>Add Dubsar to your browser&apos;s search providers?</h3><br/><br/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
 
       $('div#opensearch-buttonset').buttonset();
       $('button#opensearch-add').button({icons:{primary:'ui-icon-plus'}})
@@ -295,7 +295,7 @@
           window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href'));
           /* kluge for Chrome, which gives no feedback if the provider is already there */
           if (window.chrome) {
-            $opensearch_dialog.fadeOut('fast').html('<div><h3>Search provider added</h3>See Preferences to Manage Search Engines<br/><br/><button id="opensearch-close">ok</button></div>').fadeIn('fast');
+            $opensearch_dialog.fadeOut('fast').html('<div><h3>Search provider added</h3>See <em>Manage Search Engines</em> under Chrome Preferences<br/><br/><button id="opensearch-close">ok</button></div>').fadeIn('fast');
             $('button#opensearch-close').button({icons:{primary:'ui-icon-check'}})
                 .click(function() {
                 $opensearch_dialog.dialog('close');
