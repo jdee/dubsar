@@ -289,8 +289,7 @@
       $('div#opensearch-buttonset').buttonset();
       $('button#opensearch-add').button({icons:{primary:'ui-icon-plus'}})
         .live('click', function() {
-        window.external.AddSearchProvider('http://dubsar-dictionary.com/opensearch.xml');
-        /* window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href')); */
+        window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href'));
         $('div#opensearch-dialog').dialog('close');
         return false;
       });
