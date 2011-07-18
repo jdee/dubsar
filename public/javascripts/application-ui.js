@@ -284,7 +284,7 @@
     kill_tooltip();
 
     /* OpenSearch dialog */
-    if (window.external.AddSearchProvider) {
+    if (window.external && window.external.AddSearchProvider) {
       $('div#opensearch-dialog').html('<div><h3>Add Dubsar to your browser&apos;s search engines?<h3/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
       $('div#opensearch-buttonset').buttonset();
       $('button#opensearch-add').button({icons:{primary:'ui-icon-plus'}})
@@ -299,7 +299,7 @@
         return false;
       });
     } else {
-      $('div#opensearch-dialog').html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer, Firefox or Chrome.</div>');
+      $('div#opensearch-dialog').html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 8, Firefox or Chrome.</div>');
     }
     $('div#opensearch-dialog').dialog({ autoOpen: false, title: 'OpenSearch' });
 
