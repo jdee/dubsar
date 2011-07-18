@@ -56,8 +56,19 @@
                 %a#rss-link.line.header-link{:href => '/rss_news.xml', :title => 'RSS News Feed'}
                   %span.ui-icon.ui-icon-signal-diag
                   rss
+            %td.header-link-cell
+              .padded-header-div.header-link-div.ui-corner-all.ui-state-default
+                %a#opensearch-link.line.header-link{:href => '#', :title => 'Add Dubsar as a search engine (IE and Firefox)'}
+                  %span.ui-icon.ui-icon-search
+                  opensearch
 
       #share-dialog.template
+      #opensearch-dialog.template
+        The
+        = link_to 'OpenSearch', 'http://www.opensearch.org/'
+        protocol allows you to add Dubsar to the browser&apos;s list of
+        search engines in Internet Explorer and Firefox. Google Chrome
+        picks it up automatically.
       =render :partial => 'shared/theme_picker'
       =render :partial => 'shared/header_bar'
       %hr/
