@@ -284,12 +284,12 @@
     kill_tooltip();
 
     /* OpenSearch dialog */
-    if (window.external && window.external.AddSearchProvider) {
+    if (window.external && window.external.AddSearchProvider && (!window.chrome || !window.externalHost)) {
       $('div#opensearch-dialog').html('<div><h3>Add Dubsar to your browser&apos;s search engines?<h3/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
       $('div#opensearch-buttonset').buttonset();
       $('button#opensearch-add').button({icons:{primary:'ui-icon-plus'}})
         .live('click', function() {
-        window.external.AddSearchProvider('http://dubsar-dictionary.com' + $('a#opensearch-link').attr('href'));
+        window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href'));
         $('div#opensearch-dialog').dialog('close');
         return false;
       });
