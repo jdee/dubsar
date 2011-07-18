@@ -299,7 +299,7 @@
         return false;
       });
     } else {
-      $('div#opensearch-dialog').html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 8, Firefox or Chrome.</div>');
+      $('div#opensearch-dialog').html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 7 or 8, Firefox or Chrome.</div>');
     }
     $('div#opensearch-dialog').dialog({ autoOpen: false, title: 'OpenSearch' });
 
