@@ -140,7 +140,7 @@
         window.clearTimeout($hide_help_link_timer);
         $hide_help_link_timer = null;
       }
-      if (!$sql_help_link.is(':visible')) {
+      if ($sql_help_link.is(':hidden')) {
         $show_help_link_timer = window.setTimeout(show_sql_help_link, 3000);
       }
     }).live('mouseleave', function(){

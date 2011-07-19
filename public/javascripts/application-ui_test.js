@@ -32,7 +32,7 @@ test('accordion starting pane', function(){
   ok($('#'+starting_pane+'+div').is(':visible'), 'dubsar_starting_pane open');
 
   /* a little klugey, but */
-  ok($('#pane_0').not(':visible'), 'first pane closed');
+  ok($('#pane_0').is(':hidden'), 'first pane closed');
 
 });
 
@@ -88,7 +88,7 @@ test('hover test', function(){
   equal($('#tooltip').width(), $('#tooltip .ui-widget-header').width()+2,
     'tooltip header should be the right width');
   $('#pane_15 span.tooltip').trigger('mouseout');
-  ok(!$('#tooltip').is(':visible'), 'mouseout should hide tooltip');
+  ok($('#tooltip').is(':hidden'), 'mouseout should hide tooltip');
 });
 
 /************************ autocompleter module ******************/
@@ -161,7 +161,7 @@ asyncTest('hide menu on clear', 1, function(){
 
   input.val('').trigger('input');
   setTimeout(function(){
-    ok(!menu.is(':visible'), 'menu should not be visible');
+    ok(menu.is(':hidden'), 'menu should not be visible');
     start();
   }, 100);
 });
@@ -173,12 +173,13 @@ module('sql help dialog', {
   }
 });
 
-asyncTest('show dialog', 3, function(){
+asyncTest('show dialog', 4, function(){
+  equal($('a#sql-help-link-anchor').size(), 0, 'there is no #sql-help-link-anchor to begin with');
   $('input#word-input').trigger('mouseenter');
   setTimeout(function(){
-    ok($('a#sql-help-link-anchor').is(':visible'), '#sql-help-link-anchor should be visible');
+    ok($('a#sql-help-link-anchor').is(':visible'), '#sql-help-link-anchor becomes visible');
     $('a#sql-help-link-anchor').click();
-    equal($('.sql-help-dialog').length, 1, 'there should be 1 .sql-help-dialog');
+    equal($('.sql-help-dialog').size(), 1, 'there should be 1 .sql-help-dialog');
     ok($('.sql-help-dialog').is(':visible'), 'it should be visible');
     start();
   }, 3500);
