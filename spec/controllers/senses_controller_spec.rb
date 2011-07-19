@@ -18,25 +18,26 @@
 require 'spec_helper'
 
 describe SensesController do
+  before :each do
+    @food, @grub = create_synonyms!
+  end
+
   context "handling basic routing and requests" do
     before :each do
       request.env['HTTP_REFERER'] = '/'
+      @sense = @food.senses.first
     end
 
     it "gets the :show and :m_show views" do
-      food, grub = create_synonyms!
-      sense = food.senses.first
       %w{show m_show}.each do |route|
-        get :show, 'id' => sense.id
+        get route, 'id' => @sense.id
         response.should be_success
         assigns(:sense).should_not be_blank
       end
     end
 
     it "gets the :tab view" do
-      food, grub = create_synonyms!
-      sense = food.senses.first
-      get :tab, 'sense_id' => sense.id
+      get :tab, 'sense_id' => @sense.id
       response.should be_success
       assigns(:sense).should_not be_blank
     end
@@ -57,7 +58,6 @@ describe SensesController do
   context "handing JSON requests" do
     before :each do
       request.env['HTTP_ACCEPT'] = 'application/json'
-      @food, @grub = create_synonyms!
       @good, @bad  = create_antonyms!
     end
 

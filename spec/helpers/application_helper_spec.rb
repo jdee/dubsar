@@ -104,4 +104,22 @@ describe ApplicationHelper do
       helper.theme_color.should == '#f58400'
     end
   end
+
+  describe 'using social network helpers' do
+    it 'includes a #facebook_button method' do
+      helper.should respond_to(:facebook_button)
+      helper.facebook_button.should match %r{<script.*//connect.facebook.net}m
+      helper.facebook_button.should match /<fb:like /
+    end
+    it 'includes a #google_button method' do
+      helper.should respond_to(:google_button)
+      helper.google_button.should match %r{<script.*src="https://apis.google.com}
+      helper.google_button.should match /<g:plusone /
+    end
+    it 'includes a #twitter_button method' do
+      helper.should respond_to(:twitter_button)
+      helper.twitter_button.should match %r{<script src="http://platform\.twitter\.com}
+      helper.twitter_button.should match %r{<a href="http://twitter.com/share}
+    end
+  end
 end

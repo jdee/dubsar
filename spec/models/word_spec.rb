@@ -130,6 +130,20 @@ describe Word do
     end
   end
 
+  context 'in its convenience methods' do
+    before :each do
+      @food, grub = create_synonyms!
+    end
+
+    it 'returns the right #page_title' do
+      @food.page_title.should match /#{@food.name}/
+    end
+
+    it 'returns the right #meta_description' do
+      @food.meta_description.should match /Word.*#{@food.name}/
+    end
+  end
+
   context 'when searching' do
     before :each do
       Factory :verb

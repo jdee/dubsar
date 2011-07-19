@@ -56,4 +56,19 @@ describe Synset do
       good.words_except(good_word).first.should == sweet_word
     end
   end
+
+  context 'in its convenience methods' do
+    before :each do
+      @food, grub = create_synonyms!
+    end
+    let(:synset) { @food.synsets.first }
+
+    it 'returns the right #page_title' do
+      synset.page_title.should match %r{#{synset.words.all(:order => 'name').map(&:name).join(", ")}}
+    end
+
+    it 'returns the right #meta_description' do
+      synset.meta_description.should match /Synset.*#{synset.gloss}/
+    end
+  end
 end

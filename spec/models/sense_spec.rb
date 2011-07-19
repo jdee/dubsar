@@ -18,7 +18,9 @@
 require 'spec_helper'
 
 describe Sense do
-  context 'validation' do
+  let(:sense) { Factory :sense, :synset => Factory(:food_synset), :word => Factory(:noun) }
+
+  context 'when validating' do
     let(:no_freq_cnt) { Sense.new :freq_cnt => nil, :synset_index => 1 }
     let(:no_synset_index) { Sense.new :freq_cnt => 10, :synset_index => nil }
 
@@ -31,10 +33,19 @@ describe Sense do
     end
   end
 
-  context 'general data model' do
+  context 'in the general data model' do
     it 'returns its word in an array as :words' do
-      sense = Factory :sense, :synset => Factory(:food_synset), :word => Factory(:noun)
       sense.words.should == [ sense.word ]
+    end
+  end
+
+  context 'in its convenience methods' do
+    it 'returns the right #page_title' do
+      sense.page_title.should match /#{sense.word.name}/
+    end
+
+    it 'returns the right #meta_description' do
+      sense.meta_description.should match /Sense.* #{sense.word.name}.*#{sense.synset.gloss}/
     end
   end
 end
