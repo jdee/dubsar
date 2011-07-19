@@ -286,27 +286,14 @@
 
     /* OpenSearch dialog */
 
-    function reset_opensearch_dialog() {
+    function setup_opensearch_dialog() {
       $opensearch_dialog.html('<div><h3>Add Dubsar to your browser&apos;s search providers?</h3><br/><br/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
 
       $('div#opensearch-buttonset').buttonset();
       $('button#opensearch-add').button({icons:{primary:'ui-icon-plus'}})
         .click(function() {
-          window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href'));
-          /* kluge for Chrome, which gives no feedback if the provider is already there */
-          if (window.chrome) {
-            $opensearch_dialog.fadeOut('fast', function(){
-              $opensearch_dialog.html('<div><h3>Search provider added</h3>See <em>Manage Search Engines</em> under Chrome Preferences<br/><br/><button id="opensearch-close">ok</button></div>').fadeIn('fast');
-              $('button#opensearch-close').button({icons:{primary:'ui-icon-check'}})
-                .click(function() {
-                  $opensearch_dialog.dialog('close');
-                  return false;
-              });
-            });
-          }
-          else {
-            $opensearch_dialog.dialog('close');
-          }
+          window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('link[rel="search"]').attr('href'));
+          $opensearch_dialog.dialog('close');
           return false;
       });
       $('button#opensearch-cancel').button({icons:{primary:'ui-icon-close'}})
@@ -316,16 +303,19 @@
       });
     }
 
-    if (window.external && window.external.AddSearchProvider) {
-      reset_opensearch_dialog();
-    } else {
-      $opensearch_dialog.html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 7 or 8, Firefox or Chrome.</div>');
+    if (window.chrome) {
+      $opensearch_dialog.html('<div><p>Chrome automatically added Dubsar as a search provider when you visited this page.</p><p>See <em>Manage Search Engines</em> under Chrome Preferences or <a href="http://www.google.com/support/chrome/bin/answer.py?answer=95653" target="_blank" tabindex="-1">Chrome Help</a> for more information.</p></div>');
+    }
+    else if (window.external && window.external.AddSearchProvider) {
+      setup_opensearch_dialog();
+    }
+    else {
+      $opensearch_dialog.html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 7 or 8, Firefox or Chrome if you wish to add Dubsar to your browser&apos;s search providers.</div>');
     }
 
     $opensearch_dialog.dialog({
       autoOpen: false,
-      title: 'OpenSearch',
-      close: reset_opensearch_dialog
+      title: 'OpenSearch'
     });
 
     $('a#opensearch-link').live('click', function() {
