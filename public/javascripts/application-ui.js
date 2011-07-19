@@ -295,12 +295,14 @@
           window.external.AddSearchProvider(window.location.protocol + "//" + window.location.host + $('a#opensearch-link').attr('href'));
           /* kluge for Chrome, which gives no feedback if the provider is already there */
           if (window.chrome) {
-            $opensearch_dialog.fadeOut('fast').html('<div><h3>Search provider added</h3>See <em>Manage Search Engines</em> under Chrome Preferences<br/><br/><button id="opensearch-close">ok</button></div>').fadeIn('fast');
-            $('button#opensearch-close').button({icons:{primary:'ui-icon-check'}})
+            $opensearch_dialog.fadeOut('fast', function(){
+              $opensearch_dialog.html('<div><h3>Search provider added</h3>See <em>Manage Search Engines</em> under Chrome Preferences<br/><br/><button id="opensearch-close">ok</button></div>').fadeIn('fast');
+              $('button#opensearch-close').button({icons:{primary:'ui-icon-check'}})
                 .click(function() {
-                $opensearch_dialog.dialog('close');
-                return false;
+                  $opensearch_dialog.dialog('close');
+                  return false;
               });
+            });
           }
           else {
             $opensearch_dialog.dialog('close');
