@@ -171,7 +171,15 @@
     /* Set up the theme picker */
     $('#theme-picker-buttonset > input').button().click(function(){
       $.pick_theme($(this).val());
-    })
+    });
+    $('#theme-picker-buttonset > label').live('mouseenter', function() {
+      $(this).removeClass('ui-state-active');
+      $(this).addClass('ui-state-hover');
+    }).live('mouseleave', function() {
+      var checked_input_id = $('#theme-picker-buttonset > input:checked').attr('id');
+      $('label[for="' + checked_input_id + '"]').addClass('ui-state-active');
+      $(this).removeClass('ui-state-hover');
+    });
     $('#theme-picker-buttonset').buttonset();
     $('#theme-picker-buttonset > input:checked').click();
 
@@ -310,7 +318,7 @@
       setup_opensearch_dialog();
     }
     else {
-      $opensearch_dialog.html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 7 or 8, Firefox or Chrome if you wish to add Dubsar to your browser&apos;s search providers.</div>');
+      $opensearch_dialog.html('<div>This browser does not support the OpenSearch protocol. Use Internet Explorer 8, Firefox or Chrome if you wish to add Dubsar to your browser&apos;s search providers.</div>');
     }
 
     $opensearch_dialog.dialog({

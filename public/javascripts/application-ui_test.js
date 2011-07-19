@@ -52,6 +52,12 @@ module('theme picker', {
   }
 });
 
+test('active theme picker button hover state', function(){
+  $('input#light-radio').click();
+  $('label[for="light-radio"]').trigger('mouseenter');
+  ok($('label#dark-other').hasClass('ui-state-hover'), 'label has hover state');
+});
+
 test('theme picker button clicks', function(){
   var body = $('body');
   $('#light-radio').click();
