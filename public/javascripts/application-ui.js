@@ -287,7 +287,7 @@
     /* OpenSearch dialog */
 
     function setup_opensearch_dialog() {
-      $opensearch_dialog.html('<div><h3>Add Dubsar to your browser&apos;s search providers?</h3><br/><br/><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
+      $opensearch_dialog.html('<div><p>Search Dubsar easily from your browser&apos;s search bar, complete with live suggestions.</p><div id="opensearch-buttonset"><button tabindex="-1" id="opensearch-add">add</button><button tabindex="-1" id="opensearch-cancel">cancel</button></div></div>');
 
       $('div#opensearch-buttonset').buttonset();
       $('button#opensearch-add').button({icons:{primary:'ui-icon-plus'}})
