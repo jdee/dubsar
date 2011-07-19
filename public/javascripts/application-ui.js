@@ -281,7 +281,8 @@
         $(this).addClass('ui-state-hover').removeClass('ui-state-default');
       }, function(){
         $(this).removeClass('ui-state-hover').addClass('ui-state-default');
-      }).fadeTo('fast', 1.0);
+      });
+      $('a.close-icon-span[style*="opacity: 0;"]', $tt).fadeTo('fast', 1.0);
       $tt.draggable({
         containment: 'window',
         cursor: 'move',
