@@ -15,7 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 %div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - #{h(@word.name)} (#{@word.pos}.)", 'data-theme' => 'b'}
-  %div{'data-role' => 'header', 'data-position' => 'inline'}
+  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_header'
     %br/
     ="#{@word.name} (#{@word.pos}.)"
@@ -30,5 +30,5 @@
         %li
           = link_to url_for(:controller => :senses, :action => :m_show, :id => sense.id), 'data-transition' => 'slideup' do
             &= sense.synset.gloss
-  %div.ui-bar{'data-role' => 'footer'}
+  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'

@@ -15,7 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 %div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - License", 'data-theme' => 'b'}
-  %div{'data-role' => 'header', 'data-position' => 'inline'}
+  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_header'
   %div{'data-role' => 'content'}
     %p
@@ -48,5 +48,5 @@
     %a.undecorated{:href => 'http://wordnet.princeton.edu', :rel => 'external', :style => 'color: #888;'} WordNet&reg;
     is available under the
     =link_to 'WordNet 3.0 License.', 'http://wordnet.princeton.edu/wordnet/license', :class => 'undecorated', :rel => 'external', :style => 'color: #888;'
-  %div.ui-bar{'data-role' => 'footer'}
+  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'
