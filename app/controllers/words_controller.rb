@@ -206,7 +206,7 @@ class WordsController < ApplicationController
 
   def json_show_response
     senses = @word.senses.map do |s|
-      [ s.id, s.synonyms.map{|syn| [ syn.id, syn.name ]}, s.synset.gloss ]
+      [ s.id, s.synset.senses_except(s.word).map{|s| [ s.id, s.word.name ]}, s.synset.gloss ]
     end
     [ @word.id, @word.name, @word.pos, @word.other_forms, senses, @word.freq_cnt ]
   end
