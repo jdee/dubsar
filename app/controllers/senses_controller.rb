@@ -53,7 +53,7 @@ class SensesController < ApplicationController
 
   def json_show_response
     response = [ @sense.id, [ @sense.word.id, @sense.word.name, @sense.word.pos ], [ @sense.synset.id, @sense.synset.gloss ], @sense.synset.lexname, @sense.marker, @sense.freq_cnt ]
-    response << @sense.synonyms.map{|syn|[syn.id,syn.name]}
+    response << @sense.synset.senses_except(@sense.word).map{|s|[s.id,s.word.name]}
     response << @sense.verb_frames.map(&:frame)
     response << @sense.synset.samples
     response << pointer_response
