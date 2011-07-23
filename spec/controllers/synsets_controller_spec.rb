@@ -66,9 +66,9 @@ describe SynsetsController do
       response.should be_success
       # Responds with
       #   [ id, "pos", "lexname", "gloss", [ "sample sentence 1", "sample sentence 2", ... ],
-      #     [ [ word_id1, "synonym1" ], [ word_id2, "synonym2" ] ] ]
+      #     [ [ word_id1, "synonym1" ], [ word_id2, "synonym2" ] ], freq_cnt ]
       JSON.parse(response.body).should ==
-        [ synset.id, 'n', synset.lexname, synset.gloss, synset.samples, synset.words.sort_by(&:name).map{|w|[w.id,w.name]} ]
+        [ synset.id, 'n', synset.lexname, synset.gloss, synset.samples, synset.words.sort_by(&:name).map{|w|[w.id,w.name]}, synset.freq_cnt ]
     end
   end
 end

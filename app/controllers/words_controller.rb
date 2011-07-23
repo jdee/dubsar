@@ -208,6 +208,6 @@ class WordsController < ApplicationController
     senses = @word.senses.map do |s|
       [ s.id, s.synonyms.map{|syn| [ syn.id, syn.name ]}, s.synset.gloss ]
     end
-    [ @word.id, @word.name, @word.pos, @word.other_forms, senses ]
+    [ @word.id, @word.name, @word.pos, @word.other_forms, senses, @word.freq_cnt ]
   end
 end
