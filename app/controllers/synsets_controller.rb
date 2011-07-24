@@ -19,7 +19,8 @@ class SynsetsController < ApplicationController
   respond_to :html, :json
 
   def tab
-    @synset = Synset.find params[:synset_id], :include => [ :words, :senses ]
+    @synset = Synset.find params[:synset_id],
+      :include => [ :words, :senses, { :pointers => :target } ]
     @sense = Sense.find params[:sense_id]
     respond_to do |format|
       format.html do
@@ -31,7 +32,7 @@ class SynsetsController < ApplicationController
   end
 
   def show
-    @synset = Synset.find params[:id], :include => [ :words, :senses ]
+    @synset = Synset.find params[:id], :include => [ :words, :senses, { :pointers => :target } ]
     respond_to do |format|
       format.html
       format.json do
@@ -43,7 +44,7 @@ class SynsetsController < ApplicationController
   end
 
   def m_show
-    @synset = Synset.find params[:id], :include => [ :words, :senses ]
+    @synset = Synset.find params[:id], :include => [ :words, :senses, { :pointers => :target } ]
   rescue
     m_error
   end

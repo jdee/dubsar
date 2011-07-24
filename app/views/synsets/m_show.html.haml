@@ -40,5 +40,12 @@
       %ul
         - @synset.samples.each do |sample|
           %li=h sample
+    - unless @synset.pointers.blank?
+      %h3 pointers
+      - @synset.pointers.group_by(&:ptype).each do |ptype, ptrs|
+        %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+          %h3= ptype
+          - ptrs.each do |ptr|
+            = m_target_link ptr.target
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'

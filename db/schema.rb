@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110724155208) do
+ActiveRecord::Schema.define(:version => 20110724160943) do
 
   create_table "fairies", :force => true do |t|
     t.string   "name",         :null => false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20110724155208) do
     t.string  "source_type", :default => "Sense", :null => false
   end
 
-  add_index "pointers", ["source_id"], :name => "index_pointers_on_sense_id"
+  add_index "pointers", ["source_id"], :name => "index_pointers_on_source_id"
 
   create_table "senses", :force => true do |t|
     t.integer "synset_id"

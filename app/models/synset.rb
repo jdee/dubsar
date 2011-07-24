@@ -20,6 +20,9 @@ class Synset < ActiveRecord::Base
   has_many :senses, :order => 'freq_cnt DESC, id ASC'
   has_many :words, :through => :senses
 
+  has_many :pointers, :as => :source, :order => 'id ASC'
+  has_many :targets, :through => :pointers
+
   has_one :source, :class_name => 'Pointer', :as => :target
 
   validates :definition, :presence => true

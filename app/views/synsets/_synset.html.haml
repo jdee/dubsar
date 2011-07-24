@@ -44,3 +44,17 @@
       %ul
         - synset.samples.each do |sample|
           %li=h sample
+    - unless synset.pointers.blank?
+      %hr/
+      %strong{:title => 'links to related words of different types'}
+        pointers
+      %table
+        %tbody
+          - synset.pointers.group_by(&:ptype).each do |ptype, ptrs|
+            %tr
+              %td.pointer-type{:title => Pointer.help_text(ptype)}
+                %em
+                  &= ptype
+              %td
+                - ptrs.each do |ptr|
+                  = target_link ptr.target
