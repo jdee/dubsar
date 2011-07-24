@@ -61,14 +61,16 @@ describe SynsetsController do
     end
 
     it "returns senses by ID using the :show view" do
-      synset = @food.synsets.first
-      get :show, :id => @food.synsets.first.id
+      good, bad = create_antonyms!
+      synset = good.synsets.first
+      get :show, :id => synset.id
       response.should be_success
       # Responds with
       #   [ id, "pos", "lexname", "gloss", [ "sample sentence 1", "sample sentence 2", ... ],
-      #     [ [ sense_id1, "synonym1" ], [ sense_id2, "synonym2" ] ], freq_cnt ]
+      #     [ [ sense_id1, "synonym1" ], [ sense_id2, "synonym2" ] ], freq_cnt,
+      #     [ [ "ptype1", "target_type1", target_id1, "target text", "target gloss" ], [ "ptype2", ... ], ... ] ]
       JSON.parse(response.body).should ==
-        [ synset.id, 'n', synset.lexname, synset.gloss, synset.samples, synset.senses.all(:joins => "JOIN words ON words.id = senses.word_id", :order => 'words.name').map{|s|[s.id,s.word.name]}, synset.freq_cnt ]
+        [ synset.id, 'adj', synset.lexname, synset.gloss, synset.samples, synset.senses.all(:joins => "JOIN words ON words.id = senses.word_id", :order => 'words.name').map{|s|[s.id,s.word.name]}, synset.freq_cnt, [ [ "antonym", "synset", bad.senses.first.synset_id, bad.senses.first.synset.words.map(&:name).sort.join(', '), bad.senses.first.synset.gloss ] ] ]
     end
   end
 end

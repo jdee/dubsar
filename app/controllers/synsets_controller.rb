@@ -52,6 +52,14 @@ class SynsetsController < ApplicationController
   private
 
   def json_show_request
-    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.senses.all(:joins => "JOIN words ON words.id = senses.word_id", :order => 'words.name').map{|s|[s.id,s.word.name]}, @synset.freq_cnt ]
+    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.senses.all(:joins => "JOIN words ON words.id = senses.word_id", :order => 'words.name').map{|s|[s.id,s.word.name]}, @synset.freq_cnt, pointer_response ]
+  end
+
+  def pointer_response
+    @synset.pointers.map do |ptr|
+      response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
+      response << ptr.target.words.all(:order => 'name').map(&:name).join(', ')
+      response << ptr.target.gloss
+    end
   end
 end
