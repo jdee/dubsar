@@ -158,7 +158,7 @@ describe WordsController do
 
       # returns
       # [ id, "name", "pos", [ "inflection1", "inflection2", ... ],
-      #   [ [ sense_id1, [ [ sense_id1, "synonym1" ], [ sense_id2, "synonym2" ], ... ], "gloss1" ],
+      #   [ [ sense_id1, [ [ sense_id1, "synonym1" ], [ sense_id2, "synonym2" ], ... ], "gloss1" , "lexname1", "marker1", freq_cnt1 ],
       #   [ sense_id2, ... ] ], freq_cnt ]
       entry = JSON.parse(response.body)
       entry.first.should == food.id
@@ -166,7 +166,7 @@ describe WordsController do
       entry.third.should == food.pos
       entry.fourth.should == food.other_forms
       # only has one sense
-      entry.fifth.should == [ [ food.senses.first.id, [ [ grub.senses.first.id, grub.name ] ], food.synsets.first.gloss ] ]
+      entry.fifth.should == [ [ food.senses.first.id, [ [ grub.senses.first.id, grub.name ] ], food.synsets.first.gloss, food.synsets.first.lexname, food.senses.first.marker, food.senses.first.freq_cnt ] ]
       entry[5].should == food.freq_cnt
     end
 
