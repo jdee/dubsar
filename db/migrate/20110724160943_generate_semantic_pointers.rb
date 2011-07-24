@@ -22,6 +22,7 @@ class GenerateSemanticPointers < ActiveRecord::Migration
 
       pointer_count = Pointer.all(:conditions => { :target_type => 'Synset' }, :select => 'DISTINCT ON (target_id) *').count
       say "#{DateTime.now} processing #{pointer_count.to_s :delimiter => ','} distinct semantic pointers"
+      STDOUT.flush
 
       # The :include clause improves matters in development, where RAM is
       # plentiful, but the process peaked around 1.5 GB RSS. This should
@@ -29,7 +30,7 @@ class GenerateSemanticPointers < ActiveRecord::Migration
 
       # Pointer.all(:conditions => { :target_type => 'Synset' }, :select => 'DISTINCT ON (target_id) *', :include => { :source => :synset } ).each_with_index do |pointer, index|
 
-      Pointer.all(:conditions => { :target_type => 'Synset' }, :select => 'DISTINCT ON (target_id) *').each_with_index do |pointer|
+      Pointer.all(:conditions => { :target_type => 'Synset' }, :select => 'DISTINCT ON (target_id) *').each do |pointer|
         Pointer.create! :source_id => pointer.source.synset_id, :source_type => 'Synset', :target_id => pointer.target_id, :target_type => 'Synset', :ptype => pointer.ptype
       end
 
