@@ -17,16 +17,16 @@
 
 class Pointer < ActiveRecord::Base
   belongs_to :target, :polymorphic => true
-  belongs_to :sense
+  belongs_to :source, :polymorphic => true
 
   validates :target, :presence => true
-  validates :sense, :presence => true
+  validates :source, :presence => true
   validates :ptype, :presence => true
 
   class << self
     def create_new(params)
       search_params = {
-        :sense_id    => params[:sense_id   ] || params[:sense ].id        ,
+        :source_id   => params[:source_id  ] || params[:source].id        ,
         :target_id   => params[:target_id  ] || params[:target].id        ,
         :target_type => params[:target_type] || params[:target].class.name,
         :ptype       => params[:ptype      ]

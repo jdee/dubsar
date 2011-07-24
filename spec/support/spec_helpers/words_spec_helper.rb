@@ -36,7 +36,7 @@ def create_synonyms!
   substance_sense = Factory :sense, :word => substance, :synset => Factory(:substance_synset)
   substance.senses << substance_sense
   substance.save!
-  Factory :pointer, :sense => food.senses.first, :target => substance_sense, :ptype => 'hypernym'
+  Factory :pointer, :source => food.senses.first, :target => substance_sense, :ptype => 'hypernym'
 
   [ food, grub ]
 end
@@ -47,8 +47,8 @@ def create_antonyms!
   good_sense = Factory(:sense, :synset => Factory(:good_synset))
   bad_sense = Factory(:sense, :synset => Factory(:bad_synset ))
 
-  good_sense.pointers << Factory(:pointer, :ptype => 'antonym', :target => bad_sense.synset , :sense => good_sense)
-  bad_sense.pointers  << Factory(:pointer, :ptype => 'antonym', :target => good_sense.synset, :sense => bad_sense )
+  good_sense.pointers << Factory(:pointer, :ptype => 'antonym', :target => bad_sense.synset , :source => good_sense)
+  bad_sense.pointers  << Factory(:pointer, :ptype => 'antonym', :target => good_sense.synset, :source => bad_sense )
 
   good.senses << good_sense
   bad.senses  << bad_sense

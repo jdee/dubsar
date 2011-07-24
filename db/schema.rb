@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110629194559) do
+ActiveRecord::Schema.define(:version => 20110724155208) do
 
   create_table "fairies", :force => true do |t|
     t.string   "name",         :null => false
@@ -29,13 +29,14 @@ ActiveRecord::Schema.define(:version => 20110629194559) do
   add_index "inflections", ["word_id"], :name => "index_inflections_on_word_id"
 
   create_table "pointers", :force => true do |t|
-    t.integer "target_id",   :null => false
-    t.string  "target_type", :null => false
-    t.integer "sense_id",    :null => false
-    t.string  "ptype",       :null => false
+    t.integer "target_id",                        :null => false
+    t.string  "target_type",                      :null => false
+    t.integer "source_id",                        :null => false
+    t.string  "ptype",                            :null => false
+    t.string  "source_type", :default => "Sense", :null => false
   end
 
-  add_index "pointers", ["sense_id"], :name => "index_pointers_on_sense_id"
+  add_index "pointers", ["source_id"], :name => "index_pointers_on_sense_id"
 
   create_table "senses", :force => true do |t|
     t.integer "synset_id"
