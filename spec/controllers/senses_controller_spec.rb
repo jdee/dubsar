@@ -73,10 +73,10 @@ describe SensesController do
         # [ id, [ word_id, "word_name", "word_pos" ], [ synset_id, "synset gloss" ],
         #   "lexname", "marker", freq_cnt, [ [ sense_id1, "synonym1" ], [ sense_id2, "synonym2" ], ... ],
         #   [ "verb frame 1", "verb frame 2", ... ], [ "sample sentence 1", "sample sentence 2", ... ],
-        #   [ [ "ptype1", "target_type1", target_id1, "target text" ], [ "ptype2", ... ], ... ] ]
+        #   [ [ "ptype1", "target_type1", target_id1, "target text", "target gloss" ], [ "ptype2", ... ], ... ] ]
         JSON.parse(response.body).should == [ sense.id, [ word.id, word.name, word.pos ],
           [ sense.synset.id, sense.synset.gloss ], sense.synset.lexname, sense.marker, sense.freq_cnt,
-          sense.synset.senses_except(sense.word).map{|s|[s.id,s.word.name]}, [], sense.synset.samples, [[pointer.ptype, pointer.target_type.downcase, pointer.target.id, pointer.is_a?(Sense) ? pointer.target.word.name : pointer.target.words.map(&:name).sort.join(', ')]] ]
+          sense.synset.senses_except(sense.word).map{|s|[s.id,s.word.name]}, [], sense.synset.samples, [[pointer.ptype, pointer.target_type.downcase, pointer.target.id, pointer.is_a?(Sense) ? pointer.target.word.name : pointer.target.words.map(&:name).sort.join(', '), pointer.target.gloss]] ]
       end
     end
   end

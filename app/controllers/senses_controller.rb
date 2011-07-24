@@ -69,6 +69,7 @@ class SensesController < ApplicationController
       when 'Synset'
         response << ptr.target.words.all(:order => 'name').map(&:name).join(', ')
       end
+      response << ptr.target.gloss
     end
   end
 end

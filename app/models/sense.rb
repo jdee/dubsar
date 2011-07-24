@@ -49,4 +49,8 @@ class Sense < ActiveRecord::Base
   def meta_description
     "Dubsar Dictionary Project Sense entry for #{word.name} (#{word.pos}.): #{synset.gloss}"
   end
+
+  def gloss
+    synset.gloss
+  end
 end
