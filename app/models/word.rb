@@ -147,7 +147,16 @@ class Word < ActiveRecord::Base
   end
 
   def meta_description
-    "Dubsar Dictionary Project Word entry for #{name} (#{pos}.): #{other_forms}"
+    description = "Dubsar Dictionary Project Word entry for #{name} (#{pos}.)"
+    description += " freq. cnt.: #{freq_cnt}" unless freq_cnt.zero?
+    description += " (#{other_forms})" unless other_forms.blank?
+    case senses.count
+    when 1
+      description += "; 1 word sense"
+    else
+      description += "; #{senses.count} word senses"
+    end
+    description
   end
 
   # Abbreviation for the full part_of_speech

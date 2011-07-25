@@ -47,7 +47,11 @@ class Sense < ActiveRecord::Base
   end
 
   def meta_description
-    "Dubsar Dictionary Project Sense entry for #{word.name} (#{word.pos}.): #{synset.gloss}"
+    description = "Dubsar Dictionary Project Sense entry for #{word.name}: #{synset.gloss} <#{synset.lexname}>"
+    description += " (#{marker})" unless marker.blank?
+    description += " freq. cnt.: #{freq_cnt}" unless freq_cnt.zero?
+    description += " (#{synonyms.map(&:name).join(", ")})" unless synonyms.empty?
+    description
   end
 
   def gloss

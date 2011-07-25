@@ -62,7 +62,10 @@ class Synset < ActiveRecord::Base
   end
 
   def meta_description
-    "Dubsar Dictionary Project Synset entry for #{word_list_and_pos}: #{gloss}"
+    description = "Dubsar Dictionary Project Synset entry for #{words.map(&:name).join(", ")} <#{lexname}>"
+    description += " freq. cnt.: #{freq_cnt}" unless freq_cnt.zero?
+    description += "; #{gloss}"
+    description
   end
 
   def word_list_and_pos
