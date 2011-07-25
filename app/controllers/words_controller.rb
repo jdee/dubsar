@@ -127,7 +127,7 @@ class WordsController < ApplicationController
         { :senses => [
           { :synset => { :senses => :word } },
           { :senses_verb_frames => :verb_frame },
-          { :pointers => :target } ]
+          :pointers ]
         }
       ]
     )
