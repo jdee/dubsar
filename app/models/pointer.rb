@@ -27,6 +27,7 @@ class Pointer < ActiveRecord::Base
     def create_new(params)
       search_params = {
         :source_id   => params[:source_id  ] || params[:source].id        ,
+        :source_type => params[:source_type] || params[:source].class.name,
         :target_id   => params[:target_id  ] || params[:target].id        ,
         :target_type => params[:target_type] || params[:target].class.name,
         :ptype       => params[:ptype      ]
