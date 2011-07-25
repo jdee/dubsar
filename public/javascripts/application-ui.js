@@ -71,6 +71,11 @@
       $hide_help_link_timer = null;
     }
 
+    function kill_sql_help_link() {
+      $sql_help_link.hide();
+      $hide_help_link_timer = null;
+    }
+
     /* style the search button */
     $('#word-submit').button({
       icons: { primary:'ui-icon-search' }
@@ -209,7 +214,7 @@
     });
 
     $('div#sql-help-link-close').live('click', function(){
-      hide_sql_help_link();
+      kill_sql_help_link();
     });
 
     $('div#sense-tabs').tabs({
