@@ -26,7 +26,7 @@ class WordsController < ApplicationController
   end
 
   def m_faq
-    render :layout => false
+    render :layout => 'mobile'
   end
 
   def m_license
