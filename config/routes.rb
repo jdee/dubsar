@@ -34,6 +34,7 @@ Dubsar::Application.routes.draw do
   match '/m'                 => 'words#mobile'
   match '/m_faq'             => 'words#m_faq'
   match '/m_license'         => 'words#m_license'
+  match '/m_support'         => 'words#m_support'
   match '/m_search'          => 'words#m_search'
   match '/m_senses/:id'      => 'senses#m_show'
   match '/m_words/:id'       => 'words#m_show'

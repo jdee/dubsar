@@ -1,0 +1,36 @@
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- content_for :title do
+  Dubsar Mobile Support
+- content_for :description do
+  %link{:rel => 'canonical', :href => m_support_url}
+  %meta{:name => 'Description', :content => 'Contact Dubsar for support with mobile issues, particularly with native mobile clients for iOS and Android.'}
+  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar support, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, English, mobile, iPhone, iPad, Android, tablet, smart phone'}
+
+%div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - License", 'data-theme' => 'b'}
+  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
+    = render :partial => 'shared/mobile_header'
+  %div{'data-role' => 'content'}
+    %h1 Mobile Support
+    %p
+      Problems with Dubsar Mobile, Dubsar for iOS or Dubsar for Android?
+    %p
+      Contact us at:
+
+    = link_to 'support@dubsar-dictionary.com', 'mailto:support@dubsar-dictionary.com'
+  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
+    = render :partial => 'shared/mobile_footer'

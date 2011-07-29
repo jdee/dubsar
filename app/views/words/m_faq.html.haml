@@ -14,12 +14,27 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- content_for :title do
+  Dubsar Mobile FAQ
+- content_for :description do
+  %link{:rel => 'canonical', :href => m_faq_url}
+
 %div#faq{'data-role' => 'page', 'data-title' => "Dubsar Mobile - FAQ", 'data-theme' => 'b'}
   %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_header'
     %br/
     Dubsar Mobile Frequently Asked Questions
   %div{'data-role' => 'content'}
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Is Dubsar available for iPhone, iPad or Android?
+      A. Dubsar for iOS and Dubsar for Android will launch summer 2011.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I get help with a problem?
+      A. Contact
+      =link_to 'support@dubsar-dictionary.com', 'mailto:support@dubsar-dictionary.com'
+      for support with Dubsar Mobile, Dubsar for iOS or Dubsar for Android.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Where does the database come from?
@@ -196,7 +211,7 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How long does it take to build the Dubsar database?
-      A. Currently it takes about two hours.  There are two identical
+      A. Currently it takes two to three hours.  There are two identical
       databases in the production environment so that Dubsar can stay
       running while the database is being reseeded, and they have to be
       seeded sequentially.

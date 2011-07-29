@@ -29,6 +29,10 @@ class WordsController < ApplicationController
     render :layout => 'mobile'
   end
 
+  def m_support
+    render :layout => 'mobile'
+  end
+
   def m_license
     render :layout => false
   end
