@@ -144,10 +144,17 @@ describe WordsController do
 
     it 'gets matching words via the :search route' do
       get :search, :term => 'word%'
+      word = Word.find_by_name_and_part_of_speech('word_1', 'noun')
+      word.should_not be_nil
+      word.name.should == 'word_1'
+
       response.should be_success
-      # returns [ "term", [ id1, "term1", "n" ], [ id2, "term2", "adj" ] ... ] ]
+      # returns [ "term", [ id1, "term1", "n", freq_cnt1, "inflection1, inflection2" ],
+      #  [ id2, "term2", "adj", freq_cnt2, "..."  ] ... ] ]
       list = JSON.parse response.body
       list.last.count.should == 11
+
+      list.last.first.should == [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms ]
     end
 
     it 'returns data for individual words via the :show route' do
