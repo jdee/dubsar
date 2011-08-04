@@ -205,7 +205,7 @@ class WordsController < ApplicationController
   end
 
   def json_search_response
-    [ @term, @words.map { |w| [ w.id, w.name, w.pos, w.freq_cnt, w.other_forms ] } ]
+    [ @term, @words.map { |w| [ w.id, w.name, w.pos, w.freq_cnt, w.other_forms ] }, @words.total_pages ]
   end
 
   def json_show_response

@@ -150,11 +150,12 @@ describe WordsController do
 
       response.should be_success
       # returns [ "term", [ id1, "term1", "n", freq_cnt1, "inflection1, inflection2" ],
-      #  [ id2, "term2", "adj", freq_cnt2, "..."  ] ... ] ]
+      #  [ id2, "term2", "adj", freq_cnt2, "..."  ] ... ], total_pages ]
       list = JSON.parse response.body
-      list.last.count.should == 11
+      list.second.count.should == 11
 
-      list.last.first.should == [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms ]
+      list.second.first.should == [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms ]
+      list.third.should == 1
     end
 
     it 'returns data for individual words via the :show route' do
@@ -175,6 +176,18 @@ describe WordsController do
       # only has one sense
       entry.fifth.should == [ [ food.senses.first.id, [ [ grub.senses.first.id, grub.name ] ], food.synsets.first.gloss, food.synsets.first.lexname, food.senses.first.marker, food.senses.first.freq_cnt ] ]
       entry[5].should == food.freq_cnt
+    end
+
+    it 'supports pagination in JSON searches' do
+      20.times { Factory :list_entry }
+      # including the 11 in the before :each block
+      Word.count.should == 31
+      get :search, :term => 'word%', :page => 2
+
+      response.should be_success
+      list = JSON.parse response.body
+      list.second.count.should == 1
+      list.third.should == 2
     end
 
     after :all do
