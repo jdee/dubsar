@@ -124,20 +124,21 @@ class WordsController < ApplicationController
   # HTML or JSON, one page at a time.
   def search
     options = params.symbolize_keys
-    @words = Word.search options.merge(:page => params[:page],
-      :order => 'words.name ASC, words.part_of_speech ASC',
-      :include => [
-        :inflections,
-        { :senses => [
-          { :synset => { :senses => :word } },
-          { :senses_verb_frames => :verb_frame },
-          :pointers ]
-        }
-      ]
-    )
 
     respond_to do |format|
       format.html do
+        @words = Word.search options.merge(:page => params[:page],
+          :order => 'words.name ASC, words.part_of_speech ASC',
+          :include => [
+            :inflections,
+            { :senses => [
+              { :synset => { :senses => :word } },
+              { :senses_verb_frames => :verb_frame },
+              :pointers ]
+            }
+          ]
+        )
+
         if @words.count > 0
           render :action => 'search'
         else
@@ -147,6 +148,11 @@ class WordsController < ApplicationController
       end
 
       format.json do
+        @words = Word.search options.merge(:page => params[:page],
+          :order => 'words.name ASC, words.part_of_speech ASC',
+          :include => :inflections
+        )
+
         # Bad requests are kicked back in the munge_search_params
         # filter. If no search results are found, the result will be an
         # empty array.
