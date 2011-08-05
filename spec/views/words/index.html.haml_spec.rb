@@ -19,6 +19,7 @@ require 'spec_helper'
 
 describe '/words/index.html.haml' do
   it 'should have an #accordion div' do
+    Factory :daily_word, :word => Factory(:substance)
     render
     rendered.should have_selector(:div, :id => 'accordion')
   end

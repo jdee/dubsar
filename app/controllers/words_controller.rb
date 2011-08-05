@@ -163,14 +163,11 @@ class WordsController < ApplicationController
   end
 
   def wotd
-    @word = DailyWord.word_of_the_day
+    word = DailyWord.word_of_the_day
 
     respond_to do |format|
-      format.html do
-        render :partial => 'wotd'
-      end
       format.json do
-        respond_with json_wotd_response
+        respond_with json_wotd_response(word)
       end
     end
   end
@@ -223,8 +220,8 @@ class WordsController < ApplicationController
 
   end
 
-  def json_wotd_response
-    [ @word.id, @word.name, @word.pos, @word.freq_cnt, @word.other_forms ]
+  def json_wotd_response(word)
+    [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms ]
   end
 
   def json_search_response

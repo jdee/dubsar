@@ -142,6 +142,12 @@ class Word < ActiveRecord::Base
     name <=> other.name
   end
 
+  def button_label
+    text = "#{name} (#{pos}.)"
+    text += " freq. cnt.: #{freq_cnt}" if freq_cnt > 0
+    text += "; also #{other_forms}" if other_forms.length > 0
+  end
+
   def page_title
     "Dubsar - #{name} (#{pos}.)"
   end

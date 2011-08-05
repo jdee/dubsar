@@ -50,3 +50,9 @@
         %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
         project
   =render :partial => 'news'
+  %h2#cap-word_of_the_day_n
+    %a{:href => '#cap-word_of_the_day_n'}
+      Word of the day
+      %em (n.)
+  #pane_2
+    = render :partial => 'word', :object => DailyWord.word_of_the_day

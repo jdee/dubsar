@@ -142,6 +142,10 @@ describe Word do
     it 'returns the right #meta_description' do
       @food.meta_description.should match /Word.*#{@food.name}/
     end
+
+    it 'returns a label for buttons' do
+      @food.button_label.should == "food (n.); also foods"
+    end
   end
 
   context 'when searching' do

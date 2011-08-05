@@ -36,5 +36,10 @@
   %div{'data-role' => 'content'}
     = render :partial => 'mobile_text'
     = render :partial => 'shared/mobile_form', :locals => { :term => @term }
+    %br/
+    %hr/
+    %br/
+    - wotd = DailyWord.word_of_the_day
+    = link_to "Word of the day: #{wotd.name} (#{wotd.pos}.)", url_for(:action => :m_show, :id => wotd.id), 'data-role' => 'button'
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'

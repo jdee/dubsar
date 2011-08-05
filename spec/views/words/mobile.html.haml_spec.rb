@@ -18,6 +18,10 @@
 require 'spec_helper'
 
 describe '/words/mobile.html.haml' do
+  before :each do
+    Factory :daily_word, :word => Factory(:substance)
+  end
+
   it 'has basic jquery mobile page structure' do
     render
     rendered.should have_selector(:div, 'data-role' => 'page') do |page|

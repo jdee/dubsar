@@ -26,13 +26,14 @@ describe WordsController do
 
     it "gets all defined routes" do
       # :index is actually currently not a real route
-      %w{about faq license link m_faq m_license m_support mobile qunit tour wotd}.each do |route|
+      %w{about faq license link m_faq m_license m_support mobile qunit tour}.each do |route|
         get route
         response.should be_success
       end
     end
 
     it "gets the :index view" do
+      Factory :daily_word, :word => Factory(:verb)
       get :search
       response.should be_success
       assigns(:words).should be_blank
