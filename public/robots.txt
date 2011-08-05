@@ -6,3 +6,4 @@ Disallow: /share
 Disallow: /senses/*/
 Disallow: /synsets/*/
 Disallow: /words/*/
+Disallow: /wotd
