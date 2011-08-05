@@ -21,7 +21,7 @@ describe '/shared/_mobile_form.html.haml' do
   it 'has a form' do
     render :partial => 'shared/mobile_form'
     rendered.should have_selector(:form) do |form|
-      form.should have_selector(:input, :type => 'search', :name => 'term', :id => 'word-input')
+      form.should have_selector(:input, :type => 'text', :name => 'term', :id => 'word-input')
       form.should have_selector(:button, :id => 'word-submit')
     end
   end
