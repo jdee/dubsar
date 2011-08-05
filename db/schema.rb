@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110724160943) do
+ActiveRecord::Schema.define(:version => 20110805131815) do
+
+  create_table "daily_words", :force => true do |t|
+    t.integer  "word_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "daily_words", ["created_at"], :name => "index_daily_words_on_created_at"
 
   create_table "fairies", :force => true do |t|
     t.string   "name",         :null => false

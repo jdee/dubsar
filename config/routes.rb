@@ -43,6 +43,7 @@ Dubsar::Application.routes.draw do
   match '/qunit'             => 'words#qunit'
   match '/share'             => 'application#share'
   match '/tour'              => 'words#tour'
+  match '/wotd'              => 'words#wotd'
 
   match '/(.:format)' => 'words#search'
   match '/os(.:format)' => 'words#os'

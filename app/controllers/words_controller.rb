@@ -162,6 +162,19 @@ class WordsController < ApplicationController
     end
   end
 
+  def wotd
+    @word = DailyWord.word_of_the_day
+
+    respond_to do |format|
+      format.html do
+        render :partial => 'wotd'
+      end
+      format.json do
+        respond_with json_wotd_response
+      end
+    end
+  end
+
   private
 
   def setup_captions
@@ -208,6 +221,10 @@ class WordsController < ApplicationController
       error and return false
     end
 
+  end
+
+  def json_wotd_response
+    [ @word.id, @word.name, @word.pos, @word.freq_cnt, @word.other_forms ]
   end
 
   def json_search_response

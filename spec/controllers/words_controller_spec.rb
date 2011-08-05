@@ -26,7 +26,7 @@ describe WordsController do
 
     it "gets all defined routes" do
       # :index is actually currently not a real route
-      %w{about faq license link m_faq m_license m_support mobile qunit tour}.each do |route|
+      %w{about faq license link m_faq m_license m_support mobile qunit tour wotd}.each do |route|
         get route
         response.should be_success
       end
@@ -188,6 +188,23 @@ describe WordsController do
       list = JSON.parse response.body
       list.second.count.should == 1
       list.third.should == 2
+    end
+
+    it 'returns the word of the day' do
+      word = Word.first
+      Factory :daily_word, :word => word
+      get :wotd
+
+      response.should be_success
+      list = JSON.parse response.body
+
+      # response format:
+      # [ id, "name", "pos", freq_cnt, "inflection1, inflection2 ..." ]
+      list.first.should == word.id
+      list.second.should == word.name
+      list.third.should == word.pos
+      list.fourth.should == word.freq_cnt
+      list.fifth.should == word.other_forms
     end
 
     after :all do

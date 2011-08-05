@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#  Dubsar Dictionary Project
+#  Copyright (C) 2010-11 Jimmy Dee
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version 2
+#  of the License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+# From: http://beginrescueend.com/workflow/scripting/
+# Load RVM into a shell session *as a function*
+if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then
+
+  # First try to load from a user install
+  source "$HOME/.rvm/scripts/rvm"
+
+elif [[ -s "/usr/local/rvm/scripts/rvm" ]] ; then
+
+  # Then try to load from a root install
+  source "/usr/local/rvm/scripts/rvm"
+
+else
+
+  printf "ERROR: An RVM installation was not found.\n"
+
+fi
+
+DUBSAR_PATH=/var/lib/dubsar
+WOTD_LOG=/dev/null
+export RAILS_ENV=production
+
+cd $DUBSAR_PATH
+bundle exec rake wotd > $WOTD_LOG 2>&1

@@ -256,6 +256,15 @@ class Word < ActiveRecord::Base
       search_options.delete(:page)
       count search_options
     end
+
+    # Select a Word entry from the DB at random. Must be all lowercase
+    # with no spaces or punctuattion, at least <tt>min_length</tt>
+    # letters (9 by default).
+    def random_word(min_length=9)
+      words = Word.all(:conditions => "name ~ '^[a-z]{#{min_length}}[a-z]*$'", :select => 'id')
+      random_number = SecureRandom.random_number(words.count)
+      Word.find words[random_number].id
+    end
   end
 
   def remove_duplicate_inflections

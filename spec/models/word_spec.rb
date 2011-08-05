@@ -168,6 +168,18 @@ describe Word do
     end
   end
 
+  context "generating a word of the day" do
+    it "returns a word at random with at least the specified number of letters" do
+      Factory :substance
+      word = Word.random_word(9)
+      word.name.should match /^[a-z]{9}[a-z]*$/
+
+      # the only word in the DB when this test runs
+      word.name.should == 'substance'
+      word.part_of_speech.should == 'noun'
+    end
+  end
+
   context "building inflections when seeding the DB" do
     context "calling #create_new_inflection" do
       let(:slang) { Factory :slang }
