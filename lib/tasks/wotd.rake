@@ -15,7 +15,7 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-RSS_LIMIT=10
+RSS_LIMIT=30
 
 # cheat on strftime formats knowing the server is GMT
 def build_rss
@@ -52,7 +52,7 @@ def build_rss
             item.description description
             item.link "http://dubsar-dictionary.com/words/#{word.id}"
             item.guid dw.id, :isPermaLink => 'false'
-            item.pubDate build_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
+            item.pubDate dw.created_at.strftime("%a, %d %b %Y %H:%M:%S GMT")
           end
         end
       end
