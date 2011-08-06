@@ -21,6 +21,7 @@
       =yield :title
     =favicon_link_tag
     =auto_discovery_link_tag :rss, '/rss_news.xml', :title => 'Dubsar News Feed'
+    =auto_discovery_link_tag :rss, '/wotd.xml', :title => 'Dubsar Word of the Day'
     %link{:rel => "search", :type => "application/opensearchdescription+xml", :title => "Dubsar", :href => "/opensearch.xml"}
     != stylesheet_link_merged :base
     = csrf_meta_tag

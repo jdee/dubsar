@@ -17,6 +17,7 @@
 
 RSS_LIMIT=10
 
+# cheat on strftime formats knowing the server is GMT
 def build_rss
   build_time = DateTime.now
   File.open(ENV['FILE'] || 'public/wotd.xml', 'w') do |file|
@@ -25,11 +26,11 @@ def build_rss
     xml.rss :version => '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do |rss|
       rss.channel do |channel|
         channel.atom :link, :href => 'http://dubsar-dictionary.com/wotd.xml', :rel => 'self', :type => 'application/rss+xml'
-        channel.title 'Dubsar Word of the Day News Feed'
-        channel.description 'Subscribe to the Dubsar Word of the Day.'
+        channel.title 'Dubsar Word of the Day'
+        channel.description 'Dubsar Word of the Day News Feed'
         channel.link 'http://dubsar-dictionary.com'
-        channel.lastBuildDate build_time.strftime("%a, %d %b %Y %H:%M:%S %Z")
-        channel.pubDate build_time.strftime("%a, %d %b %Y %H:%M:%S %Z")
+        channel.lastBuildDate build_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
+        channel.pubDate build_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
         channel.image do |image|
           image.url 'http://s.dubsar-dictionary.com/images/dubsar-link.png'
           image.title 'Dubsar Word of the Day'
@@ -51,7 +52,7 @@ def build_rss
             item.description description
             item.link "http://dubsar-dictionary.com/words/#{word.id}"
             item.guid dw.id, :isPermaLink => 'false'
-            item.pubDate build_time.strftime("%a, %d %b %Y %H:%M:%S %Z")
+            item.pubDate build_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
           end
         end
       end
