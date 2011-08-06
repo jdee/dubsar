@@ -35,7 +35,7 @@ else
 
 fi
 
-DUBSAR_PATH=/var/lib/dubsar
+DUBSAR_PATH=/var/lib/dubsar/current
 WOTD_LOG=/dev/null
 export RAILS_ENV=production
 
