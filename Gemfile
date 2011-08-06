@@ -17,6 +17,7 @@
 
 source 'http://rubygems.org'
 
+gem 'builder'
 gem 'haml'
 gem 'pg'
 gem 'rails', '>= 3.0'
@@ -25,7 +26,6 @@ gem 'will_paginate', '~> 3.0.pre2'
 group :backup_dev, :development, :test do
   gem 'ZenTest', '~> 4.4.2'
   gem 'autotest-rails', '~> 4.1.0'
-  gem 'builder'
   gem 'capistrano'
   gem 'factory_girl_rails'
   gem 'json'
