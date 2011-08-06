@@ -7,3 +7,4 @@ Disallow: /senses/*/
 Disallow: /synsets/*/
 Disallow: /words/*/
 Disallow: /wotd
+Allow: /wotd.xml
