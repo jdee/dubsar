@@ -46,6 +46,13 @@ namespace :deploy do
     EOF
   end
 
+  desc 'Build wotd RSS feed'
+  task :wotd_build, :roles => :app do
+    run <<-EOF
+      cd #{deploy_to}/current && bundle exec rake RAILS_ENV=#{rails_env} wotd:build
+    EOF
+  end
+
   desc 'start the remote Dubsar instance'
   task :start, :roles => :app, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
