@@ -169,6 +169,7 @@ class WordsController < ApplicationController
       format.json do
         respond_with json_wotd_response(word)
       end
+      format.xml
     end
   end
 
