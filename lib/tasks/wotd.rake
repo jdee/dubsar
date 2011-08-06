@@ -22,7 +22,7 @@ def build_rss
   build_time = DateTime.now
   File.open(ENV['FILE'] || 'public/wotd.xml', 'w') do |file|
     xml = Builder::XmlMarkup.new :target => file
-    xml.instruct! :xml, :version => '1.0', :standalone => 'yes'
+    xml.instruct! :xml, :version => '1.0', :standalone => 'yes', :encoding => 'UTF-8'
     xml.rss :version => '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do |rss|
       rss.channel do |channel|
         channel.atom :link, :href => 'http://dubsar-dictionary.com/wotd.xml', :rel => 'self', :type => 'application/rss+xml'
