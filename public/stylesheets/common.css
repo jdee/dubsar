@@ -366,3 +366,7 @@ img#dubsar-large {
 ul.ui-tabs-nav > li {
   width: 10ex;
 }
+
+div#wotd-rss-div {
+  width: 6.5ex;
+}

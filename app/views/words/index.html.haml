@@ -55,4 +55,9 @@
       Word of the day
       %em (n.)
   #pane_2
+    #wotd-rss-div.header-link-div.ui-corner-all.ui-state-default
+      %a#wotd-rss-link.line.header-link{:href => '/wotd.xml'}
+        %span.ui-icon.ui-icon-signal-diag
+        rss
+    %br/
     = render :partial => 'word', :object => DailyWord.word_of_the_day
