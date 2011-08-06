@@ -67,3 +67,4 @@ namespace :deploy do
 end
 
 after 'deploy:update', 'deploy:package_assets'
+after 'deploy:update', 'deploy:wotd_build'
