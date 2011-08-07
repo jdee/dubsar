@@ -21,8 +21,7 @@ class DailyWord < ActiveRecord::Base
 
   class << self
     def word_of_the_day
-      wotd = first(:order => 'created_at DESC', :include => { :word => :inflections} )
-      wotd.word if wotd
+      first(:order => 'created_at DESC', :include => { :word => :inflections} ).try :word
     end
   end
 end
