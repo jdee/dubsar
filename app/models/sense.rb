@@ -43,7 +43,7 @@ class Sense < ActiveRecord::Base
   end
 
   def page_title
-    "Dubsar - #{word.name} (#{word.pos}.)"
+    "Dubsar - #{word.name} (#{word.pos}.) #{synset.gloss}"
   end
 
   def meta_description
