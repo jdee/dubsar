@@ -63,44 +63,6 @@
           sedulous.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
-        Q. Which browsers work well with Dubsar?
-      A. Dubsar requires a JavaScript-enabled browser, but thanks to
-      jQuery, nearly any browser that supports JavaScript will display
-      Dubsar well, particularly:
-      %ul
-        %li
-          Firefox 3 &amp; 5 on all tested platforms (Ubuntu Linux, Mac OS
-          X, Windows Vista)
-        %li Google Chrome 6&ndash;13 on all platforms
-        %li Safari 5 on OS X and Vista
-        %li OmniWeb 5 on OS X
-        %li Internet Explorer 8 &amp; 9 on Vista
-
-      The
-      =link_to 'QUnit test suite', qunit_path, :title => 'QUnit'
-      currently passes in all these browsers.
-
-      %h3 Mobile Devices
-
-      %p
-        Dubsar Mobile has been tested on:
-        %ul
-          %li Samsung Galaxy S (Android 2.2.1)
-          %li iPad 2 (iOS 4.3.4)
-          %li Apple iOS Simulator (4.3) in iPhone mode
-        using the Mobile Safari browser in all cases. It has also been
-        tested using Firefox 5 on Android. The QUnit test suite passes in
-        all those browsers. Except as noted in the
-        =link_to 'Dubsar issue list', 'https://github.com/jdee/dubsar/issues'
-        , the application is known to work well in all tested mobile
-        environments.
-
-      %p
-        Anecdotal reports indicate that it also works on a Blackberry.
-        Lack of available mobile testing devices prevents further testing
-        for the moment. Testing is an ongoing activity.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
         Q. What do those WordNet&reg; terms mean?
       A. Some of them are listed here in Dubsar.  The data model used in
       Dubsar's PostgreSQL database uses them for its table names.
@@ -188,12 +150,6 @@
                 &= ptype
               %td
                 &= help_text
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Is there any other documentation available for Dubsar?
-      A. See the
-      %a{:href => 'https://github.com/jdee/dubsar/wiki', :title => 'Dubsar wiki'} Dubsar wiki
-      on GitHub.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How many entries does Dubsar have?
