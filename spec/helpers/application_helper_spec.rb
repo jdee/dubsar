@@ -122,4 +122,11 @@ describe ApplicationHelper do
       helper.twitter_button.should match %r{<a href="http://twitter.com/share}
     end
   end
+
+  describe '#canonical_url' do
+    it 'should always return a string' do
+      @term = 'food'
+      helper.canonical_url.should_not be_nil
+    end
+  end
 end

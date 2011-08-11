@@ -25,10 +25,11 @@ module ApplicationHelper
     if object
       url += url_for object
     else
-      url += url_for :action => :search, :term => @term
+      url += url_for :controller => :words, :action => :search, :term => @term
       url += "&match=#{@match}" unless @match.blank?
       url += "&title=#{URI.encode @title}" unless @title.blank?
       url += "&page=#{params[:page]}" unless params[:page].blank? or params[:page].to_i == 1
+      url
     end
   end
 
