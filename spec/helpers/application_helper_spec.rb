@@ -124,9 +124,19 @@ describe ApplicationHelper do
   end
 
   describe '#canonical_url' do
-    it 'should always return a string' do
+    it 'always returns a string' do
       @term = 'food'
       helper.canonical_url.should_not be_nil
+    end
+  end
+
+  describe '#canonical_link_tag' do
+    it 'returns unescaped URLS' do
+      @term = 'food'
+      @match = 'exact'
+
+      helper.canonical_link_tag.should match %r{term=food&match=exact}
+
     end
   end
 end

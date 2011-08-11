@@ -17,7 +17,10 @@
 
 module ApplicationHelper
   def canonical_link_tag(object=nil)
-    haml_tag :link, :rel => 'canonical', :href => canonical_url(object)
+    # haml_tag :link, :rel => 'canonical', :href => canonical_url(object)
+    <<-HTML
+    <link rel="canonical" href="#{canonical_url(object)}" />
+    HTML
   end
 
   def canonical_url(object=nil)
