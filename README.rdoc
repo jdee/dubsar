@@ -29,6 +29,7 @@ Also see:
 - {Dubsar on Facebook}[http://www.facebook.com/pages/Dubsar/155561501154946]
 - {Dubsar on Twitter}[http://twitter.com/#!/dubsar]
 - {Dubsar for iOS}[https://github.com/jdee/dubsar_ios]
+- {Dubsar for Android}[https://github.com/jdee/dubsar_android]
 
 == Copyright
 
