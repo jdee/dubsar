@@ -171,6 +171,10 @@ class Word < ActiveRecord::Base
     sym ? sym.to_s : ''
   end
 
+  def name_and_pos
+    "#{name} (#{pos}.)"
+  end
+
   # generates an identifier (no spaces) from the word's name and
   # part of speech
   def unique_name

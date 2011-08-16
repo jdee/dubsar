@@ -58,7 +58,7 @@ class SynsetsController < ApplicationController
   def pointer_response
     @synset.pointers.map do |ptr|
       response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
-      response << ptr.target.words.all(:order => 'name').map(&:name).join(', ')
+      response << ptr.target.word_list_and_pos
       response << ptr.target.gloss
     end
   end

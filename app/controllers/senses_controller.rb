@@ -65,9 +65,9 @@ class SensesController < ApplicationController
       response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
       case ptr.target_type
       when 'Sense'
-        response << ptr.target.word.name
+        response << ptr.target.word.name_and_pos
       when 'Synset'
-        response << ptr.target.words.all(:order => 'name').map(&:name).join(', ')
+        response << ptr.target.word_list_and_pos
       end
       response << ptr.target.gloss
     end
