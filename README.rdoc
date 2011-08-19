@@ -30,6 +30,7 @@ Also see:
 - {Dubsar on Twitter}[http://twitter.com/#!/dubsar]
 - {Dubsar for iOS}[https://github.com/jdee/dubsar_ios]
 - {Dubsar for Android}[https://github.com/jdee/dubsar_android]
+- {Dubsar for iPhone, iPod Touch and iPad on the iTunes App Store}[http://itunes.apple.com/us/app/dubsar/id453868483]
 
 == Copyright
 
