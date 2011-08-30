@@ -162,6 +162,15 @@ describe Word do
       Word.search(:term => 'follo_', :offset => 0).count.should == 1
     end
 
+    # https://github.com/jdee/dubsar/issues/44
+    it 'handles special characters without crashing' do
+      count = nil
+      lambda do
+        count = Word.search(:term => 'S(', :offset => 0).count
+      end.should_not raise_error
+      count.should == 0
+    end
+
     it 'defaults to a case-insensitive search' do
       Word.search(:term => 'Followed', :offset => 0).count.should == 1
     end
