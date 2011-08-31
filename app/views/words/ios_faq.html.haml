@@ -1,0 +1,189 @@
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- content_for :title do
+  Dubsar for iOS FAQ
+- content_for :description do
+  %link{:rel => 'canonical', :href => ios_faq_url}
+
+%div#faq{'data-role' => 'page', 'data-title' => "Dubsar for iOS - FAQ", 'data-theme' => 'b'}
+  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
+    = render :partial => 'shared/mobile_header'
+    %br/
+    Dubsar for iOS Frequently Asked Questions
+  %div{'data-role' => 'content'}
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Can I find Dubsar in the App Store?
+      A. Yes.
+
+      %p
+        =link_to 'App Store', 'http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=453868483&mt=8'
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I get help with a problem?
+      A. Contact
+      =link_to 'support@dubsar-dictionary.com', 'mailto:support@dubsar-dictionary.com'
+      for support with Dubsar for iPhone, iPod Touch and iPad.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Where does the database come from?
+      A. This is the WordNet&reg; 3.0 data set from Princeton University,
+      available for free under the WordNet 3.0 License.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Which words are in the dictionary?
+      A. The
+      WordNet&reg;
+      data set is aimed at automated text processing and
+      includes only the most numerous parts of speech: adjectives,
+      adverbs, nouns and verbs.  It does not include conjunctions,
+      interjections, prepositions or pronouns.  These words are far fewer
+      in number and are less directly related to the meaning of any text.
+      So you won't find
+      %em from
+      in Dubsar, but you will find
+      %em sedulous.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What do those WordNet&reg; terms mean?
+      A. Some of them are listed here in Dubsar.  The data model used in
+      Dubsar's PostgreSQL database uses them for its table names.
+      %h3 Word
+      A dictionary entry with a unique name and part of speech.
+
+      %h3 Synset
+      A list of synonymous words in a particular sense.  Each word can
+      belong to multiple synsets.  A synset is essentially a meaning that
+      one or more words share.  It includes a gloss and optionally one or
+      more sample sentences.
+
+      %h3 Sense
+      The intersection (or join table, in database terms) of words and
+      synsets.  Each occurrence of one word in one synset is a sense of
+      that word.  A sense is a specific meaning of a single word.
+
+      %h3 Pointer
+      A lexical or semantic relationship between senses or synsets.  A
+      lexical pointer points from one sense to another (one specific
+      meaning of one word to a specific meaning of another word).  A
+      semantic pointer points from one synset to another and hence
+      relates two meanings.  There are many specific pointer types.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What's all that stuff listed for each word sense?
+      A. The tooltips display a number of things:
+      %dl
+        %dt lexical file name
+        %dd
+          broad categories associated with each word sense
+
+        %dt adjective marker
+        %dd
+          for some adjective senses, a limitation on the syntactic
+          position of the adjective when used in this sense (see below)
+
+        %dt frequency count
+        %dd
+          number of times this word sense occurs in a reference text
+
+        %dt verb frames
+        %dd
+          generic sentence frames applicable to this verb sense
+
+        %dt sample sentences
+        %dd
+          sample sentences for the synset
+
+      %h4 Adjective markers
+      Some adjective senses may only be used in certain syntactic
+      positions:
+      %ul
+        %li
+          %strong (a) attributive
+          The
+          %em left
+          side of the road.
+        %li
+          %strong (ip) immediately postnominal
+          I live in the city
+          %em proper.
+        %li
+          %strong (p) predicate
+          It is
+          %em well
+          he did not go.
+
+      Then there are lexical and semantic pointers from one word sense to
+      another sense (for lexical pointers) or synset (for semantic ones).
+      %hr/
+
+      %table
+        %thead
+          %tr
+            %th
+              one way of saying it
+            %th
+              another way of saying it
+        %tbody
+          - Pointer.help_list.each do |ptype, help_text|
+            %tr
+              %td
+                &= ptype
+              %td
+                &= help_text
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How many entries does Dubsar have?
+      A. Here are current row counts, by table.  This list is live,
+      generated from the database tables whenever you load this page.
+      As Dubsar&apos;s data content evolves, this list of tables and their
+      specific row counts will change.
+      %table
+        %tbody
+          - %w{synset word sense inflection pointer}.each do |model|
+            %tr
+              %td
+                =model_count(model)
+              %td
+                =model.pluralize
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How long does it take to build the Dubsar database?
+      A. Currently it takes two to three hours.  There are two identical
+      databases in the production environment so that Dubsar can stay
+      running while the database is being reseeded, and they have to be
+      seeded sequentially.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How are the autocompleter results determined?
+      A. WordNet&reg; assigns frequency counts to some word senses based
+      on the number of times that sense of that word occurs in &quot;various
+      semantic concordance texts.&quot;  By far most of the word senses in
+      WordNet&reg; are untagged.  Dubsar treats these as having a
+      frequency count of 0 and assigns a frequency count to each word
+      which is the sum of the frequency counts associated with each of
+      that word&apos;s senses.
+
+      The autocompleter displays the top ten words beginning with the
+      current search term, ordered by frequency count.  However, it
+      collapses multiple parts of speech.  So if you type in
+      %em loo,
+      Dubsar will only display nine results, since
+      %em look
+      occurs twice in the top ten.
+  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
+    &copy; 2011 Jimmy Dee &middot; WordNet&reg; &copy; 2011 The Trustees of Princeton University
