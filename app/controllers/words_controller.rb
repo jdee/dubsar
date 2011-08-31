@@ -25,6 +25,10 @@ class WordsController < ApplicationController
     render :layout => false
   end
 
+  def ios_faq
+    render :layout => 'mobile'
+  end
+
   def m_faq
     render :layout => 'mobile'
   end
