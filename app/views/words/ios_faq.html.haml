@@ -205,10 +205,24 @@
         If more than 30 results are returned, the list is paginated using a page
         control like this:
       %p
-        =image_tag 'ios_page_control.png', :height => "151", :width => "300", :alt => "iOS page control"
+        =image_tag 'ios_page_control.png', :height => "147", :width => "300", :alt => "iOS page control"
       %p
         Tap the left side of the control to page back and the right side to
         page forward through the search results.
+      %p
+        The iPad app provides some built-in wild-card searches using the alphabet
+        buttons on the master panel.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Can I get more room to see a gloss in a Sense or Synset view?
+      %p
+        A. Yes. The pale blue banner label below each gloss, listing a WordNet&reg;
+        lexname like &lt;noun.substance&gt;, can be dragged down to give the gloss
+        more room, if needed. A gold drag handle will appear if you apply pressure
+        to the label:
+      %p
+        =image_tag 'ios_drag_handle.png', :height => "173", :width => "300", :alt => "iOS drag handle"
+
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     &copy; 2011 Jimmy Dee &middot; WordNet&reg; &copy; 2011 The Trustees of Princeton University
