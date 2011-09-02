@@ -21,10 +21,15 @@
 
 %div#faq{'data-role' => 'page', 'data-title' => "Dubsar for iOS - FAQ", 'data-theme' => 'b'}
   %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
-    = render :partial => 'shared/mobile_header'
+    %h1
+      =image_tag 'dubsar-full.png', :alt => 'Dubsar', :id => 'dubsar-mobile-image', :width => "143", :height => "52"
     %br/
     Dubsar for iOS Frequently Asked Questions
   %div{'data-role' => 'content'}
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Which versions of iOS are supported?
+      A. Dubsar requires version 4.2 or higher or iOS.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How do I get help with a problem?
@@ -178,5 +183,32 @@
       Dubsar will only display nine results, since
       %em look
       occurs twice in the top ten.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Can I do wild-card searches?
+      %p
+        A. Yes. Dubsar supports two SQL wild card characters:
+      %ul
+        %li
+          _ stands for any single character, so
+          %em c_t
+          matches
+          %em cat, cot
+          and
+          %em cut.
+        %li
+          ="% stands for anything at all, including nothing, so"
+          %em="%count%"
+          matches anything containing the word
+          %em count.
+      %p
+        If more than 30 results are returned, the list is paginated using a page
+        control like this:
+      %p
+        =image_tag 'ios_page_control.png', :height => "151", :width => "300", :alt => "iOS page control"
+      %p
+        Tap the left side of the control to page back and the right side to
+        page forward through the search results.
+
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     &copy; 2011 Jimmy Dee &middot; WordNet&reg; &copy; 2011 The Trustees of Princeton University
