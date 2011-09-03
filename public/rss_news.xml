@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Mon, 29 Aug 2011 18:15:00 GMT</lastBuildDate>
-    <pubDate>Mon, 29 Aug 2011 18:15:00 GMT</pubDate>
+    <lastBuildDate>Sat, 03 Sep 2011 21:45:00 GMT</lastBuildDate>
+    <pubDate>Sat, 03 Sep 2011 21:45:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar for Android 1.0.1</title>
+      <description>Dubsar for Android 1.0.1 fixes a 4G network bug.</description>
+      <link>https://market.android.com/details?id=com.dubsar_dictionary.Dubsar</link>
+      <guid isPermaLink="false">25</guid>
+      <pubDate>Sat, 03 Sep 2011 21:45:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar for Android Released</title>
       <description>Dubsar is now available worldwide for free in the Android Market.</description>
