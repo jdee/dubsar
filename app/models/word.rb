@@ -43,6 +43,12 @@ class Hash
         term = copy.delete(:term)
         "inflections.name = ?"
       end
+    when 'regexp'
+      # only supported for backward compatibility with the iPad 1.0.1
+      # client; always expect term to be '^[character-class]'
+      table = :words
+      term = copy.delete(:term).sub(/^\^/, '') + "*"
+      "words.name GLOB ?"
     when 'exact'
       term = copy.delete(:term)
       "inflections.name = ?"

@@ -28,6 +28,11 @@ describe Hash, "with #search_options extension" do
     options = { :term => 'slan_', :match => 'case' }.search_options
     conditions = options[:conditions]
     conditions.join.should match /words\.name GLOB/
+
+    options = { :term => '^[Ss]', :match => 'regexp' }.search_options
+    conditions = options[:conditions]
+    conditions.first.should == 'words.name GLOB ?'
+    conditions.last.should == '[Ss]*'
   end
 
   it 'uses the :inflections table in an exact search' do

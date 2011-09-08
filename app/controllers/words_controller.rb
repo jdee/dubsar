@@ -219,7 +219,7 @@ class WordsController < ApplicationController
         @term = "^[#{letter}#{letter.downcase}]"
         @title = letter
       end
-    when 'case', 'exact'
+    when 'case', 'exact', 'regexp'
     else
       error and return false
     end
