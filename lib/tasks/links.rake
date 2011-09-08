@@ -61,6 +61,9 @@ task :links => :environment do
       xml.AuthorInfo :description => 'Dubsar Dictionary Project subscribed links',
         :author => 'Dubsar Dictionary Project'
 
+      # TODO: This query will not work against the SQLite DB. The exact contents
+      # of this PostgreSQL regex query are hard to match. But the links.xml file
+      # checked into SCM is current, so this is not urgent.
       terms = Set.new
       Word.all(:select => 'DISTINCT name',
         :conditions => "name ~* '^[a-z]{9}[a-z]*$'",
