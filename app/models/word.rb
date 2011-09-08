@@ -23,36 +23,38 @@ class Hash
 
     copy = clone_without_controller_params
     table = :inflections # by default
-    operator = case copy.delete(:match)
+    match = copy.delete(:match)
+
+    conditions = case match
     when nil, ''
-      if /[%_\[\]?*+.()]/ =~ copy[:term]
+      term = copy.delete(:term)
+      if /[%_\[\]?*+.()]/ =~ term
         table = :words
-        'ILIKE'
+        "words.name LIKE ?"
       else
-        copy[:term] = '^' + copy[:term] + '$'
-        '~*'
+        "inflections.name LIKE ?"
       end
     when 'case'
       if /[%_\[\]?*+.()]/ =~ copy[:term]
         table = :words
-        'LIKE'
+        term = copy.delete(:term).gsub('%', '*').gsub('_', '?')
+        "words.name GLOB ?"
       else
-        '='
+        term = copy.delete(:term)
+        "inflections.name = ?"
       end
-    when 'regexp'
-      table = :words
-      '~'
     when 'exact'
-      '='
+      term = copy.delete(:term)
+      "inflections.name = ?"
     end
 
     case table
     when :inflections
       copy.merge!(
-        :conditions => [ "inflections.name #{operator} ?", copy.delete(:term) ],
+        :conditions => [ conditions, term ],
         :joins => 'INNER JOIN inflections ON words.id = inflections.word_id')
     when :words
-      copy.merge! :conditions => [ "words.name #{operator} ?", copy.delete(:term) ]
+      copy.merge! :conditions => [ conditions, term ]
     end
     copy.merge!(:page => copy[:page]) if copy.has_key?(:page)
     copy.symbolize_keys
@@ -271,7 +273,12 @@ class Word < ActiveRecord::Base
     # with no spaces or punctuattion, at least <tt>min_length</tt>
     # letters (9 by default).
     def random_word(min_length=9)
-      words = Word.all(:conditions => "name ~ '^[a-z]{#{min_length}}[a-z]*$'", :select => 'id')
+      pattern = ''
+      min_length.times do
+        pattern += '[a-z]'
+      end
+
+      words = Word.all(:conditions => "name GLOB '#{pattern}*'", :select => 'id')
       random_number = SecureRandom.random_number(words.count)
       Word.find words[random_number].id
     end

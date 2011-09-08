@@ -65,7 +65,7 @@ describe SensesController do
       [ @food, @good ].each do |word|
         # only one sense, with only one pointer
         sense = word.senses.first
-        pointer = sense.pointers.first
+        pointer = sense.pointers.first || sense.synset.pointers.first
 
         target_text = case pointer.target
         when Sense

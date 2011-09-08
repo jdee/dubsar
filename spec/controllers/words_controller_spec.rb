@@ -94,9 +94,6 @@ describe WordsController do
       get :search, :term => 'slang', :match => 'case'
       response.should be_success
 
-      get :search, :term => 'slang', :match => 'regexp'
-      response.should be_success
-
       get :search, :term => 'slang', :match => 'foo'
       response.status.should == 404
     end

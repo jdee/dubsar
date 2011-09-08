@@ -27,11 +27,7 @@ describe Hash, "with #search_options extension" do
   it 'uses the :words table in wildcard searches' do
     options = { :term => 'slan_', :match => 'case' }.search_options
     conditions = options[:conditions]
-    conditions.join.should match /words\.name LIKE/
-
-    options = { :term => 'slan.', :match => 'regexp' }.search_options
-    conditions = options[:conditions]
-    conditions.join.should match /words\.name ~/
+    conditions.join.should match /words\.name GLOB/
   end
 
   it 'uses the :inflections table in an exact search' do
@@ -185,7 +181,7 @@ describe Word do
     it "returns a word at random with at least the specified number of letters" do
       Factory :substance
       word = Word.random_word(9)
-      word.name.should match /^[a-z]{9}[a-z]*$/
+      word.name.should match /^[a-z]{9}/
 
       # the only word in the DB when this test runs
       word.name.should == 'substance'

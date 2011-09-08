@@ -212,13 +212,14 @@ class WordsController < ApplicationController
 
     case @match
     when nil, ''
+      # TODO: Fix the alphabet links and buttons
       if @term =~ /^[A-Z]%$/
         letter = /^([A-Z])%$/.match(@term)[1]
         @match = 'regexp'
         @term = "^[#{letter}#{letter.downcase}]"
         @title = letter
       end
-    when 'case', 'exact', 'regexp'
+    when 'case', 'exact'
     else
       error and return false
     end

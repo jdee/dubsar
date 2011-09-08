@@ -19,7 +19,7 @@ class SensesController < ApplicationController
   respond_to :html, :json
 
   def tab
-    @sense = Sense.find params[:sense_id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
+    @sense = Sense.find params[:sense_id], :include => [ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
     respond_to do |format|
       format.html do
         render @sense
@@ -30,7 +30,7 @@ class SensesController < ApplicationController
   end
 
   def show
-    @sense = Sense.find params[:id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
+    @sense = Sense.find params[:id], :include => [ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
 
     respond_to do |format|
       format.html
@@ -43,7 +43,7 @@ class SensesController < ApplicationController
   end
 
   def m_show
-    @sense = Sense.find params[:id], :include => [ { :synset => :words }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
+    @sense = Sense.find params[:id], :include => [ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
     render :layout => false
   rescue
     m_error
@@ -63,12 +63,12 @@ class SensesController < ApplicationController
   def pointer_response
     @sense.pointers.map do |ptr|
       response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
-      case ptr.target_type
-      when 'Sense'
-        response << ptr.target.word.name_and_pos
-      when 'Synset'
-        response << ptr.target.word_list_and_pos
-      end
+      response << ptr.target.word.name_and_pos
+      response << ptr.target.gloss
+    end +
+    @sense.synset.pointers.map do |ptr|
+      response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
+      response << ptr.target.word_list_and_pos
       response << ptr.target.gloss
     end
   end

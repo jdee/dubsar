@@ -345,18 +345,10 @@ end
 
       if source_target == '0000'
         ptype = pointer_type(pointer_symbol)
-        synset.senses.each do |sense|
-          Pointer.create_new :source => sense, :target => target_synset,
-            :ptype => ptype
-        end
         Pointer.create_new :source => synset, :target => target_synset,
             :ptype => ptype
 
         rtype = reflected_pointer_type(pointer_symbol)
-        target_synset.senses.each do |sense|
-          Pointer.create_new :source => sense, :target => synset,
-            :ptype => rtype
-        end unless rtype.blank?
         Pointer.create_new :source => target_synset, :target => synset,
           :ptype => rtype
       else

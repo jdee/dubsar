@@ -47,9 +47,6 @@ def create_antonyms!
   good_sense = Factory(:sense, :synset => Factory(:good_synset))
   bad_sense = Factory(:sense, :synset => Factory(:bad_synset ))
 
-  good_sense.pointers << Factory(:pointer, :ptype => 'antonym', :target => bad_sense.synset , :source => good_sense)
-  bad_sense.pointers  << Factory(:pointer, :ptype => 'antonym', :target => good_sense.synset, :source => bad_sense )
-
   good_sense.synset.pointers << Factory(:pointer, :ptype => 'antonym', :target => bad_sense.synset, :source => good_sense.synset)
   bad_sense.synset.pointers << Factory(:pointer, :ptype => 'antonym', :target => good_sense.synset, :source => bad_sense.synset)
 

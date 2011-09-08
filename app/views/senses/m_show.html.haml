@@ -58,9 +58,9 @@
         - @sense.synset.samples.each do |sample|
           - unless sample.blank?
             %li=h sample
-    - unless @sense.pointers.blank?
+    - unless @sense.pointers.blank? and @sense.synset.pointers.blank?
       %h3 pointers
-      - @sense.pointers.group_by(&:ptype).each do |ptype, ptrs|
+      - (@sense.pointers+@sense.synset.pointers).group_by(&:ptype).each do |ptype, ptrs|
         %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
           %h3= ptype
           - ptrs.each do |ptr|

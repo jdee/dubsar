@@ -16,41 +16,31 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 development:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   database: dubsar_development
   pool: 5
-  username: jdee
-  password: admin
 
 backup_dev:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   database: dubsar_backup_dev
   pool: 5
-  username: jdee
-  password: admin
 
 test:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   database: dubsar_test
   pool: 5
-  username: jdee
-  password: admin
 
 production:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   database: dubsar_production
   pool: 5
-  username: dubsar
-  password: admin
 
 backup:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   database: dubsar_backup
   pool: 5
-  username: dubsar
-  password: admin
