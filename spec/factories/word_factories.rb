@@ -187,6 +187,18 @@ Factory.define :list_entry, :class => Word do |w|
       i.association(:inflection, :name => "#{@name}s")
     ]
   end
+  w.freq_cnt 100
+end
+
+Factory.define :w, :class => Word do |w|
+  w.name 'w'
+  w.part_of_speech 'noun'
+  w.inflections do |i|
+    [
+      i.association(:inflection, :name => 'w')
+    ]
+  end
+  w.freq_cnt 0
 end
 
 Factory.define :capitalized_word, :class => Word do |w|

@@ -140,6 +140,14 @@ describe WordsController do
       list.last.count.should == 0
     end
 
+    it 'returns exact matches first in the #os route, regardless of frequency count' do
+      Factory :w
+      get :os, :term => 'w'
+      list = JSON.parse response.body
+      list.last.count.should > 1
+      list.last.first.should == 'w'
+    end
+
     it 'gets matching words via the :search route' do
       get :search, :term => 'word%'
       word = Word.find_by_name_and_part_of_speech('word_1', 'noun')

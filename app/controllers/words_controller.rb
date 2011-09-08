@@ -97,10 +97,22 @@ class WordsController < ApplicationController
         # whitespace
         @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
 
+        # If the user types in 'was,' we complete with 'was' at the top, as an
+        # exact match from the inflections table, followed by matches from the
+        # words table if any. If the user types in something like 'c_,' with a
+        # wild card, we don't look for exact matches.
         local_params = params.clone
-        local_params[:term] = "#{@term}%"
-        @words = Word.search local_params.merge(:select => 'name',
-          :offset => 0, :limit => 10,
+        @words = []
+        if /[%_\[\]?*+.()]/ !~ @term
+          local_params[:term] = @term
+          @words = Word.search local_params.merge(:select => 'inflections.name', :offset => 0)
+          local_params[:term] = "#{@term}_%"
+        else
+          local_params[:term] = "#{@term}%"
+        end
+
+        @words += Word.search local_params.merge(:select => 'name',
+          :offset => 0, :limit => 10-@words.count,
           :order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
 
         # The uniq method call is case-sensitive.  It has the effect of
