@@ -18,25 +18,25 @@
 development:
   adapter: sqlite3
   encoding: unicode
-  database: dubsar_development
+  database: db/development.sqlite3
   pool: 5
 
 backup_dev:
   adapter: sqlite3
   encoding: unicode
-  database: dubsar_backup_dev
+  database: db/backup_dev.sqlite3
   pool: 5
 
 test:
   adapter: sqlite3
   encoding: unicode
-  database: dubsar_test
+  database: db/test.sqlite3
   pool: 5
 
 production:
   adapter: sqlite3
   encoding: unicode
-  database: dubsar_production
+  database: db/production.sqlite3
   pool: 5
 
 backup:
