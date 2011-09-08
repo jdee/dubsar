@@ -189,6 +189,13 @@ class WordsController < ApplicationController
     end
   end
 
+  def review
+    @inflections = Inflection.paginate(:page => params[:page],
+      :per_page => 135,
+      :order => 'name ASC',
+      :include => :word)
+  end
+
   private
 
   def setup_captions

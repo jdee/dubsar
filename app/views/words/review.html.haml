@@ -1,0 +1,23 @@
+%table{:cols => "6"}
+  %thead
+    %tr
+      %th word
+      %th inflection
+      %th word
+      %th inflection
+      %th word
+      %th inflection
+  %tbody
+    - @inflections.each_with_index do |inflection, index|
+      - break if index > 44
+      %tr
+        %td=h inflection.word.name_and_pos
+        %td=h inflection.name
+        - if @inflections.count >= index+45
+          %td=h @inflections[index+45].word.name_and_pos
+          %td=h @inflections[index+45].name
+        - if @inflections.count >= index+90
+          %td=h @inflections[index+90].word.name_and_pos
+          %td=h @inflections[index+90].name
+
+= will_paginate @inflections
