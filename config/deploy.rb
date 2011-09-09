@@ -32,6 +32,7 @@ set :deploy_to, "/var/lib/#{application}"
 set :scm, :git
 set :rails_env, 'production'
 set(:shared_database_path) {"#{shared_path}/databases"}
+set(:shared_config_path) {"#{shared_path}/config"}
 
 role :web, domain
 role :app, domain
