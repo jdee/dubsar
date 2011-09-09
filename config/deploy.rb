@@ -94,6 +94,7 @@ after "deploy:setup", "sqlite3:make_shared_folder"
 after "deploy:setup", "sqlite3:build_configuration"
 
 after 'deploy:update', 'deploy:package_assets'
+after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:wotd_build'
 
 before "deploy:migrate", "sqlite3:link_configuration_file"
