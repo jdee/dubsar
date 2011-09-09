@@ -284,7 +284,8 @@ class Word < ActiveRecord::Base
         pattern += '[a-z]'
       end
 
-      words = Word.all(:conditions => "name GLOB '#{pattern}*'", :select => 'id')
+      words = Word.all(:conditions => [ "name GLOB '#{pattern}*' AND NOT name GLOB ?",
+        "*[A-Z0-9 .-']*" ], :select => 'id')
       random_number = SecureRandom.random_number(words.count)
       Word.find words[random_number].id
     end

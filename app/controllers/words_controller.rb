@@ -190,10 +190,14 @@ class WordsController < ApplicationController
   end
 
   def review
-    @inflections = Inflection.paginate(:page => params[:page],
+    @inflections = Inflection.paginate(
+      :joins => 'INNER JOIN words ON words.id = inflections.word_id',
+      :conditions => [
+        "words.part_of_speech IN ('noun', 'verb') AND words.name GLOB '[a-z]*' AND NOT words.name GLOB ? ",
+        "*[A-Z0-9 .-']*" ],
+      :page => params[:page],
       :per_page => 135,
-      :order => 'name ASC',
-      :include => :word)
+      :order => 'name ASC')
   end
 
   private

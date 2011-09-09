@@ -186,7 +186,7 @@ describe Word do
     it "returns a word at random with at least the specified number of letters" do
       Factory :substance
       word = Word.random_word(9)
-      word.name.should match /^[a-z]{9}/
+      word.name.should match /^[a-z]{9}[a-z]*$/
 
       # the only word in the DB when this test runs
       word.name.should == 'substance'
