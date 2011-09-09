@@ -18,7 +18,7 @@
   Dubsar FAQ
 - content_for :description do
   %meta{:name => 'Description', :content => 'Frequently Asked Questions about the Dubsar Dictionary Project.'}
-  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, English'}
+  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
   %link{:rel => 'canonical', :href => 'http://dubsar-dictionary.com/faq'}
   != thumbnail_link_tags
 
@@ -91,7 +91,7 @@
       Q. What are SQL wild cards?
   #pane_3
     A. The Structured Query Language used by Dubsar&apos;s
-    PostgreSQL database accepts the following wildcards in
+    SQLite database accepts the following wildcards in
     searches:
     %ul
       %li % matches anything, including nothing at all
@@ -111,7 +111,7 @@
       Q. What do those WordNet&reg; terms mean?
   #pane_4
     A. Some of them are listed here in Dubsar.  The data model used in
-    Dubsar's PostgreSQL database uses them for its table names.
+    Dubsar's SQLite database uses them for its table names.
     %h3 Word
     A dictionary entry with a unique name and part of speech.
 
@@ -246,7 +246,8 @@
     %em loo,
     Dubsar will only display nine results, since
     %em look
-    occurs twice in the top ten.
+    occurs twice in the top ten. Exact matches are displayed first, without
+    regard to frequency count.
   %h2#faq_11
     %a{:href => '#faq_11'}
       Q. How does the

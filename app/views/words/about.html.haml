@@ -19,7 +19,7 @@
 
 - content_for :description do
   %meta{:name => 'Description', :content => 'Read about the open-source Dubsar Dictionary Project.'}
-  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, PostgreSQL, QUnit, open-source, GPL, GitHub, English'}
+  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
   %link{:rel => 'canonical', :href => 'http://dubsar-dictionary.com/about'}
   != thumbnail_link_tags
 
@@ -32,9 +32,6 @@
       %a{:href => 'http://rubyonrails.org', :title => 'Ruby on Rails®', :class => 'undecorated'}
         Ruby on Rails&reg;
       3.0,
-    %li
-      =link_to 'PostgreSQL', 'http://postgresql.org', :title => 'PostgreSQL', :class => 'undecorated'
-      8.4,
     %li
       =link_to 'jQuery', 'http://jquery.com', :title => 'jQuery', :class => 'undecorated'
       1.6 and

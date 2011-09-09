@@ -2,7 +2,6 @@
 
 Dubsar is a dictionary web application using
 - Ruby on Rails 3.0
-- PostgreSQL 8.4
 - jQuery 1.6
 - jQuery UI 1.8
 The content is taken from the Princeton University

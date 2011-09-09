@@ -123,7 +123,7 @@
     });
     $('a#share-link').live('click', function() { $share_dialog.dialog('open'); return false; });
 
-    $sql_help_dialog = $('<div>The Structured Query Language used by Dubsar&apos;s PostgreSQL database accepts the following wildcards in searches:<ul><li>% matches anything, including nothing at all</li><li>_ matches any single character</li></ul>For example:<ul><li>%count% matches all words containing <em>count</em></li><li>c_t matches <em>cat, cot</em> and <em>cut</em></li></ul></div>').dialog({
+    $sql_help_dialog = $('<div>The Structured Query Language used by Dubsar&apos;s SQLite database accepts the following wildcards in searches:<ul><li>% matches anything, including nothing at all</li><li>_ matches any single character</li></ul>For example:<ul><li>%count% matches all words containing <em>count</em></li><li>c_t matches <em>cat, cot</em> and <em>cut</em></li></ul></div>').dialog({
       autoOpen   : false        ,
       dialogClass: 'sql-help-dialog',
       height     : 350,
