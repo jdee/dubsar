@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110805131815) do
+ActiveRecord::Schema.define(:version => 20110918150540) do
 
   create_table "daily_words", :force => true do |t|
     t.integer  "word_id",    :null => false
@@ -35,6 +35,26 @@ ActiveRecord::Schema.define(:version => 20110805131815) do
 
   add_index "inflections", ["name"], :name => "index_inflections_on_name"
   add_index "inflections", ["word_id"], :name => "index_inflections_on_word_id"
+
+# Could not dump table "inflections_fts" because of following StandardError
+#   Unknown type '' for column 'id'
+
+# Could not dump table "inflections_fts_content" because of following StandardError
+#   Unknown type '' for column 'c0id'
+
+  create_table "inflections_fts_segdir", :primary_key => "level", :force => true do |t|
+    t.integer "idx"
+    t.integer "start_block"
+    t.integer "leaves_end_block"
+    t.integer "end_block"
+    t.binary  "root"
+  end
+
+  add_index "inflections_fts_segdir", ["level", "idx"], :name => "sqlite_autoindex_inflections_fts_segdir_1", :unique => true
+
+  create_table "inflections_fts_segments", :primary_key => "blockid", :force => true do |t|
+    t.binary "block"
+  end
 
   create_table "pointers", :force => true do |t|
     t.integer "target_id",                        :null => false
