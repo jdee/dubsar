@@ -161,47 +161,48 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How long does it take to build the Dubsar database?
-      A. Currently it takes two to three hours.  There are two identical
-      databases in the production environment so that Dubsar can stay
-      running while the database is being reseeded, and they have to be
-      seeded sequentially.
+      A. Currently it takes more than three hours.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How are the autocompleter results determined?
-      A. WordNet&reg; assigns frequency counts to some word senses based
-      on the number of times that sense of that word occurs in &quot;various
-      semantic concordance texts.&quot;  By far most of the word senses in
-      WordNet&reg; are untagged.  Dubsar treats these as having a
-      frequency count of 0 and assigns a frequency count to each word
-      which is the sum of the frequency counts associated with each of
-      that word&apos;s senses.
+      %p
+        A. All search results use full text searching, similar to the
+        behavior of most search engines, against the inflections table.
+        All searching is case-insensitive.
+        Results include all search terms. An asterisk (*) may be used to
+        match any non-whitespace string, including nothing. Certain operators
+        may also be used, in all uppercase, like "law OR order." Exact matches
+        (results where the matching inflection is exactly the search term as
+        it was typed) are sorted to the top. Other results are sorted in ASCII
+        order, so all capital letters come before all lowercase letters.
 
-      The autocompleter displays the top ten words beginning with the
-      current search term, ordered by frequency count.  However, it
-      collapses multiple parts of speech.  So if you type in
-      %em loo,
-      Dubsar will only display nine results, since
-      %em look
-      occurs twice in the top ten. Exact matches are displayed first, without
-      regard to frequency count.
+      %p
+        The autocompleter results are determined by looking first for an
+        exact match, then by searching for
+        %em search terms*,
+        i.e., appending an
+        asterisk to the results. So if you type in
+        %em frus, which has no exact
+        match, you will see the results of searching for
+        %em frus*,
+        which returns all results containing a term beginning with
+        %em frus.
+
+      %p
+        Exact matching is case-sensitive, so if you search for
+        %em Fruit,
+        the word
+        %em fruit
+        will not appear at the top of the list. In fact, it will not show up in
+        the autocompleter at all. If you perform a search for
+        %em Fruit, fruit
+        will appear sorted in with the rest of the results.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Can I do wild-card searches?
       %p
-        A. Yes. Dubsar supports two SQL wild card characters:
-      %ul
-        %li
-          _ stands for any single character, so
-          %em c_t
-          matches
-          %em cat, cot
-          and
-          %em cut.
-        %li
-          ="% stands for anything at all, including nothing, so"
-          %em="%count%"
-          matches anything containing the word
-          %em count.
+        A. Yes. Full text searching recognizes the asterisk (*) character, which
+        will match any non-whitespace string, including the empty string.
       %p
         If more than 30 results are returned, the list is paginated using a page
         control like this:
