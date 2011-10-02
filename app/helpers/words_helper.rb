@@ -76,15 +76,11 @@ EOF
 
   def search_term
     case @match
-    when 'regexp'
+    when 'regexp', 'glob'
       return ''
     end
 
     defined?(@term) ? @term : ''
-  end
-
-  def case_checked?
-    defined?(@match) && @match == 'case'
   end
 
   def mobile_url

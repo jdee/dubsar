@@ -36,14 +36,13 @@ describe '/words/search.html.haml' do
     rendered.should have_selector('form', :method => 'get', :action => root_path) do |form|
       form.should have_selector('input', :type => 'search', :name => 'term', :id => 'word-input')
       form.should have_selector('button', :type => 'submit', :id => 'word-submit')
-      form.should have_selector('input', :type => 'checkbox', :name => 'match', :id => 'word-case', :value => 'case')
     end
   end
 
   it 'should have alphabet browsing links' do
     render :layout => 'layouts/application', :template => 'words/search.html.haml'
     ('A'..'Z').each do |letter|
-      rendered.should have_selector('a', :href => url_for(:controller => :words, :action => :search, :term => "^[#{letter}#{letter.downcase}]", :match => 'regexp', :title => "#{letter}")) do |a|
+      rendered.should have_selector('a', :href => url_for(:controller => :words, :action => :search, :term => "[#{letter}#{letter.downcase}]*", :match => 'glob', :title => "#{letter}")) do |a|
         a.should contain(letter)
       end
     end

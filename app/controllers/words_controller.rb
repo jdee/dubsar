@@ -238,11 +238,11 @@ class WordsController < ApplicationController
       # TODO: Fix the alphabet links and buttons
       if @term =~ /^[A-Z]%$/
         letter = /^([A-Z])%$/.match(@term)[1]
-        @match = 'regexp'
-        @term = "^[#{letter}#{letter.downcase}]"
+        @match = 'glob'
+        @term = "[#{letter}#{letter.downcase}]*"
         @title = letter
       end
-    when 'case', 'exact', 'regexp'
+    when 'case', 'exact', 'glob', 'regexp'
     else
       error and return false
     end

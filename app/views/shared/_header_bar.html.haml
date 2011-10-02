@@ -25,9 +25,9 @@
               %tr
                 - ('A'..'Z').each do |letter|
                   %td
-                    = link_to letter, url_for(:controller => :words, :action => :search, :term =>"^[#{letter}#{letter.downcase}]", :match => 'regexp', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link'
+                    = link_to letter, url_for(:controller => :words, :action => :search, :term =>"[#{letter}#{letter.downcase}]*", :match => 'glob', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link'
                 %td
-                  %a.search-link{:href => url_for(:controller => :words, :action => :search, :term => '^[^A-Za-z]', :match => 'regexp', :title =>'...'), :title => 'words not starting with a letter'}
+                  %a.search-link{:href => url_for(:controller => :words, :action => :search, :term => '[^A-Za-z]*', :match => 'glob', :title =>'...'), :title => 'words not starting with a letter'}
                     &hellip;
         %td
           = form_tag(url_for(:controller => :words, :action => :search), :method => :get, :id => 'word-form') do
@@ -35,19 +35,13 @@
             =hidden_field_tag :back, 'yes'
             %table#word-search-term
               %colgroup
-                %col#c1
                 %col#c2
                 %col#c3
               %tr
-                %td &nbsp;
                 %td
                   %span#sql-help-link.template
                 %td &nbsp;
               %tr
-                %td
-                  #word-search-options-buttonset.small-buttonset
-                    = check_box_tag :match, 'case', case_checked?, :id => 'word-case', :tabindex => '1'
-                    = label_tag 'word-case', 'match case', :title => 'case-sensitive search'
                 %td
                   = search_field_tag :term, search_term, :id => 'word-input', :tabindex => '2', :title => 'enter a word or search term (SQL wildcards accepted)', :autofocus => 'autofocus'
                 %td

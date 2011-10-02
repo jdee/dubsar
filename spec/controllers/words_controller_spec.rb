@@ -86,23 +86,29 @@ describe WordsController do
       assigns(:term).should == 'World War 2'
     end
 
-    it "honors case, regexp and exact :match paramters" do
+    it "honors glob, regexp and exact :match parameters" do
       Factory :slang
       get :search, :term => 'slang', :match => 'exact'
       response.should be_success
 
-      get :search, :term => 'slang', :match => 'case'
+      get :search, :term => '[Ss]*', :match => 'glob'
+      response.should be_success
+
+      get :search, :term => '^[Ss]', :match => 'regexp'
+      response.should be_success
+
+      get :search, :term => 'slang'
       response.should be_success
 
       get :search, :term => 'slang', :match => 'foo'
       response.status.should == 404
     end
 
-    it "uses a regexp search for letter browsing" do
+    it "uses a glob search for letter browsing" do
       get :search, :term => 'A%'
-      assigns(:match).should == 'regexp'
+      assigns(:match).should == 'glob'
       assigns(:title).should == 'A'
-      assigns(:term).should == '^[Aa]'
+      assigns(:term).should == '[Aa]*'
     end
 
     after :each do
@@ -132,12 +138,6 @@ describe WordsController do
       # returns [ "term", [ "term1", "term2", ... ] ]
       list = JSON.parse response.body
       list.last.count.should == 10
-    end
-
-    it 'honors case when specified in the #os route' do
-      get :os, :term => 'Word', :match => 'case'
-      list = JSON.parse response.body
-      list.last.count.should == 0
     end
 
     it 'returns exact matches first in the #os route, regardless of frequency count' do

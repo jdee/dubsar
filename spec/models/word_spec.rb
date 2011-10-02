@@ -25,14 +25,19 @@ describe Hash, "with #search_options extension" do
   end
 
   it 'uses the :words table in wildcard searches' do
-    options = { :term => 'slan_', :match => 'case' }.search_options
+    options = { :term => '[Ss]*', :match => 'glob' }.search_options
     conditions = options[:conditions]
-    conditions.join.should match /words\.name GLOB/
+    conditions.first.should match /words.name GLOB :term/
+    conditions.last.should be_a(Hash)
+    conditions.last[:term].should == '[Ss]*'
+  end
 
+  it 'supports a limited regexp search for iPad backward compatibility' do
     options = { :term => '^[Ss]', :match => 'regexp' }.search_options
     conditions = options[:conditions]
-    conditions.first.should == 'words.name GLOB ?'
-    conditions.last.should == '[Ss]*'
+    conditions.first.should match /words.name GLOB :term/
+    conditions.last.should be_a(Hash)
+    conditions.last[:term].should == '[Ss]*'
   end
 
   it 'uses the :inflections table in an exact search' do
@@ -174,11 +179,6 @@ describe Word do
 
     it 'defaults to a case-insensitive search' do
       Word.search(:term => 'Followed', :offset => 0).count.should == 1
-    end
-
-    it 'honors a case-sensitive search' do
-      Word.search_count(:term => 'followed', :match => 'case', :offset => 0).should == 1
-      Word.search_count(:term => 'Followed', :match => 'case', :offset => 0).should == 0
     end
   end
 

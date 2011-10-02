@@ -24,43 +24,105 @@ class Hash
     copy = clone_without_controller_params
     table = :inflections # by default
     match = copy.delete(:match)
+    term = copy.delete(:term)
+
+    params = {}
 
     conditions = case match
     when nil, ''
-      term = copy.delete(:term)
+      params.merge! :term => term
       if /[%_\[\]?*+.()]/ =~ term
         table = :words
-        "words.name LIKE ?"
+        "words.name LIKE :term"
       else
-        "inflections.name LIKE ?"
+        "inflections.name LIKE :term"
       end
-    when 'case'
-      if /[%_\[\]?*+.()]/ =~ copy[:term]
-        table = :words
-        term = copy.delete(:term).gsub('%', '*').gsub('_', '?')
-        "words.name GLOB ?"
+    when 'glob'
+      params.merge! :term => term
+      table = :words
+      matches = /^\[([A-Z])([a-z])\]\*$/.match(term)
+      if matches
+        capital1 = matches[1]
+        capital2 = '' << capital1.getbyte(0)+1
+        lower1 = matches[2]
+        lower2 = '' << lower1.getbyte(0)+1
       else
-        term = copy.delete(:term)
-        "inflections.name = ?"
+        capital1 = 'A'
+        capital2 = '['
+        lower1   = 'a'
+        lower2   = '{'
+      end
+
+      params.merge!(
+        :capital1 => capital1,
+        :capital2 => capital2,
+        :lower1   => lower1,
+        :lower2   => lower2
+      )
+
+      if matches
+        <<-SQL
+        ((words.name >= :capital1 AND words.name < :capital2) OR
+         (words.name >= :lower1 AND words.name < :lower2 )) AND
+        words.name GLOB :term
+        SQL
+      else
+        # assume this is [^A-Za-z]*
+        <<-SQL
+        (words.name < :capital1 OR (words.name >= :capital2 AND words.name < :lower1)
+        OR words.name >= :lower2) AND words.name GLOB :term
+        SQL
       end
     when 'regexp'
       # only supported for backward compatibility with the iPad 1.0.1
       # client; always expect term to be '^[character-class]'
       table = :words
-      term = copy.delete(:term).sub(/^\^/, '') + "*"
-      "words.name GLOB ?"
+      matches = /^\^\[([A-Z])([a-z])\]$/.match(term)
+      if matches
+        capital1 = matches[1]
+        capital2 = '' << capital1.getbyte(0)+1
+        lower1 = matches[2]
+        lower2 = '' << lower1.getbyte(0)+1
+      else
+        capital1 = 'A'
+        capital2 = '['
+        lower1   = 'a'
+        lower2   = '{'
+      end
+
+      params.merge!(
+        :capital1 => capital1,
+        :capital2 => capital2,
+        :lower1   => lower1,
+        :lower2   => lower2,
+        :term     => "[#{capital1}#{lower1}]*"
+      )
+
+      if matches
+        <<-SQL
+        ((words.name >= :capital1 AND words.name < :capital2) OR
+         (words.name >= :lower1 AND words.name < :lower2 )) AND
+        words.name GLOB :term
+        SQL
+      else
+        # assume this is [^A-Za-z]*
+        <<-SQL
+        (words.name < :capital1 OR (words.name >= :capital2 AND words.name < :lower1)
+        OR words.name >= :lower2) AND words.name GLOB :term
+        SQL
+      end
     when 'exact'
-      term = copy.delete(:term)
-      "inflections.name = ?"
+      params.merge! :term => term
+      "inflections.name = :term"
     end
 
     case table
     when :inflections
       copy.merge!(
-        :conditions => [ conditions, term ],
+        :conditions => [ conditions, params ],
         :joins => 'INNER JOIN inflections ON words.id = inflections.word_id')
     when :words
-      copy.merge! :conditions => [ conditions, term ]
+      copy.merge! :conditions => [ conditions, params ]
     end
     copy.merge!(:page => copy[:page]) if copy.has_key?(:page)
     copy.symbolize_keys
