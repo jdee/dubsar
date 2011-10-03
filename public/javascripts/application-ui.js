@@ -62,7 +62,7 @@
     }
 
     function show_sql_help_link() {
-      $sql_help_link.html('<div class="ui-state-default ui-corner-all header-link-div" id="sql-help-link-close" style="float: left; margin-right: 0.3em; position: relative; top: 0.2em;"><span class="ui-icon ui-icon-circlesmall-close"></span></div><a id="sql-help-link-anchor" href="#" title="explain" style="position: relative; top: 0.3em;">Huh? SQL Wildcards?</a>').fadeIn('slow');
+      $sql_help_link.html('<div class="ui-state-default ui-corner-all header-link-div" id="sql-help-link-close" style="float: left; margin-right: 0.3em; position: relative; top: 0.2em;"><span class="ui-icon ui-icon-circlesmall-close"></span></div><a id="sql-help-link-anchor" href="#" title="explain" style="position: relative; top: 0.3em;">Huh? Full text searching?</a>').fadeIn('slow');
       $show_help_link_timer = null;
     }
 
@@ -123,13 +123,13 @@
     });
     $('a#share-link').live('click', function() { $share_dialog.dialog('open'); return false; });
 
-    $sql_help_dialog = $('<div>The Structured Query Language used by Dubsar&apos;s SQLite database accepts the following wildcards in searches:<ul><li>% matches anything, including nothing at all</li><li>_ matches any single character</li></ul>For example:<ul><li>%count% matches all words containing <em>count</em></li><li>c_t matches <em>cat, cot</em> and <em>cut</em></li></ul></div>').dialog({
+    $sql_help_dialog = $('<div><p>Dubsar supports Full Text Searching like many search engines.</p><ul><li>All searching is case-insensitive.</li><li>Search results will include anything that contains all search terms.</li><li>An asterisk (*) stands for any non-whitespace string (including nothing). So searching for <em>count*</em> matches anything containing a discrete term that begins with <em>count</em>.</li><li>Certain operators are recognized in all caps (e.g., <em>law OR order</em>).</li><li>Results are sorted in ASCII order, with all capital letters coming before all lower-case letters. But exact matches (including inflections) are sorted to the top.</li></div>').dialog({
       autoOpen   : false        ,
       dialogClass: 'sql-help-dialog',
       height     : 350,
       width      : 450,
       resizable  : false,
-      title      : 'SQL wildcards',
+      title      : 'Full Text Searching',
       buttons    : {
         ok: function() {
           $(this).dialog('close');

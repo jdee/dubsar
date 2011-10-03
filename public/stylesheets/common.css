@@ -261,7 +261,7 @@ td.header-link-cell {
   padding-left: 0.1em;
 }
 
-#about ul, #fairies ul, .sql-help-dialog ul {
+#about ul, #fairies ul {
   list-style-type: none;
 }
 
