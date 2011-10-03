@@ -97,41 +97,15 @@ class WordsController < ApplicationController
         # whitespace
         @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
 
-        # If the user types in 'was,' we complete with 'was' at the top, as an
-        # exact match from the inflections table, followed by matches from the
-        # words table if any. If the user types in something like 'c_,' with a
-        # wild card, we don't look for exact matches.
-        local_params = params.clone
         @words = []
-        if /[%_\[\]?*+.()]/ !~ @term
-          local_params[:term] = @term
-          @words = Word.search local_params.merge(:select => 'inflections.name', :offset => 0)
-          local_params[:term] = "#{@term}_%"
-        else
-          local_params[:term] = "#{@term}%"
-        end
+        exact = Inflection.find_by_name(@term)
+        @words << exact.name if exact
 
-        @words += Word.search local_params.merge(:select => 'name',
-          :offset => 0, :limit => 10-@words.count,
-          :order => 'freq_cnt DESC, name ASC, part_of_speech ASC')
+        @words += InflectionsFt.all(:select => 'DISTINCT name',
+          :conditions => [ "name MATCH ? AND name != ?", "#{@term}*", @term ],
+          :order => 'name ASC', :limit => 10-@words.count).map(&:name)
 
-        # The uniq method call is case-sensitive.  It has the effect of
-        # collapsing multiple parts of speech, e.g. cold (n.) and cold
-        # (adj.).  But we still have the issue of Jack and jack, which
-        # we address with the inject.
-        word_list = @words.map{ |w| w.name }.uniq.inject([]) do |list, w|
-          unless list.empty? or list.last.casecmp(w) != 0
-            if w < list.last
-              list.pop
-              list << w
-            end
-          else
-            list << w
-          end
-          list
-        end
-
-        respond_with [ @term, word_list ]
+        respond_with [ @term, @words ]
       end
     end
   end

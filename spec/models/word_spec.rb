@@ -18,6 +18,10 @@
 require 'spec_helper'
 
 describe Hash, "with #search_options extension" do
+  before :all do
+    create_fts_table
+  end
+
   it 'raises an exception if no :term specified' do
     lambda do
       {}.search_options
@@ -156,16 +160,11 @@ describe Word do
 
   context 'when searching' do
     before :each do
-      Factory :verb
+      add_inflections(Factory :verb)
     end
 
     it 'matches literals by inflection' do
       Word.search_count(:term => 'followed', :offset => 0).should == 1
-    end
-
-    it 'does not match inflections in wild-card searches' do
-      Word.search(:term => 'followe_', :offset => 0).count.should == 0
-      Word.search(:term => 'follo_', :offset => 0).count.should == 1
     end
 
     # https://github.com/jdee/dubsar/issues/44
@@ -184,7 +183,7 @@ describe Word do
 
   context "generating a word of the day" do
     it "returns a word at random with at least the specified number of letters" do
-      Factory :substance
+      add_inflections(Factory :substance)
       word = Word.random_word(9)
       word.name.should match /^[a-z]{9}[a-z]*$/
 
@@ -197,6 +196,9 @@ describe Word do
   context "building inflections when seeding the DB" do
     context "calling #create_new_inflection" do
       let(:slang) { Factory :slang }
+      before :all do
+        add_inflections(slang)
+      end
 
       it 'builds the specified inflection if it does not exist' do
         lambda { slang.create_new_inflection :name => 'slangy' }.should change(slang.inflections, :count).by(1)

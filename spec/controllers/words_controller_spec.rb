@@ -19,6 +19,10 @@ require 'json'
 require 'spec_helper'
 
 describe WordsController do
+  before :all do
+    create_fts_table
+  end
+
   context "handling basic routing and requests" do
     before :each do
       request.env['HTTP_REFERER'] = '/'
@@ -50,6 +54,7 @@ describe WordsController do
 
     it "gets :show and :m_show views" do
       word = Factory :noun
+      add_inflections word
       %w{show m_show}.each do |route|
         get route, 'id' => word.id
         response.should be_success
@@ -87,7 +92,7 @@ describe WordsController do
     end
 
     it "honors glob, regexp and exact :match parameters" do
-      Factory :slang
+      add_inflections(Factory :slang)
       get :search, :term => 'slang', :match => 'exact'
       response.should be_success
 
@@ -117,9 +122,13 @@ describe WordsController do
   end
 
   context "handling JSON requests" do
-    before :all do
+    before :each do
       Word.delete_all
-      11.times { Factory :list_entry }
+      InflectionsFt.delete_all
+      Inflection.delete_all
+      11.times do
+        add_inflections(Factory :list_entry)
+      end
     end
 
     before :each do
@@ -127,7 +136,7 @@ describe WordsController do
     end
 
     it 'ignores case when removing duplicates in the #os route' do
-      Factory :capitalized_word
+      add_inflections(Factory :capitalized_word)
       get :os, :term => 'word'
       list = JSON.parse response.body
       list.last.should include('Word_1')
@@ -141,27 +150,11 @@ describe WordsController do
     end
 
     it 'returns exact matches first in the #os route, regardless of frequency count' do
-      Factory :w
+      add_inflections(Factory :w)
       get :os, :term => 'w'
       list = JSON.parse response.body
       list.last.count.should > 1
       list.last.first.should == 'w'
-    end
-
-    it 'gets matching words via the :search route' do
-      get :search, :term => 'word%'
-      word = Word.find_by_name_and_part_of_speech('word_1', 'noun')
-      word.should_not be_nil
-      word.name.should == 'word_1'
-
-      response.should be_success
-      # returns [ "term", [ id1, "term1", "n", freq_cnt1, "inflection1, inflection2" ],
-      #  [ id2, "term2", "adj", freq_cnt2, "..."  ] ... ], total_pages ]
-      list = JSON.parse response.body
-      list.second.count.should == 11
-
-      list.second.first.should == [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms ]
-      list.third.should == 1
     end
 
     it 'returns data for individual words via the :show route' do
@@ -185,10 +178,12 @@ describe WordsController do
     end
 
     it 'supports pagination in JSON searches' do
-      20.times { Factory :list_entry }
+      20.times do
+        add_inflections(Factory :list_entry)
+      end
       # including the 11 in the before :each block
       Word.count.should == 31
-      get :search, :term => 'word%', :page => 2
+      get :search, :term => 'word', :page => 2
 
       response.should be_success
       list = JSON.parse response.body

@@ -18,7 +18,9 @@
 def create_word!(name, part_of_speech, options={})
   params = { :part_of_speech => part_of_speech.to_s, :freq_cnt => 0, :name => name }
   params.merge!(options)
-  Word.create! params
+  word = Word.create! params
+  add_inflections(word)
+  word
 end
 
 def create_synonyms!
@@ -30,6 +32,9 @@ def create_synonyms!
   grub.senses << Factory.build(:sense, :synset => food_synset, :synset_index => 2)
   food.save!
   grub.save!
+
+  add_inflections food
+  add_inflections grub
 
   # define 'substance' as a hypernym for food
   substance = Factory :substance
@@ -55,6 +60,9 @@ def create_antonyms!
 
   good.save!
   bad.save!
+
+  add_inflections good
+  add_inflections bad
 
   [ good, bad ]
 end

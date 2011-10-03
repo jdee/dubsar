@@ -30,13 +30,9 @@ class Hash
 
     conditions = case match
     when nil, ''
+      table = :inflections_fts
       params.merge! :term => term
-      if /[%_\[\]?*+.()]/ =~ term
-        table = :words
-        "words.name LIKE :term"
-      else
-        "inflections.name LIKE :term"
-      end
+      "inflections_fts.name MATCH :term"
     when 'glob'
       params.merge! :term => term
       table = :words
@@ -117,6 +113,10 @@ class Hash
     end
 
     case table
+    when :inflections_fts
+      copy.merge!(
+        :conditions => [ conditions, params],
+        :joins => 'INNER JOIN inflections_fts ON words.id = inflections_fts.word_id')
     when :inflections
       copy.merge!(
         :conditions => [ conditions, params ],
@@ -315,18 +315,85 @@ class Word < ActiveRecord::Base
     #   <tt>:term</tt> _required_ search term
     #   <tt>:match</tt> one of 'browse', 'case', 'exact', 'regexp' or '' (default - case insensitive)
     #   <tt>:page</tt> optional page number (for will_paginate)
-    # Pass any additiona options to <tt>:find,</tt> particularly
+    # Pass any additional options to <tt>:find,</tt> particularly
     #   <tt>:limit</tt>
-    #   <tt>:offset</tt>
-    # which are used in JSON requests.
+    # which are used in autocompletion (os) requests.
     def search(options={})
       options = options.symbolize_keys
       return nil unless options[:term]
 
-      if options.has_key?(:offset)
-        all options.search_options
-      else
+      case options[:match]
+      when 'exact', 'glob', 'regexp'
         paginate options.search_options
+      else
+        # FTS search, may need to look for exact match first
+        page = options[:page].nil? ? 1 : options[:page].to_i
+
+        num_exact = Word.count :joins => 'INNER JOIN inflections ON inflections.word_id = words.id',
+          :conditions => [ 'inflections.name = ?', options[:term]]
+
+        words = nil
+        if page == 1
+          # exact match, then the rest
+          words = Word.all :joins => 'INNER JOIN inflections ON inflections.word_id = words.id',
+            :conditions => [ 'inflections.name = ?', options[:term]],
+            :order => 'words.part_of_speech ASC'
+          words += Word.all :joins => 'INNER JOIN inflections_fts ON inflections_fts.word_id = words.id',
+            :conditions => [ 'inflections_fts.name MATCH :term AND inflections_fts.name != :term',
+              { :term => options[:term] }],
+            :order => 'words.name ASC, words.part_of_speech ASC',
+            :limit => 30 - num_exact
+        else
+          words = Word.all :select => 'DISTINCT words.id, words.name, words.part_of_speech, words.freq_cnt',
+            :joins => 'INNER JOIN inflections_fts ON inflections_fts.word_id = words.id',
+            :conditions => [ 'inflections_fts.name MATCH :term AND inflections_fts.name != :term',
+              { :term => options[:term] }],
+            :order => 'words.name ASC, words.part_of_speech ASC',
+            :limit => 30, :offset => 30*(page-1) - num_exact
+        end
+
+        def words.total_pages
+          @total_pages
+        end
+        def words.total_pages=(total_pages)
+          @total_pages = total_pages
+        end
+
+        def words.current_page
+          @current_page
+        end
+        def words.current_page=(current_page)
+          @current_page = current_page
+        end
+
+        def words.previous_page
+          @previous_page
+        end
+        def words.previous_page=(previous_page)
+          @previous_page = previous_page
+        end
+
+        def words.next_page
+          @next_page
+        end
+        def words.next_page=(next_page)
+          @next_page = next_page
+        end
+
+        total_matches = Word.count(:select => 'DISTINCT(words.id)',
+          :joins => 'INNER JOIN inflections_fts ON inflections_fts.word_id = words.id',
+          :conditions => ["inflections_fts.name MATCH ?", options[:term]])
+        total = total_matches / 30
+        total += 1 unless (total_matches%30).zero?
+        words.total_pages = total
+        words.current_page = page
+        words.next_page = page + 1 if page < total
+        words.previous_page = page - 1 if page > 1
+
+        def words.per_page
+          30
+        end
+        words
       end
     end
 
