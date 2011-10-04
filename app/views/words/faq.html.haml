@@ -86,30 +86,10 @@
       =link_to 'Dubsar issue list', 'https://github.com/jdee/dubsar/issues', :title => 'Dubsar issue list'
       , the application is known to work well in all tested mobile
       environments.
-  %h2#faq_4
-    %a{:href => '#faq_4'}
-      Q. What are SQL wild cards?
-  #pane_3
-    A. The Structured Query Language used by Dubsar&apos;s
-    SQLite database accepts the following wildcards in
-    searches:
-    %ul
-      %li % matches anything, including nothing at all
-      %li _ matches any single character
-    For example:
-    %ul
-      %li
-        ="%count% matches all words containing"
-        %em count
-      %li
-        c_t matches
-        %em cat, cot
-        and
-        %em cut
   %h2#faq_5
     %a{:href => '#faq_5'}
       Q. What do those WordNet&reg; terms mean?
-  #pane_4
+  #pane_3
     A. Some of them are listed here in Dubsar.  The data model used in
     Dubsar's SQLite database uses them for its table names.
     %h3 Word
@@ -136,7 +116,7 @@
   %h2#faq_6
     %a{:href => '#faq_6'}
       Q. What's all that stuff in the tooltips?
-  #pane_5
+  #pane_4
     A. The tooltips display a number of things:
     %dl
       %dt lexical file name
@@ -200,14 +180,14 @@
   %h2#faq_7
     %a{:href => '#faq_7'}
       Q. Is there any other documentation available for Dubsar?
-  #pane_6
+  #pane_5
     A. See the
     %a{:href => 'https://github.com/jdee/dubsar/wiki', :title => 'Dubsar wiki'} Dubsar wiki
     on GitHub.
   %h2#faq_8
     %a{:href => '#faq_8'}
       Q. How many entries does Dubsar have?
-  #pane_7
+  #pane_6
     A. Here are current row counts, by table.  This list is live,
     generated from the database tables whenever you load this page.
     As Dubsar&apos;s data content evolves, this list of tables and their
@@ -223,81 +203,48 @@
   %h2#faq_9
     %a{:href => '#faq_9'}
       Q. How long does it take to build the Dubsar database?
-  #pane_8
-    A. Currently it takes about two hours.  There are two identical
-    databases in the production environment so that Dubsar can stay
-    running while the database is being reseeded, and they have to be
-    seeded sequentially.
+  #pane_7
+    A. Currently it takes more than three hours.
   %h2#faq_10
     %a{:href => '#faq_10'}
       Q. How are the autocompleter results determined?
-  #pane_9
-    A. WordNet&reg; assigns frequency counts to some word senses based
-    on the number of times that sense of that word occurs in &quot;various
-    semantic concordance texts.&quot;  By far most of the word senses in
-    WordNet&reg; are untagged.  Dubsar treats these as having a
-    frequency count of 0 and assigns a frequency count to each word
-    which is the sum of the frequency counts associated with each of
-    that word&apos;s senses.
-
-    The autocompleter displays the top ten words beginning with the
-    current search term, ordered by frequency count.  However, it
-    collapses multiple parts of speech.  So if you type in
-    %em loo,
-    Dubsar will only display nine results, since
-    %em look
-    occurs twice in the top ten. Exact matches are displayed first, without
-    regard to frequency count.
-  %h2#faq_11
-    %a{:href => '#faq_11'}
-      Q. How does the
-      %em match case
-      button work?
-  #pane_10
+  #pane_8
     %p
-      A. It&apos;s a toggle button, like a check box.  Both the
-      %em search
-      button and the autocompleter honor it.  That is, if
-      %em match case
-      is selected, the autocompleter and
-      %em search
-      button will only return case-sensitive matches; otherwise, they
-      return case-insensitive matches.  The button always defaults to
-      %em off
-      when the index view is loaded; when viewing search results, the
-      %em match case
-      button will be selected if the results are for a case-sensitive
-      search. That is, if the button was selected when the search was
-      submitted, it will be selected when the search returns.
-    %p
-      It can be a little hard to tell at times whether it is selected.
-      Here&apos;s how it looks in the two themes:
+      A. All search results use full text searching, similar to the
+      behavior of most search engines, against the inflections table.
+      All searching is case-insensitive.
+      Results include all search terms. An asterisk (*) may be used to
+      match any non-whitespace string, including nothing. Certain operators
+      may also be used, in all uppercase, like "law OR order." Exact matches
+      (results where the matching inflection is exactly the search term as
+      it was typed) are sorted to the top. Other results are sorted in ASCII
+      order, so all capital letters come before all lowercase letters.
 
-    %table
-      %tbody
-        %tr
-          %td
-            &nbsp;
-          %td
-            light
-          %td
-            dark
-        %tr
-          %td off
-          %td
-            =image_tag 'light-off.png', :alt => 'light-off.png', :width => '103', :height => '40'
-          %td
-            =image_tag 'dark-off.png', :alt => 'dark-off.png', :width => '103', :height => '40'
-        %tr
-          %td on
-          %td
-            =image_tag 'light-on.png', :alt => 'light-on.png', :width => '103', :height => '40'
-          %td
-            =image_tag 'dark-on.png', :alt => 'dark-on.png', :width => '103', :height => '40'
+    %p
+      The autocompleter results are determined by looking first for an
+      exact match, then by searching for
+      %em search terms*,
+      i.e., appending an
+      asterisk to the search terms. So if you type in
+      %em frus,
+      which has no exact match, you will see the results of searching for
+      %em frus*,
+      which returns all results containing a term beginning with
+      %em frus.
+
+    %p
+      Exact matching is case-sensitive, so if you search for
+      %em Fruit,
+      the word
+      %em fruit
+      will not appear at the top of the list. In fact, it will not show up in
+      the autocompleter at all. If you perform a search for
+      %em Fruit, fruit
+      will appear sorted in with the rest of the results.
   %h2#faq_12
     %a{:href => '#faq_12'}
       Q. What is the QUnit test suite?
-  #pane_11
+  #pane_9
     A. Dubsar makes heavy use of the JavaScript programming language
     in the browser.  The
     =link_to 'QUnit test suite', qunit_path, :title => 'QUnit'
@@ -307,20 +254,20 @@
   %h2#faq_13
     %a{:href => '#faq_13'}
       Q. How do I link to Dubsar?
-  #pane_12
+  #pane_10
     A. Help tell other people about Dubsar:
     =link_to 'Link to Dubsar', link_path, :title => 'Link to Dubsar'
     from your website.
   %h2#faq_14
     %a{:href => '#faq_14'}
       Q. Is Dubsar on Facebook?
-  #pane_13
+  #pane_11
     A. Yes.  Visit
     =link_to 'Dubsar on Facebook', 'http://www.facebook.com/pages/Dubsar/155561501154946', :title => 'Dubsar on Facebook'
   %h2#faq_15
     %a{:href => '#faq_15'}
       Q. Does Dubsar use Cookies?
-  #pane_14
+  #pane_12
     %p
       A. Yes.  Dubsar uses four cookies, one of which is persistent:
     %table
@@ -383,19 +330,10 @@
       =link_to 'Link to Dubsar', link_path, :title => 'Link to Dubsar'
       using the supplied HTML snippet, visitors to your site will not
       acquire or transmit any additional cookies.
-  %h2#faq_16
-    %a{:href => '#faq_16'}
-      Q. What are subscribed links?
-  #pane_15
-    A.  Dubsar provies a limited selection of more than 37,000
-    relatively obscure words, all at least nine letters, that you can
-    add to your Google web searches.
-    =link_to 'Click here', 'http://www.google.com/coop/profile?user=012127914215357268281', :title => 'Dubsar subscribed links on Google'
-    for more information.
   %h2#faq_17
     %a{:href => '#faq_17'}
       Q. What is OpenSearch?
-  #pane_16
+  #pane_13
     %p
       A. The OpenSearch protocol allows some supported browsers (Internet
       Explorer 8, Firefox and Google Chome) to add Dubsar to the
@@ -418,7 +356,7 @@
   %h2#faq_19
     %a{:href => '#faq_19'}
       Q. Is there a mobile edition of Dubsar?
-  #pane_18
+  #pane_14
     %p
       A. Yes. It's available at
       = link_to "#{mobile_url}", mobile_url, :class => 'undecorated'
@@ -428,7 +366,7 @@
   %h2#faq_20
     %a{:href => '#faq_20'}
       Q. Is Dubsar available for iPhone, iPad or Android?
-  #pane_19
+  #pane_15
     %p
       A. Dubsar is available for iOS and Android:
 
@@ -439,8 +377,31 @@
   %h2#faq_21
     %a{:href => '#faq_21'}
       Q. How do I get help with a problem?
-  #pane_20
+  #pane_16
     %p
       A. Contact
       =link_to 'support@dubsar-dictionary.com', 'mailto:support@dubsar-dictionary.com'
       for any technical support issues.
+  %h2#faq_22
+    %a{:href => '#faq_22'}
+      Q. How does full text searching work?
+  #pane_17
+    %p
+      A. Dubsar searches now work similarly to most search engines.
+    %ul
+      %li All searching is case-insensitive.
+      %li Search results will inclue anything that contains all search terms.
+      %li
+        An asterisk (*) stands for any non-whitespace string (including nothing).
+        So searching for
+        %em count*
+        matches anything containing a discrete term that begins with
+        %em count.
+      %li
+        Certain operators are recognized in all caps (e.g.,
+        %em law OR order
+        ).
+      %li
+        Results are sorted in ASCII order, with all capital letters coming before all
+        lower-case letters. But case-sensitive exact matches (including inflections)
+        are sorted to the top.

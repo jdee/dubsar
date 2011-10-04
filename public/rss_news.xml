@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Wed, 07 Sep 2011 17:45:00 GMT</lastBuildDate>
-    <pubDate>Wed, 07 Sep 2011 17:45:00 GMT</pubDate>
+    <lastBuildDate>Tue, 04 Oct 2011 14:15:00 GMT</lastBuildDate>
+    <pubDate>Tue, 04 Oct 2011 14:15:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Full text searching in Dubsar</title>
+      <description>Dubsar now supports full text searching, like most search engines. See the FAQ for more information.</description>
+      <link>http://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">27</guid>
+      <pubDate>Tue, 04 Oct 2011 14:15:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar for iOS 1.0.1</title>
       <description>Dubsar for iOS 1.0.1 introduces support for iOS 4.2 as well as some minor fixes and usability improvements.</description>
