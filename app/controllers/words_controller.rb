@@ -193,7 +193,7 @@ class WordsController < ApplicationController
 
     # search and index use the same URL
     unless @term
-      # flash.now[:notice] = 'Dubsar is undergoing a number of changes. Thanks for your patience.'
+      flash.now[:notice] = 'Happy Halloween. In honor of the occasion, the dark theme is free all day!'
       render :action => :index
       return
     end
@@ -209,7 +209,6 @@ class WordsController < ApplicationController
 
     case @match
     when nil, ''
-      # TODO: Fix the alphabet links and buttons
       if @term =~ /^[A-Z]%$/
         letter = /^([A-Z])%$/.match(@term)[1]
         @match = 'glob'

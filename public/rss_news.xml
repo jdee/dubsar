@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Tue, 04 Oct 2011 17:00:00 GMT</lastBuildDate>
-    <pubDate>Tue, 04 Oct 2011 17:00:00 GMT</pubDate>
+    <lastBuildDate>Mon, 31 Oct 2011 02:00:00 GMT</lastBuildDate>
+    <pubDate>Mon, 31 Oct 2011 02:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Version 1.1.0 of Dubsar for iOS</title>
+      <description>Happy Halloween from the Dubsar Dictionary Project. In honor of the occasion, the Dubsar dark theme is free all day.</description>
+      <link>http://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">29</guid>
+      <pubDate>Mon, 31 Oct 2011 02:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Version 1.1.0 of Dubsar for iOS</title>
       <description>Version 1.1.0 of Dubsar for iOS is available for free worldwide in the iTunes App Store. This version introduces a local SQLite database, so the app works nearly as well on an airplane as in an office. Only the Word of the Day and the FAQ are taken from the network.</description>
