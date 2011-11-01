@@ -193,7 +193,7 @@ class WordsController < ApplicationController
 
     # search and index use the same URL
     unless @term
-      flash.now[:notice] = 'Happy Halloween. In honor of the occasion, the dark theme is free all day!'
+      # flash.now[:notice] = 'Happy Halloween. In honor of the occasion, the dark theme is free all day!'
       render :action => :index
       return
     end
