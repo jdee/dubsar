@@ -26,6 +26,7 @@ Also see:
 - {Dubsar group on Google}[http://groups.google.com/group/dubsar]
 - {Dubsar on Facebook}[http://www.facebook.com/pages/Dubsar/155561501154946]
 - {Dubsar on Twitter}[http://twitter.com/#!/dubsar]
+- {Dubsar on Google+}[https://plus.google.com/111210736976423589433]
 - {Dubsar for iOS}[https://github.com/jdee/dubsar_ios]
 - {Dubsar for Android}[https://github.com/jdee/dubsar_android]
 - {Dubsar for iPhone, iPod Touch and iPad on the iTunes App Store}[http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=453868483&mt=8]
