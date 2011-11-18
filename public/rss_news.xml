@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Mon, 31 Oct 2011 02:00:00 GMT</lastBuildDate>
-    <pubDate>Mon, 31 Oct 2011 02:00:00 GMT</pubDate>
+    <lastBuildDate>Fri, 18 Nov 2011 05:30:00 GMT</lastBuildDate>
+    <pubDate>Fri, 18 Nov 2011 05:30:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -16,7 +16,14 @@
       <height>20</height>
     </image>
     <item>
-      <title>Version 1.1.0 of Dubsar for iOS</title>
+      <title>Version 1.0.2 of Dubsar for Android</title>
+      <description>This release fixes a couple of bugs and is now available for free worldwide in the Android Market.</description>
+      <link>https://market.android.com/details?id=com.dubsar_dictionary.Dubsar</link>
+      <guid isPermaLink="false">30</guid>
+      <pubDate>Fri, 18 Nov 2011 05:30:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Happy Halloween</title>
       <description>Happy Halloween from the Dubsar Dictionary Project. In honor of the occasion, the Dubsar dark theme is free all day.</description>
       <link>http://dubsar-dictionary.com</link>
       <guid isPermaLink="false">29</guid>
