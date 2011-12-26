@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Fri, 18 Nov 2011 05:30:00 GMT</lastBuildDate>
-    <pubDate>Fri, 18 Nov 2011 05:30:00 GMT</pubDate>
+    <lastBuildDate>Mon, 26 Dec 2011 22:45:00 GMT</lastBuildDate>
+    <pubDate>Mon, 26 Dec 2011 22:45:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar in the Amazon App Store</title>
+      <description>Version 1.0.2 of Dubsar for Android is now available for free in the Amazon App Store.</description>
+      <link>http://www.amazon.com/Jimmy-Dee-Dubsar/dp/B006QCL4PG</link>
+      <guid isPermaLink="false">31</guid>
+      <pubDate>Mon, 26 Dec 2011 22:45:00 GMT</pubDate>
+    </item>
     <item>
       <title>Version 1.0.2 of Dubsar for Android</title>
       <description>This release fixes a couple of bugs and is now available for free worldwide in the Android Market.</description>
