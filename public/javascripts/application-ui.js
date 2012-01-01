@@ -192,11 +192,11 @@
       var id  = $(this).attr('id');
       var url = $(this).attr('href');
       var title = $('h3', this).text() || '';
-      $('<div id="'+id+'-dialog"><img src="'+url+'" height="600" width="905"/></div>').dialog({
+      $('<div id="'+id+'-dialog"><img src="'+url+'" height="600" width="865"/></div>').dialog({
         autoOpen   : false        ,
         dialogClass: 'tour-dialog',
         height     : 650,
-        width      : 935,
+        width      : 895,
         title      : title
       });
       $(this).click(function(){
