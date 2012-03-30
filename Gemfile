@@ -31,5 +31,6 @@ group :backup_dev, :development, :test do
   gem 'json'
   gem 'rcov', '~> 0.9.9'
   gem 'rspec-rails', '>= 2.0'
+  gem 'rvm-capistrano'
   gem 'webrat'
 end
