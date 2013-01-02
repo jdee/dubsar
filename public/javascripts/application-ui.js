@@ -62,7 +62,7 @@
     }
 
     function show_sql_help_link() {
-      $sql_help_link.html('<div class="ui-state-default ui-corner-all header-link-div" id="sql-help-link-close" style="float: left; margin-right: 0.3em; position: relative; top: 0.2em;"><span class="ui-icon ui-icon-circlesmall-close"></span></div><a id="sql-help-link-anchor" href="#" title="explain" style="position: relative; top: 0.3em;">Huh? Full text searching?</a>').fadeIn('slow');
+      $sql_help_link.html('<div class="ui-state-default ui-corner-all header-link-div" id="sql-help-link-close" style="float: left; margin-right: 0.3em; position: relative; top: 0.2em;"><span class="ui-icon ui-icon-circlesmall-close"></span></div><a id="sql-help-link-anchor" href="#" title="explain" style="position: relative; top: 0.3em; white-space: nowrap;">Huh? Full text searching?</a>').fadeIn('slow');
       $show_help_link_timer = null;
     }
 
@@ -192,11 +192,11 @@
       var id  = $(this).attr('id');
       var url = $(this).attr('href');
       var title = $('h3', this).text() || '';
-      $('<div id="'+id+'-dialog"><img src="'+url+'" height="600" width="865"/></div>').dialog({
+      $('<div id="'+id+'-dialog"><img src="'+url+'" height="600" width="802"/></div>').dialog({
         autoOpen   : false        ,
         dialogClass: 'tour-dialog',
         height     : 650,
-        width      : 895,
+        width      : 832,
         title      : title
       });
       $(this).click(function(){
