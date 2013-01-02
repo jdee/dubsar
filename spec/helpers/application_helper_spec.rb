@@ -46,18 +46,6 @@ describe ApplicationHelper do
       end
     end
 
-    describe '#html_for_fairies_link' do
-      let (:html) { helper.html_for_fairies_link }
-
-      it 'links to the :fairies_url' do
-        html.should match /#{helper.fairies_url}/
-      end
-
-      it 'uses the fairies-20x20.png image' do
-        html.should match /fairies-20x20\.png/
-      end
-    end
-
     describe '#tour_link_tag' do
       let (:tag) { helper.tour_link_tag 'image-name', 'image description' }
 
@@ -80,16 +68,6 @@ describe ApplicationHelper do
     it 'returns blank when the host is not set' do
       ActionController::Base.stub(:asset_host).and_return(nil)
       helper.asset_host.should be_blank
-    end
-  end
-
-  describe 'fairies helpers' do
-    it 'gives the right url' do
-      helper.fairies_url.should == 'http://austinguardianfairies.org'
-    end
-
-    it 'gives the right email address' do
-      helper.fairies_email.should == 'fairies@austinguardianfairies.org'
     end
   end
 

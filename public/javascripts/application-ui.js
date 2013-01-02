@@ -81,13 +81,6 @@
       icons: { primary:'ui-icon-search' }
     });
 
-    $('#fairy_name').watermark('name (required)');
-    $('#fairy_email').watermark('e-mail (required)');
-    $('#fairy_phone_number').watermark('phone number');
-    $('#volunteer').button({
-      icons: { primary:'ui-icon-person' }
-    });
-
     $('#accordion').accordion({
       active: find_starting_pane(),
       autoHeight: false,
