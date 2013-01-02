@@ -19,7 +19,7 @@ source 'http://rubygems.org'
 
 gem 'builder'
 gem 'haml'
-gem 'sqlite3-ruby'
+gem 'sqlite3'
 gem 'rails', '>= 3.0'
 gem 'will_paginate', '~> 3.0.pre2'
 
