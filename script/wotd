@@ -40,4 +40,7 @@ WOTD_LOG=/dev/null
 export RAILS_ENV=production
 
 cd $DUBSAR_PATH
+# Hack to try to get WOTD going again. Not sure why this is happening
+# when this script runs under cron, but it wants me to do this first:
+gem install bundler
 bundle exec rake wotd:new > $WOTD_LOG 2>&1
