@@ -35,9 +35,9 @@ Also see:
 
 == Copyright
 
-Copyright (C) 2012 Jimmy Dee except as otherwise attributed.
+Copyright (C) 2013 Jimmy Dee except as otherwise attributed.
 
-WordNet(R) Copyright (C) 2012 The Trustees of Princeton University.
+WordNet(R) Copyright (C) 2013 The Trustees of Princeton University.
 
 == License
 
@@ -45,7 +45,7 @@ Dubsar is free, open-source software, distributed under Version 2 of
 the GNU General Public License (GPL):
 
   Dubsar Dictionary Project
-  Copyright (C) 2010-12 Jimmy Dee
+  Copyright (C) 2010-13 Jimmy Dee
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
