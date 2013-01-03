@@ -337,7 +337,7 @@ class Word < ActiveRecord::Base
           # exact match, then the rest
           words = Word.all :joins => 'INNER JOIN inflections ON inflections.word_id = words.id',
             :conditions => [ 'inflections.name = ?', options[:term]],
-            :order => 'words.part_of_speech ASC'
+            :order => 'words.name ASC, words.part_of_speech ASC'
           words += Word.all :joins => 'INNER JOIN inflections_fts ON inflections_fts.word_id = words.id',
             :conditions => [ 'inflections_fts.name MATCH :term AND inflections_fts.name != :term',
               { :term => options[:term] }],
