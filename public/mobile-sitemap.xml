@@ -3,8 +3,8 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>http://m.dubsar-dictionary.com/m</loc>
-    <lastmod>2013-01-02</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2013-01-05</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>
@@ -24,7 +24,7 @@
   <url>
     <loc>http://m.dubsar-dictionary.com/m_support</loc>
     <lastmod>2013-01-02</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
 </urlset>
