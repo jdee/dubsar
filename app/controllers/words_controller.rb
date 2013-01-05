@@ -163,25 +163,6 @@ class WordsController < ApplicationController
     end
   end
 
-  def review
-    per_page = request.format == :html ? 135 : 10
-    @inflections = Inflection.paginate(
-      :joins => 'INNER JOIN words ON words.id = inflections.word_id',
-      :conditions => [
-        "words.part_of_speech IN ('noun', 'verb') AND words.name >= 'a' AND words.name < '{' AND words.name GLOB '[a-z]*' AND NOT words.name GLOB ? AND NOT words.name = inflections.name",
-        "*[A-Z0-9 .-']*" ],
-      :page => params[:page],
-      :per_page => per_page,
-      :order => 'name ASC')
-
-    respond_to do |format|
-      format.html
-      format.json do
-        respond_with json_review_response
-      end
-    end
-  end
-
   private
 
   def setup_captions
@@ -243,15 +224,5 @@ class WordsController < ApplicationController
       [ s.id, s.synset.senses_except(s.word).map{|_s| [ _s.id, _s.word.name ]}, s.synset.gloss, s.synset.lexname, s.marker, s.freq_cnt ]
     end
     [ @word.id, @word.name, @word.pos, @word.other_forms, senses, @word.freq_cnt ]
-  end
-
-  def json_review_response
-    inflections = []
-    @inflections.each do |inflection|
-      inflections << { :id => inflection.id, :name => inflection.name,
-        :word => { :id => inflection.word_id, :name => inflection.word.name,
-        :pos => inflection.word.pos } }
-    end
-    inflections
   end
 end
