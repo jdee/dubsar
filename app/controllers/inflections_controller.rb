@@ -40,7 +40,9 @@ class InflectionsController < ApplicationController
   def show
     @inflection = Inflection.find params[:id]
     respond_to do |format|
-      respond_with @inflection
+      format.json do
+        respond_with @inflection
+      end
     end
   end
 
