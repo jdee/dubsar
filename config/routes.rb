@@ -18,6 +18,7 @@
 Dubsar::Application.routes.draw do
   resources :words  , :only => :show do
     match '/tab' => 'words#tab'
+    match '/inflections' => 'inflections#word'
   end
   resources :senses , :only => :show do
     match '/tab' => 'senses#tab'

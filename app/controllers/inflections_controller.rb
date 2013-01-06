@@ -51,7 +51,7 @@ class InflectionsController < ApplicationController
     @inflection = word.inflections.create(:name => params[:name]).id
     respond_to do |format|
       format.json do
-        respond_with "{ \"id\" : #{@inflection.id} }", :location => inflection_url(@inflection)
+        head :created, :location => inflection_path(@inflection)
       end
     end
   end
@@ -72,6 +72,16 @@ class InflectionsController < ApplicationController
         @inflection = Inflection.find params[:id]
         @inflection.delete
         respond_with @inflection
+      end
+    end
+  end
+
+  def word
+    word = Word.find params[:word_id]
+    @inflections = word.inflections.all
+    respond_to do |format|
+      format.json do
+        respond_with @inflections
       end
     end
   end
