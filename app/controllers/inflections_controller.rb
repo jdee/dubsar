@@ -48,10 +48,10 @@ class InflectionsController < ApplicationController
 
   def create
     word = Word.find params[:word_id]
-    @inflection = word.inflections.create(:name => params[:name]).id
+    @inflection = word.inflections.create(:name => params[:name])
     respond_to do |format|
       format.json do
-        head :created, :location => inflection_path(@inflection)
+        head :created, :location => @inflection
       end
     end
   end
@@ -70,7 +70,7 @@ class InflectionsController < ApplicationController
     respond_to do |format|
       format.json do
         @inflection = Inflection.find params[:id]
-        @inflection.delete
+        @inflection.destroy
         respond_with @inflection
       end
     end
