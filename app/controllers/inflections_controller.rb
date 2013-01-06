@@ -85,6 +85,7 @@ class InflectionsController < ApplicationController
         :word => { :id => inflection.word_id, :name => inflection.word.name,
         :pos => inflection.word.pos } }
     end
-    { :page => params[:page], :inflections => inflections }
+    { :page => params[:page], :total_pages => @inflections.total_pages,
+      :inflections => inflections }
   end
 end
