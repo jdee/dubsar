@@ -42,7 +42,7 @@ class InflectionsController < ApplicationController
       :per_page => 10000, :order => 'id ASC'
     respond_to do |format|
       format.json do
-        respond_with @inflections
+        respond_with json_review_response
       end
     end
   end
@@ -105,7 +105,7 @@ class InflectionsController < ApplicationController
         :word => { :id => inflection.word_id, :name => inflection.word.name,
         :pos => inflection.word.pos } }
     end
-    { :page => params[:page], :total_pages => @inflections.total_pages,
+    { :page => params[:page] || 1, :total_pages => @inflections.total_pages,
       :inflections => inflections }
   end
 end
