@@ -37,6 +37,16 @@ class InflectionsController < ApplicationController
     end
   end
 
+  def index
+    @inflections = Inflection.paginate :page => params[:page],
+      :per_page => 10000, :order => 'id ASC'
+    respond_to do |format|
+      format.json do
+        respond_with @inflections
+      end
+    end
+  end
+
   def show
     @inflection = Inflection.find params[:id]
     respond_to do |format|

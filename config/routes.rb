@@ -26,7 +26,7 @@ Dubsar::Application.routes.draw do
   resources :synsets, :only => :show do
     match '/tab' => 'synsets#tab'
   end
-  resources :inflections, :only => [ :create, :show, :update, :destroy ]
+  resources :inflections, :only => [ :create, :index, :show, :update, :destroy ]
 
   match '/about'             => 'words#about'
   match '/faq'               => 'words#faq'
