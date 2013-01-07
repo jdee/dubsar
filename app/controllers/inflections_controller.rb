@@ -59,6 +59,10 @@ class InflectionsController < ApplicationController
   def create
     word = Word.find params[:word_id]
     @inflection = word.inflections.create(:name => params[:name])
+    ActiveRecord::Base.connection.execute <<-SQL
+      INSERT INTO inflections_fts(id, name, word_id)
+        VALUES(#{@inflection.id}, "#{@inflection.name}", #{params[:word_id]})
+    SQL
     respond_to do |format|
       format.json do
         head :created, :location => @inflection
@@ -71,6 +75,10 @@ class InflectionsController < ApplicationController
       format.json do
         @inflection = Inflection.find params[:id]
         @inflection.update_attributes :name => params[:name]
+        ActiveRecord::Base.connection.execute <<-SQL
+          UPDATE inflections_fts SET name = "#{params[:name]}"
+            WHERE id = #{params[:id]}
+        SQL
         respond_with @inflection
       end
     end
@@ -81,6 +89,9 @@ class InflectionsController < ApplicationController
       format.json do
         @inflection = Inflection.find params[:id]
         @inflection.destroy
+        ActiveRecord::Base.connection.execute <<-SQL
+          DELETE FROM inflections_fts WHERE id = #{params[:id]}
+        SQL
         respond_with @inflection
       end
     end
