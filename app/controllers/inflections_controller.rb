@@ -25,7 +25,7 @@ class InflectionsController < ApplicationController
       :joins => 'INNER JOIN words ON words.id = inflections.word_id',
       :conditions => [
         "words.part_of_speech IN ('noun', 'verb') AND words.name >= 'a' AND words.name < '{' AND words.name GLOB '[a-z]*' AND NOT words.name GLOB ? AND NOT words.name = inflections.name",
-        "*[A-Z0-9 .-']*" ],
+        "*[A-Z0-9 .'-]*" ],
       :page => params[:page],
       :per_page => per_page,
       :order => 'name ASC')
