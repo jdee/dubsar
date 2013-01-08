@@ -19,7 +19,7 @@
   #error.ui-state-error.ui-corner-all.line
     %span.ui-icon.ui-icon-alert
     &= flash[:error]
-- elsif flash[:notice]
+- elsif flash[:notice] || flash[:alert]
   #error.ui-state-active.ui-corner-all.line
     %span.ui-icon.ui-icon-info
     &= flash[:notice]

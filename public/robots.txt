@@ -2,10 +2,13 @@ Sitemap: http://dubsar-dictionary.com/sitemap.xml
 
 User-agent: *
 Disallow: /m*
+Disallow: /inflections
 Disallow: /review
 Disallow: /share
 Disallow: /senses/*/
 Disallow: /synsets/*/
+Disallow: /tokens
+Disallow: /users
 Disallow: /words/*/
 Disallow: /wotd
 Allow: /wotd.xml

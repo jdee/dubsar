@@ -16,6 +16,10 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Dubsar::Application.routes.draw do
+  devise_for :users
+
+  resources :tokens, :only => [:create, :destroy]
+
   resources :words  , :only => :show do
     match '/tab' => 'words#tab'
     match '/inflections' => 'inflections#word'
@@ -52,5 +56,5 @@ Dubsar::Application.routes.draw do
 
   root :to => "words#index"
 
-  match '*junk' => "application#error"
+  match '/*junk' => "application#error"
 end

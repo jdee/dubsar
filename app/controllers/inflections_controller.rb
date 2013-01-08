@@ -16,6 +16,7 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class InflectionsController < ApplicationController
+  before_filter :authenticate_user!
   respond_to :html, :json
 
   def review
