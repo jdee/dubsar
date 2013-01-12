@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>http://dubsar-dictionary.com</link>
-    <lastBuildDate>Wed, 02 Jan 2013 05:30:00 GMT</lastBuildDate>
-    <pubDate>Wed, 02 Jan 2013 05:30:00 GMT</pubDate>
+    <lastBuildDate>Tue, 08 Jan 2013 22:00:00 GMT</lastBuildDate>
+    <pubDate>Tue, 08 Jan 2013 22:00:00 GMT</pubDate>
     <image>
       <url>http://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,13 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar 1.1.1 available in the iOS App Store</title>
+      <description>This release provides some fixes for iOS 6 and iPhone 5.</description>
+      <link>http://itunes.apple.com/us/app/dubsar/id453868483</link>
+      <guid isPermaLink="false">33</guid>
+      <pubDate>Tue, 08 Jan 2013 22:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Word of the Day Fixed</title>
       <description>The word of the day was stuck for quite a long time. It has been fixed. It will begin updating again on Android devices at 00:00 UTC on January 3.</description>
