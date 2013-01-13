@@ -27,16 +27,16 @@ namespace :wotd do
       xml.instruct!(:xml, :version => '1.0', :standalone => 'yes')
       xml.rss :version => '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do |rss|
         rss.channel do |channel|
-          channel.atom :link, :href => 'http://dubsar-dictionary.com/wotd.xml', :rel => 'self', :type => 'application/rss+xml'
+          channel.atom :link, :href => 'https://dubsar-dictionary.com/wotd.xml', :rel => 'self', :type => 'application/rss+xml'
           channel.title 'Dubsar Word of the Day'
           channel.description 'Dubsar Word of the Day News Feed'
-          channel.link 'http://dubsar-dictionary.com'
+          channel.link 'https://dubsar-dictionary.com'
           channel.lastBuildDate build_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
           channel.pubDate DailyWord.first(:order => 'created_at DESC').created_at.strftime("%a, %d %b %Y %H:%M:%S GMT")
           channel.image do |image|
-            image.url 'http://s.dubsar-dictionary.com/images/dubsar-link.png'
+            image.url 'https://s.dubsar-dictionary.com/images/dubsar-link.png'
             image.title 'Dubsar Word of the Day'
-            image.link 'http://dubsar-dictionary.com'
+            image.link 'https://dubsar-dictionary.com'
             image.description 'Dubsar Word of the Day News Feed'
             image.width '88'
             image.height '20'
@@ -52,7 +52,7 @@ namespace :wotd do
               description += "; also #{word.other_forms}" unless word.other_forms.empty?
 
               item.description description
-              item.link "http://dubsar-dictionary.com/words/#{word.id}"
+              item.link "https://dubsar-dictionary.com/words/#{word.id}"
               item.guid dw.id, :isPermaLink => 'false'
               item.pubDate dw.created_at.strftime("%a, %d %b %Y %H:%M:%S GMT")
             end
