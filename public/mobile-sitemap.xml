@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>http://m.dubsar-dictionary.com/m</loc>
-    <lastmod>2013-01-05</lastmod>
+    <loc>https://m.dubsar-dictionary.com/m</loc>
+    <lastmod>2013-01-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>
-        http://s.dubsar-dictionary.com/dubsar-full.png
+        https://s.dubsar-dictionary.com/dubsar-full.png
       </image:loc>
       <image:title>
         Dubsar
@@ -17,13 +17,13 @@
         Dubsar Dictionary Project
       </image:caption>
       <image:license>
-        http://dubsar-dictionary.com/license
+        https://dubsar-dictionary.com/license
       </image:license>
     </image:image>
   </url>
   <url>
-    <loc>http://m.dubsar-dictionary.com/m_support</loc>
-    <lastmod>2013-01-02</lastmod>
+    <loc>https://m.dubsar-dictionary.com/m_support</loc>
+    <lastmod>2013-01-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
