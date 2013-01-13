@@ -66,7 +66,7 @@ module WordsHelper
   end
 
   def mobile_canonical_link_tag
-    url = "http://m.dubsar-dictionary.com#{url_for :action => :m_search, :term => @term}"
+    url = "https://m.dubsar-dictionary.com#{url_for :action => :m_search, :term => @term}"
     url += "&page=#{params[:page]}" unless params[:page].blank? or params[:page].to_i == 1
 
     s = <<EOF
@@ -84,6 +84,6 @@ EOF
   end
 
   def mobile_url
-    "http://m.dubsar-dictionary.com/m"
+    "https://m.dubsar-dictionary.com/m"
   end
 end

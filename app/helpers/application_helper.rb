@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def canonical_url(object=nil)
-    url = "http://dubsar-dictionary.com"
+    url = "https://dubsar-dictionary.com"
     if object
       url += url_for object
     else
@@ -62,17 +62,12 @@ TAG
 
   def html_for_link
     s = <<EOF
-<a href="http://dubsar-dictionary.com" title="Dubsar Project" target="_blank"><img src="#{asset_host}/images/dubsar-link.png" alt="Dubsar" height="20" width="88" style="vertical-align: top; border-style: none;"/></a>
+<a href="https://dubsar-dictionary.com" title="Dubsar Project" target="_blank"><img src="#{asset_host}/images/dubsar-link.png" alt="Dubsar" height="20" width="88" style="vertical-align: top; border-style: none;"/></a>
 EOF
   end
 
   def asset_host
-    host = ActionController::Base.asset_host
-    if host
-      host = 'http://' + host
-    else
-      host = ''
-    end
+    return ActionController::Base.asset_host || ''
   end
 
   def theme_color
@@ -112,9 +107,9 @@ EOF
 
   def twitter_button
     <<-HTML
-<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+<script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
 <div>
-  <a href="http://twitter.com/share?via=dubsar&text=Dubsar%20Dictionary%20Project%20#dubsar" class="twitter-share-button">Tweet</a>
+  <a href="https://twitter.com/share?via=dubsar&text=Dubsar%20Dictionary%20Project%20#dubsar" class="twitter-share-button">Tweet</a>
 </div>
     HTML
   end

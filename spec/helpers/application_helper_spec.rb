@@ -38,7 +38,7 @@ describe ApplicationHelper do
       let (:html) { helper.html_for_link }
 
       it 'links to Dubsar' do
-        html.should match %r{href="http://dubsar-dictionary.com"}
+        html.should match %r{href="https://dubsar-dictionary.com"}
       end
 
       it 'uses the dubsar-link image' do
@@ -61,8 +61,8 @@ describe ApplicationHelper do
 
   describe '#asset_host' do
     it 'returns a URL when the host is set' do
-      ActionController::Base.stub(:asset_host).and_return('s.dubsar-dictionary.com')
-      helper.asset_host.should == 'http://s.dubsar-dictionary.com'
+      ActionController::Base.stub(:asset_host).and_return('https://s.dubsar-dictionary.com')
+      helper.asset_host.should == 'https://s.dubsar-dictionary.com'
     end
 
     it 'returns blank when the host is not set' do
@@ -96,8 +96,8 @@ describe ApplicationHelper do
     end
     it 'includes a #twitter_button method' do
       helper.should respond_to(:twitter_button)
-      helper.twitter_button.should match %r{<script src="http://platform\.twitter\.com}
-      helper.twitter_button.should match %r{<a href="http://twitter.com/share}
+      helper.twitter_button.should match %r{<script src="https://://platform\.twitter\.com}
+      helper.twitter_button.should match %r{<a href="https://twitter.com/share}
     end
   end
 
