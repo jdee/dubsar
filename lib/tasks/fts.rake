@@ -42,7 +42,14 @@ namespace :fts do
       INSERT INTO inflections_fts(id, name, word_id)
         SELECT id, name, word_id FROM inflections
     SQL
-    puts " optimizing new table"
+    puts " done"
+
+    Rake::Task['fts:optimize'].invoke
+  end
+
+  desc "optimize FTS table"
+  task :optimize => :environment do
+    puts "optimizing inflections_fts table"
     ActiveRecord::Base.connection.execute <<-SQL
       INSERT INTO inflections_fts(inflections_fts) VALUES('optimize')
     SQL

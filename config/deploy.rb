@@ -53,6 +53,13 @@ namespace :deploy do
     EOF
   end
 
+  desc 'Optimize inflections_fts table'
+  task :optimize_fts, :roles => :app do
+    run <<-EOF
+      cd #{deploy_to}/current && bundle exec rake RAILS_ENV=#{rails_env} fts:optimize
+    EOF
+  end
+
   desc 'start the remote Dubsar instance'
   task :start, :roles => :app, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
@@ -95,5 +102,6 @@ after 'deploy:update', 'deploy:package_assets'
 after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:wotd_build'
+after 'deploy:update', 'deploy:optimize_fts'
 
 before "deploy:migrate", "sqlite3:link_configuration_file"
