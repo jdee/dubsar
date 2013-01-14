@@ -212,9 +212,14 @@
         will appear sorted in with the rest of the results.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
-        Q. Is Dubsar on Facebook?
+        Q. Is Dubsar on any social networks?
       A. Yes.  Visit
-      =link_to 'Dubsar on Facebook', 'http://m.facebook.com/profile.php?id=155561501154946'
+      %p
+        =link_to 'Dubsar on Facebook', 'http://m.facebook.com/profile.php?id=155561501154946'
+      %p
+        =link_to 'Dubsar on Twitter', 'http://twitter.com/#!/dubsar', :title => 'Dubsar on Twitter'
+      %p
+        =link_to 'Dubsar on Google+', 'https://plus.google.com/111210736976423589433', :title => 'Dubsar on Google+'
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What is OpenSearch?
