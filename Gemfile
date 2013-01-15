@@ -23,6 +23,7 @@ gem 'sqlite3'
 gem 'rails', '>= 3.0'
 gem 'will_paginate', '~> 3.0.pre2'
 gem 'devise'
+gem 'rack-ssl'
 
 group :backup_dev, :development, :test do
   gem 'ZenTest', '~> 4.4.2'
