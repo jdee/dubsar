@@ -15,8 +15,7 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-
-require 'rack/ssl'
+require 'rack/ssl-enforcer'
 
 Dubsar::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
@@ -69,6 +68,5 @@ Dubsar::Application.configure do
 
   ActionController::Base.asset_host = 'https://s.dubsar-dictionary.com'
 
-  config.middleware.use Rack::SSL
-  config.middleware.insert_before ActionDispatch::Cookies, Rack::SSL
+  config.middleware.use Rack::SslEnforcer
 end
