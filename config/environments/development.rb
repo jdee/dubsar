@@ -27,8 +27,4 @@ Dubsar::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   ActionController::Base.asset_host = 'https://s.dubsar-dictionary.com'
-
-  config.middleware.use Rack::SSL
-
-  config.middleware.insert_before ActionDispatch::Cookies, Rack::SSL
 end

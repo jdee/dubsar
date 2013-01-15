@@ -74,7 +74,6 @@ GEM
     rack (1.2.3)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
-    rack-ssl-enforcer (0.2.5)
     rack-test (0.5.7)
       rack (>= 1.0)
     rails (3.0.9)
@@ -134,7 +133,6 @@ DEPENDENCIES
   factory_girl_rails
   haml
   json
-  rack-ssl-enforcer
   rails (>= 3.0)
   rcov (~> 0.9.9)
   rspec-rails (>= 2.0)
