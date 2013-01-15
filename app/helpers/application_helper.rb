@@ -16,6 +16,10 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module ApplicationHelper
+  include ActionView::Helpers::UrlHelper
+
+  alias :orig_url_for :url_for
+
   def canonical_link_tag(object=nil)
     # haml_tag :link, :rel => 'canonical', :href => canonical_url(object)
     <<-HTML
@@ -118,5 +122,13 @@ EOF
     <<-HTML
 <a href="#{link_path}" class="unstyled"><h3>or link to &nbsp;<img alt="Dubsar" height="20" width="88" src="#{image_path 'dubsar-link.png'}" style="vertical-align: bottom; border-style: none;" /></h3></a>
     HTML
+  end
+
+  def url_for(params)
+    case params
+    when Hash
+      params.merge :protocol => 'https'
+    end
+    orig_url_for params
   end
 end
