@@ -1,4 +1,4 @@
-Sitemap: http://dubsar-dictionary.com/sitemap.xml
+Sitemap: https://dubsar-dictionary.com/sitemap.xml
 
 User-agent: *
 Disallow: /m*
