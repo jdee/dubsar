@@ -15,6 +15,9 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+require 'net/https'
+require 'yaml'
+
 RSS_LIMIT=30
 
 namespace :wotd do
@@ -68,6 +71,25 @@ namespace :wotd do
 
     puts "word of the day is #{word.name} (#{word.pos}.) [ID #{word.id}]"
     DailyWord.create! :word => word
+
+    # Send a broadcast push
+    uri = URI('https://go.urbanairship.com/api/push/broadcast/')
+    request = Net::HTTP::Post.new(uri.path)
+
+    airship_config = YAML::load_file("config/airship_config.yml").symbolize_keys!
+
+    request.set_content_type "application/json"
+    request.body = { :aps => { :alert => word.name_and_pos },
+      :dubsar_url => "dubsar://x/words/#{word.id}" }.to_json
+    request.basic_auth airship_config[:app_key], airship_config[:master_secret]
+
+    puts "POST #{uri}"
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    response = http.request request
+
+    puts "HTTP status code #{response.code}"
 
     Rake::Task['wotd:build'].invoke
   end
