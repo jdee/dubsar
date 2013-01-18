@@ -79,8 +79,8 @@ namespace :wotd do
     airship_config = YAML::load_file("config/airship_config.yml").symbolize_keys!
 
     request.set_content_type "application/json"
-    request.body = { :aps => { :alert => word.name_and_pos },
-      :dubsar_url => "dubsar://x/words/#{word.id}" }.to_json
+    request.body = { :aps => { :alert => "Word of the day: #{word.name_and_pos}" },
+      :dubsar_url => "dubsar://x/words/#{word.id}", :word_and_pos => word.name_and_pos }.to_json
     request.basic_auth airship_config[:app_key], airship_config[:master_secret]
 
     puts "POST #{uri}"
