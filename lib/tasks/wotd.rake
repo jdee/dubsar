@@ -82,8 +82,9 @@ namespace :wotd do
     request.body = { :aps => { :alert =>
         "Word of the day: #{word.name_and_pos}",
         :badge => "+1" },
-      :dubsar_url => "dubsar://x/words/#{word.id}",
-      :word_and_pos => word.name_and_pos }.to_json
+      :dubsar_type => "wotd",
+      :dubsar_url => "dubsar://x/words/#{word.id}"
+    }.to_json
     request.basic_auth airship_config[:app_key], airship_config[:master_secret]
 
     puts "POST #{uri}"
