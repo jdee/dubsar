@@ -153,11 +153,11 @@ class WordsController < ApplicationController
   end
 
   def wotd
-    word = DailyWord.word_of_the_day
+    daily_word = DailyWord.word_of_the_day
 
     respond_to do |format|
       format.json do
-        respond_with json_wotd_response(word)
+        respond_with json_wotd_response(daily_word)
       end
       format.xml
     end
@@ -211,8 +211,16 @@ class WordsController < ApplicationController
 
   end
 
-  def json_wotd_response(word)
-    [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms ]
+  def json_wotd_response(daily_word)
+    expiration = daily_word.created_at
+
+    expiration += 1.day
+    expiration += 1.minute
+
+    word = daily_word.word
+
+    [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms,
+      expiration ]
   end
 
   def json_search_response

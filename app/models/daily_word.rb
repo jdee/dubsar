@@ -21,7 +21,7 @@ class DailyWord < ActiveRecord::Base
 
   class << self
     def word_of_the_day
-      first(:order => 'created_at DESC', :include => { :word => :inflections} ).try :word
+      first :order => 'created_at DESC', :include => { :word => :inflections}
     end
   end
 end
