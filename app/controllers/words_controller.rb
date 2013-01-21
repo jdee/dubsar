@@ -220,7 +220,7 @@ class WordsController < ApplicationController
     word = daily_word.word
 
     [ word.id, word.name, word.pos, word.freq_cnt, word.other_forms,
-      expiration ]
+      expiration.to_i ]
   end
 
   def json_search_response
