@@ -70,7 +70,7 @@ namespace :wotd do
     word = Word.random_word
 
     puts "word of the day is #{word.name} (#{word.pos}.) [ID #{word.id}]"
-    DailyWord.create! :word => word
+    daily_word = DailyWord.create! :word => word
 
     # Send a broadcast push
     uri = URI('https://go.urbanairship.com/api/push/broadcast/')
@@ -82,18 +82,35 @@ namespace :wotd do
     request.body = { :aps => { :alert =>
         "Word of the day: #{word.name_and_pos}",
         :badge => "+1" },
-      :dubsar_type => "wotd",
-      :dubsar_url => "dubsar://x/words/#{word.id}"
+      :dubsar => {
+        :type => "wotd",
+        :url => "dubsar://x/words/#{word.id}",
+        :expiration => "#{daily_word.created_at+1.day+1.minute}"
+      }
     }.to_json
-    request.basic_auth airship_config[:app_key], airship_config[:master_secret]
 
-    puts "POST #{uri}"
+    if (airship_config[:development_app_key] && airship_config[:development_master_secret])
+      request.basic_auth airship_config[:development_app_key], airship_config[:development_master_secret]
 
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    response = http.request request
+      puts "POST #{uri}"
 
-    puts "HTTP status code #{response.code}"
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      response = http.request request
+
+      puts "HTTP status code #{response.code}"
+    end
+    if (airship_config[:production_app_key] && airship_config[:production_master_secret])
+      request.basic_auth airship_config[:production_app_key], airship_config[:production_master_secret]
+
+      puts "POST #{uri}"
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      response = http.request request
+
+      puts "HTTP status code #{response.code}"
+    end
 
     Rake::Task['wotd:build'].invoke
   end
