@@ -89,21 +89,14 @@ namespace :wotd do
       }
     }.to_json
 
-    if (airship_config[:development_app_key] && airship_config[:development_master_secret])
-      request.basic_auth airship_config[:development_app_key], airship_config[:development_master_secret]
+    ["development","production"].each do |environment|
+      app_key = airship_config["#{environment}_app_key".to_sym]
+      master_secret = airship_config["#{environment}_master_secret".to_sym]
+      next unless app_key && master_secret
 
-      puts "POST #{uri}"
+      request.basic_auth app_key, master_secret
 
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      response = http.request request
-
-      puts "HTTP status code #{response.code}"
-    end
-    if (airship_config[:production_app_key] && airship_config[:production_master_secret])
-      request.basic_auth airship_config[:production_app_key], airship_config[:production_master_secret]
-
-      puts "POST #{uri}"
+      puts "POST #{uri} [#{environment}]"
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true

@@ -16,7 +16,7 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class InflectionsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :only => [ :create, :update, :destroy ]
   respond_to :html, :json
 
   def review
@@ -24,7 +24,7 @@ class InflectionsController < ApplicationController
     @inflections = Inflection.paginate(
       :joins => 'INNER JOIN words ON words.id = inflections.word_id',
       :conditions => [
-        "words.part_of_speech IN ('noun', 'verb') AND words.name >= 'a' AND words.name < '{' AND words.name GLOB '[a-z]*' AND NOT words.name GLOB ? AND NOT words.name = inflections.name",
+        "(words.part_of_speech IN ('adjective', 'adverb') OR words.name < 'a' OR words.name >= '{' OR NOT words.name GLOB '[a-z]*' OR words.name GLOB ?) AND NOT words.name = inflections.name",
         "*[A-Z0-9 .'-]*" ],
       :page => params[:page],
       :per_page => per_page,
