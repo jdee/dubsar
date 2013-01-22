@@ -84,7 +84,7 @@ namespace :wotd do
         :badge => "+1" },
       :dubsar => {
         :type => "wotd",
-        :url => "dubsar://x/words/#{word.id}",
+        :url => "dubsar://x/wotd/#{word.id}",
         :expiration => (daily_word.created_at+1.day+1.minute).to_i
       }
     }.to_json
