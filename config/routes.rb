@@ -35,6 +35,7 @@ Dubsar::Application.routes.draw do
   match '/about'             => 'words#about'
   match '/faq'               => 'words#faq'
   match '/ios_faq'           => 'words#ios_faq'
+  match '/ios_faq_v120'      => 'words#ios_faq_v120'
   match '/license'           => 'words#license'
   match '/m'                 => 'words#mobile'
   match '/m_faq'             => 'words#m_faq'

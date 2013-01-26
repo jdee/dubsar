@@ -1,0 +1,267 @@
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010-13 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- content_for :title do
+  Dubsar for iOS FAQ
+- content_for :description do
+  %link{:rel => 'canonical', :href => ios_faq_url}
+
+%div#faq{'data-role' => 'page', 'data-title' => "Dubsar for iOS - FAQ", 'data-theme' => 'b'}
+  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
+    %h1
+      =image_tag 'dubsar-full.png', :alt => 'Dubsar', :id => 'dubsar-mobile-image', :width => "143", :height => "52"
+    %br/
+    Dubsar for iOS Frequently Asked Questions
+  %div{'data-role' => 'content'}
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What is Augury?
+      A. Augury was one of the main occupations of the ancient
+      %em dubsar,
+      cataloging omens in order to predict the future. The Dubsar app now
+      also speaks mysteriously when asked, using WordNet&reg;&apos;s
+      generic verb frames and randomly-selected words to construct
+      arbitrary sentences. Tap the Augur button on the main view's toolbar
+      to try it.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Which versions of iOS are supported?
+      A. Version 1.1.0 and earlier require version 4.2 or higher of iOS.
+      Version 1.1.1 and later require version 4.3 or higher.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I get help with a problem?
+      A. Contact
+      =link_to 'support@dubsar-dictionary.com', 'mailto:support@dubsar-dictionary.com'
+      for support with Dubsar for iPhone, iPod Touch and iPad.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Where does the database come from?
+      A. This is the WordNet&reg; 3.0 data set from Princeton University,
+      available for free under the WordNet 3.0 License.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Which words are in the dictionary?
+      A. The
+      WordNet&reg;
+      data set is aimed at automated text processing and
+      includes only the most numerous parts of speech: adjectives,
+      adverbs, nouns and verbs.  It does not include conjunctions,
+      interjections, prepositions or pronouns.  These words are far fewer
+      in number and are less directly related to the meaning of any text.
+      So you won't find
+      %em from
+      in Dubsar, but you will find
+      =link_to 'sedulous.', 'dubsar://x/words/6171'
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What do those WordNet&reg; terms mean?
+      A. Some of them are listed here in Dubsar.  The data model used in
+      Dubsar's SQLite database uses them for its table names.
+      %h3 Word
+      A dictionary entry with a unique name and part of speech.
+
+      %h3 Synset
+      A list of synonymous words in a particular sense.  Each word can
+      belong to multiple synsets.  A synset is essentially a meaning that
+      one or more words share.  It includes a gloss and optionally one or
+      more sample sentences.
+
+      %h3 Sense
+      The intersection (or join table, in database terms) of words and
+      synsets.  Each occurrence of one word in one synset is a sense of
+      that word.  A sense is a specific meaning of a single word.
+
+      %h3 Pointer
+      A lexical or semantic relationship between senses or synsets.  A
+      lexical pointer points from one sense to another (one specific
+      meaning of one word to a specific meaning of another word).  A
+      semantic pointer points from one synset to another and hence
+      relates two meanings.  There are many specific pointer types.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What's all that stuff listed for each word sense?
+      A. The tooltips display a number of things:
+      %dl
+        %dt lexical file name
+        %dd
+          broad categories associated with each word sense
+
+        %dt adjective marker
+        %dd
+          for some adjective senses, a limitation on the syntactic
+          position of the adjective when used in this sense (see below)
+
+        %dt frequency count
+        %dd
+          number of times this word sense occurs in a reference text
+
+        %dt verb frames
+        %dd
+          generic sentence frames applicable to this verb sense
+
+        %dt sample sentences
+        %dd
+          sample sentences for the synset
+
+      %h4 Adjective markers
+      Some adjective senses may only be used in certain syntactic
+      positions:
+      %ul
+        %li
+          %strong (a) attributive
+          The
+          %em left
+          side of the road.
+        %li
+          %strong (ip) immediately postnominal
+          I live in the city
+          %em proper.
+        %li
+          %strong (p) predicate
+          It is
+          %em well
+          he did not go.
+
+      Then there are lexical and semantic pointers from one word sense to
+      another sense (for lexical pointers) or synset (for semantic ones).
+      %hr/
+
+      %table
+        %thead
+          %tr
+            %th
+              one way of saying it
+            %th
+              another way of saying it
+        %tbody
+          - Pointer.help_list.each do |ptype, help_text|
+            %tr
+              %td
+                &= ptype
+              %td
+                &= help_text
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How many entries does Dubsar have?
+      A. Here are current row counts, by table.  This list is live,
+      generated from the database tables whenever you load this page.
+      As Dubsar&apos;s data content evolves, this list of tables and their
+      specific row counts will change.
+      %table
+        %tbody
+          - %w{synset word sense inflection pointer}.each do |model|
+            %tr
+              %td
+                =model_count(model)
+              %td
+                =model.pluralize
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How long does it take to build the Dubsar database?
+      A. Currently it takes more than three hours.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How are the autocompleter results determined?
+      %p
+        A. All search results use full text searching, similar to the
+        behavior of most search engines, against the inflections table.
+        All searching is case-insensitive.
+        Results include all search terms. An asterisk (*) may be used to
+        match any non-whitespace string, including nothing. Certain operators
+        may also be used, in all uppercase, like "law OR order." Exact matches
+        (results where the matching inflection is exactly the search term as
+        it was typed) are sorted to the top. Other results are sorted in ASCII
+        order, so all capital letters come before all lowercase letters.
+
+      %p
+        The autocompleter results are determined by looking first for an
+        exact match, then by searching for
+        %em search terms*,
+        i.e., appending an
+        asterisk to the search terms. So if you type in
+        %em frus,
+        which has no exact match, you will see the results of searching for
+        %em frus*,
+        which returns all results containing a term beginning with
+        %em frus.
+
+      %p
+        Exact matching is case-sensitive, so if you search for
+        %em Fruit,
+        the word
+        %em fruit
+        will not appear at the top of the list. In fact, it will not show up in
+        the autocompleter at all. If you perform a search for
+        %em Fruit, fruit
+        will appear sorted in with the rest of the results.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Can I do wild-card searches?
+      %p
+        A. Yes. Full text searching recognizes the asterisk (*) character, which
+        will match any non-whitespace string, including the empty string.
+      %p
+        If more than 30 results are returned, the list is paginated using a page
+        control like this:
+      %p
+        =image_tag 'ios_page_control.png', :height => "147", :width => "300", :alt => "iOS page control"
+      %p
+        Tap the left side of the control to page back and the right side to
+        page forward through the search results.
+      %p
+        The iPad app provides some built-in wild-card searches using the alphabet
+        buttons on the master panel.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Can I get more room to see a gloss in a Sense or Synset view?
+      %p
+        A. Yes. The pale blue banner label below each gloss, listing a WordNet&reg;
+        lexname like &lt;noun.substance&gt;, can be dragged down to give the gloss
+        more room, if needed. A gold drag handle will appear if you apply pressure
+        to the label:
+      %p
+        =image_tag 'ios_drag_handle.png', :height => "173", :width => "300", :alt => "iOS drag handle"
+      %p
+        This is available in Sense and Synset views on both the iPhone and iPad.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What does Dubsar mean?
+      A. Dubsar is the Sumerian word for scribe.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How does full text searching work?
+      %p
+        A. Dubsar searches now work similarly to most search engines.
+      %ul
+        %li All searching is case-insensitive.
+        %li Search results will include anything that contains all search terms.
+        %li
+          An asterisk (*) stands for any non-whitespace string (including nothing).
+          So searching for
+          %em count*
+          matches anything containing a discrete term that begins with
+          %em count.
+        %li
+          Certain operators are recognized in all caps (e.g.,
+          %em law OR order
+          ).
+        %li
+          Results are sorted in ASCII order, with all capital letters coming before all
+          lower-case letters. But case-sensitive exact matches (including inflections)
+          are sorted to the top.
+  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
+    &copy; 2013 Jimmy Dee &middot; WordNet&reg; &copy; 2013 The Trustees of Princeton University
