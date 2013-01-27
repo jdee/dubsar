@@ -81,7 +81,8 @@ namespace :wotd do
     request.set_content_type "application/json"
     request.body = { :aps => { :alert =>
         "Word of the day: #{word.name_and_pos}",
-        :badge => "+1" },
+        :badge => "+1",
+        :sound => "default" },
       :dubsar => {
         :type => "wotd",
         :url => "dubsar:///wotd/#{word.id}",
