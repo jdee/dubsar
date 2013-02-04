@@ -26,5 +26,5 @@ Dubsar::Application.configure do
   # For devise:
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-  ActionController::Base.asset_host = 'https://s.dubsar-dictionary.com'
+  # ActionController::Base.asset_host = 'https://s.dubsar-dictionary.com'
 end

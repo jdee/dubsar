@@ -28,16 +28,65 @@
   %div{'data-role' => 'content'}
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
-        Q. What is Augury?
-      A.
-      =link_to 'Augury', 'dubsar:///words/82652'
-      was one of the main occupations of the ancient
-      %em dubsar,
-      cataloging omens in order to predict the future. The Dubsar app now
-      also speaks mysteriously when asked, using WordNet&reg;&apos;s
-      generic verb frames and randomly-selected words to construct
-      arbitrary sentences. Tap the Augur button on the main view's toolbar
-      to try it.
+        Q. How do the previews work?
+      %p
+        A. Dubsar's views reflect the structure of WordNet&reg;, but often, in previous
+        versions, you would have to tap through a couple of empty views in order to get
+        to the information you wanted. That's because the Search and Word views are just
+        lists of things: search results and word senses. Now Dubsar shows you a preview
+        of the following view for the first item in each list.
+      %p
+        For example, search for onomatopoeia. You'll get back a view like this:
+ 
+      =image_tag 'onomatopoeia-1.png', :size => '240x426'
+
+      %p
+        This view includes a preview. To hide the preview, tap the Hide button at the
+        right of the bottom toolbar. When the preview goes away, you'll see this:
+
+      =image_tag 'onomatopoeia-2.png', :size => '240x426'
+
+      %p
+        This was previously the only content of this Dubsar Search view. Having found
+        the one word matching your search, you had to tap ahead to the Word view in
+        order to see more. Now you'll see this in the Word view:
+
+      =image_tag 'onomatopoeia-3.png', :size => '240x426'
+
+      %p
+        Again, this view contains a preview. If you tap Hide again, you'll see:
+
+      =image_tag 'onomatopoeia-4.png', :size => '240x426'
+
+      %p
+        Before the introduction of previews, this was all you'd see in this Word view,
+        a single sense. Tapping yet again on that row, you'll finally come to the
+        Sense view:
+
+      =image_tag 'onomatopoeia-5.png', :size => '240x426'
+
+      %p
+        This is just what was previewed in the previous two views, but you didn't have
+        to tap through two empty views to see this information, as you did in Dubsar
+        1.1.1 and earlier. Note that in the Search view, you get a preview of the first
+        Word view in the search results, and that preview in turn includes a preview
+        of the first Sense in that Word view, just as you see in the full Word view if
+        you tap on the first row of the search results.
+
+      %p
+        Sometimes you are interested in a long list. Search for something like
+        %em take.
+        If you hide the preview in the search view, you'll see many matches. Take is
+        primarily a verb, so 
+        =link_to 'take (v.)', 'dubsar:///words/145841'
+        has a higher frequency count than other parts of speech and is displayed as
+        the first result. (Search results are displayed with exact matches at the top,
+        followed by fulltext matches. Exact matches, if there is more than one, are
+        sorted by frequency count.) But maybe you're interested in
+        =link_to 'take (n.)', 'dubsar:///words/32773'
+        or one of the other matches. Hide the preview to see them. Similarly in the
+        Word view, you can always hide the preview to show the rest of the sense of
+        the word.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Which versions of iOS are supported?
