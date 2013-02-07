@@ -405,7 +405,7 @@ class Word < ActiveRecord::Base
     end
 
     # Select a Word entry from the DB at random. Must be all lowercase
-    # with no spaces or punctuattion, at least <tt>min_length</tt>
+    # with no spaces or punctuation, at least <tt>min_length</tt>
     # letters (9 by default).
     def random_word(min_length=9)
       pattern = ''
@@ -413,8 +413,9 @@ class Word < ActiveRecord::Base
         pattern += '[a-z]'
       end
 
-      words = Word.all(:conditions => [ "name GLOB '#{pattern}*' AND NOT name GLOB ?",
-        "*[A-Z0-9 .-']*" ], :select => 'id')
+      words = Word.all(:conditions =>
+        [ "name >= 'a' AND name < '{' AND name GLOB '#{pattern}*' AND NOT name GLOB ?",
+        "*[A-Z0-9 .'-]*" ], :select => 'id')
       random_number = SecureRandom.random_number(words.count)
       Word.find words[random_number].id
     end
