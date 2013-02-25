@@ -4,7 +4,7 @@
   <url>
     <loc>https://dubsar-dictionary.com</loc>
     <lastmod>2013-02-21</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>
@@ -119,8 +119,8 @@
   </url>
   <url>
     <loc>https://dubsar-dictionary.com/faq</loc>
-    <lastmod>2013-01-14</lastmod>
-    <changefreq>yearly</changefreq>
+    <lastmod>2013-02-25</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
