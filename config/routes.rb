@@ -52,6 +52,8 @@ Dubsar::Application.routes.draw do
   match '/tour'              => 'words#tour'
   match '/wotd'              => 'words#wotd'
 
+  match '/m_laertes_faq'     => 'words#m_laertes_faq'
+
   match '/(.:format)' => 'words#search'
   match '/os(.:format)' => 'words#os'
 

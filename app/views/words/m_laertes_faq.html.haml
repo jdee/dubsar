@@ -1,0 +1,360 @@
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010-13 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- content_for :title do
+  Laertes Testing FAQ
+- content_for :description do
+  %link{:rel => 'canonical', :href => m_laertes_faq_url}
+
+%div#faq{'data-role' => 'page', 'data-title' => "Laertes Testing FAQ", 'data-theme' => 'b'}
+  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
+    = render :partial => 'shared/mobile_header'
+    %br/
+    Laertes Testing Frequently Asked Questions
+  %div{'data-role' => 'content'}
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What is this page?
+      A. Apologies for the Dubsar intrusion. This is just an easy place and format for me
+      to use. This will grow over time into an FAQ or help for users. For now, hopefully
+      it will help testers of Laertes to understand how the game works and help new testers
+      get started without repeating a lot of information in each build e-mail. I&apos;m
+      just trying to get this up and running now. Expect the content and format to evolve
+      quite a bit. This page should be considered by no means exhaustive. I am just trying
+      to give testers some help and start building a real manual. Please let me know if you
+      think something needs to change here.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What is the game about?
+      %p
+        A. Laertes is a first-person RPG for iOS. There may be support for other platforms
+        like Android and desktops some day (next year at the earliest). Right now, there is
+        no iPad support. I develop on my iPhone, and no tester has an iPad registered. I
+        will add iPad support once it&apos;s warranted. If anyone wants to register an iPad
+        and test, let me know, and I&apos;ll make the NIBS for the next build. It&apos;s a
+        matter of half a day, and it has to happen some time.
+      %p
+        The game is set in Ancient Greece. I have been motivated by decades of life as an
+        RPG junkie. I love those games, but often the writing is lazy and absurd and may as
+        well be randomly generated. I want this game to be a little more realistic, so it
+        is set in a historical time period, and I hope to achieve a good degree of historical
+        realism. There are supernatural elements, but they are muted.
+      %p
+        Laertes is the name of a central character in the game, one who will eventually
+        accompany you on most of your quests (once I&apos;ve built that part).
+      %p
+        Everything is under construction at the moment. That applies in spades to the
+        dialog, narrative, quests, artwork, textures, images, books and so on. All is
+        subject to change. The game will probably be complete in July or August, and then
+        I&apos;ll build real content for it. I would consider it about half done now.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do you start a character?
+      %p
+        A. Start on the Character tab and tap the + button on the Characters view. You make
+        a few permanent choices at the beginning: name, gender, race and class. Race and
+        gender only ever enter the narrative portion of the game, influencing how people
+        respond to you and what they have to say. There are no consequences in game play.
+      %p
+        Your character class is another matter. There are six skills. Each class specializes
+        in two of them. There is a lot of in-game help and explanation in the character
+        views. Tap all the buttons for explanations of race, class, gender, skills, skill
+        points, talents and so on. Most of that will probably end up here sooner or later.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do you play?
+      %p
+        A. First, create or choose a character. You can have multiple characters and switch
+        between them on the Character tab. All the other tabs in the game refer to the
+        context of the current character: the current character&apos;s inventory, quests,
+        library, and so on. If you haven't selected or created a character, the other
+        tabs will tell you to do so.
+      %p
+        Game play occurs primarily through the Map/Areas tab. Start by viewing the world
+        map. Then tap Areas to see a list of areas you can visit. Tap one of them to start
+        a game.
+    
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do the controls work?
+      = image_tag 'laertes.png', :alt => 'laertes', :width => 1136, :height => 640
+      %p
+        A. You&apos;ll spend a lot of time in a view like this. The two wheels at the upper
+        left and right control the direction you look and the direction you move. This is
+        pretty much identical with the Xbox 360 thumbstick controls for a lot of
+        first-person games, like Halo and Skyrim. You move with the left wheel and turn
+        in place with the right wheel. Use the right wheel to turn left or right or to
+        look up or down. If you prefer to press down to look up, you can use the Invert
+        inclination setting in the Laertes section of the iOS Settings App to do that.
+      %p
+        Use the left wheel to move forward, left, right or backward without changing the
+        direction you&apos;re facing. Sidestepping and backpedaling are slower than
+        moving forward. You can use both wheels at the same time. In particular, you can
+        turn while moving. This is usually more effective than moving to the side,
+        depending what you are trying to do.
+      %p
+        I usually play the game by cradling the phone in my palms, so that each thumb pad
+        is on top of a wheel, and the bottom of the phone rests in my hands. I then
+        usually only ever press up on the left wheel, ignoring the other directions of
+        motion. I use the right thumb to turn left or right while moving or standing still.
+        I occasionally also look up or down. I also often hold the phone only with my left
+        hand, with the left thumb over the top of the left wheel. Then I use the index
+        finger of my right hand to tap the right wheel whenever I want to turn.
+      %p
+        Hold down the zoom button to magnify the scene up to five times. The magnification
+        lasts as long as you hold the button down, then reverts. The intention is that you
+        only use the zoom when standing still, to get a good look at something far away.
+        If you set the phone on a table top, for example, you can hold the zoom button and
+        use both wheels to move and look, but that&apos;s not really the intended way to
+        use it.
+      %p
+        If you are a lefty, or you just find this layout difficult, let me know. I have
+        thought about adding a setting to switch the sides of the wheels, so that you
+        have the option to move with the right and look with the left. I&apos;m not sure
+        if there&apos;s a hidden bias there.
+      %p
+        You have a light that is off by default. If you are in a dark area, tap the light
+        button to turn it on (and again to turn it off). It does not reach very far, but
+        lets you see close things more easily. It does affect your stealth, however. If a
+        creature can see your light, any attempt at stealth is negated.
+      %p
+        The stat button is poorly named. These will eventually be icons, if these buttons
+        even survive. This button simply pauses the game, dismissing the game play view and
+        returning to the tab view, so you can change weapons, apply a recently gained skill
+        point, view quest status, and so on. Return to game play through the Areas list as
+        before. Tap the Resume button to simply resume your paused game. You also have the
+        option to start a new game in a new area. This will reload the new area, even if
+        it&apos;s the same as the one you&apos;re in, and return you to your starting
+        point. Often you just want to Resume instead.
+      = image_tag 'laertes-map.png', :alt => 'laertes-map', :width => 1136, :height => 640
+      %p
+        Tapping the map button toggles between the 3D perspective view and the aerial map
+        view. The player is always represented in the center of the map by a blue x.
+        A compass rose indicates the direction of north. The top of the screen is the
+        side indicated in this view, on the right of the phone if you are holding it in
+        portrait. This always represents the direction the player is facing in the game.
+      %p
+        Please note: The game is not paused while you are in map mode. If you want to
+        pause the game, press stat to return to the tab view. You can, in fact, play the
+        entire game in map mode. You can move by dragging the screen with one finger. You
+        zoom and rotate using, respectively, the pinch and rotate gestures. People are
+        represented as blue circles. Doors are brown circles. Tap them to talk or go
+        through them.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I do other things?
+      %p
+        A. Currently, everything works automatically with the exception of going through
+        doors and talking to people. You have a certain chance per unit time to detect
+        hidden things (doors and containers) within a certain distance. You do not have to
+        do anything but move around. Lock picking also works automatically, with a certain
+        chance of success, on any locked object within a certain distance. Both these
+        activities are governed by your Engineering skill. The higher that skill, the easier
+        things are to find. And with most skills, there is a huge, qualitative difference
+        between 0 and 1. If your Engineering skill is 0, most things are fairly hard to find.
+      %p
+        There is little feedback during lock picking, but you will see a message when you
+        successfully pick a lock. Also, locked doors and containers appear on the map with
+        red circles and slashes, which go away once you unlock them. Containers are automatically
+        opened and their contents transferred to your inventory once you have found and
+        unlocked them and approached within a certain distance.
+      %p
+        Messages will tell you when you find things. When you find drachmae (money), you
+        will see a number in gold flash at the center of the screen briefly. These numbers
+        are usually small.
+      %p
+        Combat also happens automatically. This is probably not a permanent state of affairs.
+        I will probably do a big combat overhaul in a few weeks. But for now, a few things to
+        note:
+        %ul
+          %li
+            Your character automatically attacks any target within melee range. Ranged
+            combat has not been introduced yet.
+          %li
+            Your character attacks regardless what you are doing, even if you are running
+            away. There is no reason not to busy yourself with other things during combat
+            except for the glorious spectacle of my 3-D weapon images rendered during the
+            show. (For which you have to be facing your opponent.)
+          %li
+            Currently, state changes are permanent, except for your death. So if you are
+            in an area with several enemies, and you manage to kill one before you die, you
+            can simply return to that area, and you will have one less enemy to kill this
+            time around. Survivors have their health restored on area load, however, so
+            you have to kill at least one before you die each time.
+          %li
+            Enemies cannot follow you through doors, so you can just rush through an area
+            to escape.
+          %li
+            If you leave combat and enter an area that is clear (no living enemies), your
+            health is restored to 100%.
+          %li
+            Your health is restored to 100% when combat is over (assuming you survive).
+          %li
+            Whenever you take damage, the screen flashes red, and the word &quot;damage&quot;
+            appears in red. Your compass bar at the top of the first-person view also
+            gradually turns red. If it is all white, you are at full health. If it is solid
+            red, you are dead.
+          %li
+            Enemies are the opposite: When they are solid red, they are at full health.
+            When you hit them, they fade.
+          %li
+            The amount of damage you do depends on your Combat skill and the weapon you
+            are using. Better weapons (look for a higher grade) do more damage, and so
+            do bigger ones. Spears do more than swords, and swords more damage than
+            daggers.
+          %li
+            Depend on the AI, or AS (Artificial Stupidity), as I like to think of it, to
+            fail to find you if you run away. It will get confused and hung on corners
+            easily. If you can back at a steep angle around a corner, you can probably
+            lose one or more of your opponents.
+    
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I manage my inventory?
+      = image_tag 'laertes-inventory.png', :alt => 'laertes-inventory', :height => 1136, :width => 640
+      %p
+        A. Go to the Inventory tab. If an item (weapon, armor or clothing) can be
+        equipped, you can do so on this tab by simply tapping the relevant row. If an item
+        like a mortar and pestle cannot be equipped, tapping will have no effect. You can
+        also only equip one weapon at a time, so if you tap a new one, the others will all
+        be unequipped, like radio buttons. Some items have a certain skill requirement that
+        prevents you from equipping them. You can see this on the individual Item view.
+      %p
+        Tap the blue detail disclosure button on the right side of each table view row
+        in the inventory view to see details for that item, including an explanation of
+        why you cannot equip an item. You can also equip and unequip items here.
+      %p
+        You sell things right out of your inventory, without having to find a vendor. Your
+        Speech skill does factor in to affect the amount of money you get from the sale.
+        You can sell from the Inventory view or the individual Item view. There you also
+        have the option to sell multiple instances of a thing instead of selling them one
+        at a time.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Why are the drachma numbers so low?
+      %p
+        A. According to
+        = link_to 'Wikipedia', 'http://en.wikipedia.org/wiki/Drachma'
+        , a drachma was one day&apos;s wage for a hoplite or a skilled worker. I&apos;m
+        not sure how this will end up. I may quote values in drachmae and oboloi or something.
+        For now, using decimals is convenient. I doubt it will survive in this form forever.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do the other skills work?
+      %p
+        A. Many aspects of game play have not been fully developed yet. Here are some notes:
+      %p
+        Philosophy can be used to receive certain benefits from books. Some books will give
+        you a skill point when you receive them, but only if your Philosophy skill is 1 or
+        higher. Others may reveal secret features on the local map, like secret doors. Again,
+        you only receive this benefit if you have a 1 or greater Philosophy skill. If you
+        receive a book while your Philosophy is 0 and then increase it to 1, you do not get
+        the benefits of the book. That will probably change. These are currently the only
+        effects of the Philosophy skill. Philosophy is also supposed to govern Medicine/First
+        Aid and to provide some degree of clairvoyance via divination (notionally through
+        the stars or something). This all remains to be developed.
+      %p
+        Wilderness is like Philosophy in that it currently only reveals certain things to
+        you, and there is no quantitative dependence on the skill rank. There is currently
+        no reason to raise either of these skills above 1. If your Wilderness skill is 1 or
+        higher, plants are revealed to you on the map, and you can get things from them.
+        If your Wilderness skill is 0, they are not indicated on the map and effectively do
+        not exist. You cannot find them or use them. Once that skill increases to 1, they
+        are marked on your map for you. This is an underdeveloped area of the game.
+      %p
+        Stealth happens automatically if your Stealth skill is greater than 0. If Stealth is
+        0, you are not capable of Stealth at all. If it greater than 0, creatures may fail
+        to notice you. They will never notice you if they do not have a line of sight. If
+        they do have a line of sight, and your light is on, they notice you immediately.
+        Otherwise, there is a finite chance of detection per unit time that depends on the
+        creature, on your Stealth skill and the distance between you. Once one creature in
+        an area notices you, all do. If you sneak up within attack range without being
+        detected, you do double damage on your first attack.
+      %p
+        Engineering governs finding and unlocking things. This is discussed above. As with
+        many other skills, if your skill rank in Engineering is 0, it is much harder to find
+        and unlock things than if your skill is 1 or higher, though in this case, these
+        things continue to get easier as you increase the skill. Features that are hidden
+        or locked have a secret level and a lock level, respectively, that make them hard
+        or easy, so continue to increase this skill in order to find and open harder things.
+      %p
+        Speech affects sale prices out of your inventory and when buying from merchants.
+        There are also some speech challenges that have random outcomes depending on your
+        Speech skill. As with everything else, it is fairly hopeless (but not impossible)
+        to persuade someone with a 0 skill rank. Even at higher ranks you may fail, however.
+        You can usually try again until you succeed.
+      %p
+        Combat affects your ability to use armor and weapons. With a 0 Combat skill, you can
+        only use a dagger. With a 1 Combat skill, you can use any weapon. With a 2 or higher,
+        you can equip any shield or armor item.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Why do some areas take a long time to load?
+      %p
+        A. When you load an area by tapping a row in the Areas list or tapping a door to
+        another area, all the data necessary for OpenGL to build the 3-D view has to be
+        built, including lighting calculations, which are expensive.
+      %p
+        Performance will just be a constant battle with this app. I am happier to have areas
+        take a long time to load than to have poor performance (sluggish response) during
+        game play. But it is also frustrating to wait thirty seconds to go through a door.
+        For now, don&apos;t be surprised if it takes that long or longer to load an area.
+        This is a matter that will evolve a lot along the way.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. Why do people and doors seem unresponsive when I tap them?
+      %p
+        A. This is a bit of code that needs work. The spot you need to tap is at the center
+        of the person or door (in the middle of the person&apos;s body, not their head).
+        You currently have to tap within 200 pts. of that location on the screen
+        (which is 320 pts. wide) and within 10 feet on the map. If you are facing the top
+        of a door or a person, tap near the bottom of the screen or look down toward the
+        middle and then tap. This will improve over time. It has not bubbled to the top of
+        the list is all.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What settings are there?
+      = image_tag 'laertes-settings.png', :alt => 'laertes-settings', :height => 1136, :width => 640
+      %p
+        A. There are a few things you can change by going to the iOS Settings App (the
+        one with the gears where you choose your Wi-Fi network and things like that).
+        Scroll down to the app settings and find the settings for Laertes.
+      %p
+        The tour is the transparent overlays that are shown when you first install a new
+        version. Once you have seen it (by visiting the Map tab, at the moment), it will
+        be suppressed in the future. Set the Suppress tour setting to OFF if you want to
+        see it again.
+      %p
+        If you set the Invert inclination setting to ON, you will look up when you press
+        down and vice versa. Be sure to stock plenty of Benzadrine.
+      %p
+        Switch Person labels to OFF if you do not want to see the name of each person in
+        the first-person game play view. I usually play this way and use it for screen
+        shots. The default is to show you everyone&apos;s name.
+      %p
+        There are two lighting modes: per-vertex and per-fragment. A vertex is the corner
+        of a triangle being rendered on the screen. A fragment is a piece (i.e., an individual
+        pixel) in the interior of such a triangle. Per-vertex lighting calculates the
+        lighting at each vertex, and the GPU merely interpolates the values from each vertex
+        over the interior. If you select per-fragment lighting, light values are calculated
+        pixel by pixel for every location on the screen, frame by frame. This is a lot more
+        expensive, but looks far nicer. On an iPhone 4S or an iPhone 5, per-fragment lighting
+        performs fine and is the default. Turn the Fragment lighting switch to OFF if you are
+        having trouble with performance. This has no effect on area load times. It only
+        affects frame-by-frame rendering times.
+
+  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
+    = render :partial => 'shared/mobile_footer'
