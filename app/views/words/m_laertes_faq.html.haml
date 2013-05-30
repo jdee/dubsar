@@ -332,9 +332,10 @@
       %p
         Performance will just be a constant battle with this app. I am happier to have areas
         take a long time to load than to have poor performance (sluggish response) during
-        game play. But it is also frustrating to wait thirty seconds to go through a door.
-        For now, don&apos;t be surprised if it takes that long or longer to load an area.
-        This is a matter that will evolve a lot along the way.
+        game play.
+      %p
+        At the moment, it should not take more than a few seconds to load an area thanks to
+        some last-minute optimization.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Why do people and doors seem unresponsive when I tap them?
@@ -374,9 +375,9 @@
         over the interior. If you select per-fragment lighting, light values are calculated
         pixel by pixel for every location on the screen, frame by frame. This is a lot more
         expensive, but looks far nicer. On an iPhone 4S or an iPhone 5, per-fragment lighting
-        performs fine and is the default. Turn the Fragment lighting switch to OFF if you are
-        having trouble with performance. This has no effect on area load times. It only
-        affects frame-by-frame rendering times.
+        performs fine and is the default. Turn the Fragment lighting switch to OFF if the
+        app seems sluggish. This is most likely to happen on an iPhone 4S. This setting no
+        effect on area load times. It only affects frame-by-frame rendering times.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What happens when I install a new version?
@@ -387,6 +388,33 @@
         levels, so you stand to start out with better gear, and you can always find the same
         things again. In addition, the quests should be easier each time because of your
         skill increases.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What devices have you tested on?
+      %p
+        A. My own phone is an iPhone 5. I also have an iPhone 4S with a broken screen that
+        still works extremely well as a test device. In addition, I have an iPod touch, 4th
+        gen. I can play the game fine on both phones with fragment lighting turned on,
+        though in some larger areas, the response can be sluggish. If you find that
+        frustrating, turn the Fragment lighting setting to OFF. I can play the game fine
+        on the iPod touch with vertex lighting (fragment lighting turned off).
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I buy from merchants?
+      %p
+        A. Currently, there is only one merchant in the game, at the Delphi Camp, which
+        you reach from the Road to Delphi (where you meet the Stranger) by going through a
+        door to the south. He sells a few weapons. Speak to him and tap the
+        %em buy
+        button in the dialog menu. This brings up a mercantile view not too different from
+        your inventory view. Merchants have an unlimited supply of all items, so it is only
+        your funds that limit how many of each thing you can buy. The sale price depends on
+        your Speech skill, just as when you sell things out of your inventory. Once you
+        buy what you want, return to game play by saying Goodbye to the vendor. Then pause
+        the game with the
+        %em stat
+        button to return to the tab view and your inventory, where you can equip your new
+        item and sell any old ones you don&apos;t want.
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'
