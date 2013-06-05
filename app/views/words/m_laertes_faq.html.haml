@@ -81,6 +81,10 @@
         Hopefully the
         pretty pictures will keep testers interested in coming back to the same material
         over and over.
+      %p
+        %strong June 5:
+        Imgur seems to have some issues. That album URL seems to be a bit flaky lately.
+        I&apos;ll move the photos if that persists.
     
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
@@ -104,15 +108,29 @@
         context of the current character: the current character&apos;s inventory, quests,
         library, and so on. If you haven't selected or created a character, the other
         tabs will tell you to do so.
+      = image_tag 'laertes-world-map.png', :alt => 'laertes-world-map', :width => 480, :height => 852
       %p
         Game play occurs primarily through the Map/Areas tab. Start by viewing the world
-        map. Then tap Areas to see a list of areas you can visit. Tap one of them to start
-        a game.
+        map. You can then zoom the map or tap Areas to see a list of areas you can visit.
+        Tapping one of the rows in the Areas list will start a game. Tap the detail
+        disclosure button there to see a thumbnail map of that area without starting a
+        game. You can also start a game from that view. You will also reach the area
+        detail view by tapping an area on the world map.
+      %p
+        If you have a current game paused (if the Resume button is showing), that area is
+        marked on the map with a star, and its name appears in gold. Other area names appear
+        with cyan text. Map annotations that do not correspond to play areas are indicated in
+        white. Green text is used for areas that have a quest available. This part
+        is a little buggy right now. Only the starting area for the quest is indicated,
+        regardless how far you are through the quest. If you visit an active quest on the
+        Quest tab, there is a View on Map button there that will take you to the appropriate
+        map location. This will also be the starting area for the quest, not wherever your
+        next objective is. That will change eventually.
     
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How do the controls work?
-      = image_tag 'laertes.png', :alt => 'laertes', :width => 1136, :height => 640
+      = image_tag 'laertes.png', :alt => 'laertes', :width => 852, :height => 480
       %p
         A. You&apos;ll spend a lot of time in a view like this. The two wheels at the upper
         left and right control the direction you look and the direction you move. This is
@@ -161,7 +179,7 @@
         option to start a new game in a new area. This will reload the new area, even if
         it&apos;s the same as the one you&apos;re in, and return you to your starting
         point. Often you just want to Resume instead.
-      = image_tag 'laertes-map.png', :alt => 'laertes-map', :width => 1136, :height => 640
+      = image_tag 'laertes-map.png', :alt => 'laertes-map', :width => 852, :height => 480
       %p
         Tapping the map button toggles between the 3D perspective view and the aerial map
         view. The player is always represented in the center of the map by a blue x.
@@ -180,19 +198,16 @@
         Q. How do I do other things?
       %p
         A. Currently, everything works automatically with the exception of going through
-        doors and talking to people. You have a certain chance per unit time to detect
-        hidden things (doors and containers) within a certain distance. You do not have to
-        do anything but move around. Lock picking also works automatically, with a certain
-        chance of success, on any locked object within a certain distance. Both these
-        activities are governed by your Engineering skill. The higher that skill, the easier
+        doors, talking to people and picking locks. You have a certain chance per unit
+        time to detect hidden things (doors and containers) within a certain distance.
+        You do not have to do anything but move around. (Lock picking no longer occurs
+        automatically. See new FAQ below.) Detection is governed by your Engineering skill. The
+        higher that skill, the easier
         things are to find. And with most skills, there is a huge, qualitative difference
         between 0 and 1. If your Engineering skill is 0, most things are fairly hard to find.
       %p
-        There is little feedback during lock picking, but you will see a message when you
-        successfully pick a lock. Also, locked doors and containers appear on the map with
-        red circles and slashes, which go away once you unlock them. Containers are automatically
-        opened and their contents transferred to your inventory once you have found and
-        unlocked them and approached within a certain distance.
+        Unlocked containers are automatically opened and their contents transferred to your
+        inventory once you have found and unlocked them and approached within a certain distance.
       %p
         Messages will tell you when you find things. When you find drachmae (money), you
         will see a number in gold flash at the center of the screen briefly. These numbers
@@ -246,7 +261,7 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How do I manage my inventory?
-      = image_tag 'laertes-inventory.png', :alt => 'laertes-inventory', :height => 1136, :width => 640
+      = image_tag 'laertes-inventory.png', :alt => 'laertes-inventory', :height => 852, :width => 480
       %p
         A. Go to the Inventory tab. If an item (weapon, armor or clothing) can be
         equipped, you can do so on this tab by simply tapping the relevant row. If an item
@@ -350,7 +365,7 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What settings are there?
-      = image_tag 'laertes-settings.png', :alt => 'laertes-settings', :height => 1136, :width => 640
+      = image_tag 'laertes-settings.png', :alt => 'laertes-settings', :height => 852, :width => 480
       %p
         A. There are a few things you can change by going to the iOS Settings App (the
         one with the gears where you choose your Wi-Fi network and things like that).
@@ -415,6 +430,40 @@
         %em stat
         button to return to the tab view and your inventory, where you can equip your new
         item and sell any old ones you don&apos;t want.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I pick a lock?
+      %p
+        A. When you tap a locked door or container, if you do not have a key to that
+        feature, the lock pick view will appear. If you are not sure if a door or
+        container is locked, switch to the aerial map view of the area. If the feature
+        is locked, it will be displayed with a red circle and slash. You may have to
+        be relatively close to a container to begin lock picking.
+      %p
+        You can dismiss the lock pick view at any time, without unlocking anything, by
+        tapping the red close button at the upper right. While the lock pick view is
+        showing, the game is paused, and none of the other controls will respond until
+        you dismiss the lock pick view.
+      %p
+        To pick a lock, once the view is showing, drag your finger slowly around the
+        lock pick view (with the wooden background). The pick will follow your finger.
+        Each time you open the lock pick view, a random location on the surface of the
+        view is selected. Your finger must remain within a certain tolerance of that
+        position for a small amount of time in order to open the lock. The tolerance
+        depends on your Engineering skill and the lock level of the feature.
+      %p
+        When you get within that tolerance of the target location, you will hear a
+        loud click if the device is not muted. The device will also vibrate. Your
+        finger must remain within the computed tolerance for a small time. If you
+        move your finger too fast, you may skip over the target and not get any feedback
+        or move out of tolerance again even though you received feedback. This can happen
+        often when picking difficult locks.
+        Once you hear the click or feel the vibration, stop moving your finger. You may
+        even need to backtrack to find the right position again.
+      %p
+        Once a locked door is opened, you will go through it. Unlocked containers are
+        cleaned out whenever you are within range. This occurs automatically once you
+        have unlocked a container.
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'
