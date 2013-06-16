@@ -25,6 +25,131 @@
     %br/
     Laertes Testing Frequently Asked Questions
   %div{'data-role' => 'content'}
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true', 'data-theme' => 'e'}
+      %h2
+        *New* Q. How does combat work?
+      = image_tag 'laertes-combat.png', :alt => 'laertes-combat', :width => 852, :height => 480
+      %p
+        Combat is still mostly automatic, but there is now a lot more animation, not to
+        mention sound effects and fight music, and without pausing the game you can now
+        change weapons or targets during combat. This will no doubt continue to evolve.
+      %p
+        Combat begins when a creature notices you. Creatures only notice you if you are
+        within a short distance or in their line of sight. Even if your stealth is zero,
+        creatures only have a certain chance of noticing you per unit time, and it drops
+        off with distance. However, it is dramatically affected by your light, so turn
+        your light off or at least down if you are trying to remain undetected.
+        If you can attack a creature before being noticed, you will
+        do double damage. The attack will start combat unless your sneak attack kills
+        your target, though even then, any surviving creatures may still notice you.
+      %p
+        If your attack misses or does not kill your target, or if you are noticed before
+        you can attack, all creatures in the area will notice and come after you. Combat
+        will stop, even if there are surviving enemies in the area, when there are no
+        more targets in range or line of sight. It can begin again if another creature
+        notices you.
+      %p
+        Once combat begins, your equipped weapon and shield (if you have one and can equip
+        it; you have to have a Combat skill of 2 or higher to equip a shield) will appear
+        on the screen. If you have not selected a target, the game will automatically
+        select one for you among those that are within range of your weapon and in your
+        line of sight (not hidden behind walls, etc.). This happens, for example, when
+        the first target comes within range, or after you kill your current target.
+      %p
+        If you don&apos;t like the target selected for you, swipe your finger left or
+        right (in landscape orientation, parallel to the long axis of the device) across
+        the screen during combat to choose a different target. You cannot choose targets
+        that are out of range or out of sight. Also, this control is hypersensitive at the
+        moment. One swipe usually results in several selections. In effect, you&apos;re
+        selecting a new target at random (this can include the old one). This is a bug.
+      %p
+        Your current target will be yellow. All others are red.
+      %p
+        Each weapon has a range and an attack period, which you can see on the item view
+        in your inventory. If you wish to change weapons during combat, use the button at
+        the upper right labeled
+        %em chg.
+        If you only have one weapon to equip, the button will be disabled, and instead of
+        chg, you&apos;ll see
+        %em -.
+        Tapping this button during combat simply cycles to the next weapon in your
+        inventory.
+      %p
+        During combat, several controls are hidden, including the zoom button and the light
+        slider. Your light comes on during combat automatically at half intensity. In
+        addition, you only have one direction wheel, on the left. Your options for motion
+        and direction are more limited during combat. The left direction wheel responds
+        differently depending whether you have a current target selected or not. In both
+        cases, you have no control over your inclination (the angle between your line of
+        sight and the horizontal plane) during combat.
+      %p
+        If you have a current target selected, you will remain facing it at all times.
+        Your inclination will be adjusted so that you are always looking down at your target.
+        If you press up on the wheel, you&apos;ll press your enemy backwards. If you press
+        down on the wheel, you retreat. If you press left or right, you flank in that direction
+        by sidestepping and rotating to remain facing your opponent at the same distance.
+        There is currently a bug if you equip a bow and do this when a distant target is
+        selected. You will fly across the room from side to side, but remain facing your
+        target, which is fun, but needs to be fixed.
+      %p
+        If you do not have a target selected during combat (which usually just means all
+        targets are out of range), pressing up or down on the wheel will behave as when a
+        target is selected, but sideways movement will work differently. Rather than
+        sidestepping to flank a target you don&apos;t have, you can move more or less
+        freely. However, since you don&apos;t have a right direction wheel to use for
+        turning, pressing left or right on the left wheel during combat moves you
+        %em forward,
+        instead of sideways, but turns you to face the direction you are pressing at the
+        same time, so that you move in an arc to the left or right at full speed.
+   
+      %p
+        Some things to keep in mind:
+        %ul
+          %li
+            If you approach within attack range of an enemy, you will attack that enemy.
+            If you have a bow equipped, you will automatically attack pretty well any
+            enemy you see. If you do not want to start a fight, be sure you have a melee
+            weapon equipped.
+          %li
+            Currently, state changes are permanent, except for your death. So if you are
+            in an area with several enemies, and you manage to kill one before you die, you
+            can simply return to that area, and you will have one less enemy to kill this
+            time around. Survivors have their health restored on area load, however, so
+            you have to kill at least one before you die each time.
+          %li
+            Enemies cannot follow you through doors, so if you can make it to a door during
+            combat, you can escape.
+          %li
+            If you leave combat and enter an area that is clear (no living enemies), your
+            health is restored to 100%.
+          %li
+            Your health is restored to 100% when combat is over (assuming you survive) if
+            no enemies remain in the area you are in. It is possible for combat to stop
+            while there are still enemies in another part of the current area. In this
+            case, your health is not restored. (You can leave the area and come back to
+            restore your health, if you need to.)
+          %li
+            Whenever you take damage, the screen flashes red, and the word &quot;damage&quot;
+            appears in red. Your compass bar at the top of the first-person view also
+            gradually turns red. If it is all white, you are at full health. If it is solid
+            red, you are dead.
+          %li
+            Enemies are the opposite: When they are solid red (or yellow, for the current
+            target), they are at full health. When you hit them, they fade.
+          %li
+            The amount of damage you do depends on your Combat skill and the weapon you
+            are using. Better weapons (look for a higher grade) do more damage, and so
+            do bigger ones. Spears do more than swords, and swords more damage than
+            daggers. Bows do the same amount of damage swords.
+          %li
+            Bows are ineffective at short range. Against enemies within 10 feet, a bow
+            effectively gives you a penalty of two combat points, so switch to a melee
+            weapon when enemies close.
+          %li
+            Depend on the AI, or AS (Artificial Stupidity), as I like to think of it, to
+            fail to find you if you run away. It will get confused and hung on corners
+            easily. If you can back at a steep angle around a corner, you can probably
+            lose one or more of your opponents.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What is this page?
@@ -57,9 +182,9 @@
         accompany you on most of your quests (once I&apos;ve built that part).
       %p
         Everything is under construction at the moment. That applies in spades to the
-        dialog, narrative, quests, artwork, textures, images, books and so on. All is
-        subject to change. The game will probably be complete in July or August, and then
-        I&apos;ll build real content for it. I would consider it about half done now.
+        music, dialog, narrative, quests, artwork, textures, images, books and so on. All is
+        subject to change. The game will probably be complete in August, and then
+        I&apos;ll build real content for it. I would consider it a bit more than half done now.
       %p
         I plan to make this a free app and to sell individual adventures as IAP content.
         There will be a little bit of free content up front and probably more later on.
@@ -67,7 +192,8 @@
         might one day host that and let users contribute their own content: maps, quests,
         treasure, people, so on. That is quite some time off though, if it happens.
       %p
-        Volume is the term I use internally for a modular unit of content that can be
+        %em Volume
+        is the term I use internally for a modular unit of content that can be
         individually installed and played. There is currently one volume built into the
         app bundle, which is getting fatter and fatter. Now that the app includes textures,
         there are lots of image files bundled in. Eventually, the app proper will be much
@@ -163,10 +289,11 @@
         have the option to move with the right and look with the left. I&apos;m not sure
         if there&apos;s a hidden bias there.
       %p
-        You have a light that is off by default. If you are in a dark area, tap the light
-        button to turn it on (and again to turn it off). It does not reach very far, but
-        lets you see close things more easily. It does affect your stealth, however. If a
-        creature can see your light, any attempt at stealth is negated.
+        You have a light whose intensity you control with the slider on the right side of
+        the view. When you start game play, it starts at intensity zero, at the bottom.
+        The slider disappears during combat. After combat, it reappears set to half
+        intensity. It makes things easier to see, but it affects your stealth. The higher
+        your light intensity setting, the easier it is for creatures to detect you.
       %p
         The stat button is poorly named. These will eventually be icons, if these buttons
         even survive. This button simply pauses the game, dismissing the game play view and
@@ -194,14 +321,12 @@
       %h2
         Q. How do I do other things?
       %p
-        A. Currently, everything works automatically with the exception of going through
-        doors, talking to people and picking locks. You have a certain chance per unit
-        time to detect hidden things (doors and containers) within a certain distance.
-        You do not have to do anything but move around. (Lock picking no longer occurs
-        automatically. See new FAQ below.) Detection is governed by your Engineering skill. The
-        higher that skill, the easier
-        things are to find. And with most skills, there is a huge, qualitative difference
-        between 0 and 1. If your Engineering skill is 0, most things are fairly hard to find.
+        A. You have a certain chance per unit time to detect hidden things (doors and
+        containers) within a certain distance. You do not have to do anything but move
+        around. Detection is governed by your Engineering skill. The higher that skill,
+        the easier things are to find. And with most skills, there is a huge, qualitative
+        difference between 0 and 1. If your Engineering skill is 0, most things are fairly
+        hard to find.
       %p
         Unlocked containers are automatically opened and their contents transferred to your
         inventory once you have found and unlocked them and approached within a certain distance.
@@ -209,51 +334,6 @@
         Messages will tell you when you find things. When you find drachmae (money), you
         will see a number in gold flash at the center of the screen briefly. These numbers
         are usually small.
-      %p
-        Combat also happens automatically. This is probably not a permanent state of affairs.
-        I will probably do a big combat overhaul in a few weeks. But for now, a few things to
-        note:
-        %ul
-          %li
-            Your character automatically attacks any target within melee range. Ranged
-            combat has not been introduced yet.
-          %li
-            Your character attacks regardless what you are doing, even if you are running
-            away. There is no reason not to busy yourself with other things during combat
-            except for the glorious spectacle of my 3-D weapon images rendered during the
-            show. (For which you have to be facing your opponent.)
-          %li
-            Currently, state changes are permanent, except for your death. So if you are
-            in an area with several enemies, and you manage to kill one before you die, you
-            can simply return to that area, and you will have one less enemy to kill this
-            time around. Survivors have their health restored on area load, however, so
-            you have to kill at least one before you die each time.
-          %li
-            Enemies cannot follow you through doors, so you can just rush through an area
-            to escape.
-          %li
-            If you leave combat and enter an area that is clear (no living enemies), your
-            health is restored to 100%.
-          %li
-            Your health is restored to 100% when combat is over (assuming you survive).
-          %li
-            Whenever you take damage, the screen flashes red, and the word &quot;damage&quot;
-            appears in red. Your compass bar at the top of the first-person view also
-            gradually turns red. If it is all white, you are at full health. If it is solid
-            red, you are dead.
-          %li
-            Enemies are the opposite: When they are solid red, they are at full health.
-            When you hit them, they fade.
-          %li
-            The amount of damage you do depends on your Combat skill and the weapon you
-            are using. Better weapons (look for a higher grade) do more damage, and so
-            do bigger ones. Spears do more than swords, and swords more damage than
-            daggers.
-          %li
-            Depend on the AI, or AS (Artificial Stupidity), as I like to think of it, to
-            fail to find you if you run away. It will get confused and hung on corners
-            easily. If you can back at a steep angle around a corner, you can probably
-            lose one or more of your opponents.
     
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
@@ -346,8 +426,8 @@
         take a long time to load than to have poor performance (sluggish response) during
         game play.
       %p
-        At the moment, it should not take more than a few seconds to load an area thanks to
-        some last-minute optimization.
+        At the moment, it usually does not take much more than ten seconds to load an
+        area.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Why do people and doors seem unresponsive when I tap them?
@@ -378,7 +458,18 @@
       %p
         Switch Person labels to OFF if you do not want to see the name of each person in
         the first-person game play view. I usually play this way and use it for screen
-        shots. The default is to show you everyone&apos;s name.
+        shots. The default is to show you everyone&apos;s name. I think there are some
+        bugs here because I never use it. In addition, somehow it randomly gets set to ON
+        every now and then. Clearly this neds a bit of work.
+      %p
+        The Music Volume setting is passed directly to the AVAudioPlayer object that plays
+        the theme and fight music, but that thing seems rather unresponsive to the value.
+        You can, at least, disable all music by setting this to 0 (the minimum value, at
+        the left). If it is set to anything but 0, the music will play at some constant
+        volume. You can control the volume with the overall device volume control and mute
+        button. This setting does not affect sound effects, so use it to disable music if
+        you are having trouble hearing the sound effects. You will probably have to restart
+        game play (not just resume or go through a door) for the change to take effect.
       %p
         There are two lighting modes: per-vertex and per-fragment. A vertex is the corner
         of a triangle being rendered on the screen. A fragment is a piece (i.e., an individual
@@ -388,8 +479,15 @@
         pixel by pixel for every location on the screen, frame by frame. This is a lot more
         expensive, but looks far nicer. On an iPhone 4S or an iPhone 5, per-fragment lighting
         performs fine and is the default. Turn the Fragment lighting switch to OFF if the
-        app seems sluggish. This is most likely to happen on an iPhone 4S. This setting no
+        app seems sluggish. This is most likely to happen on an iPhone 4S. This setting has no
         effect on area load times. It only affects frame-by-frame rendering times.
+      %p
+        However, this should not usually be necessary. I have adjusted as much as possible to
+        make things perform reasonably on an iPhone 4S, and when things seem sluggish, often
+        it is simply because there are too many vertices being rendered, and per-vertex
+        lighting does not help. This setting will eventually disappear. I would like to
+        improve performance to the point that per-vertex lighting can be retired altogether.
+        For now, this is provided as a back door in case you are having trouble.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What happens when I install a new version?
