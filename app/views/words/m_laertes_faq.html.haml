@@ -442,7 +442,8 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What settings are there?
-      = image_tag 'laertes-settings.png', :alt => 'laertes-settings', :height => 852, :width => 480
+      = image_tag 'laertes-settings-top.png', :alt => 'laertes-settings-top', :height => 852, :width => 480
+      = image_tag 'laertes-settings-bottom.png', :alt => 'laertes-settings-bottom', :height => 852, :width => 480
       %p
         A. There are a few things you can change by going to the iOS Settings App (the
         one with the gears where you choose your Wi-Fi network and things like that).
@@ -462,6 +463,11 @@
         bugs here because I never use it. In addition, somehow it randomly gets set to ON
         every now and then. Clearly this neds a bit of work.
       %p
+        Some parts of the game provide a degree of visual transparency. In particular,
+        enemies will fade as they take damage. However, this is a bit expensive. Don&apos;t
+        be surprised if the game is sluggish and unresponsive if you have this option set
+        as well as High Definition (see below).
+      %p
         The Music Volume setting is passed directly to the AVAudioPlayer object that plays
         the theme and fight music, but that thing seems rather unresponsive to the value.
         You can, at least, disable all music by setting this to 0 (the minimum value, at
@@ -471,23 +477,30 @@
         you are having trouble hearing the sound effects. You will probably have to restart
         game play (not just resume or go through a door) for the change to take effect.
       %p
-        There are two lighting modes: per-vertex and per-fragment. A vertex is the corner
-        of a triangle being rendered on the screen. A fragment is a piece (i.e., an individual
-        pixel) in the interior of such a triangle. Per-vertex lighting calculates the
-        lighting at each vertex, and the GPU merely interpolates the values from each vertex
-        over the interior. If you select per-fragment lighting, light values are calculated
-        pixel by pixel for every location on the screen, frame by frame. This is a lot more
-        expensive, but looks far nicer. On an iPhone 4S or an iPhone 5, per-fragment lighting
-        performs fine and is the default. Turn the Fragment lighting switch to OFF if the
-        app seems sluggish. This is most likely to happen on an iPhone 4S. This setting has no
-        effect on area load times. It only affects frame-by-frame rendering times.
+        Scroll to the bottom of the view to find the High Definition setting. This multiplies
+        the number of pixels rendered per frame, making it
+        %em very
+        expensive. If this option is set, the app will render frames at only half the normal
+        rate (10 fps instead of 20). Even then, an iPhone 4S cannot even come close to
+        keeping up in some of the more involved areas (the Temple Courtyard and the Delphi
+        Library particularly) at full resolution (640 x 960). On the 4S, with the High
+        Definition setting set to ON, frames are rendered 453 x 679, doubling rather than
+        quadrupling the number of pixels. With this setting (and Transparency set to OFF),
+        the app performs fine at 10 fps in all but the areas mentioned above.
       %p
-        However, this should not usually be necessary. I have adjusted as much as possible to
-        make things perform reasonably on an iPhone 4S, and when things seem sluggish, often
-        it is simply because there are too many vertices being rendered, and per-vertex
-        lighting does not help. This setting will eventually disappear. I would like to
-        improve performance to the point that per-vertex lighting can be retired altogether.
-        For now, this is provided as a back door in case you are having trouble.
+        On an iPhone 5, at 10 fps, the app can just barely keep up at full definition
+        (640 x 1136) with Transparency set to OFF in most areas. By default, High Definition
+        is set to OFF on an iPhone 4S and ON on an iPhone 5. Feel free to adjust, but be
+        aware of the performance penalty associated with this setting and Transparency.
+      %p
+        You have to recreate the render buffer backing the OpenGL view in order for a
+        change in this setting to take effect, so going through a door or resuming a paused
+        game is not enough. You have to start again from the Map or Areas view and abandon
+        any paused game.
+      %p
+        These remarks about performance only apply to the area view used for game play.
+        The lock picking and item views use full definition (640 x 1136 or 640 x 960) on
+        all devices without any penalty and are not affected by this setting.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What happens when I install a new version?
@@ -504,10 +517,11 @@
       %p
         A. My own phone is an iPhone 5. I also have an iPhone 4S with a broken screen that
         still works extremely well as a test device. In addition, I have an iPod touch, 4th
-        gen. I can play the game fine on both phones with fragment lighting turned on,
-        though in some larger areas, the response can be sluggish. If you find that
-        frustrating, turn the Fragment lighting setting to OFF. I can play the game fine
-        on the iPod touch with vertex lighting (fragment lighting turned off).
+        gen. I can play the game fine on both phones, though in some larger areas, with HD
+        turned on, the response can be sluggish. If you find that
+        frustrating, turn the High Definition setting to OFF. All current testers have
+        registered a iPhone 4S or 5. Performance on other hardware will be addressed
+        before the eventual release of the app.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How do I buy from merchants?
