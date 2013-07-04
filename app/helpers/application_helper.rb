@@ -20,6 +20,22 @@ module ApplicationHelper
 
   alias :orig_url_for :url_for
 
+  def nsa_banner
+    s = <<-EOF
+<script type="text/javascript">
+    window._idl = {};
+    _idl.variant = "modal";
+    (function() {
+        var idl = document.createElement('script');
+        idl.type = 'text/javascript';
+        idl.async = true;
+        idl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'members.internetdefenseleague.org/include/?url=' + (_idl.url || '') + '&campaign=' + (_idl.campaign || '') + '&variant=' + (_idl.variant || 'banner');
+        document.getElementsByTagName('body')[0].appendChild(idl);
+    })();
+</script>
+    EOF
+  end
+
   def canonical_link_tag(object=nil)
     # haml_tag :link, :rel => 'canonical', :href => canonical_url(object)
     <<-HTML
