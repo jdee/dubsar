@@ -38,5 +38,8 @@
   %body
     = yield
 
+    = link_to 'http://internetdefenseleague.org' do
+      = image_tag 'idl_footer_badge.png', :alt => 'Member of the Internet Defense League', :style => 'margin:0px; padding:0px; border-style:none; position: absolute; right: 1em; bottom: 1em;'
+
     != javascript_include_merged :mobile
     = javascript_include_tag 'jquery.mobile-1.0b2.min'
