@@ -3,12 +3,12 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://dubsar-dictionary.com</loc>
-    <lastmod>2013-02-21</lastmod>
+    <lastmod>2013-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/dubsar.png
+        https://s.dubsar-dictionary.com/images/dubsar.png
       </image:loc>
       <image:title>
         Dubsar
@@ -34,7 +34,7 @@
     <priority>0.9</priority>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/autocomplete.png
+        https://s.dubsar-dictionary.com/images/autocomplete.png
       </image:loc>
       <image:title>
         Dubsar Autocompleter
@@ -48,7 +48,7 @@
     </image:image>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/browse.png
+        https://s.dubsar-dictionary.com/images/browse.png
       </image:loc>
       <image:title>
         Browse Dubsar
@@ -62,7 +62,7 @@
     </image:image>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/sense.png
+        https://s.dubsar-dictionary.com/images/sense.png
       </image:loc>
       <image:title>
         Dubsar Sense View
@@ -76,7 +76,7 @@
     </image:image>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/synset.png
+        https://s.dubsar-dictionary.com/images/synset.png
       </image:loc>
       <image:title>
         Dubsar Synset View
@@ -90,7 +90,7 @@
     </image:image>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/tooltip.png
+        https://s.dubsar-dictionary.com/images/tooltip.png
       </image:loc>
       <image:title>
         Dubsar Tooltip
@@ -104,7 +104,7 @@
     </image:image>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/view.png
+        https://s.dubsar-dictionary.com/images/view.png
       </image:loc>
       <image:title>
         Dubsar Search Results
@@ -130,7 +130,7 @@
     <priority>0.5</priority>
     <image:image>
       <image:loc>
-        https://s.dubsar-dictionary.com/dubsar-link.png
+        https://s.dubsar-dictionary.com/images/dubsar-link.png
       </image:loc>
       <image:title>
         Dubsar
