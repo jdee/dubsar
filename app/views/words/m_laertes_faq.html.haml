@@ -564,6 +564,17 @@
         Once a locked door is opened, you will go through it. Unlocked containers are
         cleaned out whenever you are within range. This occurs automatically once you
         have unlocked a container.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do I register a device?
+      %p
+        A. When you first join TestFlight, it will send you an e-mail. Open it on your
+        iPhone, iPad or iPod touch and tap the link.
+      %p
+        If you have already done that and wish to add a new device, simply visit
+        =link_to 'https://testflightapp.com/m/login', 'https://testflightapp.com/m/login', 'target' => '_blank'
+        on the device and login with your e-mail and password. (Note: You will have to
+        temporarily disable private browsing in Safari this once in order to do so.)
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'
