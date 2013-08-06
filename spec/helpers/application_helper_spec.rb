@@ -96,7 +96,7 @@ describe ApplicationHelper do
     end
     it 'includes a #twitter_button method' do
       helper.should respond_to(:twitter_button)
-      helper.twitter_button.should match %r{<script src="https://://platform\.twitter\.com}
+      helper.twitter_button.should match %r{<script src="https://platform\.twitter\.com}
       helper.twitter_button.should match %r{<a href="https://twitter.com/share}
     end
   end

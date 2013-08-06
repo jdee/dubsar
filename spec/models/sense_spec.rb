@@ -18,7 +18,7 @@
 require 'spec_helper'
 
 describe Sense do
-  let(:sense) { Factory :sense, :synset => Factory(:food_synset), :word => Factory(:noun) }
+  let(:sense) { FactoryGirl.create :sense, :synset => FactoryGirl.create(:food_synset), :word => FactoryGirl.create(:noun) }
 
   context 'when validating' do
     let(:no_freq_cnt) { Sense.new :freq_cnt => nil, :synset_index => 1 }

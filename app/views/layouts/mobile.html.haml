@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2012 Jimmy Dee
+- #  Copyright (C) 2010-13 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -32,7 +32,8 @@
     = yield :description
 
     = csrf_meta_tag
-    != stylesheet_link_merged :mobile
+    = stylesheet_link_tag 'jquery-ui-1.8.14.autocomplete'
+    = stylesheet_link_tag 'mobile'
     = stylesheet_link_tag 'jquery.mobile-1.0b2.min'
 
   %body
@@ -41,5 +42,7 @@
     = link_to 'http://internetdefenseleague.org' do
       = image_tag 'idl_footer_badge.png', :alt => 'Member of the Internet Defense League', :style => 'margin:0px; padding:0px; border-style:none; position: absolute; right: 1em; bottom: 1em;'
 
-    != javascript_include_merged :mobile
+    = javascript_include_tag 'jquery-1.6.2.min'
+    = javascript_include_tag 'jquery-ui-1.8.14.autocomplete.min'
+    = javascript_include_tag 'autocompleter'
     = javascript_include_tag 'jquery.mobile-1.0b2.min'

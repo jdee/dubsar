@@ -19,7 +19,7 @@ class SensesController < ApplicationController
   respond_to :html, :json
 
   def tab
-    @sense = Sense.find params[:sense_id], :include => [ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
+    @sense = Sense.includes([ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]).find params[:sense_id]
     respond_to do |format|
       format.html do
         render @sense
@@ -30,7 +30,7 @@ class SensesController < ApplicationController
   end
 
   def show
-    @sense = Sense.find params[:id], :include => [ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
+    @sense = Sense.includes([ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]).find params[:id]
 
     respond_to do |format|
       format.html
@@ -43,7 +43,7 @@ class SensesController < ApplicationController
   end
 
   def m_show
-    @sense = Sense.find params[:id], :include => [ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]
+    @sense = Sense.includes([ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]).find params[:id]
     render :layout => false
   rescue
     m_error

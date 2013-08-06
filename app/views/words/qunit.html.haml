@@ -26,7 +26,11 @@
     %link{:rel => "apple-touch-icon", :sizes => "114x114", :href => "#{image_path 'dubsar-retina.png'}"}
     %link{:rel => "icon", :href => "#{image_path 'dubsar-android.png'}"}
     != thumbnail_link_tags
-    !=stylesheet_link_merged :qunit
+    =stylesheet_link_tag 'jquery-ui-1.8.14.dark'
+    =stylesheet_link_tag 'jquery-ui-1.8.14.light'
+    =stylesheet_link_tag 'application-dark'
+    =stylesheet_link_tag 'application-light'
+    =stylesheet_link_tag 'qunit'
     =csrf_meta_tag
     %meta{:name => 'Description', :content => 'The Dubsar QUnit test suite puts elements of Dubsar through a sequence of automated tests.'}
     %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
@@ -109,4 +113,13 @@
     #footer{:style => 'position: fixed; bottom: 0; height: 6ex; margin: 0.2ex; font-size: 0.9em;'}
       =render 'shared/footer'
 
-    !=javascript_include_merged :qunit
+    =javascript_include_tag 'jquery-1.6.2.min'
+    =javascript_include_tag 'jquery-ui-1.8.14.custom.min'
+    =javascript_include_tag 'qunit'
+    =javascript_include_tag 'jquery.watermark.min'
+    =javascript_include_tag 'jquery.mockjax'
+    =javascript_include_tag 'application'
+    =javascript_include_tag 'application_test'
+    =javascript_include_tag 'application-ui'
+    =javascript_include_tag 'application-ui_test'
+    =javascript_include_tag 'autocompleter'

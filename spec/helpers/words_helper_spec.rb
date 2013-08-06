@@ -20,7 +20,7 @@ require 'spec_helper'
 describe WordsHelper do
   describe "#search_title" do
     before :each do
-      words = stub('words')
+      words = double('words')
       words.stub(:total_pages).and_return(2)
       words.stub(:empty?).and_return(false)
       @words = words
@@ -62,7 +62,7 @@ describe WordsHelper do
     before :each do
       Word.delete_all
       %w{adjective adverb conjunction interjection noun preposition pronoun verb}.each do |part_of_speech|
-        Factory.create part_of_speech.to_sym
+        FactoryGirl.create part_of_speech.to_sym
       end
     end
 
@@ -85,12 +85,12 @@ describe WordsHelper do
 
   describe '#meta_description' do
     it 'includes the title and resulting words' do
-      words = [ Factory.create(:adverb) ]
+      words = [ FactoryGirl.create(:adverb) ]
       helper.meta_description('a title', words).should match /a title: well, adv\.$/
     end
 
     it 'includes inflections when appropriate' do
-      words = [ Factory.create(:noun) ]
+      words = [ FactoryGirl.create(:noun) ]
       helper.meta_description('food', words).should match /food: food, n\. \(foods\)$/
     end
   end

@@ -19,9 +19,5 @@ class DailyWord < ActiveRecord::Base
   belongs_to :word
   validates :word, :presence => true
 
-  class << self
-    def word_of_the_day
-      first :order => 'created_at DESC', :include => { :word => :inflections}
-    end
-  end
+  scope :word_of_the_day, -> { order('created_at DESC').limit(1).first }
 end

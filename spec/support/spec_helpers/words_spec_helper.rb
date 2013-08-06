@@ -24,12 +24,12 @@ def create_word!(name, part_of_speech, options={})
 end
 
 def create_synonyms!
-  food_synset = Factory :food_synset
-  food = Factory.build :noun
-  grub = Factory.build :grub
+  food_synset = FactoryGirl.create :food_synset
+  food = FactoryGirl.build :noun
+  grub = FactoryGirl.build :grub
 
-  food.senses << Factory.build(:sense, :synset => food_synset)
-  grub.senses << Factory.build(:sense, :synset => food_synset, :synset_index => 2)
+  food.senses << FactoryGirl.build(:sense, :synset => food_synset)
+  grub.senses << FactoryGirl.build(:sense, :synset => food_synset, :synset_index => 2)
   food.save!
   grub.save!
 
@@ -37,23 +37,23 @@ def create_synonyms!
   add_inflections grub
 
   # define 'substance' as a hypernym for food
-  substance = Factory :substance
-  substance_sense = Factory :sense, :word => substance, :synset => Factory(:substance_synset)
+  substance = FactoryGirl.create :substance
+  substance_sense = FactoryGirl.create :sense, :word => substance, :synset => FactoryGirl.create(:substance_synset)
   substance.senses << substance_sense
   substance.save!
-  Factory :pointer, :source => food.senses.first, :target => substance_sense, :ptype => 'hypernym'
+  FactoryGirl.create :pointer, :source => food.senses.first, :target => substance_sense, :ptype => 'hypernym'
 
   [ food, grub ]
 end
 
 def create_antonyms!
-  good = Factory :good
-  bad = Factory :bad
-  good_sense = Factory(:sense, :synset => Factory(:good_synset))
-  bad_sense = Factory(:sense, :synset => Factory(:bad_synset ))
+  good = FactoryGirl.create :good
+  bad = FactoryGirl.create :bad
+  good_sense = FactoryGirl.create(:sense, :synset => FactoryGirl.create(:good_synset))
+  bad_sense = FactoryGirl.create(:sense, :synset => FactoryGirl.create(:bad_synset ))
 
-  good_sense.synset.pointers << Factory(:pointer, :ptype => 'antonym', :target => bad_sense.synset, :source => good_sense.synset)
-  bad_sense.synset.pointers << Factory(:pointer, :ptype => 'antonym', :target => good_sense.synset, :source => bad_sense.synset)
+  good_sense.synset.pointers << FactoryGirl.create(:pointer, :ptype => 'antonym', :target => bad_sense.synset, :source => good_sense.synset)
+  bad_sense.synset.pointers << FactoryGirl.create(:pointer, :ptype => 'antonym', :target => good_sense.synset, :source => bad_sense.synset)
 
   good.senses << good_sense
   bad.senses  << bad_sense

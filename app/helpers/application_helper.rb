@@ -16,7 +16,7 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module ApplicationHelper
-  include ActionView::Helpers::UrlHelper
+  include ActionDispatch::Routing::UrlFor
 
   alias :orig_url_for :url_for
 
@@ -143,7 +143,7 @@ EOF
   def url_for(params)
     case params
     when Hash
-      params.merge :protocol => 'https'
+      params.merge protocol: 'https'
     end
     orig_url_for params
   end

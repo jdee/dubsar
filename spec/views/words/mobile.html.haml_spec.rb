@@ -19,7 +19,7 @@ require 'spec_helper'
 
 describe '/words/mobile.html.haml' do
   before :each do
-    Factory :daily_word, :word => Factory(:substance)
+    FactoryGirl.create :daily_word, :word => FactoryGirl.create(:substance)
   end
 
   it 'has basic jquery mobile page structure' do

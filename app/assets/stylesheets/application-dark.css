@@ -1,0 +1,80 @@
+/*
+  Dubsar Dictionary Project
+  Copyright (C) 2010-13 Jimmy Dee
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+body.style-dark, body.style-dark a:link, body.style-dark #header-bar a:visited {
+  color: #eeeeee;
+}
+
+body.style-dark {
+  background-color: #000;
+}
+
+body.style-dark #about a:link, body.style-dark #about a:hover, body.style-dark #about a:active {
+  color: #f58400;
+}
+
+body.style-dark a:visited {
+  color: #555555;
+}
+
+body.style-dark a:visited > img {
+  border-color: #555555;
+}
+
+body.style-dark a > img:hover,active {
+  border-color: #ffffff;
+}
+
+body.style-dark #header-bar {
+  background-color: #f58400;
+  border-color: #ffaf0f;
+}
+
+body.style-dark hr {
+  background-color: #555555;
+}
+
+body.style-dark #header-bar a:hover,active,
+body.style-dark a:hover,active,
+body.style-dark *.ui-state-active > span.ui-button-text {
+  color: #ffffff;
+}
+
+body.style-dark a.undecorated, body.style-dark #footer, body.style-dark #about,
+body.style-dark #tour, body.style-dark #tour * {
+  color: #f58400;
+}
+
+body.style-dark .pagination * {
+  color: #f58400!important;
+}
+
+body.style-dark .view-heading a.unstyled:link,visited,
+body.style-dark .view-content a.unstyled:visited {
+  color: white;
+}
+
+body.style-dark .view-heading a.unstyled:hover,active,
+body.style-dark .view-heading .ui-state-highlight a.unstyled:link,visited {
+  color: #0078a3;
+}
+
+body.style-dark .view-content a.unstyled:hover,active {
+  color: #2e7db2;
+}

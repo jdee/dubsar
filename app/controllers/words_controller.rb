@@ -54,7 +54,7 @@ class WordsController < ApplicationController
   end
 
   def tab
-    @word = Word.find params[:word_id], :include => [ :inflections, { :senses => :synset } ]
+    @word = Word.includes([ :inflections, { senses: :synset }]).find params[:word_id]
     @sense = Sense.find params[:sense_id]
     respond_to do |format|
       format.html do
@@ -66,7 +66,7 @@ class WordsController < ApplicationController
   end
 
   def show
-    @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
+    @word = Word.includes([ :inflections, { senses: :synset }]).find params[:id]
     respond_to do |format|
       format.html
       format.json do
@@ -78,7 +78,7 @@ class WordsController < ApplicationController
   end
 
   def m_show
-    @word = Word.find params[:id], :include => [ :inflections, { :senses => :synset } ]
+    @word = Word.includes([ :inflections, { senses: :synset }]).find params[:id]
     render :layout => false
   rescue
     m_error
@@ -109,9 +109,9 @@ class WordsController < ApplicationController
         exact = Inflection.find_by_name(@term)
         @words << exact.name if exact
 
-        @words += InflectionsFt.all(:select => 'DISTINCT name',
-          :conditions => [ "name MATCH ? AND name != ?", "#{@term}*", @term ],
-          :order => 'name ASC', :limit => 10-@words.count).map(&:name)
+        @words += InflectionsFt.select('name').distinct.
+          where([ "name MATCH ? AND name != ?", "#{@term}*", @term ]).
+          order('name ASC').limit(10-@words.count).map(&:name)
 
         respond_with [ @term, @words ]
       end
@@ -236,7 +236,7 @@ class WordsController < ApplicationController
   end
 
   def json_show_response
-    senses = @word.senses.all(:order => 'freq_cnt DESC').map do |s|
+    senses = @word.senses.order('freq_cnt DESC').map do |s|
       [ s.id, s.synset.senses_except(s.word).map{|_s| [ _s.id, _s.word.name ]}, s.synset.gloss, s.synset.lexname, s.marker, s.freq_cnt ]
     end
     [ @word.id, @word.name, @word.pos, @word.other_forms, senses, @word.freq_cnt ]

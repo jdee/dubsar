@@ -143,45 +143,13 @@ class Hash
   end
 end
 
-class String
-  def double_consonant?
-    case self
-    when /mortar$/
-      false
-    when /[bs]lur$/, /spur$/, /[bc]ur$/, /demur$/, /ir$/,
-      /[ens]fer$/, /^(dis|)inter$/, /deter$/, /abhor$/, /^aver$/,
-      /char$/, /[bcjmptw]ar$/
-      true
-    when /^grin$/, /^[cd]on$/, /^t[hw]in$/, /^[bcfw]an$/, /^[dgps]un$/,
-      /^[bdfgstw]in$/, /^stun$/, /^s[hkp]in$/, /^chin$/, /^scan$/,
-      /^plan$/, /^shun$/, /^swan$/, /^[py]en$/, /^begin$/, /tan$/,
-      /run$/, /man$/, /pin$/, /pan$/
-      true
-    when /^gel$/, /^fulfil$/, /^corral$/, /^instal$/, /^appal$/,
-      /^enthral$/, /^pal$/, /^excel$/, /pel$/, /stil$/
-      true
-    when /^audit$/, /^benefit$/, /^exit$/, /^orbit$/, /^profit$/,
-      /^vomit$/, /credit$/, /habit$/, /comfit$/, /edit$/, /debit$/,
-      /limit$/, /posit$/, /inherit$/, /spirit$/, /licit$/, /hibit$/,
-      /rabbit$/, /merit$/, /visit$/, /^summit$/, /^transit$/
-      false
-    # -uit (like quit) is handled in local_exceptional_verb
-    when /[^aeiou][aeiouy]t$/
-      true
-    else
-      false
-    end
-  end
-end
-
 # A single +Word+ entry represents a word and part of speech.  For
 # example, _run_ will have two separate entries as a noun and a verb.
 class Word < ActiveRecord::Base
   before_save :compute_freq_cnt
-  has_many :senses, :order => 'freq_cnt DESC, id ASC'
-  has_many :synsets, :through => :senses,
-    :order => 'senses.freq_cnt DESC, senses.id ASC'
-  has_many :inflections, :order => 'inflections.name ASC'
+  has_many :senses, -> { order('senses.freq_cnt DESC, senses.id ASC') }
+  has_many :synsets, -> { order('senses.freq_cnt DESC, senses.id ASC') }, through: :senses
+  has_many :inflections, -> { order('inflections.name ASC') }
 
   validates :name, :presence => true
   validates :freq_cnt, :presence => true
@@ -203,9 +171,6 @@ class Word < ActiveRecord::Base
     super
 
     irregulars.each { |i| inflections.build :name => i } if irregulars
-
-    add_regular_inflections
-    remove_duplicate_inflections
   end
 
   def <=>(other)
@@ -252,39 +217,9 @@ class Word < ActiveRecord::Base
       "#{name.downcase.gsub(/[\s.']/, '_')}_#{pos}"
   end
 
-  def create_new_inflection(name)
-    inflections.create(:name => name) unless inflections.map(&:name).include?(name)
-  end
-
-  def build_new_inflection(name)
-    inflections.build(:name => name) unless inflections.map(&:name).include?(name)
-  end
-
-  def add_regular_inflections
-    # DEBT: Should subclass and have this handled polymorphically,
-    # but for now there's not much here.
-
-    # Only attempt regular inflection of words that contain no
-    # capitals, numbers, spaces, hyphens or other punctuation.
-    if name =~ /^[a-z]+$/
-      case
-      when part_of_speech.blank?
-        return # invalid anyway
-      when inflections.empty?
-        method = "add_regular_#{part_of_speech}_inflections"
-        self.send method
-      when part_of_speech == 'verb'
-        # verbs have to be handled in more detail
-        add_regular_verb_inflections
-      end
-    end
-
-    add_self_inflection
-  end
-
   def other_forms
-    inflections.find(:all, :conditions => [ 'name != ?', name ],
-      :order => 'name').map{|infl|infl.name}.join(', ')
+    inflections.where([ 'name != ?', name ]).
+      order('name').map{|infl|infl.name}.join(', ')
   end
 
   class << self
@@ -323,33 +258,31 @@ class Word < ActiveRecord::Base
       return nil unless options[:term]
 
       case options[:match]
-      when 'exact', 'glob', 'regexp'
-        paginate options.search_options
+      when 'exact'
+        raise "match: 'exact' no longer supported"
+      when 'glob', 'regexp'
+        # Really only happens for glob and maybe regexp
+        includes(options[:include]).where(options.search_options[:conditions]).paginate(page: options[:page]).order(options[:order])
       else
         # FTS search, may need to look for exact match first
         page = options[:page].nil? ? 1 : options[:page].to_i
 
-        num_exact = Word.count :joins => 'INNER JOIN inflections ON inflections.word_id = words.id',
-          :conditions => [ 'inflections.name = ?', options[:term]]
+        num_exact = Word.includes(:inflections).where(inflections: { name: options[:term] }).count
 
         words = nil
         if page == 1
           # exact match, then the rest
-          words = Word.all :joins => 'INNER JOIN inflections ON inflections.word_id = words.id',
-            :conditions => [ 'inflections.name = ?', options[:term]],
-            :order => 'words.name ASC, words.freq_cnt DESC, words.part_of_speech ASC'
-          words += Word.all :joins => 'INNER JOIN inflections_fts ON inflections_fts.word_id = words.id',
-            :conditions => [ 'inflections_fts.name MATCH :term AND inflections_fts.name != :term',
-              { :term => options[:term] }],
-            :order => 'words.name ASC, words.part_of_speech ASC',
-            :limit => 30 - num_exact
+          words = Word.includes(:inflections).where(inflections: { name: options[:term] }).order('words.name ASC, words.freq_cnt DESC, words.part_of_speech ASC')
+          words += Word.joins('INNER JOIN inflections_fts ON inflections_fts.word_id = words.id').where(['inflections_fts.name MATCH :term AND inflections_fts.name != :term', { :term => options[:term] }]).
+            order('words.name ASC, words.part_of_speech ASC').
+            limit(30 - num_exact)
         else
-          words = Word.all :select => 'DISTINCT words.id, words.name, words.part_of_speech, words.freq_cnt',
-            :joins => 'INNER JOIN inflections_fts ON inflections_fts.word_id = words.id',
-            :conditions => [ 'inflections_fts.name MATCH :term AND inflections_fts.name != :term',
-              { :term => options[:term] }],
-            :order => 'words.name ASC, words.part_of_speech ASC',
-            :limit => 30, :offset => 30*(page-1) - num_exact
+          words = Word.select('words.id, words.name, words.part_of_speech, words.freq_cnt').distinct.
+            joins('INNER JOIN inflections_fts ON inflections_fts.word_id = words.id').
+            where([ 'inflections_fts.name MATCH :term AND inflections_fts.name != :term',
+              { :term => options[:term] }]).
+            order('words.name ASC, words.part_of_speech ASC').
+            limit(30).offset(30*(page-1) - num_exact)
         end
 
         def words.total_pages
@@ -380,9 +313,9 @@ class Word < ActiveRecord::Base
           @next_page = next_page
         end
 
-        total_matches = Word.count(:select => 'DISTINCT(words.id)',
-          :joins => 'INNER JOIN inflections_fts ON inflections_fts.word_id = words.id',
-          :conditions => ["inflections_fts.name MATCH ?", options[:term]])
+        total_matches = Word.select('words.id').distinct.
+          joins('INNER JOIN inflections_fts ON inflections_fts.word_id = words.id').
+          where(["inflections_fts.name MATCH ?", options[:term]]).count
         total = total_matches / 30
         total += 1 unless (total_matches%30).zero?
         words.total_pages = total
@@ -397,13 +330,6 @@ class Word < ActiveRecord::Base
       end
     end
 
-    def search_count(options={})
-      return 0 unless options[:term]
-      search_options = options.search_options
-      search_options.delete(:page)
-      count search_options
-    end
-
     # Select a Word entry from the DB at random. Must be all lowercase
     # with no spaces or punctuation, at least <tt>min_length</tt>
     # letters (9 by default).
@@ -413,236 +339,14 @@ class Word < ActiveRecord::Base
         pattern += '[a-z]'
       end
 
-      words = Word.all(:conditions =>
-        [ "name >= 'a' AND name < '{' AND name GLOB '#{pattern}*' AND NOT name GLOB ?",
-        "*[A-Z0-9 .'-]*" ], :select => 'id')
+      words = Word.where([ "name >= 'a' AND name < '{' AND name GLOB '#{pattern}*' AND NOT name GLOB ?",
+        "*[A-Z0-9 .'-]*" ]).select(:id)
       random_number = SecureRandom.random_number(words.count)
       Word.find words[random_number].id
     end
   end
 
-  def remove_duplicate_inflections
-    inflections.each do |i|
-      inflections.delete(i) if
-        inflections.select{|j|j.name == i.name}.length > 1
-    end
-  end
-
   def compute_freq_cnt
     self.freq_cnt = senses.sum :freq_cnt
-  end
-
-  private
-
-  # Handle some things that aren't in WordNet and are not well
-  # handled by active_support.
-  def local_exceptional_noun
-    case name
-    when /^dragoman$/
-      inflections.build :name => name + 's'
-      false
-    when /^brahman$/, /^caiman$/, /^ceriman$/, /^dolman$/,
-      /^hanuman$/, /^human$/, /^liman$/, /^roman$/,
-      /^saman$/, /^shaman$/, /^soman$/, /^talisman$/, /^zaman$/
-      inflections.build :name => name + 's'
-      true
-    else
-      false
-    end
-  end
-
-  def local_exceptional_verb
-    case name
-    when /^quiz$/
-      build_new_inflection name + 'zes'
-      build_new_inflection name + 'zed'
-      build_new_inflection name + 'zing'
-      true
-    when /quip$/
-      build_new_inflection name + 's'
-      build_new_inflection name + 'ped'
-      build_new_inflection name + 'ping'
-      true
-    when /quit$/, /squat$/
-      build_new_inflection name + 's'
-      build_new_inflection name + 'ted'
-      build_new_inflection name + 'ting'
-      true
-    when /hurt$/
-      build_new_inflection name + 's'
-      build_new_inflection name + 'ing'
-      true
-    when /[^aeio]et$/
-      if inflections.empty?
-        inflections.build :name => name + 'ed'
-        inflections.build :name => name + 'ing'
-      end
-      build_new_inflection name + 's'
-      true
-    when /[ai]c$/
-      if inflections.empty?
-        inflections.build :name => name + 'ked'
-        inflections.build :name => name + 'king'
-      end
-      build_new_inflection name + 's'
-      true
-    else
-      false
-    end
-  end
-
-  def add_regular_adjective_inflections
-    # These end up looking absurd much of the time
-  end
-
-  def add_regular_adverb_inflections
-    # There are no regular adverb inflections
-  end
-
-  def add_regular_noun_inflections
-    # Use the active_support inflector for regular nouns.
-    inflections.build :name => name.pluralize unless local_exceptional_noun
-  end
-
-  def add_regular_verb_inflections
-    return if local_exceptional_verb
-
-    build_past_tense
-    build_third_person_singular
-    build_present_participle
-  end
-
-  def add_self_inflection
-    build_new_inflection name
-  end
-
-  def build_present_participle
-    return unless part_of_speech == 'verb'
-    # Based on vagaries of the WN exceptions, this seems like the
-    # right thing to do, but needs review.
-    return if inflections.any? { |i| i.name =~ /[ny]ing$/ }
-
-    case name
-    when /^.e$/
-      # pretty much just being, but would also produce things like meing
-      build_new_inflection name + 'ing'
-    when /[^e]e$/
-      build_new_inflection name.sub(/e$/, 'ing')
-    when /[^aeiou][aeiouy][lnrt]$/
-      c = /[^aeiou][aeiouy]([lnrt])$/.match(name)[1]
-      l = name.double_consonant? ? c : ''
-      build_new_inflection name + l + 'ing'
-    else
-      case pad
-      when 's'
-        build_new_inflection name + pad + 'ing'
-        build_new_inflection name + 'ing'
-      else
-        build_new_inflection name + pad + 'ing'
-      end
-    end
-  end
-
-  def build_third_person_singular
-    return unless part_of_speech == 'verb'
-    case name
-    when 'be', 'have'
-      # very limited set of verbs with irregular third-person singular
-      # present tense
-      # (do nothing)
-      return
-    when /[osxz]$/, /(ch|sh)$/
-      inflections.build :name => name + 'es'
-      case pad
-      when 's'
-        # e.g., buses and busses as the present tense of bus
-        inflections.build :name => name + 'es'
-        inflections.build :name => name + pad + 'es'
-      end
-    when /[^aeou]y$/
-      inflections.build :name => name.sub(/y$/, 'ies')
-    else
-      inflections.build :name => name + 's'
-    end
-  end
-
-  def build_past_tense
-    # DEBT: Assume any irregular verb in WordNet has an irregular past
-    # tense.  (Is this true of all English verbs?)
-    #
-    # Also, any verb that has a past participle different from its past
-    # tense (2nd and 3rd principle parts) is irregular.  WordNet does
-    # not distinguish semantically among verb conjugations.  It only
-    # presents different forms for each word, as we do here.  So for
-    # regular verbs, we do not construct a past participle, only a past
-    # tense.
-    return unless part_of_speech == 'verb' and inflections.empty?
-
-    case name
-    when /e$/
-      build_new_inflection name + 'd'
-    when /[^aeou]y$/
-      build_new_inflection name.sub(/y$/, 'ied')
-    when /[^aeiou][aeiouy][lnrt]$/
-      c = /[^aeiou][aeiouy]([lnrt])$/.match(name)[1]
-      l = name.double_consonant? ? c : ''
-      build_new_inflection name + l + 'ed'
-    else
-      case pad
-      when /^[n]$/
-        build_new_inflection name + 'ed'
-      when /^[ls]$/
-        build_new_inflection name + pad + 'ed'
-        build_new_inflection name + 'ed'
-      else
-        build_new_inflection name + pad + 'ed'
-      end
-    end
-  end
-
-=begin
-  # This code is unused.
-  def comparative_degree
-    return '' unless part_of_speech == 'adjective'
-    case name
-    when /e$/
-      name + 'r'
-    when /y$/
-      name.sub /y$/, 'ier'
-    else
-      name + pad + 'er'
-    end
-  end
-
-  def superlative_degree
-    return '' unless part_of_speech == 'adjective'
-    case name
-    when /e$/
-      name + 'st'
-    when /y$/
-      name.sub /y$/, 'iest'
-    else
-      name + pad + 'est'
-    end
-  end
-=end
-
-  def pad
-    # A word taking an -e... (-ed, -es, etc.) or -ing ending that ends
-    # in consonant-vowel-consonant has the last consonant doubled
-    # before adding the ending.  (Words ending in E are treated
-    # elsewhere.) We treat Y as a vowel in the last two positions, but
-    # not the first.
-
-    # Match:
-    # yes => yessing (pad = s)
-    # pad => padding (pad = d)
-
-    # Don't match (so no padding):
-    # fail => failing (a is a vowel)
-    # cloy => cloying (y is treated like a vowel in the last position)
-    # snow => snowing
-    md = name.match /[^aeiou][aeiouy]([^aeiouwy])$/
-    md ? md[1] : ''
   end
 end

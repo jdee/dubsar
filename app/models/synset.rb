@@ -17,10 +17,10 @@
 
 # A set of synonymous words.
 class Synset < ActiveRecord::Base
-  has_many :senses, :order => 'freq_cnt DESC, id ASC'
+  has_many :senses, -> { order 'senses.freq_cnt DESC, senses.id ASC' }
   has_many :words, :through => :senses
 
-  has_many :pointers, :as => :source, :order => 'id ASC'
+  has_many :pointers, -> { order 'pointers.id ASC' }, as: :source
   has_many :targets, :through => :pointers
 
   has_one :source, :class_name => 'Pointer', :as => :target
@@ -32,15 +32,14 @@ class Synset < ActiveRecord::Base
   # Return a collection of +Word+ model objects excluding the one
   # passed in as the +word+ argument.
   def words_except(word)
-    words.find :all, :order => 'name',
-      :conditions => [ "name != ?", word.name ]
+    words.where([ "name != ?", word.name ]).order(:name)
   end
 
   # Return a collection of +Sense+ model objects excluding the one
   # associated with the +word+ argument.
   def senses_except(word)
-    senses.find :all, :joins => "INNER JOIN words w ON w.id = senses.word_id",
-      :order => 'w.name', :conditions => [ "w.name != ?", word.name ]
+    senses.joins("INNER JOIN words w ON w.id = senses.word_id").
+      where([ "w.name != ?", word.name ]).order('w.name')
   end
 
   def gloss
@@ -69,6 +68,6 @@ class Synset < ActiveRecord::Base
   end
 
   def word_list_and_pos
-    "#{words.all(:order => 'name').map(&:name).join(", ")} (#{Word.pos(part_of_speech)}.)"
+    "#{words.order(:name).map(&:name).join(", ")} (#{Word.pos(part_of_speech)}.)"
   end
 end

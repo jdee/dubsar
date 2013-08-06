@@ -15,41 +15,43 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-Factory.define :pointer do |p|
-end
-
-Factory.define :verb_frame do |vf|
-end
-
-Factory.define :senses_verb_frame do |svf|
-end
-
-Factory.define :food_synset, :class => Synset do |s|
-  s.definition 'something edible'
-  s.lexname 'noun.Tops'
-  s.part_of_speech 'noun'
-end
-
-Factory.define :substance_synset, :class => Synset do |s|
-  s.definition 'a material or thing'
-  s.lexname 'noun.Tops'
-  s.part_of_speech 'noun'
-end
-
-Factory.define :bad_synset, :class => Synset do |s|
-  s.definition 'the opposite of good; "a bad boy"; "a bad thing"'
-  s.lexname 'adj.all'
-  s.part_of_speech 'adjective'
-end
-
-Factory.define :good_synset, :class => Synset do |s|
-  s.definition 'the opposite of bad'
-  s.lexname 'adj.all'
-  s.part_of_speech 'adjective'
-end
-
-Factory.define :follow_synset, :class => Synset do |s|
-  s.definition 'pursue; follow in or as if in pursuit'
-  s.lexname 'verb.motion'
-  s.part_of_speech 'verb'
+FactoryGirl.define do
+  factory :pointer do
+  end
+  
+  factory :verb_frame do
+  end
+  
+  factory :senses_verb_frame do
+  end
+  
+  factory :food_synset, :class => Synset do
+    definition 'something edible'
+    lexname 'noun.Tops'
+    part_of_speech 'noun'
+  end
+  
+  factory :substance_synset, :class => Synset do
+    definition 'a material or thing'
+    lexname 'noun.Tops'
+    part_of_speech 'noun'
+  end
+  
+  factory :bad_synset, :class => Synset do
+    definition 'the opposite of good; "a bad boy"; "a bad thing"'
+    lexname 'adj.all'
+    part_of_speech 'adjective'
+  end
+  
+  factory :good_synset, :class => Synset do
+    definition 'the opposite of bad'
+    lexname 'adj.all'
+    part_of_speech 'adjective'
+  end
+  
+  factory :follow_synset, :class => Synset do
+    definition 'pursue; follow in or as if in pursuit'
+    lexname 'verb.motion'
+    part_of_speech 'verb'
+  end
 end

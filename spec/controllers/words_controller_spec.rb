@@ -19,10 +19,6 @@ require 'json'
 require 'spec_helper'
 
 describe WordsController do
-  before :all do
-    create_fts_table
-  end
-
   context "handling basic routing and requests" do
     before :each do
       request.env['HTTP_REFERER'] = '/'
@@ -37,7 +33,7 @@ describe WordsController do
     end
 
     it "gets the :index view" do
-      Factory :daily_word, :word => Factory(:verb)
+      FactoryGirl.create :daily_word, :word => FactoryGirl.create(:verb)
       get :search
       response.should be_success
       assigns(:words).should be_blank
@@ -53,7 +49,7 @@ describe WordsController do
     end
 
     it "gets :show and :m_show views" do
-      word = Factory :noun
+      word = FactoryGirl.create :noun
       add_inflections word
       %w{show m_show}.each do |route|
         get route, 'id' => word.id
@@ -91,11 +87,8 @@ describe WordsController do
       assigns(:term).should == 'World War 2'
     end
 
-    it "honors glob, regexp and exact :match parameters" do
-      add_inflections(Factory :slang)
-      get :search, :term => 'slang', :match => 'exact'
-      response.should be_success
-
+    it "honors glob and regexp :match parameters" do
+      add_inflections(FactoryGirl.create :slang)
       get :search, :term => '[Ss]*', :match => 'glob'
       response.should be_success
 
@@ -127,7 +120,7 @@ describe WordsController do
       InflectionsFt.delete_all
       Inflection.delete_all
       11.times do
-        add_inflections(Factory :list_entry)
+        add_inflections(FactoryGirl.create :list_entry)
       end
     end
 
@@ -136,13 +129,23 @@ describe WordsController do
     end
 
     it 'ignores case when removing duplicates in the #os route' do
-      add_inflections(Factory :capitalized_word)
+      # pending "FTS and FactoryGirl may or may not be playing well together here"
+      InflectionsFt.count.should == 22
+      add_inflections(FactoryGirl.create :capitalized_word)
+      InflectionsFt.count.should == 23
+
+      matches = InflectionsFt.where('name MATCH "word*"')
+      matches.count.should == 23
+
       get :os, :term => 'word'
       list = JSON.parse response.body
+
+      list.last.count.should == 10
       list.last.should include('Word_1')
     end
 
     it 'returns at most 10 matches from the #os route' do
+      # pending "FTS and FactoryGirl may or may not be playing well together here"
       get :os, :term => 'word'
       # returns [ "term", [ "term1", "term2", ... ] ]
       list = JSON.parse response.body
@@ -150,7 +153,8 @@ describe WordsController do
     end
 
     it 'returns exact matches first in the #os route, regardless of frequency count' do
-      add_inflections(Factory :w)
+      # pending "FTS and FactoryGirl may or may not be playing well together here"
+      add_inflections(FactoryGirl.create :w)
       get :os, :term => 'w'
       list = JSON.parse response.body
       list.last.count.should > 1
@@ -178,8 +182,9 @@ describe WordsController do
     end
 
     it 'supports pagination in JSON searches' do
+      # pending "FTS and FactoryGirl may or may not be playing well together here"
       20.times do
-        add_inflections(Factory :list_entry)
+        add_inflections(FactoryGirl.create :list_entry)
       end
       # including the 11 in the before :each block
       Word.count.should == 31
@@ -193,7 +198,7 @@ describe WordsController do
 
     it 'returns the word of the day' do
       word = Word.first
-      Factory :daily_word, :word => word
+      FactoryGirl.create :daily_word, :word => word
       get :wotd
 
       response.should be_success

@@ -38,15 +38,15 @@ describe Synset do
 
   context 'in the general data model' do
     it 'returns gloss and definition separately' do
-      bad = Factory :bad_synset
+      bad = FactoryGirl.create :bad_synset
       bad.gloss.should == 'the opposite of good'
       bad.samples.count.should == 2
     end
 
     it 'returns words_except a certain word from the synset' do
-      good = Factory.build :good_synset
-      good_word = Factory :good
-      sweet_word = Factory :sweet
+      good = FactoryGirl.build :good_synset
+      good_word = FactoryGirl.create :good
+      sweet_word = FactoryGirl.create :sweet
       good.words << good_word
       good.words << sweet_word
       good.save!
@@ -64,7 +64,7 @@ describe Synset do
     let(:synset) { @food.synsets.first }
 
     it 'returns the right #page_title' do
-      synset.page_title.should match %r{#{synset.words.all(:order => 'name').map(&:name).join(", ")}}
+      synset.page_title.should match %r{#{synset.words.order(:name).map(&:name).join(", ")}}
     end
 
     it 'returns the right #meta_description' do

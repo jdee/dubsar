@@ -22,16 +22,16 @@ describe '/words/_word.html.haml' do
     @word, grub = create_synonyms!
   end
 
-  let (:verb) { Factory :verb }
-  let (:verb_synset) { Factory :follow_synset }
-  let (:verb_sense) { Factory :sense, :word => verb, :synset => verb_synset }
-  let (:verb_frame) { Factory :verb_frame, :number => 1, :frame => 'Something ----s' }
+  let (:verb) { FactoryGirl.create :verb }
+  let (:verb_synset) { FactoryGirl.create :follow_synset }
+  let (:verb_sense) { FactoryGirl.create :sense, :word => verb, :synset => verb_synset }
+  let (:verb_frame) { FactoryGirl.create :verb_frame, :number => 1, :frame => 'Something ----s' }
 
   before :each do
     verb.senses << verb_sense
 
     # associate a verb frame with this sense
-    verb_sense.senses_verb_frames << Factory(:senses_verb_frame, :sense => verb_sense, :verb_frame => verb_frame)
+    verb_sense.senses_verb_frames << FactoryGirl.create(:senses_verb_frame, :sense => verb_sense, :verb_frame => verb_frame)
 
     verb_sense.save!
     verb.save!

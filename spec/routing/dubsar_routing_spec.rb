@@ -23,6 +23,9 @@ describe 'Dubsar routes' do
   end
 
   it 'routes garbage to #error' do
+    # The default route blocks /rails/info/routes atm. Can always get it from rake
+    # routes, but can comment it out at times and make this pending
+    # pending("commented out the error route during development")
     get("/foo").should route_to(:controller => "application", :action => "error", :junk => "foo")
   end
 end

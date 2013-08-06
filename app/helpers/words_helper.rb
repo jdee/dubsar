@@ -48,9 +48,9 @@ module WordsHelper
   def part_of_speech_count(model, part_of_speech)
     case model.to_sym
     when :inflection
-      Inflection.count :conditions => [ 'words.part_of_speech = ?', part_of_speech ], :joins => 'INNER JOIN words ON words.id = inflections.word_id'
+      Inflection.includes(:word).where('words.part_of_speech = ?', part_of_speech).references(:word).count
     when :word
-      Word.count :conditions => [ 'part_of_speech = ?', part_of_speech ]
+      Word.where(part_of_speech: part_of_speech).count
     end
   end
 

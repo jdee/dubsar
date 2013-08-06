@@ -18,9 +18,9 @@
 require 'spec_helper'
 
 describe Pointer do
-  let(:no_target) { Pointer.new :target => nil, :source => Factory.build(:sense), :ptype => 'attribute' }
-  let(:no_source) { Pointer.new :target => Factory.build(:sense), :source => nil, :ptype => 'attribute' }
-  let(:no_ptype) { Pointer.new :target => Factory.build(:sense), :source => Factory.build(:sense), :ptype => nil }
+  let(:no_target) { Pointer.new :target => nil, :source => FactoryGirl.build(:sense), :ptype => 'attribute' }
+  let(:no_source) { Pointer.new :target => FactoryGirl.build(:sense), :source => nil, :ptype => 'attribute' }
+  let(:no_ptype) { Pointer.new :target => FactoryGirl.build(:sense), :source => FactoryGirl.build(:sense), :ptype => nil }
 
   it 'validates presence of :target' do
     no_target.should_not be_valid
@@ -39,13 +39,13 @@ describe Pointer do
 
     it 'creates a new pointer' do
       lambda do
-        Pointer.create_new(:source => Factory(:sense), :target => Factory(:sense), :ptype => 'attribute')
+        Pointer.create_new(:source => FactoryGirl.create(:sense), :target => FactoryGirl.create(:sense), :ptype => 'attribute')
       end.should change(Pointer, :count).by(1)
     end
 
     it 'does not create a new pointer if the same entry exists' do
-      source = Factory(:sense)
-      target = Factory(:sense)
+      source = FactoryGirl.create(:sense)
+      target = FactoryGirl.create(:sense)
       Pointer.create_new(:source => source, :target => target, :ptype => 'attribute')
       lambda do
         Pointer.create_new(:source => source, :target => target, :ptype => 'attribute')

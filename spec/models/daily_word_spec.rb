@@ -25,13 +25,13 @@ describe DailyWord do
   end
 
   it 'returns the most recent entry' do
-    Factory :daily_word, :word => Factory(:substance)
-    Factory :daily_word, :word => Factory(:verb)
+    FactoryGirl.create :daily_word, :word => FactoryGirl.create(:substance)
+    FactoryGirl.create :daily_word, :word => FactoryGirl.create(:verb)
 
-    DailyWord.word_of_the_day.name.should == 'follow'
+    DailyWord.word_of_the_day.word.name.should == 'follow'
   end
 
   it 'returns nil if no wotd present' do
-    DailyWord.word_of_the_day.should be_nil
+    DailyWord.word_of_the_day.should be_blank
   end
 end

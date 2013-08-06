@@ -19,8 +19,7 @@ class SynsetsController < ApplicationController
   respond_to :html, :json
 
   def tab
-    @synset = Synset.find params[:synset_id],
-      :include => [ { :senses => :word }, { :pointers => :target } ]
+    @synset = Synset.includes([ { senses: [ :synset, :word ] }, { pointers: :target} ]).find params[:synset_id]
     @sense = Sense.find params[:sense_id]
     respond_to do |format|
       format.html do
@@ -32,7 +31,7 @@ class SynsetsController < ApplicationController
   end
 
   def show
-    @synset = Synset.find params[:id], :include => [ { :senses => [ :synset, :word ] }, { :pointers => :target } ]
+    @synset = Synset.includes([ { senses: [ :synset, :word ] }, { pointers: :target} ]).find params[:id]
     respond_to do |format|
       format.html
       format.json do
@@ -44,7 +43,7 @@ class SynsetsController < ApplicationController
   end
 
   def m_show
-    @synset = Synset.find params[:id], :include => [ { :senses => :word }, { :pointers => :target } ]
+    @synset = Synset.includes([ { senses: [ :synset, :word ] }, { pointers: :target} ]).find params[:id]
   rescue
     m_error
   end
@@ -52,7 +51,7 @@ class SynsetsController < ApplicationController
   private
 
   def json_show_response
-    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.senses.all(:joins => "JOIN words ON words.id = senses.word_id", :order => 'freq_cnt DESC').map{|s|[s.id,s.word.name,s.marker,s.freq_cnt]}, @synset.freq_cnt, pointer_response ]
+    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.senses.includes(:word).order('freq_cnt DESC').map{|s|[s.id,s.word.name,s.marker,s.freq_cnt]}, @synset.freq_cnt, pointer_response ]
   end
 
   def pointer_response

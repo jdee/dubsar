@@ -18,13 +18,13 @@
 require 'spec_helper'
 
 describe '/words/search.html.haml' do
-  let (:word) { Factory :noun }
+  let (:word) { FactoryGirl.create :noun }
 
   before :each do
-    grub = Factory :grub
-    synset = Factory :food_synset
-    Factory :sense, :word => word, :synset => synset
-    Factory :sense, :word => grub, :synset => synset, :synset_index => 2
+    grub = FactoryGirl.create :grub
+    synset = FactoryGirl.create :food_synset
+    FactoryGirl.create :sense, :word => word, :synset => synset
+    FactoryGirl.create :sense, :word => grub, :synset => synset, :synset_index => 2
     words = [ word ]
     words.stub(:total_pages).and_return(1)
     assign(:words, words)
@@ -33,7 +33,7 @@ describe '/words/search.html.haml' do
 
   it 'should have a search form' do
     render :layout => 'layouts/application', :template => 'words/search.html.haml'
-    rendered.should have_selector('form', :method => 'get', :action => root_path) do |form|
+    rendered.should have_selector('form', :method => 'get', :action => root_url) do |form|
       form.should have_selector('input', :type => 'search', :name => 'term', :id => 'word-input')
       form.should have_selector('button', :type => 'submit', :id => 'word-submit')
     end

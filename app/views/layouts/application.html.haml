@@ -27,7 +27,11 @@
     %link{:rel => "apple-touch-icon", :sizes => "72x72", :href => "#{image_path 'dubsar-ipad.png'}"}
     %link{:rel => "apple-touch-icon", :sizes => "114x114", :href => "#{image_path 'dubsar-retina.png'}"}
     %link{:rel => "icon", :href => "#{image_path 'dubsar-android.png'}"}
-    != stylesheet_link_merged :base
+    = stylesheet_link_tag 'jquery-ui-1.8.14.dark'
+    = stylesheet_link_tag 'application-dark'
+    = stylesheet_link_tag 'jquery-ui-1.8.14.light'
+    = stylesheet_link_tag 'application-light'
+    = stylesheet_link_tag 'common'
     = csrf_meta_tag
     =yield :description
 
@@ -89,4 +93,9 @@
     #footer.ui-widget
       =render :partial => 'shared/footer'
 
-    != javascript_include_merged :base
+    = javascript_include_tag 'jquery-1.6.2.min'
+    = javascript_include_tag 'jquery-ui-1.8.14.custom.min'
+    = javascript_include_tag 'jquery.watermark.min'
+    = javascript_include_tag 'application'
+    = javascript_include_tag 'application-ui'
+    = javascript_include_tag 'autocompleter'
