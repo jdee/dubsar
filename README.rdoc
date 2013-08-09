@@ -1,7 +1,7 @@
 = Dubsar
 
 Dubsar is a dictionary web application using
-- Ruby on Rails 3.0
+- Ruby on Rails 4.0
 - jQuery 1.6
 - jQuery UI 1.8
 The content is taken from the Princeton University
