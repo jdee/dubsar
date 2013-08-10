@@ -78,5 +78,5 @@ Dubsar::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  ActionController::Base.asset_host = 'https://s.dubsar-dictionary.com'
+  config.action_controller.asset_host = 'https://s.dubsar-dictionary.com'
 end
