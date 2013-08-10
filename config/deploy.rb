@@ -39,13 +39,6 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 default_run_options[:pty] = true
 
 namespace :deploy do
-  desc 'Create asset packages for production'
-  task :package_assets, :roles => :app do
-    run <<-EOF
-      cd #{deploy_to}/current && bundle exec rake RAILS_ENV=#{rails_env} asset:packager:build_all
-    EOF
-  end
-
   desc 'Build wotd RSS feed'
   task :wotd_build, :roles => :app do
     run <<-EOF
