@@ -143,7 +143,7 @@ EOF
   def url_for(params)
     case params
     when Hash
-      params.merge protocol: 'https'
+      params.merge! protocol: 'https' if Rails.env == 'backup' || Rails.env == 'production'
     end
     orig_url_for params
   end
