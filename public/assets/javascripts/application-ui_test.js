@@ -1,0 +1,1 @@
+../../../app/assets/javascripts/application-ui_test.js
