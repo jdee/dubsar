@@ -1,1 +1,1 @@
-../../../vendor/assets/javascripts/jquery.mockjax.js
+../../vendor/assets/javascripts/jquery.mockjax.js

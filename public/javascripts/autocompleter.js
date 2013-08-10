@@ -1,1 +1,1 @@
-../../../app/assets/javascripts/autocompleter.js
+../../app/assets/javascripts/autocompleter.js

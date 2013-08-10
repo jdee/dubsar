@@ -1,1 +1,1 @@
-../../../app/assets/javascripts/application_test.js
+../../app/assets/javascripts/application_test.js

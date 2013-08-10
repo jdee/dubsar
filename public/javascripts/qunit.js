@@ -1,1 +1,1 @@
-../../../vendor/assets/javascripts/qunit.js
+../../vendor/assets/javascripts/qunit.js
