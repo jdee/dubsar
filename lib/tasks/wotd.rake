@@ -44,7 +44,7 @@ namespace :wotd do
             image.width '88'
             image.height '20'
           end
-          DailyWord.all(:order => 'created_at DESC', :limit => RSS_LIMIT).each do |dw|
+          DailyWord.order('created_at DESC').limit(RSS_LIMIT).each do |dw|
             word = dw.word
             channel.item do |item|
               name_and_pos = "#{word.name} (#{word.pos}.)"
