@@ -96,7 +96,6 @@ end
 
 after "deploy:setup", "sqlite3:make_shared_folder"
 
-after 'deploy:update', 'deploy:package_assets'
 after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_airship_config'
