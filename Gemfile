@@ -25,6 +25,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'devise'
 gem 'uglifier'
 gem 'therubyracer'
+gem 'passenger'
 
 group :backup_dev, :development, :test do
   gem 'ZenTest'

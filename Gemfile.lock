@@ -38,6 +38,7 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    daemon_controller (1.1.5)
     devise (3.0.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -76,6 +77,10 @@ GEM
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
+    passenger (4.0.10)
+      daemon_controller (>= 1.1.0)
+      rack
+      rake (>= 0.8.1)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -156,6 +161,7 @@ DEPENDENCIES
   factory_girl_rails
   haml
   json
+  passenger
   rails (>= 4.0)
   rspec-rails (>= 2.0)
   rvm-capistrano
