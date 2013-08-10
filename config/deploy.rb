@@ -18,7 +18,7 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 
-set :rvm_ruby_string, 'ree-1.8.7-2010.02'        # Or whatever env you want it to run in.
+set :rvm_ruby_string, 'ruby-2.0.0-p247'        # Or whatever env you want it to run in.
 
 set :user, 'dubsar'
 set :domain, 'dubsar-dictionary.com'
