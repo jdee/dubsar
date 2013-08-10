@@ -24,10 +24,6 @@ gem 'rails', '>= 4.0'
 gem 'will_paginate', '~> 3.0'
 gem 'devise'
 
-group :backup, :production do
-  gem 'passenger'
-end
-
 group :backup_dev, :development, :test do
   gem 'ZenTest'
   gem 'autotest-rails'
