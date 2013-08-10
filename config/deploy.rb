@@ -39,6 +39,13 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 default_run_options[:pty] = true
 
 namespace :deploy do
+  desc 'precompile assets'
+  task :precompile_assets, :roles => :app do
+    run <<-EOF
+      cd #{deploy_to}/current && bundle exec rake RAILS_ENV=#{rails_env} assets:precompile
+    EOF
+  end
+
   desc 'Build wotd RSS feed'
   task :wotd_build, :roles => :app do
     run <<-EOF

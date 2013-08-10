@@ -23,6 +23,7 @@ gem 'sqlite3', '~> 1.3.6'
 gem 'rails', '>= 4.0'
 gem 'will_paginate', '~> 3.0'
 gem 'devise'
+gem 'uglifier'
 
 group :backup_dev, :development, :test do
   gem 'ZenTest'
