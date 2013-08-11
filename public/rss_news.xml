@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>https://dubsar-dictionary.com</link>
-    <lastBuildDate>Fri, 09 Aug 2013 00:00:00 GMT</lastBuildDate>
-    <pubDate>Thu, 08 Aug 2013 17:30:00 GMT</pubDate>
+    <lastBuildDate>Sun, 11 Aug 2013 00:00:00 GMT</lastBuildDate>
+    <pubDate>Sun, 11 Aug 2013 00:00:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,17 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar server upgrade complete</title>
+      <description>
+      The Dubsar server has undergone a number of upgrades, from the operating system
+      up. In particular, it is now running Ubuntu 12.04 as well as Ruby 2.0, Rails 4
+      and Passenger 4. Apologies for any inconvenience caused by the outage.
+      </description>
+      <link>https://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">39</guid>
+      <pubDate>Sun, 11 Aug 2013 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar server unavailable over the weekend</title>
       <description>
