@@ -39,13 +39,6 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 default_run_options[:pty] = true
 
 namespace :deploy do
-  desc 'precompile assets'
-  task :precompile_assets, :roles => :app do
-    run <<-EOF
-      cd #{deploy_to}/current && bundle exec rake RAILS_ENV=#{rails_env} assets:precompile
-    EOF
-  end
-
   desc 'Build wotd RSS feed'
   task :wotd_build, :roles => :app do
     run <<-EOF
@@ -107,6 +100,6 @@ after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_airship_config'
 after 'deploy:update', 'deploy:wotd_build'
-after 'deploy:update', 'deploy:optimize_fts'
+# after 'deploy:update', 'deploy:optimize_fts'
 
 before "deploy:migrate", "sqlite3:link_configuration_file"
