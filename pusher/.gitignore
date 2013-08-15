@@ -1,0 +1,8 @@
+*.o
+*.pem
+*.p12
+check-*-feedback
+core
+feedback
+passphrase
+pusher

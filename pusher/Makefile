@@ -1,0 +1,44 @@
+#  Dubsar Dictionary Project
+#  Copyright (C) 2010-13 Jimmy Dee
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version 2
+#  of the License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+# debug
+CPPFLAGS=$(shell pkg-config --cflags openssl sqlite3) -D_DEBUG
+CFLAGS=-Wall -Werror -g
+LDLIBS=$(shell pkg-config --libs openssl sqlite3)
+LDFLAGS=-Wall -Werror -g
+
+# release
+# CPPFLAGS=$(shell pkg-config --cflags openssl sqlite3) -U_DEBUG
+# CFLAGS=-Wall -Werror -O3
+# LDLIBS=$(shell pkg-config --libs openssl sqlite3)
+# LDFLAGS=-Wall -Werror -O3 -s
+
+all: pusher feedback
+
+pusher: pusher.o cert_file.o notification.o socket_connect.o tls_connection.o
+feedback: feedback.o cert_file.o socket_connect.o timestamp.o tls_connection.o
+
+clean:
+	rm -f pusher feedback *.o core*
+
+pusher.o: notification.h socket_connect.h tls_connection.h
+cert_file.o: cert_file.h
+notification.o: notification.h
+socket_connect.o: socket_connect.h
+tls_connection.o: cert_file.h tls_connection.h
+feedback.o: socket_connect.h timestamp.h tls_connection.h
+timestamp.o: timestamp.h
