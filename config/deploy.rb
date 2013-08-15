@@ -69,6 +69,12 @@ namespace :deploy do
   task :link_airship_config, :roles => :db do
     run "ln -nsf #{shared_config_path}/airship_config.yml #{release_path}/config/airship_config.yml"
   end
+
+  desc "Links the client_secrets.yml file"
+  task :link_client_secrets, :roles => :db do
+    run "ln -nsf #{shared_config_path}/client_secrets.yml #{release_path}/config/production_client_secrets.yml"
+    run "ln -nsf #{shared_config_path}/client_secrets.yml #{release_path}/config/backup_client_secrets.yml"
+  end
 end
 
 # from http://www.bagonca.com/blog/2009/05/09/rails-deploy-using-sqlite3/
@@ -99,6 +105,7 @@ after "deploy:setup", "sqlite3:make_shared_folder"
 after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_airship_config'
+after 'deploy:update', 'deploy:link_client_secrets'
 after 'deploy:update', 'deploy:wotd_build'
 # after 'deploy:update', 'deploy:optimize_fts'
 
