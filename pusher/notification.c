@@ -252,7 +252,7 @@ buildNotificationPayload(int wotd, int broadcast, int production,
     }
     else
     {
-        snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"%s\"},\"dubsar\":{\"url\":\"%s\"}}", message, url);
+        n = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"%s\"},\"dubsar\":{\"url\":\"%s\"}}", message, url);
     }
 
     fprintf(stderr, "payload (%d): %s\n", n, payloadBuffer);
