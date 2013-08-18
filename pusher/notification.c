@@ -196,11 +196,9 @@ buildNotification(char* notification, const char* deviceToken, const char* paylo
 {
     notification[0] = 1;
 
-    /*
-     * TODO: Increment identifier with each notification
-     */
-    uint32_t identifier = 1;
+    static uint32_t identifier = 1;
     memcpy(&notification[1], &identifier, sizeof(identifier));
+    ++ identifier;
 
     uint32_t expiry = htonl(time(NULL) + 86400);
     memcpy(&notification[5], &expiry, sizeof(expiry));
