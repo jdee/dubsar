@@ -103,10 +103,7 @@ end
 namespace :pusher do
   desc "Build the pusher"
   task :build do
-    run <<-EOF
-      cd #{deploy_to}/current/pusher
-      make
-    EOF
+    run "cd #{deploy_to}/current/pusher && /usr/bin/make"
   end
 end
 
