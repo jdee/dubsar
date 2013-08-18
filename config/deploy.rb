@@ -100,6 +100,16 @@ namespace :sqlite3 do
   end
 end
 
+namespace :pusher do
+  desc "Build the pusher"
+  task :build do
+    run <<-EOF
+      cd #{deploy_to}/current/pusher
+      make
+    EOF
+  end
+end
+
 after "deploy:setup", "sqlite3:make_shared_folder"
 
 after 'deploy:update', 'sqlite3:build_configuration'
@@ -107,6 +117,7 @@ after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_airship_config'
 after 'deploy:update', 'deploy:link_client_secrets'
 after 'deploy:update', 'deploy:wotd_build'
+after 'deploy:update', 'pusher:build'
 # after 'deploy:update', 'deploy:optimize_fts'
 
 before "deploy:migrate", "sqlite3:link_configuration_file"
