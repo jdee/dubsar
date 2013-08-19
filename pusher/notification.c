@@ -159,11 +159,6 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
         {
             expiration = time(NULL) + 86400;
         }
-        else if (wotdExpiration[0] == '+')
-        {
-            int interval = atoi(&wotdExpiration[1]);
-            expiration = time(NULL) + interval;
-        }
 
         const char* pos = NULL;
         if (!strcmp(wordPartOfSpeech, "noun")) pos = "n";
@@ -171,9 +166,18 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
         else if (!strcmp(wordPartOfSpeech, "adjective")) pos = "adj";
         else pos = "adv";
 
-        payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Word of the day: %s (%s.)\"},"
-            "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":%ld}}",
-            wordName, pos, wordId, expiration);
+        if (expiration > 0)
+        {
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Word of the day: %s (%s.)\"},"
+                "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":%ld}}",
+                wordName, pos, wordId, expiration);
+        }
+        else
+        {
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Word of the day: %s (%s.)\"},"
+                "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":\"%s\"}}",
+                wordName, pos, wordId, wotdExpiration);
+        }
     }
     else
     {

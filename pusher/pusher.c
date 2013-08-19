@@ -180,6 +180,7 @@ parseArgs(int argc, char** argv)
         case 'x':
             if (hasLongArgument(c)) return 1;
             strcpy(wotdExpiration, optarg);
+            break;
         case 'h':
         default:
             return -1;
@@ -229,7 +230,7 @@ usage(const char* s)
     fprintf(stderr, "    -a use cacertfile (.pem) for CA certs\n");
     fprintf(stderr, "    -b broadcast to specified environment (dev or prod; incompatible with -t; requires -d)\n");
     fprintf(stderr, "    -c use certificate in file at cert_path (.p12, required)\n");
-    fprintf(stderr, "    -d use database at database_path (only -b)\n");
+    fprintf(stderr, "    -d use database at database_path (only with -b or -w)\n");
     fprintf(stderr, "    -h print this message and exit\n");
     fprintf(stderr, "    -m user message for notification (required except with -w)\n");
     fprintf(stderr, "    -P read the passphrase from passphrase_file(required)\n");
