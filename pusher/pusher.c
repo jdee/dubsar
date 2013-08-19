@@ -42,6 +42,7 @@ static char host[256];
 static unsigned short port = 0;
 static char message[256];
 static char deviceToken[128];
+static char wotdExpiration[128];
 static char url[256];
 
 static int
@@ -128,8 +129,9 @@ parseArgs(int argc, char** argv)
     message[0] = '\0';
     deviceToken[0] = '\0';
     url[0] = '\0';
+    wotdExpiration[0] = '\0';
 
-    const char * const opts = "a:b:c:d:hm:P:p:t:u:w";
+    const char * const opts = "a:b:c:d:hm:P:p:t:u:wx:";
     int c = -1;
 
     while ((c=getopt(argc, argv, opts)) != -1)
@@ -175,6 +177,9 @@ parseArgs(int argc, char** argv)
         case 'w':
             wotd = 1;
             break;
+        case 'x':
+            if (hasLongArgument(c)) return 1;
+            strcpy(wotdExpiration, optarg);
         case 'h':
         default:
             return -1;
@@ -215,7 +220,7 @@ usage(const char* s)
 {
     fprintf(stderr, "usage:\n");
     fprintf(stderr, "    %s [-a cacertfile] [-b environment] [-c cert_path] [-d database_path] [-h] [-m message]", s);
-    fprintf(stderr, " [-P passphrase_file] [-p host:port] [-t device_token] [-u url] [-w]\n");
+    fprintf(stderr, " [-P passphrase_file] [-p host:port] [-t device_token] [-u url] [-w] [-x expiration]\n");
     fprintf(stderr, "\n");
     fprintf(stderr, "examples:\n");
     fprintf(stderr, "    %s -b (dev|prod) -d database_path -p host:port -c cert_path -w\n", s);
@@ -232,6 +237,7 @@ usage(const char* s)
     fprintf(stderr, "    -t send to this device_token (incompatible with -b)\n");
     fprintf(stderr, "    -u url for notification (required except with -w)\n");
     fprintf(stderr, "    -w read new WOTD from the DB and send the notification\n");
+    fprintf(stderr, "    -x use expiration in WOTD expiration field (not APNS expiry)\n");
 }
 
 int
@@ -289,7 +295,8 @@ main(int argc, char** argv)
     void* notificationPayload = NULL;
     size_t notificationPayloadSize = 0;
     if (buildNotificationPayload(wotd, broadcast, production, deviceToken,
-        databasePath, message, url, &notificationPayload, &notificationPayloadSize))
+        databasePath, message, url, wotdExpiration,
+        &notificationPayload, &notificationPayloadSize))
     {
         fprintf(stderr, "failed to build notification payload");
         stopTlsConnection(tls);

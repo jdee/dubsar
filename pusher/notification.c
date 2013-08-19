@@ -110,7 +110,7 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
 
 static
 int
-wotdPayload(const char* databasePath, char* payloadBuffer)
+wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpiration)
 {
     sqlite3* database = NULL;
     int rc = sqlite3_open_v2(databasePath, &database,
@@ -154,7 +154,16 @@ wotdPayload(const char* databasePath, char* payloadBuffer)
 
         // roughly speaking, we should only be sending WOTD pushes when the
         // WOTD is generated, so this is about right
-        time_t expiration = time(NULL) + 86400;
+        time_t expiration = 0;
+        if (wotdExpiration == NULL || wotdExpiration[0] == '\0')
+        {
+            expiration = time(NULL) + 86400;
+        }
+        else if (wotdExpiration[0] == '+')
+        {
+            int interval = atoi(&wotdExpiration[1]);
+            expiration = time(NULL) + interval;
+        }
 
         const char* pos = NULL;
         if (!strcmp(wordPartOfSpeech, "noun")) pos = "n";
@@ -200,7 +209,8 @@ buildNotification(char* notification, const char* deviceToken, const char* paylo
     memcpy(&notification[1], &identifier, sizeof(identifier));
     ++ identifier;
 
-    uint32_t expiry = htonl(time(NULL) + 86400);
+    // don't attempt to deliver past 12 hours
+    uint32_t expiry = htonl(time(NULL) + 43200);
     memcpy(&notification[5], &expiry, sizeof(expiry));
 
     uint16_t tokenSize = htons(32);
@@ -221,7 +231,7 @@ buildNotification(char* notification, const char* deviceToken, const char* paylo
 int
 buildNotificationPayload(int wotd, int broadcast, int production,
     const char* deviceToken, const char* databasePath, const char* message,
-    const char* url, void** buffer, size_t* bufsiz)
+    const char* url, const char* wotdExpiration, void** buffer, size_t* bufsiz)
 {
     char payloadBuffer[256];
     int n = -1;
@@ -246,7 +256,7 @@ buildNotificationPayload(int wotd, int broadcast, int production,
 
     if (wotd)
     {
-        n = wotdPayload(databasePath, payloadBuffer);
+        n = wotdPayload(databasePath, payloadBuffer, wotdExpiration);
     }
     else
     {
