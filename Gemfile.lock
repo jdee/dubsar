@@ -161,6 +161,7 @@ DEPENDENCIES
   factory_girl_rails
   haml
   json
+  nokogiri
   passenger
   rails (>= 4.0)
   rspec-rails (>= 2.0)
