@@ -5,6 +5,12 @@ describe DeviceTokensController do
     DeviceToken.destroy_all
   end
 
+  it 'responds to /devices_tokens/count' do
+    request.env['HTTP_ACCEPT'] = 'application/json'
+    get :count
+    response.should be_success
+  end
+
   it 'succeeds with a valid request' do
     post :create, device_token: {token:'some-token', production: false}, version:'1.2.2',
       secret:'BBE2C00F-15EF-4A5F-A773-F48E859226D8'

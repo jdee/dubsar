@@ -20,7 +20,10 @@ Dubsar::Application.routes.draw do
 
   resources :tokens, :only => [:create, :destroy]
 
-  resources :device_tokens, :only => [:create, :show]
+  resources :device_tokens, :only => [:create, :show ] do
+    get '/count', to: 'device_tokens#count', on: :collection
+  end
+
   delete :device_tokens, to: 'device_tokens#destroy'
 
   resources :words  , :only => :show do

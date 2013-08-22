@@ -16,9 +16,19 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class DeviceTokensController < ApplicationController
-  before_filter :verify_client_secret
+  before_filter :verify_client_secret, except: :count
   skip_before_filter :verify_authenticity_token
   respond_to :json
+
+  def count
+    prod_count = DeviceToken.where(production: true).count
+    dev_count = DeviceToken.where(production: false).count
+    respond_to do |format|
+      format.json do
+        respond_with({ prod: prod_count, dev: dev_count })
+      end
+    end
+  end
 
   def create
     @device_token = DeviceToken.find_by_token_and_production params[:device_token][:token],
