@@ -19,11 +19,11 @@ module SensesHelper
   def target_link(target)
     target_text = case target
     when Sense
-      target.word.name
       target_path = sense_path target
+      target.word.name
     when Synset
-      target.words.map(&:name).join(', ')
       target_path = synset_path target
+      target.words.map(&:name).join(', ')
     end
 
     link_to target_text, target_path, :class => 'search-link'
