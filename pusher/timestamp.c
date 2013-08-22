@@ -25,5 +25,5 @@ timestamp(time_t t, char* buffer, size_t max)
     struct tm local;
     localtime_r(&t, &local);
 
-    strftime(buffer, max, "%m-%d-%Y %H", &local);
+    strftime(buffer, max, "%m-%d-%Y %T", &local);
 }
