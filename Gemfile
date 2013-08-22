@@ -26,7 +26,6 @@ gem 'devise'
 gem 'uglifier'
 gem 'therubyracer'
 gem 'passenger'
-gem 'nokogiri'
 
 group :backup_dev, :development, :test do
   gem 'ZenTest'
@@ -38,4 +37,5 @@ group :backup_dev, :development, :test do
   gem 'rspec-rails', '>= 2.0'
   gem 'rvm-capistrano'
   gem 'webrat'
+  gem 'nokogiri'
 end

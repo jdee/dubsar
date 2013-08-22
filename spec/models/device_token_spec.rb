@@ -9,11 +9,6 @@ describe DeviceToken do
     no_token.should_not be_valid
   end
 
-  it 'should not be valid without a production flag' do
-    pending "apparently blank and false are indistinguishable for a boolean"
-    no_production.should_not be_valid
-  end
-
   it 'should be valid with token and production flag' do
     valid.should be_valid
   end
