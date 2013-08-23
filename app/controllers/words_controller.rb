@@ -223,7 +223,6 @@ class WordsController < ApplicationController
     expiration = daily_word.created_at
 
     expiration += 1.day
-    expiration += 1.minute
 
     word = daily_word.word
 
