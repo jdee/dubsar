@@ -128,6 +128,7 @@ loadPassphrase()
         return -1;
     }
 
+    fclose(fp);
     len = strlen(passphrase);
 
     /* strip off any trailing newline */
@@ -142,7 +143,6 @@ loadPassphrase()
         return -1;
     }
 
-    fclose(fp);
     return 0;
 }
 
