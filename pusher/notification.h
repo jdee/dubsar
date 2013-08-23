@@ -36,4 +36,5 @@
  */
 extern int buildNotificationPayload(int wotd, int broadcast, int production,
     const char* deviceToken, const char* databasePath, const char* message,
-    const char* url, const char* wotdExpiration, void** buffer, size_t* bufsiz);
+    const char* url, const char* wotdExpiration, int apnsExpiration,
+    void** buffer, size_t* bufsiz);

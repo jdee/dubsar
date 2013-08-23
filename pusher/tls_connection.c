@@ -100,7 +100,6 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     }
     else
     {
-        fprintf(stderr, "peer cert is not NULL\n");
         subjectName = X509_get_subject_name(cert);
         X509_NAME_print_ex_fp(stderr, subjectName, 2, 0);
         fprintf(stderr, "\n");

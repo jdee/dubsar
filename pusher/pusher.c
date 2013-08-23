@@ -18,6 +18,7 @@
  */
 
 #include <errno.h>
+#include <signal.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,6 +45,36 @@ static char message[256];
 static char deviceToken[128];
 static char wotdExpiration[128];
 static char url[256];
+
+static int shutdown = 0;
+
+// returns 8, 16, 32, 64 (which add to 120), then 120 repeatedly
+static int
+backoff()
+{
+    static int _backoff = 4;
+
+    _backoff *= 2;
+    if (_backoff > 120) _backoff = 120;
+
+    return _backoff;
+}
+
+static void
+signalHandler(int sig)
+{
+    switch (sig)
+    {
+    case SIGINT:
+    case SIGTERM:
+        shutdown = 1;
+        break;
+    default:
+        break;
+    }
+
+    signal(sig, signalHandler);
+}
 
 static int
 hasLongArgument(int c)
@@ -244,7 +275,11 @@ usage(const char* s)
 int
 main(int argc, char** argv)
 {
+    signal(SIGINT, signalHandler);
+    signal(SIGTERM, signalHandler);
+
     int s = -1;
+    int success = 0;
     SSL* tls = NULL;
 
     /*
@@ -272,49 +307,114 @@ main(int argc, char** argv)
     fprintf(stderr, "url: %s\n", url);
     fprintf(stderr, "wotd: %d\n", wotd);
 
-    /*
-     * Connect to server
-     */
-
-    fprintf(stderr, "attempting connection to %s:%d\n", host, port);
-    s = socketConnect(host, port);
-    if (s < 0)
-    {
-        fprintf(stderr, "connection to %s:%d failed\n", host, port);
-        return -1;
-    }
-
-    fprintf(stderr, "successfully connected to %s:%d\n", host, port);
-
-    tls = makeTlsConnection(s, certPath, passphrase, cacertPath);
-    if (!tls)
-    {
-        fprintf(stderr, "TLS handshake failed\n");
-        return -1;
-    }
-
+    time_t expiration = time(NULL) + 43200;
+    
     void* notificationPayload = NULL;
     size_t notificationPayloadSize = 0;
     if (buildNotificationPayload(wotd, broadcast, production, deviceToken,
-        databasePath, message, url, wotdExpiration,
+        databasePath, message, url, wotdExpiration, expiration,
         &notificationPayload, &notificationPayloadSize))
     {
         fprintf(stderr, "failed to build notification payload");
-        stopTlsConnection(tls);
         return -1;
     }
     fprintf(stderr, "notification length is %ld\n", notificationPayloadSize);
 
-    int nb = SSL_write(tls, notificationPayload, notificationPayloadSize);
-    free(notificationPayload);
-    if (nb != notificationPayloadSize)
+    /*
+     * Connect to server
+     */
+
+    int nb = 0;
+    int b = 0;
+    while (!success && !shutdown && time(NULL) < expiration)
     {
-        fprintf(stderr, "SSL_write: %s", ERR_error_string(nb, NULL));
-        stopTlsConnection(tls);
-        return -1;
+        while (!shutdown && time(NULL) < expiration && s < 0)
+        {
+            fprintf(stderr, "attempting connection to %s:%d\n", host, port);
+            s = socketConnect(host, port);
+            if (s < 0)
+            {
+                fprintf(stderr, "connection to %s:%d failed\n", host, port);
+                b = backoff();
+
+                if (shutdown || time(NULL) + b >= expiration)
+                {
+                    free(notificationPayload);
+                    return 1;
+                }
+
+                fprintf(stderr, "will try again in %d s\n", b);
+                sleep(b);
+                continue;
+            }
+        
+            fprintf(stderr, "successfully connected to %s:%d\n", host, port);
+        }
+    
+        if (shutdown || time(NULL) >= expiration)
+        {
+            free(notificationPayload);
+            if (s >= 0) close(s);
+            return 1;
+        }
+
+        tls = makeTlsConnection(s, certPath, passphrase, cacertPath);
+        if (!tls)
+        {
+            fprintf(stderr, "TLS handshake failed\n");
+            close(s);
+            s = -1;
+            b = backoff();
+
+            if (shutdown || time(NULL) + b >= expiration)
+            {
+                free(notificationPayload);
+                return 1;
+            }
+
+            fprintf(stderr, "will reconnect in %d s\n", b);
+            sleep(b);
+            continue;
+        }
+
+        if (shutdown)
+        {
+            free(notificationPayload);
+            stopTlsConnection(tls);
+            return 1;
+        }
+    
+        nb = SSL_write(tls, notificationPayload, notificationPayloadSize);
+        if (nb != notificationPayloadSize)
+        {
+            fprintf(stderr, "SSL_write: %s", ERR_error_string(nb, NULL));
+            stopTlsConnection(tls);
+            s = -1;
+            tls = NULL;
+            b = backoff();
+
+            if (shutdown || time(NULL) + b >= expiration)
+            {
+                free(notificationPayload);
+                return 1;
+            }
+
+            fprintf(stderr, "will reconnect in %d s\n", b);
+            sleep(b);
+            continue;
+        }
+    
+        fprintf(stderr, "successfully wrote %d bytes\n", nb);
+        free(notificationPayload);
+        success = 1;
     }
 
-    fprintf(stderr, "successfully wrote %d bytes\n", nb);
+    if (shutdown || time(NULL) >= expiration)
+    {
+        if (tls) stopTlsConnection(tls);
+        else if (s >= 0) close(s);
+        return 1;
+    }
 
     /*
      * Check for error response packet

@@ -205,7 +205,8 @@ hexValue(const char* s, size_t l)
 
 static
 void
-buildNotification(char* notification, const char* deviceToken, const char* payloadBuffer, int n)
+buildNotification(char* notification, const char* deviceToken, const char* payloadBuffer, int n,
+    int expiration)
 {
     notification[0] = 1;
 
@@ -214,7 +215,7 @@ buildNotification(char* notification, const char* deviceToken, const char* paylo
     ++ identifier;
 
     // don't attempt to deliver past 12 hours
-    uint32_t expiry = htonl(time(NULL) + 43200);
+    uint32_t expiry = htonl(expiration);
     memcpy(&notification[5], &expiry, sizeof(expiry));
 
     uint16_t tokenSize = htons(32);
@@ -235,7 +236,8 @@ buildNotification(char* notification, const char* deviceToken, const char* paylo
 int
 buildNotificationPayload(int wotd, int broadcast, int production,
     const char* deviceToken, const char* databasePath, const char* message,
-    const char* url, const char* wotdExpiration, void** buffer, size_t* bufsiz)
+    const char* url, const char* wotdExpiration, int apnsExpiration,
+    void** buffer, size_t* bufsiz)
 {
     char payloadBuffer[256];
     int n = -1;
@@ -258,6 +260,8 @@ buildNotificationPayload(int wotd, int broadcast, int production,
         return 1;
     }
 
+    fprintf(stderr, "sending to %d device(s)\n", numDevices);
+
     if (wotd)
     {
         n = wotdPayload(databasePath, payloadBuffer, wotdExpiration);
@@ -277,7 +281,7 @@ buildNotificationPayload(int wotd, int broadcast, int production,
     for (j=0; j<numDevices; ++j)
     {
         char* notification = &((char*) *buffer)[(45+n)*j];
-        buildNotification(notification, &deviceTokens[j*64], payloadBuffer, n);
+        buildNotification(notification, &deviceTokens[j*64], payloadBuffer, n, apnsExpiration);
     }
 
     free(deviceTokens);
