@@ -17,6 +17,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <stdio.h>
 #include <time.h>
 
 /**
@@ -26,3 +27,9 @@
  * \param max the size of \a buffer, in bytes
  */
 extern void timestamp(time_t t, char* buffer, size_t max);
+
+/**
+ * Write a subsecond timestamp to the supplied \a fp.
+ * \param fp the FILE pointer to which to write the timestamp
+ */
+extern void timestamp_f(FILE* fp);

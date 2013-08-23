@@ -20,7 +20,6 @@
 #include <errno.h>
 #include <signal.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -30,6 +29,7 @@
 
 #include "notification.h"
 #include "socket_connect.h"
+#include "timestamp.h"
 #include "tls_connection.h"
 
 extern char* optarg;
@@ -315,18 +315,26 @@ main(int argc, char** argv)
 
     if (broadcast)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "broadcast environment: %s\n", (production ? "prod" : "dev"));
     }
     else
     {
+        timestamp_f(stderr);
         fprintf(stderr, "device token: %s\n", deviceToken);
     }
 
+    timestamp_f(stderr);
     fprintf(stderr, "cert. file: %s. passphrase loaded\n", certPath);
+    timestamp_f(stderr);
     fprintf(stderr, "database path: %s\n", databasePath);
+    timestamp_f(stderr);
     fprintf(stderr, "message: \"%s\"\n", message);
+    timestamp_f(stderr);
     fprintf(stderr, "host: %s, port: %d\n", host, port);
+    timestamp_f(stderr);
     fprintf(stderr, "url: %s\n", url);
+    timestamp_f(stderr);
     fprintf(stderr, "wotd: %d\n", wotd);
 
     time_t expiration = time(NULL) + 43200;
@@ -337,9 +345,11 @@ main(int argc, char** argv)
         databasePath, message, url, wotdExpiration, expiration,
         &notificationPayload, &notificationPayloadSize))
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to build notification payload");
         return -1;
     }
+    timestamp_f(stderr);
     fprintf(stderr, "notification length is %ld\n", notificationPayloadSize);
 
     /*
@@ -352,10 +362,12 @@ main(int argc, char** argv)
     {
         while (!shutdown && time(NULL) < expiration && s < 0)
         {
+            timestamp_f(stderr);
             fprintf(stderr, "attempting connection to %s:%d\n", host, port);
             s = socketConnect(host, port);
             if (s < 0)
             {
+                timestamp_f(stderr);
                 fprintf(stderr, "connection to %s:%d failed\n", host, port);
                 b = backoff();
 
@@ -365,11 +377,13 @@ main(int argc, char** argv)
                     return 1;
                 }
 
+                timestamp_f(stderr);
                 fprintf(stderr, "will try again in %d s\n", b);
                 sleep(b);
                 continue;
             }
         
+            timestamp_f(stderr);
             fprintf(stderr, "successfully connected to %s:%d\n", host, port);
         }
     
@@ -383,6 +397,7 @@ main(int argc, char** argv)
         tls = makeTlsConnection(s, certPath, passphrase, cacertPath);
         if (!tls)
         {
+            timestamp_f(stderr);
             fprintf(stderr, "TLS handshake failed\n");
             close(s);
             s = -1;
@@ -394,6 +409,7 @@ main(int argc, char** argv)
                 return 1;
             }
 
+            timestamp_f(stderr);
             fprintf(stderr, "will reconnect in %d s\n", b);
             sleep(b);
             continue;
@@ -409,6 +425,7 @@ main(int argc, char** argv)
         nb = SSL_write(tls, notificationPayload, notificationPayloadSize);
         if (nb != notificationPayloadSize)
         {
+            timestamp_f(stderr);
             fprintf(stderr, "SSL_write: %s", ERR_error_string(nb, NULL));
             stopTlsConnection(tls);
             s = -1;
@@ -421,11 +438,13 @@ main(int argc, char** argv)
                 return 1;
             }
 
+            timestamp_f(stderr);
             fprintf(stderr, "will reconnect in %d s\n", b);
             sleep(b);
             continue;
         }
     
+        timestamp_f(stderr);
         fprintf(stderr, "successfully wrote %d bytes\n", nb);
         free(notificationPayload);
         success = 1;
@@ -441,7 +460,8 @@ main(int argc, char** argv)
     /*
      * Check for error response packet
      */
-    fprintf(stderr, "checking for error response\n");
+    timestamp_f(stderr);
+    fprintf(stderr, "checking for error response (10 s)\n");
     char errorResponse[6];
     nb = SSL_read(tls, errorResponse, sizeof(errorResponse));
 
@@ -450,17 +470,21 @@ main(int argc, char** argv)
         long identifier;
         memcpy(&identifier, errorResponse+2, sizeof(identifier));
 
+        timestamp_f(stderr);
         fprintf(stderr, "APNS error response: command %d, status %d, identifier %ld (network order)\n", errorResponse[0], errorResponse[1], identifier);
     }
     else if (nb == 0 || (nb == -1 && errno == EAGAIN))
     {
+        timestamp_f(stderr);
         fprintf(stderr, "APNS push successfully sent\n");
     }
     else if (nb == -1)
     {
+        timestamp_f(stderr);
         perror("SSL_read");
     }
     else {
+        timestamp_f(stderr);
         fprintf(stderr, "SSL_read error %d: %s", nb, ERR_error_string(nb, NULL));
     }
 

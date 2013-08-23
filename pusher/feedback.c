@@ -18,7 +18,6 @@
  */
 
 #include <arpa/inet.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -185,26 +184,32 @@ main(int argc, char** argv)
         return 1;
     }
 
+    timestamp_f(stderr);
     fprintf(stderr, "cert. file: %s. passphrase loaded\n", certPath);
+    timestamp_f(stderr);
     fprintf(stderr, "host: %s, port: %d\n", host, port);
 
     /*
      * Connect to server
      */
 
+    timestamp_f(stderr);
     fprintf(stderr, "attempting connection to %s:%d\n", host, port);
     s = socketConnect(host, port);
     if (s < 0)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "connection to %s:%d failed\n", host, port);
         return -1;
     }
 
+    timestamp_f(stderr);
     fprintf(stderr, "successfully connected to %s:%d\n", host, port);
 
     tls = makeTlsConnection(s, certPath, passphrase, cacertPath);
     if (!tls)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "TLS handshake failed\n");
         return -1;
     }
@@ -231,15 +236,18 @@ main(int argc, char** argv)
             sprintf(token+2*j, "%02x", feedback.n_token[j]);
         }
 
+        timestamp_f(stderr);
         fprintf(stderr, "%s: DT %s\n", timebuf, token);
     }
 
     if (nr < 0)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "SSL_read returned error: %s", ERR_error_string(nr, NULL));
     }
     else
     {
+        timestamp_f(stderr);
         fprintf(stderr, "<EOF>\n");
     }
 

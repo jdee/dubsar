@@ -17,6 +17,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <sys/time.h>
+
 #include "timestamp.h"
 
 void
@@ -26,4 +28,17 @@ timestamp(time_t t, char* buffer, size_t max)
     localtime_r(&t, &local);
 
     strftime(buffer, max, "%m-%d-%Y %T", &local);
+}
+
+void
+timestamp_f(FILE* fp)
+{
+    struct timeval now;
+    gettimeofday(&now, NULL);
+
+    char buffer[256];
+    timestamp(time(NULL), buffer, 255);
+
+    fprintf(fp, "%s", buffer);
+    fprintf(fp, ".%06ld ", now.tv_usec);
 }

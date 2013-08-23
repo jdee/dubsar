@@ -23,6 +23,7 @@
 #include <openssl/pem.h>
 
 #include "cert_file.h"
+#include "timestamp.h"
 #include "tls_connection.h"
 
 SSL*
@@ -45,6 +46,7 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
 
     if (SSL_library_init() < 0)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to initialize ssl library\n");
         return NULL;
     }
@@ -56,6 +58,7 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     ctx = SSL_CTX_new(TLSv1_client_method());
     if (!ctx)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to initialize ssl context\n");
         close(fd);
         return NULL;
@@ -63,6 +66,7 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
 
     if (useCertFile(ctx, certPath, passphrase, cacertpath))
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to load cert from file\n");
         SSL_CTX_free(ctx);
         close(fd);
@@ -72,6 +76,7 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     ssl = SSL_new(ctx);
     if (!ssl)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "SSL_new failed\n");
         SSL_CTX_free(ctx);
         close(fd);
@@ -84,16 +89,19 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     if (SSL_connect(ssl) <= 0)
     {
         int error = ERR_get_error();
+        timestamp_f(stderr);
         fprintf(stderr, "error %d from SSL_connect: %s\n", error, ERR_error_string(error, NULL));
         SSL_free(ssl);
         return NULL;
     }
 
+    timestamp_f(stderr);
     fprintf(stderr, "TLSv1 handshake successful\n");
 
     cert = SSL_get_peer_certificate(ssl);
     if (cert == NULL)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "peer cert is NULL\n");
         stopTlsConnection(ssl);
         return NULL;
@@ -101,6 +109,7 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     else
     {
         subjectName = X509_get_subject_name(cert);
+        timestamp_f(stderr);
         X509_NAME_print_ex_fp(stderr, subjectName, 2, 0);
         fprintf(stderr, "\n");
 
@@ -109,14 +118,17 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
 #endif // _DEBUG
     }
 
+    timestamp_f(stderr);
     fprintf(stderr, "peer certificate is ");
     result = SSL_get_verify_result(ssl);
     if (result == X509_V_OK)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "valid\n");
     }
     else
     {
+        timestamp_f(stderr);
         fprintf(stderr, "invalid: %d\n", result);
         stopTlsConnection(ssl);
         return NULL;
@@ -137,16 +149,19 @@ stopTlsConnection(SSL* ssl)
     fprintf(stderr, "calling SSL_shutdown\n");
     if ((rc=SSL_shutdown(ssl)) == 0)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "calling SSL_shutdown again\n");
         rc = SSL_shutdown(ssl);
     }
 
     if (rc <= 0)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to shut down TLS connection successfully\n");
     }
     else
     {
+        timestamp_f(stderr);
         fprintf(stderr, "shut down TLS connection\n");
     }
 

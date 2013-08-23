@@ -21,6 +21,7 @@
 #include <openssl/pkcs12.h>
 
 #include "cert_file.h"
+#include "timestamp.h"
 
 int
 useCertFile(SSL_CTX* ctx, const char* path, const char* passphrase, const char* cacertfile)
@@ -33,6 +34,7 @@ useCertFile(SSL_CTX* ctx, const char* path, const char* passphrase, const char* 
     p12_file = fopen(path, "r");
     if (!p12_file)
     {
+        timestamp_f(stderr);
         perror(path);
         return -1;
     }
@@ -43,6 +45,7 @@ useCertFile(SSL_CTX* ctx, const char* path, const char* passphrase, const char* 
     if (!PKCS12_parse(p12_cert, passphrase, &pkey, &x509_cert, NULL))
     {
         int error = ERR_get_error();
+        timestamp_f(stderr);
         fprintf(stderr, "failed to parse p12 file; error %d\n", error);
         PKCS12_free(p12_cert);
         return -1;
@@ -52,6 +55,7 @@ useCertFile(SSL_CTX* ctx, const char* path, const char* passphrase, const char* 
     if (!SSL_CTX_use_certificate(ctx, x509_cert))
     {
         int error = ERR_get_error();
+        timestamp_f(stderr);
         fprintf(stderr, "failed to set cert for SSL context; error %d\n", error);
         X509_free(x509_cert);
         EVP_PKEY_free(pkey);
@@ -62,6 +66,7 @@ useCertFile(SSL_CTX* ctx, const char* path, const char* passphrase, const char* 
     if (!SSL_CTX_use_PrivateKey(ctx, pkey))
     {
         int error = ERR_get_error();
+        timestamp_f(stderr);
         fprintf(stderr, "failed to set private key for SSL context; error %d\n", error);
         EVP_PKEY_free(pkey);
         return -1;
@@ -70,6 +75,7 @@ useCertFile(SSL_CTX* ctx, const char* path, const char* passphrase, const char* 
 
     if (cacertfile && *cacertfile && !SSL_CTX_load_verify_locations(ctx, cacertfile, NULL))
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to load root cert for verification from %s\n", cacertfile);
         return -1;
     }

@@ -19,14 +19,13 @@
 
 #include <arpa/inet.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #include <sqlite3.h>
 
 #include "notification.h"
+#include "timestamp.h"
 
 static
 int
@@ -37,6 +36,7 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
         SQLITE_OPEN_FULLMUTEX|SQLITE_OPEN_READONLY, NULL);
     if (rc != SQLITE_OK)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
         return -1;
     }
@@ -49,6 +49,7 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
     rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
     if (rc != SQLITE_OK)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
         sqlite3_close(database);
         return -1;
@@ -62,6 +63,7 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
     }
     else
     {
+        timestamp_f(stderr);
         fprintf(stderr, "error counting device tokens: %d\n", rc);
         sqlite3_finalize(statement);
         sqlite3_close(database);
@@ -82,6 +84,7 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
     rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
     if (rc != SQLITE_OK)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
         sqlite3_close(database);
         return -1;
@@ -96,6 +99,7 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
 
     if (rc != SQLITE_DONE || count != number)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "error retrieving device tokens: %d\n", rc);
         free(*buffer);
         *buffer = NULL;
@@ -117,6 +121,7 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
         SQLITE_OPEN_FULLMUTEX|SQLITE_OPEN_READONLY, NULL);
     if (rc != SQLITE_OK)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
         return -1;
     }
@@ -129,6 +134,7 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
     rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
     if (rc != SQLITE_OK)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "error %d from sqlite3_prepare_v2\n", rc);
         sqlite3_close(database);
         return -1;
@@ -181,6 +187,7 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
     }
     else
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to find WOTD in the DB: %d", rc);
     }
 
@@ -256,10 +263,12 @@ buildNotificationPayload(int wotd, int broadcast, int production,
 
     if (numDevices <= 0)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "failed to build device list\n");
         return 1;
     }
 
+    timestamp_f(stderr);
     fprintf(stderr, "sending to %d device(s)\n", numDevices);
 
     if (wotd)
@@ -271,6 +280,7 @@ buildNotificationPayload(int wotd, int broadcast, int production,
         n = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"%s\"},\"dubsar\":{\"url\":\"%s\"}}", message, url);
     }
 
+    timestamp_f(stderr);
     fprintf(stderr, "payload (%d): %s\n", n, payloadBuffer);
 
     // don't ask

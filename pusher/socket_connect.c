@@ -20,12 +20,12 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
-#include <stdio.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
 #include "socket_connect.h"
+#include "timestamp.h"
 
 int socketConnect(const char* host, unsigned short port)
 {
@@ -42,6 +42,7 @@ int socketConnect(const char* host, unsigned short port)
     int rc = getaddrinfo(host, sport, &hints, &result);
     if (rc != 0)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "%s\n", gai_strerror(rc));
         return -1;
     }
@@ -49,6 +50,7 @@ int socketConnect(const char* host, unsigned short port)
     int s = socket(AF_INET, SOCK_STREAM, 0);
     if (s == -1)
     {
+        timestamp_f(stderr);
         perror("socket");
         return -1;
     }
@@ -56,6 +58,7 @@ int socketConnect(const char* host, unsigned short port)
     int on = 1;
     if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)))
     {
+        timestamp_f(stderr);
         perror("SO_REUSEADDR");
         return -1;
     }
@@ -65,6 +68,7 @@ int socketConnect(const char* host, unsigned short port)
     timeout.tv_usec = 0;
     if (setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout)))
     {
+        timestamp_f(stderr);
         perror("SO_RCVTIMEO");
         return -1;
     }
@@ -72,6 +76,7 @@ int socketConnect(const char* host, unsigned short port)
     int off = 0;
     if (setsockopt(s, IPPROTO_TCP, TCP_NODELAY, &off, sizeof(off)))
     {
+        timestamp_f(stderr);
         perror("TCP_NODELAY");
         return -1;
     }
@@ -92,6 +97,7 @@ int socketConnect(const char* host, unsigned short port)
 
     if (!connected)
     {
+        timestamp_f(stderr);
         fprintf(stderr, "Failed to connect to %s:%d\n", host, port);
         close(s);
         return -1;
