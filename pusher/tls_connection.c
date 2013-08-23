@@ -123,12 +123,10 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     result = SSL_get_verify_result(ssl);
     if (result == X509_V_OK)
     {
-        timestamp_f(stderr);
         fprintf(stderr, "valid\n");
     }
     else
     {
-        timestamp_f(stderr);
         fprintf(stderr, "invalid: %d\n", result);
         stopTlsConnection(ssl);
         return NULL;
@@ -146,6 +144,7 @@ stopTlsConnection(SSL* ssl)
      * See https://www.openssl.org/docs/ssl/SSL_shutdown.html#
      * Should it be while instead of if?
      */
+    timestamp_f(stderr);
     fprintf(stderr, "calling SSL_shutdown\n");
     if ((rc=SSL_shutdown(ssl)) == 0)
     {

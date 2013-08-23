@@ -20,6 +20,7 @@
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include <openssl/err.h>
@@ -51,6 +52,27 @@ hasLongArgument(int c)
 static int
 loadPassphrase()
 {
+    struct stat sb;
+    if (stat(passphraseFilePath, &sb))
+    {
+        perror(passphraseFilePath);
+        return -1;
+    }
+
+    if (sb.st_uid != getuid())
+    {
+        fprintf(stderr, "passphrase file owner (%d) must be the current user (%d)\n",
+            sb.st_uid, getuid());
+        return -1;
+    }
+
+    if (sb.st_mode & (S_IRWXG|S_IRWXO))
+    {
+        fprintf(stderr, "passphrase file must not be accessible by group or others (file mode is 0%o)\n",
+            sb.st_mode);
+        return -1;
+    }
+
     FILE* fp = fopen(passphraseFilePath, "r");
     int len = 0;
 
