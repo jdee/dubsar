@@ -206,6 +206,9 @@ main(int argc, char** argv)
         return 1;
     }
 
+    // make logs a little easier to read/more useful
+    setvbuf(stderr, NULL, _IOLBF, 0);
+
     timestamp_f(stderr);
     fprintf(stderr, "cert. file: %s. passphrase loaded\n", certPath);
     timestamp_f(stderr);
