@@ -218,7 +218,11 @@ buildNotification(char* notification, const char* deviceToken, const char* paylo
     notification[0] = 1;
 
     static uint32_t identifier = 1;
-    memcpy(&notification[1], &identifier, sizeof(identifier));
+    timestamp_f(stderr);
+    fprintf(stderr, "buffer ID %d: token %s\n", identifier, deviceToken);
+
+    uint32_t nid = htonl(identifier);
+    memcpy(&notification[1], &nid, sizeof(nid));
     ++ identifier;
 
     // don't attempt to deliver past 12 hours
@@ -290,8 +294,17 @@ buildNotificationPayload(int wotd, int broadcast, int production,
     int j;
     for (j=0; j<numDevices; ++j)
     {
+        char token[128];
+        strncpy(token, &deviceTokens[j*64], 64);
+        token[64] = '\0';
+        if (strlen(token) != 64 || strspn(token, "0123456789abcdefABCDEF") != 64) {
+            timestamp_f(stderr);
+            fprintf(stderr, "invalid device token \"%s\", skipping\n", token);
+            continue;
+        }
+
         char* notification = &((char*) *buffer)[(45+n)*j];
-        buildNotification(notification, &deviceTokens[j*64], payloadBuffer, n, apnsExpiration);
+        buildNotification(notification, token, payloadBuffer, n, apnsExpiration);
     }
 
     free(deviceTokens);

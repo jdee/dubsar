@@ -17,6 +17,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <arpa/inet.h>
 #include <errno.h>
 #include <signal.h>
 #include <stdint.h>
@@ -34,7 +35,7 @@
 
 extern char* optarg;
 
-static int production = 0, wotd = 0, broadcast = 0;
+static int production = 0, wotd = 0, broadcast = 0, noSend = 0;
 static char certPath[256];
 static char cacertPath[256];
 static char passphraseFilePath[256];
@@ -47,7 +48,7 @@ static char deviceToken[128];
 static char wotdExpiration[128];
 static char url[256];
 
-static int shutdown = 0;
+static int _shutdown = 0;
 
 // returns 8, 16, 32, 64 (which add to 120), then 120 repeatedly
 static int
@@ -68,7 +69,7 @@ signalHandler(int sig)
     {
     case SIGINT:
     case SIGTERM:
-        shutdown = 1;
+        _shutdown = 1;
         break;
     default:
         break;
@@ -184,7 +185,7 @@ parseArgs(int argc, char** argv)
     url[0] = '\0';
     wotdExpiration[0] = '\0';
 
-    const char * const opts = "a:b:c:d:hm:P:p:t:u:wx:";
+    const char * const opts = "a:b:c:d:hm:nP:p:t:u:wx:";
     int c = -1;
 
     while ((c=getopt(argc, argv, opts)) != -1)
@@ -210,6 +211,9 @@ parseArgs(int argc, char** argv)
         case 'm':
             if (hasLongArgument(c)) return 1;
             strcpy(message, optarg);
+            break;
+        case 'n':
+            noSend = 1;
             break;
         case 'P':
             if (hasLongArgument(c)) return 1;
@@ -241,10 +245,11 @@ parseArgs(int argc, char** argv)
     }
 
     int dtLength = strlen(deviceToken);
+    int dtoken = dtLength > 0 ? 1 : 0;
 
-    if ((broadcast == 0 && dtLength == 0) || (broadcast == 1 && dtLength > 0))
+    if (dtoken + broadcast != 1)
     {
-        fprintf(stderr, "specify -b or -t, but not both\n");
+        fprintf(stderr, "specify -b or -t, but not more than one\n");
         return -1;
     }
 
@@ -254,9 +259,9 @@ parseArgs(int argc, char** argv)
         return -1;
     }
 
-    if (strlen(host) == 0 || port == 0 || strlen(certPath) == 0 || strlen(passphraseFilePath) == 0)
+    if (noSend == 0 && (strlen(host) == 0 || port == 0 || strlen(certPath) == 0 || strlen(passphraseFilePath) == 0))
     {
-        fprintf(stderr, "-P, -p and -c are required\n");
+        fprintf(stderr, "-P, -p and -c are required except with -n\n");
         return -1;
     }
 
@@ -273,7 +278,7 @@ static void
 usage(const char* s)
 {
     fprintf(stderr, "usage:\n");
-    fprintf(stderr, "    %s [-a cacertfile] [-b environment] [-c cert_path] [-d database_path] [-h] [-m message]", s);
+    fprintf(stderr, "    %s [-a cacertfile] [-b environment] [-c cert_path] [-d database_path] [-h] [-m message] [-n]", s);
     fprintf(stderr, " [-P passphrase_file] [-p host:port] [-t device_token] [-u url] [-w] [-x expiration]\n");
     fprintf(stderr, "\n");
     fprintf(stderr, "examples:\n");
@@ -286,6 +291,7 @@ usage(const char* s)
     fprintf(stderr, "    -d use database at database_path (only with -b or -w)\n");
     fprintf(stderr, "    -h print this message and exit\n");
     fprintf(stderr, "    -m user message for notification (required except with -w)\n");
+    fprintf(stderr, "    -n do not send; just build payload and report\n");
     fprintf(stderr, "    -P read the passphrase from passphrase_file(required)\n");
     fprintf(stderr, "    -p connect to remote host:port (required)\n");
     fprintf(stderr, "    -t send to this device_token (incompatible with -b)\n");
@@ -321,10 +327,15 @@ main(int argc, char** argv)
         timestamp_f(stderr);
         fprintf(stderr, "broadcast environment: %s\n", (production ? "prod" : "dev"));
     }
-    else
+    else if (noSend == 0)
     {
         timestamp_f(stderr);
         fprintf(stderr, "device token: %s\n", deviceToken);
+    }
+    else
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "build and report only; no send\n");
     }
 
     timestamp_f(stderr);
@@ -355,15 +366,21 @@ main(int argc, char** argv)
     timestamp_f(stderr);
     fprintf(stderr, "notification length is %ld\n", notificationPayloadSize);
 
+    if (noSend)
+    {
+        free(notificationPayload);
+        return 0;
+    }
+
     /*
      * Connect to server
      */
 
     int nb = 0;
     int b = 0;
-    while (!success && !shutdown && time(NULL) < expiration)
+    while (!success && !_shutdown && time(NULL) < expiration)
     {
-        while (!shutdown && time(NULL) < expiration && s < 0)
+        while (!_shutdown && time(NULL) < expiration && s < 0)
         {
             timestamp_f(stderr);
             fprintf(stderr, "attempting connection to %s:%d\n", host, port);
@@ -374,7 +391,7 @@ main(int argc, char** argv)
                 fprintf(stderr, "connection to %s:%d failed\n", host, port);
                 b = backoff();
 
-                if (shutdown || time(NULL) + b >= expiration)
+                if (_shutdown || time(NULL) + b >= expiration)
                 {
                     free(notificationPayload);
                     return 1;
@@ -390,7 +407,7 @@ main(int argc, char** argv)
             fprintf(stderr, "successfully connected to %s:%d\n", host, port);
         }
     
-        if (shutdown || time(NULL) >= expiration)
+        if (_shutdown || time(NULL) >= expiration)
         {
             free(notificationPayload);
             if (s >= 0) close(s);
@@ -406,7 +423,7 @@ main(int argc, char** argv)
             s = -1;
             b = backoff();
 
-            if (shutdown || time(NULL) + b >= expiration)
+            if (_shutdown || time(NULL) + b >= expiration)
             {
                 free(notificationPayload);
                 return 1;
@@ -418,7 +435,7 @@ main(int argc, char** argv)
             continue;
         }
 
-        if (shutdown)
+        if (_shutdown)
         {
             free(notificationPayload);
             stopTlsConnection(tls);
@@ -435,7 +452,7 @@ main(int argc, char** argv)
             tls = NULL;
             b = backoff();
 
-            if (shutdown || time(NULL) + b >= expiration)
+            if (_shutdown || time(NULL) + b >= expiration)
             {
                 free(notificationPayload);
                 return 1;
@@ -453,7 +470,7 @@ main(int argc, char** argv)
         success = 1;
     }
 
-    if (shutdown || time(NULL) >= expiration)
+    if (_shutdown || time(NULL) >= expiration)
     {
         if (tls) stopTlsConnection(tls);
         else if (s >= 0) close(s);
@@ -474,7 +491,7 @@ main(int argc, char** argv)
         memcpy(&identifier, errorResponse+2, sizeof(identifier));
 
         timestamp_f(stderr);
-        fprintf(stderr, "APNS error response: command %d, status %d, identifier %ld (network order)\n", errorResponse[0], errorResponse[1], identifier);
+        fprintf(stderr, "APNS error response: command %d, status %d, identifier %u (host order)\n", errorResponse[0], errorResponse[1], htonl(identifier));
     }
     else if (nb == 0 || (nb == -1 && errno == EAGAIN))
     {
