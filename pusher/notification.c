@@ -212,7 +212,7 @@ hexValue(const char* s, size_t l)
 
 static
 void
-buildNotification(char* notification, const char* deviceToken, const char* payloadBuffer, int n,
+buildNotification(unsigned char* notification, const char* deviceToken, const char* payloadBuffer, int n,
     int expiration)
 {
     notification[0] = 1;
@@ -303,7 +303,7 @@ buildNotificationPayload(int wotd, int broadcast, int production,
             continue;
         }
 
-        char* notification = &((char*) *buffer)[(45+n)*j];
+        unsigned char* notification = &((unsigned char*) *buffer)[(45+n)*j];
         buildNotification(notification, token, payloadBuffer, n, apnsExpiration);
     }
 
