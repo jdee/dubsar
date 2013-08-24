@@ -292,6 +292,7 @@ buildNotificationPayload(int wotd, int broadcast, int production,
     *buffer = malloc(*bufsiz);
 
     int j;
+    int count = 0;
     for (j=0; j<numDevices; ++j)
     {
         char token[128];
@@ -305,7 +306,9 @@ buildNotificationPayload(int wotd, int broadcast, int production,
 
         unsigned char* notification = &((unsigned char*) *buffer)[(45+n)*j];
         buildNotification(notification, token, payloadBuffer, n, apnsExpiration);
+        ++ count;
     }
+    *bufsiz = (45 + n) * count;
 
     free(deviceTokens);
 
