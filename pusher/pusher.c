@@ -487,7 +487,7 @@ main(int argc, char** argv)
 
     if (nb == sizeof(errorResponse))
     {
-        long identifier;
+        uint32_t identifier;
         memcpy(&identifier, errorResponse+2, sizeof(identifier));
 
         timestamp_f(stderr);
