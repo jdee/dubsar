@@ -21,20 +21,27 @@
     Princeton University
     %a.undecorated{:href => 'http://wordnet.princeton.edu', :style => 'color: #888;'} WordNet&reg;
     project.
-%p
-  %strong
-    Dubsar for iPhone, iPod Touch and iPad:
-  %p
-    =link_to 'App Store', 'http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=453868483&mt=8'
-%p
-  %strong
-    Dubsar for Android:
-  %p
-    =link_to 'Google Play', 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar'
-  %p
-    =link_to 'Amazon App Store', 'http://www.amazon.com/Jimmy-Dee-Dubsar/dp/B006QCL4PG'
-  %p
-    =link_to 'Direct download (APK: 119 kB)', "#{asset_host}/Dubsar-1.0.2.1.apk"
+%table
+  %tbody
+    %tr
+      %td
+        %strong
+          /Dubsar for iPhone, iPod Touch and iPad:
+          Dubsar for iOS:
+      %td
+        %strong
+          Dubsar for Android:
+  %tr
+    %td{valign: 'top'}
+      %p
+        =link_to 'App Store', 'http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=453868483&mt=8'
+    %td{valign: 'top'}
+      %p
+        =link_to 'Google Play', 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar'
+      %p
+        =link_to 'Amazon App Store', 'http://www.amazon.com/Jimmy-Dee-Dubsar/dp/B006QCL4PG'
+      %p
+        =link_to 'Direct download (APK: 119 kB)', "#{asset_host}/Dubsar-1.0.2.1.apk"
 
 %br/
 %p
