@@ -218,8 +218,10 @@ buildNotification(unsigned char* notification, const char* deviceToken, const ch
     notification[0] = 1;
 
     static uint32_t identifier = 1;
+#ifdef _DEBUG
     timestamp_f(stderr);
     fprintf(stderr, "buffer ID %d: token %s\n", identifier, deviceToken);
+#endif // _DEBUG
 
     uint32_t nid = htonl(identifier);
     memcpy(&notification[1], &nid, sizeof(nid));
