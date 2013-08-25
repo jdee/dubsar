@@ -108,4 +108,42 @@ namespace :wotd do
 
     Rake::Task['wotd:build'].invoke
   end
+
+  desc 'get active production device tokens'
+  task :prod => :environment do
+    uri = URI("https://go.urbanairship.com/api/device_tokens/")
+    request = Net::HTTP::Get.new(uri.path)
+
+    airship_config = YAML::load_file("config/airship_config.yml").symbolize_keys!
+
+    request.set_content_type "application/json"
+    app_key = airship_config[:production_app_key]
+    app_master_secret = airship_config[:production_master_secret]
+    puts "not configured" and return if app_key.nil? || app_master_secret.nil?
+
+    request.basic_auth app_key, app_master_secret
+
+    puts "GET #{uri} [prod]"
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    response = http.request request
+
+    puts "HTTP status code #{response.code}"
+
+    if response.code == "200"
+      tokens = JSON::parse(response.body).symbolize_keys!
+      puts "#{tokens[:active_device_tokens_count]} active device tokens"
+      puts "no overlap" unless tokens[:device_tokens].any? do |t|
+        t.symbolize_keys!
+        next false unless t[:active]
+
+        token = t[:device_token]
+        next false if DeviceToken.find_by_token_and_production(token, true).blank?
+
+        puts "#{token} is in production DT list"
+        next true
+      end
+    end
+  end
 end
