@@ -360,7 +360,7 @@ main(int argc, char** argv)
         &notificationPayload, &notificationPayloadSize))
     {
         timestamp_f(stderr);
-        fprintf(stderr, "failed to build notification payload");
+        fprintf(stderr, "failed to build notification payload\n");
         return -1;
     }
     timestamp_f(stderr);
