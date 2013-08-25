@@ -142,7 +142,18 @@ namespace :wotd do
         token = t[:device_token].downcase
         next if DeviceToken.find_by_token_and_production(token, true).blank?
 
-        puts "#{token} is in production DT list"
+        puts "#{token} is in production DT list, deactivating"
+
+        uri = URI("https://device-api.urbanairship.com/api/device_tokens/#{token}/")
+        request = Net::HTTP::Delete.new(uri.path)
+        request.basic_auth app_key, app_master_secret
+
+        puts "DELETE #{uri}"
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        response = http.request request
+        puts "HTTP status code #{response.code}"
+
         overlap = true
       end
       puts "no overlap with #{DeviceToken.where(production:true).count} tokens in DB" unless overlap
