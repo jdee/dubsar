@@ -134,7 +134,8 @@ namespace :wotd do
     if response.code == "200"
       tokens = JSON::parse(response.body).symbolize_keys!
       puts "#{tokens[:active_device_tokens_count]} active device tokens"
-      puts "no overlap" unless tokens[:device_tokens].any? do |t|
+      puts "no overlap with #{DeviceToken.where(production:true).count} tokens in DB" unless
+        tokens[:device_tokens].any? do |t|
         t.symbolize_keys!
         next false unless t[:active]
 
