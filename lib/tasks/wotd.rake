@@ -123,40 +123,40 @@ namespace :wotd do
 
     request.basic_auth app_key, app_master_secret
 
-    puts "GET #{uri} [prod]"
+    puts "#{DateTime.now} GET #{uri} [prod]"
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     response = http.request request
 
-    puts "HTTP status code #{response.code}"
+    puts "#{DateTime.now} HTTP status code #{response.code}"
 
-    if response.code == "200"
-      tokens = JSON::parse(response.body).symbolize_keys!
-      puts "#{tokens[:active_device_tokens_count]} active device tokens"
-      overlap = false
-      tokens[:device_tokens].each do |t|
-        t.symbolize_keys!
-        next unless t[:active]
+    return unless response.code == "200"
 
-        token = t[:device_token].downcase
-        next if DeviceToken.find_by_token_and_production(token, true).blank?
+    tokens = JSON::parse(response.body).symbolize_keys!
+    puts "#{DateTime.now} #{tokens[:active_device_tokens_count]} active device tokens"
+    overlap = false
+    tokens[:device_tokens].each do |t|
+      t.symbolize_keys!
+      next unless t[:active]
 
-        puts "#{token} is in production DT list, deactivating"
+      token = t[:device_token].downcase
+      next if DeviceToken.find_by_token_and_production(token, true).blank?
 
-        uri = URI("https://device-api.urbanairship.com/api/device_tokens/#{token}/")
-        request = Net::HTTP::Delete.new(uri.path)
-        request.basic_auth app_key, app_master_secret
+      puts "#{DateTime.now} #{token} is in production DT list, deactivating"
 
-        puts "DELETE #{uri}"
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        response = http.request request
-        puts "HTTP status code #{response.code}"
+      uri = URI("https://device-api.urbanairship.com/api/device_tokens/#{token}/")
+      request = Net::HTTP::Delete.new(uri.path)
+      request.basic_auth app_key, app_master_secret
 
-        overlap = true
-      end
-      puts "no overlap with #{DeviceToken.where(production:true).count} tokens in DB" unless overlap
+      puts "#{DateTime.now} DELETE #{uri}"
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      response = http.request request
+      puts "#{DateTime.now} HTTP status code #{response.code}"
+
+      overlap = true
     end
+    puts "#{DateTime.now} no overlap with #{DeviceToken.where(production:true).count} tokens in DB" unless overlap
   end
 end
