@@ -30,19 +30,26 @@
       %h2
         Q. How do I turn off word of the day push notifications?
       %p
-        A. This method works for any application. Open the Settings app from the
+        A. This method works for push notifications from any iOS application on an iPad,
+        iPhone or iPod touch. Open the Settings app from the
         device&apos;s home screen. Tap Notifications on the master panel (iPad) or
         the main view of the Settings app (iPhone/iPod touch). Scroll down to see a
         list of apps &quot;In Notification Center.&quot; Tap the row for Dubsar.
         This will take you to a screen with a number of push-notification-related
         settings for Dubsar. Unfortunately, there is no master switch to turn off
         notifications altogether. You have to disable all the aspects independently
-        on this screen. When you are done, it should looke like this:
+        on this screen. When you are done, it should look like this (the iPhone view
+        is similar to the detail panel on the right):
       %h3 Dubsar with all notifications disabled
       = image_tag 'dubsar-notifications.png', alt: 'Dubsar Notifications', width: 800, height: 600, style: 'display: block;'
       %p
-        When you have set the Notification Center, Badge App Icon, Sounds and View In
-        Lock Screen switches to OFF and set the Alert Style to None, tap the back
+        When you have set the
+        %em Notification Center, Badge App Icon, Sounds
+        and
+        %em View In Lock Screen
+        switches to OFF and set the
+        %em Alert Style
+        to None, tap the back
         button in the navigation bar at the top, which says, &quot;Notifications.&quot;
         This will return you to the general Notifications settings. At the bottom, under
         Not In Notification Center, you&apos;ll see Dubsar:
@@ -53,6 +60,11 @@
         you can also fine-tune the settings for each application there, choosing which
         sort of notification, if any, you wish to receive, whether you want a badge on
         the app and whether it should play a sound when a notification arrives.
+      %p
+        If you originally said no when asked if the app could send push notifications
+        but later change your mind, you can use the settings above to enable notifications
+        from Dubsar. You can also do this after you&apos;ve removed Dubsar from the
+        Notification Center, as described above.
      
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
