@@ -28,6 +28,34 @@
   %div{'data-role' => 'content'}
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
+        Q. How do I turn off word of the day push notifications?
+      %p
+        A. This method works for any application. Open the Settings app from the
+        device&apos;s home screen. Tap Notifications on the master panel (iPad) or
+        the main view of the Settings app (iPhone/iPod touch). Scroll down to see a
+        list of apps &quot;In Notification Center.&quot; Tap the row for Dubsar.
+        This will take you to a screen with a number of push-notification-related
+        settings for Dubsar. Unfortunately, there is no master switch to turn off
+        notifications altogether. You have to disable all the aspects independently
+        on this screen. When you are done, it should looke like this:
+      %h3 Dubsar with all notifications disabled
+      = image_tag 'dubsar-notifications.png', alt: 'Dubsar Notifications', width: 800, height: 600, style: 'display: block;'
+      %p
+        When you have set the Notification Center, Badge App Icon, Sounds and View In
+        Lock Screen switches to OFF and set the Alert Style to None, tap the back
+        button in the navigation bar at the top, which says, &quot;Notifications.&quot;
+        This will return you to the general Notifications settings. At the bottom, under
+        Not In Notification Center, you&apos;ll see Dubsar:
+      %h3 Dubsar no longer in Notification Center
+      = image_tag 'notifications.png', alt: 'Dubsar not in Notification Center', width: 800, height: 600, style: 'display: block;'
+      %p
+        You can do the same for any application in the Notification Center. Of course,
+        you can also fine-tune the settings for each application there, choosing which
+        sort of notification, if any, you wish to receive, whether you want a badge on
+        the app and whether it should play a sound when a notification arrives.
+     
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
         Q. How do the previews work?
       %p
         A. Dubsar's views reflect the structure of WordNet&reg;, but often, in previous
