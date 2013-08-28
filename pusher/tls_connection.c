@@ -97,6 +97,8 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
 
     timestamp_f(stderr);
     fprintf(stderr, "TLSv1 handshake successful\n");
+    timestamp_f(stderr);
+    fprintf(stderr, "cipher: %s\n", SSL_get_cipher(ssl));
 
     cert = SSL_get_peer_certificate(ssl);
     if (cert == NULL)
