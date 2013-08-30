@@ -86,6 +86,14 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     SSL_CTX_free(ctx);
     SSL_set_fd(ssl, fd);
 
+    /*
+     * By default, APNS picks AES256-SHA, but with TLSv1, that CBC-based cipher
+     * is vulnerable to the BEAST. The server seems to accept RC4-SHA. Put both in this order
+     * to make sure we connect, just in case. No support for forward secrecy seems to be
+     * available.
+     */
+    SSL_set_cipher_list(ssl, "RC4-SHA:AES256-SHA");
+
     if (SSL_connect(ssl) <= 0)
     {
         int error = ERR_get_error();
