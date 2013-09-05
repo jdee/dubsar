@@ -223,8 +223,7 @@ buildNotification(unsigned char* notification, const char* deviceToken, const ch
     fprintf(stderr, "buffer ID %d: token %s\n", identifier, deviceToken);
 #endif // _DEBUG
 
-    uint32_t nid = htonl(identifier);
-    memcpy(&notification[1], &nid, sizeof(nid));
+    memcpy(&notification[1], &identifier, sizeof(identifier));
     ++ identifier;
 
     // don't attempt to deliver past 12 hours

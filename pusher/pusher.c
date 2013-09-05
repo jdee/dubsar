@@ -17,7 +17,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <arpa/inet.h>
 #include <errno.h>
 #include <signal.h>
 #include <stdint.h>
@@ -478,25 +477,31 @@ main(int argc, char** argv)
     }
 
     /*
-     * Check for error response packet
+     * Check for error response packet(s)
      */
     timestamp_f(stderr);
-    fprintf(stderr, "checking for error response (10 s)\n");
+    fprintf(stderr, "checking for error responses (10 s)\n");
     char errorResponse[6];
-    nb = SSL_read(tls, errorResponse, sizeof(errorResponse));
-
-    if (nb == sizeof(errorResponse))
+    
+    int numErrors;
+    for (numErrors=0;
+        (nb=SSL_read(tls, errorResponse, sizeof(errorResponse))) == sizeof(errorResponse);
+        ++numErrors)
     {
         uint32_t identifier;
         memcpy(&identifier, errorResponse+2, sizeof(identifier));
 
         timestamp_f(stderr);
-        fprintf(stderr, "APNS error response: command %d, status %d, identifier %u (host order)\n", errorResponse[0], errorResponse[1], htonl(identifier));
+        fprintf(stderr, "APNS error response: command %d, status %d, identifier %u (network order)\n", errorResponse[0], errorResponse[1], identifier);
     }
-    else if (nb == 0 || (nb == -1 && errno == EAGAIN))
+
+    if (nb == 0 || (nb == -1 && errno == EAGAIN))
     {
-        timestamp_f(stderr);
-        fprintf(stderr, "APNS push successfully sent\n");
+        if (numErrors == 0)
+        {
+            timestamp_f(stderr);
+            fprintf(stderr, "APNS push successfully sent\n");
+        }
     }
     else if (nb == -1)
     {
