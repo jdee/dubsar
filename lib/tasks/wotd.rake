@@ -108,7 +108,8 @@ namespace :wotd do
 
       token = t[:device_token].downcase
 
-      DeviceToken.create production: true, token: token
+      DeviceToken.create production: true, token: token if
+        DeviceToken.find_by_production_and_token(true, token).blank?
     end
 
     puts "#{DateTime.now} #{DeviceToken.where(production: true).count} tokens in production DB"
