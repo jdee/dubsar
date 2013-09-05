@@ -72,40 +72,6 @@ namespace :wotd do
     puts "word of the day is #{word.name} (#{word.pos}.) [ID #{word.id}]"
     daily_word = DailyWord.create! :word => word
 
-    # Send a broadcast push
-    uri = URI('https://go.urbanairship.com/api/push/broadcast/')
-    request = Net::HTTP::Post.new(uri.path)
-
-    airship_config = YAML::load_file("config/airship_config.yml").symbolize_keys!
-
-    request.set_content_type "application/json"
-    request.body = { :aps => { :alert =>
-        "Word of the day: #{word.name_and_pos}",
-        :badge => "+1",
-        :sound => "default" },
-      :dubsar => {
-        :type => "wotd",
-        :url => "dubsar:///wotd/#{word.id}",
-        :expiration => (daily_word.created_at+1.day+1.minute).to_i
-      }
-    }.to_json
-
-    ["development","production"].each do |environment|
-      app_key = airship_config["#{environment}_app_key".to_sym]
-      master_secret = airship_config["#{environment}_master_secret".to_sym]
-      next unless app_key && master_secret
-
-      request.basic_auth app_key, master_secret
-
-      puts "POST #{uri} [#{environment}]"
-
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      response = http.request request
-
-      puts "HTTP status code #{response.code}"
-    end
-
     Rake::Task['wotd:build'].invoke
   end
 
@@ -135,28 +101,16 @@ namespace :wotd do
 
     tokens = JSON::parse(response.body).symbolize_keys!
     puts "#{DateTime.now} #{tokens[:active_device_tokens_count]} active device tokens"
-    overlap = false
+
     tokens[:device_tokens].each do |t|
       t.symbolize_keys!
       next unless t[:active]
 
       token = t[:device_token].downcase
-      next if DeviceToken.find_by_token_and_production(token, true).blank?
 
-      puts "#{DateTime.now} #{token} is in production DT list, deactivating"
-
-      uri = URI("https://device-api.urbanairship.com/api/device_tokens/#{token}/")
-      request = Net::HTTP::Delete.new(uri.path)
-      request.basic_auth app_key, app_master_secret
-
-      puts "#{DateTime.now} DELETE #{uri}"
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      response = http.request request
-      puts "#{DateTime.now} HTTP status code #{response.code}"
-
-      overlap = true
+      DeviceToken.create production: true, token: token
     end
-    puts "#{DateTime.now} no overlap with #{DeviceToken.where(production:true).count} tokens in DB" unless overlap
+
+    puts "#{DateTime.now} #{DeviceToken.where(production: true).count} tokens in production DB"
   end
 end
