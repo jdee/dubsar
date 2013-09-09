@@ -20,6 +20,10 @@ module ApplicationHelper
 
   alias :orig_url_for :url_for
 
+  def apk_link
+    "#{asset_host}/Dubsar-1.1.0.2.apk"
+  end
+
   def nsa_banner
     s = <<-EOF
 <script type="text/javascript">
