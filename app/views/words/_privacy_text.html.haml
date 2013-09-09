@@ -1,0 +1,143 @@
+%h2 Privacy Statement
+
+%strong [DRAFT]
+
+%p
+  Dubsar has few issues related to user privacy, but it takes those seriously.
+
+%h3 No identity
+
+%p
+  Users have no identity to Dubsar beyond an IP address. Nothing considered to be
+  personally identifiable information is ever collected. Dubsar never requests an
+  e-mail address. Users do not log in. The content of the application is entirely
+  public and read-only and mostly static.
+
+%h3 Search history
+
+%p
+  While no personally identifiable information is collected by Dubsar, IP addresses
+  can still be correlated with identities, and the search history of otherwise
+  anonymous users of Dubsar is available to the server in different ways at different
+  times. The Dubsar Dictionary Project prefers to err on the side of caution and treat
+  this as sensitive data, though it is generally not considered personally identifiable.
+  This is, at any rate, the worst vulnerability Dubsar users have when it comes to privacy.
+
+%h3 iOS
+
+%p
+  This is the most secure, private Dubsar implementation. The application on an iPhone,
+  iPod touch or iPad only communicates with the server to request the FAQ web page or
+  to synchronize the word of the day if it has expired. The iOS application has a
+  local copy of the database from the server (without some tables unrelated to the
+  dictionary content). When a user views Dubsar content in the iOS application, all
+  searching and data retrieval are local, using a read-only SQLite database file in the
+  application bundle. User queries and browsing history are not recorded or transmitted
+  anywhere. Starting with version 1.2.2, the release build of the application logs very
+  little to the device console during normal operation. Its output is mostly limited to
+  the status of HTTP communications with the server when retrieving the word of the day
+  once per day. Without a hidden keystroke or screen capture program, it would be
+  extraordinarily
+  difficult to discover the search and browsing history of a user of the Dubsar iOS
+  application.
+
+%p
+  %strong Note:
+  This does not apply to use of Dubsar with the Safari browser on an iOS device. Those
+  requests are handled by the server, not the local application.
+
+%h3 Web application
+
+%p
+  All users of Dubsar other than those using the iOS application get their information
+  from the Dubsar server. All requests are served by an Nginx web server.
+
+%h4 HTTPS
+
+%p
+  Dubsar redirects most HTTP traffic to the same HTTPS URL (e.g.,
+  =link_to 'http://dubsar-dictionary.com', 'http://dubsar-dictionary.com'
+  is redirected to
+  =link_to 'https://dubsar-dictionary.com', 'https://dubsar-dictionary.com'
+  ). The main exception is JSON requests from the 1.0.2 and earlier Android clients
+  (see
+  =link_to 'Android', '#android'
+  below). HTTPS is a secure, private transport that encrypts all
+  communications between the client and server using SSL or TLS. There are many ins and
+  outs to SSL and TLS. Qualys has a tool for evaluating the security of any HTTPS
+  site; it gives Dubsar a 
+  =link_to 'high score.', 'https://www.ssllabs.com/ssltest/analyze.html?d=https%3A%2F%2Fdubsar-dictionary.com'
+
+%p
+  Note that Dubsar supports forward secrecy, which makes it resistant to mass
+  surveillance when used with modern browsers. This also applies to the Android client
+  on Android 3.0 and later.
+
+%h4 Server logs
+
+%p
+  It&apos;s not possible to operate a server without logs. In order to troubleshoot
+  many problems, it is necessary to have a record of traffic to the server. This means
+  each request that the server receives is stored in a disk file with the IP address of
+  origin and the URL requested, which is precisely the request and browsing history of
+  each user by IP adddress. These log files, however, are protected by system security.
+  The data stored in them is retained for a limited time for purposes of troubleshooting
+  and then completely discarded. All reasonable steps are taken to protect the server
+  logs.
+
+%h3#android Android
+
+%p
+  The Android application before version 1.1.0 was not secure. It used HTTP instead
+  of HTTPS for its communications, sending all client requests across the open
+  Internet without encryption since older releases predated the adoption of HTTPS by
+  the server. Unfortunately, the Android HTTP client software used in the older versions
+  will not follow a redirect message from the server to the corresponding HTTPS URL
+  (see HTTPS above). Hence, those older versions cannot be made secure. However, the
+  1.1.0 release of Dubsar for Android uses HTTPS for all communications with the server.
+  It also logs almost nothing about a user's activity to the Android logcat.
+
+%h3 Tor and anonymity
+
+%p
+  The only real privacy issue at stake is the search history for each IP address that
+  connects to Dubsar. Any user who is very concerned about protecting that information
+  is welcome to use the Tor network to connect to Dubsar. The Dubsar server will not
+  refuse connections or service by IP address. Getting a response through Tor takes a
+  little longer, but it makes the request quite anonymous and private.
+
+%p
+  The 1.1.0 release of the Android application also supports an HTTP proxy setting,
+  making it easy to use with the Guardian Project&apos;s Orbot application. Even
+  without rooting a device, you can install Orbot from Google Play and connect Dubsar
+  to it by setting the application&apos;s HTTP proxy to localhost:8118. This is also
+  a good idea even if Orbot is configured for transparent proxying of data, since it
+  prevents accidentally connecting to Dubsar and revealing your true IP address if
+  Orbot is not running.
+
+%p
+  Note that when you first install the application, the first time you launch it, it
+  is not possible to avoid requesting the current word of the day before you have an
+  opportunity to set the HTTP proxy for the application. If this is a grave concern
+  for you, take the network down on the device before the first time you launch Dubsar,
+  or make sure you're running Orbot with transparent proxying enabled.
+
+%p
+  Also note that the HTTP proxy setting only applies to requests made by the
+  application, which includes all user dictionary requests, any traffic related to the
+  word of the day and the FAQ web page from the server. It does not apply to the
+  buttons on the About activity that take the user to Google Play, the Amazon App Store
+  or the Dubsar website. If you are careful to use the Orweb browser or have
+  transparent proxying set up, those browser requests can also be routed through Tor.
+
+%h3 External sites
+
+%p
+  Users who wish to discuss Dubsar on Facebook, Twitter or Google Plus can easily do so
+  using the Share button at the top of any Dubsar page. Some of the scripts included from
+  those vendors have the capacity to report a user&apos;s presence on any website to
+  their networks, even if the user does not click on those buttons or links. Hence, the
+  Share button uses AJAX to render those buttons and links only if the user wishes to.
+  Without clicking the Share button, no external markup is used or scripts loaded. All
+  other content on the site, without exception, is hosted by Dubsar. This protects privacy
+  and improves performance/response as well.

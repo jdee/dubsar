@@ -16,12 +16,16 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - content_for :title do
   Dubsar Privacy Statement
-
 - content_for :description do
-  %meta{:name => 'Description', :content => "Statement from the Dubsar Dictionary Project concerning user privacy."}
-  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
-  %link{:rel => 'canonical', :href => 'https://dubsar-dictionary.com/privacy'}
-  != thumbnail_link_tags
+  %link{:rel => 'canonical', :href => 'https://m.dubsar-dictionary.com/m_privacy'}
+  %meta{:name => 'Description', :content => 'Statement from the Dubsar Dictionary Project concerning user privacy.'}
+  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English, mobile, iPhone, iPad, Android, tablet, smart phone'}
 
-#about
-  = render partial: 'privacy_text'
+%div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => 'Dubsar Mobile'}
+  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
+    = render :partial => 'shared/mobile_header'
+  %div{'data-role' => 'content'}
+    = render :partial => 'privacy_text'
+
+  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
+    = render :partial => 'shared/mobile_footer'

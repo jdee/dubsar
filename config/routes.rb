@@ -58,6 +58,7 @@ Dubsar::Application.routes.draw do
   get '/tour'             , to: 'words#tour'
   get '/wotd'             , to: 'words#wotd'
   get '/privacy'          , to: 'words#privacy'
+  get '/m_privacy'        , to: 'words#m_privacy'
 
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 
