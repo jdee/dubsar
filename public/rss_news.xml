@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>https://dubsar-dictionary.com</link>
-    <lastBuildDate>Thu, 22 Aug 2013 04:00:00 GMT</lastBuildDate>
-    <pubDate>Thu, 22 Aug 2013 04:00:00 GMT</pubDate>
+    <lastBuildDate>Mon, 09 Sep 2013 16:00:00 GMT</lastBuildDate>
+    <pubDate>Mon, 09 Sep 2013 16:00:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,16 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar 1.1.0 for Android available on Google Play</title>
+      <description>
+      This release improves compatibility with current Android releases. It also
+      provides better privacy for users.
+      </description>
+      <link>https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar</link>
+      <guid isPermaLink="false">41</guid>
+      <pubDate>Mon, 09 Sep 2013 16:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar 1.2.2 for iOS available in the App Store</title>
       <description>
