@@ -57,6 +57,7 @@ Dubsar::Application.routes.draw do
   get '/share'            , to: 'application#share'
   get '/tour'             , to: 'words#tour'
   get '/wotd'             , to: 'words#wotd'
+  get '/privacy'          , to: 'words#privacy'
 
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 
