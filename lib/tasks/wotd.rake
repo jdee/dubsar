@@ -74,44 +74,4 @@ namespace :wotd do
 
     Rake::Task['wotd:build'].invoke
   end
-
-  desc 'get active production device tokens'
-  task :prod => :environment do
-    uri = URI("https://go.urbanairship.com/api/device_tokens/")
-    request = Net::HTTP::Get.new(uri.path)
-
-    airship_config = YAML::load_file("config/airship_config.yml").symbolize_keys!
-
-    request.set_content_type "application/json"
-    app_key = airship_config[:production_app_key]
-    app_master_secret = airship_config[:production_master_secret]
-    puts "not configured" and return if app_key.nil? || app_master_secret.nil?
-
-    request.basic_auth app_key, app_master_secret
-
-    puts "#{DateTime.now} GET #{uri} [prod]"
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    response = http.request request
-
-    puts "#{DateTime.now} HTTP status code #{response.code}"
-
-    return unless response.code == "200"
-
-    tokens = JSON::parse(response.body).symbolize_keys!
-    puts "#{DateTime.now} #{tokens[:active_device_tokens_count]} active device tokens"
-
-    tokens[:device_tokens].each do |t|
-      t.symbolize_keys!
-      next unless t[:active]
-
-      token = t[:device_token].downcase
-
-      DeviceToken.create production: true, token: token if
-        DeviceToken.find_by_production_and_token(true, token).blank?
-    end
-
-    puts "#{DateTime.now} #{DeviceToken.where(production: true).count} tokens in production DB"
-  end
 end
