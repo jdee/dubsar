@@ -33,7 +33,12 @@ class DeviceTokensController < ApplicationController
   def create
     @device_token = DeviceToken.find_by_token_and_production params[:device_token][:token],
       params[:device_token][:production]
-    head :created, :location => @device_token and return if @device_token
+
+    if @device_token
+      @device_token.update_attribute :updated_at, DateTime.now
+      head :created, :location => @device_token
+      return
+    end
 
     @device_token = DeviceToken.create token_params
     head :invalid_entity and return unless @device_token.valid?

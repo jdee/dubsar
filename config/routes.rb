@@ -24,7 +24,7 @@ Dubsar::Application.routes.draw do
     get '/count', to: 'device_tokens#count', on: :collection
   end
 
-  delete :device_tokens, to: 'device_tokens#destroy'
+  # delete :device_tokens, to: 'device_tokens#destroy'
 
   resources :words  , :only => :show do
     get '/tab', to: 'words#tab'

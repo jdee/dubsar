@@ -31,10 +31,16 @@ describe DeviceTokensController do
     response.code.should == "201"
     DeviceToken.count.should == 1
 
+    orig_time = DeviceToken.first.updated_at
+
+    sleep 1
+
     post :create, device_token: {token:'some-token', production: false}, version:'1.2.2',
       secret:'BBE2C00F-15EF-4A5F-A773-F48E859226D8'
     response.code.should == "201"
     DeviceToken.count.should == 1
+
+    DeviceToken.first.updated_at.should > orig_time
   end
 
   it 'fails with an invalid client secret' do
@@ -44,6 +50,7 @@ describe DeviceTokensController do
   end
 
   it 'deletes by token' do
+    pending "not really necessary"
     DeviceToken.count.should == 0
     post :create, device_token: {token:'some-token', production: false}, version:'1.2.2',
       secret:'BBE2C00F-15EF-4A5F-A773-F48E859226D8'
