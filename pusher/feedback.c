@@ -17,6 +17,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <assert.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <string.h>
@@ -241,17 +242,22 @@ main(int argc, char** argv)
 
     struct n_feedback
     {
-        unsigned long n_time;
-        unsigned short n_size;
-        unsigned char n_token[32];
+        uint32_t n_time;
+        uint16_t n_size;
+        uint8_t n_token[32];
     } feedback;
 
+    // sizeof(feedback) is 40
+    const size_t feedbackSize = 38;
+
     int nr = 0;
-    while ((nr=SSL_read(tls, &feedback, sizeof(feedback))) == sizeof(feedback))
+    while ((nr=SSL_read(tls, &feedback, feedbackSize)) == feedbackSize)
     {
         time_t time = ntohl(feedback.n_time);
         char timebuf[256];
         timestamp(time, timebuf, 255);
+
+        uint16_t size = ntohs(feedback.n_size);
 
         char token[128];
         memset(token, 0, sizeof(token));
@@ -262,7 +268,7 @@ main(int argc, char** argv)
         }
 
         timestamp_f(stderr);
-        fprintf(stderr, "%s: DT %s\n", timebuf, token);
+        fprintf(stderr, "%s: DT (%u) %s\n", timebuf, size, token);
     }
 
     if (nr < 0)
