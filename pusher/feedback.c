@@ -337,6 +337,7 @@ main(int argc, char** argv)
         {
             timestamp_f(stderr);
             fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
+            stopTlsConnection(tls);
             return -1;
         }
 
