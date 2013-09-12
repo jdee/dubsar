@@ -385,6 +385,8 @@ main(int argc, char** argv)
          */
 
         time_t updatedAt = getUpdateTimeForDeviceToken(token, selectStmt);
+        timestamp(updatedAt, timebuf, 255);
+
         // if there's no such token in the DB (we already removed it from a previous
         // feedback run), updatedAt will be 0.
         if (updatedAt == 0)
@@ -396,7 +398,6 @@ main(int argc, char** argv)
         else if (time < updatedAt)
         {
             timestamp_f(stderr);
-            timestamp(updatedAt, timebuf, 255);
             fprintf(stderr, "device token %s reregistered at %s\n", token, timebuf);
             continue;
         }
@@ -414,7 +415,7 @@ main(int argc, char** argv)
         else
         {
             timestamp_f(stderr);
-            fprintf(stderr, "deleted device token %s\n", token);
+            fprintf(stderr, "deleted device token %s, last registered at %s\n", token, timebuf);
         }
     }
 
