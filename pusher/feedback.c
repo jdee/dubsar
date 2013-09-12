@@ -322,6 +322,10 @@ main(int argc, char** argv)
         return -1;
     }
 
+    /*
+     * Open DB if so configured
+     */
+
     sqlite3* database = NULL;
     sqlite3_stmt* selectStmt = NULL;
     sqlite3_stmt* deleteStmt = NULL;
@@ -350,6 +354,10 @@ main(int argc, char** argv)
     // sizeof(feedback) is 40
     const size_t feedbackSize = 38;
 
+    /*
+     * Now read feedback until no more input.
+     */
+
     int nr = 0;
     while ((nr=SSL_read(tls, &feedback, feedbackSize)) == feedbackSize)
     {
@@ -372,6 +380,10 @@ main(int argc, char** argv)
 
         if (!database) continue;
 
+        /*
+         * If using a DB, look for each DT and check the time of last registration.
+         */
+
         time_t updatedAt = getUpdateTimeForDeviceToken(token, selectStmt);
         // if there's no such token in the DB (we already removed it from a previous
         // feedback run), updatedAt will be 0.
@@ -389,6 +401,9 @@ main(int argc, char** argv)
             continue;
         }
 
+        /*
+         * If in the DB, and not registered since the feedback time, delete.
+         */
 
         int rc = removeDeviceToken(token, deleteStmt);
         if (rc != SQLITE_DONE)
@@ -403,9 +418,12 @@ main(int argc, char** argv)
         }
     }
 
-    sqlite3_finalize(deleteStmt);
-    sqlite3_finalize(selectStmt);
-    sqlite3_close(database);
+    if (database)
+    {
+        sqlite3_finalize(deleteStmt);
+        sqlite3_finalize(selectStmt);
+        sqlite3_close(database);
+    }
 
     if (nr < 0)
     {
