@@ -27,6 +27,22 @@
   %div{'data-role' => 'content'}
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
+        Q. How do I suppress Word of the Day notifications on Android?
+      %p
+        A. Go to the app&apos;s home page by tapping the
+        %em Home
+        button in the action bar at the top of the screen, which looks like a house.
+        Once on the home page, tap the
+        %em Preferences
+        button in the action bar, which looks like an array of buttons.
+      =image_tag 'android-prefs.png'
+
+      %p
+        That will take you to the Preferences view. In the Preferences view, the first
+        option is for Word of the day status bar notifications. You can turn them on and
+        off with that setting.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
         Q. Are there native Dubsar applications for mobile devices?
       A. Dubsar is available for iOS and Android.
 
@@ -252,23 +268,6 @@
           Results are sorted in ASCII order, with all capital letters coming before all
           lower-case letters. But case-sensitive exact matches (including inflections)
           are sorted to the top.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do I suppress Word of the Day notifications on Android?
-      %p
-        A. Launch the application. If you're not on the app's home page,
-        tap the
-        %em Home
-        button in the action bar at the top of the screen, which looks like a house.
-        Once on the home page, tap the
-        %em Preferences
-        button in the action bar, which looks like an array of buttons.
-      =image_tag 'android-prefs.png'
-
-      %p
-        In the Preferences view, the first option is for Word
-        of the day status bar notifications. You can turn them on and
-        off with this button.
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'
