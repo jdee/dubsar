@@ -142,7 +142,7 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
 
     int wordId = 0;
     const char* wordName = NULL, *wordPartOfSpeech = NULL;
-    // const char* dailyWordCreatedAt = NULL;
+    const char* dailyWordCreatedAt = NULL;
     int payloadLength = -1;
 
     if ((rc=sqlite3_step(statement)) == SQLITE_ROW)
@@ -150,20 +150,16 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
         wordId = sqlite3_column_int(statement, 0);
         wordName = (const char*)sqlite3_column_text(statement, 1);
         wordPartOfSpeech = (const char*)sqlite3_column_text(statement, 2);
-        // dailyWordCreatedAt = (const char*)sqlite3_column_text(statement, 3);
+        dailyWordCreatedAt = (const char*)sqlite3_column_text(statement, 3);
 
-        /* What? No strptime?
-        struct tm created;
-        strptime(dailyWordCreatedAt, "%Y-%m-%d %T", &created);
-        time_t expiration = mktime(&created) + 86400;
-         */
-
-        // roughly speaking, we should only be sending WOTD pushes when the
-        // WOTD is generated, so this is about right
         time_t expiration = 0;
         if (wotdExpiration == NULL || wotdExpiration[0] == '\0')
         {
-            expiration = time(NULL) + 86400;
+            char buffer[32];
+            strcpy(buffer, dailyWordCreatedAt);
+            char* period = strchr(buffer, '.');
+            if (period) *period = '\0';
+            expiration = parseTimestamp(buffer, "%Y-%m-%d %T") + 86400;
         }
 
         const char* pos = NULL;

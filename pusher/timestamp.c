@@ -17,6 +17,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#define _XOPEN_SOURCE
+
 #include <sys/time.h>
 
 #include "timestamp.h"
@@ -41,4 +43,12 @@ timestamp_f(FILE* fp)
 
     fprintf(fp, "%s", buffer);
     fprintf(fp, ".%06ld ", now.tv_usec);
+}
+
+time_t
+parseTimestamp(const char* timestamp, const char* format)
+{
+    struct tm utc;
+    strptime(timestamp, format, &utc);
+    return mktime(&utc);
 }

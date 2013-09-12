@@ -17,8 +17,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#define _XOPEN_SOURCE // for strptime(3)
-
 #define CLOSE_DATABASE \
     if (database) \
     { \
@@ -90,12 +88,7 @@ getUpdateTimeForDeviceToken(char* token, sqlite3_stmt* statement)
     char* period = strchr(updateTimestamp, '.');
     if (period) *period = '\0';
 
-    struct tm utc;
-    strptime(updateTimestamp, "%Y-%m-%d %T", &utc);
-
-    // I think this may be local time, but on the server, that's
-    // UTC.
-    return mktime(&utc);
+    return parseTimestamp(updateTimestamp, "%Y-%m-%d %T");
 }
 
 static int

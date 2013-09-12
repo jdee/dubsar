@@ -33,3 +33,5 @@ extern void timestamp(time_t t, char* buffer, size_t max);
  * \param fp the FILE pointer to which to write the timestamp
  */
 extern void timestamp_f(FILE* fp);
+
+extern time_t parseTimestamp(const char* timestamp, const char* format);
