@@ -17,14 +17,18 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#define _XOPEN_SOURCE // for strptime(3)
+
 #include <assert.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
 #include <openssl/err.h>
+#include <sqlite3.h>
 
 #include "socket_connect.h"
 #include "timestamp.h"
@@ -38,6 +42,67 @@ static char passphraseFilePath[256];
 static char passphrase[256];
 static char host[256];
 static unsigned short port = 0;
+static int production = -1;
+static char databasePath[256];
+
+static sqlite3_stmt*
+prepareStatement(sqlite3* database, char* sql)
+{
+    sqlite3_stmt* statement = NULL;
+    int rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
+        return NULL;
+    }
+
+    return statement;
+}
+
+static time_t
+getUpdateTimeForDeviceToken(char* token, sqlite3_stmt* statement)
+{
+    char flag[2];
+    if (production) strcpy(flag, "t");
+    else strcpy(flag, "f");
+
+    sqlite3_reset(statement);
+    sqlite3_bind_text(statement, 1, token, -1, SQLITE_STATIC);
+    sqlite3_bind_text(statement, 2, flag, -1, SQLITE_STATIC);
+
+    int rc = sqlite3_step(statement);
+    if (rc != SQLITE_ROW) return 0;
+
+    const char* updatedAt = (const char*)sqlite3_column_text(statement, 0);
+
+    char updateTimestamp[32];
+    strcpy(updateTimestamp, updatedAt);
+    // strip out any subsecond timestamp
+    char* period = strchr(updateTimestamp, '.');
+    if (period) *period = '\0';
+
+    struct tm utc;
+    strptime(updateTimestamp, "%Y-%m-%d %T", &utc);
+
+    // I think this may be local time, but on the server, that's
+    // UTC.
+    return mktime(&utc);
+}
+
+static int
+removeDeviceToken(char* token, sqlite3_stmt* statement)
+{
+    char flag[2];
+    if (production) strcpy(flag, "t");
+    else strcpy(flag, "f");
+
+    sqlite3_reset(statement);
+    sqlite3_bind_text(statement, 1, token, -1, SQLITE_STATIC);
+    sqlite3_bind_text(statement, 2, flag, -1, SQLITE_STATIC);
+
+    return sqlite3_step(statement);
+}
 
 static int
 hasLongArgument(int c)
@@ -140,8 +205,9 @@ parseArgs(int argc, char** argv)
     passphraseFilePath[0] = '\0';
     passphrase[0] = '\0';
     host[0] = '\0';
+    databasePath[0] = '\0';
 
-    const char * const opts = "a:c:hP:p:";
+    const char * const opts = "a:c:d:e:hP:p:";
     int c = -1;
 
     while ((c=getopt(argc, argv, opts)) != -1)
@@ -164,6 +230,14 @@ parseArgs(int argc, char** argv)
         case 'p':
             if (setHostAndPort()) return 1;
             break;
+        case 'd':
+            if (hasLongArgument(c)) return 1;
+            strcpy(databasePath, optarg);
+            break;
+        case 'e':
+            if (!strcasecmp(optarg, "prod")) production = 1;
+            else if (!strcasecmp(optarg, "dev")) production = 0;
+            break;
         case 'h':
         default:
             return -1;
@@ -176,6 +250,12 @@ parseArgs(int argc, char** argv)
         return -1;
     }
 
+    if (strlen(databasePath) > 0 && production < 0)
+    {
+        fprintf(stderr, "-e required with -d\n");
+        return -1;
+    }
+
     return 0;
 }
 
@@ -183,13 +263,15 @@ static void
 usage(const char* s)
 {
     fprintf(stderr, "usage:\n");
-    fprintf(stderr, "    %s [-a cacertfile] [-c cert_path] [-h] [-P passphrase_file] [-p host:port]\n", s);
+    fprintf(stderr, "    %s [-a cacertfile] [-c cert_path] [-h] [-P passphrase_file] [-p host:port] [-d databasepath] [-e dev|prod]\n", s);
     fprintf(stderr, "\n");
     fprintf(stderr, "    -a use cacertfile (.pem) for CA certs\n");
     fprintf(stderr, "    -c use certificate in file at cert_path (.p12, required)\n");
     fprintf(stderr, "    -h print this message and exit\n");
     fprintf(stderr, "    -P read the passphrase from passphrase_file(required)\n");
     fprintf(stderr, "    -p connect to remote host:port (required)\n");
+    fprintf(stderr, "    -d remove dead device tokens from the database at databasepath\n");
+    fprintf(stderr, "    -e feedback is from the prod or dev environment (required with -d)\n");
 }
 
 int
@@ -240,6 +322,24 @@ main(int argc, char** argv)
         return -1;
     }
 
+    sqlite3* database = NULL;
+    sqlite3_stmt* selectStmt = NULL;
+    sqlite3_stmt* deleteStmt = NULL;
+    if (strlen(databasePath) > 0)
+    {
+        int rc = sqlite3_open_v2(databasePath, &database,
+            SQLITE_OPEN_FULLMUTEX|SQLITE_OPEN_READWRITE, NULL);
+        if (rc != SQLITE_OK)
+        {
+            timestamp_f(stderr);
+            fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
+            return -1;
+        }
+
+        selectStmt = prepareStatement(database, "SELECT updated_at FROM device_tokens WHERE token = ? AND production = ?");
+        deleteStmt = prepareStatement(database, "DELETE FROM device_tokens WHERE token = ? AND production = ?");
+    }
+
     struct n_feedback
     {
         uint32_t n_time;
@@ -269,7 +369,43 @@ main(int argc, char** argv)
 
         timestamp_f(stderr);
         fprintf(stderr, "%s: DT (%u) %s\n", timebuf, size, token);
+
+        if (!database) continue;
+
+        time_t updatedAt = getUpdateTimeForDeviceToken(token, selectStmt);
+        // if there's no such token in the DB (we already removed it from a previous
+        // feedback run), updatedAt will be 0.
+        if (updatedAt == 0)
+        {
+            timestamp_f(stderr);
+            fprintf(stderr, "device token %s not in DB\n", token);
+            continue;
+        }
+        else if (time < updatedAt)
+        {
+            timestamp_f(stderr);
+            timestamp(updatedAt, timebuf, 255);
+            fprintf(stderr, "device token %s reregistered at %s\n", token, timebuf);
+            continue;
+        }
+
+
+        int rc = removeDeviceToken(token, deleteStmt);
+        if (rc != SQLITE_DONE)
+        {
+            timestamp_f(stderr);
+            fprintf(stderr, "failed to remove device token %s: %d\n", token, rc);
+        }
+        else
+        {
+            timestamp_f(stderr);
+            fprintf(stderr, "deleted device token %s\n", token);
+        }
     }
+
+    sqlite3_finalize(deleteStmt);
+    sqlite3_finalize(selectStmt);
+    sqlite3_close(database);
 
     if (nr < 0)
     {
