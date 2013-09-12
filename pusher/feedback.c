@@ -256,6 +256,12 @@ parseArgs(int argc, char** argv)
         return -1;
     }
 
+    if (production >= 0 && strlen(databasePath) == 0)
+    {
+        fprintf(stderr, "-e requires -d\n");
+        return -1;
+    }
+
     return 0;
 }
 
@@ -296,6 +302,12 @@ main(int argc, char** argv)
     fprintf(stderr, "cert. file: %s. passphrase loaded\n", certPath);
     timestamp_f(stderr);
     fprintf(stderr, "host: %s, port: %d\n", host, port);
+    if (strlen(databasePath) > 0)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "database: %s (%s)\n", databasePath, (production ? "prod" : "dev"));
+    }
+
 
     /*
      * Connect to server
