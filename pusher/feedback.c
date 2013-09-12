@@ -19,6 +19,14 @@
 
 #define _XOPEN_SOURCE // for strptime(3)
 
+#define CLOSE_DATABASE \
+    if (database) \
+    { \
+        sqlite3_finalize(deleteStmt); \
+        sqlite3_finalize(selectStmt); \
+        sqlite3_close(database); \
+    }
+
 #include <assert.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
@@ -308,32 +316,6 @@ main(int argc, char** argv)
         fprintf(stderr, "database: %s (%s)\n", databasePath, (production ? "prod" : "dev"));
     }
 
-
-    /*
-     * Connect to server
-     */
-
-    timestamp_f(stderr);
-    fprintf(stderr, "attempting connection to %s:%d\n", host, port);
-    s = socketConnect(host, port);
-    if (s < 0)
-    {
-        timestamp_f(stderr);
-        fprintf(stderr, "connection to %s:%d failed\n", host, port);
-        return -1;
-    }
-
-    timestamp_f(stderr);
-    fprintf(stderr, "successfully connected to %s:%d\n", host, port);
-
-    tls = makeTlsConnection(s, certPath, passphrase, cacertPath);
-    if (!tls)
-    {
-        timestamp_f(stderr);
-        fprintf(stderr, "TLS handshake failed\n");
-        return -1;
-    }
-
     /*
      * Open DB if so configured
      */
@@ -349,12 +331,38 @@ main(int argc, char** argv)
         {
             timestamp_f(stderr);
             fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
-            stopTlsConnection(tls);
             return -1;
         }
 
         selectStmt = prepareStatement(database, "SELECT updated_at FROM device_tokens WHERE token = ? AND production = ?");
         deleteStmt = prepareStatement(database, "DELETE FROM device_tokens WHERE token = ? AND production = ?");
+    }
+
+    /*
+     * Connect to server
+     */
+
+    timestamp_f(stderr);
+    fprintf(stderr, "attempting connection to %s:%d\n", host, port);
+    s = socketConnect(host, port);
+    if (s < 0)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "connection to %s:%d failed\n", host, port);
+        CLOSE_DATABASE
+        return -1;
+    }
+
+    timestamp_f(stderr);
+    fprintf(stderr, "successfully connected to %s:%d\n", host, port);
+
+    tls = makeTlsConnection(s, certPath, passphrase, cacertPath);
+    if (!tls)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "TLS handshake failed\n");
+        CLOSE_DATABASE
+        return -1;
     }
 
     struct n_feedback
@@ -432,12 +440,7 @@ main(int argc, char** argv)
         }
     }
 
-    if (database)
-    {
-        sqlite3_finalize(deleteStmt);
-        sqlite3_finalize(selectStmt);
-        sqlite3_close(database);
-    }
+    CLOSE_DATABASE
 
     if (nr < 0)
     {
