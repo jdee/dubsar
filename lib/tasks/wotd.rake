@@ -74,4 +74,16 @@ namespace :wotd do
 
     Rake::Task['wotd:build'].invoke
   end
+
+  desc 'remove any dev tokens from prod'
+  task scrub_prod: :environment do
+    # Somehow my development tokens keep getting into prod.
+    DeviceToken.where(production:false).each do |dt|
+      prod = DeviceToken.find_by_token_and_production dt.token, true
+      unless prod.blank?
+        puts "#{DateTime.now} deleting #{dt.token} from prod"
+        prod.destroy
+      end
+    end
+  end
 end
