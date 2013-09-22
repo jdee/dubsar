@@ -78,7 +78,12 @@ getUpdateTimeForDeviceToken(char* token, sqlite3_stmt* statement)
     sqlite3_bind_text(statement, 2, flag, -1, SQLITE_STATIC);
 
     int rc = sqlite3_step(statement);
-    if (rc != SQLITE_ROW) return 0;
+    if (rc != SQLITE_ROW)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "Error executing SELECT statement: %d\n", rc);
+        return 0;
+    }
 
     const char* updatedAt = (const char*)sqlite3_column_text(statement, 0);
 
