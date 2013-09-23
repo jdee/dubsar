@@ -32,27 +32,28 @@
       %p
         A. This method works for push notifications from any iOS application on an iPad,
         iPhone or iPod touch. Open the Settings app from the
-        device&apos;s home screen. Tap Notifications on the master panel (iPad) or
-        the main view of the Settings app (iPhone/iPod touch). Scroll down to see a
-        list of apps &quot;In Notification Center.&quot; Tap the row for Dubsar.
+        device&apos;s home screen. Tap Notification Center on the master panel (iPad) or
+        the main view of the Settings app (iPhone/iPod touch). (It&apos;s just called Notifications
+        on iOS 6 and below.) Scroll down to see a
+        list of apps to &quot;Include.&quot; Tap the row for Dubsar.
         This will take you to a screen with a number of push-notification-related
         settings for Dubsar. Unfortunately, there is no master switch to turn off
         notifications altogether. You have to disable all the aspects independently
-        on this screen. When you are done, it should look like this (the iPad view
-        is similar):
+        on this screen by turning off all the switches. When you are done, it should
+        look like this (the iPad view is similar):
       %h3 Dubsar with all notifications disabled
       = image_tag 'dubsar-notifications.png', alt: 'Dubsar Notifications', width: 280, height: 497, style: 'display: block;'
       %p
         When you have set the
-        %em Notification Center, Badge App Icon, Sounds
+        %em Show in Notification Center, Badge App Icon, Sounds
         and
-        %em View In Lock Screen
-        switches to OFF and set the
+        %em Show on Lock Screen
+        switches to off and set the
         %em Alert Style
-        to None, tap the back
-        button in the navigation bar at the top, which says, &quot;Notifications.&quot;
+        to None, tap the Back
+        button in the navigation bar at the top.
         This will return you to the general Notifications settings. At the bottom, under
-        Not In Notification Center, you&apos;ll see Dubsar:
+        &quot;Do Not Include,&quot; you&apos;ll see Dubsar:
       %h3 Dubsar no longer in Notification Center
       = image_tag 'notifications.png', alt: 'Dubsar not in Notification Center', width: 280, height: 497, style: 'display: block;'
       %p
@@ -70,43 +71,43 @@
       %h2
         Q. How do the previews work?
       %p
-        A. Dubsar's views reflect the structure of WordNet&reg;, but often, in previous
+        A. Dubsar&apos;s views reflect the structure of WordNet&reg;, but often, in previous
         versions, you would have to tap through a couple of empty views in order to get
-        to the information you wanted. That's because the Search and Word views are just
+        to the information you wanted. That&apos;s because the Search and Word views are just
         lists of things: search results and word senses. Now Dubsar shows you a preview
         of the following view for the first item in each list.
       %p
-        For example, search for onomatopoeia. You'll get back a view like this:
+        For example, search for onomatopoeia. You&apos;ll get back a view like this:
  
-      =image_tag 'onomatopoeia-1.png', :size => '240x426'
+      =image_tag 'onomatopoeia-1.png', :size => '280x497'
 
       %p
-        This view includes a preview. To hide the preview, tap the Hide button at the
-        right of the bottom toolbar. When the preview goes away, you'll see this:
+        This view includes a preview. To hide the preview, tap the Preview button at the
+        right of the bottom toolbar. When the preview goes away, you&apos;ll see this:
 
-      =image_tag 'onomatopoeia-2.png', :size => '240x426'
+      =image_tag 'onomatopoeia-2.png', :size => '280x497'
 
       %p
         This was previously the only content of this Search view. Having found
         the one word matching your search, you had to tap ahead to the Word view in
-        order to see more. Now you'll see this in the Word view:
+        order to see more. Now you&apos;ll see this in the Word view:
 
-      =image_tag 'onomatopoeia-3.png', :size => '240x426'
-
-      %p
-        Again, this view contains a preview. If you tap Hide again, you'll see:
-
-      =image_tag 'onomatopoeia-4.png', :size => '240x426'
+      =image_tag 'onomatopoeia-3.png', :size => '280x497'
 
       %p
-        Before the introduction of previews, this was all you'd see in this Word view,
-        a single sense. Tapping once again on that row, you'll finally come to the
+        Again, this view contains a preview. If you tap Preview again, you&apos;ll see:
+
+      =image_tag 'onomatopoeia-4.png', :size => '280x497'
+
+      %p
+        Before the introduction of previews, this was all you&apos;d see in this Word view,
+        a single sense. Tapping once again on that row, you&apos;ll finally come to the
         Sense view:
 
-      =image_tag 'onomatopoeia-5.png', :size => '240x426'
+      =image_tag 'onomatopoeia-5.png', :size => '280x497'
 
       %p
-        This is just what was previewed in the previous two views, but you didn't have
+        This is just what was previewed in the previous two views, but you didn&apos;t have
         to tap through two empty views to see this information, as you did in Dubsar
         1.1.1 and earlier. Note that in the Search view, you get a preview of the first
         Word view in the search results, and that preview in turn includes a preview
@@ -317,18 +318,6 @@
       %p
         The iPad app provides some built-in wild-card searches using the alphabet
         buttons on the master panel.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Can I get more room to see a gloss in a Sense or Synset view?
-      %p
-        A. Yes. The pale blue banner label below each gloss, listing a WordNet&reg;
-        lexname like &lt;noun.substance&gt;, can be dragged down to give the gloss
-        more room, if needed. A gold drag handle will appear if you apply pressure
-        to the label:
-      %p
-        =image_tag 'ios_drag_handle.png', :height => "173", :width => "300", :alt => "iOS drag handle"
-      %p
-        This is available in Sense and Synset views on both the iPhone and iPad.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What does Dubsar mean?
