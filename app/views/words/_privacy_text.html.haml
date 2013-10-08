@@ -1,6 +1,6 @@
 %h2 Privacy Statement
 
-%strong [DRAFT]
+%h3 08-Oct-2013
 
 %p
   Dubsar has few issues related to user privacy, but it takes those seriously.
@@ -52,7 +52,7 @@
   All users of Dubsar other than those using the iOS application get their information
   from the Dubsar server. All requests are served by an Nginx web server.
 
-%h4 HTTPS
+%h4#https HTTPS
 
 %p
   Dubsar redirects most HTTP traffic to the same HTTPS URL (e.g.,
@@ -71,7 +71,7 @@
 %p
   Note that Dubsar supports forward secrecy, which makes it resistant to mass
   surveillance when used with modern browsers. This also applies to the Android client
-  on Android 3.0 and later.
+  on Android 3.0 and later with version 1.1.0 or later of the Dubsar for Android app.
 
 %h4 Server logs
 
@@ -93,11 +93,13 @@
   Internet without encryption since older releases predated the adoption of HTTPS by
   the server. Unfortunately, the Android HTTP client software used in the older versions
   will not follow a redirect message from the server to the corresponding HTTPS URL
-  (see HTTPS above). Hence, those older versions cannot be made secure. However, the
+  (see
+  =link_to 'HTTPS', '#https'
+  above). Hence, those older versions cannot be made secure. However, the
   1.1.0 release of Dubsar for Android uses HTTPS for all communications with the server.
   It also logs almost nothing about a user's activity to the Android logcat.
 
-%h3 Tor and anonymity
+%h3#tor Tor and anonymity
 
 %p
   The only real privacy issue at stake is the search history for each IP address that
@@ -108,8 +110,12 @@
 
 %p
   The 1.1.0 release of the Android application also supports an HTTP proxy setting,
-  making it easy to use with the Guardian Project&apos;s Orbot application. Even
-  without rooting a device, you can install Orbot from Google Play and connect Dubsar
+  making it easy to use with the Guardian Project&apos;s
+  =link_to 'Orbot', 'https://guardianproject.info/apps/orbot/', target: '_blank'
+  application. Even
+  without rooting a device, you can
+  =link_to 'install Orbot from Google Play', 'https://play.google.com/store/apps/details?id=org.torproject.android', target: '_blank'
+  and connect Dubsar
   to it by setting the application&apos;s HTTP proxy to localhost:8118. This is also
   a good idea even if Orbot is configured for transparent proxying of data, since it
   prevents accidentally connecting to Dubsar and revealing your true IP address if
@@ -120,7 +126,7 @@
   is not possible to avoid requesting the current word of the day before you have an
   opportunity to set the HTTP proxy for the application. If this is a grave concern
   for you, take the network down on the device before the first time you launch Dubsar,
-  or make sure you're running Orbot with transparent proxying enabled.
+  or make sure you&apos;re running Orbot with transparent proxying enabled.
 
 %p
   Also note that the HTTP proxy setting only applies to requests made by the
@@ -128,7 +134,7 @@
   word of the day and the FAQ web page from the server. It does not apply to the
   buttons on the About activity that take the user to Google Play, the Amazon App Store
   or the Dubsar website. If you are careful to use the Orweb browser or have
-  transparent proxying set up, those browser requests can also be routed through Tor.
+  transparent proxying enabled, those browser requests can also be routed through Tor.
 
 %h3 External sites
 
@@ -141,3 +147,8 @@
   Without clicking the Share button, no external markup is used or scripts loaded. All
   other content on the site, without exception, is hosted by Dubsar. This protects privacy
   and improves performance/response as well.
+
+%p
+  If you do click the Share button, even without sharing anything, your identity may be
+  sent to some social networks. This is true of every site on the Internet that displays
+  controls or content from these networks.
