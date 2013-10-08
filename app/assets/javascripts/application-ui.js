@@ -185,7 +185,7 @@
       var id  = $(this).attr('id');
       var url = $(this).attr('href');
       var title = $('h3', this).text() || '';
-      $('<div id="'+id+'-dialog"><img src="'+url+'" height="600" width="802"/></div>').dialog({
+      $('<div id="'+id+'-dialog"><img src="'+url+'" height="649" width="800"/></div>').dialog({
         autoOpen   : false        ,
         dialogClass: 'tour-dialog',
         height     : 650,
