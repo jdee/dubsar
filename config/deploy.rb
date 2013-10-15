@@ -31,6 +31,7 @@ set :rails_env, 'production'
 set :rvm_type, :system
 set(:shared_database_path) {"#{shared_path}/databases"}
 set(:shared_config_path) {"#{shared_path}/config"}
+set :secret_token_path, "config/initializers/secret_token.rb"
 
 role :web, domain
 role :app, domain
@@ -70,6 +71,16 @@ namespace :deploy do
     run "ln -nsf #{shared_config_path}/client_secrets.yml #{release_path}/config/production_client_secrets.yml"
     run "ln -nsf #{shared_config_path}/client_secrets.yml #{release_path}/config/backup_client_secrets.yml"
   end
+
+  desc "Generates a new secret"
+  task :update_secret do
+    run <<-EOF
+      cd #{deploy_to}/current &&
+      echo "Dubsar::Application.config.secret_key_base = '" > #{secret_token_path} &&
+      bundle exec rake secret >> #{secret_token_path} &&
+      echo "'" >> #{secret_token_path}
+    EOF
+  end
 end
 
 # from http://www.bagonca.com/blog/2009/05/09/rails-deploy-using-sqlite3/
@@ -108,6 +119,7 @@ after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_client_secrets'
 after 'deploy:update', 'deploy:wotd_build'
+after 'deploy:update', 'deploy:update_secret'
 after 'deploy:update', 'pusher:build'
 # after 'deploy:update', 'deploy:optimize_fts'
 
