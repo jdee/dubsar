@@ -67,9 +67,14 @@ namespace :deploy do
   end
 
   desc "Links the client_secrets.yml file"
-  task :link_client_secrets, :roles => :db do
+  task :link_client_secrets do
     run "ln -nsf #{shared_config_path}/client_secrets.yml #{release_path}/config/production_client_secrets.yml"
     run "ln -nsf #{shared_config_path}/client_secrets.yml #{release_path}/config/backup_client_secrets.yml"
+  end
+
+  desc "Links to devise config"
+  task :link_devise_config do
+    run "ln -nsf #{shared_config_path}/devise_config.rb #{release_path}/config/initializers/devise.rb"
   end
 
   desc "Generates a new secret"
@@ -96,7 +101,7 @@ namespace :sqlite3 do
   end
 
   desc "Links the configuration file"
-  task :link_configuration_file, :roles => :db do
+  task :link_configuration_file do
     run "ln -nsf #{shared_config_path}/sqlite_config.yml #{release_path}/config/database.yml"
   end
 
