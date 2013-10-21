@@ -125,6 +125,7 @@ after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_client_secrets'
 after 'deploy:update', 'deploy:wotd_build'
 after 'deploy:update', 'deploy:update_secret'
+after 'deploy:update', 'deploy:link_devise_config'
 after 'deploy:update', 'pusher:build'
 # after 'deploy:update', 'deploy:optimize_fts'
 
