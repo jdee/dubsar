@@ -11,4 +11,5 @@ Disallow: /tokens
 Disallow: /users
 Disallow: /words/*/
 Disallow: /wotd
+Disallow: /resume
 Allow: /wotd.xml
