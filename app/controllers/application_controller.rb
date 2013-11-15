@@ -61,4 +61,16 @@ class ApplicationController < ActionController::Base
     @back = request.env['HTTP_REFERER']
     true
   end
+
+  def summary
+    render layout: false
+  end
+
+  def employment
+    render layout: false
+  end
+
+  def education
+    render layout: false
+  end
 end

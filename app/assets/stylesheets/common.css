@@ -201,7 +201,7 @@ input#word-input {
   border-style: solid;
 }
 
-#about {
+#about, #resume {
   margin: 1em 6em;
   font-size: large;
   text-align: justify;
@@ -261,7 +261,7 @@ td.header-link-cell {
   padding-left: 0.1em;
 }
 
-#about ul {
+#about ul, #resume ul {
   list-style-type: none;
 }
 
@@ -330,7 +330,7 @@ dt {
   font-weight: bold;
 }
 
-#about a > img {
+#about a > img, #resume a > img {
   border-style: none;
 }
 
@@ -369,4 +369,9 @@ ul.ui-tabs-nav > li {
 
 div#wotd-rss-div {
   width: 6.5ex;
+}
+
+.employment, .summary {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 }

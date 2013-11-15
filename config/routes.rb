@@ -60,6 +60,11 @@ Dubsar::Application.routes.draw do
   get '/privacy'          , to: 'words#privacy'
   get '/m_privacy'        , to: 'words#m_privacy'
 
+  get '/resume'           , to: 'application#resume'
+  get '/resume/summary'   , to: 'application#summary'
+  get '/resume/employment', to: 'application#employment'
+  get '/resume/education' , to: 'application#education'
+
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 
   get '/(.:format)', to: 'words#search'

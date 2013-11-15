@@ -329,5 +329,10 @@
       $opensearch_dialog.dialog('open');
       return false;
     });
+
+    $('#resume-tabs').tabs({
+      cache: true,
+      spinner: '[...]'
+    });
   });
 })(jQuery);
