@@ -62,6 +62,22 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  def m_resume
+    render layout: 'mobile'
+  end
+
+  def m_summary
+    render layout: false
+  end
+
+  def m_employment
+    render layout: false
+  end
+
+  def m_education
+    render layout: false
+  end
+
   def summary
     render layout: false
   end

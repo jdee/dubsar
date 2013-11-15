@@ -14,11 +14,34 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- content_for :title do
+  Resume for Jimmy Dee
+
 %div{'data-role' => 'page', 'data-theme' => 'b', 'data-title' => 'Dubsar Mobile'}
   %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_header'
   %div{'data-role' => 'content'}
-    = render :partial => 'resume_content'
+
+    %h1
+      Jimmy Dee
+    %strong Freelance Mobile Software Developer
+    &middot;
+    = link_to 'jimmy.dee@dubsar-dictionary.com', 'mailto:jimmy.dee@dubsar-dictionary.com'
+    %br/
+    %br/
+  
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'false'}
+      %h2
+        Summary
+      = render partial: 'summary'
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Employment
+      = render partial: 'employment'
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Education
+      = render partial: 'education'
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'

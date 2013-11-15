@@ -65,6 +65,11 @@ Dubsar::Application.routes.draw do
   get '/resume/employment', to: 'application#employment'
   get '/resume/education' , to: 'application#education'
 
+  get '/m_resume'         , to: 'application#m_resume'
+  get '/m_resume/summary'   , to: 'application#m_summary'
+  get '/m_resume/employment', to: 'application#m_employment'
+  get '/m_resume/education' , to: 'application#m_education'
+
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 
   get '/(.:format)', to: 'words#search'
