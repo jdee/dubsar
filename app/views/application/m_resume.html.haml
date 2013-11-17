@@ -42,6 +42,10 @@
       %h2
         Education
       = render partial: 'education'
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Apps
+      = render partial: 'apps'
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'

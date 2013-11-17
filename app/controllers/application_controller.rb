@@ -66,18 +66,6 @@ class ApplicationController < ActionController::Base
     render layout: 'mobile'
   end
 
-  def m_summary
-    render layout: false
-  end
-
-  def m_employment
-    render layout: false
-  end
-
-  def m_education
-    render layout: false
-  end
-
   def summary
     render layout: false
   end
@@ -87,6 +75,10 @@ class ApplicationController < ActionController::Base
   end
 
   def education
+    render layout: false
+  end
+
+  def apps
     render layout: false
   end
 end
