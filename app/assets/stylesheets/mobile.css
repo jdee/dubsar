@@ -18,12 +18,12 @@
  */
 
 div.ui-page[data-role='page'] {
-  min-width: 55ex;
+  width: 100%;
 }
 
 div.ui-page[data-role='page'], input#word-input, div[data-role='header'] h1.ui-title,
 div[data-role='header'] a[data-role='button'] > span, ul.ui-menu {
-  font-size: large;
+  font-size: x-large;
 }
 
 /*
@@ -67,4 +67,9 @@ a.undecorated:hover,active {
 div.ui-bar[data-role='footer'] {
   font-size: x-small;
   width: auto;
+}
+
+.employment {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 }
