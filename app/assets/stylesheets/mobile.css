@@ -19,6 +19,12 @@
 
 div.ui-page[data-role='page'] {
   width: 100%;
+  min-width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 
 div.ui-page[data-role='page'], input#word-input, div[data-role='header'] h1.ui-title,
