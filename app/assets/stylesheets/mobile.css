@@ -29,7 +29,7 @@ div.ui-page[data-role='page'] {
 
 div.ui-page[data-role='page'], input#word-input, div[data-role='header'] h1.ui-title,
 div[data-role='header'] a[data-role='button'] > span, ul.ui-menu {
-  font-size: x-large;
+  font-size: large;
 }
 
 /*
