@@ -21,7 +21,7 @@ module ApplicationHelper
   alias :orig_url_for :url_for
 
   def apk_link
-    "#{asset_host}/Dubsar-1.1.1.1.apk"
+    "#{asset_host}/Dubsar-1.1.2.2.apk"
   end
 
   def nsa_banner
