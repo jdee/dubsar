@@ -56,6 +56,27 @@
         =link_to 'Direct Download (APK: 538 kB)', apk_link
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
+        Q. How does the HTTP proxy setting work?
+      %p
+        A. Starting with Jelly Bean, Android supports a global HTTP proxy
+        setting for wi-fi connections. (Long press on a wi-fi network in the Settings app
+        and select Modify network. Then check Show advanced options to reveal the global
+        proxy setting for that network.)
+      %p
+        To override the global setting, or to use a proxy setting independent of network
+        (e.g., for the Guardian Project&apos;s Orbot gateway on the device), use the HTTP proxy
+        setting in the Preferences activity. This setting is used both for retrieving data
+        from the Dubsar server and for displaying this FAQ in the application. If it is set,
+        it overrides any global proxy setting. It does not take effect if you tap any of the
+        buttons in the About activity (to visit the Amazon App Store or the Dubsar website,
+        e.g.). Those links are handled by your browser app, which can take advantage of a global
+        proxy setting.
+      %p
+        At the moment, there is a known bug. When viewing the FAQ web view on Kit Kat
+        (Android 4.4), the application&apos;s HTTP proxy setting is ignored. In order to view
+        this FAQ in the app on Kit Kat, use a global proxy setting or connect without a proxy.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
         Q. How do I get help with a problem?
       A. Contact
       =link_to 'support@dubsar-dictionary.com', 'mailto:support@dubsar-dictionary.com'
