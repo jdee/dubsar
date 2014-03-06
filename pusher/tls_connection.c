@@ -1,6 +1,6 @@
 /*
  *  Dubsar Dictionary Project
- *  Copyright (C) 2010-13 Jimmy Dee
+ *  Copyright (C) 2010-14 Jimmy Dee
  *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     }
 
     /*
-     * TLS 1 handshake
+     * TLSv1 handshake. TLSv1.1 and TLSv1.2 don't seem to be supported by APNS.
      */
 
     ctx = SSL_CTX_new(TLSv1_client_method());
@@ -87,12 +87,12 @@ makeTlsConnection(int fd, const char* certPath, const char* passphrase, const ch
     SSL_set_fd(ssl, fd);
 
     /*
-     * By default, APNS picks AES256-SHA, but with TLSv1, that CBC-based cipher
-     * is vulnerable to the BEAST. The server seems to accept RC4-SHA. No support for
-     * TLSv1.1 or TLSv1.2 seems to be available. Forward secrecy options are limited
-     * at best.
+     * By default, APNS uses AES256-SHA, but with TLSv1, that CBC-based cipher
+     * is vulnerable to the BEAST. But the server no longer accepts RC4. It's not
+     * clear if it supports any other ciphers. I'm not sorry to see RC4 go, but
+     * TLSv1.1/TLSv1.2 support would be nice.
      */
-    SSL_set_cipher_list(ssl, "RC4-SHA");
+    // SSL_set_cipher_list(ssl, "RC4-SHA");
 
     if (SSL_connect(ssl) <= 0)
     {
