@@ -27,6 +27,105 @@
   %div{'data-role' => 'content'}
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
+        *New* Q. What are combat moves?
+      %p
+        A. Combat occurs automatically, for the most part. During combat, your character
+        will ordinarily just execute a default attack with whatever weapon they have
+        equipped. Alternately, you can select from a number of other available combat moves,
+        like a power attack or finesse attack.
+      %p
+        Certain combat moves are universal and available to all characters with all weapons.
+        They&apos;re
+        also not very good ones; they come with big defensive penalties. As you raise your
+        combat skill, you will gain more effective combat moves. Many combat moves are
+        limited to a specific weapon type and can only be used if you have a weapon of that
+        type equipped. All combat moves potentially modify your character&apos;s offense
+        (chance to hit), defense (chance to avoid being hit), damage done by your weapon
+        when you hit and attack period of your weapon, speeding up or slowing down your
+        attack.
+      %p
+        Combat moves also provide a way for a character to specialize in a weapon. In
+        particular, when your combat skill reaches 1 for the first time (including at
+        creation), you can choose a new combat from three weapon-specific moves, each
+        of which gives you a slight advantage with that type of weapon. When you choose a
+        weapon-specific combat move, if you do not currently have a weapon of that type
+        in your inventory, you will receive a low-end weapon of that type (a bronze
+        broadsword, bronze spear or wooden bow).
+      %p
+        Combat moves are new to the game and have not been fully developed yet. For now,
+        you will be able to choose one of three weapon-specific combat moves once your
+        combat skill reaches rank 1. In addition, all characters have three universal
+        combat moves, including the default attack. Currently all combat moves are attacks,
+        but eventually combat moves may include things like blocking, parrying, dodging,
+        etc. These are simply things you can do during combat. The name
+        %em combat moves
+        may change as well.
+      %p
+        You can see all your currently available combat moves at the bottom of the character
+        view. If a green button labeled NEW appears above the list, you can tap it to
+        choose a new combat move. After you make your choice, your new combat move will
+        appear in the list on the character view. Tap any of the rows in the table for more
+        details on the combat move listed on that row.
+      = image_tag 'laertes-combat-moves.png', :alt => 'laertes-combat-moves', :width => 451, :height => 800
+      = image_tag 'laertes-combat-move-choice.png', :alt => 'laertes-combat-moves', :width => 451, :height => 800
+      %p
+        During combat, a segmented control appears in the upper right-hand corner of the
+        game play view, in place of the right thumb wheel, with two or three segments,
+        one for each of your available combat moves (with your currently equipped weapon)
+        except for the default attack. They are labeled by the first letter of the
+        corresponding combat move (See also Q. How does combat work?):
+      %p
+        %table
+          %thead
+            %tr
+              %th combat move
+              %th label
+          %tbody
+            %tr
+              %td power attack
+              %td p
+            %tr
+              %td speed attack
+              %td s
+            %tr
+              %td finesse attack (sword)
+              %td f
+            %tr
+              %td lunge (spear)
+              %td l
+            %tr
+              %td overdraw (bow)
+              %td o
+      %p
+        The means of selecting a combat move during combat will no doubt change. For
+        example, the initials on the buttons will probably be replaced with distinctive
+        icons. But in addition, the segmented control will not scale well if a character
+        continues to gain new combat moves.
+      %p
+        The list of available combat moves depends on your equipped weapon. If you have
+        the finesse attack, for example,
+        %em f
+        will only appear in the combat move control
+        when you have a sword equipped.
+      %p
+        If you ignore this control and tap none of the buttons there, your character will
+        just use the default attack each attack period. Whenever you tap one of the
+        segments in the control, the specified combat move will be used the next time the
+        character has an opportunity to attack. At that point, the control will be reset
+        so that no segment is selected, and the character will once again use the default
+        attack the next period unless you select a different combat move. The effects of
+        the selected combat move (modifications to offense, defense, damage and attack period)
+        will apply for the next attack only, unless you select the same combat move again.
+      %p
+        Eventually use of combat moves may trigger special animations and sound effects.
+      %p
+        Combat moves were largely inspired by Feats from the KotOR games. Combat moves were
+        introduced
+        in order to give you something more to do during combat. Otherwise, the only things
+        you can do besides moving around are changing weapons and changing targets, which
+        you rarely have any need to do.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
         Q. What is this page?
       %p
         A. Apologies for the Dubsar intrusion. This is just an easy place and format for me
@@ -49,7 +148,7 @@
         Q. What is the game about?
       %p
         A. Laertes is a first-person RPG for iOS. There may be support for other platforms
-        like Android and desktops some day (next year at the earliest).
+        like Android and desktops some day.
       %p
         The game is set in Ancient Greece. I have been motivated by decades of life as an
         RPG junkie. I love those games, but often the writing is lazy and absurd and may as
@@ -63,25 +162,21 @@
         Everything is under construction at the moment. That applies in spades to the
         music, dialog, narrative, quests, artwork, textures, images, books and so on. All is
         subject to change. Once the game is finished,
-        I&apos;ll build real content for it. I would consider it a bit more than half done now.
-        It will be 2014 before the app is finished.
+        I&apos;ll build real content for it. That may be some time yet.
       %p
-        I plan to make this a free app and to sell individual adventures as IAP content.
-        There will be a little bit of free content up front and probably more later on.
+        I originally planned to make this a free app and to sell individual adventures as
+        IAP content, with
+        a little bit of free content up front and probably more later on.
         I built a Rails/jQuery UI/Raphael.js app to generate and maintain the content. I
         might one day host that and let users contribute their own content: maps, quests,
         treasure, people, so on. That is quite some time off though, if it happens.
       %p
-        %em Volume
-        is the term I use internally for a modular unit of content that can be
-        individually installed and played. There is currently one volume built into the
-        app bundle, which is getting fatter and fatter. Now that the app includes textures,
-        there are lots of image files bundled in. Eventually, the app proper will be much
-        smaller, and you&apos;ll download all that stuff as part of each volume.
-      %p
-        Well, that was my original plan. I think the first release of the app will likely
-        include all content in the way of many RPGS. Later, I will probably add IAP for
-        add-ons and user-contributed content.
+        For
+        now, it&apos;s likely that the initial release will not support IAP at all, but
+        rather, as it is now and as with many RPG campaigns, all content will simply be built
+        into the game. IAP may be added later to distribute add-ons, even if only free
+        ones. The game would then be sold, probably for around US$5.00. All that is still
+        a long way off, and it could end up a bunch of different ways.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Where can I see screenshots?
@@ -90,7 +185,7 @@
         = link_to 'http://redmenace.imgur.com/Laertes', 'http://redmenace.imgur.com/Laertes', target: '_blank'
         (
         = link_to 'http://imgur.com/a/lMhNN', 'http://imgur.com/a/lMhNN', target: '_blank'
-        in case the first does not work).
+        in case the first does not work; it usually doesn&apos;t on a mobile device).
         Hopefully the
         pretty pictures will keep testers interested in coming back to the same material
         over and over.
@@ -100,13 +195,15 @@
         Q. How do you start a character?
       %p
         A. Start on the Character tab and tap the + button on the Characters view. You make
-        a few permanent choices at the beginning: name, gender, race and class. Race and
+        a few permanent choices at the beginning: name, gender, home and class. Home
+        (place of origin) and
         gender only ever enter the narrative portion of the game, influencing how people
-        respond to you and what they have to say. There are no consequences in game play.
+        respond to you, what they have to say and which quests are available
+        to you. There are no direct consequences in game play.
       %p
         Your character class is another matter. There are six skills. Each class specializes
         in two of them. There is a lot of in-game help and explanation in the character
-        views. Tap all the buttons for explanations of race, class, gender, skills, skill
+        views. Tap all the buttons for explanations of home, class, gender, skills, skill
         points, talents and so on. Most of that will probably end up here sooner or later.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
@@ -139,7 +236,7 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How do the controls work?
-      = image_tag 'laertes.png', :alt => 'laertes', :width => 444, :height => 250
+      = image_tag 'laertes.png', :alt => 'laertes', :width => 600, :height => 406
       %p
         A. You&apos;ll spend a lot of time in a view like this. The two wheels at the upper
         left and right control the direction you move and the direction you look,
@@ -207,7 +304,7 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How does combat work?
-      = image_tag 'laertes-combat.png', :alt => 'laertes-combat', :width => 444, :height => 250
+      = image_tag 'laertes-combat.png', :alt => 'laertes-combat', :width => 600, :height => 406
       %p
         Combat is still mostly automatic, but there is now a lot more animation, not to
         mention sound effects and fight music, and without pausing the game you can now
@@ -256,8 +353,8 @@
       %p
         During combat, several controls are hidden, including the zoom button and the light
         slider. Your light comes on during combat automatically at half intensity. In
-        addition, you only have one direction wheel, on the left. Your options for motion
-        and direction are more limited during combat. The left direction wheel responds
+        addition, you only have one thumb wheel, on the left. Your options for motion
+        and direction are more limited during combat. The left thumb wheel responds
         differently depending whether you have a current target selected or not. In both
         cases, you have no control over your inclination (the angle between your line of
         sight and the horizontal plane) during combat.
@@ -275,7 +372,7 @@
         targets are out of range), pressing up or down on the wheel will behave as when a
         target is selected, but sideways movement will work differently. Rather than
         sidestepping to flank a target you don&apos;t have, you can move more or less
-        freely. However, since you don&apos;t have a right direction wheel to use for
+        freely. However, since you don&apos;t have a right thumb wheel to use for
         turning, pressing left or right on the left wheel during combat moves you
         %em forward,
         instead of sideways, but turns you to face the direction you are pressing at the
