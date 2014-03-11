@@ -126,6 +126,24 @@
         you rarely have any need to do.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
+        *New* Q. What is that sexy knob in the new character view?
+      %p
+        A. I&apos;m glad you asked. That is an open-source
+        = link_to 'iOS Knob Control', 'https://github.com/jdee/ios-knob-control', target: '_blank'
+        that originated as a couple of methods in a view controller in Laertes, because I
+        had a novel idea for a way to select a character class. I quickly had the idea to
+        make it into an open-source iOS knob control and then, not quickly at all, I eventually
+        did that. You supply any image for the knob (optionally multiple images for different
+        screen densities and control states), and the control animates rotation of
+        the image in response to a user gesture, programmatically providing the angular position
+        of the knob. It can operate in a continuous mode, like
+        a potentiometer or volume knob, or in a couple of discrete modes, one of which is
+        used in Laertes. The control is a single .h, .m file pair with a BSD license.
+        Some sample knob images are also provided courtesy of
+        = link_to 'Mike Calvert.', 'https://github.com/bloodymonster', target: '_blank'
+      = image_tag 'laertes-knob.png', alt: 'laertes-knob', width: 296, height: 258
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
         Q. What is this page?
       %p
         A. Apologies for the Dubsar intrusion. This is just an easy place and format for me
