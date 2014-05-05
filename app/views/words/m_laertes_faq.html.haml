@@ -27,121 +27,27 @@
   %div{'data-role' => 'content'}
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
-        *New* Q. What are combat moves?
+        *New* Q. What should I do to work around a bug if I create a new character?
       %p
-        A. Combat occurs automatically, for the most part. During combat, your character
-        will ordinarily just execute a default attack with whatever weapon they have
-        equipped. Alternately, you can select from a number of other available combat moves,
-        like a power attack or finesse attack.
+        A. There is a bug that potentially permanently screws up a newly created character by
+        confusing it with other characters, often with one just deleted,
+        so it&apos;s worth being careful.
       %p
-        Certain combat moves are universal and available to all characters with all weapons.
-        They&apos;re
-        also not very good ones; they come with big defensive penalties. As you raise your
-        combat skill, you will gain more effective combat moves. Many combat moves are
-        limited to a specific weapon type and can only be used if you have a weapon of that
-        type equipped. All combat moves potentially modify your character&apos;s offense
-        (chance to hit), defense (chance to avoid being hit), damage done by your weapon
-        when you hit and attack period of your weapon, speeding up or slowing down your
-        attack.
+        Once you create a new character, look at the Quests tab. There should be exactly two
+        quests available to a new character. The first is called &quot;The hangover.&quot;
+        Tap the row for that quest in the list view to see your first task. This view should
+        say, &quot;Find the hidden door.&quot;
+      = image_tag 'laertes-workaround.png', alt: 'laertes-workaround', width: 280, height: 497
       %p
-        Combat moves also provide a way for a character to specialize in a weapon. In
-        particular, when your combat skill reaches 1 for the first time (including at
-        creation), you can choose a new combat from three weapon-specific moves, each
-        of which gives you a slight advantage with that type of weapon. When you choose a
-        weapon-specific combat move, if you do not currently have a weapon of that type
-        in your inventory, you will receive a low-end weapon of that type (a bronze
-        broadsword, bronze spear or wooden bow).
+        If you see more (or fewer) than two quests in the quest list or this view does not
+        say, &quot;Find the hidden door,&quot; you should stop and restart the app before you
+        do anything else. This should clear the problem.
       %p
-        Combat moves are new to the game and have not been fully developed yet. For now,
-        you will be able to choose one of three weapon-specific combat moves once your
-        combat skill reaches rank 1. In addition, all characters have three universal
-        combat moves, including the default attack. Currently all combat moves are attacks,
-        but eventually combat moves may include things like blocking, parrying, dodging,
-        etc. These are simply things you can do during combat. The name
-        %em combat moves
-        may change as well.
+        If you find the hidden door in the Demo Room before clearing this problem, the
+        character can never finish the initial quest. You may as well create a new character.
       %p
-        You can see all your currently available combat moves at the bottom of the character
-        view. If a green button labeled NEW appears above the list, you can tap it to
-        choose a new combat move. After you make your choice, your new combat move will
-        appear in the list on the character view. Tap any of the rows in the table for more
-        details on the combat move listed on that row.
-      = image_tag 'laertes-combat-moves.png', :alt => 'laertes-combat-moves', :width => 280, :height => 497
-      = image_tag 'laertes-combat-move-choice.png', :alt => 'laertes-combat-moves', :width => 280, :height => 497
-      %p
-        During combat, a segmented control appears in the upper right-hand corner of the
-        game play view, in place of the right thumb wheel, with two or three segments,
-        one for each of your available combat moves (with your currently equipped weapon)
-        except for the default attack. They are labeled by the first letter of the
-        corresponding combat move (See also Q. How does combat work?):
-      %p
-        %table
-          %thead
-            %tr
-              %th combat move
-              %th label
-          %tbody
-            %tr
-              %td power attack
-              %td p
-            %tr
-              %td speed attack
-              %td s
-            %tr
-              %td finesse attack (sword)
-              %td f
-            %tr
-              %td lunge (spear)
-              %td l
-            %tr
-              %td overdraw (bow)
-              %td o
-      %p
-        The means of selecting a combat move during combat will no doubt change. For
-        example, the initials on the buttons will probably be replaced with distinctive
-        icons. But in addition, the segmented control will not scale well if a character
-        continues to gain new combat moves.
-      %p
-        The list of available combat moves depends on your equipped weapon. If you have
-        the finesse attack, for example,
-        %em f
-        will only appear in the combat move control
-        when you have a sword equipped.
-      %p
-        If you ignore this control and tap none of the buttons there, your character will
-        just use the default attack each attack period. Whenever you tap one of the
-        segments in the control, the specified combat move will be used the next time the
-        character has an opportunity to attack. At that point, the control will be reset
-        so that no segment is selected, and the character will once again use the default
-        attack the next period unless you select a different combat move. The effects of
-        the selected combat move (modifications to offense, defense, damage and attack period)
-        will apply for the next attack only, unless you select the same combat move again.
-      %p
-        Eventually use of combat moves may trigger special animations and sound effects.
-      %p
-        Combat moves were largely inspired by Feats from the KotOR games. Combat moves were
-        introduced
-        in order to give you something more to do during combat. Otherwise, the only things
-        you can do besides moving around are changing weapons and changing targets, which
-        you rarely have any need to do.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        *New* Q. What is that sexy knob in the new character view?
-      %p
-        A. I&apos;m glad you asked. That is an open-source
-        = link_to 'iOS Knob Control', 'https://github.com/jdee/ios-knob-control', target: '_blank'
-        that originated as a couple of methods in a view controller in Laertes, because I
-        had a novel idea for a way to select a character class. I quickly had the idea to
-        make it into an open-source iOS knob control and then, not quickly at all, I eventually
-        did that. You supply any image for the knob (optionally multiple images for different
-        screen densities and control states), and the control animates rotation of
-        the image in response to a user gesture, programmatically providing the angular position
-        of the knob. It can operate in a continuous mode, like
-        a potentiometer or volume knob, or in a couple of discrete modes, one of which is
-        used in Laertes. The control is a single .h, .m file pair with a BSD license.
-        Some sample knob images are also provided courtesy of
-        = link_to 'Mike Calvert.', 'https://github.com/bloodymonster', target: '_blank'
-      = image_tag 'laertes-knob.png', alt: 'laertes-knob', width: 296, height: 258
+        This issue occurs rarely and is hard to reproduce, or I&apos;d fix it before letting this
+        build go. I think it cannot occur if you have only one character.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What is this page?
@@ -233,28 +139,53 @@
         library, and so on. If you haven't selected or created a character, the other
         tabs will tell you to do so.
       = image_tag 'laertes-world-map.png', :alt => 'laertes-world-map', :width => 280, :height => 497
+      = image_tag 'laertes-areas.png', :alt => 'laertes-areas', :width => 280, :height => 497
+      = image_tag 'laertes-area-detail.png', :alt => 'laertes-area-detail', :width => 280, :height => 497
+      = image_tag 'laertes-quest-status.png', :alt => 'laertes-quest-status', :width => 280, :height => 497
       %p
-        Game play occurs primarily through the Map/Areas tab. Start by viewing the world
-        map. You can then zoom the map or tap Areas to see a list of areas you can visit.
-        Tapping one of the rows in the Areas list will start a game. Tap the detail
-        disclosure button there to see a thumbnail map of that area without starting a
-        game. You can also start a game from that view. You will also reach the area
-        detail view by tapping an area on the world map.
+        Game play primarily occurs in a 3-D first person perspective view.
+        The tab view provides access to different information about your
+        character (skills and similar info on the Character tab; their Inventory on that
+        tab; all their Quest status on that tab; books they&apos;ve found on the Library
+        tab, etc.).
+      %p
+        To jump into 3-D game play, go either to the Map or Quests tab. The Map tab shows
+        you all available areas you can play in. The Quests tab shows all available quests
+        you can do. On the Map tab, you have two views to choose from: the world map view
+        and the area list view. Change between them by tapping the button labeled Map or
+        Areas at the upper left in the navigation bar. Both views show you essentially the
+        same information: a list of available areas. The world map view shows areas by zoom
+        level. Areas are only visible when the map is sufficiently zoomed in.
+      %p
+        In case you can&apos;t find the area you&apos;re looking for on the world map, you 
+        always have two other options. If there is an available quest that starts in the
+        area you want, you can select that quest on the Quests tab and then tap the
+        %em View on Map
+        button, which will take you to the world map with a zoom level sufficient to reveal
+        the area. Also, all available areas are listed in a table view in the Areas view on
+        the Map tab, whether or not they have quests. You can tap one of the blue, yellow or
+        green map annotations on
+        the world map or choose an area from the Areas list to see an Area Detail view with
+        a thumbnail map of the area. Tapping an area in the Areas list will start game play
+        in that area. Tap the blue detail disclosure button at the right of each row to see
+        the Area Detail view for that area.
+      %p
+        On both the Area Detail view and the Quest Status view, there is a system play button
+        (a solid black isosceles triangle point to the right, like an audio or video play
+        button) in the navigation bar at the upper right. Tap this button to begin play in
+        the selected area. If you are on the Quest Status view, you will begin in the starting
+        area for that quest, even if you previously made further progress on the quest with
+        your current character.
       %p
         If you have a current game paused (if the Resume button is showing), that area is
-        marked on the map with a star, and its name appears in gold. Other area names appear
+        marked on the world map with a star, and its name appears in gold. Other area names appear
         with cyan text. Map annotations that do not correspond to play areas are indicated in
-        white. Green text is used for areas that have a quest available. This part
-        is a little buggy right now. Only the starting area for the quest is indicated,
-        regardless how far you are through the quest. If you visit an active quest on the
-        Quest tab, there is a View on Map button there that will take you to the appropriate
-        map location. This will also be the starting area for the quest, not wherever your
-        next objective is. That will change eventually.
+        white. Green text is used for areas that have a quest available.
     
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How do the controls work?
-      = image_tag 'laertes.png', :alt => 'laertes', :width => 532, :height => 360
+      = image_tag 'laertes.png', :alt => 'laertes', :width => 546, :height => 360
       %p
         A. You&apos;ll spend a lot of time in a view like this. The two wheels at the upper
         left and right control the direction you move and the direction you look,
@@ -297,8 +228,7 @@
         intensity. It makes things easier to see, but it affects your stealth. The higher
         your light intensity setting, the easier it is for creatures to detect you.
       %p
-        The stat button is poorly named. These will eventually be icons, if these buttons
-        even survive. This button simply pauses the game, dismissing the game play view and
+        The pause button pauses the game, dismissing the game play view and
         returning to the tab view, so you can change weapons, apply a recently gained skill
         point, view quest status, and so on. Return to game play through the Areas list as
         before. Tap the Resume button to simply resume your paused game. You also have the
@@ -322,7 +252,7 @@
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How does combat work?
-      = image_tag 'laertes-combat.png', :alt => 'laertes-combat', :width => 532, :height => 360
+      = image_tag 'laertes-combat.png', :alt => 'laertes-combat', :width => 546, :height => 360
       %p
         Combat is still mostly automatic, but there is now a lot more animation, not to
         mention sound effects and fight music, and without pausing the game you can now
@@ -446,6 +376,105 @@
             lose one or more of your opponents.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
+        Q. What are combat moves?
+      %p
+        A. Combat occurs automatically, for the most part. During combat, your character
+        will ordinarily just execute a default attack with whatever weapon they have
+        equipped. Alternately, you can select from a number of other available combat moves,
+        like a power attack or finesse attack.
+      %p
+        Certain combat moves are universal and available to all characters with all weapons.
+        They&apos;re
+        also not very good ones; they come with big defensive penalties. As you raise your
+        combat skill, you will gain more effective combat moves. Many combat moves are
+        limited to a specific weapon type and can only be used if you have a weapon of that
+        type equipped. All combat moves potentially modify your character&apos;s offense
+        (chance to hit), defense (chance to avoid being hit), damage done by your weapon
+        when you hit and attack period of your weapon, speeding up or slowing down your
+        attack.
+      %p
+        Combat moves also provide a way for a character to specialize in a weapon. In
+        particular, when your combat skill reaches 1 for the first time (including at
+        creation), you can choose a new combat from three weapon-specific moves, each
+        of which gives you a slight advantage with that type of weapon. When you choose a
+        weapon-specific combat move, if you do not currently have a weapon of that type
+        in your inventory, you will receive a low-end weapon of that type (a bronze
+        broadsword, bronze spear or wooden bow).
+      %p
+        Combat moves are new to the game and have not been fully developed yet. For now,
+        you will be able to choose one of three weapon-specific combat moves once your
+        combat skill reaches rank 1. In addition, all characters have three universal
+        combat moves, including the default attack. Currently all combat moves are attacks,
+        but eventually combat moves may include things like blocking, parrying, dodging,
+        etc. These are simply things you can do during combat. The name
+        %em combat moves
+        may change as well.
+      %p
+        You can see all your currently available combat moves at the bottom of the character
+        view. If a green button labeled NEW appears above the list, you can tap it to
+        choose a new combat move. After you make your choice, your new combat move will
+        appear in the list on the character view. Tap any of the rows in the table for more
+        details on the combat move listed on that row.
+      = image_tag 'laertes-combat-moves.png', :alt => 'laertes-combat-moves', :width => 280, :height => 497
+      = image_tag 'laertes-combat-move-choice.png', :alt => 'laertes-combat-moves', :width => 280, :height => 497
+      %p
+        During combat, a segmented control appears in the upper right-hand corner of the
+        game play view, in place of the right thumb wheel, with two or three segments,
+        one for each of your available combat moves (with your currently equipped weapon)
+        except for the default attack. They are labeled by the first letter of the
+        corresponding combat move (See also Q. How does combat work?):
+      %p
+        %table
+          %thead
+            %tr
+              %th combat move
+              %th label
+          %tbody
+            %tr
+              %td power attack
+              %td p
+            %tr
+              %td speed attack
+              %td s
+            %tr
+              %td finesse attack (sword)
+              %td f
+            %tr
+              %td lunge (spear)
+              %td l
+            %tr
+              %td overdraw (bow)
+              %td o
+      %p
+        The means of selecting a combat move during combat will no doubt change. For
+        example, the initials on the buttons will probably be replaced with distinctive
+        icons. But in addition, the segmented control will not scale well if a character
+        continues to gain new combat moves.
+      %p
+        The list of available combat moves depends on your equipped weapon. If you have
+        the finesse attack, for example,
+        %em f
+        will only appear in the combat move control
+        when you have a sword equipped.
+      %p
+        If you ignore this control and tap none of the buttons there, your character will
+        just use the default attack each attack period. Whenever you tap one of the
+        segments in the control, the specified combat move will be used the next time the
+        character has an opportunity to attack. At that point, the control will be reset
+        so that no segment is selected, and the character will once again use the default
+        attack the next period unless you select a different combat move. The effects of
+        the selected combat move (modifications to offense, defense, damage and attack period)
+        will apply for the next attack only, unless you select the same combat move again.
+      %p
+        Eventually use of combat moves may trigger special animations and sound effects.
+      %p
+        Combat moves were largely inspired by Feats from the KotOR games. Combat moves were
+        introduced
+        in order to give you something more to do during combat. Otherwise, the only things
+        you can do besides moving around are changing weapons and changing targets, which
+        you rarely have any need to do.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
         Q. How do I do other things?
       %p
         A. You have a certain chance per unit time to detect hidden things (doors and
@@ -499,22 +528,25 @@
         A. Many aspects of game play have not been fully developed yet. Here are some notes:
       %p
         Philosophy can be used to receive certain benefits from books. Some books will give
-        you a skill point when you receive them, but only if your Philosophy skill is 1 or
-        higher. Others may reveal secret features on the local map, like secret doors. Again,
-        you only receive this benefit if you have a 1 or greater Philosophy skill. If you
-        receive a book while your Philosophy is 0 and then increase it to 1, you do not get
+        you a skill point when you receive them, but only if your Philosophy skill is a certain
+        minimum value, depending on the book. Others may reveal secret features on the local map,
+        like secret doors. Again,
+        you only receive this benefit if you have a Philosophy skill equal to or greater than
+        a threshold that depends on the book. If you
+        receive a book while your Philosophy is below the threshold and then increase it to
+        the threshold, you do not get
         the benefits of the book. That will probably change. These are currently the only
         effects of the Philosophy skill. Philosophy is also supposed to govern Medicine/First
         Aid and to provide some degree of clairvoyance via divination (notionally through
         the stars or something). This all remains to be developed.
       %p
         Wilderness is like Philosophy in that it currently only reveals certain things to
-        you, and there is no quantitative dependence on the skill rank. There is currently
-        no reason to raise either of these skills above 1. If your Wilderness skill is 1 or
-        higher, plants are revealed to you on the map, and you can get things from them.
-        If your Wilderness skill is 0, they are not indicated on the map and effectively do
-        not exist. You cannot find them or use them. Once that skill increases to 1, they
-        are marked on your map for you. This is an underdeveloped area of the game.
+        you.
+        If your Wilderness skill is at least the minimum value required to reveal a plant,
+        that plant is revealed to you on the map, and you can get things from it.
+        If your Wilderness skill is too low, a plant is not indicated on the map and effectively does
+        not exist. You cannot find or use it. Once that skill increases to the threshold for a
+        plant, it is marked on your map for you. This is an underdeveloped area of the game.
       %p
         Stealth happens automatically if your Stealth skill is greater than 0. If Stealth is
         0, you are not capable of Stealth at all. If it greater than 0, creatures may fail
@@ -525,12 +557,17 @@
         an area notices you, all do. If you sneak up within attack range without being
         detected, you do double damage on your first attack.
       %p
-        Engineering governs finding and unlocking things. This is discussed above. As with
-        many other skills, if your skill rank in Engineering is 0, it is much harder to find
-        and unlock things than if your skill is 1 or higher, though in this case, these
-        things continue to get easier as you increase the skill. Features that are hidden
+        Stealth also governs finding hidden things, based on their secret level. This is an
+        entirely passive use of the skill. The probability to detect a hidden thing per unit
+        time also depends inversely on your distance from it.
+      %p
+        Engineering governs unlocking things. This is discussed above. As with
+        many other skills, if your skill rank in Engineering is 0, it is much harder to
+        unlock things than if your skill is 1 or higher.
+      %p
+        Features that are hidden
         or locked have a secret level and a lock level, respectively, that make them hard
-        or easy, so continue to increase this skill in order to find and open harder things.
+        or easy, so continue to increase Stealth and Engineering in order to find and open harder things.
       %p
         Speech affects sale prices out of your inventory and when buying from merchants.
         There are also some speech challenges that have random outcomes depending on your
@@ -545,8 +582,8 @@
       %h2
         Q. Why do some areas take a long time to load?
       %p
-        A. This probably means you have an out-of-date build. As of build 1.0.0.10, it
-        should never take more than a second or two to load an area.
+        A. This probably means you have an out-of-date build. As of build 1.0.0.14, ten
+        seconds is a long load time.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Why do people and doors seem unresponsive when I tap them?
@@ -590,20 +627,10 @@
         you are having trouble hearing the sound effects. You will probably have to restart
         game play (not just resume or go through a door) for the change to take effect.
       %p
-        Scroll to the bottom of the view to find the High Definition setting. This multiplies
-        the number of pixels rendered per frame, making it
-        %em very
-        expensive. If this option is set, the app will render frames at a lower rate
-        (15 fps instead of 20 on an iPhone 5 or iPad 3/4; 10 fps on all other devices). Even
-        then, an iPhone 4S cannot even come close to
-        keeping up in some of the more involved areas (the Temple Courtyard and the Delphi
-        Library particularly) at full resolution (640 x 960). On the 4S, with the High
-        Definition setting set to ON, frames are rendered 453 x 679, doubling rather than
-        quadrupling the number of pixels.
-      %p
-        On an iPhone 5, at 15 fps, the app can just barely keep up at full definition
-        (640 x 1136). By default, High Definition is set to OFF on all devices. I generally
-        only use it for screenshots.
+        Scroll to the bottom of the view to find the High Resolution setting. High-resolution
+        multiplies the burden on the GPU by up to 4, but the app performs far better now than
+        it did in the past. Now the default value of this setting is ON. If you have trouble
+        with app performance or just want to see the difference, you can switch it OFF here.
       %p
         You have to recreate the render buffer backing the OpenGL view in order for a
         change in this setting to take effect, so going through a door or resuming a paused
@@ -680,19 +707,16 @@
         depends on your Engineering skill and the lock level of the feature.
       %p
         When you get within that tolerance of the target location, you will hear a
-        loud click if the device is not muted. The device will also vibrate. Your
+        loud click if the device is not muted. The device will also vibrate if possible.
+        In addition, the view will flash green for one frame. Your
         finger must remain within the computed tolerance for a small time. If you
         move your finger too fast, you may skip over the target and not get any feedback
         or move out of tolerance again even though you received feedback. This can happen
         often when picking difficult locks.
-        Once you hear the click or feel the vibration, stop moving your finger. You may
-        even need to backtrack to find the right position again.
-      %p
-        %strong Note:
-        The iPad does not vibrate (this might also include other devices). You have to
-        have the sound on in order to pick a lock on an iPad, unlike an iPhone. However,
-        if you prefer not to play music while you are playing the game, you can turn the
-        music volume off in the game settings. Sound effects will still be audible.
+        Once you hear the click, see the green flash or feel the vibration, stop moving
+        your finger. You may
+        even need to backtrack to find the right position again. The view will turn green
+        and remain green when you successfully open the lock.
       %p
         Once a locked door is opened, you will go through it. Unlocked containers are
         cleaned out whenever you are within range. This occurs automatically once you
@@ -712,6 +736,25 @@
         You should also let me know if you add a new device. I don&apos;t think TF
         necessarily lets me know when you do. I have to modify some things on my end
         for you to get access once I have the UDID.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What is that sexy knob in the new character view?
+      %p
+        A. I&apos;m glad you asked. That is an open-source
+        = link_to 'iOS Knob Control', 'https://github.com/jdee/ios-knob-control', target: '_blank'
+        that originated as a couple of methods in a view controller in Laertes, because I
+        had a novel idea for a way to select a character class. I quickly had the idea to
+        make it into an open-source iOS knob control and then, not quickly at all, I eventually
+        did that. You supply any image for the knob (optionally multiple images for different
+        screen densities and control states) or let the control generate images you can customize,
+        and the control animates rotation of
+        the image in response to a user gesture, programmatically providing the angular position
+        of the knob. It can operate in a continuous mode, like
+        a potentiometer or volume knob, or in a couple of discrete modes, one of which is
+        used in Laertes. The control is a single .h, .m file pair with a BSD license.
+        Some sample knob images are also provided courtesy of
+        = link_to 'Mike Calvert.', 'https://github.com/bloodymonster', target: '_blank'
+      = image_tag 'laertes-knob.png', alt: 'laertes-knob', width: 296, height: 258
 
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     = render :partial => 'shared/mobile_footer'
