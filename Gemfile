@@ -33,7 +33,7 @@ group :backup_dev, :development, :test do
   gem 'factory_girl_rails'
   gem 'json'
   gem 'simplecov', require: false
-  gem 'rspec-rails', '>= 2.0'
+  gem 'rspec-rails', '~> 2.99'
   gem 'rvm-capistrano'
   gem 'webrat'
   gem 'nokogiri'
