@@ -33,7 +33,6 @@
     "24458" => 116,
     "24701" => 117,
     "25079" => 119,
-    # "40189" => 202, # found by a rule (40189 is a truncation of 202)
     "43834" => 222,
     "51791" => 266,
     "52486" => 427,
@@ -185,13 +184,78 @@
     "1807949" => 9900,
     "1808909" => 9905,
     "1812324" => 9923,
-    "1848878" => 10126
+    "1848878" => 10126,
+    "1852738" => 10146,
+    "1868236" => 10226,
+    "1880529" => 10286,
+    "1884969" => 10312,
+    "1885720" => 10315,
+    "1895355" => 10365,
+    "1920631" => 10498,
+    "1940682" => 10601,
+    "1943120" => 10610,
+    "1968015" => 10739,
+    "1972513" => 10765,
+    "1991733" => 10869,
+    "2007041" => 10949,
+    "2031662" => 11090,
+    "2032205" => 11093,
+    "2037940" => 11126,
+    "2048059" => 11179,
+    "2058261" => 11248,
+    "2059434" => 11255,
+    "86117" => 11365,
+    "2098311" => 11460,
+    "2141133" => 11681,
+    "2141804" => 11685,
+    "2171017" => 11887,
+    "2187588" => 11985,
+    "2203651" => 12104,
+    "2275064" => 12553,
+    "2276242" => 12557,
+    "2277044" => 12561,
+    "2287272" => 12612,
+    "2305827" => 12721,
+    "2328429" => 12855,
+    "2328637" => 12856,
+    "2332671" => 12877,
+    "2333471" => 12881,
+    "2344113" => 12938,
+    "2344882" => 12942,
+    "2351216" => 12976,
+    "2354846" => 12995,
+    "2359909" => 13026,
+    "2371053" => 13081,
+    "2412395" => 13306,
+    "2334464" => 13308,
+    "2435043" => 13425,
+    "2435464" => 13428,
+    "2444489" => 13485,
+    "2445119" => 13487,
+    "2455914" => 13561,
+    "2463673" => 13608,
+    "2475791" => 13666,
+    "2479427" => 13686,
+    "2505376" => 13843,
+    "2512593" => 13880,
+    "2516967" => 13901,
+    "2528983" => 13969,
+    "2542324" => 14043,
+    "2542621" => 14045,
+    "2548215" => 14078,
+    "2548368" => 14079,
+    "2548500" => 14080,
+    "2548631" => 14081,
+    "2548820" => 14082,
+    "2548958" => 14083,
+    "2549079" => 14084,
+    "2549225" => 14085
   }
 }
 
 def strings_equal_by_words(s1, s2)
-  words1 = s1.split(/[^A-Za-z]+/)
-  words2 = s2.split(/[^A-Za-z]+/)
+  words1 = s1.split(/[^A-Za-z0-9]+/)
+  words2 = s2.split(/[^A-Za-z0-9]+/)
 
   return false unless words1.count == words2.count
 
@@ -199,12 +263,12 @@ def strings_equal_by_words(s1, s2)
 end
 
 def word_count(s)
-  s.split(/[^A-Za-z]+/).count
+  s.split(/[^A-Za-z0-9]+/).count
 end
 
 def words_in_common(s1, s2)
-  words1 = s1.split(/[^A-Za-z]+/)
-  words2 = s2.split(/[^A-Za-z]+/)
+  words1 = s1.split(/[^A-Za-z0-9]+/)
+  words2 = s2.split(/[^A-Za-z0-9]+/)
 
   smaller_list = words1.count < words2.count ? words1 : words2
   larger_list = words1.count < words2.count ? words2 : words1
@@ -303,7 +367,7 @@ def synset_for_data_line(line)
     if word.blank?
       new_count += 1
       puts "New word: #{synonym}, #{@part_of_speech}"
-      nil.foo
+      # nil.foo
       word = make_word! synonym, @part_of_speech
       next
     end
@@ -324,7 +388,7 @@ def synset_for_data_line(line)
         defn_count = word_count(defn)
         stripped_synset_defn_count = word_count(stripped_synset_defn)
 
-        puts "Non-matching definition \"#{stripped_synset_defn}\" has #{in_common} of #{stripped_synset_defn_count} with \"#{defn}\" (#{defn_count})"
+        # puts "Non-matching definition \"#{stripped_synset_defn}\" has #{in_common} of #{stripped_synset_defn_count} with \"#{defn}\" (#{defn_count})"
         # This difference has to be at least 1
         # If the two definitions differ by one word, take this one
         if defn_count == stripped_synset_defn_count && defn_count - in_common <= 1
@@ -367,7 +431,7 @@ def synset_for_data_line(line)
 
   if new_count == synonyms.count
     puts "All-New synset <#{@lexnames[lex_filenum]}> #{defn} (#{synonyms.join(",")})"
-    nil.foo
+    # nil.foo
     return make_synset! synset_offset, defn, @lexnames[lex_filenum], @part_of_speech, synonyms, markers
   end
 
