@@ -15,8 +15,95 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+# The following code loads the WN 3.1 data set without changing row IDS for
+# senses, synsets or words whenever possible. It should work with any subsequent
+# update using the same file format, with the exception of this list, which
+# refers to the numeric offset of each synset as listed in the first column of each
+# row in the data.* files. These represent synsets with significant changes that
+# are difficult to identify automatically. If using this code with any subsequent
+# data set, remove the contents of the dictionary for each part of speech below, so
+# that you have "adjective" => {}, "adverb" => {}, and so forth. Synsets in this
+# list will not be identified by the synset_for_data_line method otherwise with WN 3.1.
+#
+# The key in the dictionary for each part of speech is the offset read from the
+# data file, as a string, with the initial 0's stripped. The value is an integer
+# equal to the synset ID in the database for the matching synset.
 @synset_exceptions = {
-	"24458" => 116  
+  "adjective" => {
+    "24458" => 116,
+    "24701" => 117,
+    "25079" => 119,
+    # "40189" => 202, # found by a rule (40189 is a truncation of 202)
+    "43834" => 222,
+    "51791" => 266,
+    "52486" => 427,
+    "101225" => 530,
+    "106981" => 562,
+    "119817" => 628,
+    "123654" => 650,
+    "165213" => 889,
+    "177648" => 952,
+    "178829" => 957,
+    "242247" => 1340,
+    "243558" => 1349,
+    "247479" => 1376,
+    "302053" => 1670,
+    "302637" => 1673,
+    "318624" => 1755,
+    "357450" => 1979,
+    "403798" => 2284,
+    "403922" => 2286,
+    "414699" => 2343,
+    "427259" => 2411,
+    "490985" => 2752,
+    "492970" => 2761,
+    "493366" => 2763,
+    "510662" => 2860,
+    "2331344" => 2939,
+    "529920" => 2957,
+    "533833" => 2975,
+    "537047" => 2988,
+    "537516" => 2992,
+    "558079" => 3101,
+    # manually edited data.adj for 562326 to correct spelling of "crowded".
+    # parsing here does not depend on offsets being accurate, just unique.
+    "562326" => 3127,
+    "575501" => 3195,
+    "576056" => 3198,
+    "594915" => 3291,
+    "596783" => 3301,
+    "598545" => 3306,
+    "2506031" => 3357,
+    "618080" => 3415,
+    "627729" => 3478,
+    "628097" => 3480,
+    "660221" => 3651,
+    "661271" => 3657,
+    "662119" => 3663,
+    "683799" => 3789,
+    "699967" => 3876,
+    "700543" => 3879,
+    "714186" => 3944,
+    "717749" => 3962,
+    "735762" => 4054,
+    "736942" => 4060,
+    "746008" => 4114,
+    "752408" => 4144,
+    "760641" => 4187,
+    "768832" => 4224,
+    "786516" => 4314,
+    "828657" => 4537,
+    "829356" => 4540,
+    "868970" => 4748,
+    "881395" => 4815,
+    "889690" => 4860,
+    "911705" => 4973,
+    "913487" => 4981,
+    "923395" => 5039,
+    "953800" => 5209,
+    "973992" => 5313,
+    "992194" => 5412
+  }
 }
 
 def strings_equal_by_words(s1, s2)
@@ -106,7 +193,9 @@ def synset_for_data_line(line)
 
   synset = nil
 
-  synset_id = @synset_exceptions[synset_offset.to_s]
+  exceptions = @synset_exceptions[part_of_speech]
+  synset_id = exceptions[synset_offset.to_s] if exceptions
+
   puts "synset exception ID for #{synset_offset.to_s}: #{synset_id}" if synset_id
   synset = Synset.find synset_id if synset_id
 
@@ -197,12 +286,12 @@ def synset_for_data_line(line)
     puts "All-New synset <#{@lexnames[lex_filenum]}> #{defn} (#{synonyms.join(",")})"
     nil.foo
     return make_synset! synset_offset, defn, @lexnames[lex_filenum], @part_of_speech, synonyms, markers
-  else
-    puts "No Synset found matching <#{@lexnames[lex_filenum]}> #{defn.strip} (#{synonyms.join(",")})"
-    synonyms.each do |synonym|
-      if Word.find_by_name_and_part_of_speech(synonym, @part_of_speech).senses.count == 0
-        puts "Synonym #{synonym} has no synsets [#{candidates} candidate(s)]"
-      end
+  end
+
+  puts "No Synset found matching #{synset_offset} <#{@lexnames[lex_filenum]}> #{defn.strip} (#{synonyms.join(",")})"
+  synonyms.each do |synonym|
+    if Word.find_by_name_and_part_of_speech(synonym, @part_of_speech).senses.count == 0
+      puts "Synonym #{synonym} has no synsets [#{candidates} candidate(s)]"
     end
   end
 
