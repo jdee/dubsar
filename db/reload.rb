@@ -15,6 +15,10 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+@synset_exceptions = {
+	"24458" => 116  
+}
+
 def strings_equal_by_words(s1, s2)
   words1 = s1.split(/[^A-Za-z]+/)
   words2 = s2.split(/[^A-Za-z]+/)
@@ -22,6 +26,10 @@ def strings_equal_by_words(s1, s2)
   return false unless words1.count == words2.count
 
   words1.join(" ") == words2.join(" ")
+end
+
+def word_count(s)
+  s.split(/[^A-Za-z]+/).count
 end
 
 def words_in_common(s1, s2)
@@ -96,30 +104,34 @@ def synset_for_data_line(line)
     markers << marker
   end
 
+  synset = nil
+
+  synset_id = @synset_exceptions[synset_offset.to_s]
+  puts "synset exception ID for #{synset_offset.to_s}: #{synset_id}" if synset_id
+  synset = Synset.find synset_id if synset_id
+
   # 1. Look for a synset with the same lexname, synonyms and definition.
 
-  synset = nil
   Synset.where(lexname:@lexnames[lex_filenum], definition: defn).each do |a_synset|
     if a_synset.senses.count == synonyms.count &&
       synonyms.all? { |synonym| a_synset.words.where(name: synonym).count == 1 }
       synset = a_synset
-      synset.update_attributes offset: synset_offset unless synset.offset == synset_offset
       break
     end
-  end
-
-  return synset if synset
+  end unless synset
 
   defn.strip!
 
   # 2. Check each synonym's synsets from the DB to see if we can find something with
   #    a close definition
   new_count = 0
+  candidates = 0
   synonyms.each do |synonym|
     word = Word.find_by_name_and_part_of_speech synonym, @part_of_speech
     if word.blank?
       new_count += 1
       puts "New word: #{synonym}, #{@part_of_speech}"
+      nil.foo
       word = make_word! synonym, @part_of_speech
       next
     end
@@ -131,43 +143,67 @@ def synset_for_data_line(line)
         stripped_synset_defn.starts_with?(defn) ||
         strings_equal_by_words(defn, stripped_synset_defn)
 
-        # puts "Looking for #{synonym}, #{@part_of_speech}: #{defn}. Found #{stripped_synset_defn}"
-
-        if @lexnames[lex_filenum] != synonym_synset.lexname
-          puts "Lexname changed for Synset ID #{synonym_synset.id}: <#{@lexnames[lex_filenum]}>"
-          nil.foo
-          synonym_synset.update_attributes lexname: @lexnames[lex_filenum]
-        end
-
-        # The definition and synonyms have changed, or they would have been found above.
-        if defn != synonym_synset.definition
-          puts "Definition changed for Synset ID #{synonym_synset.id} (#{synonym}): \"#{defn}\" (WAS \"#{synonym_synset.definition}\")"
-          nil.foo
-          synonym_synset.update_attributes definition: defn
-        end
-
-        if synonym_synset.senses.count != synonyms.count ||
-          synonyms.any? { |synonym| synonym_synset.words.where(name: synonym).count != 1 }
-          puts "Synonyms changed for Synset ID #{synonym_synset.id}: \"#{synonyms.join(",")}\""
-          make_synonyms! synonym_synset, synonyms, markers, @part_of_speech
-        end
-
         synset = synonym_synset
-        synset.update_attributes offset: synset_offset unless synset.offset == synset_offset
-        break # word.synsets.each
+      elsif synonym_synset.lexname == @lexnames[lex_filenum] &&
+        synonym_synset.words.count == synonyms.count &&
+        synonyms.all? { |synonym| synonym_synset.words.where(name: synonym).count == 1 }
+
+        in_common = words_in_common(defn, stripped_synset_defn)
+        defn_count = word_count(defn)
+        stripped_synset_defn_count = word_count(stripped_synset_defn)
+
+        puts "Non-matching definition \"#{stripped_synset_defn}\" has #{in_common} of #{stripped_synset_defn_count} with \"#{defn}\" (#{defn_count})"
+        # This difference has to be at least 1
+        # If the two definitions differ by one word, take this one
+        if defn_count == stripped_synset_defn_count && defn_count - in_common <= 1
+          synset = synonym_synset
+        else
+          # Candidates don't have the same definition text but have the same lexname and
+          # the same synonyms.
+          candidates += 1
+        end
       end
     end
 
     break if synset # synonyms.each
+  end unless synset
+
+  if synset
+    synset.update_attributes offset: synset_offset unless synset.offset == synset_offset
+    if @lexnames[lex_filenum] != synset.lexname
+      puts "Lexname changed for Synset ID #{synset.id}: <#{@lexnames[lex_filenum]}>"
+      # nil.foo
+      synset.update_attributes lexname: @lexnames[lex_filenum]
+    end
+
+    # The definition and synonyms have changed, or they would have been found above.
+    if defn != synset.definition.strip
+      puts "Definition changed for Synset ID #{synset.id}: \"#{defn}\" (WAS \"#{synset.definition}\")"
+      # nil.foo
+      synset.update_attributes definition: defn
+    end
+
+    if synset.senses.count != synonyms.count ||
+      synonyms.any? { |synonym| synset.words.where(name: synonym).count != 1 }
+      # nil.foo
+      puts "Synonyms changed for Synset ID #{synset.id}: \"#{synonyms.join(",")}\""
+      make_synonyms! synset, synonyms, markers, @part_of_speech
+    end
   end
 
   return synset if synset
 
   if new_count == synonyms.count
     puts "All-New synset <#{@lexnames[lex_filenum]}> #{defn} (#{synonyms.join(",")})"
+    nil.foo
     return make_synset! synset_offset, defn, @lexnames[lex_filenum], @part_of_speech, synonyms, markers
   else
     puts "No Synset found matching <#{@lexnames[lex_filenum]}> #{defn.strip} (#{synonyms.join(",")})"
+    synonyms.each do |synonym|
+      if Word.find_by_name_and_part_of_speech(synonym, @part_of_speech).senses.count == 0
+        puts "Synonym #{synonym} has no synsets [#{candidates} candidate(s)]"
+      end
+    end
   end
 
   nil
@@ -382,8 +418,15 @@ failure_count = 0
   @clean_so_far = true
   File.open(File.expand_path("defaults/data.#{sfx}", File.dirname(__FILE__))).each do |line|
     next if line =~ /^\s/
+
     synset = synset_for_data_line line
+
     if synset
+
+      if last_id && synset.id != last_id + 1
+        puts "MISSING #{last_id + 1}. Jumped from #{last_id} to #{synset.id}"
+      end
+
       last_id = synset.id
       matching_count += 1
     else
