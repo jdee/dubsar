@@ -111,7 +111,7 @@
     "953800" => 5209,
     "973992" => 5313,
     "992194" => 5412,
-    "997760" => 5433,
+    "997760" => 5443,
     "1012028" => 5523,
     "1012335" => 5525,
     "1018989" => 5554,
@@ -359,7 +359,7 @@
     "1296823" => 28405,
     "2410277" => 34501,
     "2686412" => 36088,
-    "2716929" => 36267,
+    "2716785" => 36267,
     "2723487" => 36294,
     "2733566" => 36342,
     "2803952" => 36748,
@@ -666,7 +666,7 @@ end
 
 def make_word!(name, part_of_speech)
   @new_word_count += 1
-  inflections = @irregular_inflections[name.to_sym] || []
+  inflections = @irregular_inflections[name.gsub(' ', '_').to_sym] || []
   inflections << name
   word = Word.create! name: name, part_of_speech: part_of_speech, irregular: inflections
 
@@ -714,6 +714,7 @@ def synset_for_data_line(line)
   w_cnt = w_cnt.to_i(16)
 
   defn.chomp!
+  synset_offset_s = synset_offset
   synset_offset = synset_offset.to_i
 
   # Read synonyms
@@ -823,6 +824,22 @@ def synset_for_data_line(line)
       # nil.foo
       puts "Synonyms changed for Synset ID #{synset.id}: \"#{synonyms.join(",")}\""
       make_synonyms! synset, synonyms, markers, @part_of_speech
+    end
+
+    # Update lexical info (after updating synonyms)
+    synset.senses.each_with_index do |synonym, index|
+      sense = synset.sense.includes(:word).where(word: {name: synonym}).first
+
+      sense_key = @part_of_speech + '_' + synset_offset_s + '_' + synonym.gsub(' ', '_')
+      sense.update_attributes marker: marker[index], freq_cnt: @sense_index[sense_key.to_s], synset_index: index
+
+      inflections = @irregular_inflections[synonym.gsub(' ', '_').to_sym] || []
+      inflections.each do |inflection|
+        if sense.word.inflections.where(name: inflection).blank?
+          puts "New irregular inflection: #{sense.word.name_and_pos}: #{inflection}"
+          sense.word.inflections.create! name: inflection
+        end
+      end
     end
 
     @updated_synset_count += 1 if updated
@@ -1086,12 +1103,7 @@ puts "Deleting #{to_delete.count} synsets: "
 STDOUT.flush
 
 to_delete.each do |synset_id|
-  begin
-    synset = Synset.find synset_id
-  rescue => e
-    puts "Failed to find synset with ID #{synset_id}: #{e}"
-    next
-  end
+  synset = Synset.find synset_id
 
   puts "DELETING #{synset_id}: <#{synset.lexname}> \"#{synset.definition}\" (#{synset.words.map(&:name).join(",")})"
   STDOUT.flush
