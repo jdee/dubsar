@@ -1021,6 +1021,7 @@ end
 puts "Max Synset ID is #{max_synset_id}"
 puts "to_delete initialized with #{to_delete.count} members"
 
+@total_synset_count = 0
 @new_sense_count = 0
 @new_synset_count = 0
 @new_word_count = 0
@@ -1065,6 +1066,8 @@ puts "to_delete initialized with #{to_delete.count} members"
     # poor-person's assert(synset)
     nil.foo unless synset
 
+    @total_synset_count += 1
+
     next if synset.id > max_synset_id # new Synset
 
     if to_delete.include?(synset.id)
@@ -1079,13 +1082,10 @@ end
 
 puts "#{Time.now} finished"
 
-puts "Will delete #{to_delete.count} synsets: "
+puts "Deleting #{to_delete.count} synsets: "
 STDOUT.flush
 
 to_delete.each do |synset_id|
-  puts "Delete Synset #{synset_id}"
-  STDOUT.flush
-
   begin
     synset = Synset.find synset_id
   rescue => e
@@ -1093,8 +1093,22 @@ to_delete.each do |synset_id|
     next
   end
 
-  puts " #{synset_id}: <#{synset.lexname}> \"#{synset.definition}\" (#{synset.words.map(&:name).join(",")})"
+  puts "DELETING #{synset_id}: <#{synset.lexname}> \"#{synset.definition}\" (#{synset.words.map(&:name).join(",")})"
   STDOUT.flush
+
+  synset.destroy
+end
+
+puts "##### Started with #{max_synset_id} synsets. Loaded #{@total_synset_count}. After clean-up, #{Synset.count} remain"
+
+puts "Deleting #{Word.empty.count} words: "
+STDOUT.flush
+
+Word.empty.each do |word|
+  puts "DELETING #{word.id}: #{word.name_and_pos}"
+  STDOUT.flush
+
+  word.destroy
 end
 
 puts "#{@new_inflections_required.count} new inflections required:"

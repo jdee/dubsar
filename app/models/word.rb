@@ -147,11 +147,11 @@ end
 # example, _run_ will have two separate entries as a noun and a verb.
 class Word < ActiveRecord::Base
   before_save :compute_freq_cnt
-  has_many :senses, -> { order('senses.freq_cnt DESC, senses.id ASC') }
+  has_many :senses, -> { order('senses.freq_cnt DESC, senses.id ASC') }, dependent: :destroy
   has_many :synsets, -> { order('senses.freq_cnt DESC, senses.id ASC') }, through: :senses
   has_many :inflections, -> { order('inflections.name ASC') }, dependent: :destroy
 
-  scope :empty, -> { where [ '(select count(*) from senses s where s.word_id = words.id) == 0' ] }
+  scope :empty, -> { includes(:senses).where(senses: { id: nil })  }
 
   validates :name, :presence => true
   validates :freq_cnt, :presence => true
