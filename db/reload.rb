@@ -28,6 +28,14 @@
 # The key in the dictionary for each part of speech is the offset read from the
 # data file, as a string, with the initial 0's stripped. The value is an integer
 # equal to the synset ID in the database for the matching synset.
+#
+# Essentially, any synset listed here will have the assigned ID. If this list is empty
+# or incorrect, the build will succeed, but old rows will be replaced by equivalent new
+# ones that may differ by little. Any correspondence between these synsets in WN 3.1
+# with their equivalents in 3.0 will be lost. This will be inconvenient for search engines
+# and caches of any kind, as well as any sort of bookmarking. The WOTD history may be
+# incorrect for the next month. But the content of the DB will be exactly the content
+# of WN 3.1.
 @synset_exceptions = {
   "adjective" => {
     "24458" => 116,
@@ -657,12 +665,18 @@ def definitions_overlap(defn1, defn2)
 end
 
 def make_word!(name, part_of_speech)
+  @new_word_count += 1
   inflections = @irregular_inflections[name.to_sym] || []
   inflections << name
-  Word.create! name: name, part_of_speech: part_of_speech, irregular: inflections
+  word = Word.create! name: name, part_of_speech: part_of_speech, irregular: inflections
+
+  @new_inflections_required << word if
+    (part_of_speech == "noun" || part_of_speech == "verb") && name =~ /^[a-z]+$/
+  word
 end
 
 def make_synset!(offset, defn, lexname, part_of_speech, synonyms, markers)
+  @new_synset_count += 1
   synset = Synset.create! offset: offset, definition: defn, lexname: lexname, part_of_speech: part_of_speech
 
   synonyms.each_with_index do |synonym, index|
@@ -676,6 +690,7 @@ def make_synonym!(synset, synonym, marker, part_of_speech)
   word = Word.find_by_name_and_part_of_speech synonym, part_of_speech
   word ||= make_word! synonym, part_of_speech
 
+  @new_sense_count += 1
   Sense.create! synset_id: synset.id, word_id: word.id, marker: marker
 end
 
@@ -740,12 +755,9 @@ def synset_for_data_line(line)
 
   # 2. Check each synonym's synsets from the DB to see if we can find something with
   #    a close definition
-  new_count = 0
-  candidates = 0
   synonyms.each do |synonym|
     word = Word.find_by_name_and_part_of_speech synonym, @part_of_speech
     if word.blank?
-      new_count += 1
       puts "New word: #{synonym}, #{@part_of_speech}"
       # nil.foo
       word = make_word! synonym, @part_of_speech
@@ -773,10 +785,6 @@ def synset_for_data_line(line)
         # If the two definitions differ by one word, take this one
         if defn_count == stripped_synset_defn_count && defn_count - in_common <= 1
           synset = synonym_synset
-        else
-          # Candidates don't have the same definition text but have the same lexname and
-          # the same synonyms.
-          candidates += 1
         end
       end
 
@@ -790,7 +798,10 @@ def synset_for_data_line(line)
 
   if synset
     synset.update_attributes offset: synset_offset unless synset.offset == synset_offset
+    updated = false
     if @lexnames[lex_filenum] != synset.lexname
+
+      updated = true
       puts "Lexname changed for Synset ID #{synset.id}: <#{@lexnames[lex_filenum]}>"
       # nil.foo
       synset.update_attributes lexname: @lexnames[lex_filenum]
@@ -798,6 +809,8 @@ def synset_for_data_line(line)
 
     # The definition and synonyms have changed, or they would have been found above.
     if defn != synset.definition.strip
+
+      updated = true
       puts "Definition changed for Synset ID #{synset.id}: \"#{defn}\" (WAS \"#{synset.definition}\")"
       # nil.foo
       synset.update_attributes definition: defn
@@ -805,28 +818,21 @@ def synset_for_data_line(line)
 
     if synset.senses.count != synonyms.count ||
       synonyms.any? { |synonym| synset.words.where(name: synonym).count != 1 }
+
+      updated = true
       # nil.foo
       puts "Synonyms changed for Synset ID #{synset.id}: \"#{synonyms.join(",")}\""
       make_synonyms! synset, synonyms, markers, @part_of_speech
     end
+
+    @updated_synset_count += 1 if updated
+    return synset
   end
 
-  return synset if synset
+  synset = make_synset! synset_offset, defn, @lexnames[lex_filenum], @part_of_speech, synonyms, markers
+  puts "New Synset ID #{synset.id} at offset #{synset_offset} <#{@lexnames[lex_filenum]}> #{defn.strip} (#{synonyms.join(",")})"
 
-  if new_count == synonyms.count
-    puts "All-New synset <#{@lexnames[lex_filenum]}> #{defn} (#{synonyms.join(",")})"
-    # nil.foo
-    return make_synset! synset_offset, defn, @lexnames[lex_filenum], @part_of_speech, synonyms, markers
-  end
-
-  puts "No Synset found matching #{synset_offset} <#{@lexnames[lex_filenum]}> #{defn.strip} (#{synonyms.join(",")})"
-  synonyms.each do |synonym|
-    if Word.find_by_name_and_part_of_speech(synonym, @part_of_speech).senses.count == 0
-      puts "Synonym #{synonym} has no synsets [#{candidates} candidate(s)]"
-    end
-  end
-
-  nil
+  synset
 end
 
 def pointer_type(symbol)
@@ -1003,9 +1009,24 @@ end
 puts "#{Time.now} loaded sense index"
 STDOUT.flush
 
-last_id = nil
-matching_count = 0
 failure_count = 0
+
+to_delete = []
+max_synset_id = Synset.order('id desc').limit(1).first.id
+(1..max_synset_id).each do |synset_id|
+  to_delete << synset_id
+  # puts "Added #{synset_id}"
+end
+
+puts "Max Synset ID is #{max_synset_id}"
+puts "to_delete initialized with #{to_delete.count} members"
+
+@new_sense_count = 0
+@new_synset_count = 0
+@new_word_count = 0
+@updated_synset_count = 0
+
+@new_inflections_required = []
 
 %w{adj adv noun verb}.each do |sfx|
   @part_of_speech = case sfx
@@ -1041,19 +1062,47 @@ failure_count = 0
 
     synset = synset_for_data_line line
 
-    if synset
+    # poor-person's assert(synset)
+    nil.foo unless synset
 
-      if last_id && synset.id != last_id + 1
-        puts "MISSING #{last_id + 1}-#{synset.id-1}. Jumped from #{last_id} to #{synset.id}"
-      end
+    next if synset.id > max_synset_id # new Synset
 
-      last_id = synset.id
-      matching_count += 1
+    if to_delete.include?(synset.id)
+      # puts "FOUND #{synset.id}"
+      to_delete.delete synset.id
     else
-      failure_count += 1
-      puts "Last: #{last_id}. Matches: #{matching_count}. Failures: #{failure_count}."
+      puts "Duplicate synset ID #{synset.id}"
     end
+
   end
 end
 
 puts "#{Time.now} finished"
+
+puts "Will delete #{to_delete.count} synsets: "
+STDOUT.flush
+
+to_delete.each do |synset_id|
+  puts "Delete Synset #{synset_id}"
+  STDOUT.flush
+
+  begin
+    synset = Synset.find synset_id
+  rescue => e
+    puts "Failed to find synset with ID #{synset_id}: #{e}"
+    next
+  end
+
+  puts " #{synset_id}: <#{synset.lexname}> \"#{synset.definition}\" (#{synset.words.map(&:name).join(",")})"
+  STDOUT.flush
+end
+
+puts "#{@new_inflections_required.count} new inflections required:"
+@new_inflections_required.each do |word|
+  puts " #{word.name_and_pos}"
+end
+
+puts "#{@updated_synset_count} existing synsets updated"
+puts "#{@new_synset_count} new synsets created"
+puts "#{@new_word_count} new words created"
+puts "#{@new_sense_count} new senses created"

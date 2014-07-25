@@ -149,7 +149,7 @@ class Word < ActiveRecord::Base
   before_save :compute_freq_cnt
   has_many :senses, -> { order('senses.freq_cnt DESC, senses.id ASC') }
   has_many :synsets, -> { order('senses.freq_cnt DESC, senses.id ASC') }, through: :senses
-  has_many :inflections, -> { order('inflections.name ASC') }
+  has_many :inflections, -> { order('inflections.name ASC') }, dependent: :destroy
 
   validates :name, :presence => true
   validates :freq_cnt, :presence => true
@@ -207,7 +207,7 @@ class Word < ActiveRecord::Base
   end
 
   def name_and_pos
-    "#{name} (#{pos}.)"
+    "#{name}, #{pos}."
   end
 
   # generates an identifier (no spaces) from the word's name and
