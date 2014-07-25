@@ -151,6 +151,8 @@ class Word < ActiveRecord::Base
   has_many :synsets, -> { order('senses.freq_cnt DESC, senses.id ASC') }, through: :senses
   has_many :inflections, -> { order('inflections.name ASC') }, dependent: :destroy
 
+  scope :empty, -> { where [ '(select count(*) from senses s where s.word_id = words.id) == 0' ] }
+
   validates :name, :presence => true
   validates :freq_cnt, :presence => true
   validates :part_of_speech, :presence => true,
