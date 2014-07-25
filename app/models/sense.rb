@@ -21,7 +21,7 @@ class Sense < ActiveRecord::Base
   has_one :source, :class_name => 'Pointer', :as => :target
   has_many :pointers, -> { order('pointers.id ASC') }, as: :source
   has_many :targets, :through => :pointers
-  has_many :senses_verb_frames
+  has_many :senses_verb_frames, dependent: :destroy
   has_many :verb_frames, -> { order :number }, through: :senses_verb_frames
   validates :freq_cnt, :presence => true
   validates :synset_index, :presence => true

@@ -20,4 +20,17 @@ namespace :wn do
   task reload: :environment do
     require File.expand_path('db/reload', Rails.root)
   end
+
+  desc 'verify the WN 3.1 DB content'
+  task verify: :environment do
+    # DEBT: Nouns only for now
+    File.open(File.expand_path("db/defaults/data.noun", Rails.root)).each do |line|
+      next if line =~ /^\s/
+
+      left, defn = line.split('| ')
+      synset_offset, lex_filenum, ss_type, w_cnt, *rest = left.split(' ')
+
+      puts "##### Failed to find synset at offset #{synset_offset}" if Synset.where(offset: synset_offset.to_i, part_of_speech:'noun').count == 0
+    end
+  end
 end

@@ -747,7 +747,7 @@ def synset_for_data_line(line)
   Synset.where(lexname:@lexnames[lex_filenum], definition: defn).each do |a_synset|
     if a_synset.senses.count == synonyms.count &&
       synonyms.all? { |synonym| a_synset.words.where(name: synonym).count == 1 }
-      synset = a_synset
+      synset = a_synset if a_synset.id <= @max_synset_id # don't take new ones
       break
     end
   end unless synset
@@ -766,6 +766,8 @@ def synset_for_data_line(line)
     end
 
     word.synsets.each do |synonym_synset|
+      next if synonym_synset.id > @max_synset_id # don't take new ones
+
       stripped_synset_defn = synonym_synset.definition.strip
       if stripped_synset_defn == defn ||
         defn.starts_with?(stripped_synset_defn) ||
@@ -827,11 +829,11 @@ def synset_for_data_line(line)
     end
 
     # Update lexical info (after updating synonyms)
-    synset.senses.each_with_index do |synonym, index|
-      sense = synset.sense.includes(:word).where(word: {name: synonym}).first
+    synonyms.each_with_index do |synonym, index|
+      sense = synset.senses.includes(:word).where(words: {name: synonym}).first
 
       sense_key = @part_of_speech + '_' + synset_offset_s + '_' + synonym.gsub(' ', '_')
-      sense.update_attributes marker: marker[index], freq_cnt: @sense_index[sense_key.to_s], synset_index: index
+      sense.update_attributes marker: markers[index], freq_cnt: @sense_index[sense_key.to_s], synset_index: index
 
       inflections = @irregular_inflections[synonym.gsub(' ', '_').to_sym] || []
       inflections.each do |inflection|
@@ -1028,14 +1030,15 @@ STDOUT.flush
 
 failure_count = 0
 
+@max_synset_id = Synset.order('id desc').limit(1).first.id
+puts "Max Synset ID is #{@max_synset_id}"
+
 to_delete = []
-max_synset_id = Synset.order('id desc').limit(1).first.id
-(1..max_synset_id).each do |synset_id|
+(1..@max_synset_id).each do |synset_id|
   to_delete << synset_id
   # puts "Added #{synset_id}"
 end
 
-puts "Max Synset ID is #{max_synset_id}"
 puts "to_delete initialized with #{to_delete.count} members"
 
 @total_synset_count = 0
@@ -1085,7 +1088,7 @@ puts "to_delete initialized with #{to_delete.count} members"
 
     @total_synset_count += 1
 
-    next if synset.id > max_synset_id # new Synset
+    next if synset.id > @max_synset_id # new Synset
 
     if to_delete.include?(synset.id)
       # puts "FOUND #{synset.id}"
@@ -1111,7 +1114,7 @@ to_delete.each do |synset_id|
   synset.destroy
 end
 
-puts "##### Started with #{max_synset_id} synsets. Loaded #{@total_synset_count}. After clean-up, #{Synset.count} remain"
+puts "##### Started with #{@max_synset_id} synsets. Loaded #{@total_synset_count}. After clean-up, #{Synset.count} remain"
 
 puts "Deleting #{Word.empty.count} words: "
 STDOUT.flush
