@@ -451,7 +451,45 @@
     "6325134" => 55895,
     "6394213" => 56255,
     "6436708" => 56494,
-    "6604544" => 57332
+    "6604544" => 57332,
+    "6655934" => 57624,
+    "6766514" => 58216,
+    "6836640" => 58587,
+    "6905066" => 58951,
+    "6952319" => 59292,
+    "6979234" => 59454,
+    "6984279" => 59484,
+    "7026665" => 59751,
+    "7048658" => 59858,
+    "7048968" => 59859,
+    "7123492" => 60253,
+    "7191150" => 60597,
+    "7309129" => 61260, # edited poetic_jstice
+    "7569690" => 62692,
+    "7600424" => 62859,
+    "7895635" => 64874,
+    "7915951" => 65003,
+    "7985266" => 65426,
+    "7993684" => 65463,
+    "8024219" => 65612,
+    "8073958" => 65785,
+    "8102739" => 65933,
+    "8154010" => 66160,
+    "8168497" => 66223,
+    "8517241" => 67956,
+    "8561479" => 68115,
+    "8581164" => 68223,
+    "8606395" => 68347,
+    "8625308" => 68444,
+    "8922758" => 69755,
+    "8923207" => 69758,
+    "8925281" => 69776,
+    "8925719" => 69777,
+    "8986934" => 70039,
+    "8987197" => 70040,
+    "9133059" => 70741,
+    "9190986" => 71045,
+    "9366956" => 71960
   }
 }
 
@@ -476,6 +514,16 @@ def words_in_common(s1, s2)
   larger_list = words1.count < words2.count ? words2 : words1
 
   smaller_list.count { |w| larger_list.include? w }
+end
+
+# Poorly named method. Returns true if and only if one of defn1 and defn2
+# contains all the words in the other. This happens a lot: samples and qualifying phrases
+# like "(used in the plural)" are added and removed.
+def definitions_overlap(defn1, defn2)
+  words1 = defn1.split(/[^A-Za-z0-9]+/).uniq
+  words2 = defn2.split(/[^A-Za-z0-9]+/).uniq
+
+  words1.all? { |word| words2.include? word } or words2.all? { |word| words1.include? word }
 end
 
 def make_word!(name, part_of_speech)
@@ -542,7 +590,7 @@ def synset_for_data_line(line)
 
   synset = nil
 
-  exceptions = @synset_exceptions[part_of_speech]
+  exceptions = @synset_exceptions[@part_of_speech]
   synset_id = exceptions[synset_offset.to_s] if exceptions
 
   puts "synset exception ID for #{synset_offset.to_s}: #{synset_id}" if synset_id
@@ -600,6 +648,8 @@ def synset_for_data_line(line)
           # the same synonyms.
           candidates += 1
         end
+      elsif definitions_overlap(stripped_synset_defn, defn)
+        synset = synonym_synset
       end
     end
 
