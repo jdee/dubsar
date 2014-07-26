@@ -1343,8 +1343,8 @@ puts "#{@new_sense_count} new senses created"
         source_no = source_no.to_i(16)
         target_no = target_no.to_i(16)
 
-        sense = synset.senses.find(:first, :conditions => "synset_index = #{source_no}")
-        target = target_synset.senses.find(:first, :conditions => "synset_index = #{target_no}")
+        sense = synset.senses.where(synset_index: source_no).first
+        target = target_synset.senses.where(synset_index: target_no).first
 
         Pointer.create_new :source => sense, :target => target, :ptype => pointer_type(pointer_symbol)
         rtype = reflected_pointer_type(pointer_symbol)
