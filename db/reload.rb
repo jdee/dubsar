@@ -875,14 +875,12 @@ def synset_for_data_line(line)
     word = Word.find_by_name_and_part_of_speech synonym, @part_of_speech
     if word.blank?
       puts "New word: #{synonym}, #{@part_of_speech}"
-      # nil.foo
       word = make_word! synonym, @part_of_speech
       next
     end
 
-    word.synsets.each do |synonym_synset|
-      next if synonym_synset.id > @max_synset_id # don't take new ones
-
+    # Only looking for matches among the old 3.0 data set.
+    word.synsets.where(["synsets.id <= ?", @max_synset_id]).each do |synonym_synset|
       stripped_synset_defn = synonym_synset.definition.strip
       if stripped_synset_defn == defn ||
         defn.starts_with?(stripped_synset_defn) ||
@@ -925,7 +923,6 @@ def synset_for_data_line(line)
 
     updated = true
     puts "Lexname changed for Synset ID #{synset.id}: <#{@lexnames[lex_filenum]}>"
-    # nil.foo
     synset.update_attributes lexname: @lexnames[lex_filenum]
   end
 
@@ -934,7 +931,6 @@ def synset_for_data_line(line)
 
     updated = true
     puts "Definition changed for Synset ID #{synset.id}: \"#{defn}\" (WAS \"#{synset.definition}\")"
-    # nil.foo
     synset.update_attributes definition: defn
   end
 
@@ -942,7 +938,6 @@ def synset_for_data_line(line)
     synonyms.any? { |synonym| synset.words.where(name: synonym).count != 1 }
 
     updated = true
-    # nil.foo
     puts "Synonyms changed for Synset ID #{synset.id}: \"#{synonyms.join(",")}\""
     make_synonyms! synset, synonyms, markers, @part_of_speech
   end
@@ -958,7 +953,7 @@ def synset_for_data_line(line)
     if sentences
       sentences.each do |number|
         frame = VerbFrame.find_by_number(number.to_i+1000)
-        SensesVerbFrame.create :sense => sense, :verb_frame => frame
+        SensesVerbFrame.create :sense => sense, :verb_frame => frame if SensesVerbFrame.where(sense_id: sense.id, verb_frame_id: frame.id).blank?
       end
     end
 
@@ -971,10 +966,10 @@ def synset_for_data_line(line)
 
     if w_num != 0
       sense = synset.senses.where(synset_index: w_num).first
-      SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+      SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id if SensesVerbFrame.where(sense_id: sense.id, verb_frame_id: verb_frame_id).blank?
     else
       synset.senses.each do |sense|
-        SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+        SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id if SensesVerbFrame.where(sense_id: sense.id, verb_frame_id: verb_frame_id).blank?
       end
     end
   end
