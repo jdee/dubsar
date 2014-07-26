@@ -1161,7 +1161,7 @@ STDOUT.flush
 
 failure_count = 0
 
-@max_synset_id = Synset.order('id desc').limit(1).first.id
+@max_synset_id = 117659 # Synset.order('id desc').limit(1).first.id
 puts "Max Synset ID is #{@max_synset_id}"
 
 to_delete = []
