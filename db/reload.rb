@@ -631,6 +631,75 @@
   }
 }
 
+@new_inflections = {
+  "noun" => {
+    "gip" => %w{gips},
+    "bricolage" => %w{bricolages},
+    "neuromarketing" => %w{neuromarketings},
+    "chinos" => [], # already plural
+    "moulin" => %w{moulins},
+    "lacunar" => %w{lacunars lacunaria},
+    "golfclub" => %w{golfclubs},
+    "liftgate" => %w{liftgates},
+    "jeans" => [], # already plural
+    "mic" => %w{mics},
+    "humidifier" => %w{humidifiers},
+    "dehumidifier" => %w{dehumidifiers},
+    "skivvies" => [], # already plural
+    "trousers" => [], # already plural
+    "kenosis" => %w{kenoses},
+    "dendrology" => %w{dendrologies},
+    "panentheism" => %w{panentheisms},
+    "pandeism" => %w{pandeisms},
+    "paronym" => %w{paronyms},
+    "manga" => [], # same in plural
+    "malware" => %w{malwares},
+    "volvelle" => %w{volvelles},
+    "initialism" => %w{initialisms},
+    "promo" => %w{promos},
+    "obsequy" => %w{obsequies},
+    "criterium" => %w{criteriums}, # bicycle road race
+    "crit" => %w{crits}, # " " "
+    "mysoandry" => %w{mysoandries},
+    "moon" => %w{moongs},
+    # "munggo" => %w{munggos munggoes}, # Or no plural? From Tagalog and other languages.
+    # "monggo" => %w{monggos monggoes}, # Or no plural? From Tagalog and other languages.
+    "munggo" => [], # Or no plural? From Tagalog and other languages.
+    "monggo" => [], # Or no plural? From Tagalog and other languages.
+    "tamal" => %w{tamales},
+    "zumbooruk" => %w{zumbooruks},
+    "zumbooruck" => %w{zumboorucks},
+    "zamburek" => %w{zambureks},
+    "zamboorak" => %w{zambooraks},
+    "zamburak" => %w{zamburaks},
+    "depths" => [], # already plural
+    "concertinist" => %w{concertinists},
+    "biker" => %w{bikers},
+    "dyslexic" => %w{dyslexics},
+    "kiddie" => %w{kiddies},
+    "transgendered" => %w{transgendereds},
+    "clochard" => %w{clochards},
+    "rem" => [], # same in the plural
+    "mrem" => [], # same in the plural
+    "millirem" => [], # same in the plural
+    "bazillion" => %w{bazillions},
+    "lemniscate" => %w{lemniscates},
+    "couth" => %w{couths},
+    "polynucleotide" => %w{polynucleotides},
+    "oligonucleotide" => %w{oligonucleotides},
+    "oligo" => %w{oligos},
+    "vacay" => %w{vacays}
+  },
+  "verb" => {
+    "minor" => %w{minors minoring minored},
+    "rewind" => %w{rewinds rewinding rewound},
+    "underrun" => %w{underruns underrunning underran},
+    "exfiltrate" => %w{exfiltrates exfiltrating exfiltrated},
+    "regift" => %w{regifts regifting regifted},
+    "babysit" => %w{babysits babysitting babysat}
+  }
+}
+
 def strings_equal_by_words(s1, s2)
   words1 = s1.split(/[^A-Za-z0-9]+/)
   words2 = s2.split(/[^A-Za-z0-9]+/)
@@ -668,6 +737,10 @@ def make_word!(name, part_of_speech)
   @new_word_count += 1
   inflections = @irregular_inflections[name.gsub(' ', '_').to_sym] || []
   inflections << name
+
+  new_inflections = @new_inflections[part_of_speech][name]
+  inflections += new_inflections if new_inflections
+
   word = Word.create! name: name, part_of_speech: part_of_speech, irregular: inflections
 
   @new_inflections_required << word if
