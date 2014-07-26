@@ -717,9 +717,12 @@ def synset_for_data_line(line)
   synset_offset_s = synset_offset
   synset_offset = synset_offset.to_i
 
-  # Read synonyms
   synonyms = []
   markers = []
+  sentence_array = []
+  verb_frame_array = []
+
+  # Read synonyms
   rest.slice(0, 2*w_cnt).each_slice(2) do |a|
     s = a[0].gsub('_', ' ')
     marker = nil
@@ -732,6 +735,37 @@ def synset_for_data_line(line)
 
     synonyms << s
     markers << marker
+
+    if @part_of_speech == 'verb'
+      lex_id = case a[1].to_i
+      when (0..9)
+        '0' + a[1]
+      else
+        a[1]
+      end
+      sense_key = "#{a[0]}%2:#{lex_filenum}:#{lex_id}::"
+      sentences = @verb_sentences[sense_key]
+    else
+      sentences = nil
+    end
+
+    sentence_array << sentences
+
+    p_cnt, *more = rest.slice(2*w_cnt, rest.length-2*w_cnt)
+    if more
+      p_cnt = p_cnt.to_i
+  
+      f_cnt, *more_frames = more.slice(4*p_cnt, more.length-4*p_cnt)
+      f_cnt = f_cnt.to_i
+      if f_cnt != 0 and more_frames
+        more_frames.slice(0, 3*f_cnt).each_slice(3) do |f|
+          plus, f_num, w_num = f
+          verb_frame_id = @verb_frames[f_num.to_i][0]
+          w_num = w_num.to_i
+          verb_frame_array << [ w_num, verb_frame_id ]
+        end
+      end
+    end
   end
 
   synset = nil
@@ -799,58 +833,74 @@ def synset_for_data_line(line)
     break if synset # synonyms.each
   end unless synset
 
-  if synset
-    synset.update_attributes offset: synset_offset unless synset.offset == synset_offset
-    updated = false
-    if @lexnames[lex_filenum] != synset.lexname
+  if !synset
+    synset = make_synset! synset_offset, defn, @lexnames[lex_filenum], @part_of_speech, synonyms, markers
+    puts "New Synset ID #{synset.id} at offset #{synset_offset} <#{@lexnames[lex_filenum]}> #{defn.strip} (#{synonyms.join(",")})"
+  end
 
-      updated = true
-      puts "Lexname changed for Synset ID #{synset.id}: <#{@lexnames[lex_filenum]}>"
-      # nil.foo
-      synset.update_attributes lexname: @lexnames[lex_filenum]
-    end
+  synset.update_attributes offset: synset_offset unless synset.offset == synset_offset
+  updated = false
+  if @lexnames[lex_filenum] != synset.lexname
 
-    # The definition and synonyms have changed, or they would have been found above.
-    if defn != synset.definition.strip
+    updated = true
+    puts "Lexname changed for Synset ID #{synset.id}: <#{@lexnames[lex_filenum]}>"
+    # nil.foo
+    synset.update_attributes lexname: @lexnames[lex_filenum]
+  end
 
-      updated = true
-      puts "Definition changed for Synset ID #{synset.id}: \"#{defn}\" (WAS \"#{synset.definition}\")"
-      # nil.foo
-      synset.update_attributes definition: defn
-    end
+  # The definition and synonyms have changed, or they would have been found above.
+  if defn != synset.definition.strip
 
-    if synset.senses.count != synonyms.count ||
-      synonyms.any? { |synonym| synset.words.where(name: synonym).count != 1 }
+    updated = true
+    puts "Definition changed for Synset ID #{synset.id}: \"#{defn}\" (WAS \"#{synset.definition}\")"
+    # nil.foo
+    synset.update_attributes definition: defn
+  end
 
-      updated = true
-      # nil.foo
-      puts "Synonyms changed for Synset ID #{synset.id}: \"#{synonyms.join(",")}\""
-      make_synonyms! synset, synonyms, markers, @part_of_speech
-    end
+  if synset.senses.count != synonyms.count ||
+    synonyms.any? { |synonym| synset.words.where(name: synonym).count != 1 }
 
-    # Update lexical info (after updating synonyms)
-    synonyms.each_with_index do |synonym, index|
-      sense = synset.senses.includes(:word).where(words: {name: synonym}).first
+    updated = true
+    # nil.foo
+    puts "Synonyms changed for Synset ID #{synset.id}: \"#{synonyms.join(",")}\""
+    make_synonyms! synset, synonyms, markers, @part_of_speech
+  end
 
-      sense_key = @part_of_speech + '_' + synset_offset_s + '_' + synonym.gsub(' ', '_')
-      sense.update_attributes marker: markers[index], freq_cnt: @sense_index[sense_key.to_s], synset_index: index
+  # Update lexical info (after updating synonyms)
+  synonyms.each_with_index do |synonym, index|
+    sense = synset.senses.includes(:word).where(words: {name: synonym}).first
 
-      inflections = @irregular_inflections[synonym.gsub(' ', '_').to_sym] || []
-      inflections.each do |inflection|
-        if sense.word.inflections.where(name: inflection).blank?
-          puts "New irregular inflection: #{sense.word.name_and_pos}: #{inflection}"
-          sense.word.inflections.create! name: inflection
-        end
+    sense_key = @part_of_speech + '_' + synset_offset_s + '_' + synonym.gsub(' ', '_')
+    sense.update_attributes marker: markers[index], freq_cnt: @sense_index[sense_key.to_s], synset_index: index+1
+
+    sentences = sentence_array[index]
+    if sentences
+      sentences.each do |number|
+        frame = VerbFrame.find_by_number(number.to_i+1000)
+        SensesVerbFrame.create :sense => sense, :verb_frame => frame
       end
     end
 
-    @updated_synset_count += 1 if updated
-    return synset
+    sense.word.save # update the freq. cnt. for each word
   end
 
-  synset = make_synset! synset_offset, defn, @lexnames[lex_filenum], @part_of_speech, synonyms, markers
-  puts "New Synset ID #{synset.id} at offset #{synset_offset} <#{@lexnames[lex_filenum]}> #{defn.strip} (#{synonyms.join(",")})"
+  verb_frame_array.each do |entry|
+    w_num = entry.first
+    verb_frame_id = entry.second
 
+    if w_num != 0
+      sense = synset.senses.where(synset_index: w_num).first
+      SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+    else
+      synset.senses.each do |sense|
+        SensesVerbFrame.create :sense_id => sense.id, :verb_frame_id => verb_frame_id
+      end
+    end
+  end
+
+  @updated_synset_count += 1 if updated
+
+  synset.save
   synset
 end
 
@@ -1049,6 +1099,24 @@ puts "to_delete initialized with #{to_delete.count} members"
 
 @new_inflections_required = []
 
+# Make this a migration?
+# drop_table :senses_verb_frames
+# create_table :senses_verb_frames do |t|
+#   t.references :sense
+#   t.references :verb_frame
+# end
+puts "#{Time.now} Clearing senses_verb_frames..."
+STDOUT.flush
+SensesVerbFrame.delete_all
+puts "#{Time.now} Done clearing senses_verb_frames"
+STDOUT.flush
+
+puts "#{Time.now} Clearing pointers..."
+STDOUT.flush
+Pointer.delete_all
+puts "#{Time.now} Done clearing pointers"
+STDOUT.flush
+
 %w{adj adv noun verb}.each do |sfx|
   @part_of_speech = case sfx
   when 'adj'
@@ -1100,8 +1168,6 @@ puts "to_delete initialized with #{to_delete.count} members"
   end
 end
 
-puts "#{Time.now} finished"
-
 puts "Deleting #{to_delete.count} synsets: "
 STDOUT.flush
 
@@ -1135,3 +1201,76 @@ puts "#{@updated_synset_count} existing synsets updated"
 puts "#{@new_synset_count} new synsets created"
 puts "#{@new_word_count} new words created"
 puts "#{@new_sense_count} new senses created"
+
+# Here on out is straight out of seeds.rb. The IDS in the senses_verb_frames and
+# pointers tables are never exposed, so there's no need to be concerned about keeping
+# their REST IDS constant like the words, senses and synsets tables. So we just reseed
+# the pointers table here.
+%w{adj adv noun verb}.each do |sfx|
+  part_of_speech = case sfx
+  when 'adj'
+    'adjective'
+  when 'adv'
+    'adverb'
+  else
+    sfx
+  end
+
+  puts "#{Time.now} loading #{part_of_speech} pointers"
+  STDOUT.flush
+  File.open(File.expand_path("defaults/data.#{sfx}", File.dirname(__FILE__))).each do |line|
+    next if line =~ /^\s/
+
+    left, defn = line.split('| ')
+    synset_offset, lex_filenum, ss_type, w_cnt, *rest = left.split(' ')
+
+    synset = Synset.find_by_offset_and_part_of_speech synset_offset.to_i,
+      part_of_speech
+
+    w_cnt = w_cnt.to_i(16)
+    p_cnt, *more = rest.slice(2*w_cnt, rest.length-2*w_cnt)
+    next unless more
+
+    p_cnt = p_cnt.to_i
+    more.slice(0, 4*p_cnt).each_slice(4) do |p|
+      pointer_symbol, target_synset_offset, target_pos, source_target = p
+
+      target_synset =
+        Synset.find_by_offset_and_part_of_speech target_synset_offset.to_i,
+        case target_pos
+        when 'n'
+          'noun'
+        when /^[as]$/
+          'adjective'
+        when 'r'
+          'adverb'
+        when 'v'
+          'verb'
+        end
+
+      if source_target == '0000'
+        ptype = pointer_type(pointer_symbol)
+        Pointer.create_new :source => synset, :target => target_synset,
+            :ptype => ptype
+
+        rtype = reflected_pointer_type(pointer_symbol)
+        Pointer.create_new :source => target_synset, :target => synset,
+          :ptype => rtype
+      else
+        source_no = source_target[0,2]
+        target_no = source_target[2,2]
+        source_no = source_no.to_i(16)
+        target_no = target_no.to_i(16)
+
+        sense = synset.senses.find(:first, :conditions => "synset_index = #{source_no}")
+        target = target_synset.senses.find(:first, :conditions => "synset_index = #{target_no}")
+
+        Pointer.create_new :source => sense, :target => target, :ptype => pointer_type(pointer_symbol)
+        rtype = reflected_pointer_type(pointer_symbol)
+        Pointer.create_new(:source => target, :target => sense, :ptype => rtype) unless rtype.blank?
+      end
+    end
+  end
+end
+
+puts "#{Time.now} finished"
