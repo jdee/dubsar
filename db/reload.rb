@@ -632,6 +632,8 @@
 }
 
 @new_inflections = {
+  "adjective" => {},
+  "adverb" => {},
   "noun" => {
     "gip" => %w{gips},
     "bricolage" => %w{bricolages},
@@ -739,7 +741,13 @@ def make_word!(name, part_of_speech)
   inflections << name
 
   new_inflections = @new_inflections[part_of_speech][name]
-  inflections += new_inflections if new_inflections
+  if new_inflections
+    puts "add'l inflections for new word #{name}, #{part_of_speech}: #{new_inflections.join(", ")}"
+    inflections += new_inflections
+  else
+    puts "no add'l inflections for new word #{name}, #{part_of_speech}"
+  end
+  STDOUT.flush
 
   word = Word.create! name: name, part_of_speech: part_of_speech, irregular: inflections
 
