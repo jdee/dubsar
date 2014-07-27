@@ -631,6 +631,29 @@
   }
 }
 
+@word_exceptions = {
+  "adjective" => {
+    "retaliative" => 13365
+  },
+  "adverb" => {
+  },
+  "noun" => {
+    "Sempach" => 35419,
+    "battle of Sempach" => 35420,
+    "blue jeans" => 57408,
+    "pedal pushers" => 59903,
+    "skivvies" => 62285,
+    "penetralium" => 90852,
+    "Mount Rainier National Park" => 90951,
+    "Kennedy International" => 94264,
+    "Rainier" => 96067,
+    "Mount Rainier" => 96068,
+    "Mt. Rainier" => 96069
+  },
+  "verb" => {
+  }
+}
+
 @new_inflections = {
   "adjective" => {},
   "adverb" => {},
@@ -647,7 +670,6 @@
     "mic" => %w{mics},
     "humidifier" => %w{humidifiers},
     "dehumidifier" => %w{dehumidifiers},
-    "skivvies" => [], # already plural
     "trousers" => [], # already plural
     "kenosis" => %w{kenoses},
     "dendrology" => %w{dendrologies},
@@ -736,9 +758,9 @@ def definitions_overlap(defn1, defn2)
 end
 
 def make_word!(name, part_of_speech)
-  @new_word_count += 1
   inflections = @irregular_inflections[name.gsub(' ', '_').to_sym] || []
-  inflections << name
+
+  inflections << name # may dupe, but don't care that much
 
   new_inflections = @new_inflections[part_of_speech][name]
   if new_inflections
@@ -749,6 +771,24 @@ def make_word!(name, part_of_speech)
   end
   STDOUT.flush
 
+  spelling_change = @word_exceptions[part_of_speech][name]
+  if spelling_change
+    word = Word.find(spelling_change)
+    puts "spelling change for Word #{spelling_change} from \"#{word.name}\" to \"#{name}\""
+    word.update_attributes name: name
+
+    word.inflections.destroy_all
+
+    inflections.each do |inflection|
+      word.inflections.create! name: inflection
+    end
+
+    return word
+  end
+
+  puts "New word: #{name}, #{part_of_speech}"
+
+  @new_word_count += 1
   word = Word.create! name: name, part_of_speech: part_of_speech, irregular: inflections
 
   @new_inflections_required << word if
@@ -767,7 +807,6 @@ def make_synset!(offset, defn, lexname, part_of_speech, synonyms, markers)
 end
 
 def make_synonym!(synset, synonym, marker, part_of_speech)
-  # word = make_word! synonym, part_of_speech
   word = Word.find_by_name_and_part_of_speech synonym, part_of_speech
   word ||= make_word! synonym, part_of_speech
 
@@ -873,11 +912,9 @@ def synset_for_data_line(line)
   #    a close definition
   synonyms.each do |synonym|
     word = Word.find_by_name_and_part_of_speech synonym, @part_of_speech
-    if word.blank?
-      puts "New word: #{synonym}, #{@part_of_speech}"
-      word = make_word! synonym, @part_of_speech
-      next
-    end
+    word ||= make_word! synonym, @part_of_speech
+
+    next unless word
 
     # Only looking for matches among the old 3.0 data set.
     word.synsets.where(["synsets.id <= ?", @max_synset_id]).each do |synonym_synset|
