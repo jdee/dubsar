@@ -1386,4 +1386,14 @@ puts "#{@new_sense_count} new senses created"
   end
 end
 
+puts "#{Time.now} rebuilding inflections_fts"
+STDOUT.flush
+
+Rake::Task['fts:build'].invoke
+
+puts "#{Time.now} vacuuming"
+STDOUT.flush
+
+ActiveRecord::Base.connection.execute "vacuum"
+
 puts "#{Time.now} finished"
