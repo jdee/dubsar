@@ -35,7 +35,7 @@ namespace :wotd do
           channel.description 'Dubsar Word of the Day News Feed'
           channel.link 'https://dubsar-dictionary.com'
           channel.lastBuildDate build_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
-          channel.pubDate DailyWord.first(:order => 'created_at DESC').created_at.strftime("%a, %d %b %Y %H:%M:%S GMT")
+          channel.pubDate DailyWord.order('created_at DESC').first.created_at.strftime("%a, %d %b %Y %H:%M:%S GMT")
           channel.image do |image|
             image.url 'https://s.dubsar-dictionary.com/images/dubsar-link.png'
             image.title 'Dubsar Word of the Day'
