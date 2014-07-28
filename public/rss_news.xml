@@ -6,7 +6,7 @@
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>https://dubsar-dictionary.com</link>
     <lastBuildDate>Fri, 10 Jan 2014 23:30:00 GMT</lastBuildDate>
-    <pubDate>Fri, 10 Jan 2014 23:30:00 GMT</pubDate>
+    <pubDate>Tue, 28 Jul 2014 01:15:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -16,9 +16,31 @@
       <height>20</height>
     </image>
     <item>
+      <title>Dubsar approved for Amazon Fire phone</title>
+      <description>
+      Dubsar has been approved for distribution to the Amazon Fire phone. Look for
+      it there.
+      </description>
+      <link>https://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">49</guid>
+      <pubDate>Tue, 28 Jul 2014 01:15:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Dubsar server outage</title>
+      <description>
+      The server will be unavailable for maintenace for some hours starting shortly
+      after the word of the day 2014-Jul-29 00:00:00 UTC. That&apos;s Monday evening
+      in the U.S.
+      </description>
+      <link>https://dubsar-dictionary.com</link>
+      <guid isPermaLink="false">48</guid>
+      <pubDate>Tue, 28 Jul 2014 01:15:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Dubsar 1.1.2 for Android now available</title>
       <description>
-      Privacy statement from the Dubsar Dictionary Project.
+      Dubsar 1.1.2 is now available on Google Play, in the Amazon App Store,
+      and by direct download.
       </description>
       <link>https://dubsar-dictionary.com</link>
       <guid isPermaLink="false">47</guid>
