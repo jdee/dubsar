@@ -40,4 +40,4 @@ WOTD_LOG=/var/lib/dubsar/shared/log/wotd.log
 export RAILS_ENV=production
 
 cd $DUBSAR_PATH
-rake wotd:new > $WOTD_LOG 2>&1
+bundle exec rake wotd:new > $WOTD_LOG 2>&1
