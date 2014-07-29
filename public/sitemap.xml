@@ -3,8 +3,8 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://dubsar-dictionary.com</loc>
-    <lastmod>2014-07-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2014-07-29</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>
@@ -23,7 +23,7 @@
   </url>
   <url>
     <loc>https://dubsar-dictionary.com/about</loc>
-    <lastmod>2014-01-11</lastmod>
+    <lastmod>2014-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -125,7 +125,7 @@
   </url>
   <url>
     <loc>https://dubsar-dictionary.com/faq</loc>
-    <lastmod>2014-01-12</lastmod>
+    <lastmod>2014-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
