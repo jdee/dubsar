@@ -15,7 +15,11 @@
 
 %p
   I can&apos;t say Dubsar is always the finest example of my coding abilities, but the
-  source is GPL and available in GitHub:
+  source is GPL and available in GitHub.
+
+%p
+  Version 2.0 of the iOS app, in the master branch,
+  has been rewritten in Swift and will be released to the App Store with iOS 8.
 
 %ul
   %li
@@ -27,8 +31,8 @@
 
 %h2 Laertes
 
-= image_tag 'laertes.png', size: '284x160'
-= image_tag 'laertes-combat.png', size: '284x160'
+= image_tag 'laertes.png', size: '284x187'
+= image_tag 'laertes-combat.png', size: '284x187'
 
 %p
   Laertes is a first-person fantasy role-playing game for iOS using OpenGL ES 2.0. I built
@@ -38,23 +42,29 @@
   =link_to 'here.', 'http://redmenace.imgur.com/Laertes'
   There will doubtless be an Android version of Laertes some day as well, but not yet.
 
-%h2 Tensor
+%h2 iOS Knob Control
 
 %p
-  Tensor is the working name for a new productivity app I have started building in the last
-  month or so. I built it
-  to replace spreadsheets I used for grocery and to-do lists. There is currently a Rails
-  webapp and an iOS app. I also plan to build an Android app fairly soon.
+  Just as the space program produced miracles like the ballpoint pen,
+  I have spun out some of the custom components I built for Laertes. The first is a
+  customizable knob control for iOS that can be configured to respond to four different
+  gestures and operates in continuous, discrete and rotary dial modes. It can use custom
+  images or generate customizable default images for you. It&apos;s distributed as a
+  single .h, .m file pair you drop into a project. It includes full, separate sample
+  apps in Objective-C and Swift, not to mention some reusable images from a graphic
+  designer.
 
-%h2 TestFlight
+= image_tag 'ikc-spin.png', alt: 'spin', size: "160x284"
+= image_tag 'ikc-continuous.png', alt: 'spin', size: "160x284"
+= image_tag 'ikc-rotary-dial.png', alt: 'spin', size: "160x284"
+= image_tag 'ikc-feedback.png', alt: 'spin', size: "160x284"
+
+%h2 Violation for iOS
 
 %p
-  I distribute iOS test builds on TestFlight.
-  If you would like to take a look at Laertes or Tensor, you just have to sign up to be
-  a tester
-  = link_to 'here.', 'http://tflig.ht/q5zFmO'
-  Please also contact me directly, especially if I don&apos;t know you personally.
-  iOS 7 is required for both apps at the moment, and for Laertes, which uses a lot of
-  resources, the later the model, the
-  better. The best experience is on an iPhone 5 or later. Laertes has 64-bit support as
-  well, though that is recent and not thoroughly tested.
+  The release of the iOS knob control went well, so I wanted to release more of the
+  custom components from Laertes. Violation is a framework for iOS that currently
+  comprises a custom gesture recognizer and a custom control that uses it. Eventually,
+  the iOS Knob Control will join Violation, but that will wait until a time when both are
+  not simultaneously being prepared for a release. Like the iOS Knob Control, Violation
+  includes full, separate sample apps in Swift and Objective-C.
