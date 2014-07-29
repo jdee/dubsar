@@ -77,6 +77,12 @@ namespace :deploy do
     run "ln -nsf #{shared_config_path}/devise_config.rb #{release_path}/config/initializers/devise.rb"
   end
 
+  desc "Links the database for download"
+  task :link_wn31_db do
+    run "ln -nsf #{shared_database_path}/dubsar-wn3.1.zip #{File.join(current_path, 'public', 'dubsar-wn3.1.zip')}"
+    run "ln -nsf #{shared_database_path}/dubsar-wn3.1-1.zip #{File.join(current_path, 'public', 'dubsar-wn3.1-1.zip')}"
+  end
+
   desc "Generates a new secret"
   task :update_secret do
     run <<-EOF
@@ -126,6 +132,7 @@ after 'deploy:update', 'deploy:link_client_secrets'
 after 'deploy:update', 'deploy:wotd_build'
 after 'deploy:update', 'deploy:update_secret'
 after 'deploy:update', 'deploy:link_devise_config'
+after 'deploy:update', 'deploy:link_wn31_db'
 after 'deploy:update', 'pusher:build'
 # after 'deploy:update', 'deploy:optimize_fts'
 
