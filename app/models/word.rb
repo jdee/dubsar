@@ -175,6 +175,19 @@ class Word < ActiveRecord::Base
     irregulars.each { |i| inflections.build :name => i } if irregulars
   end
 
+  def before_destroy
+    daily_words = DailyWord.where(word_id: id)
+    return if daily_words.blank?
+    puts "Removing #{daily_words.count} daily word row(s) for word ID #{id}"
+    daily_words.destroy_all
+
+    true
+  rescue
+    # If, I don't know, there's like no daily_words table or something, just figure
+    # it must be for iOS and silently ignore it.
+    true
+  end
+
   def <=>(other)
     name <=> other.name
   end

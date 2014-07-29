@@ -663,7 +663,7 @@
     "neuromarketing" => %w{neuromarketings},
     "chinos" => [], # already plural
     "moulin" => %w{moulins},
-    "lacunar" => %w{lacunars lacunaria},
+    "lacunar" => %w{lacunars}, # lacunaria in exceptions
     "golfclub" => %w{golfclubs},
     "liftgate" => %w{liftgates},
     "jeans" => [], # already plural
@@ -1193,6 +1193,8 @@ STDOUT.flush
 
 failure_count = 0
 
+puts "RAILS_ENV = #{ENV['RAILS_ENV']}"
+
 @max_synset_id = 117659 # Synset.order('id desc').limit(1).first.id
 puts "Max Synset ID is #{@max_synset_id}"
 
@@ -1300,6 +1302,7 @@ STDOUT.flush
 
 Word.empty.each do |word|
   puts "DELETING #{word.id}: #{word.name_and_pos}"
+  puts "Word #{word.id} (#{word.name_and_pos}) was a potential WOTD" if word.name =~ /^[A-Za-z]{9}[A-Za-z]*$/
   STDOUT.flush
 
   word.destroy
