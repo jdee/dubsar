@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
     <link>https://dubsar-dictionary.com</link>
-    <lastBuildDate>Tue, 29 Jul 2014 02:45:00 GMT</lastBuildDate>
-    <pubDate>Tue, 29 Jul 2014 02:45:00 GMT</pubDate>
+    <lastBuildDate>Fri, 01 Aug 2014 22:00:00 GMT</lastBuildDate>
+    <pubDate>Fri, 01 Aug 2014 22:00:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,20 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Dubsar 1.3.2 available in the App Store with WordNet® 3.1</title>
+      <description>
+      Version 1.3.2 of Dubsar for iOS is available for free worldwide in the App Store
+      with the content of WordNet® 3.1 and the iOS 7.1 SDK. This version can be
+      installed on any device running iOS 5.0 or higher. Version 2.0.0 of the
+      app, rewritten in Swift, will be released with the iOS 8 SDK in the
+      fall. Swift requires iOS 7.0 or higher. Version 1.3.2 is the last anticipated
+      release of the app for iOS 5 &amp; 6.
+      </description>
+      <link>https://itunes.apple.com/us/app/dubsar/id453868483?mt=8</link>
+      <guid isPermaLink="false">51</guid>
+      <pubDate>Fri, 01 Aug 2014 22:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar updated to WordNet® 3.1</title>
       <description>
