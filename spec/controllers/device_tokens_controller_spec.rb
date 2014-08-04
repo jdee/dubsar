@@ -18,7 +18,7 @@ describe DeviceTokensController do
 
     token = assigns(:device_token)
     token.token.should == 'some-token'
-    token.production.should be_false
+    token.production.should be false
   end
 
   # The semantics here of POST/DELETE are add/remove this token to/from the active list.
@@ -43,14 +43,30 @@ describe DeviceTokensController do
     DeviceToken.first.updated_at.should > orig_time
   end
 
-  it 'fails with an invalid client secret' do
+  it 'fails with an invalid client secret in prod' do
+    post :create, device_token: {token:'some-token', production: true}, version:'1.2.2',
+      secret:'wrong-secret'
+    response.code.should == "403"
+  end
+
+  it 'fails with an invalid client secret in dev' do
     post :create, device_token: {token:'some-token', production: false}, version:'1.2.2',
       secret:'wrong-secret'
     response.code.should == "403"
   end
 
+  it 'fails with a blank client secret in prod' do
+    post :create, device_token: {token:'some-token', production: true}, version:'1.2.2'
+    response.code.should == "403"
+  end
+
+  it 'succeeds with a blank client secret in dev' do
+    post :create, device_token: {token:'some-token', production: false}, version:'1.2.2'
+    response.code.should == "201"
+  end
+
   it 'deletes by token' do
-    pending "not really necessary"
+    skip "not really necessary"
     DeviceToken.count.should == 0
     post :create, device_token: {token:'some-token', production: false}, version:'1.2.2',
       secret:'BBE2C00F-15EF-4A5F-A773-F48E859226D8'

@@ -64,6 +64,13 @@ class DeviceTokensController < ApplicationController
     client_secret = params[:secret]
     expected_secret = client_secrets[client_version]
 
+    # GETs come through here
+    return true if params[:device_token].blank?
+
+    # Verify the secret if it is included, but for a dev registration, it's ok to omit the
+    # client secret.
+    return true if params[:device_token][:production].blank? && client_secret.blank?
+
 =begin
     puts "client_secrets: #{client_secrets}"
     puts "client_version: #{client_version.inspect}; client_secret: #{client_secret.inspect}"

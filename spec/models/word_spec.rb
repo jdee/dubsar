@@ -108,7 +108,7 @@ describe Word do
   context 'in the general data model' do
     it 'recognizes synonyms' do
       food, grub = create_synonyms!
-      food.synsets.any?{|s|s.words.include?(grub)}.should be_true
+      food.synsets.any?{|s|s.words.include?(grub)}.should be true
     end
   end
 
@@ -141,7 +141,7 @@ describe Word do
 
     # https://github.com/jdee/dubsar/issues/44
     it 'handles special characters without crashing' do
-      pending "this fails with the build of sqlite in MacPorts by default. pending until I rebuild that or find another solution" if RUBY_PLATFORM =~ /darwin/
+      skip "this fails with the build of sqlite in MacPorts by default. pending until I rebuild that or find another solution" if RUBY_PLATFORM =~ /darwin/
       count = nil
       -> { count = Word.search(:term => 'S(', :offset => 0).count }.should_not raise_error
       count.should == 0
