@@ -43,10 +43,18 @@ class Hash
         lower1 = matches[2]
         lower2 = '' << lower1.getbyte(0)+1
       else
-        capital1 = 'A'
-        capital2 = '['
-        lower1   = 'a'
-        lower2   = '{'
+        matches = /^\[([A-Z])([A-Z])([a-z])([a-z])\]\*$/.match term
+        if matches
+          capital1 = matches[1]
+          capital2 = '' << matches[2].getbyte(0)+1
+          lower1 = matches[3]
+          lower2 = '' << matches[4].getbyte(0)+1
+        else
+          capital1 = 'A'
+          capital2 = '['
+          lower1   = 'a'
+          lower2   = '{'
+        end
       end
 
       params.merge!(
