@@ -81,6 +81,12 @@ describe SensesController do
         #   "lexname", "marker", freq_cnt, [ [ sense_id1, "synonym1", "marker1", freq_cnt1 ], [ sense_id2, "synonym2", "marker2", freq_cnt2 ], ... ],
         #   [ "verb frame 1", "verb frame 2", ... ], [ "sample sentence 1", "sample sentence 2", ... ],
         #   [ [ "ptype1", "target_type1", target_id1, "target text", "target gloss" ], [ "ptype2", ... ], ... ] ]
+        pointer_array = [ pointer.ptype, pointer.target_type.downcase, pointer.target.id,
+          target_text, pointer.target.gloss ]
+        if pointer.target.is_a? Sense
+          pointer_array << pointer.target.synset_id
+        end
+
         JSON.parse(response.body).should ==
           [
             sense.id,
@@ -94,19 +100,14 @@ describe SensesController do
                 s.id,
                 s.word.name,
                 s.marker,
-                s.freq_cnt
+                s.freq_cnt,
+                s.synset_id
               ]
             },
             [],
             sense.synset.samples,
             [
-              [
-                pointer.ptype,
-                pointer.target_type.downcase,
-                pointer.target.id,
-                target_text,
-                pointer.target.gloss
-              ]
+              pointer_array
             ]
           ]
       end

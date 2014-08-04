@@ -53,7 +53,7 @@ class SensesController < ApplicationController
 
   def json_show_response
     response = [ @sense.id, [ @sense.word.id, @sense.word.name, @sense.word.pos ], [ @sense.synset.id, @sense.synset.gloss ], @sense.synset.lexname, @sense.marker, @sense.freq_cnt ]
-    response << @sense.synset.senses_except(@sense.word).sort{|s1,s2|s2.freq_cnt<=>s1.freq_cnt}.map{|s|[s.id,s.word.name,s.marker,s.freq_cnt]}
+    response << @sense.synset.senses_except(@sense.word).sort{|s1,s2|s2.freq_cnt<=>s1.freq_cnt}.map{|s|[s.id,s.word.name,s.marker,s.freq_cnt,s.synset_id]}
     response << @sense.verb_frames.map(&:frame)
     response << @sense.synset.samples
     response << pointer_response
@@ -65,6 +65,8 @@ class SensesController < ApplicationController
       response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
       response << ptr.target.word.name_and_pos
       response << ptr.target.gloss
+      response << ptr.target.synset_id if ptr.target.is_a?(Sense)
+      response
     end +
     @sense.synset.pointers.map do |ptr|
       response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]

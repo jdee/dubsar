@@ -51,7 +51,7 @@ class SynsetsController < ApplicationController
   private
 
   def json_show_response
-    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.senses.includes(:word).order('freq_cnt DESC').map{|s|[s.id,s.word.name,s.marker,s.freq_cnt]}, @synset.freq_cnt, pointer_response ]
+    [ @synset.id, Word.pos(@synset.part_of_speech), @synset.lexname, @synset.gloss, @synset.samples, @synset.senses.includes(:word).order('freq_cnt DESC').map{|s|[s.id,s.word.name,s.marker,s.freq_cnt,s.word_id]}, @synset.freq_cnt, pointer_response ]
   end
 
   def pointer_response
@@ -59,6 +59,8 @@ class SynsetsController < ApplicationController
       response = [ ptr.ptype, ptr.target_type.downcase, ptr.target.id ]
       response << ptr.target.word_list_and_pos
       response << ptr.target.gloss
+      response << ptr.target.synset_id if ptr.target.is_a? Sense
+      response
     end
   end
 end

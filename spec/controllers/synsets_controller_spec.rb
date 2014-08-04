@@ -70,7 +70,7 @@ describe SynsetsController do
       #     [ [ sense_id1, "synonym1", "marker1", freq_cnt1 ], [ sense_id2, "synonym2", "marker2", freq_cnt2 ] ], freq_cnt,
       #     [ [ "ptype1", "target_type1", target_id1, "target text", "target gloss" ], [ "ptype2", ... ], ... ] ]
       JSON.parse(response.body).should ==
-        [ synset.id, 'adj', synset.lexname, synset.gloss, synset.samples, synset.senses.includes(:word).order('words.name').map{|s|[s.id,s.word.name,s.marker,s.freq_cnt]}, synset.freq_cnt, [ [ "antonym", "synset", bad.senses.first.synset_id, bad.senses.first.synset.word_list_and_pos, bad.senses.first.synset.gloss ] ] ]
+        [ synset.id, 'adj', synset.lexname, synset.gloss, synset.samples, synset.senses.includes(:word).order('words.name').map{|s|[s.id,s.word.name,s.marker,s.freq_cnt,s.word_id]}, synset.freq_cnt, [ [ "antonym", "synset", bad.senses.first.synset_id, bad.senses.first.synset.word_list_and_pos, bad.senses.first.synset.gloss ] ] ]
     end
   end
 end
