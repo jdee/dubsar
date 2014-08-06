@@ -244,7 +244,7 @@ class WordsController < ApplicationController
 
   def json_show_response
     senses = @word.senses.order('freq_cnt DESC').map do |s|
-      [ s.id, s.synset.senses_except(s.word).map{|_s| [ _s.id, _s.word.name ]}, s.synset.gloss, s.synset.lexname, s.marker, s.freq_cnt ]
+      [ s.id, s.synset.senses_except(s.word).map{|_s| [ _s.id, _s.word.name ]}, s.synset.gloss, s.synset.lexname, s.marker, s.freq_cnt, s.synset_id ]
     end
     [ @word.id, @word.name, @word.pos, @word.other_forms, senses, @word.freq_cnt ]
   end

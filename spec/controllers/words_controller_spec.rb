@@ -177,7 +177,7 @@ describe WordsController do
       entry.third.should == food.pos
       entry.fourth.should == food.other_forms
       # only has one sense
-      entry.fifth.should == [ [ food.senses.first.id, [ [ grub.senses.first.id, grub.name ] ], food.synsets.first.gloss, food.synsets.first.lexname, food.senses.first.marker, food.senses.first.freq_cnt ] ]
+      entry.fifth.should == [ [ food.senses.first.id, [ [ grub.senses.first.id, grub.name ] ], food.synsets.first.gloss, food.synsets.first.lexname, food.senses.first.marker, food.senses.first.freq_cnt, food.senses.first.synset_id ] ]
       entry[5].should == food.freq_cnt
     end
 
