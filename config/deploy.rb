@@ -79,8 +79,10 @@ namespace :deploy do
 
   desc "Links the database for download"
   task :link_wn31_db do
-    run "ln -nsf #{shared_database_path}/dubsar-wn3.1.zip #{File.join(current_path, 'public', 'dubsar-wn3.1.zip')}"
-    run "ln -nsf #{shared_database_path}/dubsar-wn3.1-1.zip #{File.join(current_path, 'public', 'dubsar-wn3.1-1.zip')}"
+    YAML::load_file(File.expand_path('config/downloads.yml', Rails.root)).each do |k, v|
+      zipfile = "#{k}.zip"
+      run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
+    end
   end
 
   desc "Generates a new secret"

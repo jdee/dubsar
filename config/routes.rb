@@ -69,6 +69,8 @@ Dubsar::Application.routes.draw do
 
   get '/m_resume'         , to: 'application#m_resume'
 
+  get '/downloads'        , to: 'application#downloads'
+
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 
   get '/(.:format)', to: 'words#search'

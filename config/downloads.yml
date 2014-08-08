@@ -15,32 +15,5 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-development:
-  adapter: sqlite3
-  encoding: unicode
-  database: db/development.sqlite3
-  pool: 5
-
-backup_dev:
-  adapter: sqlite3
-  encoding: unicode
-  database: db/backup_dev.sqlite3
-  pool: 5
-
-test:
-  adapter: sqlite3
-  encoding: unicode
-  database: db/test.sqlite3
-  pool: 5
-
-production:
-  adapter: sqlite3
-  encoding: unicode
-  database: db/production.sqlite3
-  pool: 5
-
-backup:
-  adapter: sqlite3
-  encoding: unicode
-  database: dubsar_backup
-  pool: 5
+'dubsar-wn3.1-1':
+    unzipped: 96345088

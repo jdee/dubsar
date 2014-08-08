@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
   before_filter :get_theme_cookie
   before_filter :set_back
 
+  respond_to :html, :json
+
   # Retrieve the user's <tt>dubsar_theme</tt> cookie before rendering
   # any view.
   def get_theme_cookie
@@ -80,5 +82,22 @@ class ApplicationController < ActionController::Base
 
   def apps
     render layout: false
+  end
+
+  def downloads
+    respond_to do |format|
+      format.json do
+        file = File.expand_path('config/downloads.yml', Rails.root)
+        downloads = YAML::load_file file
+
+        downloads.each do |k, v|
+          dlfile = File.join(Rails.root, 'public', "#{k}.zip")
+
+          v[:zipped] = File.size(dlfile)
+        end
+
+        respond_with downloads.to_json
+      end
+    end
   end
 end

@@ -1,6 +1,0 @@
-development_app_key: my development app key
-development_master_secret: my development master secret
-
-# Will send to whatever is configured, both, if present.:
-# production_app_key: my production app key
-# production_master_secret: my production master secret
