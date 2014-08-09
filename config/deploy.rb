@@ -84,12 +84,20 @@ namespace :deploy do
 
     on_rollback { find_and_execute_task 'deploy:rollback' }
 
-    transaction do
+    if File.exist? file
       puts "loading #{file}"
-      YAML::load_file(file).each do |k, v|
-        zipfile = "#{k}.zip"
-        run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
+      begin
+        YAML::load_file(file).each do |k, v|
+          zipfile = "#{k}.zip"
+          run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
+        end
+      rescue
+        puts "Failed to load #{file}"
+        find_and_execute_task 'deploy:rollback'
       end
+    else
+      puts "No YAML file to link"
+      find_and_execute_task 'deploy:rollback'
     end
   end
 
