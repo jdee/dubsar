@@ -82,7 +82,10 @@ namespace :deploy do
     file = File.join(current_path, 'config', 'downloads.yml')
     puts "linking downloads in #{file}"
 
+    on_rollback { find_and_execute_task 'deploy:rollback' }
+
     transaction do
+      puts "loading #{file}"
       YAML::load_file(file).each do |k, v|
         zipfile = "#{k}.zip"
         run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
