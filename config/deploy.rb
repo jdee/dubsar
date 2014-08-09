@@ -79,10 +79,8 @@ namespace :deploy do
 
   desc "Links the database for download"
   task :link_wn31_db do
-    file = File.join(current_path, 'config', 'downloads.yml')
+    file = File.join(release_path, 'config', 'downloads.yml')
     puts "linking downloads in #{file}"
-
-    on_rollback { find_and_execute_task 'deploy:rollback' }
 
     if File.exist? file
       puts "loading #{file}"
@@ -96,7 +94,7 @@ namespace :deploy do
         find_and_execute_task 'deploy:rollback'
       end
     else
-      puts "No YAML file to link"
+      puts "Could not find #{file}"
       find_and_execute_task 'deploy:rollback'
     end
   end
