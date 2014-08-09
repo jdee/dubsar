@@ -79,7 +79,7 @@ namespace :deploy do
 
   desc "Links the database for download"
   task :link_wn31_db do
-    file = File.expand_path('./downloads.yml', __FILE__)
+    file = File.expand_path('./downloads.yml', File.dirname(__FILE__))
     puts "linking downloads in #{file}"
 
     if File.exist? file
