@@ -79,7 +79,9 @@ namespace :deploy do
 
   desc "Links the database for download"
   task :link_wn31_db do
-    YAML::load_file(File.join(current_path, 'config', 'downloads.yml')).each do |k, v|
+    file = File.expand_path 'config/downloads.yml', current_path
+    puts "linking downloads in #{file}"
+    YAML::load_file(file).each do |k, v|
       zipfile = "#{k}.zip"
       run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
     end
