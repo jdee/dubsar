@@ -87,7 +87,7 @@ namespace :deploy do
       run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
     end
 =end
-    run "ln -nsf #{shared_database_path}/dubsar-wn3.1-1.zip #{File.join(current_path, 'public', 'dubsar-wn3.1-1.zip'}"
+    run "ln -nsf #{shared_database_path}/dubsar-wn3.1-1.zip #{File.join(current_path, 'public', 'dubsar-wn3.1-1.zip')}"
   end
 
   desc "Generates a new secret"
