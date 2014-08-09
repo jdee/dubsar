@@ -79,7 +79,7 @@ namespace :deploy do
 
   desc "Links the database for download"
   task :link_wn31_db do
-    file = File.join(release_path, 'config', 'downloads.yml')
+    file = File.join(shared_config_path, 'downloads.yml')
     puts "linking downloads in #{file}"
 
     if File.exist? file
