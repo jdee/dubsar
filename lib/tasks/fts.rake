@@ -16,7 +16,7 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 namespace :fts do
-  desc 'build the FTS table in the current database'
+  desc 'build the FTS tables in the current database'
   task :build => :environment do
     puts "building inflections_fts table"
     puts " dropping any old tables"
@@ -32,10 +32,16 @@ namespace :fts do
     ActiveRecord::Base.connection.execute <<-SQL
       DROP TABLE IF EXISTS inflections_fts_segments
     SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS inflections_fts_docsize
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS inflections_fts_stat
+    SQL
 
     puts " creating new table"
     ActiveRecord::Base.connection.execute <<-SQL
-      CREATE VIRTUAL TABLE inflections_fts USING fts3(id, name, word_id)
+      CREATE VIRTUAL TABLE inflections_fts USING fts4(id, name, word_id)
     SQL
     puts " populating new table"
     ActiveRecord::Base.connection.execute <<-SQL
@@ -44,14 +50,49 @@ namespace :fts do
     SQL
     puts " done"
 
+    puts "building synsets_fts table"
+    puts " dropping any old tables"
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synsets_fts
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synsets_fts_content
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synsets_fts_segdir
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synsets_fts_segments
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synsets_fts_docsize
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synsets_fts_stat
+    SQL
+
+    puts " creating new table"
+    ActiveRecord::Base.connection.execute <<-SQL
+      CREATE VIRTUAL TABLE synsets_fts USING fts4(id, definition)
+    SQL
+    puts " populating new table"
+    ActiveRecord::Base.connection.execute <<-SQL
+      INSERT INTO synsets_fts(id, definition)
+        SELECT id, definition FROM synsets
+    SQL
+
     Rake::Task['fts:optimize'].invoke
+    puts " done"
   end
 
-  desc "optimize FTS table"
+  desc "optimize FTS tables"
   task :optimize => :environment do
-    puts "optimizing inflections_fts table"
+    puts "optimizing fts tables"
     ActiveRecord::Base.connection.execute <<-SQL
       INSERT INTO inflections_fts(inflections_fts) VALUES('optimize')
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      INSERT INTO synsets_fts(synsets_fts) VALUES('optimize')
     SQL
     puts "done"
   end
