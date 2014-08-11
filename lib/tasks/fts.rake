@@ -104,7 +104,7 @@ namespace :fts do
 
     puts " creating new table"
     ActiveRecord::Base.connection.execute <<-SQL
-      CREATE VIRTUAL TABLE synset_suggestions USING fts4(id, suggestion)
+      CREATE VIRTUAL TABLE synset_suggestions USING fts4(synset_id, suggestion)
     SQL
     puts "#{DateTime.now} populating new table"
     Synset.order('id ASC').each do |synset|
@@ -114,7 +114,7 @@ namespace :fts do
         suggestion.strip!
 
         ActiveRecord::Base.connection.execute <<-SQL
-          INSERT INTO synset_suggestions(id, suggestion) VALUES(#{synset.id}, '#{suggestion}')
+          INSERT INTO synset_suggestions(synset_id, suggestion) VALUES(#{synset.id}, '#{suggestion}')
         SQL
 
       end

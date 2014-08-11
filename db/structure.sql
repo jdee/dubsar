@@ -38,6 +38,12 @@ CREATE TABLE 'synsets_fts_segments'(blockid INTEGER PRIMARY KEY, block BLOB);
 CREATE TABLE 'synsets_fts_segdir'(level INTEGER,idx INTEGER,start_block INTEGER,leaves_end_block INTEGER,end_block INTEGER,root BLOB,PRIMARY KEY(level, idx));
 CREATE TABLE 'synsets_fts_docsize'(docid INTEGER PRIMARY KEY, size BLOB);
 CREATE TABLE 'synsets_fts_stat'(id INTEGER PRIMARY KEY, value BLOB);
+CREATE VIRTUAL TABLE synset_suggestions USING fts4(synset_id, suggestion);
+CREATE TABLE 'synset_suggestions_content'(docid INTEGER PRIMARY KEY, 'c0synset_id', 'c1suggestion');
+CREATE TABLE 'synset_suggestions_segments'(blockid INTEGER PRIMARY KEY, block BLOB);
+CREATE TABLE 'synset_suggestions_segdir'(level INTEGER,idx INTEGER,start_block INTEGER,leaves_end_block INTEGER,end_block INTEGER,root BLOB,PRIMARY KEY(level, idx));
+CREATE TABLE 'synset_suggestions_docsize'(docid INTEGER PRIMARY KEY, size BLOB);
+CREATE TABLE 'synset_suggestions_stat'(id INTEGER PRIMARY KEY, value BLOB);
 INSERT INTO schema_migrations (version) VALUES ('20101017043609');
 
 INSERT INTO schema_migrations (version) VALUES ('20101017043706');
@@ -93,4 +99,6 @@ INSERT INTO schema_migrations (version) VALUES ('20130107234336');
 INSERT INTO schema_migrations (version) VALUES ('20130806180052');
 
 INSERT INTO schema_migrations (version) VALUES ('20140810202705');
+
+INSERT INTO schema_migrations (version) VALUES ('20140811190025');
 
