@@ -81,6 +81,46 @@ namespace :fts do
         SELECT id, definition FROM synsets
     SQL
 
+    puts "building synset_suggestions table"
+    puts " dropping any old tables"
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synset_suggestions
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synset_suggestions_content
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synset_suggestions_segdir
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synset_suggestions_segments
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synset_suggestions_docsize
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      DROP TABLE IF EXISTS synset_suggestions_stat
+    SQL
+
+    puts " creating new table"
+    ActiveRecord::Base.connection.execute <<-SQL
+      CREATE VIRTUAL TABLE synset_suggestions USING fts4(id, suggestion)
+    SQL
+    puts "#{DateTime.now} populating new table"
+    Synset.order('id ASC').each do |synset|
+      synset.definition.split(/[;"'`.,:()]+/).each do |suggestion|
+        next if suggestion.blank?
+        suggestion.chomp!
+        suggestion.strip!
+
+        ActiveRecord::Base.connection.execute <<-SQL
+          INSERT INTO synset_suggestions(id, suggestion) VALUES(#{synset.id}, '#{suggestion}')
+        SQL
+
+      end
+      puts "#{DateTime.now} finished #{synset.id}/#{Synset.count}" if synset.id % 10_000 == 0
+    end
+
     Rake::Task['fts:optimize'].invoke
     puts " done"
   end
@@ -93,6 +133,9 @@ namespace :fts do
     SQL
     ActiveRecord::Base.connection.execute <<-SQL
       INSERT INTO synsets_fts(synsets_fts) VALUES('optimize')
+    SQL
+    ActiveRecord::Base.connection.execute <<-SQL
+      INSERT INTO synset_suggestions(synset_suggestions) VALUES('optimize')
     SQL
     puts "done"
   end
