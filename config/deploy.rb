@@ -91,8 +91,8 @@ namespace :deploy do
           zipfile = "#{download[:name]}.zip"
           run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
         end
-      rescue
-        puts "Failed to load #{file}"
+      rescue => e
+        puts "Failed to load #{file}: #{e}"
         find_and_execute_task 'deploy:rollback'
       end
     else
@@ -144,13 +144,13 @@ end
 
 after "deploy:setup", "sqlite3:make_shared_folder"
 
+after 'deploy:update', 'deploy:link_wn31_db'
 after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_client_secrets'
 after 'deploy:update', 'deploy:wotd_build'
 after 'deploy:update', 'deploy:update_secret'
 after 'deploy:update', 'deploy:link_devise_config'
-after 'deploy:update', 'deploy:link_wn31_db'
 after 'deploy:update', 'pusher:build'
 # after 'deploy:update', 'deploy:optimize_fts'
 
