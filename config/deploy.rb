@@ -85,8 +85,10 @@ namespace :deploy do
     if File.exist? file
       puts "loading #{file}"
       begin
-        YAML::load_file(file).each do |k, v|
-          zipfile = "#{k}.zip"
+        YAML::load_file(file).each do |download|
+          download.symbolize_keys!
+
+          zipfile = "#{download[:name]}.zip"
           run "ln -nsf #{shared_database_path}/#{zipfile} #{File.join(current_path, 'public', zipfile)}"
         end
       rescue
