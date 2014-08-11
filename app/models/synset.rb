@@ -29,6 +29,9 @@ class Synset < ActiveRecord::Base
   validates :lexname, :presence => true
   validates :part_of_speech, :presence => true
 
+  scope :search, ->(term) { joins('JOIN synsets_fts ON synsets_fts.id = synsets.id').
+    where(['synsets_fts MATCH ?', term]) }
+
   # Return a collection of +Word+ model objects excluding the one
   # passed in as the +word+ argument.
   def words_except(word)

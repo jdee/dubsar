@@ -125,7 +125,7 @@ class WordsController < ApplicationController
 
           respond_with [ @term, @words ]
         elsif @scope == :synsets
-          @synsets = SynsetSuggestion.autocomplete(@term).map(&:suggestion)
+          @synsets = SynsetSuggestion.autocomplete(@term).limit(params[:max]).map(&:suggestion)
           respond_with [ @term, @synsets ]
         end
       end
@@ -161,10 +161,14 @@ class WordsController < ApplicationController
       end
 
       format.json do
-        @words = Word.search options.merge(:page => params[:page],
-          :order => 'words.name ASC, words.part_of_speech ASC',
-          :include => :inflections
-        )
+        if @scope == :words
+          @words = Word.search options.merge(:page => params[:page],
+            :order => 'words.name ASC, words.part_of_speech ASC',
+            :include => :inflections
+          )
+        elsif @scope == :synsets
+          @synsets = Synset.includes(:words).search(params[:term]).order('synsets.id ASC').limit(30).paginate(page: params[:page] || 1)
+        end
 
         # Bad requests are kicked back in the munge_search_params
         # filter. If no search results are found, the result will be an
@@ -246,7 +250,16 @@ class WordsController < ApplicationController
   end
 
   def json_search_response
-    [ @term, @words.map { |w| [ w.id, w.name, w.pos, w.freq_cnt, w.other_forms ] }, @words.total_pages ]
+    if @scope == :words
+      [ @term, @words.map { |w| [ w.id, w.name, w.pos, w.freq_cnt, w.other_forms ] }, @words.total_pages ]
+    else
+      synsets = @synsets.map do |synset|
+        [ synset.id, synset.definition, synset.lexname, synset.part_of_speech,
+          synset.senses.map { |se| [ se.id, se.word_id, se.word.name ] } ]
+      end
+
+      [ @term, synsets, @synsets.total_pages ]
+    end
   end
 
   def json_show_response
