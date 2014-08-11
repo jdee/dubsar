@@ -90,10 +90,14 @@ class ApplicationController < ActionController::Base
         file = File.expand_path('config/downloads.yml', Rails.root)
         downloads = YAML::load_file file
 
-        downloads.each do |k, v|
-          dlfile = File.join(Rails.root, 'public', "#{k}.zip")
+        p downloads
 
-          v[:zipped] = File.size(dlfile)
+        downloads.each do |download|
+          download.symbolize_keys!
+
+          dlfile = File.join(Rails.root, 'public', "#{download[:name]}.zip")
+
+          download[:zipped] = File.size(dlfile)
         end
 
         respond_with downloads.to_json

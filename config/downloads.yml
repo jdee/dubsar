@@ -15,9 +15,6 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-'dubsar-wn3.1-3':
-    unzipped: 144580608
-'dubsar-wn3.1-2':
-    unzipped: 119077888
-'dubsar-wn3.1-1':
-    unzipped: 96345088
+- {name: 'dubsar-wn3.1-3', unzipped: 144580608}
+- {name: 'dubsar-wn3.1-2', unzipped: 119077888}
+- {name: 'dubsar-wn3.1-1', unzipped: 96345088}
