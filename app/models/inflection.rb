@@ -18,4 +18,12 @@
 class Inflection < ActiveRecord::Base
   belongs_to :word
   validates :name, :presence => true
+
+  before_destroy :delete_from_fts
+
+  def delete_from_fts
+    ActiveRecord::Base.connection.execute <<-SQL
+      DELETE FROM inflections_fts WHERE id = #{id}
+    SQL
+  end
 end
