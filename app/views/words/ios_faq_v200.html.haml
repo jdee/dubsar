@@ -25,14 +25,12 @@
       =image_tag 'dubsar-full.png', :alt => 'Dubsar', :id => 'dubsar-mobile-image', :width => "143", :height => "52"
     %br/
     Dubsar for iOS 2.0 Frequently Asked Questions
-    %p
-      This page is not yet mature. At the moment, this is just the production FAQ with
-      one or two modifications. It will soon grow into a real FAQ for the new app. At
-      any rate, this is where to look for help-like information.
   %div{'data-role' => 'content'}
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How do I turn off word of the day push notifications?
+      %p
+        %strong This section is currently out of date.
       %p
         A. This method works for push notifications from any iOS application on an iPad,
         iPhone or iPod touch running iOS 7 or below. (It&apos;s slightly easier on iOS 8.
@@ -72,7 +70,221 @@
         but later change your mind, you can use the settings above to enable notifications
         from Dubsar. You can also do this after you&apos;ve removed Dubsar from the
         Notification Center, as described above.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What&apos;s new in version 2.0.0?
+      %p
+        A. Version 2.0.0 was almost completely rewritten in Swift, updating a lot of
+        outdated code that was difficult to support and extending the app&apos;s
+        longevity. A number of new features were also added:
+      %ul
+        %li
+          Online/offline option. Now you have the option of a smaller download and
+          installation.
+        %li
+          Autocorrection. It is notoriously difficult in English to find a word in the
+          dictionary if you don&apos;t know how to spell it. Now the app can give you
+          a little help if you wish.
+        %li
+          Theming. Several themes are now available with different typefaces and color
+          schemes.
+        %li
+          Bookmarks. You can now bookmark your favorite words and view the list via
+          the search bar on the main view.
+        %li
+          Synset searching. You can now search for synsets whose glosses or
+          sample sentences match your search terms, or search for matching words as
+          before.
+        %li
+          Dynamic Type support. The app now honors the system Text Size setting.
+
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What settings are available?
+      %p
+        A. There are several new settings:
+      %ul
+        %li Theme: Select the font and color scheme.
+        %li Offline: Choose whether the app should be able to work without network access.
+        %li 
+          Autoupdate: Choose whether the app should automatically install database updates
+          when the offline switch is on.
+        %li
+          Autocorrection: Choose whether the search bar on the main view autocorrects as
+          you type.
+        %li
+          Secure bookmarks: Choose whether bookmarks are encrypted before being stored.
+      %p
+        See further FAQS below for more information.
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What is the difference between online and offline?
+
+      %p
+        A. There is now an offline switch in the Settings. If set to off, any local
+        database will be deleted, and all requests will be sent to the server. This
+        saves nearly 150 MB on the device; the app will require only about 12 MB.
+        Also, the download will be about 3 MB instead of more than 40 MB.
+        The response of the application will be slower. If the network (or the server)
+        is unavailable, the app will not work. While all available network security
+        is used to communicate with the server, this mode is also slightly less
+        secure to the extent that SSL/TLS can be cracked. This is a good mode if you
+        don&apos;t care much about security and are using the app on a device that
+        always has network access but has limited space.
+      %p
+        If the offline switch is set to on, a local database will be downloaded and
+        maintained. The download will be more than 40 MB, and the app will take about
+        150 MB on the device. However, in this mode, the app will only use the network
+        for three things: synching the word of the day if it is out of date, viewing
+        these FAQ and checking for updates to the database. The response of the app
+        will be much faster, since it is only accessing local data. The app will be
+        available whenever the network is not. And this mode is more secure, since
+        there is no network encryption to crack. Use this mode on devices that have
+        abundant space or intermittent network access or if you are concerned about
+        your privacy.
+
+      %p
+        Updates are infrequent but occasionally necessary. If you set the autoupdate
+        switch in the Settings to on, the app will check for updates up to once per
+        hour whenever it enters the background. Updates will be automatically downloaded
+        in the background. The user is notified via local notification if an update
+        occurs.
+      %p
+        If you set the autoupdate switch to off, the app will check for updates up to
+        once per hour whenever it enters the foreground. If an update is available,
+        the user is prompted. Downloads will continue in the background if the app
+        is backgrounded while a download is in progress.
+
+      %p
+        The downloaded database is excluded from backups. If you restore from a backup,
+        the app will download the latest database when you run it, if so configured.
+
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What does the autocorrection setting do?
+      %p
+        A. If this switch is on, the search bar on the main view will offer
+        autocorrection options as you type. By default, the switch is off.
      
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How does Dynamic Type work?
+      %p
+        A. You can select a preferred reading point size in the Settings app. On iOS 7,
+        it&apos;s under General &gt; Text Size; on iOS 8, it&apos;s under
+        Display &amp; Brightness &gt; Text Size. Any time the setting changes, the next
+        time you launch Dubsar, it will adjust the size of nearly all text in the app.
+
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How do bookmarks work?
+
+      %p
+        A. You can bookmark any word view in Dubsar by tapping the star-shaped button
+        in the upper right-hand corner of the view. This is a toggle button, so tap
+        it again to remove the bookmark. Bookmarking is only available for word views,
+        not synset or search views, for example.
+      %p
+        Bookmarks are readily accessible from the home view, using the bookmark button
+        in the search bar. In the bookmark list view you can tap any bookmark to visit
+        the stored word or delete any bookmark using the button at the right.
+      %p
+        Optionally, you may choose to store your bookmarks securely. There is a secure
+        bookmarks switch in the Settings. If set to on, your bookmarks undergo 256-bit
+        AES encryption before storage, protecting them from hackers. This setting is off
+        by default, since it potentially risks losing bookmarks when restoring from an
+        insecure backup. See the next FAQ for more details.
+
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What should I know about secure bookmarks and backups?
+
+      %p
+        A. If you choose the secure bookmarks option in the Settings, your bookmarks
+        will be protected using 256-bit AES encryption. The randomly-generated encryption
+        key is stored in the keychain on the device. The device keychain is only backed
+        up if the device backup is secure, which requires you to synch locally and encrypt
+        the backup. (See
+        =link_to 'http://support.apple.com/kb/HT4946', 'http://support.apple.com/kb/HT4946'
+        for more information.)
+        In that case, the app can still decrypt the encrypted bookmarks after
+        a restore operation. In case of an insecure backup, the keychain may also be
+        restored to the same device. But if you backup to iCloud or locally without
+        encryption and have secure bookmarks enabled, your encrypted bookmarks will be lost if you
+        restore a new device from the insecure backup, because they can&apos;t be decrypted
+        without the encrytion key in the keychain. Backed up bookmarks will always
+        be restored if you disable the secure bookmarks option.
+
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. What is the difference between word and synset searching?
+
+      %p
+        A. You can now search for words or synsets that match your search terms, using
+        the scope buttons in the search bar on the main view. Searching for words is
+        the default: A full text search is performed against the inflections table. The
+        result set is all words that have at least one inflection that matches the search
+        term(s). Each word has itself as an inflection, so the root or inflected forms may
+        be matched. Hence a search for thought turns up thought, n. and think, v. Any
+        exact match is filtered to the top.
+
+      %p
+        If you select the synsets scope button from the search bar, a full text search
+        for your search terms will be performed against the synsets table. The field
+        used for the full text search includes the gloss for each synset as well as its
+        sample sentences (but not verb frames). The result set is all synsets whose
+        definition field (gloss + samples) matches the search term(s) in a full text
+        search.
+
+      %p
+        Note that if you search synsets, you get back a list of synsets, not a list of
+        words. This saves space in the result list if any matching synset has more
+        than one word. Also note that synset searching can be slow.
+
+    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
+      %h2
+        Q. How does the new Synset view work?
+      %p
+        A. This view replaces two views from Dubsar 1.3: the Sense view and the
+        Synset view, which were largely the same and hard to distinguish.
+
+      %p
+        Every synset includes at least one word, and frequently more. Of the content
+        in the synset view, some information pertains to the synset as a whole and all
+        the words it contains, while some information pertains only to certain words.
+        Mostly this involves the pointers below the sample sentences and verb frames.
+        A semantic pointer expresses relationships between one synset and another. An
+        example is the antonym; all words in a synset are antonyms of all the words in
+        an antonymous synset. A lexical pointer, on the other hand, relates one word
+        in a synset to one word in another synset (or one sense to another sense in
+        terms of Dubsar&apos;s data model). For example, the derivationally related
+        form pointer applies only to individual words. Taken is derivationally related
+        to take, but not to its synonym grab. Verb frames and adjective markers are
+        also lexical in nature, pertaining to individual words, not entire synsets.
+
+      %p
+        The list of synonyms in the synset is shown directly above any sample sentences
+        or verb frames. If one of the words in the synset is highlighted, lexical
+        information, also highlighted, will be included in the view. That is, there
+        may be other highlighted fields in the view with information pertaining only
+        to the highlighted word among the synonyms. If no word there is highlighted,
+        no other field on the page will be highlighted. Only semantic data will be
+        present, referring to the entire synset. Tap any of the synonyms to change
+        which word, if any, is highlighted.
+
+      %p
+        The frequency count in this view will be the semantic frequency count, i.e.
+        the frequency count for the entire synset, the sum of the frequency counts of
+        all synonyms, if no synonym is highlighted. If a synonym is highlighted, the
+        frequency count will also be highlighted, and the lexical frequency count
+        for that word will be displayed (along with any adjective marker).
+
+      %p
+        If a synset has only one word, that word is always highlighted, and lexical
+        information is always displayed. In this case, it is not possible to show
+        semantic data separately (they are the same as the lexical data) by tapping
+        the lone word in the synse.
+
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Which versions of iOS are supported?
@@ -195,9 +407,10 @@
       %h2
         Q. How many entries does Dubsar have?
       A. Here are current row counts, by table.  This list is live,
-      generated from the database tables whenever you load this page.
+      generated from the database tables on the server
+      whenever you load this page.
       As Dubsar&apos;s data content evolves, this list of tables and their
-      specific row counts will change.
+      specific row counts may change.
       %table
         %tbody
           - %w{synset word sense inflection pointer}.each do |model|
@@ -206,10 +419,6 @@
                 =model_count(model)
               %td
                 =model.pluralize
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How long does it take to build the Dubsar database?
-      A. Currently it takes about an hour and a half.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How are the autocompleter results determined?
