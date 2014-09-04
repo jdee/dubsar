@@ -116,6 +116,7 @@
           Secure bookmarks: Choose whether bookmarks are encrypted before being stored.
       %p
         See further FAQS below for more information.
+      =image_tag "dubsar-settings.png", alt: "Dubsar Settings", width: 280, height: 497, style: 'display: block;'
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What is the difference between online and offline?
@@ -188,6 +189,8 @@
         Bookmarks are readily accessible from the home view, using the bookmark button
         in the search bar. In the bookmark list view you can tap any bookmark to visit
         the stored word or delete any bookmark using the button at the right.
+      %h3 Bookmark List View
+      =image_tag "dubsar-bookmarks-small.png", alt: "Dubsar Bookmarks", width: 280, height: 497, style: 'display: block;'
       %p
         Optionally, you may choose to store your bookmarks securely. There is a secure
         bookmarks switch in the Settings. If set to on, your bookmarks undergo 256-bit
@@ -228,6 +231,9 @@
         be matched. Hence a search for thought turns up thought, n. and think, v. Any
         exact match is filtered to the top.
 
+      %h3 Scoped search
+      =image_tag "dubsar-scoped-search.png", alt: "Dubsar Scoped Search", width: 280, height: 497, style: 'display: block;'
+
       %p
         If you select the synsets scope button from the search bar, a full text search
         for your search terms will be performed against the synsets table. The field
@@ -241,12 +247,21 @@
         words. This saves space in the result list if any matching synset has more
         than one word. Also note that synset searching can be slow.
 
+      %p
+        A segmented control in the search results lets you easily change scope for the
+        search displayed, but you&apos;ll have to go home for a new search.
+
+      %h3 Search results with scope control
+      =image_tag "dubsar-search-trial.png", alt: "Dubsar Search Results", width: 280, height: 497, style: 'display: block;'
+
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. How does the new Synset view work?
       %p
         A. This view replaces two views from Dubsar 1.3: the Sense view and the
         Synset view, which were largely the same and hard to distinguish.
+
+      =image_tag "dubsar-synset.png", alt: "Dubsar Synset", width: 280, height: 497, style: 'display: block;'
 
       %p
         Every synset includes at least one word, and frequently more. Of the content
@@ -270,7 +285,8 @@
         to the highlighted word among the synonyms. If no word there is highlighted,
         no other field on the page will be highlighted. Only semantic data will be
         present, referring to the entire synset. Tap any of the synonyms to change
-        which word, if any, is highlighted.
+        which word, if any, is highlighted. Tap the triangular button next to any
+        synonym to visit the word view for that synonym.
 
       %p
         The frequency count in this view will be the semantic frequency count, i.e.
@@ -283,7 +299,7 @@
         If a synset has only one word, that word is always highlighted, and lexical
         information is always displayed. In this case, it is not possible to show
         semantic data separately (they are the same as the lexical data) by tapping
-        the lone word in the synse.
+        the lone word in the synset.
 
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
