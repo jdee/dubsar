@@ -30,15 +30,14 @@
       %h2
         Q. How do I turn off word of the day push notifications?
       %p
-        %strong This section is currently out of date.
+        A. Here&apos;s how:
+
+      %h3 iOS 7
+
       %p
-        A. This method works for push notifications from any iOS application on an iPad,
-        iPhone or iPod touch running iOS 7 or below. (It&apos;s slightly easier on iOS 8.
-        Watch this space.)
         Open the Settings app from the
         device&apos;s home screen. Tap Notification Center on the master panel (iPad) or
-        the main view of the Settings app (iPhone/iPod touch). (It&apos;s just called Notifications
-        on iOS 6 and below.) Scroll down to see a
+        the main view of the Settings app (iPhone/iPod touch). Scroll down to see a
         list of apps to &quot;Include.&quot; Tap the row for Dubsar.
         This will take you to a screen with a number of push-notification-related
         settings for Dubsar. Unfortunately, there is no master switch to turn off
@@ -60,6 +59,24 @@
         &quot;Do Not Include,&quot; you&apos;ll see Dubsar:
       %h3 Dubsar no longer in Notification Center
       = image_tag 'notifications.png', alt: 'Dubsar not in Notification Center', width: 280, height: 497, style: 'display: block;'
+
+      %h3 iOS 8
+
+      %p
+        First see the instructions for iOS 7. It&apos;s easier in iOS 8. First, there
+        is a master switch in the notification settings. You don&apos;t have to disable
+        each individual element.
+      %h3 iOS 8 notification settings with master switch
+      = image_tag 'ios8-push-settings.png', alt: 'Dubsar not in Notification Center', width: 280, height: 373, style: 'display: block;'
+
+      %p
+        Second, you can get to the settings both through the
+        Notification Center and through the settings for each app.
+      %h3 iOS 8 Dubsar settings with link to notification settings
+      = image_tag 'ios8-dubsar-settings.png', alt: 'Dubsar not in Notification Center', width: 280, height: 373, style: 'display: block;'
+
+      %hr/
+
       %p
         You can do the same for any application in the Notification Center. Of course,
         you can also fine-tune the settings for each application there, choosing which
@@ -439,21 +456,13 @@
       %h2
         Q. How are the autocompleter results determined?
       %p
-        %strong This section is currently out of date.
-      %p
         A. All search results use full text searching, similar to the
-        behavior of most search engines, against the inflections table.
-        All searching is case-insensitive.
-        Results include all search terms. An asterisk (*) may be used to
-        match any non-whitespace string, including nothing. Certain operators
-        may also be used, in all uppercase, like "law OR order." Exact matches
-        (results where the matching inflection is exactly the search term as
-        it was typed) are sorted to the top. Other results are sorted in ASCII
-        order, so all capital letters come before all lowercase letters.
+        behavior of most search engines. See the FAQ about full text
+        searching below.
 
       %p
-        The autocompleter results are determined by looking first for an
-        exact match, then by searching for
+        When autocompleting a word search, the autocompleter results are determined
+        by looking first for an exact match, then by searching for
         %em search terms*,
         i.e., appending an
         asterisk to the search terms. So if you type in
@@ -472,6 +481,14 @@
         the autocompleter at all. If you perform a search for
         %em Fruit, fruit
         will appear sorted in with the rest of the results.
+
+      %p
+        When searching synsets, the definition field, which contains both the synset
+        gloss and its sample sentences, is used for the full text query. There is no
+        notion of an exact match. The autocompleter results are obtained by searching
+        for search terms* as above, appending an asterisk to the search terms in a
+        full text MATCH query.
+
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. Can I do wild-card searches?
@@ -487,8 +504,8 @@
         Tap the left side of the control to page back and the right side to
         page forward through the search results.
       %p
-        The iPad app provides some built-in wild-card searches using the alphabet
-        buttons on the master panel.
+        The app provides some built-in wild-card searches view the alphabet
+        strip on the main view.
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
         Q. What does Dubsar mean?
@@ -497,7 +514,28 @@
       %h2
         Q. How does full text searching work?
       %p
-        A. Dubsar searches now work similarly to most search engines.
+        A. Dubsar searches work similarly to most search engines. It works about
+        the same when searching words and synsets.
+      %p
+        When searching words, the inflections
+        table is queried, and all words with a matching inflection are returned. Each
+        word has an uninflected entry in the inflections table, so you can find man, n.
+        by searching for men, hook, n. by searching for hooks, be, v. by searching
+        for am, etc. But you can also find them, of course, by searching respectively
+        for man, hook and and be. Exact word matches are sorted to the top.
+        Word results are sorted in ASCII order, with all capital letters coming before all
+        lower-case letters. But case-sensitive exact matches (including exact inflection
+        matches) are sorted to the top.
+
+      %p
+        When searching synsets, the definition field of the synsets table is queried,
+        which includes sample sentences (but not verb frames). Matching synsets are
+        returned. There is no notion of an exact match when searching definitions
+        (as opposed to individual words).
+
+      %p
+        In both cases:
+
       %ul
         %li All searching is case-insensitive.
         %li Search results will include anything that contains all search terms.
@@ -511,9 +549,5 @@
           Certain operators are recognized in all caps (e.g.,
           %em law OR order
           ).
-        %li
-          Results are sorted in ASCII order, with all capital letters coming before all
-          lower-case letters. But case-sensitive exact matches (including inflections)
-          are sorted to the top.
   %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
     &copy; 2014 Jimmy Dee &middot; WordNet&reg; &copy; 2014 The Trustees of Princeton University

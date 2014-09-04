@@ -1,6 +1,6 @@
 %h2 Privacy Statement
 
-%h3 08-Oct-2014
+%h3 04-Sep-2014
 
 %p
   Dubsar has few issues related to user privacy, but it takes those seriously.
@@ -26,25 +26,52 @@
 %h3 iOS
 
 %p
-  This is the most secure, private Dubsar implementation. The application on an iPhone,
-  iPod touch or iPad only communicates with the server to request the FAQ web page or
-  to synchronize the word of the day if it has expired. The iOS application has a
-  local copy of the database from the server (without some tables unrelated to the
-  dictionary content). When a user views Dubsar content in the iOS application, all
-  searching and data retrieval are local, using a read-only SQLite database file in the
-  application bundle. User queries and browsing history are not recorded or transmitted
-  anywhere. Starting with version 1.2.2, the release build of the application logs very
-  little to the device console during normal operation. Its output is mostly limited to
-  the status of HTTP communications with the server when retrieving the word of the day
-  once per day. Without a hidden keystroke or screen capture program, it would be
+  This is potentially the most secure, private Dubsar implementation if used in
+  offline mode.
+
+%p
+  In offline mode, the application on an iPhone,
+  iPod touch or iPad only communicates with the server to request the FAQ web page,
+  to update the database or
+  to synchronize the word of the day if it has expired. The application maintains a
+  local copy of the database downloaded from the server.
+  When a user views Dubsar content in the iOS application in offline mode, all
+  searching and data retrieval are local, using a read-only SQLite database file.
+  User queries and browsing history are not recorded or transmitted
+  anywhere. The release build of the application logs nothing
+  to the device console during normal operation.
+  Without a hidden keystroke or screen capture program, it would be
   extraordinarily
   difficult to discover the search and browsing history of a user of the Dubsar iOS
   application.
 
 %p
-  %strong Note:
-  This does not apply to use of Dubsar with the Safari browser on an iOS device. Those
-  requests are handled by the server, not the local application.
+  In online mode, the app communicates with the server normally, like a browser,
+  obtaining its data from a RESTful API. All requests to the server use TLSv1.2 with
+  forward secrecy.
+
+%p
+  Version 2.0 of the iOS app introduces bookmarks, which constitute an equally
+  significant privacy concern. The bookmark feature does not involve data queries,
+  so it is unaffected by the offline setting. Bookmarks are stored and backed up in
+  the user defaults. There is also an option to store them securely. If this option
+  is off, bookmarks are stored in the clear.
+
+%p
+  If the secure bookmarks setting is on, bookmark data undergo 256-bit AES
+  encryption before being stored, using a randomly-generated encryption key, which
+  is then stored in the device&apos;s keychain. The key is changed every time the
+  bookmarks are written to storage. They are rewritten for consistency any time they
+  are loaded, and reencrypted each time, so each value of the 256-bit key is used
+  for at most a single read operation. This provides a robust privacy barrier.
+
+%p
+  Note that there is no password associated with bookmark encryption, which increases
+  the level of security. However, it relies on the device keychain for key persistence.
+  In some circumstances, the keychain cannot be restored from a backup. In those cases,
+  the secure bookmarks cannot be decrypted and so are effectively not restored from the
+  backup. Unencrypted bookmarks are always restored from a backup. See the FAQ for
+  more details on secure bookmarks and backups.
 
 %h3 Web application
 
