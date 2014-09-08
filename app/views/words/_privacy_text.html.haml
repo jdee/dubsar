@@ -59,7 +59,8 @@
 
 %p
   If the secure bookmarks setting is on, bookmark data undergo 256-bit AES
-  encryption before being stored, using a randomly-generated encryption key, which
+  encryption with the iOS CommonCrypto facility before being stored, using a
+  randomly-generated encryption key, which
   is then stored in the device&apos;s keychain. The key is changed every time the
   bookmarks are written to storage. They are rewritten for consistency any time they
   are loaded, and reencrypted each time, so each value of the 256-bit key is used
@@ -70,8 +71,8 @@
   the level of security. However, it relies on the device keychain for key persistence.
   In some circumstances, the keychain cannot be restored from a backup. In those cases,
   the secure bookmarks cannot be decrypted and so are effectively not restored from the
-  backup. Unencrypted bookmarks are always restored from a backup. See the FAQ for
-  more details on secure bookmarks and backups.
+  backup and are in fact deleted. Unencrypted bookmarks are always restored from a backup.
+  See the FAQ for more details on secure bookmarks and backups.
 
 %h3 Web application
 
