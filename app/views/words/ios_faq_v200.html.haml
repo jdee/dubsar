@@ -210,10 +210,9 @@
       =image_tag "dubsar-bookmarks-small.png", alt: "Dubsar Bookmarks", width: 280, height: 497, style: 'display: block;'
       %p
         Optionally, you may choose to store your bookmarks securely. There is a secure
-        bookmarks switch in the Settings. If set to on, your bookmarks undergo 256-bit
-        AES encryption before storage, protecting them from hackers. This setting is off
-        by default, since it potentially risks losing bookmarks when restoring from an
-        insecure backup. See the next FAQ for more details.
+        bookmarks switch in the Settings. This setting is off by default, since it
+        potentially risks losing bookmarks when restoring from an insecure backup. See
+        the next FAQ for more details.
 
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
@@ -221,18 +220,17 @@
 
       %p
         A. If you choose the secure bookmarks option in the Settings, your bookmarks
-        will be protected using 256-bit AES encryption. The randomly-generated encryption
-        key is stored in the keychain on the device. The device keychain is only backed
+        will be protected using iOS security facilities.
+        The device keychain is only backed
         up if the device backup is secure, which requires you to synch locally and encrypt
         the backup. (See
-        =link_to 'http://support.apple.com/kb/HT4946', 'http://support.apple.com/kb/HT4946'
+        =link_to 'http://support.apple.com/kb/HT4946', 'http://support.apple.com/kb/HT4946', target: '_blank'
         for more information.)
-        In that case, the app can still decrypt the encrypted bookmarks after
+        In that case, the app can still recover the secure bookmarks after
         a restore operation. In case of an insecure backup, the keychain may also be
         restored to the same device. But if you backup to iCloud or locally without
         encryption and have secure bookmarks enabled, your encrypted bookmarks will be lost if you
-        restore a new device from the insecure backup, because they can&apos;t be decrypted
-        without the encrytion key in the keychain. Backed up bookmarks will always
+        restore a new device from the insecure backup. Backed up bookmarks will always
         be restored if you disable the secure bookmarks option.
 
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
