@@ -129,8 +129,6 @@
         %li
           Autocorrection: Choose whether the search bar on the main view autocorrects as
           you type.
-        %li
-          Secure bookmarks: Choose whether bookmarks are encrypted before being stored.
       %p
         See further FAQS below for more information.
       =image_tag "dubsar-settings.png", alt: "Dubsar Settings", width: 280, height: 497, style: 'display: block;'
@@ -213,25 +211,6 @@
         bookmarks switch in the Settings. This setting is off by default, since it
         potentially risks losing bookmarks when restoring from an insecure backup. See
         the next FAQ for more details.
-
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What should I know about secure bookmarks and backups?
-
-      %p
-        A. If you choose the secure bookmarks option in the Settings, your bookmarks
-        will be protected using iOS security facilities.
-        The device keychain is only backed
-        up if the device backup is secure, which requires you to synch locally and encrypt
-        the backup. (See
-        =link_to 'http://support.apple.com/kb/HT4946', 'http://support.apple.com/kb/HT4946', target: '_blank'
-        for more information.)
-        In that case, the app can still recover the secure bookmarks after
-        a restore operation. In case of an insecure backup, the keychain may also be
-        restored to the same device. But if you backup to iCloud or locally without
-        encryption and have secure bookmarks enabled, your encrypted bookmarks will be lost if you
-        restore a new device from the insecure backup. Backed up bookmarks will always
-        be restored if you disable the secure bookmarks option.
 
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
