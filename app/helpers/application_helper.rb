@@ -129,12 +129,18 @@ EOF
     HTML
   end
 
-  def twitter_button
-    <<-HTML
-<script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
-<div>
-  <a href="https://twitter.com/share?via=dubsar&text=Dubsar%20Dictionary%20Project%20#dubsar" class="twitter-share-button">Tweet</a>
-</div>
+  def twitter_button(twitter_handle, url, text)
+    s = <<-HTML
+      <a class="twitter-share-button" href="https://twitter.com/share"
+        data-url="#{url}"
+        data-via="#{twitter_handle}"
+        data-related="#{twitter_handle}"
+        data-text="#{text}">
+      Tweet
+      </a>
+      <script type="text/javascript">
+      window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+      </script>
     HTML
   end
 
