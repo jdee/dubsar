@@ -1,4 +1,4 @@
-Sitemap: http://m.dubsar-dictionary.com/mobile-sitemap.xml
+Sitemap: https://m.dubsar-dictionary.com/mobile-sitemap.xml
 
 User-Agent: *
 Allow: /

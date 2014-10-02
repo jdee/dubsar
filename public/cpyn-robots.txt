@@ -1,2 +1,4 @@
+Sitemap: https://cpyn.mobi/cpyn-sitemap.xml
+
 User-agent: *
 Allow: /
