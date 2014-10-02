@@ -148,7 +148,7 @@ EOF
     <<-HTML
       <a class="twitter-follow-button"
         href="https://twitter.com/cpyn_mobi"
-        data-show-count="false"
+        data-show-count="true"
         data-lang="en">
       Follow @cpyn_mobi
       </a>
