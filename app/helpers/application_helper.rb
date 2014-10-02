@@ -144,6 +144,27 @@ EOF
     HTML
   end
 
+  def twitter_follow_button
+    <<-HTML
+      <a class="twitter-follow-button"
+        href="https://twitter.com/cpyn_mobi"
+        data-show-count="false"
+        data-lang="en">
+      Follow @cpyn_mobi
+      </a>
+      <script type="text/javascript">
+      window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src= "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+      }(document, "script", "twitter-wjs"));
+      </script>
+    HTML
+  end
+
   def dubsar_button
     <<-HTML
 <a href="#{link_path}" class="unstyled"><h3>or link to &nbsp;<img alt="Dubsar" height="20" width="88" src="#{image_path 'dubsar-link.png'}" style="vertical-align: bottom; border-style: none;" /></h3></a>
