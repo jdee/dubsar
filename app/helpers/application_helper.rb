@@ -135,6 +135,7 @@ EOF
         data-url="#{url}"
         data-via="#{twitter_handle}"
         data-related="#{twitter_handle}"
+        data-count="none"
         data-text="#{text}">
       Tweet
       </a>
@@ -148,7 +149,7 @@ EOF
     <<-HTML
       <a class="twitter-follow-button"
         href="https://twitter.com/cpyn_mobi"
-        data-show-count="true"
+        data-show-count="false"
         data-lang="en">
       Follow @cpyn_mobi
       </a>
