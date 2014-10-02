@@ -25,7 +25,8 @@ module Dubsar
     config.assets.precompile += [
       'main_manifest.css', 'main_manifest.js',
       'mobile_manifest.css', 'mobile_manifest.js', 
-      'qunit_manifest.css', 'qunit_manifest.js'
+      'qunit_manifest.css', 'qunit_manifest.js',
+      'cpyn_manifest.css', 'cpyn_manifest.js'
     ]
   end
 end

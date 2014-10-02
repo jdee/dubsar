@@ -12,4 +12,5 @@ Disallow: /users
 Disallow: /words/*/
 Disallow: /wotd
 Disallow: /resume
+Disallow: /cpyn
 Allow: /wotd.xml

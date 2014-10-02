@@ -64,6 +64,10 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  def cpyn
+    render layout: 'cpyn'
+  end
+
   def m_resume
     render layout: 'mobile'
   end
