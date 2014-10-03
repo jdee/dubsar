@@ -72,6 +72,7 @@ Dubsar::Application.routes.draw do
   get '/m_resume'         , to: 'application#m_resume'
 
   get '/cpyn'             , to: 'application#cpyn'
+  get '/how-to-cpyn'      , to: 'application#how_to_cpyn'
 
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 

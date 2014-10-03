@@ -1,0 +1,160 @@
+- content_for :title do
+  How to cpyn
+
+- content_for :description do
+  %meta{name:'Description', content:'Instructions for using the cpyn iOS audio player app.'}
+  %link{rel:'canonical', href:'https://cpyn.mobi/how-to-cpyn'}
+
+%h1{style: 'text-align: center;'}
+  How to cpyn
+
+%ul{style: 'list-style-type: none'}
+  %li
+    =link_to 'Choosing something to cpyn', '#choosing'
+  %ii
+    =link_to 'The Equalizer', '#equalizer'
+  %li
+    =link_to 'The Q button', '#q_button'
+  %li
+    =link_to 'Playback', '#playback'
+  %li
+    =link_to 'Background and remote control', '#background'
+  %li
+    =link_to 'Header views', '#headers'
+  %li
+    =link_to 'Now-playing view', '#now_playing'
+  %li
+    =link_to 'Light conrols', '#light_controls'
+  %li
+    =link_to 'Audio settings', '#audio_settings'
+  %li
+    =link_to 'Wave form', '#wave_form'
+
+%h2#choosing Choosing something to cpyn
+
+%p
+  When you first start the app, there is a large, wide button above the turntable that
+  is either labeled
+  %em library
+  or with the name of your current track. Tap that button. It will immediately change to
+  say
+  %em - loading library -.
+
+=image_tag 'cpyn-overhead.png', size: "280x497", alt: "cpyn overhead view", style: 'display: block;'
+
+%p
+  After a few seconds, a modal view will appear with your iPod library.
+
+=image_tag 'ipod-library.png', size: "280x497", alt: "iPod library", style: 'display: block;'
+
+%p
+  Select any track(s) from your iPod library and tap done. The library view will go away and
+  return you to the turntable, which should now be playing.
+
+%h2#equalizer The Equalizer
+
+%p
+  With the turntable showing, swipe to the left to show equalization options.
+
+=image_tag 'cpyn_equalizer.png', size: "280x497", alt: "cpyn equalizer", style: 'display: block;'
+
+%p
+  A button at the bottom shows which equalizer preset you are currently using. Tap the button
+  to see a list of presets. The setting starts out Custom, which enables the graphic equalizer.
+  If you select any other preset, the graphic equalizer will be disabled; the sliders will all
+  be gray. Adjust the sliders with Custom selected to choose a nonstandard equalizer setting.
+%p
+  This view includes a frequency analyzer that shows the relative power distribution per
+  band while the audio plays.
+
+%h2#q_button Q button
+
+%p
+  There is a button marked Q in the upper lefthand corner of the view. This simply displays your
+  current queue. It shows what&apos;s up next, not including the current track.
+
+=image_tag 'cpyn-queue.png', size: "280x191", alt: "cpyn queue", style: 'display: block;'
+
+%h2#playback Playback
+
+%p
+  You can freely skip tracks forward and backward during playback or while paused.
+  The button on the right below the turntable changes from a play button to a pause
+  button. Use it to toggle playback. The counter above the iTunes button will show
+  the current playback time and the total track length.
+
+%h2#background Background and remote control
+
+%p
+  The app can play in the background and with the screen locked. You can use the remote
+  control functions in the lock screen, in the now-playing controls in the control center
+  and on your earphones to pause, play and skip tracks.
+
+%h2#headers Header views
+
+%p
+  There is an arrow button above the turntable pointing down. Tap it to reveal the
+  header view, a region at the top of the screen that contains controls and other
+  information, while the turntable view is reclined.
+%p
+  Each header view has an edge grip consisting of three vertically-arranged gray dots
+  on the left or right side indicating the presence of another header view on that
+  side. Swipe left from the right side or right from the left side wherever you see
+  a grip to slide to the next header view.
+%p
+  There are six header view panes, discussed below.
+
+%h2#now_playing Now-playing view
+
+%p
+  The first header view you will see is the leftmost: the now-playing view.
+
+=image_tag 'cpyn-now-playing.png', size: "280x135", alt: 'cpyn now-playing view', style: 'display: block;'
+
+%p
+  This view shows the artist, the album the track is from, the track index on that album,
+  the track name, the publication date, the total track time and the composer where available.
+
+%h2#light_controls Light controls
+
+%p
+  This view provides controls to adjust the light over the turntable.
+
+=image_tag 'cpyn-light-controls.png', size: "280x135", alt: 'cpyn light controls', style: 'display: block;'
+
+%p
+  You can directly adjust the red, green and blue components of the light as well as its position
+  in a plane above the turntable. You can also enable autolighting and let the accelerometers
+  on the device do the work. The light will change position to appear always to be overhead.
+
+%h2#audio_settings Audio settings
+
+%p
+  The next three header view panes contain different audio settings.
+
+=image_tag 'cpyn-mixer-view.png', size: "280x135", alt: 'cpyn mixer view', style: 'display: block;'
+%br/
+=image_tag 'cpyn-playback-rate-view.png', size: "280x135", alt: 'cpyn mixer view', style: 'display: block;'
+%br/
+=image_tag 'cpyn-options-view.png', size: "280x135", alt: 'cpyn mixer view', style: 'display: block;'
+
+%p
+  Most of these are pretty clear, but here are some things you should know:
+
+%p
+  Track delay is the delay between tracks. Playback is ordinarily gapless. You can adjust the
+  gap to be up to 1 second. This setting is also available in the Settings app.
+%p
+  Playback rate ranges from 0.25 to 4.0. The pitch changes with the rate. Any deviation from
+  1.0 is very noticeable. Tap the reset button to restore it to exactly 1.0.
+%p
+  You can adjust the rotation speed of the turntable to either 33 or 45 r.p.m. You can also
+  disable the rotation altogether if you prefer.
+
+%h2#wave_form Wave form
+
+%p
+  The last header view shows you the live wave form being read from the MP3 or other audio
+  file and played. What you see is a time slice of about 50 ms.
+
+=image_tag 'cpyn-wave-form-view.png', size: "280x135", alt: 'cpyn wave form view', style: 'display: block;'
