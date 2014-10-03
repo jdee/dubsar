@@ -32,7 +32,8 @@
     = stylesheet_link_tag 'cpyn_manifest'
     %meta{name:"viewport", content:"initial-scale=1.0"}
 
-  %body{style: 'color: #e6e6fa; background-color: #191970; font-family: Avenir Next;'}
+  %body{style: 'color: #e6e6fa; background-color: #191970; font-family: Avenir Next; max-width: 750pt; margin-left: auto; margin-right: auto;'}
     = yield
 
+    -# No JS besides the Twitter button atm
     -# = javascript_include_tag 'cpyn_manifest'
