@@ -8,7 +8,7 @@
 %h1{style: 'text-align: center;'}
   How to cpyn
 
-%ul{style: 'list-style-type: none'}
+%ul{style: 'list-style-type: none;'}
   %li
     =link_to 'Choosing something to cpyn', '#choosing'
   %ii
@@ -20,15 +20,24 @@
   %li
     =link_to 'Background and remote control', '#background'
   %li
+    =link_to 'Scratching', '#scratching'
+  %li
     =link_to 'Header views', '#headers'
-  %li
-    =link_to 'Now-playing view', '#now_playing'
-  %li
-    =link_to 'Light conrols', '#light_controls'
-  %li
-    =link_to 'Audio settings', '#audio_settings'
-  %li
-    =link_to 'Wave form', '#wave_form'
+  %ul{style: 'list-style-type: none;'}
+    %li
+      =link_to 'Volume view', '#volume_view'
+    %li
+      =link_to 'Wave form', '#wave_form'
+    %li
+      =link_to 'Now-playing view', '#now_playing'
+    %li
+      =link_to 'Audio-detail view', '#audio_detail'
+    %li
+      =link_to 'Audio settings', '#audio_settings'
+    %li
+      =link_to 'Turntable speed', '#turntable_speed'
+    %li
+      =link_to 'Light controls', '#light_controls'
 
 %h2#choosing Choosing something to cpyn
 
@@ -71,15 +80,34 @@
 
 %p
   There is a button marked Q in the upper lefthand corner of the view. This simply displays your
-  current queue. It shows what&apos;s up next, not including the current track.
+  current queue.
 
-=image_tag 'cpyn-queue.png', size: "280x191", alt: "cpyn queue", style: 'display: block; margin-left: 20pt;'
+=image_tag 'cpyn-queue.png', size: "280x497", alt: "cpyn queue", style: 'display: block; margin-left: 20pt;'
+
+%p
+  You can immediately advance to play any track in your queue by tapping that row.
+
+%p
+  Here you find the repeat and shuffle mode settings. You can also manually edit your
+  queue here, skipping any tracks you&apos;d prefer not to hear and reordering them
+  by dragging them around.
+
+= image_tag 'cpyn-queue-edit.png', size: "280x497", alt: "cpyn queue editing", style: "display: block; margin-left: 20pt;"
+
+%p
+  After reordering your queue manually or by choosing a shuffle mode, you can use the
+  Reset button to undo all changes and return to your original queue.
+
+%p
+  Use the + button here to add new tracks from your library to the end of your queue,
+  even while it&apos;s playing. This first undoes any changes to your queue. If you
+  have a shuffle mode selected, they will be reshuffled.
 
 %h2#playback Playback
 
 %p
   You can freely skip tracks forward and backward during playback or while paused.
-  The button on the right below the turntable changes from a play button to a pause
+  The button in the middle below the turntable changes from a play button to a pause
   button. Use it to toggle playback. The counter above the iTunes button will show
   the current playback time and the total track length.
 
@@ -89,6 +117,14 @@
   The app can play in the background and with the screen locked. You can use the remote
   control functions in the lock screen, in the now-playing controls in the control center
   and on your earphones to pause, play and skip tracks.
+
+%h2#scratching Scratching
+
+%p
+  You can scratch records by rotating the turntable back and forth with one finger.
+  More than one finger cancels the gesture and returns to whatever playback direction
+  and speed you currently have set. The music player adjusts the direction and playback
+  rate to match your gesture. It can switch directions up to 4 times per second.
 
 %h2#headers Header views
 
@@ -104,67 +140,96 @@
 %p
   There are six header view panes, discussed below.
 
-%h2#now_playing Now-playing view
+%h3#volume_view Volume view
 
 %p
-  The first header view you will see is the leftmost: the now-playing view.
+  The first header view you will see is the volume view.
 
-=image_tag 'cpyn-now-playing.png', size: "280x137", alt: 'cpyn now-playing view', style: 'display: block; margin-left: 20pt;'
+=image_tag 'cpyn-volume-view.png', size: "280x156", alt: 'cpyn mixer view', style: 'display: block; margin-left: 20pt;'
+
+%p
+  Here you can adjust the device volume and choose AirPlay routes. You can also adjust
+  the stereo balance and playback direction here. You can freely switch directions
+  while playing. You can even play your entire queue in reverse, repeating and cross
+  fading as you go.
+
+%p
+  To the left of the volume view are several views that have no controls and present
+  only information. Swipe right from the left side of the header view to see the header
+  view to the left.
+
+%h3#wave_form Wave form
+
+%p
+  The first header view you will see to the left shows you the live wave form being read 
+  from the MP3 or other audio file and played. What you see is a time slice of about 46 ms.
+
+=image_tag 'cpyn-wave-form-view.png', size: "280x156", alt: 'cpyn wave form view', style: 'display: block; margin-left: 20pt;'
+
+%h3#now_playing Now-playing view
+
+%p
+  The next header view you will see to the left is the now-playing view.
+
+=image_tag 'cpyn-now-playing.png', size: "280x156", alt: 'cpyn now-playing view', style: 'display: block; margin-left: 20pt;'
 
 %p
   This view shows the artist, the album the track is from, the track index on that album,
   the track name, the publication date, the total track time and the composer where available.
 
-%h2#light_controls Light controls
+%h3#audio_detail Audio-detail view
+
+%p
+  The last view to the left of the volume view shows audio format details of the now-playing
+  track.
+
+=image_tag 'cpyn-audio-detail.png', size: "280x156", alt: 'cpyn audio detail view', style: 'display: block; margin-left: 20pt;'
+
+%h3#audio_settings Audio settings
+
+%p
+  The first view to the right of the volume view lets you adjust the playback rate and
+  track delay.
+
+=image_tag 'cpyn-playback-rate-view.png', size: "280x156", alt: 'cpyn mixer view', style: 'display: block; margin-left: 20pt;'
+
+%p
+  Playback rate ranges from 1/4 x to 4 x. The pitch changes with the rate. Any deviation from
+  1.0 is very noticeable. Tap the 1.0 button above the knob to restore it to exactly 1.0.
+%p
+  Track delay is the delay between tracks. Playback is ordinarily gapless. You can adjust the
+  gap to be up to 4 seconds. Set it to a negative value to cross fade tracks. This setting
+  is also available in the Settings app. Tap the 0 above the knob to return to gapless playback.
+
+%h3#turntable_speed Turntable speed
+
+%p
+  The next view to the right lets you adjust the turntable speed.
+
+=image_tag 'cpyn-options-view.png', size: "280x156", alt: 'cpyn mixer view', style: 'display: block; margin-left: 20pt;'
+
+%p
+  You can adjust the rotation speed of the turntable to either 33 or 45 r.p.m. You can also
+  disable the rotation altogether if you prefer.
+
+%h3#light_controls Light controls
 
 %p
   This view provides controls to adjust the light over the turntable.
 
-=image_tag 'cpyn-light-controls.png', size: "280x137", alt: 'cpyn light controls', style: 'display: block; margin-left: 20pt;'
+=image_tag 'cpyn-light-controls.png', size: "280x156", alt: 'cpyn light controls', style: 'display: block; margin-left: 20pt;'
 
 %p
   You can directly adjust the red, green and blue components of the light as well as its position
   in a plane above the turntable. You can also enable autolighting and let the accelerometers
   on the device do the work. The light will change position to appear always to be overhead.
 
-%h2#audio_settings Audio settings
-
-%p
-  The next three header view panes contain different audio settings.
-
-=image_tag 'cpyn-mixer-view.png', size: "280x137", alt: 'cpyn mixer view', style: 'display: block; margin-left: 20pt;'
-%br/
-=image_tag 'cpyn-playback-rate-view.png', size: "280x137", alt: 'cpyn mixer view', style: 'display: block; margin-left: 20pt;'
-%br/
-=image_tag 'cpyn-options-view.png', size: "280x137", alt: 'cpyn mixer view', style: 'display: block; margin-left: 20pt;'
-
-%p
-  Most of these are pretty clear, but here are some things you should know:
-
-%p
-  Track delay is the delay between tracks. Playback is ordinarily gapless. You can adjust the
-  gap to be up to 4 seconds. Set it to a negative value to cross fade tracks. This setting
-  is also available in the Settings app. Tap the 0 above the knob to return to gapless playback.
-%p
-  Playback rate ranges from 1/16 x to 16 x. The pitch changes with the rate. Any deviation from
-  1.0 is very noticeable. Tap the 1.0 button above the knob to restore it to exactly 1.0.
-%p
-  You can adjust the rotation speed of the turntable to either 33 or 45 r.p.m. You can also
-  disable the rotation altogether if you prefer.
 %p
   All the knobs in these views can be configured to respond to one of two gestures: a
   one-finger rotation gesture (just drag your finger around the surface of the knob in a
   circle); or a vertical pan gesture (drag your finger up and down across the knob to
   increase or decrease a setting). This gesture preference is configured in the Settings
   app (not the cpyn app itself).
-
-%h2#wave_form Wave form
-
-%p
-  The last header view shows you the live wave form being read from the MP3 or other audio
-  file and played. What you see is a time slice of about 50 ms.
-
-=image_tag 'cpyn-wave-form-view.png', size: "280x137", alt: 'cpyn wave form view', style: 'display: block; margin-left: 20pt;'
 
 %h6{style: 'text-align: center'}
   &copy; 2014 Jimmy Dee. All rights reserved.
