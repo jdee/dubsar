@@ -32,5 +32,18 @@
   %body{style: 'color: #e6e6fa; background-color: #191970; font-family: Avenir Next; max-width: 750pt; margin-left: auto; margin-right: auto;'}
     = yield
 
+    %hr/
+    %p{style: 'text-align: center;'}
+      =link_to 'about', 'https://cpyn.mobi/about-cpyn'
+      &middot;
+      =link_to 'help', 'https://cpyn.mobi/how-to-cpyn'
+      &middot;
+      =link_to 'home', 'https://cpyn.mobi'
+      &middot;
+      =link_to 'privacy', 'https://cpyn.mobi/cpyn-privacy'
+      &middot;
+      =link_to 'support', 'https://cpyn.mobi/cpyn-support'
+    %h6{style: 'text-align: center;'}
+      &copy; 2014 Jimmy Dee. All rights reserved.
     -# No JS besides the Twitter button atm
     -# = javascript_include_tag 'cpyn_manifest'
