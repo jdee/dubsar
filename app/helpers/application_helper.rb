@@ -103,6 +103,31 @@ EOF
     end
   end
 
+  def facebook_sdk
+    <<-HTML
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    HTML
+  end
+
+  def facebook_follow_button
+    <<-HTML
+<div class="fb-follow" data-href="https://www.facebook.com/cpyn.mobi" data-colorscheme="dark" data-layout="button" data-show-faces="false"></div>
+    HTML
+  end
+
+  def new_facebook_button
+    <<-HTML
+<div class="fb-like" data-href="https://cpyn.mobi" data-layout="button" data-action="like" data-show-faces="false" data-colorscheme="dark" data-share="true"></div>
+    HTML
+  end
+
   def facebook_button
     <<-HTML
 <div id="fb-root"></div>
