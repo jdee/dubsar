@@ -73,6 +73,9 @@ Dubsar::Application.routes.draw do
 
   get '/cpyn'             , to: 'application#cpyn'
   get '/how-to-cpyn'      , to: 'application#how_to_cpyn'
+  get '/cpyn-support'     , to: 'application#cpyn_support'
+  get '/cpyn-privacy'     , to: 'application#cpyn_privacy'
+  get '/about-cpyn'       , to: 'application#about_cpyn'
 
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 

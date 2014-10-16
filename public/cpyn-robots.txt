@@ -1,4 +1,4 @@
 Sitemap: https://cpyn.mobi/cpyn-sitemap.xml
 
 User-agent: *
-Disallow: /how-to-cpyn
+Allow: /

@@ -68,7 +68,19 @@ class ApplicationController < ActionController::Base
     render layout: 'cpyn'
   end
 
+  def about_cpyn
+    render layout: 'cpyn'
+  end
+
+  def cpyn_privacy
+    render layout: 'cpyn'
+  end
+
   def how_to_cpyn
+    render layout: 'cpyn'
+  end
+
+  def cpyn_support
     render layout: 'cpyn'
   end
 
