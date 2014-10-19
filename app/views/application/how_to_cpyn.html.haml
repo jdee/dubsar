@@ -1,45 +1,49 @@
 - content_for :title do
-  How to cpyn
+  how to cpyn
 
 - content_for :description do
   %meta{name:'Description', content:'Instructions for using the cpyn iOS audio player app.'}
   %link{rel:'canonical', href:'https://cpyn.mobi/how-to-cpyn'}
 
 %h1{style: 'text-align: center;'}
-  How to cpyn
+  how to cpyn
 
 %ul{style: 'list-style-type: none;'}
   %li
-    =link_to 'Choosing something to cpyn', '#choosing'
+    =link_to 'choosing something to cpyn', '#choosing'
+  %li
+    =link_to 'playback', '#playback'
   %ii
-    =link_to 'The Equalizer', '#equalizer'
+    =link_to 'the equalizer', '#equalizer'
   %li
-    =link_to 'The Q button', '#q_button'
+    =link_to 'the queue view', '#q_view'
   %li
-    =link_to 'Playback', '#playback'
+    =link_to 'background and remote control', '#background'
   %li
-    =link_to 'Background and remote control', '#background'
+    =link_to 'home sharing', '#home_sharing'
   %li
-    =link_to 'Scratching', '#scratching'
+    =link_to 'scratching', '#scratching'
   %li
-    =link_to 'Header views', '#headers'
+    =link_to 'header views', '#headers'
   %ul{style: 'list-style-type: none;'}
     %li
-      =link_to 'Volume view', '#volume_view'
+      =link_to 'volume view', '#volume_view'
     %li
-      =link_to 'Wave form', '#wave_form'
+      =link_to 'wave form', '#wave_form'
     %li
-      =link_to 'Now-playing view', '#now_playing'
+      =link_to 'now-playing view', '#now_playing'
     %li
-      =link_to 'Audio-detail view', '#audio_detail'
+      =link_to 'audio-detail view', '#audio_detail'
     %li
-      =link_to 'Audio settings', '#audio_settings'
+      =link_to 'audio settings', '#audio_settings'
     %li
-      =link_to 'Turntable speed', '#turntable_speed'
+      =link_to 'turntable speed and autolevel', '#turntable_speed'
     %li
-      =link_to 'Light controls', '#light_controls'
+      =link_to 'light controls', '#light_controls'
+    %li
+      =link_to 'knob gestures', '#knob_gestures'
 
-%h2#choosing Choosing something to cpyn
+%h2#choosing choosing something to cpyn
 
 %p
   When you first start the app, there is a large, wide button above the turntable that
@@ -52,15 +56,23 @@
 =image_tag 'cpyn-overhead.png', size: "280x497", alt: "cpyn overhead view", style: 'display: block; margin-left: 20pt;'
 
 %p
-  After a few seconds, a modal view will appear with your iPod library.
+  After a few seconds, a modal view will appear with your Music Library.
 
 =image_tag 'ipod-library.png', size: "280x497", alt: "iPod library", style: 'display: block; margin-left: 20pt;'
 
 %p
-  Select any track(s) from your iPod library and tap done. The library view will go away and
+  Select any track(s) from your Music Library and tap done. The library view will go away and
   return you to the turntable, which should now be playing.
 
-%h2#equalizer The Equalizer
+%h2#playback playback
+
+%p
+  You can freely skip tracks forward and backward during playback or while paused.
+  The button in the middle below the turntable changes from a play button to a pause
+  button. Use it to toggle playback. The counter above the iTunes button will show
+  the current playback time and the total track length.
+
+%h2#equalizer the equalizer
 
 %p
   With the turntable showing, swipe to the left to show equalization options.
@@ -72,15 +84,19 @@
   to see a list of presets. The setting starts out Custom, which enables the graphic equalizer.
   If you select any other preset, the graphic equalizer will be disabled; the sliders will all
   be gray. Adjust the sliders with Custom selected to choose a nonstandard equalizer setting.
+  The sliders respond both to tap and pan gestures. Tap anywhere along a vertical bar to move
+  the slider to that position. Drag your finger up and down anywhere along the length of a
+  vertical bar to move the slider with better precision, even if the slider is not directly
+  under your finger.
 %p
   This view includes a frequency analyzer that shows the relative power distribution per
   band while the audio plays.
 
-%h2#q_button Q button
+%h2#q_view the queue view
 
 %p
-  There is a button marked Q in the upper lefthand corner of the view. This simply displays your
-  current queue.
+  There is a button marked with three horizontal lines in the upper lefthand corner of
+  the view. Tapping it simply displays your current queue.
 
 =image_tag 'cpyn-queue.png', size: "280x497", alt: "cpyn queue", style: 'display: block; margin-left: 20pt;'
 
@@ -96,37 +112,49 @@
 
 %p
   After reordering your queue manually or by choosing a shuffle mode, you can use the
-  Reset button to undo all changes and return to your original queue.
+  Reset button to undo all changes and return to your original queue. Shuffling and
+  manual edits are treated the same. If you are shuffling, setting shuffle to off is
+  the same as tapping the Reset button. The Reset button will always set shuffle to off.
+%p
+  Your queue and your current position in it will be saved even through a reboot of the
+  device. But all edits, including randomization, are ephemeral. Your original queue
+  will be loaded the next time the app starts. If you have a shuffle mode set, the queue
+  will be shuffled.
+%p
+  If a shuffle mode and repeat mode are both set, tracks or albums are reshuffled each
+  time through the queue. There is a chance of hearing the same track or album twice in a
+  row when this happens.
 
 %p
   Use the + button here to add new tracks from your library to the end of your queue,
   even while it&apos;s playing. This first undoes any changes to your queue. If you
-  have a shuffle mode selected, they will be reshuffled.
+  have a shuffle mode selected, the new queue will be reshuffled.
 
-%h2#playback Playback
-
-%p
-  You can freely skip tracks forward and backward during playback or while paused.
-  The button in the middle below the turntable changes from a play button to a pause
-  button. Use it to toggle playback. The counter above the iTunes button will show
-  the current playback time and the total track length.
-
-%h2#background Background and remote control
+%h2#background background and remote control
 
 %p
   The app can play in the background and with the screen locked. You can use the remote
   control functions in the lock screen, in the now-playing controls in the control center
-  and on your earphones to pause, play and skip tracks.
+  and on your earphones or an AirPlay device to pause, play and skip tracks.
 
-%h2#scratching Scratching
+%h2#home_sharing home sharing
+
+%p
+  Home Sharing is not currently supported due to technical problems testing it. It may
+  or may not work. In any event, the behavior of cpyn if you try to play from a Home
+  Share is unpredictable.
+  Home Sharing
+  will be supported in the future to the degree possible.
+
+%h2#scratching scratching
 
 %p
   You can scratch records by rotating the turntable back and forth with one finger.
   More than one finger cancels the gesture and returns to whatever playback direction
   and speed you currently have set. The music player adjusts the direction and playback
-  rate to match your gesture. It can switch directions up to 4 times per second.
+  rate to match your gesture. It can switch directions several times per second.
 
-%h2#headers Header views
+%h2#headers header views
 
 %p
   There is an arrow button above the turntable pointing down. Tap it to reveal the
@@ -135,12 +163,12 @@
 %p
   Each header view has an edge grip consisting of three vertically-arranged gray dots
   on the left or right side indicating the presence of another header view on that
-  side. Swipe left from the right side or right from the left side wherever you see
-  a grip to slide to the next header view.
+  side (frequently on both sides). Swipe left from the right side or right from the
+  left side wherever you see a grip to slide to the next header view.
 %p
   There are six header view panes, discussed below.
 
-%h3#volume_view Volume view
+%h3#volume_view volume view
 
 %p
   The first header view you will see is the volume view.
@@ -158,7 +186,7 @@
   only information. Swipe right from the left side of the header view to see the header
   view to the left.
 
-%h3#wave_form Wave form
+%h3#wave_form wave form
 
 %p
   The first header view you will see to the left shows you the live wave form being read 
@@ -166,7 +194,7 @@
 
 =image_tag 'cpyn-wave-form-view.png', size: "280x156", alt: 'cpyn wave form view', style: 'display: block; margin-left: 20pt;'
 
-%h3#now_playing Now-playing view
+%h3#now_playing now-playing view
 
 %p
   The next header view you will see to the left is the now-playing view.
@@ -177,7 +205,7 @@
   This view shows the artist, the album the track is from, the track index on that album,
   the track name, the publication date, the total track time and the composer where available.
 
-%h3#audio_detail Audio-detail view
+%h3#audio_detail audio-detail view
 
 %p
   The last view to the left of the volume view shows audio format details of the now-playing
@@ -185,7 +213,13 @@
 
 =image_tag 'cpyn-audio-detail.png', size: "280x156", alt: 'cpyn audio detail view', style: 'display: block; margin-left: 20pt;'
 
-%h3#audio_settings Audio settings
+%p
+  If you have audio difficulty with any track, please report this information to
+  =link_to 'cpyn-support@dubsar-dictionary.com.', 'mailto:cpyn-support@dubsar-dictionary.com'
+  Feel free to send a screenshot. Also, please suggest at least one publicly-available
+  track with the indicated audio properties.
+
+%h3#audio_settings audio settings
 
 %p
   The first view to the right of the volume view lets you adjust the playback rate and
@@ -201,18 +235,24 @@
   gap to be up to 4 seconds. Set it to a negative value to cross fade tracks. This setting
   is also available in the Settings app. Tap the 0 above the knob to return to gapless playback.
 
-%h3#turntable_speed Turntable speed
+%h3#turntable_speed turntable speed and autolevel
 
 %p
-  The next view to the right lets you adjust the turntable speed.
+  The next view to the right lets you adjust the turntable speed and the autolevel setting.
 
 =image_tag 'cpyn-options-view.png', size: "280x156", alt: 'cpyn mixer view', style: 'display: block; margin-left: 20pt;'
 
 %p
   You can adjust the rotation speed of the turntable to either 33 or 45 r.p.m. You can also
   disable the rotation altogether if you prefer.
+%p
+  The autolevel setting normalizes audio levels across and within tracks, gently adjusting
+  the output gain to compensate for level changes. A progress bar below the switch indicates
+  the current output gain, which will be set to 1 any time autolevel is disabled. The
+  bar ranges from 0 to 2. With autolevel on, you will see the gain rise and fall to
+  compensate for the current audio level.
 
-%h3#light_controls Light controls
+%h3#light_controls light controls
 
 %p
   This view provides controls to adjust the light over the turntable.
@@ -223,6 +263,8 @@
   You can directly adjust the red, green and blue components of the light as well as its position
   in a plane above the turntable. You can also enable autolighting and let the accelerometers
   on the device do the work. The light will change position to appear always to be overhead.
+
+%h3#knob_gestures knob gestures
 
 %p
   All the knobs in these views can be configured to respond to one of two gestures: a
