@@ -6,6 +6,14 @@
   %meta{name: 'Keywords', content: 'music, music player, iOS, App Store, turntable, OpenGL, OpenGL ES, audio, audio player, cpyn, scratch'}
   %link{rel: 'canonical', href: 'https://cpyn.mobi'}
 
+  / Twitter app card
+  %meta{name: "twitter:card", content: "app"}
+  %meta{name: "twitter:app:id:iphone", content: "929721548"}
+  %meta{name: "twitter:app:id:ipad", content: "929721548"}
+  %meta{name: "twitter:app:name:iphone", content: "cpyn audio player"}
+  %meta{name: "twitter:app:name:ipad", content: "cpyn audio player"}
+  %meta{name: "twitter:app:description", content: "cpyn is a new audio player app for iOS that lets you scratch records as they play."}
+
 !=facebook_sdk
 %div{style: 'text-align: center; font-size: x-large;'}
   %p
@@ -22,8 +30,9 @@
 
 %div
   %div{style: 'text-align: center;'}
-    %h2{style: 'text-align: center;'}
-      coming to the App Store autumn 2014
+    %p
+      =link_to 'https://itunes.apple.com/us/app/cpyn/id929721548?mt=8', target: '_blank' do
+        =image_tag 'Download_on_the_App_Store_Badge_US-UK_135x40.svg', width: 135, height: 40, alt: 'Download on the App Store'
 
     %div{style: 'text-align: center;'}
       != facebook_follow_button
