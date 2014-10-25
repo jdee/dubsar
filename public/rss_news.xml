@@ -3,10 +3,10 @@
   <channel>
     <atom:link href="https://dubsar-dictionary.com/rss_news.xml" rel="self" type="application/rss+xml" />
     <title>Dubsar News Feed</title>
-    <description>Keep up with changes to the Dubsar Dictionary Project site.</description>
+    <description>Keep up with changes to the Dubsar Dictionary Project.</description>
     <link>https://dubsar-dictionary.com</link>
-    <lastBuildDate>Tue, 16 Sep 2014 20:30:00 GMT</lastBuildDate>
-    <pubDate>Tue, 16 Sep 2014 20:30:00 GMT</pubDate>
+    <lastBuildDate>Sat, 25 Oct 2014 18:15:00 GMT</lastBuildDate>
+    <pubDate>Sat, 25 Oct 2014 18:15:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,19 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>cpyn</title>
+      <description>
+      Dubsar for iOS has a new sibling, an iOS audio player app by the same author called
+      cpyn, v. /spɪn/ past tense cpÿn /spʌn/. You can find version 1.0 of cpyn on the
+      iOS App Store. cpyn includes a three-dimensional turntable, reversible
+      playback and record scratching, as well as an array of audio features from
+      equalization to cross fading and autolevel.
+      </description>
+      <link>https://itunes.apple.com/us/app/cpyn/id929721548?mt=8</link>
+      <guid isPermaLink="false">53</guid>
+      <pubDate>Sat, 25 Oct 2014 18:15:00 GMT</pubDate>
+    </item>
     <item>
       <title>Dubsar 2.0 for iOS is in the App Store</title>
       <description>
