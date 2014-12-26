@@ -24,7 +24,10 @@ gem 'rails', '>= 4.0'
 gem 'will_paginate', '~> 3.0'
 gem 'devise'
 gem 'uglifier'
-gem 'therubyracer'
+
+group :production do
+  gem 'therubyracer'
+end
 
 group :backup_dev, :development, :test do
   gem 'ZenTest'
