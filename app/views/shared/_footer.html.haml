@@ -15,26 +15,23 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-&copy; 2015 Jimmy Dee &middot;
-=link_to 'Contact', 'mailto:dubsar@dubsar-dictionary.com', :title => 'Contact', :class => 'undecorated'
-&middot;
-=link_to 'About', about_path, :title => 'About', :class => 'undecorated'
-&middot;
-=link_to 'FAQ', faq_path, :title => 'Frequently Asked Questions', :class => 'undecorated'
-&middot;
-=link_to 'License', license_path, :title => 'License', :class => 'undecorated'
-&middot;
-=link_to 'Privacy', privacy_path, title: 'Privacy', :class => 'undecorated'
-&middot;
-%a.undecorated{:href => qunit_path, :title => 'QUnit'}
-  %span#qunit-link.line.ui-state-default.ui-corner-all
-    %span#wrench-icon.ui-icon.ui-icon-wrench
-    %strong QUnit Test Suite
-%br/
-%a{:href => 'http://wordnet.princeton.edu', :class => 'undecorated'}
-  WordNet&reg;
-&copy; 2015 The Trustees of Princeton University
-&middot;
-%a{:href => 'http://wordnet.princeton.edu', :class => 'undecorated'} WordNet&reg;
-is available under the
-=link_to 'WordNet 3.0 License', 'http://wordnet.princeton.edu/wordnet/license', :title => 'WordNet 3.0 License', :class => 'undecorated'
+%hr/
+#footer
+  &copy; 2015 Jimmy Dee &middot;
+  =link_to 'Contact', 'mailto:dubsar@dubsar-dictionary.com', :title => 'Contact', :class => 'undecorated'
+  &middot;
+  =link_to 'About', about_path, :title => 'About', :class => 'undecorated'
+  &middot;
+  =link_to 'FAQ', faq_path, :title => 'Frequently Asked Questions', :class => 'undecorated'
+  &middot;
+  =link_to 'License', license_path, :title => 'License', :class => 'undecorated'
+  &middot;
+  =link_to 'Privacy', privacy_path, title: 'Privacy', :class => 'undecorated'
+  %br/
+  %a{:href => 'http://wordnet.princeton.edu', :class => 'undecorated'}
+    WordNet&reg;
+  &copy; 2015 The Trustees of Princeton University
+  &middot;
+  %a{:href => 'http://wordnet.princeton.edu', :class => 'undecorated'} WordNet&reg;
+  is available under the
+  =link_to 'WordNet 3.0 License', 'http://wordnet.princeton.edu/wordnet/license', :title => 'WordNet 3.0 License', :class => 'undecorated'

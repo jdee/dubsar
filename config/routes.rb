@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010-14 Jimmy Dee
+#  Copyright (C) 2010-15 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ Dubsar::Application.routes.draw do
   get '/(.:format)', to: 'words#search'
   get '/os(.:format)', to: 'words#os'
 
-  root :to => "words#index"
+  root :to => "application#index"
 
   # Currently suppresses things like /rails/info/routes. Need to except that.
   get '/*junk', to: "application#error"

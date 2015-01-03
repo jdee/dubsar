@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -30,34 +30,7 @@
   %meta{:property => 'og:description', :content => 'The Dubsar Project is a suite of open-source dictionary applications using content from the Princeton University WordNet® project.'}
   %meta{:property => 'og:email', :content => 'dubsar@dubsar-dictionary.com'}
   %link{:rel => 'canonical', :href => 'https://dubsar-dictionary.com'}
-  != thumbnail_link_tags
 
-#accordion
-  %h2#cap-dubsar_n
-    %a{:href => '#cap-dubsar_n'}
-      Dubsar
-      %em (n.)
-  #pane_0
-    %ol
-      %li
-        the Sumerian word for
-        %em scribe
-        &mdash; cuneiform
-        =link_to image_tag('Obel.png', :id => 'cuneiform-signs', :alt => @dubsar_alt, :height => "17", :width => "46"), 'http://psd.museum.upenn.edu/epsd/epsd/e1050.html', :title => @dubsar_caption
-      %li
-        a dictionary application using content from the Princeton
-        University
-        %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
-        project
-  =render :partial => 'news'
-  %h2#cap-word_of_the_day_n
-    %a{:href => '#cap-word_of_the_day_n'}
-      Word of the day
-      %em (n.)
-  #pane_2
-    #wotd-rss-div.header-link-div.ui-corner-all.ui-state-default
-      %a#wotd-rss-link.line.header-link{:href => '/wotd.xml'}
-        %span.ui-icon.ui-icon-signal-diag
-        rss
-    %br/
-    = render :partial => 'word', :object => DailyWord.word_of_the_day.word
+=image_tag 'dubsar-big.png', size: '170x170', style: 'margin: 2em;'
+
+=render partial: 'search_form'

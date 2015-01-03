@@ -15,14 +15,12 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-- if flash[:error]
-  #error.line
-    %span
-    &= flash[:error]
-- elsif flash[:notice] || flash[:alert]
-  #error.line
-    %span
-    &= flash[:notice]
-- else
-  #error.line.template
-    %span
+%form{method: :get, action: '/'}
+  %input{type: :search, autofocus: :autofocus, placeholder: 'search term(s)', name: :term}
+  %br/
+  %input{type: :radio, name: :scope, value: :words, checked: :checked}
+  %label{:for => :scope_words} words
+  %input{type: :radio, name: :scope, value: :synsets}
+  %label{:for => :scope_synsets} synsets
+  %br/
+  %input{type: :submit, value: 'search'}

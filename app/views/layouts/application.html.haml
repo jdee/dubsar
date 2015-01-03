@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -30,66 +30,17 @@
     %link{:rel => "apple-touch-icon", :sizes => "120x120", :href => "#{image_path 'dubsar-120x120.png'}"}
     %link{:rel => "apple-touch-icon", :sizes => "144x144", :href => "#{image_path 'dubsar-ipad-retina.png'}"}
     %link{:rel => "apple-touch-icon", :sizes => "152x152", :href => "#{image_path 'dubsar-152x152.png'}"}
-    = stylesheet_link_tag 'jquery-ui-1.8.14.dark'
-    = stylesheet_link_tag 'jquery-ui-1.8.14.light'
+    %meta{name: 'viewport', content: 'initial-scale=1.0'}
     = stylesheet_link_tag 'main_manifest'
     = csrf_meta_tag
     =yield :description
 
-  %body{:class => "style-#{@theme}"}
-    -# != nsa_banner
-    #header.ui-widget
-      %table.banner-container
-        %tbody
-          %tr
-            %td
-              %h2
-                %a{:href => root_path, :class => "undecorated", :title => 'home'}
-                  =image_tag 'dubsar.png', :alt => 'D', :id => 'dubsar-image', :height => "26", :width => "26"
-                  Dubsar Project
-            %td.header-link-cell
-              .padded-header-div.header-link-div.ui-corner-all.ui-state-default
-                %a#tour-link.line.header-link.search-link{:href => tour_path, :title => 'take a tour'}
-                  %span.ui-icon.ui-icon-flag
-                  tour
-            %td.header-link-cell
-              .padded-header-div.header-link-div.ui-corner-all.ui-state-default
-                %a#mobile-link.line.header-link.search-link{:href => mobile_url, :title => 'Dubsar Mobile Edition'}
-                  %span.ui-icon.ui-icon-signal
-                  mobile
-            %td.header-link-cell
-              .padded-header-div.header-link-div.ui-corner-all.ui-state-default
-                %a#share-link.line.header-link{:href => '#', :title => 'Tell the people!'}
-                  %span.ui-icon.ui-icon-comment
-                  share
-            %td.header-link-cell
-              .padded-header-div.header-link-div.ui-corner-all.ui-state-default
-                %a#rss-link.line.header-link{:href => '/rss_news.xml', :title => 'RSS News Feed'}
-                  %span.ui-icon.ui-icon-signal-diag
-                  rss
-            %td.header-link-cell
-              .padded-header-div.header-link-div.ui-corner-all.ui-state-default
-                %a#opensearch-link.line.header-link{:href => '/opensearch.xml', :title => 'Add Dubsar as a search provider (Firefox and Chrome)'}
-                  %span.ui-icon.ui-icon-gear
-                  opensearch
-
-      #share-dialog.template
-      #opensearch-dialog.template
-        The
-        = link_to 'OpenSearch', 'http://www.opensearch.org/'
-        protocol allows you to add Dubsar to the browser&apos;s list of
-        search engines in Firefox. Google Chrome
-        picks it up automatically.
-
-      =render :partial => 'shared/theme_picker'
-      =render :partial => 'shared/header_bar'
-      %hr/
+  %body
     =render :partial => 'shared/error'
     #main
       =yield
 
     =yield :pagination
-    #footer.ui-widget
-      =render :partial => 'shared/footer'
 
+    =render :partial => 'shared/footer'
     = javascript_include_tag 'main_manifest'
