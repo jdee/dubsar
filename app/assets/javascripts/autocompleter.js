@@ -30,7 +30,7 @@
         type: 'GET',
         dataType: 'html',
         success: function(data) {
-          $('#autocomplete-results').html(data);
+          $('#autocomplete-results').html(data).show();
         },
         error: function(error) {
           alert(error);
@@ -40,7 +40,7 @@
 
     function checkReset(elm) {
       if ($(elm).val() == '') {
-        $('#autocomplete-results').html('');
+        $('#autocomplete-results').html('').hide();
         return true;
       }
       return false;

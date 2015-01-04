@@ -30,6 +30,25 @@ body, input, form {
   text-align: center;
 }
 
+#search-form {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 320pt;
+}
+
+#search-term {
+  width: 87.5%;
+  max-width: 280pt;
+}
+
+#autocomplete-results {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  max-width: 320pt;
+  display: none;
+}
+
 #footer {
   font-size: large;
 }
