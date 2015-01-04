@@ -20,6 +20,8 @@
   $(function() {
 
     function triggerAutocomplete() {
+      if (checkReset(this)) return;
+
       var term = $(this).val();
       // TODO: Scope
 
@@ -36,13 +38,15 @@
       });
     }
 
-    function checkReset() {
-      if ($(this).val() == '') {
+    function checkReset(elm) {
+      if ($(elm).val() == '') {
         $('#autocomplete-results').html('');
+        return true;
       }
+      return false;
     }
 
-    $('#search-term').on('keyup', triggerAutocomplete).on('change', checkReset);
+    $('#search-term').on('input', triggerAutocomplete);
     
   });
 })(jQuery);
