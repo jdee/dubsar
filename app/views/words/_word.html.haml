@@ -14,22 +14,20 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-.view-container
-  .line.view-heading
-    %span
-      = link_to_unless_current 'Word:', word_path(word)
-      &= word.name
-      %em= "(#{word.pos}.)"
-      - unless word.freq_cnt.zero?
-        &nbsp;
-        = "freq. cnt.: #{word.freq_cnt.to_s :delimiter => ','}"
-  .view-content
-    %em other forms:
-    - if word.other_forms.length > 0
-      &= word.other_forms
-    - else
-      (none)
-    %ol
-      - word.senses.each do |sense|
-        %li
-          = render :partial => 'sense', :object => sense
+%span
+  = link_to_unless_current 'Word:', word_path(word)
+  &= word.name
+  %em= "(#{word.pos}.)"
+  - unless word.freq_cnt.zero?
+    &nbsp;
+    = "freq. cnt.: #{word.freq_cnt.to_s :delimiter => ','}"
+.view-content
+  %em other forms:
+  - if word.other_forms.length > 0
+    &= word.other_forms
+  - else
+    (none)
+  %ol
+    - word.senses.each do |sense|
+      %li
+        = render :partial => 'sense', :object => sense

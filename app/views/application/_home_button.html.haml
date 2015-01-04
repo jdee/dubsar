@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -14,14 +14,6 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-- content_for :title do
-  &= @word.page_title
 
-- content_for :description do
-  %meta{:name => 'Description', :content => @word.meta_description}
-  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
-  != canonical_link_tag @word
-  != thumbnail_link_tags
-
-= render partial: 'home_button'
-= render @word
+=link_to root_path, title: 'Home', id: 'home-button' do
+  =image_tag 'dubsar-big.png', size: '60x60', alt: 'Home'

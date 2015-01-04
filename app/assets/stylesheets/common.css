@@ -49,11 +49,17 @@ body {
   display: none;
 }
 
-#footer, #footer * {
+#footer, #footer *, label {
   font-size: large;
 }
 
 .line {
   float: left;
   margin-right: 0.3em;
+}
+
+#home-button {
+  text-decoration: none;
+  float: left;  
+  margin: 4px;
 }
