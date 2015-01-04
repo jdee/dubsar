@@ -16,9 +16,8 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 .template
   #tooltip-container
-    .ui-widget-header
-      .ui-state-default.line
-        %span.ui-icon.ui-icon-info
+    %div
+      .line
         %span.tooltip-header-text
           &nbsp;
           %em{:title => 'lexical file name, a broad category associated with this word sense'}
@@ -31,8 +30,7 @@
             %span{:title => 'frequency count of this word sense in a reference text'}
               &= "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
             &nbsp;
-        %a.close-icon-span.ui-state-default.ui-corner-all{:title => 'close'}
-          %span.ui-icon.ui-icon-close
+    %br/
     - unless sense.frames.empty?
       %hr/
       %strong{:title => 'generic sentence frames for this verb sense'}
@@ -59,13 +57,10 @@
       %hr/
       %strong{:title => 'links to related words of different types'}
         pointers
-      %table
-        %tbody
-          - (sense.pointers+sense.synset.pointers).group_by(&:ptype).each do |ptype, ptrs|
-            %tr
-              %td.pointer-type{:title => Pointer.help_text(ptype)}
-                %em
-                  &= ptype
-              %td
-                - ptrs.each do |ptr|
-                  = target_link ptr.target
+        - (sense.pointers+sense.synset.pointers).group_by(&:ptype).each do |ptype, ptrs|
+          %p.pointer-type{:title => Pointer.help_text(ptype)}
+            %em
+              &= ptype
+          %p
+            - ptrs.each do |ptr|
+              = target_link ptr.target

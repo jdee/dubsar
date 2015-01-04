@@ -24,7 +24,7 @@ body {
   background-color: #87ceeb;
 }
 
-body, input, form {
+* {
   font-family: Avenir Next, Verdana, Arial, sans-serif;
   font-size: xx-large;
   text-align: center;
@@ -49,7 +49,7 @@ body, input, form {
   display: none;
 }
 
-#footer {
+#footer, #footer * {
   font-size: large;
 }
 

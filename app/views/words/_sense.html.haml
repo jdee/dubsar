@@ -16,7 +16,7 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - unless sense.synonyms.empty?
   = link_to h(sense.synonyms.map(&:name).join(', ')), sense.synset, :class => 'search-link'
-%span.tooltip.ui-corner-all
+%span.tooltip
   - if @sense == sense
     &= sense.synset.gloss
   - else
