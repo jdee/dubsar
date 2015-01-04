@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -15,46 +15,44 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-.ui-widget.ui-corner-all.view-container
-  .ui-state-active.ui-corner-top.line.view-heading
-    %span.ui-icon.ui-icon-document
-    %span
-      = link_to_unless_current 'Synset:', synset
-      - synset.senses.sort_by{|s|s.word.name}.each do |sense|
-        - if @sense == sense
-          &= sense.word.name
-        - else
-          = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
-      &nbsp;
-      %em{:title => 'lexical file name, a broad category associated with this word sense'}
-        &= "<#{synset.lexname}>"
-      - unless synset.freq_cnt.zero?
-        &nbsp;
-        %span{:title => 'frequency count of this word sense in a reference text'}
-          = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
-  .ui-corner-bottom.view-content.ui-widget-content
-    %strong gloss
-    %br/
-    %br/
+%span.ui-icon.ui-icon-document
+%span
+  = link_to_unless_current 'Synset:', synset
+  - synset.senses.sort_by{|s|s.word.name}.each do |sense|
+    - if @sense == sense
+      &= sense.word.name
+    - else
+      = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
+  &nbsp;
+  %em{:title => 'lexical file name, a broad category associated with this word sense'}
+    &= "<#{synset.lexname}>"
+  - unless synset.freq_cnt.zero?
     &nbsp;
-    &= synset.gloss
-    - unless synset.samples.empty?
-      %hr/
-      %h4 sample sentences
-      %ul
-        - synset.samples.each do |sample|
-          %li=h sample
-    - unless synset.pointers.blank?
-      %hr/
-      %strong{:title => 'links to related words of different types'}
-        pointers
-      %table
-        %tbody
-          - synset.pointers.group_by(&:ptype).each do |ptype, ptrs|
-            %tr
-              %td.pointer-type{:title => Pointer.help_text(ptype)}
-                %em
-                  &= ptype
-              %td
-                - ptrs.each do |ptr|
-                  = target_link ptr.target
+    %span{:title => 'frequency count of this word sense in a reference text'}
+      = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
+.view-content
+  %strong gloss
+  %br/
+  %br/
+  &nbsp;
+  &= synset.gloss
+  - unless synset.samples.empty?
+    %hr/
+    %h4 sample sentences
+    %ul
+      - synset.samples.each do |sample|
+        %li=h sample
+  - unless synset.pointers.blank?
+    %hr/
+    %strong{:title => 'links to related words of different types'}
+      pointers
+    %table
+      %tbody
+        - synset.pointers.group_by(&:ptype).each do |ptype, ptrs|
+          %tr
+            %td.pointer-type{:title => Pointer.help_text(ptype)}
+              %em
+                &= ptype
+            %td
+              - ptrs.each do |ptr|
+                = target_link ptr.target

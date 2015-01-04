@@ -43,6 +43,12 @@ a:hover,active {
   text-align: center;
 }
 
+hr.divider {
+  height: 5px;
+  background-color: #fbc90b;
+  /* background-color: #333; */
+}
+
 #search-form {
   margin: 0 auto;
   width: 100%;

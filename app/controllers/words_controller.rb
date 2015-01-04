@@ -145,25 +145,31 @@ class WordsController < ApplicationController
     @scope = params[:scope].try(:to_sym) || :words
     options = params.symbolize_keys
 
+    @synsets = Synset.includes(:words).search(params[:term]).order('synsets.id ASC').limit(30).paginate(page: params[:page] || 1) if @scope == :synsets
+
     respond_to do |format|
       format.html do
-        @words = Word.search options.merge(:page => params[:page],
-          :order => 'words.name ASC, words.part_of_speech ASC',
-          :include => [
-            :inflections,
-            { :senses => [
-              { :synset => { :senses => :word } },
-              { :senses_verb_frames => :verb_frame },
-              :pointers ]
-            }
-          ]
-        )
+        if @scope == :words
+          @words = Word.search options.merge(:page => params[:page],
+            :order => 'words.name ASC, words.part_of_speech ASC',
+            :include => [
+              :inflections,
+              { :senses => [
+                { :synset => { :senses => :word } },
+                { :senses_verb_frames => :verb_frame },
+                :pointers ]
+              }
+            ]
+          )
 
-        if @words.count > 0
-          render :action => 'search'
+          if @words.count > 0
+            render :action => 'search'
+          else
+            redirect_with_error(
+              "no results for \"#{CGI.escapeHTML @term}\"")
+          end
         else
-          redirect_with_error(
-            "no results for \"#{CGI.escapeHTML @term}\"")
+          render action: 'search'
         end
       end
 
@@ -173,8 +179,6 @@ class WordsController < ApplicationController
             :order => 'words.name ASC, words.part_of_speech ASC',
             :include => :inflections
           )
-        elsif @scope == :synsets
-          @synsets = Synset.includes(:words).search(params[:term]).order('synsets.id ASC').limit(30).paginate(page: params[:page] || 1)
         end
 
         # Bad requests are kicked back in the munge_search_params
