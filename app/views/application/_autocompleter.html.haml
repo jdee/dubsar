@@ -1,0 +1,5 @@
+#autocompleter
+  - if @scope == :words
+    - @words.each do |word|
+      = link_to word, "/?term=#{word}"
+      %br/

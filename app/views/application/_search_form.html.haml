@@ -15,12 +15,13 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-%form{method: :get, action: '/'}
-  %input{type: :search, autofocus: :autofocus, placeholder: 'search term(s)', name: :term}
+=form_tag '/', method: :get do
+  =search_field_tag :term, nil, autofocus: :autofocus, autocomplete: :off, placeholder: 'search term(s)', id: 'search-term'
+  #autocomplete-results
   %br/
-  %input{type: :radio, name: :scope, value: :words, checked: :checked}
-  %label{:for => :scope_words} words
-  %input{type: :radio, name: :scope, value: :synsets}
-  %label{:for => :scope_synsets} synsets
+  =radio_button_tag :scope, :words, true
+  =label_tag :scope_words, 'words'
+  =radio_button_tag :scope, :synsets
+  =label_tag :scope_synsets, 'synsets'
   %br/
-  %input{type: :submit, value: 'search'}
+  =submit_tag 'search'

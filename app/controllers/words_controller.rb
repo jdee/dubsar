@@ -106,28 +106,34 @@ class WordsController < ApplicationController
 
   def os
     respond_to do |format|
+      @term = params[:term]
+      @scope = params[:scope].try(:to_sym) || :words
+      # strip leading and trailing white space and compress internal
+      # whitespace
+      @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
+      if @scope == :words
+        @words = []
+        exact = Inflection.find_by_name(@term)
+        @words << exact.name if exact
+
+        @words += InflectionsFt.select('name').distinct.
+          where([ "name MATCH ? AND name != ?", "#{@term}*", @term ]).
+          order('name ASC').limit(10-@words.count).map(&:name)
+
+      elsif @scope == :synsets
+        @synsets = SynsetSuggestion.autocomplete(@term).limit(params[:max]).map(&:suggestion)
+      end
+
       format.json do
-        @term = params[:term]
-        @scope = params[:scope].try(:to_sym) || :words
-
-        # strip leading and trailing white space and compress internal
-        # whitespace
-        @term.sub!(/^\s*/, '').sub!(/\s*$/, '').gsub!(/\s+/, ' ')
-
         if @scope == :words
-          @words = []
-          exact = Inflection.find_by_name(@term)
-          @words << exact.name if exact
-
-          @words += InflectionsFt.select('name').distinct.
-            where([ "name MATCH ? AND name != ?", "#{@term}*", @term ]).
-            order('name ASC').limit(10-@words.count).map(&:name)
-
           respond_with [ @term, @words ]
-        elsif @scope == :synsets
-          @synsets = SynsetSuggestion.autocomplete(@term).limit(params[:max]).map(&:suggestion)
+        else
           respond_with [ @term, @synsets ]
         end
+      end
+
+      format.html do
+        render partial: 'autocompleter'
       end
     end
   end
