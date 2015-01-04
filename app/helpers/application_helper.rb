@@ -20,6 +20,10 @@ module ApplicationHelper
 
   alias :orig_url_for :url_for
 
+  def home_page
+    @term.nil?
+  end
+
   def search_field_options
     options = {
       autocomplete: :off,
@@ -29,7 +33,7 @@ module ApplicationHelper
       id: 'search-term',
       title: 'press enter to search'
     }
-    options[:autofocus] = :autofocus unless @term
+    options[:autofocus] = :autofocus if home_page
     options
   end
 
