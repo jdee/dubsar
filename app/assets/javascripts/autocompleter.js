@@ -57,7 +57,10 @@
     /* Chrome only: This hides the AC when going back to the index. (But not Safari.) */
     checkReset('#search-term');
 
-    $('input[name="scope"]').on('change', triggerAutocomplete);
+    $('input[name="scope"]').on('change', function() {
+      searchField.focus();
+      triggerAutocomplete();
+    });
     
   });
 })(jQuery);
