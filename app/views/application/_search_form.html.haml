@@ -16,9 +16,9 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 =form_tag '/', method: :get, id: 'search-form' do
-  =radio_button_tag :scope, :words, true
+  =radio_button_tag :scope, :words, @scope.nil? || @scope == :words
   =label_tag :scope_words, 'Words'
-  =radio_button_tag :scope, :synsets
+  =radio_button_tag :scope, :synsets, @scope == :synsets
   =label_tag :scope_synsets, 'Synsets'
   %br/
   =search_field_tag :term, @term, search_field_options

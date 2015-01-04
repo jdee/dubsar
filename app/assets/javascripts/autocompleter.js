@@ -19,15 +19,17 @@
 ;(function($) {
   $(function() {
     var acResults = $('#autocomplete-results');
+    var searchField = $('#search-term');
 
     function triggerAutocomplete() {
-      if (checkReset(this)) return;
+      if (checkReset('#search-term')) return;
 
-      var term = $(this).val();
-      // TODO: Scope
+      var term = searchField.val();
+      var scope = "words";
+      if ($('#scope_synsets').is(':checked')) scope = "synsets";
 
       $.ajax({
-        url: '/os?term=' + term,
+        url: '/os?term=' + term + '&scope=' + scope,
         type: 'GET',
         dataType: 'html',
         success: function(data) {
@@ -47,11 +49,15 @@
       return false;
     }
 
-    $('#search-term').on('input focus', triggerAutocomplete);
-    $('#search-term').on('blur', function() {
+    searchField.on('input focus', triggerAutocomplete);
+    searchField.on('blur', function() {
       acResults.hide();
     });
+
+    /* Chrome only: This hides the AC when going back to the index. (But not Safari.) */
     checkReset('#search-term');
+
+    $('input[name="scope"]').on('change', triggerAutocomplete);
     
   });
 })(jQuery);

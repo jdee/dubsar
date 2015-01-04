@@ -121,7 +121,8 @@ class WordsController < ApplicationController
           order('name ASC').limit(10-@words.count).map(&:name)
 
       elsif @scope == :synsets
-        @synsets = SynsetSuggestion.autocomplete(@term).limit(params[:max]).map(&:suggestion)
+        max = (params[:max] || 10).to_i
+        @synsets = SynsetSuggestion.autocomplete(@term).limit(max).map(&:suggestion)
       end
 
       format.json do

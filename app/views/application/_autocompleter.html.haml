@@ -1,5 +1,9 @@
 #autocompleter
   - if @scope == :words
     - @words.each do |word|
-      = link_to word, "/?term=#{word}"
+      = link_to word, "/?term=#{word}&scope=words"
+      %br/
+  - else
+    - @synsets.each do |synset|
+      = link_to synset, "/?term=#{synset}&scope=synsets"
       %br/
