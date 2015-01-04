@@ -62,7 +62,7 @@ a:hover,active {
   display: none;
 }
 
-#footer, #footer *, label {
+#footer, #footer *, label, .alphabet-link {
   font-size: large;
 }
 

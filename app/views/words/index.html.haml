@@ -47,6 +47,6 @@
 %br/
 #alphabet
   - ('A'..'Z').each do |letter|
-    = link_to letter, url_for(:controller => '/words', :action => :search, :term =>"[#{letter}#{letter.downcase}]*", :match => 'glob', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link'
-  %a.search-link{:href => url_for(:controller => '/words', :action => :search, :term => '[^A-Za-z]*', :match => 'glob', :title =>'...'), :title => 'words not starting with a letter'}
+    = link_to letter, url_for(:controller => '/words', :action => :search, :term =>"[#{letter}#{letter.downcase}]*", :match => 'glob', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link alphabet-link'
+  %a.alphabet-link.search-link{:href => url_for(:controller => '/words', :action => :search, :term => '[^A-Za-z]*', :match => 'glob', :title =>'...'), :title => 'words not starting with a letter'}
     &hellip;
