@@ -21,7 +21,14 @@
   =radio_button_tag :scope, :synsets
   =label_tag :scope_synsets, 'Synsets'
   %br/
-  =search_field_tag :term, nil, autofocus: :autofocus, autocomplete: :off, autocapitalize: :off, autocorrect: :off, placeholder: 'search term(s)', id: 'search-term', title: 'press enter to search'
+  =search_field_tag :term, nil,
+    autofocus: :autofocus,
+    autocomplete: :off,
+    autocapitalize: :off,
+    autocorrect: :off,
+    placeholder: 'search term(s)',
+    id: 'search-term',
+    title: 'press enter to search'
   #autocomplete-results
   -# %br/
   -# =submit_tag 'search'
