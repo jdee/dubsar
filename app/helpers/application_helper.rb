@@ -20,6 +20,19 @@ module ApplicationHelper
 
   alias :orig_url_for :url_for
 
+  def search_field_options
+    options = {
+      autocomplete: :off,
+      autocapitalize: :off,
+      autocorrect: :off,
+      placeholder: 'search term(s)',
+      id: 'search-term',
+      title: 'press enter to search'
+    }
+    options[:autofocus] = :autofocus unless @term
+    options
+  end
+
   def apk_link
     "#{asset_host}/Dubsar-1.1.2.2.apk"
   end

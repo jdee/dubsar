@@ -47,7 +47,11 @@
       return false;
     }
 
-    $('#search-term').on('input', triggerAutocomplete);
+    $('#search-term').on('input focus', triggerAutocomplete);
+    $('#search-term').on('blur', function() {
+      acResults.hide();
+    });
+    checkReset('#search-term');
     
   });
 })(jQuery);
