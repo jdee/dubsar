@@ -31,11 +31,13 @@
   %meta{:property => 'og:email', :content => 'dubsar@dubsar-dictionary.com'}
   %link{:rel => 'canonical', :href => 'https://dubsar-dictionary.com'}
 
-=image_tag 'dubsar-big.png', size: '120x120', style: 'margin: 1.5em;'
+=image_tag 'dubsar-big.png', size: '120x120', style: 'margin: 0.5em;'
+
+%h5 Powered by WordNet&reg;
 
 =render partial: 'search_form'
 
-%h3 word of the day
+%h3 Word of the Day
 
 %p
   - wotd = DailyWord.word_of_the_day.word
