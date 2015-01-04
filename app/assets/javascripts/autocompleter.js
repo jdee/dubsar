@@ -18,6 +18,7 @@
  */
 ;(function($) {
   $(function() {
+    var acResults = $('#autocomplete-results');
 
     function triggerAutocomplete() {
       if (checkReset(this)) return;
@@ -30,7 +31,7 @@
         type: 'GET',
         dataType: 'html',
         success: function(data) {
-          $('#autocomplete-results').html(data).show();
+          acResults.html(data).show();
         },
         error: function(error) {
           alert(error);
@@ -40,7 +41,7 @@
 
     function checkReset(elm) {
       if ($(elm).val() == '') {
-        $('#autocomplete-results').html('').hide();
+        acResults.html('').hide();
         return true;
       }
       return false;
