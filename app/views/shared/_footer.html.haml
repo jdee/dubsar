@@ -21,13 +21,13 @@
   &copy; #{year} Jimmy Dee &middot;
   =link_to 'Contact', 'mailto:dubsar@dubsar-dictionary.com', :title => 'Contact', :class => 'undecorated'
   &middot;
-  =link_to 'About', about_path, :title => 'About', :class => 'undecorated'
+  =link_to_unless_current 'About', about_path, :title => 'About', :class => 'undecorated'
   &middot;
-  =link_to 'FAQ', faq_path, :title => 'Frequently Asked Questions', :class => 'undecorated'
+  =link_to_unless_current 'FAQ', faq_path, :title => 'Frequently Asked Questions', :class => 'undecorated'
   &middot;
-  =link_to 'License', license_path, :title => 'License', :class => 'undecorated'
+  =link_to_unless_current 'License', license_path, :title => 'License', :class => 'undecorated'
   &middot;
-  =link_to 'Privacy', privacy_path, title: 'Privacy', :class => 'undecorated'
+  =link_to_unless_current 'Privacy', privacy_path, title: 'Privacy', :class => 'undecorated'
   %br/
   %a{:href => 'http://wordnet.princeton.edu', :class => 'undecorated', target: '_blank'}
     WordNet&reg;
