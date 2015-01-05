@@ -82,3 +82,9 @@ hr.divider {
   float: left;  
   margin: 4px;
 }
+
+.accordion-body {
+  background-color: white;
+  max-height: 250pt;
+  overflow: hidden;
+}

@@ -15,8 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-%span.ui-icon.ui-icon-document
-%span
+%span.accordion-head
   = link_to_unless_current 'Synset:', synset
   - synset.senses.sort_by{|s|s.word.name}.each do |sense|
     - if @sense == sense
@@ -30,7 +29,7 @@
     &nbsp;
     %span{:title => 'frequency count of this word sense in a reference text'}
       = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
-.view-content
+.view-content.accordion-body
   %strong gloss
   %br/
   %br/

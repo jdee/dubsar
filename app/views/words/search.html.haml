@@ -27,7 +27,7 @@
 = render partial: 'home_button'
 = render partial: 'search_form'
 
-#accordion
+#accordion.accordion
   - if @scope == :words
     = render partial: 'accordion_word', collection: @words
   - else
