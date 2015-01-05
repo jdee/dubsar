@@ -76,7 +76,7 @@ hr.divider {
   font-weight: bold;
 }
 
-label {
+label, .pagination * {
   font-size: large;
 }
 
@@ -99,4 +99,8 @@ label {
 
 .info-link {
   text-decoration: none;
+}
+
+.template {
+  display: none;
 }
