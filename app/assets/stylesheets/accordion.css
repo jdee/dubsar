@@ -32,6 +32,11 @@
 }
 
 .accordion-head.open {
+  border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+}
+
+.accordion-head:hover, .accordion-head.open {
   background-color: #87ceeb;
   color: black;
   border-color: black;
@@ -41,12 +46,12 @@
   background-color: white;
   overflow: hidden;
 
-  border-style: solid;
+  border-style: none solid solid solid;
   border-width: 1px;
   /* border-color: #1c94c4; */
   border-color: black;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
+  border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
 }
 
 .accordion-body.open {
