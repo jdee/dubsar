@@ -15,5 +15,23 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-/%hr.divider/
-= render partial: 'synsets/synset', object: accordion_synset
+- unless synset.samples.empty?
+  %hr/
+  %h4 sample sentences
+  %ul
+    - synset.samples.each do |sample|
+      %li=h sample
+- unless synset.pointers.blank?
+  %hr/
+  %strong{:title => 'links to related words of different types'}
+    pointers
+  %table
+    %tbody
+      - synset.pointers.group_by(&:ptype).each do |ptype, ptrs|
+        %tr
+          %td.pointer-type{:title => Pointer.help_text(ptype)}
+            %em
+              &= ptype
+          %td
+            - ptrs.each do |ptr|
+              = target_link ptr.target

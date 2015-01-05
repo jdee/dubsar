@@ -90,13 +90,3 @@ label {
   float: left;  
   margin: 4px;
 }
-
-.accordion-head *, .accordion-body * {
-  font-size: large;
-}
-
-.accordion-body {
-  background-color: white;
-  max-height: 250pt;
-  overflow: hidden;
-}

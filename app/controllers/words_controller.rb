@@ -145,7 +145,8 @@ class WordsController < ApplicationController
     @scope = params[:scope].try(:to_sym) || :words
     options = params.symbolize_keys
 
-    @synsets = Synset.includes(:words).search(params[:term]).order('synsets.id ASC').limit(30).paginate(page: params[:page] || 1) if @scope == :synsets
+    # DEBT: Don't need all these associations when doing a json load
+    @synsets = Synset.includes(words: {senses: [ { synset: { senses: :word}}, { senses_verb_frames: :verb_frame}, :pointers] }).search(params[:term]).order('synsets.id ASC').limit(30).paginate(page: params[:page] || 1) if @scope == :synsets
 
     respond_to do |format|
       format.html do

@@ -25,6 +25,7 @@
     $('.accordion .accordion-body').each(function(n) {
       if (n == 0) {
         $(this).data('open', true);
+        $(this).prev('.accordion-head').addClass('open');
       }
       else {
         $(this).data('open', false);
@@ -50,10 +51,14 @@
       // the 0-based index of the currently open pane in that accordion
       var openPane = accordion.data('openPane');
 
+      // console.log('accordion.openPane = ' + openPane);
+
       // nth-child is 1-based. Also, there are two children per pane--one head and one
       // body--hence the *= 2.
       ++ openPane;
       openPane *= 2;
+
+      // console.log('closing ' + openPane + 'th child');
 
       // the currently open body element
       var openElement = $('.accordion-body:nth-child(' + openPane + ')', accordion);
@@ -61,18 +66,23 @@
       // close the currently open pane
       // hide instead of fade so that the scrollTop call below works. Otherwise, have to
       // scroll after that's hidden. or account for the change in advance.
-      openElement.hide();
       openElement.data('open', false);
+      openElement.hide();
+
+      openElement.prev('.accordion-head').removeClass('open');
+
+      // console.log('opening ' + body.size() + ' elements');
 
       // now open the body element for this head
-      body.fadeIn('fast');
       body.data('open', true);
+      body.slideDown('fast');
+
+      $(this).addClass('open');
 
       // and record the current pane on the accordion itself
       accordion.data('openPane', body.data('index'));
 
-      // and scroll the new thing to the top
-      $(document).scrollTop($(this).offset().top);
+      // console.log('set accordion.openPane to ' + accordion.data('openPane'));
     });
     
   });

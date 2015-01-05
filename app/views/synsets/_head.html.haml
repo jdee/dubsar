@@ -15,5 +15,21 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-/%hr.divider/
-= render partial: 'synsets/synset', object: accordion_synset
+&= synset.gloss
+%br/
+%em{:title => 'lexical file name, a broad category associated with this word sense'}
+  &= "<#{synset.lexname}>"
+/- unless synset.marker.blank?
+/  &nbsp;
+/  %span{title: 'positional adjective marker'}
+/    (#{synset.marker})
+- unless synset.freq_cnt.zero?
+  &nbsp;
+  %span{:title => 'frequency count of this word sense in a reference text'}
+    = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
+%br/
+- synset.senses.sort_by{|s|s.word.name}.each do |sense|
+  - if @sense == sense
+    &= sense.word.name
+  - else
+    = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
