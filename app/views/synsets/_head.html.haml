@@ -15,23 +15,25 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+- sense = synset.senses.first if synset.senses.count == 1
+
 %span
   &= synset.gloss
 %br/
 %span{:title => 'lexical file name, a broad category associated with this word sense'}
   %em
     &= "<#{synset.lexname}>"
-/- unless synset.marker.blank?
-/  &nbsp;
-/  %span{title: 'positional adjective marker'}
-/    (#{synset.marker})
+- unless sense.nil? || sense.marker.blank?
+  &nbsp;
+  %span{title: 'positional adjective marker'}
+    (#{sense.marker})
 - unless synset.freq_cnt.zero?
   &nbsp;
   %span{:title => 'frequency count of this word sense in a reference text'}
     = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
 %br/
-- synset.senses.sort_by{|s|s.word.name}.each do |sense|
-  - if @sense == sense
-    &= sense.word.name
-  - else
-    = link_to h(sense.word.name), sense, :class => 'search-link unstyled'
+- synset.senses.sort_by{|s|s.word.name}.each do |s|
+  /- if sense == s
+  /  &= s.word.name
+  /- else
+  = link_to h(s.word.name), s, :class => 'search-link unstyled'

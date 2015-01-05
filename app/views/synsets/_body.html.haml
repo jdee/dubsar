@@ -17,22 +17,19 @@
 
 - sense = synset.senses.first if synset.senses.count == 1
 - pointers = synset.pointers
-- pointers.merge!(sense.pointers) unless sense.nil?
+- pointers = pointers.merge(sense.pointers) unless sense.nil?
 
 - unless synset.samples.empty?
-  %hr/
   %h4 sample sentences
-  %ul
+  %ul{style: 'list-style-type: none;'}
     - synset.samples.each do |sample|
       %li=h sample
 - unless sense.nil? or sense.verb_frames.empty?
-  %hr/
   %h4 verb frames
-  %ul
+  %ul{style: 'list-style-type: none;'}
     - sense.verb_frames.each do |frame|
       %li=h frame.frame
 - unless pointers.blank?
-  %hr/
   %strong{:title => 'links to related words of different types'}
     pointers
   %table
