@@ -15,7 +15,13 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-.accordion-head
+- is_preview = defined?(with_info_button) && with_info_button
+
+- class_list = "accordion-head"
+- if !is_preview
+  - class_list = "#{class_list} open"
+
+%div{:class => class_list}
   - if defined?(with_info_button)
     = render partial: 'synsets/head', locals: { synset: synset, with_info_button: with_info_button }
   - else
