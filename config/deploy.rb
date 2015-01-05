@@ -21,7 +21,7 @@ require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 set :rvm_ruby_string, 'ruby-2.0.0-p481'        # Or whatever env you want it to run in.
 
 set :user, 'dubsar'
-set :domain, 'dubsar-dictionary.com'
+set :domain, 'dubsar.info'
 set :application, "dubsar"
 set :repository,  "http://github.com/jdee/dubsar.git"
 set :use_sudo, false

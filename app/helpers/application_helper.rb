@@ -65,7 +65,7 @@ module ApplicationHelper
   end
 
   def canonical_url(object=nil)
-    url = "https://dubsar-dictionary.com"
+    url = "https://dubsar.info"
     if object
       url += url_for object
     else
@@ -103,7 +103,7 @@ TAG
 
   def html_for_link
     s = <<EOF
-<a href="https://dubsar-dictionary.com" title="Dubsar Project" target="_blank"><img src="#{asset_host}/images/dubsar-link.png" alt="Dubsar" height="20" width="88" style="vertical-align: top; border-style: none;"/></a>
+<a href="https://dubsar.info" title="Dubsar Project" target="_blank"><img src="#{asset_host}/images/dubsar-link.png" alt="Dubsar" height="20" width="88" style="vertical-align: top; border-style: none;"/></a>
 EOF
   end
 
