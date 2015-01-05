@@ -16,10 +16,9 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 /%hr.divider/
 .accordion-head{:id => "#{accordion_word.unique_name}"}
-  %a{:href => "##{accordion_word.unique_name}"}
-    &= accordion_word.name
-    %em
-      &= "(#{accordion_word.pos}.)"
+  &= accordion_word.name
+  %em
+    &= "(#{accordion_word.pos}.)"
 .accordion-body{:id => "pane_#{@count+=1}"}
   %span
     %em other forms:
