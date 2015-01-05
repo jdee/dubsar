@@ -90,3 +90,13 @@ label {
   float: left;  
   margin: 4px;
 }
+
+.info-button {
+  margin-top: 0.8em;
+  margin-right: 0.8em;
+  float: right;
+}
+
+.info-link {
+  text-decoration: none;
+}

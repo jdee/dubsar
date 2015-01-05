@@ -25,6 +25,8 @@
   border-style: solid;
   border-width: 1px;
   border-color: #1c94c4;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
   margin-top: 5px;
   cursor: pointer;
 }
@@ -37,11 +39,16 @@
 
 .accordion-body {
   background-color: white;
-  max-height: 250pt;
   overflow: hidden;
 
   border-style: solid;
   border-width: 1px;
   /* border-color: #1c94c4; */
   border-color: black;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.accordion-body.open {
+  max-height: 250pt;
 }

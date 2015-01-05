@@ -21,14 +21,12 @@
 
 - unless synset.samples.empty?
   %h4 sample sentences
-  %ul{style: 'list-style-type: none;'}
-    - synset.samples.each do |sample|
-      %li=h sample
+  - synset.samples.each do |sample|
+    %p=h sample
 - unless sense.nil? or sense.verb_frames.empty?
   %h4 verb frames
-  %ul{style: 'list-style-type: none;'}
-    - sense.verb_frames.each do |frame|
-      %li=h frame.frame
+  - sense.verb_frames.each do |frame|
+    %p=h frame.frame
 - unless pointers.blank?
   %strong{:title => 'links to related words of different types'}
     pointers

@@ -15,6 +15,10 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+- if defined?(with_info_button) and with_info_button
+  = link_to !defined?(sense) || sense.nil? ? synset : sense, :class => 'info-link' do
+    = image_tag 'info-button.png', size: '44x44', alt: 'more info', :class => 'info-button'
+
 - sense = synset.senses.first if synset.senses.count == 1
 
 %span
@@ -33,7 +37,7 @@
     = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
 %br/
 - synset.senses.sort_by{|s|s.word.name}.each do |s|
-  /- if sense == s
-  /  &= s.word.name
-  /- else
-  = link_to h(s.word.name), s, :class => 'search-link unstyled'
+  - if sense == s || (defined?(with_info_button) and with_info_button)
+    &= s.word.name
+  - else
+    = link_to h(s.word.name), s, :class => 'search-link unstyled'

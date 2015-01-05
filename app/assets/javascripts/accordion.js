@@ -25,7 +25,7 @@
     $('.accordion .accordion-body').each(function(n) {
       if (n == 0) {
         $(this).data('open', true);
-        $(this).prev('.accordion-head').addClass('open');
+        $(this).addClass('open').prev('.accordion-head').addClass('open');
         openElement = $(this);
       }
       else {
@@ -58,11 +58,12 @@
       // scroll after that's hidden. or account for the change in advance.
       elm.data('open', false);
       elm.hide();
-      elm.prev('.accordion-head').removeClass('open');
+      elm.addClass('open').prev('.accordion-head').removeClass('open');
 
       // now open the body element for this head
       body.data('open', true);
       body.slideDown('fast');
+      body.addClass('open');
       $(this).addClass('open');
 
       // and record the current pane on the accordion itself
