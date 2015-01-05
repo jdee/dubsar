@@ -61,7 +61,12 @@
       // console.log('closing ' + openPane + 'th child');
 
       // the currently open body element
-      var openElement = $('.accordion-body:nth-child(' + openPane + ')', accordion);
+      // .accordion-body:nth-child(n) also works in many cases, but not all. not sure if
+      // the semantics of nth-child vary btw Safari on OS X and iOS, but if it works this
+      // way, there's no need to specify the element class or type. it's not the nth-child
+      // of accordion that matches .accordion-body, it's the nth-child period.
+      // Anyway, this seems to be more portable.
+      var openElement = $('*:nth-child(' + openPane + ')', accordion);
 
       // close the currently open pane
       // hide instead of fade so that the scrollTop call below works. Otherwise, have to
