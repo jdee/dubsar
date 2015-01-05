@@ -15,19 +15,29 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+- sense = synset.senses.first if synset.senses.count == 1
+- pointers = synset.pointers
+- pointers.merge!(sense.pointers) unless sense.nil?
+
 - unless synset.samples.empty?
   %hr/
   %h4 sample sentences
   %ul
     - synset.samples.each do |sample|
       %li=h sample
-- unless synset.pointers.blank?
+- unless sense.nil? or sense.verb_frames.empty?
+  %hr/
+  %h4 verb frames
+  %ul
+    - sense.verb_frames.each do |frame|
+      %li=h frame.frame
+- unless pointers.blank?
   %hr/
   %strong{:title => 'links to related words of different types'}
     pointers
   %table
     %tbody
-      - synset.pointers.group_by(&:ptype).each do |ptype, ptrs|
+      - pointers.group_by(&:ptype).each do |ptype, ptrs|
         %tr
           %td.pointer-type{:title => Pointer.help_text(ptype)}
             %em

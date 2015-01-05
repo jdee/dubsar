@@ -19,21 +19,22 @@
 ;(function($) {
   $(function() {
 
-    $('.accordion').data('openPane', 0);
+    var openElement = null;
 
-    // DEBT: This probably won't work with more than one accordion.
+    // DEBT: This probably won't work with more than one accordion on a page.
     $('.accordion .accordion-body').each(function(n) {
       if (n == 0) {
         $(this).data('open', true);
         $(this).prev('.accordion-head').addClass('open');
+        openElement = $(this);
       }
       else {
         $(this).data('open', false);
         $(this).hide();
       }
-
-      $(this).data('index', n);
     });
+
+    $('.accordion').data('openElement', openElement);
 
     $('.accordion .accordion-head').on('click', function() {
       // the body associated with this head
@@ -48,46 +49,24 @@
 
       // the containing accordion
       var accordion = $(this).closest('.accordion');
-      // the 0-based index of the currently open pane in that accordion
-      var openPane = accordion.data('openPane');
-
-      // console.log('accordion.openPane = ' + openPane);
-
-      // nth-child is 1-based. Also, there are two children per pane--one head and one
-      // body--hence the *= 2.
-      ++ openPane;
-      openPane *= 2;
-
-      // console.log('closing ' + openPane + 'th child');
 
       // the currently open body element
-      // .accordion-body:nth-child(n) also works in many cases, but not all. not sure if
-      // the semantics of nth-child vary btw Safari on OS X and iOS, but if it works this
-      // way, there's no need to specify the element class or type. it's not the nth-child
-      // of accordion that matches .accordion-body, it's the nth-child period.
-      // Anyway, this seems to be more portable.
-      var openElement = $('*:nth-child(' + openPane + ')', accordion);
+      var elm = accordion.data('openElement');
 
       // close the currently open pane
       // hide instead of fade so that the scrollTop call below works. Otherwise, have to
       // scroll after that's hidden. or account for the change in advance.
-      openElement.data('open', false);
-      openElement.hide();
-
-      openElement.prev('.accordion-head').removeClass('open');
-
-      // console.log('opening ' + body.size() + ' elements');
+      elm.data('open', false);
+      elm.hide();
+      elm.prev('.accordion-head').removeClass('open');
 
       // now open the body element for this head
       body.data('open', true);
       body.slideDown('fast');
-
       $(this).addClass('open');
 
       // and record the current pane on the accordion itself
-      accordion.data('openPane', body.data('index'));
-
-      // console.log('set accordion.openPane to ' + accordion.data('openPane'));
+      accordion.data('openElement', body);
     });
     
   });

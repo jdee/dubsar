@@ -15,10 +15,12 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-&= synset.gloss
+%span
+  &= synset.gloss
 %br/
-%em{:title => 'lexical file name, a broad category associated with this word sense'}
-  &= "<#{synset.lexname}>"
+%span{:title => 'lexical file name, a broad category associated with this word sense'}
+  %em
+    &= "<#{synset.lexname}>"
 /- unless synset.marker.blank?
 /  &nbsp;
 /  %span{title: 'positional adjective marker'}
