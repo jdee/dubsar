@@ -68,7 +68,15 @@ hr.divider {
   display: none;
 }
 
-#footer, #footer *, label, .alphabet-link {
+#footer, #footer *, .alphabet-link {
+  font-size: small;
+}
+
+.alphabet-link {
+  font-weight: bold;
+}
+
+label {
   font-size: large;
 }
 
@@ -81,6 +89,10 @@ hr.divider {
   text-decoration: none;
   float: left;  
   margin: 4px;
+}
+
+.accordion-head *, .accordion-body * {
+  font-size: large;
 }
 
 .accordion-body {
