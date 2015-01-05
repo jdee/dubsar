@@ -7,19 +7,17 @@ Dubsar is a dictionary web application using
 The content is taken from the Princeton University
 WordNet[http://wordnet.princeton.edu] project.
 
-Dubsar is deployed at https://dubsar-dictionary.com.
-
-Dubsar Mobile is deployed at https://m.dubsar-dictionary.com/m.
+Dubsar is deployed at https://dubsar.info.
 
 For more information, see the
 {Dubsar wiki on GitHub}[https://github.com/jdee/dubsar/wiki].
 
 On the Dubsar site:
-{About Dubsar}[https://dubsar-dictionary.com/about]
--- {FAQ}[https://dubsar-dictionary.com/faq]
--- {QUnit test suite}[https://dubsar-dictionary.com/qunit]
--- {Tour}[https://dubsar-dictionary.com/tour]
--- {RSS News Feed}[https://dubsar-dictionary.com/rss_news.xml]
+{About Dubsar}[https://dubsar.info/about]
+-- {FAQ}[https://dubsar.info/faq]
+-- {QUnit test suite}[https://dubsar.info/qunit]
+-- {Tour}[https://dubsar.info/tour]
+-- {RSS News Feed}[https://dubsar.info/rss_news.xml]
 
 Also see:
 
