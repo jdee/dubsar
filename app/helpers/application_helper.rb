@@ -31,7 +31,8 @@ module ApplicationHelper
       autocorrect: :off,
       placeholder: 'search term(s)',
       id: 'search-term',
-      title: 'press enter to search'
+      title: 'press enter to search',
+      required: true
     }
     options[:autofocus] = :autofocus if home_page
     options

@@ -22,11 +22,13 @@
 - unless synset.samples.empty?
   %h4 sample sentences
   - synset.samples.each do |sample|
-    %p=h sample
+    =h sample
+    %br/
 - unless sense.nil? or sense.verb_frames.empty?
   %h4 verb frames
   - sense.verb_frames.each do |frame|
-    %p=h frame.frame
+    =h frame.frame
+    %br/
 - unless pointers.blank?
   %strong{:title => 'links to related words of different types'}
     pointers
