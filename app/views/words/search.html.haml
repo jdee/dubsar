@@ -29,9 +29,9 @@
 
 #accordion.accordion
   - if @scope == :words
-    = render partial: 'accordion_word', collection: @words
+    = render partial: 'accordion_word', collection: @words, locals: { with_info_button: true }
   - else
-    = render partial: 'accordion_synset', collection: @synsets
+    = render partial: 'accordion_synset', collection: @synsets, locals: { with_info_button: true }
 
 - content_for :pagination do
   = will_paginate @scope == :words ? @words : @synsets

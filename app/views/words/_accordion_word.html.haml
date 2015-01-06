@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -14,21 +14,11 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-/%hr.divider/
-.accordion-head{:id => "#{accordion_word.unique_name}"}
-  &= accordion_word.name
-  %em
-    &= "(#{accordion_word.pos}.)"
-.accordion-body{:id => "pane_#{@count+=1}"}
-  %span
-    %em other forms:
-    - if accordion_word.other_forms.length > 0
-      &= accordion_word.other_forms
-    - else
-      (none)
-    &nbsp;
-    = link_to accordion_word, :class => 'search-link' do
-      %em
-        &= "Word entry for #{accordion_word.name} (#{accordion_word.pos}.)"
-  %ol
-    = render :partial => 'accordion_sense', :collection => accordion_word.senses
+
+.accordion-head
+  - if defined?(with_info_button)
+    = render partial: 'words/head', locals: { word: accordion_word, with_info_button: with_info_button }
+  - else
+    = render partial: 'words/head', locals: { word: accordion_word }
+.accordion-body
+  = render partial: 'words/body', locals: { word: accordion_word }

@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -16,8 +16,7 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - if defined?(with_info_button) and with_info_button
-  = link_to !defined?(sense) || sense.nil? ? synset : sense, :class => 'info-link' do
-    = image_tag 'info-button.png', size: '44x44', alt: 'more info', :class => 'info-button'
+  = render partial: 'info_button', locals: { target: !defined?(sense) || sense.nil? ? synset : sense }
 
 - sense = synset.senses.first if synset.senses.count == 1
 

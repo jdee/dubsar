@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -15,5 +15,10 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-/%hr.divider/
-= render partial: 'synsets/synset', object: accordion_synset, locals: { with_info_button: true }
+.accordion-head
+  - if defined?(with_info_button)
+    = render partial: 'synsets/head', locals: { synset: accordion_synset, with_info_button: with_info_button }
+  - else
+    = render partial: 'synsets/head', locals: { synset: accordion_synset }
+.accordion-body
+  = render partial: 'synsets/body', locals: { synset: accordion_synset }

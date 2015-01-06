@@ -15,7 +15,10 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-%div
-  = render partial: 'synsets/head', locals: { synset: synset }
-%div
-  = render partial: 'synsets/body', locals: { synset: synset }
+- if defined?(with_info_button) and with_info_button
+  = render partial: 'info_button', locals: { target: word }
+
+&= word.name_and_pos
+- unless word.other_forms.blank?
+  %br/
+  %em (#{h word.other_forms})
