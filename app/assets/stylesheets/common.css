@@ -65,6 +65,11 @@ hr.divider {
   width: 100%;
   max-width: 320pt;
   display: none;
+  cursor: pointer;
+}
+
+span.autocomplete-result.selected, span.autocomplete-result:hover {
+  background-color: #87ceeb;
 }
 
 #footer, #footer *, .alphabet-link {

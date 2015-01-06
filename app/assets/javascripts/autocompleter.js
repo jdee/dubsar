@@ -20,13 +20,19 @@
   $(function() {
     var acResults = $('#autocomplete-results');
     var searchField = $('#search-term');
+    var acHighlighted = false;
+
+    function getScope() {
+      var scope = "words";
+      if ($('#scope_synsets').is(':checked')) scope = "synsets";
+      return scope;
+    }
 
     function triggerAutocomplete() {
       if (checkReset('#search-term')) return;
 
       var term = searchField.val();
-      var scope = "words";
-      if ($('#scope_synsets').is(':checked')) scope = "synsets";
+      var scope = getScope();
 
       $.ajax({
         url: '/os?term=' + term + '&scope=' + scope,
@@ -50,8 +56,17 @@
     }
 
     searchField.on('input focus', triggerAutocomplete);
+    //*
     searchField.on('blur', function() {
+      if (acHighlighted) return;
       acResults.hide();
+    });
+    // */
+
+    acResults.hover(function() {
+      acHighlighted = true;
+    }, function() {
+      acHighlighted = false;
     });
 
     /* Chrome only: This hides the AC when going back to the index. (But not Safari.) */

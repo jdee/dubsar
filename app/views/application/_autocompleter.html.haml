@@ -1,9 +1,25 @@
-#autocompleter
-  - if @scope == :words
-    - @words.each do |word|
-      = link_to word, "/?term=#{word}&scope=words"
-      %br/
-  - else
-    - @synsets.each do |synset|
-      = link_to synset, "/?term=#{synset}&scope=synsets"
-      %br/
+- #  Dubsar Dictionary Project
+- #  Copyright (C) 2010-15 Jimmy Dee
+- #
+- #  This program is free software; you can redistribute it and/or
+- #  modify it under the terms of the GNU General Public License
+- #  as published by the Free Software Foundation; either version 2
+- #  of the License, or (at your option) any later version.
+- #
+- #  This program is distributed in the hope that it will be useful,
+- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- #  GNU General Public License for more details.
+- #
+- #  You should have received a copy of the GNU General Public License
+- #  along with this program; if not, write to the Free Software
+- #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+- if @scope == :words
+  - @words.each do |word|
+    %span.autocomplete-result{style: 'display: block;'}
+      = link_to word, "/?utf8=✓&term=#{CGI.escape word}&scope=words"
+- else
+  - @synsets.each do |synset|
+    %span.autocomplete-result{style: 'display: block;'}
+      = link_to synset, "/?utf8=✓&term=#{CGI.escape synset}&scope=synsets"
