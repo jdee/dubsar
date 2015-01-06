@@ -1,5 +1,5 @@
 #  Dubsar Dictionary Project
-#  Copyright (C) 2010-14 Jimmy Dee
+#  Copyright (C) 2010-15 Jimmy Dee
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module SensesHelper
+module SynsetsHelper
   def target_link(target, lexical_class=nil)
     target_text = case target
     when Sense
@@ -24,28 +24,12 @@ module SensesHelper
       target.words.map(&:name).join(', ')
     end
 
+    target = "#{synset_path(target.synset)}##{target.word.unique_name}" if target.is_a?(Sense)
+
     if lexical_class
       link_to target_text, target, :class => "lexical #{lexical_class}"
     else
       link_to target_text, target
     end
-  end
-
-  def m_target_link(target)
-    target_url = case target
-    when Sense
-      url_for(:controller => :senses, :action => :m_show, :id => target.id, :index => 0)
-    when Synset
-      url_for(:controller => :synsets, :action => :m_show, :id => target.id)
-    end
-
-    target_text = case target
-    when Sense
-      "#{target.word.name} (#{target.word.pos}.)"
-    when Synset
-      "#{target.words.map(&:name).join(', ')} (#{Word.pos(target.part_of_speech)}.)"
-    end
-
-    link_to target_text, target_url, 'data-role' => 'button', 'data-icon' => 'arrow-r', 'data-transition' => 'slide', 'data-iconpos' => 'right'
   end
 end
