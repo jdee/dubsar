@@ -16,8 +16,9 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - if defined?(with_info_button) and with_info_button
-  / TODO: add lexical context (fragment) to target
-  = render partial: 'info_button', locals: { target: synset }
+  - if !defined?(target)
+    - target = synset
+  = render partial: 'info_button', locals: { target: target }
 
 %span
   &= synset.gloss

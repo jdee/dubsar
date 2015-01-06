@@ -44,5 +44,19 @@
         link.addClass('selected');
       }
     });
+
+    // if we load #word_pos, treat that like a click on the appropriate link
+    var fragment = location.hash;
+    console.log("fragment = " + fragment);
+    if (fragment) {
+      var uniqueName = fragment.slice(1);
+      console.log("uniqueName = " + uniqueName);
+      var link = $('a[href="' + fragment + '"]');
+      if (link.size() > 0) {
+        $('.semantic').hide();
+        link.addClass('selected');
+        $('.' + uniqueName).show();
+      }
+    }
   });
 })(jQuery);

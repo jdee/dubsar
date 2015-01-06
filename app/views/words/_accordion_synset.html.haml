@@ -17,7 +17,11 @@
 
 .accordion-head
   - if defined?(with_info_button)
-    = render partial: 'synsets/head', locals: { synset: accordion_synset, with_info_button: with_info_button }
+    - puts "synset_path = #{synset_path(accordion_synset)}"
+    - if defined?(@word)
+      = render partial: 'synsets/head', locals: { synset: accordion_synset, with_info_button: with_info_button, target: "#{synset_path(accordion_synset)}##{@word.unique_name}" }
+    - else
+      = render partial: 'synsets/head', locals: { synset: accordion_synset, with_info_button: with_info_button }
   - else
     = render partial: 'synsets/head', locals: { synset: accordion_synset }
 .accordion-body
