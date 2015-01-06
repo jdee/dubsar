@@ -22,3 +22,7 @@
 - unless word.other_forms.blank?
   %br/
   %em (#{h word.other_forms})
+
+- unless word.freq_cnt <= 0
+  %br/
+  %em freq. cnt. #{word.freq_cnt}
