@@ -36,26 +36,44 @@
       $('.synonym-link').removeClass('selected');
 
       if (selected) {
-        $('.semantic').show();
-        link.removeClass('selected');
+        var synonymCount = $('.synonym-link').size();
+
+        if (synonymCount == 1) {
+          $('.'+target).show();
+          link.addClass('selected');
+        }
+        else {
+          $('.semantic').show();
+          link.removeClass('selected');
+        }
       }
       else {
         $('.'+target).show();
         link.addClass('selected');
       }
+
+      return false;
     });
 
     // if we load #word_pos, treat that like a click on the appropriate link
     var fragment = location.hash;
-    console.log("fragment = " + fragment);
     if (fragment) {
       var uniqueName = fragment.slice(1);
-      console.log("uniqueName = " + uniqueName);
       var link = $('a[href="' + fragment + '"]');
+
       if (link.size() > 0) {
         $('.semantic').hide();
         link.addClass('selected');
         $('.' + uniqueName).show();
+      }
+    }
+    else {
+      var synonymLinks = $('.synonym-link');
+      if (synonymLinks.size() == 1) {
+        // highlight as though this one link were highlighted
+        $('.semantic').hide();
+        $('.lexical').show();
+        synonymLinks.addClass('selected');
       }
     }
   });
