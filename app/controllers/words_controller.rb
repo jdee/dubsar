@@ -221,7 +221,7 @@ class WordsController < ApplicationController
 
     # search and index use the same URL
     unless @term
-      # flash.now[:notice] = 'The Dubsar server will be unavailable a short time Tuesday (UTC) for maintenance.'
+      flash.now[:notice] = 'Welcome to the new Dubsar.'
       render :action => :index
       return
     end

@@ -16,13 +16,11 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - if flash[:error]
-  #error.line
-    %span
+  #error.error
     &= flash[:error]
 - elsif flash[:notice] || flash[:alert]
-  #error.line
-    %span
+  #error.notice
     &= flash[:notice]
 - else
-  #error.line.template
+  #error.template
     %span

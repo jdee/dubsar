@@ -16,10 +16,16 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - if @scope == :words
-  - @words.each do |word|
-    %span.autocomplete-result{style: 'display: block;'}
-      = link_to word, "/?utf8=✓&term=#{CGI.escape word}&scope=words"
+  - if @words.blank?
+    %span No suggestions
+  - else
+    - @words.each do |word|
+      %span.autocomplete-result{style: 'display: block;'}
+        = link_to word, "/?utf8=✓&term=#{CGI.escape word}&scope=words"
 - else
-  - @synsets.each do |synset|
-    %span.autocomplete-result{style: 'display: block;'}
-      = link_to synset, "/?utf8=✓&term=#{CGI.escape synset}&scope=synsets"
+  - if @synsets.blank?
+    %span No suggestions
+  - else
+    - @synsets.each do |synset|
+      %span.autocomplete-result{style: 'display: block;'}
+        = link_to synset, "/?utf8=✓&term=#{CGI.escape synset}&scope=synsets"

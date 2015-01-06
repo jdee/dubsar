@@ -65,7 +65,7 @@ hr.divider {
   width: 100%;
   max-width: 320pt;
   display: none;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 span.autocomplete-result.selected, span.autocomplete-result:hover {
@@ -82,11 +82,6 @@ span.autocomplete-result.selected, span.autocomplete-result:hover {
 
 label, .pagination * {
   font-size: large;
-}
-
-.line {
-  float: left;
-  margin-right: 0.3em;
 }
 
 #home-button {
@@ -107,4 +102,18 @@ label, .pagination * {
 
 .template {
   display: none;
+}
+
+#error {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+#error.error {
+  background-color: #ffe;
+}
+
+#error.notice {
+  background-color: #87ceeb;
+  color: black;
 }
