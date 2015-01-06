@@ -21,7 +21,7 @@
   =radio_button_tag :scope, :synsets, @scope == :synsets
   =label_tag :scope_synsets, 'Synsets'
   %br/
-  =search_field_tag :term, @term, search_field_options
+  =search_field_tag :term, @match == 'glob' ? nil : @term, search_field_options
   #autocomplete-results
   -# %br/
   -# =submit_tag 'search'
