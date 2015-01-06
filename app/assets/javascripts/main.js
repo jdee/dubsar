@@ -18,11 +18,31 @@
  */
 ;(function($) {
   $(function() {
+    // hide the error div after 3 seconds if it's showing
     var errorDiv = $('#error');
     if (errorDiv.is(':visible')) {
       setTimeout(function() {
         errorDiv.slideUp('slow');
       }, 3000);
     }
+
+    $('.synonym-link').on('click', function() {
+      var link = $(this);
+      var target = link.attr('href').slice(1);
+
+      $('.lexical, .semantic').hide();
+
+      var selected = link.hasClass('selected');
+      $('.synonym-link').removeClass('selected');
+
+      if (selected) {
+        $('.semantic').show();
+        link.removeClass('selected');
+      }
+      else {
+        $('.'+target).show();
+        link.addClass('selected');
+      }
+    });
   });
 })(jQuery);

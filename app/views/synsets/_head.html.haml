@@ -16,27 +16,34 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - if defined?(with_info_button) and with_info_button
-  = render partial: 'info_button', locals: { target: !defined?(sense) || sense.nil? ? synset : sense }
-
-- sense = synset.senses.first if synset.senses.count == 1
+  / TODO: add lexical context (fragment) to target
+  = render partial: 'info_button', locals: { target: synset }
 
 %span
   &= synset.gloss
 %br/
-%span{:title => 'lexical file name, a broad category associated with this word sense'}
+%span{:title => 'lexical file name, a broad category associated with this synset'}
   %em
     &= "<#{synset.lexname}>"
-- unless sense.nil? || sense.marker.blank?
-  &nbsp;
-  %span{title: 'positional adjective marker'}
-    (#{sense.marker})
+- synset.senses.each do |sense|
+  - unless sense.marker.blank?
+    - classes = "#{sense.word.unique_name} lexical"
+    %span{:class => classes, title: 'positional adjective marker'}
+      &nbsp;
+      (#{sense.marker})
 - unless synset.freq_cnt.zero?
   &nbsp;
-  %span{:title => 'frequency count of this word sense in a reference text'}
+  %span.semantic{:title => 'frequency count of this synset in a reference text'}
     = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
+  - synset.senses.each do |sense|
+    - unless sense.freq_cnt <= 0
+      - classes = "#{sense.word.unique_name} lexical"
+      %span{:class => classes, title: 'frequency count of this word sense in a reference text'}
+        = "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
 %br/
 - synset.senses.sort_by{|s|s.word.name}.each do |s|
-  - if sense == s || (defined?(with_info_button) and with_info_button)
+  - if (defined?(with_info_button) and with_info_button)
     &= s.word.name
   - else
-    = link_to h(s.word.name), s, :class => 'search-link unstyled'
+    = link_to s.word.name, "##{s.word.unique_name}", :class => 'synonym-link'
+    / TODO: Navigation buttons

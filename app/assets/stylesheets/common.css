@@ -117,3 +117,18 @@ label, .pagination * {
   background-color: #87ceeb;
   color: black;
 }
+
+/* by default, lexical things are hidden. semantic things (like the total 
+   frequency count for a synset) are not. */
+.lexical {
+  display: none;
+  background-color: #87ceeb;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.synonym-link.selected {
+  background-color: #87ceeb;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}

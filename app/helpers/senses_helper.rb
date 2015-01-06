@@ -16,7 +16,7 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module SensesHelper
-  def target_link(target)
+  def target_link(target, lexical_class=nil)
     target_text = case target
     when Sense
       target.word.name
@@ -24,7 +24,11 @@ module SensesHelper
       target.words.map(&:name).join(', ')
     end
 
-    link_to target_text, target, :class => 'search-link'
+    if lexical_class
+      link_to target_text, target, :class => "lexical #{lexical_class}"
+    else
+      link_to target_text, target
+    end
   end
 
   def m_target_link(target)

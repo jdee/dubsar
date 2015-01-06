@@ -15,20 +15,22 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-- sense = synset.senses.first if synset.senses.count == 1
 - pointers = synset.pointers
-- pointers = pointers.merge(sense.pointers) unless sense.nil?
+- synset.senses.each do |sense|
+  - pointers = pointers.merge(sense.pointers)
 
 - unless synset.samples.empty?
   %h4 sample sentences
   - synset.samples.each do |sample|
     =h sample
     %br/
-- unless sense.nil? or sense.verb_frames.empty?
-  %h4 verb frames
-  - sense.verb_frames.each do |frame|
-    =h frame.frame
-    %br/
+- synset.senses.each do |sense|
+  - unless sense.verb_frames.empty?
+    %div{:class => "lexical #{sense.word.unique_name}"}
+      %h4 verb frames
+      - sense.verb_frames.each do |frame|
+        =h frame.frame
+        %br/
 - unless pointers.blank?
   %strong{:title => 'links to related words of different types'}
     pointers
@@ -41,4 +43,4 @@
               &= ptype
           %td
             - ptrs.each do |ptr|
-              = target_link ptr.target
+              = target_link ptr.target, ptr.source_type == "Sense" ? ptr.source.word.unique_name : nil
