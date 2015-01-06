@@ -15,10 +15,6 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-- pointers = synset.pointers
-- synset.senses.each do |sense|
-  - pointers = pointers.merge(sense.pointers)
-
 - unless synset.samples.empty?
   %h4 sample sentences
   - synset.samples.each do |sample|
@@ -31,16 +27,12 @@
       - sense.verb_frames.each do |frame|
         =h frame.frame
         %br/
-- unless pointers.blank?
-  %strong{:title => 'links to related words of different types'}
-    pointers
-  %table
-    %tbody
-      - pointers.group_by(&:ptype).each do |ptype, ptrs|
-        %tr
-          %td.pointer-type{:title => Pointer.help_text(ptype)}
-            %em
-              &= ptype
-          %td
-            - ptrs.each do |ptr|
-              = target_link ptr.target, ptr.source_type == "Sense" ? ptr.source.word.unique_name : nil
+
+- synset.senses.each do |sense|
+  - unless sense.pointers.blank?
+    %div{:class => "lexical #{sense.word.unique_name}"}
+      = render partial: 'pointers', locals: { pointers: sense.pointers, title: 'lexical pointers', description: 'word pointers'}
+
+- unless synset.pointers.blank?
+  %div
+    = render partial: 'pointers', locals: { pointers: synset.pointers, title: 'semantic pointers', description: 'synset pointers'}
