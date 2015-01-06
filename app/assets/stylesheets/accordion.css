@@ -48,6 +48,9 @@
   background-color: white;
   overflow: hidden;
 
+  margin-left: 0;
+  margin-right: 0;
+
   border-style: none solid solid solid;
   border-width: 1px;
   border-color: black;
