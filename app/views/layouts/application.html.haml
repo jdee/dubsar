@@ -34,7 +34,7 @@
     = stylesheet_link_tag 'main_manifest'
     =yield :description
 
-  %body
+  %body{:class => "style-#{@theme}"}
     =render :partial => 'shared/error'
     #main
       =yield

@@ -77,5 +77,13 @@
         synonymLinks.addClass('selected');
       }
     }
+
+    $('input[name="theme"]').on('change', function() {
+      var theme = $('#theme_dark').is(':checked') ? 'dark' : 'light';
+      document.cookie = 'dubsar_theme='+theme+'; max-age='+30*86400+'; path=/';
+
+      var body = $('body');
+      body.removeClass('style-light style-dark').addClass('style-' + theme);
+    });
   });
 })(jQuery);

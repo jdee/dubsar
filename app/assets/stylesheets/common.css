@@ -21,20 +21,6 @@ body {
   max-width: 750pt;
   margin-left: auto;
   margin-right: auto;
-  background-color: #e0e0ff;
-  color: #1c94c4;
-}
-
-a:link {
-  color: #1c94c4;
-}
-
-a:visited {
-  color: #333;
-}
-
-a:hover,active {
-  color: #fbc90b;
 }
 
 * {
@@ -45,7 +31,6 @@ a:hover,active {
 
 hr.divider {
   height: 5px;
-  background-color: #fbc90b;
 }
 
 #search-form {
@@ -61,15 +46,10 @@ hr.divider {
 
 #autocomplete-results {
   position: absolute;
-  background-color: white;
   width: 100%;
   max-width: 320pt;
   display: none;
   /* cursor: pointer; */
-}
-
-span.autocomplete-result.selected, span.autocomplete-result:hover {
-  background-color: #87ceeb;
 }
 
 #footer, #footer *, .alphabet-link {
@@ -109,21 +89,10 @@ label, .pagination * {
   -moz-border-radius: 5px;
 }
 
-#error.error {
-  background-color: #ffe;
-}
-
-#error.notice {
-  background-color: #87ceeb;
-  color: black;
-}
-
 /* by default, lexical things are hidden. semantic things (like the total 
    frequency count for a synset) are not. */
 .lexical {
   display: none;
-  background-color: #87ceeb;
-  color: black;
   border-radius: 5px;
   -moz-border-radius: 5px;
   margin-top: 5px;
@@ -131,7 +100,6 @@ label, .pagination * {
 }
 
 .synonym-link.selected {
-  background-color: #87ceeb;
   border-radius: 5px;
   -moz-border-radius: 5px;
 }

@@ -17,38 +17,49 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-.accordion-head, .accordion-head *, .accordion-body, .accordion-body * {
-  font-size: large;
+body.style-light {
+  background-color: #e0e0ff;
+  color: #1c94c4;
 }
 
-.accordion-head {
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-
-  margin-top: 5px;
-  min-height: 72px;
-  cursor: pointer;
+body.style-light a:link {
+  color: #1c94c4;
 }
 
-.accordion-head.open {
-  border-radius: 5px 5px 0 0;
-  -moz-border-radius: 5px 5px 0 0;
+body.style-light a:visited {
+  color: #333;
 }
 
-.accordion-body {
-  overflow: hidden;
-
-  margin-left: 0;
-  margin-right: 0;
-
-  border-style: none solid solid solid;
-  border-width: 1px;
-  border-radius: 0 0 5px 5px;
-  -moz-border-radius: 0 0 5px 5px;
+body.style-light a:hover,active {
+  color: #fbc90b;
 }
 
-.accordion-body.open {
-  max-height: 250pt;
+body.style-light hr.divider {
+  background-color: #fbc90b;
+}
+
+body.style-light #autocomplete-results {
+  background-color: white;
+}
+
+body.style-light span.autocomplete-result.selected, body.style-light span.autocomplete-result:hover {
+  background-color: #87ceeb;
+}
+
+body.style-light #error.notice {
+  background-color: #87ceeb;
+  color: black;
+}
+
+body.style-light .lexical {
+  background-color: #87ceeb;
+  color: black;
+}
+
+body.style-light .synonym-link.selected {
+  background-color: #87ceeb;
+}
+
+body.style-light .synonym-link:visited {
+  color: #1c94c4;
 }
