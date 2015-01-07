@@ -45,6 +45,10 @@ hr.divider {
   -webkit-appearance: none;
 }
 
+#search-results #search-term {
+  font-size: x-large;
+}
+
 #autocomplete-results {
   position: absolute;
   width: 100%;

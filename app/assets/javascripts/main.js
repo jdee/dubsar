@@ -72,13 +72,25 @@
       }
     }
     else {
-      var synonymLinks = $('.synonym-link');
-      if (synonymLinks.size() == 1) {
-        // highlight as though this one link were highlighted
-        $('.semantic').hide();
-        $('.lexical').show();
-        synonymLinks.addClass('selected');
-      }
+      $('.accordion-body').each(function() {
+        var synonymLinks = $('.synonym-link', $(this));
+        if (synonymLinks.size() == 1) {
+          // highlight as though this one link were highlighted
+          $('.semantic', $(this)).hide();
+          $('.lexical', $(this)).show();
+          synonymLinks.addClass('selected');
+        }
+      });
+
+      $('.accordion-head').each(function() {
+        var synonyms = $('.synonym', $(this));
+        if (synonyms.size() == 1) {
+          var body = $(this).next('.accordion-body');
+          // highlight as though this one link were highlighted
+          $('.semantic', body).hide();
+          $('.lexical', body).show();
+        }
+      });
     }
 
     $('input[name="theme"]').on('change', function() {

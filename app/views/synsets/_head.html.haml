@@ -45,7 +45,8 @@
 %br/
 - synset.senses.sort_by{|s|s.word.name}.each do |s|
   - if (defined?(with_info_button) and with_info_button)
-    &= s.word.name
+    %span.synonym
+      &= s.word.name
   - else
     %table.word-links
       %tbody
