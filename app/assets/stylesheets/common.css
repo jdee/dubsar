@@ -126,6 +126,14 @@ div.accordion-body div.word-links a.info-link {
   border-spacing: 32px;
 }
 
-#main-news .news-content {
+#main-news #news-content {
   display: none;
+}
+
+#news-headline, #news-headline *, #news-content, #news-content * {
+  font-size: x-large;
+}
+
+#news-headline, #news-content {
+  margin: 2em;
 }

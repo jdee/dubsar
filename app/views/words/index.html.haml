@@ -57,18 +57,9 @@
     = render partial: 'news'
 
 - # Mobile app links
-%strong Mobile Apps
-%br/
-= link_to 'https://itunes.apple.com/us/app/dubsar-dictionary-project/id453868483?mt=8', style: 'text-decoration: none;', target: '_blank' do
-  =image_tag 'Download_on_the_App_Store_Badge_US-UK_135x40.svg', size: '135x40', alt: 'Download on the App Store'
-= link_to 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar', style: 'text-decoration: none;', target: '_blank' do
-  = image_tag 'en_app_rgb_wo_45.png', alt: 'Android app on Google Play', size: '129x45'
-= link_to 'http://www.amazon.com/gp/mas/dl/android?p=com.dubsar_dictionary.Dubsar&ref=mas_pm_app_name', style: 'text-decoration: none;', target: '_blank' do
-  = image_tag 'amazon-apps-store-us-black.png', alt: 'Available at Amazon', size: '132x45', id: 'amazon-light'
-  = image_tag 'amazon-apps-store-us-white.png', alt: 'Available at Amazon', size: '132x45', id: 'amazon-dark'
-%br/
-= link_to 'APK (591 kB)', apk_link, style: 'font-size: large;'
+= render partial: 'mobile_apps'
 
+%br/
 %br/
 
 - # Theme picker
