@@ -42,6 +42,7 @@ hr.divider {
 #search-term {
   width: 87.5%;
   max-width: 280pt;
+  -webkit-appearance: none;
 }
 
 #autocomplete-results {
