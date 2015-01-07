@@ -74,3 +74,8 @@ body.style-light div.accordion-body table.word-links a.synonym-link:hover,
 body.style-light div.accordion-body table.word-links a.synonym-link:active {
   color: #1c94c4;
 }
+
+body.style-light #search-form {
+  color: black;
+  background-color: #1c94c4;
+}

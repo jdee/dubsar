@@ -23,6 +23,15 @@ body {
   margin-right: auto;
 }
 
+#dubsar-banner {
+  margin: 0.5em;
+}
+
+#powered-by-wordnet {
+  font-size: x-large;
+  font-weight: bold;
+}
+
 * {
   font-family: Avenir Next, Verdana, Arial, sans-serif;
   font-size: xx-large;
@@ -35,8 +44,9 @@ hr.divider {
 
 #search-form {
   margin: 0 auto;
+  padding-bottom: 10px;
   width: 100%;
-  max-width: 320pt;
+  /* max-width: 320pt; */
 }
 
 #search-term {

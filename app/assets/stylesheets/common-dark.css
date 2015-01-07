@@ -86,3 +86,8 @@ body.style-dark div.accordion-body table.word-links a.synonym-link:hover,
 body.style-dark div.accordion-body table.word-links a.synonym-link:active {
   color: white;
 }
+
+body.style-dark #search-form {
+  color: black;
+  background-color: #eedd82;
+}
