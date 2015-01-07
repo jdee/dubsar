@@ -49,7 +49,6 @@ hr.divider {
   width: 100%;
   max-width: 320pt;
   display: none;
-  /* cursor: pointer; */
 }
 
 #footer, #footer *, .alphabet-link {
@@ -96,7 +95,13 @@ a.info-link {
   border-radius: 5px;
   -moz-border-radius: 5px;
   margin-top: 5px;
+  /*
   margin-right: 5px;
+   */
+}
+
+.synonym-link, .lexical {
+  padding: 2px;
 }
 
 .synonym-link.selected {
@@ -127,12 +132,8 @@ div.accordion-body table.word-links a.synonym-link {
   cursor: text;
 }
 
-#synset_head a.synonym-link {
-  margin-top: 14px;
-}
-
 #synset_head img.info-button {
-  margin: 4px;
+  margin: 1px;
   display: inline;
   float: none;
 }

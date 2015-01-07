@@ -42,6 +42,7 @@
       %span{:class => classes, title: 'frequency count of this word sense in a reference text'}
         = "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
 %br/
+%br/
 - synset.senses.sort_by{|s|s.word.name}.each do |s|
   - if (defined?(with_info_button) and with_info_button)
     &= s.word.name
