@@ -55,6 +55,7 @@
       return false;
     });
 
+    // DEBT: This is fine for navigation to synsets (from words or other synsets).
     // if we load #word_pos, treat that like a click on the appropriate link
     var fragment = location.hash;
     if (fragment) {

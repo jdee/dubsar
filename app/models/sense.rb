@@ -56,4 +56,14 @@ class Sense < ActiveRecord::Base
   def gloss
     synset.gloss
   end
+
+  def unique_name
+    name = word.name
+    (name.capitalized? ? 'cap-' : '') + name.downcase.gsub(/[\s.']/, '_')
+  end
+
+  def path_to_synset_with_fragment
+    "#{synset_path(synset)}##{unique_name}"
+  end
+
 end

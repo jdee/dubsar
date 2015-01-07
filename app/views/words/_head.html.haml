@@ -17,9 +17,7 @@
 
 
 - if defined?(with_info_button) and with_info_button
-  - if !defined?(target)
-    - target = word
-  = render partial: 'info_button', locals: { target: target }
+  = render partial: 'info_button', locals: { target: word }
 
 &= word.name_and_pos
 - unless word.other_forms.blank?

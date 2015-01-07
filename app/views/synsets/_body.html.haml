@@ -22,7 +22,7 @@
     %br/
 - synset.senses.each do |sense|
   - unless sense.verb_frames.empty?
-    %div{:class => "lexical #{sense.word.unique_name}"}
+    %div{:class => "lexical #{sense.unique_name}"}
       %h4 verb frames
       - sense.verb_frames.each do |frame|
         =h frame.frame
@@ -30,7 +30,7 @@
 
 - synset.senses.each do |sense|
   - unless sense.pointers.blank?
-    %div{:class => "lexical #{sense.word.unique_name}"}
+    %div{:class => "lexical #{sense.unique_name}"}
       = render partial: 'pointers', locals: { pointers: sense.pointers, title: 'lexical pointers', description: 'word pointers'}
 
 - unless synset.pointers.blank?

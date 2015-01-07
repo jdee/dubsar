@@ -26,7 +26,7 @@ module SynsetsHelper
       target.name
     end
 
-    target = "#{synset_path(target.synset)}##{target.word.unique_name}" if target.is_a?(Sense)
+    target = path_to_synset_with_fragment(target) if target.is_a?(Sense)
 
     if lexical_class
       link_to target_text, target, :class => "lexical #{lexical_class}"
@@ -34,4 +34,9 @@ module SynsetsHelper
       link_to target_text, target
     end
   end
+
+  def path_to_synset_with_fragment(sense)
+    "#{synset_path(sense.synset)}##{sense.unique_name}"
+  end
+
 end

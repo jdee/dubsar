@@ -16,9 +16,7 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - if defined?(with_info_button) and with_info_button
-  - if !defined?(target)
-    - target = synset
-  = render partial: 'info_button', locals: { target: target }
+  = render partial: 'info_button', locals: { target: synset }
 
 %span
   &= synset.gloss
@@ -28,7 +26,7 @@
     &= "<#{synset.lexname}>"
 - synset.senses.each do |sense|
   - unless sense.marker.blank?
-    - classes = "#{sense.word.unique_name} lexical"
+    - classes = "#{sense.unique_name} lexical"
     %span{:class => classes, title: 'positional adjective marker'}
       &nbsp;
       (#{sense.marker})
@@ -38,7 +36,7 @@
     = "freq. cnt.: #{synset.freq_cnt.to_s :delimiter => ','}"
   - synset.senses.each do |sense|
     - unless sense.freq_cnt <= 0
-      - classes = "#{sense.word.unique_name} lexical"
+      - classes = "#{sense.unique_name} lexical"
       %span{:class => classes, title: 'frequency count of this word sense in a reference text'}
         = "freq. cnt.: #{sense.freq_cnt.to_s :delimiter => ','}"
 %br/
@@ -48,6 +46,6 @@
   - else
     .word-links
       / Selection link
-      = link_to s.word.name, "##{s.word.unique_name}", :class => 'synonym-link'
+      = link_to s.word.name, "##{s.unique_name}", :class => 'synonym-link', 'data-synset-path' => path_to_synset_with_fragment(s)
       / Navigation button
       = render partial: 'info_button', locals: { target: s.word }
