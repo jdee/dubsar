@@ -18,7 +18,7 @@
  */
 
 body.style-dark .accordion-head {
-  border-color: #f58400;
+  border-color: #ffd700;
 }
 
 body.style-dark .accordion-head:hover, body.style-dark .accordion-head.open {

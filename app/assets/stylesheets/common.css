@@ -108,6 +108,9 @@ label, .pagination * {
   display: inline-block;
 }
 
+.content * {
+  font-size: x-large;
+}
 div.accordion-body div.word-links a.info-link {
   display: none;
 }
@@ -135,5 +138,6 @@ div.accordion-body div.word-links a.info-link {
 }
 
 #news-headline, #news-content {
-  margin: 2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
