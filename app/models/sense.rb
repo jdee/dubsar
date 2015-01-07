@@ -58,8 +58,13 @@ class Sense < ActiveRecord::Base
   end
 
   def unique_name
+=begin
+    # This is only useful when distinguishing words in a synset, but useless to distinguish
+    # synsets a word belongs to. The easiest thing to do is use the id and be done with it.
     name = word.name
     (name.capitalized? ? 'cap-' : '') + name.downcase.gsub(/[\s.']/, '_')
+=end
+    id
   end
 
   def path_to_synset_with_fragment

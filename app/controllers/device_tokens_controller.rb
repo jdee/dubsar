@@ -18,15 +18,16 @@
 class DeviceTokensController < ApplicationController
   before_filter :verify_client_secret, except: :count
   skip_before_filter :verify_authenticity_token
-  respond_to :json
+  respond_to :json, :html
 
   def count
-    prod_count = DeviceToken.where(production: true).count
-    dev_count = DeviceToken.where(production: false).count
+    @prod_count = DeviceToken.where(production: true).count
+    @dev_count = DeviceToken.where(production: false).count
     respond_to do |format|
       format.json do
         respond_with({ prod: prod_count, dev: dev_count })
       end
+      format.html
     end
   end
 
