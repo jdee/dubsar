@@ -54,10 +54,8 @@
       var elm = accordion.data('openElement');
 
       // close the currently open pane
-      // hide instead of fade so that the scrollTop call below works. Otherwise, have to
-      // scroll after that's hidden. or account for the change in advance.
       elm.data('open', false);
-      elm.hide();
+      elm.slideUp('fast');
       elm.addClass('open').prev('.accordion-head').removeClass('open');
 
       // now open the body element for this head
