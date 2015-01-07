@@ -17,8 +17,8 @@
 
 .accordion-head
   - if defined?(with_info_button)
-    - if defined?(sense)
-      = render partial: 'synsets/head', locals: { synset: accordion_synset, with_info_button: with_info_button, sense: sense }
+    - if defined?(target)
+      = render partial: 'synsets/head', locals: { synset: accordion_synset, with_info_button: with_info_button, target: target }
     - else
       = render partial: 'synsets/head', locals: { synset: accordion_synset, with_info_button: with_info_button }
   - else

@@ -35,8 +35,4 @@ module SynsetsHelper
     end
   end
 
-  def path_to_synset_with_fragment(sense)
-    "#{synset_path(sense.synset)}##{sense.unique_name}"
-  end
-
 end

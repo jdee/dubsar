@@ -20,6 +20,10 @@ module ApplicationHelper
 
   alias :orig_url_for :url_for
 
+  def path_to_synset_with_fragment(sense)
+    "#{synset_path(sense.synset)}##{sense.unique_name}"
+  end
+
   def home_page
     @term.nil?
   end
