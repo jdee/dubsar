@@ -9,5 +9,4 @@ Disallow: /tokens
 Disallow: /users
 Disallow: /wotd
 Disallow: /resume
-Disallow: /cpyn
 Allow: /wotd.xml

@@ -1,7 +1,2 @@
-Sitemap: https://m.dubsar-dictionary.com/mobile-sitemap.xml
-
 User-Agent: *
-Allow: /
-Allow: /m
-Disallow: /m_*
-Allow: /m_support
+Disallow: /

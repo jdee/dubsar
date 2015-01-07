@@ -28,17 +28,9 @@ Dubsar::Application.routes.draw do
 
   # delete :device_tokens, to: 'device_tokens#destroy'
 
-  resources :words  , :only => :show do
-    get '/tab', to: 'words#tab'
-    get '/inflections', to:'inflections#word'
-  end
-  resources :senses , :only => :show do
-    get '/tab', to: 'senses#tab'
-  end
-  resources :synsets, :only => :show do
-    get '/tab', to: 'synsets#tab'
-  end
-  resources :inflections, :only => [ :create, :index, :show, :update, :destroy ]
+  resources :words  , :only => :show
+  resources :senses , :only => :show
+  resources :synsets, :only => :show
 
   get '/about'            , to: 'words#about'
   get '/faq'              , to: 'words#faq'
