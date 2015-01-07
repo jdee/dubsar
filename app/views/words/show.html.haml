@@ -15,7 +15,7 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - content_for :title do
-  &= @word.page_title
+  &= params[:title] || @word.page_title
 
 - content_for :description do
   %meta{:name => 'Description', :content => @word.meta_description}
@@ -24,7 +24,7 @@
   != thumbnail_link_tags
 
 = render partial: 'home_button'
-%h1{style: 'margin-bottom: 0.8em;'} Word
+%h1{style: 'margin-bottom: 0.8em;'} #{params[:title] || "Word"}
 %br/
 .content
   = render @word

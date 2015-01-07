@@ -49,7 +49,7 @@
 
 %div
   - wotd = DailyWord.word_of_the_day.word
-  = link_to wotd.name_and_pos, wotd
+  = link_to wotd.name_and_pos, word_path(wotd, title: 'Dubsar Word of the Day')
 
 - # News
 #main-news
