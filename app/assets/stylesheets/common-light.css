@@ -63,3 +63,7 @@ body.style-light .synonym-link.selected {
 body.style-light .synonym-link:visited {
   color: #1c94c4;
 }
+
+body.style-light #amazon-dark {
+  display: none;
+}

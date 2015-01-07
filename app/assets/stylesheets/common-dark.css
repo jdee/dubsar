@@ -75,3 +75,7 @@ body.style-dark .synonym-link.selected {
 body.style-dark .synonym-link:visited {
   color: #ffd700;
 }
+
+body.style-dark #amazon-light { 
+  display: none;
+}
