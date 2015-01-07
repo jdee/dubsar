@@ -22,6 +22,8 @@ module SynsetsHelper
       target.word.name
     when Synset
       target.words.map(&:name).join(', ')
+    when Word
+      target.name
     end
 
     target = "#{synset_path(target.synset)}##{target.word.unique_name}" if target.is_a?(Sense)

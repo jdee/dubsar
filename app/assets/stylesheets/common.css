@@ -91,8 +91,8 @@ label, .pagination * {
 }
 
 .info-button {
-  margin-top: 0.8em;
-  margin-right: 0.8em;
+  margin-top: 14px;
+  margin-right: 14px;
   float: right;
 }
 
@@ -134,4 +134,22 @@ label, .pagination * {
   background-color: #87ceeb;
   border-radius: 5px;
   -moz-border-radius: 5px;
+}
+
+.word-links {
+  display: inline-block;
+}
+
+div.accordion-body div.word-links a.info-link {
+  display: none;
+}
+
+#synset_head a.synonym-link {
+  margin-top: 14px;
+}
+
+#synset_head img.info-button {
+  margin-left: 14px;
+  display: inline;
+  float: none;
 }

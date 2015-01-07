@@ -46,5 +46,8 @@
   - if (defined?(with_info_button) and with_info_button)
     &= s.word.name
   - else
-    = link_to s.word.name, "##{s.word.unique_name}", :class => 'synonym-link'
-    / TODO: Navigation buttons
+    .word-links
+      / Selection link
+      = link_to s.word.name, "##{s.word.unique_name}", :class => 'synonym-link'
+      / Navigation button
+      = render partial: 'info_button', locals: { target: s.word }
