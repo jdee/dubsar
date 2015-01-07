@@ -104,6 +104,12 @@ a.info-link {
   -moz-border-radius: 5px;
 }
 
+body.style-light .accordion-body .lexical, body.style-light .accordion-body .synonym-link.selected,
+body.style-dark .accordion-body .lexical, body.style-dark .accordion-body .synonym-link.selected {
+  background-color: inherit;
+  color: inherit;
+}
+
 .word-links {
   display: inline-block;
 }
