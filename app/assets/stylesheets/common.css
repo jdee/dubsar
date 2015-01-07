@@ -76,7 +76,7 @@ label, .pagination * {
   float: right;
 }
 
-.info-link {
+a.info-link {
   text-decoration: none;
 }
 
@@ -111,7 +111,8 @@ label, .pagination * {
 .content * {
   font-size: x-large;
 }
-div.accordion-body div.word-links a.info-link {
+
+div.accordion-body table.word-links a.info-link {
   display: none;
 }
 
@@ -120,7 +121,7 @@ div.accordion-body div.word-links a.info-link {
 }
 
 #synset_head img.info-button {
-  margin-left: 14px;
+  margin: 4px;
   display: inline;
   float: none;
 }

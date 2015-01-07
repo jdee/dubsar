@@ -46,8 +46,12 @@
   - if (defined?(with_info_button) and with_info_button)
     &= s.word.name
   - else
-    .word-links
-      / Selection link
-      = link_to s.word.name, "##{s.unique_name}", :class => 'synonym-link', 'data-synset-path' => path_to_synset_with_fragment(s)
-      / Navigation button
-      = render partial: 'info_button', locals: { target: s.word }
+    %table.word-links
+      %tbody
+        %tr
+          %td
+            / Selection link
+            = link_to s.word.name, "##{s.unique_name}", :class => 'synonym-link', 'data-synset-path' => path_to_synset_with_fragment(s)
+          %td
+            / Navigation button
+            = render partial: 'info_button', locals: { target: s.word }
