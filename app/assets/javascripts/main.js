@@ -27,6 +27,9 @@
     }
 
     $('.synonym-link').on('click', function() {
+      // Ignore .accordion-body .synonym-link
+      if ($(this).closest('.accordion-body').size() > 0) return;
+
       var link = $(this);
       var target = link.attr('href').slice(1);
 

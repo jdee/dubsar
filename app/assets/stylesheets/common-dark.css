@@ -79,3 +79,10 @@ body.style-dark .synonym-link:visited {
 body.style-dark #amazon-light { 
   display: none;
 }
+
+body.style-dark div.accordion-body table.word-links a.synonym-link:link,
+body.style-dark div.accordion-body table.word-links a.synonym-link:visited,
+body.style-dark div.accordion-body table.word-links a.synonym-link:hover,
+body.style-dark div.accordion-body table.word-links a.synonym-link:active {
+  color: white;
+}

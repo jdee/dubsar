@@ -116,6 +116,11 @@ div.accordion-body table.word-links a.info-link {
   display: none;
 }
 
+div.accordion-body table.word-links a.synonym-link {
+  text-decoration: none;
+  cursor: text;
+}
+
 #synset_head a.synonym-link {
   margin-top: 14px;
 }
