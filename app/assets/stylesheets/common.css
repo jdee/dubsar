@@ -157,3 +157,7 @@ div.accordion-body div.word-links a.info-link {
 #device_counts {
   border-spacing: 32px;
 }
+
+#main-news .news-content {
+  display: none;
+}

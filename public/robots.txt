@@ -1,15 +1,12 @@
 Sitemap: https://dubsar-dictionary.com/sitemap.xml
 
 User-agent: *
-Disallow: /m*
 Disallow: /inflections
 Disallow: /review
+Disallow: /device_tokens
 Disallow: /share
-Disallow: /senses/*/
-Disallow: /synsets/*/
 Disallow: /tokens
 Disallow: /users
-Disallow: /words/*/
 Disallow: /wotd
 Disallow: /resume
 Disallow: /cpyn

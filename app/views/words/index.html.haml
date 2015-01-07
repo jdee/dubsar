@@ -31,20 +31,34 @@
   %meta{:property => 'og:email', :content => 'dubsar@dubsar-dictionary.com'}
   %link{:rel => 'canonical', :href => 'https://dubsar.info'}
 
+- # Main page content
+
+- # Banner
 =image_tag 'dubsar-full@3x.png', size: '202x45', style: 'margin: 0.5em;'
 
 %p{style: 'font-size: x-large; font-weight: bold;'}
   Powered by WordNet&reg;
 
+- # Search form
 =render partial: 'search_form'
 
 %br/
+
+- # WOTD
 %strong Word of the Day
 
-%p
+%div
   - wotd = DailyWord.word_of_the_day.word
   = link_to wotd.name_and_pos, wotd
 
+- # News
+#main-news
+  = link_to news_path, id: 'news-link' do
+    = render partial: 'news'
+
+- # Mobile app links
+%strong Mobile Apps
+%br/
 = link_to 'https://itunes.apple.com/us/app/dubsar-dictionary-project/id453868483?mt=8', style: 'text-decoration: none;', target: '_blank' do
   =image_tag 'Download_on_the_App_Store_Badge_US-UK_135x40.svg', size: '135x40', alt: 'Download on the App Store'
 = link_to 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar', style: 'text-decoration: none;', target: '_blank' do
@@ -55,6 +69,8 @@
 = link_to 'APK (591 kB)', apk_link, style: 'font-size: large;'
 
 %br/
+
+- # Alphabet links
 #alphabet
   - ('A'..'Z').each do |letter|
     = link_to letter, url_for(:controller => '/words', :action => :search, :term =>"[#{letter}#{letter.downcase}]*", :match => 'glob', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link alphabet-link'

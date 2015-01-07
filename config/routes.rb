@@ -62,6 +62,7 @@ Dubsar::Application.routes.draw do
   get '/wotd'             , to: 'words#wotd'
   get '/privacy'          , to: 'words#privacy'
   get '/m_privacy'        , to: 'words#m_privacy'
+  get '/news'             , to: 'words#news'
 
   get '/resume'           , to: 'application#resume'
   get '/resume/summary'   , to: 'application#summary'
