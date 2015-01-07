@@ -1,5 +1,5 @@
 - #  Dubsar Dictionary Project
-- #  Copyright (C) 2010-14 Jimmy Dee
+- #  Copyright (C) 2010-15 Jimmy Dee
 - #
 - #  This program is free software; you can redistribute it and/or
 - #  modify it under the terms of the GNU General Public License
@@ -21,61 +21,23 @@
   %meta{:name => 'Description', :content => 'Read about the open-source Dubsar Dictionary Project.'}
   %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
   %link{:rel => 'canonical', :href => 'https://dubsar.info/about'}
-  != thumbnail_link_tags
 
 #about
+  = render partial: 'home_button'
+
   %h4 Dubsar
-  Dubsar was conceived as a simple web-based dictionary application
-  using Ruby on Rails&reg; 3.0. Since then, it has undergone extensive development and
-  upgrades and now uses:
-  %ul
-    %li
-      %a{:href => 'http://rubyonrails.org', :title => 'Ruby on Rails®', :class => 'undecorated'}
-        Ruby on Rails&reg;
-      4.1,
-    %li
-      =link_to 'jQuery', 'http://jquery.com', :title => 'jQuery', :class => 'undecorated'
-      1.6 and
-    %li
-      =link_to 'jQuery UI', 'http://jqueryui.com', :title => 'jQuery UI', :class => 'undecorated'
-      1.8.
-  %p
-    The ready availability of the
-    %a{:href => 'http://wordnet.princeton.edu', :class => 'undecorated'} WordNet&reg;
-    3.1 data set made it the perfect candidate for inclusion in Dubsar.
-    Dubsar is a work in progress.  Over time, it may grow to include
-    other data sources.
 
   %p
-    Dubsar is above all a technology project, a place to prove and
-    explore open-source application software like the jQuery family.
-    While the features of the site will certainly
-    evolve in coming releases, it will also grow to include more
-    technical content like the hosted
-    =link_to 'QUnit test suite.', qunit_path, :title => 'QUnit test suite', :class => 'undecorated'
-
-  %p
-    Visit the
-    = link_to 'Dubsar Mobile Edition', mobile_url, :title => 'Dubsar Mobile Edition'
-    on your smart phone, tablet or other mobile device.
-
-  %p
-    Dubsar applications are
-    available for free worldwide on the
-    =link_to 'iTunes App Store', 'https://itunes.apple.com/us/app/dubsar/id453868483?mt=8'
-    for iPhone, iPod Touch and iPad.
-
-  %p
-    Dubsar is also available via
-    =link_to 'Google Play', 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar'
-    and the
-    =link_to 'Amazon App Store', 'http://www.amazon.com/gp/mas/dl/android?p=com.dubsar_dictionary.Dubsar&ref=mas_pm_app_name'
-    for free worldwide. The 591-kB APK is also available for direct
-    =link_to 'download.', apk_link
-
-  %p
-    =link_to 'Link to Dubsar', link_path, :title => 'Link to Dubsar'
-    from your website.
+    The Dubsar Dictionary Project is a suite of English dictionary applications using
+    WordNet&reg; 3.1.
+    The website is built using
+    %a{:href => 'http://rubyonrails.org', :title => 'Ruby on Rails®'}
+      Ruby on Rails&reg;.
+    The original website was launched as a personal project in late 2010. Since then,
+    it sprouted a mobile website and native applications for Android and iOS.
+    The current website is the sixth interface constructed as part of the Dubsar
+    Dictionary Project. The new website is much more mobile friendly and supersedes
+    the star-crossed m.dubsar-dictionary.com, RIP.
 
   %h4
     %a{:href => 'http://wordnet.princeton.edu', :class => 'undecorated'} WordNet&reg;
@@ -107,48 +69,28 @@
 
   %p
     Dubsar provides one important class of information not present in
-    WordNet&reg;.  While WordNet&reg; does provide exceptional
+    WordNet&reg;. While WordNet&reg; does provide exceptional
     inflections for irregular words, it does not offer much help with
-    regular inflections.  WordNet&reg; makes use of the Morphy
-    algorithm to make a morphological determination of the head term
-    associated with an inflected form.  For example, the head term for
-    %em queried
-    is the verb
-    %em query,
-    the former being the past tense and past participle of the latter.
-    WordNet&reg; applications like the
-    %a.undecorated{:href => 'http://wordnetweb.princeton.edu/perl/webwn'}
-      WordNet&reg; online interface
-    will match inflected forms when searching
-    for a word.  For example, if you search for
-    %em happening,
-    you'll find the verb
-    %em happen.
-    But if you search for the misspelled
-    %em happenning,
-    you'll find the same verb. The Morphy rules are overly broad. When
-    searching for words, this can have the effect at times of
-    correcting one's spelling.  It helps the user find the intended
-    dictionary entry.  But it is not possible for applications using
-    Morphy to display all inflections associated with a word, since
-    many of them (like
-    %em happenning
-    above) are invalid.
+    regular inflections.
 
   %p
-    Dubsar, on the other hand, does just this and displays all known
-    inflections for each word.  It can do this because it does not use
-    rules to determine inflections when looking up words.  Dubsar
-    includes a database table containing every inflected form of every
-    word it knows.  When a user performs a search without wild cards,
-    the search is matched against all known inflected word forms.
-    However, only exact matches are performed.  So if you search Dubsar
+    The original inflections table in the Dubsar database was constructed using
+    a lengthy, yet incomplete, set of regular expressions and exceptions. Noun plurals
+    were originally constructed using the ActiveSupport::Inflector from Ruby on Rails&reg;.
+    This resulted in plurals like
+    %em blice
     for
-    %em happening,
-    you'll find
-    %em happen.
-    But you'll get no results for
-    %em happenning.
+    %em blouse.
+    Many erroneous verb forms persisted for some time. A manual editorial process
+    eventually weeded out persistent problems. There are certainly cases where a plural
+    for, say, a pharmaceutical trade name, is dubious. But the current inflections table
+    is free from egregious errors.
+  %p
+    Other than irregular inflections provided by WordNet&reg;, inflected forms are only
+    listed for nouns and verbs, and only for those with no spaces, capitalization, numbers
+    or punctuation. Inflected forms include any form of a word that would not usually be
+    listed under its own head. For nouns, plurals are listed. For verbs, the third-person
+    singular present form is listed as well as the present and past participles.
 
   %p
     The database currently contains
@@ -160,25 +102,21 @@
     %em be
     has eight inflected forms:
 
-    %ul
-      %li am
-      %li are
-      %li be
-      %li been
-      %li being
-      %li is
-      %li was
-      %li were
-
-    Dubsar generates
-    =(part_of_speech_count(:inflection, 'verb')-part_of_speech_count(:word, 'verb')-1_967).to_s :delimiter => ','
-    verb inflections and
-    =(part_of_speech_count(:inflection, 'noun')-part_of_speech_count(:word, 'noun')-1_455).to_s :delimiter => ','
-    noun inflections not found in WordNet&reg;. Most of the latter are
-    from the ActiveSupport Inflector.
-
+    %div am
+    %div are
+    %div be
+    %div been
+    %div being
+    %div is
+    %div was
+    %div were
   %p
-    See the
-    =link_to 'Dubsar wiki on GitHub', 'https://github.com/jdee/dubsar/wiki/Inflections', :title => 'Dubsar wiki', :class => 'undecorated'
-    for more details on Dubar&apos;s inflection handling.
-
+    When searching words, the inflections table is actually consulted instead of the words
+    table. So you can match the verb
+    %em be
+    by searching for
+    %em was,
+    and if you search for
+    %em thought,
+    the first thing you&apos;ll see is the verb
+    %em think.

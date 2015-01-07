@@ -158,7 +158,8 @@ div.accordion-body table.word-links a.synonym-link {
   display: none;
 }
 
-#news-headline, #news-headline *, #news-content, #news-content * {
+#news-headline, #news-headline *, #news-content, #news-content *,
+#about, #about * {
   font-size: x-large;
 }
 
