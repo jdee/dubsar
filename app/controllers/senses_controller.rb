@@ -16,6 +16,7 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class SensesController < ApplicationController
+  include SynsetsHelper
   respond_to :html, :json
 
   def tab
@@ -30,15 +31,9 @@ class SensesController < ApplicationController
   end
 
   def show
-    @sense = Sense.includes([ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]).find params[:id]
-
-    respond_to do |format|
-      format.html
-      format.json do
-        respond_with json_show_response
-      end
-    end
-  rescue
+    @sense = Sense.find params[:id]
+    redirect_to path_to_synset_with_fragment(@sense)
+  rescue => e
     error
   end
 
