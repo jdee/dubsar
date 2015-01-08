@@ -49,6 +49,6 @@
   -moz-border-radius: 0 0 5px 5px;
 }
 
-.accordion-body.open {
+.accordion.limited .accordion-body.open {
   max-height: 250pt;
 }

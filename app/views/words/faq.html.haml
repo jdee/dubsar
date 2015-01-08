@@ -21,21 +21,23 @@
   %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
   %link{:rel => 'canonical', :href => 'https://dubsar.info/faq'}
 
-#accordion
-  %h2#faq_1
-    %a{:href => '#faq_1'}
-      Q. Where does the database come from?
-  #pane_0
+= render partial: 'home_button'
+
+%h2 Dubsar FAQ
+
+#accordion.accordion
+  .accordion-head
+    Q. Where does the database come from?
+  .accordion-body
     A. This is the
     %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
     3.1 data set from Princeton University,
     available for free under the
     %a{:href => 'http://wordnet.princeton.edu/wordnet/license', :title => 'WordNet 3.0 License'}
       WordNet 3.0 License.
-  %h2#faq_2
-    %a{:href => '#faq_2'}
-      Q. Which words are in the dictionary?
-  #pane_1
+  .accordion-head
+    Q. Which words are in the dictionary?
+  .accordion-body
     A. The
     %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
     data set is aimed at automated text processing and
@@ -49,28 +51,21 @@
     %em
       %a{:href => url_for(:action => :show, :id => Word.find_by_name_and_part_of_speech('sedulous', 'adjective').id), :title => 'sedulous'}
         sedulous.
-  %h2#faq_3
-    %a{:href => '#faq_3'}
-      Q. Which browsers work well with Dubsar?
-  #pane_2
+  .accordion-head
+    Q. Which browsers work well with Dubsar?
+  .accordion-body
     A. Dubsar requires a JavaScript-enabled browser, but thanks to
     jQuery, nearly any browser that supports JavaScript will display
     Dubsar well, particularly:
     %ul
-      %li
-        Firefox 3&ndash;23 on all tested platforms (Ubuntu Linux, Mac OS X)
-      %li
-        Google Chrome 23&ndash;33 on Linux and OS X.
-        %em Note:
-        Dubsar has done well in every Chrome release since 6, but 21 and
-        22 introduced some display issues. Chrome 23 fixed those
-        problems.
-      %li Safari 5 &amp; 6 on OS X
-      %li OmniWeb 5 on OS X
+      %li Firefox
+      %li Google Chrome
+      %li Safari
 
-    The
-    =link_to 'QUnit test suite', qunit_path, :title => 'QUnit'
-    currently passes in all these browsers.
+    Dubsar is routinely tested on the latest version of each of those browsers. Problems
+    are noted in the
+    =link_to 'Dubsar issue list', 'https://github.com/jdee/dubsar/issues', :title => 'Dubsar issue list'
+    on GitHub.
 
     %h3 Mobile Devices
 
@@ -80,10 +75,9 @@
       =link_to 'Dubsar issue list', 'https://github.com/jdee/dubsar/issues', :title => 'Dubsar issue list'
       , the application is known to work well in all tested mobile
       environments.
-  %h2#faq_5
-    %a{:href => '#faq_5'}
-      Q. What do those WordNet&reg; terms mean?
-  #pane_3
+  .accordion-head
+    Q. What do those WordNet&reg; terms mean?
+  .accordion-body
     A. Some of them are listed here in Dubsar.  The data model used in
     Dubsar's SQLite database uses them for its table names.
     %h3 Word
@@ -107,11 +101,7 @@
     meaning of one word to a specific meaning of another word).  A
     semantic pointer points from one synset to another and hence
     relates two meanings.  There are many specific pointer types.
-  %h2#faq_6
-    %a{:href => '#faq_6'}
-      Q. What's all that stuff in the tooltips?
-  #pane_4
-    A. The tooltips display a number of things:
+
     %dl
       %dt lexical file name
       %dd
@@ -171,17 +161,9 @@
               &= ptype
             %td
               &= help_text
-  %h2#faq_7
-    %a{:href => '#faq_7'}
-      Q. Is there any other documentation available for Dubsar?
-  #pane_5
-    A. See the
-    %a{:href => 'https://github.com/jdee/dubsar/wiki', :title => 'Dubsar wiki'} Dubsar wiki
-    on GitHub.
-  %h2#faq_8
-    %a{:href => '#faq_8'}
-      Q. How many entries does Dubsar have?
-  #pane_6
+  .accordion-head
+    Q. How many entries does Dubsar have?
+  .accordion-body
     A. Here are current row counts, by table.  This list is live,
     generated from the database tables whenever you load this page.
     As Dubsar&apos;s data content evolves, this list of tables and their
@@ -194,15 +176,9 @@
               =model_count(model)
             %td
               =model.pluralize
-  %h2#faq_9
-    %a{:href => '#faq_9'}
-      Q. How long does it take to build the Dubsar database?
-  #pane_7
-    A. Currently it takes more than two hours.
-  %h2#faq_10
-    %a{:href => '#faq_10'}
-      Q. How are the autocompleter results determined?
-  #pane_8
+  .accordion-head
+    Q. How are the autocompleter results determined?
+  .accordion-body
     %p
       A. All search results use full text searching, similar to the
       behavior of most search engines, against the inflections table.
@@ -235,27 +211,9 @@
       the autocompleter at all. If you perform a search for
       %em Fruit, fruit
       will appear sorted in with the rest of the results.
-  %h2#faq_12
-    %a{:href => '#faq_12'}
-      Q. What is the QUnit test suite?
-  #pane_9
-    A. Dubsar makes heavy use of the JavaScript programming language
-    in the browser.  The
-    =link_to 'QUnit test suite', qunit_path, :title => 'QUnit'
-    puts elements of Dubsar through a sequence of automated tests and
-    reports the results.  The tests run in the browser when you load
-    the page.  The test suite currently passes in all tested browsers.
-  %h2#faq_13
-    %a{:href => '#faq_13'}
-      Q. How do I link to Dubsar?
-  #pane_10
-    A. Help tell other people about Dubsar:
-    =link_to 'Link to Dubsar', link_path, :title => 'Link to Dubsar'
-    from your website.
-  %h2#faq_14
-    %a{:href => '#faq_14'}
-      Q. Is Dubsar on any social networks?
-  #pane_11
+  .accordion-head
+    Q. Is Dubsar on any social networks?
+  .accordion-body
     A. Yes.  Visit
     %p
       =link_to 'Dubsar on Facebook', 'http://www.facebook.com/pages/Dubsar/155561501154946', :title => 'Dubsar on Facebook'
@@ -264,12 +222,11 @@
     %p
       =link_to 'Dubsar on Google+', 'https://plus.google.com/111210736976423589433', :title => 'Dubsar on Google+'
 
-  %h2#faq_15
-    %a{:href => '#faq_15'}
-      Q. Does Dubsar use Cookies?
-  #pane_12
+  .accordion-head
+    Q. Does Dubsar use Cookies?
+  .accordion-body
     %p
-      A. Yes.  Dubsar uses four cookies, one of which is persistent:
+      A. Yes.  Dubsar uses two cookies, one of which is persistent:
     %table
       %tbody
         %tr
@@ -284,14 +241,6 @@
           %td persistent
           %td store the user&apos;s choice of light or dark display theme
         %tr
-          %td dubsar_starting_pane
-          %td transient
-          %td store the open accordion pane
-        %tr
-          %td dubsar_starting_offset
-          %td transient
-          %td store the scroll offset of the result accordion
-        %tr
           %td _dubsar_session
           %td transient
           %td maintain session state (used by Ruby on Rails&reg;)
@@ -302,16 +251,8 @@
       time the page is visited, this cookie is set to
       &quot;light.&quot; It has a lifetime of thirty days.
     %p
-      The other three cookies are transient, limited to a single
+      The other cookie is transient, limited to a single
       browser session.
-    %p
-      The
-      %em dubsar_starting_pane
-      and
-      %em dubsar_starting_offset
-      cookies are used to redraw the screen correctly on refresh, in
-      particular when returning an error (when no matching results are
-      found).
     %p
       Dubsar has no knowledge of your identity when you visit the site.
       There is no authentication, no login, no user ID.  The
@@ -319,21 +260,9 @@
       cookie identifies you to the server in an anonymous way, which is
       useful, for example, when returning error messages.  This is a
       standard technique, and it&apos;s built into Ruby on Rails&reg;.
-    %p
-      Dubsar conducted a brief experiment with links to social
-      networks, but eventually abandoned them because of a number of
-      problems involving cookies.  Now when you browse Dubsar, all
-      content loaded into your browser is hosted by Dubsar until you
-      leave the site.  All static content is hosted on the separate
-      sub-domain s.dubsar.info, which will not serve web
-      pages and assigns no cookies, so if you
-      =link_to 'Link to Dubsar', link_path, :title => 'Link to Dubsar'
-      using the supplied HTML snippet, visitors to your site will not
-      acquire or transmit any additional cookies.
-  %h2#faq_17
-    %a{:href => '#faq_17'}
-      Q. What is OpenSearch?
-  #pane_13
+  .accordion-head
+    Q. What is OpenSearch?
+  .accordion-body
     %p
       A. The OpenSearch protocol allows some supported browsers (Internet
       Explorer 8, Firefox and Google Chome) to add Dubsar to the
@@ -341,54 +270,22 @@
       Dubsar, complete with live suggestions, from your browser&apos;s
       search bar. The browser will recognize Dubsar&apos;s OpenSearch
       plug-in on its own. Chrome automatically adds all discovered search
-      providers. IE 8 and Firefox will prompt you by highlighting the
-      search-provider combo box. Dubsar also has an OpenSearch link
-      at the top of each page that you can use for the purpose.
-    %p
-      Internet Explorer 9 discontinued support for the OpenSearch
-      protocol. Internet Explorer 7 supports the OpenSearch protocol
-      (without live suggestions), but Dubsar has never been tested in
-      that browser, and it is not currently supported by Dubsar.
+      providers. Firefox will prompt you by highlighting the
+      search-provider combo box.
     %p
       See
       = link_to 'Wikipedia', 'http://en.wikipedia.org/wiki/OpenSearch'
       for more information.
-  %h2#faq_19
-    %a{:href => '#faq_19'}
-      Q. Is there a mobile edition of Dubsar?
-  #pane_14
-    %p
-      A. Yes. It's available at
-      = link_to "#{mobile_url}", mobile_url, :class => 'undecorated'
-  %h2#faq_20
-    %a{:href => '#faq_20'}
-      Q. Is Dubsar available for iPhone, iPad or Android?
-  #pane_15
-    %p
-      A. Native Dubsar apps are available.
-    %h3 iOS (1.3.2):
-    %p
-      =link_to 'App Store', 'https://itunes.apple.com/us/app/dubsar/id453868483?mt=8'
-
-    %h3 Android (1.1.1):
-    %p
-      =link_to 'Google Play', 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar'
-    %p
-      =link_to 'Amazon App Store', 'http://www.amazon.com/gp/mas/dl/android?p=com.dubsar_dictionary.Dubsar&ref=mas_pm_app_name'
-    %p
-      =link_to 'Direct Download (APK: 591 kB)', apk_link
-  %h2#faq_21
-    %a{:href => '#faq_21'}
-      Q. How do I get help with a problem?
-  #pane_16
+  .accordion-head
+    Q. How do I get help with a problem?
+  .accordion-body
     %p
       A. Contact
       =link_to 'support@dubsar-dictionary.com', 'mailto:support@dubsar-dictionary.com'
       for any technical support issues.
-  %h2#faq_22
-    %a{:href => '#faq_22'}
-      Q. How does full text searching work?
-  #pane_17
+  .accordion-head
+    Q. How does full text searching work?
+  .accordion-body
     %p
       A. Dubsar searches now work similarly to most search engines.
     %ul

@@ -50,9 +50,15 @@ hr.divider {
 }
 
 #search-term {
+  max-width: 280pt;
+  width: 87.5%;
+  -webkit-appearance: none;
+}
+
+#search-field-div {
   width: 87.5%;
   max-width: 280pt;
-  -webkit-appearance: none;
+  margin: auto;
 }
 
 #search-results #search-term {
@@ -61,8 +67,8 @@ hr.divider {
 
 #autocomplete-results {
   position: absolute;
-  width: 100%;
-  max-width: 320pt;
+  width: 87.5%;
+  max-width: 280pt;
   display: none;
 }
 

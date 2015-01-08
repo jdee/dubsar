@@ -17,6 +17,6 @@
 
 %div
   = render partial: 'words/head', locals: { word: word }
-.accordion
+.accordion.limited
   - word.senses.each do |sense|
     = render partial: 'accordion_synset', object: sense.synset, locals: { with_info_button: true, target: path_to_synset_with_fragment(sense) }
