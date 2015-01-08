@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project.</description>
     <link>https://dubsar-dictionary.com</link>
-    <lastBuildDate>Sat, 25 Oct 2014 18:15:00 GMT</lastBuildDate>
-    <pubDate>Sat, 25 Oct 2014 18:15:00 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Jan 2015 01:45:00 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Jan 2015 01:45:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar-dictionary.com/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,17 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>New Dubsar website</title>
+      <description>
+      Dubsar has a new, mobile-friendly website with a new domain, dubsar.info.
+      The new website also supports synset searching, which has been available
+      in the iOS app for some months.
+      </description>
+      <link>https://dubsar.info</link>
+      <guid isPermaLink="false">54</guid>
+      <pubDate>Thu, 08 Jan 2015 01:45:00 GMT</pubDate>
+    </item>
     <item>
       <title>cpyn</title>
       <description>
