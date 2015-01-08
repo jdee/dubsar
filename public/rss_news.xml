@@ -1,14 +1,14 @@
 <?xml version="1.0" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <atom:link href="https://dubsar-dictionary.com/rss_news.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dubsar.info/rss_news.xml" rel="self" type="application/rss+xml" />
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project.</description>
-    <link>https://dubsar-dictionary.com</link>
-    <lastBuildDate>Thu, 08 Jan 2015 01:45:00 GMT</lastBuildDate>
+    <link>https://dubsar.info</link>
+    <lastBuildDate>Thu, 08 Jan 2015 02:00:00 GMT</lastBuildDate>
     <pubDate>Thu, 08 Jan 2015 01:45:00 GMT</pubDate>
     <image>
-      <url>https://s.dubsar-dictionary.com/images/dubsar-link.png</url>
+      <url>https://s.dubsar.info/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
       <link>https://dubsar-dictionary.com</link>
       <description>Dubsar Project News Feed</description>
