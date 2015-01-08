@@ -58,7 +58,7 @@ class WordsController < ApplicationController
   end
 
   def mobile
-    render :layout => 'mobile'
+    redirect_to 'https://dubsar.info', status: :moved_permanently
   end
 
   def tab
