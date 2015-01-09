@@ -24,7 +24,7 @@ gem 'rails', '>= 4.0'
 gem 'will_paginate', '~> 3.0'
 gem 'devise'
 gem 'uglifier'
-gem 'yui-compressor'
+gem 'sass-rails'
 
 group :production do
   gem 'therubyracer'
