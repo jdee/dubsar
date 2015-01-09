@@ -80,10 +80,6 @@ hr.divider {
   font-weight: bold;
 }
 
-label, .pagination * {
-  font-size: large;
-}
-
 #home-button {
   text-decoration: none;
   float: left;  
@@ -127,27 +123,12 @@ a.info-link {
   -moz-border-radius: 5px;
 }
 
-body.style-light .accordion-body .lexical, body.style-light .accordion-body .synonym-link.selected,
-body.style-dark .accordion-body .lexical, body.style-dark .accordion-body .synonym-link.selected {
-  background-color: inherit;
-  color: inherit;
-}
-
 .word-links {
   display: inline-block;
 }
 
 .content * {
   font-size: x-large;
-}
-
-div.accordion-body table.word-links a.info-link {
-  display: none;
-}
-
-div.accordion-body table.word-links a.synonym-link {
-  text-decoration: none;
-  cursor: text;
 }
 
 #synset_head img.info-button {

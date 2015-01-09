@@ -3,3 +3,36 @@
  *= require accordion-light
  *= require accordion-dark
  */
+
+label, .pagination * {
+  font-size: large;
+}
+
+body.style-light .accordion-body .lexical, body.style-light .accordion-body .synonym-link.selected,
+body.style-dark .accordion-body .lexical, body.style-dark .accordion-body .synonym-link.selected {
+  background-color: inherit;
+  color: inherit;
+}
+
+div.accordion-body table.word-links a.info-link {
+  display: none;
+}
+
+div.accordion-body table.word-links a.synonym-link {
+  text-decoration: none;
+  cursor: text;
+}
+
+body.style-dark div.accordion-body table.word-links a.synonym-link:link,
+body.style-dark div.accordion-body table.word-links a.synonym-link:visited,
+body.style-dark div.accordion-body table.word-links a.synonym-link:hover,
+body.style-dark div.accordion-body table.word-links a.synonym-link:active {
+  color: white;
+}
+
+body.style-light div.accordion-body table.word-links a.synonym-link:link,
+body.style-light div.accordion-body table.word-links a.synonym-link:visited,
+body.style-light div.accordion-body table.word-links a.synonym-link:hover,
+body.style-light div.accordion-body table.word-links a.synonym-link:active {
+  color: #1c94c4;
+}
