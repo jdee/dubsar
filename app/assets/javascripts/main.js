@@ -99,6 +99,11 @@
 
       var body = $('body');
       body.removeClass('style-light style-dark').addClass('style-' + theme);
+
+      var link = $('#theme-stylesheet');
+      var assetPath = link.attr('data-' + theme);
+
+      link.attr('href', assetPath);
     });
   });
 })(jQuery);
