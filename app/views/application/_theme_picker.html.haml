@@ -16,7 +16,9 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #theme-picker
-  =radio_button_tag :theme, :light, @theme.nil? || @theme.to_sym == :light
-  =label_tag :theme_light, 'Light'
-  =radio_button_tag :theme, :dark, @theme.to_sym == :dark
-  =label_tag :theme_dark, 'Dark'
+  .radio
+    =radio_button_tag :theme, :light, @theme.nil? || @theme.to_sym == :light
+    =label_tag :theme_light, 'Light'
+  .radio
+    =radio_button_tag :theme, :dark, @theme.to_sym == :dark
+    =label_tag :theme_dark, 'Dark'

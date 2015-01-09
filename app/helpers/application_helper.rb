@@ -162,6 +162,14 @@ a.info-link {
   margin-bottom: 2em;
 }
 
+.radio {
+  display: inline-block;
+}
+
+.radio input {
+  margin: 20px;
+}
+
 </style>
     EOF
   end

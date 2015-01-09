@@ -17,10 +17,12 @@
 
 #search-form
   =form_tag '/', method: :get do
-    =radio_button_tag :scope, :words, @scope.nil? || @scope == :words
-    =label_tag :scope_words, 'Words'
-    =radio_button_tag :scope, :synsets, @scope == :synsets
-    =label_tag :scope_synsets, 'Synsets'
+    .radio
+      =radio_button_tag :scope, :words, @scope.nil? || @scope == :words
+      =label_tag :scope_words, 'Words'
+    .radio
+      =radio_button_tag :scope, :synsets, @scope == :synsets
+      =label_tag :scope_synsets, 'Synsets'
     %br/
     #search-field-div
       =search_field_tag :term, @match == 'glob' ? nil : @term, search_field_options
