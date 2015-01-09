@@ -20,6 +20,292 @@ module ApplicationHelper
 
   alias :orig_url_for :url_for
 
+  def common_css
+    s = <<-EOF
+<style>
+
+body {
+  max-width: 750pt;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#dubsar-banner {
+  margin: 0.5em;
+}
+
+#powered-by-wordnet {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+* {
+  font-family: Avenir Next, Verdana, Arial, sans-serif;
+  font-size: xx-large;
+  text-align: center;
+}
+
+hr.divider {
+  height: 5px;
+}
+
+#search-form {
+  margin: 0 auto;
+  padding-bottom: 10px;
+  width: 100%;
+  /* max-width: 320pt; */
+}
+
+#search-term {
+  max-width: 280pt;
+  width: 87.5%;
+  -webkit-appearance: none;
+}
+
+#search-field-div {
+  width: 87.5%;
+  max-width: 280pt;
+  margin: auto;
+}
+
+#search-results #search-term {
+  font-size: x-large;
+}
+
+#autocomplete-results {
+  position: absolute;
+  width: 87.5%;
+  max-width: 280pt;
+  display: none;
+}
+
+#footer, #footer *, .alphabet-link {
+  font-size: small;
+}
+
+.alphabet-link {
+  font-weight: bold;
+}
+
+#home-button {
+  text-decoration: none;
+  float: left;  
+  margin: 4px;
+}
+
+.info-button {
+  margin-top: 14px;
+  margin-right: 14px;
+  float: right;
+}
+
+a.info-link {
+  text-decoration: none;
+}
+
+.template {
+  display: none;
+}
+
+#error {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+/* by default, lexical things are hidden. semantic things (like the total 
+   frequency count for a synset) are not. */
+.lexical {
+  display: none;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-top: 5px;
+}
+
+.synonym-link, .lexical {
+  padding: 2px;
+}
+
+.synonym-link.selected {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.word-links {
+  display: inline-block;
+}
+
+.content * {
+  font-size: x-large;
+}
+
+#synset_head img.info-button {
+  margin: 1px;
+  display: inline;
+  float: none;
+}
+
+#device_counts {
+  border-spacing: 32px;
+}
+
+#main-news #news-content {
+  display: none;
+}
+
+#news-headline, #news-headline *, #news-content, #news-content *,
+#about, #about * {
+  font-size: x-large;
+}
+
+#news-headline, #news-content {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+</style>
+    EOF
+  end
+
+  def common_light_css
+    s = <<-EOF
+<style>
+
+body.style-light {
+  background-color: #e0e0ff;
+  color: #1c94c4;
+}
+
+body.style-light a:link {
+  color: #1c94c4;
+}
+
+body.style-light a:visited {
+  color: #333;
+}
+
+body.style-light a:hover,active {
+  color: #fbc90b;
+}
+
+body.style-light hr.divider {
+  background-color: #fbc90b;
+}
+
+body.style-light #autocomplete-results {
+  background-color: white;
+}
+
+body.style-light span.autocomplete-result.selected, body.style-light span.autocomplete-result:hover {
+  background-color: #87ceeb;
+}
+
+body.style-light #error.notice {
+  background-color: #87ceeb;
+  color: black;
+}
+
+body.style-light .lexical {
+  background-color: #87ceeb;
+  color: black;
+}
+
+body.style-light .synonym-link.selected {
+  background-color: #87ceeb;
+}
+
+body.style-light .synonym-link:visited {
+  color: #1c94c4;
+}
+
+body.style-light #amazon-dark {
+  display: none;
+}
+
+body.style-light #search-form {
+  color: black;
+  background-color: #1c94c4;
+}
+
+</style>
+    EOF
+  end
+
+  def common_dark_css
+    s = <<-EOF
+<style>
+
+body.style-dark {
+  background-color: black;
+  color: white;
+}
+
+body.style-dark a:link {
+  color: #ffd700;
+}
+
+body.style-dark a:visited {
+  color: #aaa;
+}
+
+body.style-dark a:hover,active {
+  color: white;
+}
+
+body.style-dark hr.divider {
+  background-color: #4682b4;
+}
+
+body.style-dark #autocomplete-results {
+  background-color: #333;
+}
+
+body.style-dark span.autocomplete-result.selected, body.style-dark span.autocomplete-result:hover {
+  background-color: #eedd82;
+}
+
+body.style-dark span.autocomplete-result:hover a:link {
+  color: #333;
+}
+
+body.style-dark span.autocomplete-result:hover a:hover {
+  color: white;
+}
+
+body.style-dark #error.error {
+  background-color: #eedd82;
+  color: #ff4500;
+}
+
+body.style-dark #error.notice {
+  background-color: #888;
+  color: #ffd700;
+}
+
+body.style-dark .lexical {
+  background-color: #b8860b;
+}
+
+body.style-dark .synonym-link.selected {
+  background-color: #b8860b;
+}
+
+body.style-dark .synonym-link:visited {
+  color: #ffd700;
+}
+
+body.style-dark #amazon-light { 
+  display: none;
+}
+
+body.style-dark #search-form {
+  color: black;
+  background-color: #eedd82;
+}
+
+</style>
+    EOF
+  end
+
   def path_to_synset_with_fragment(sense)
     synset_path sense.synset, anchor: sense.unique_name
   end

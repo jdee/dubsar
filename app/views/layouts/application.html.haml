@@ -31,8 +31,11 @@
     %link{:rel => "apple-touch-icon", :sizes => "144x144", :href => "#{image_path 'dubsar-ipad-retina.png'}"}
     %link{:rel => "apple-touch-icon", :sizes => "152x152", :href => "#{image_path 'dubsar-152x152.png'}"}
     %meta{name: 'viewport', content: 'initial-scale=1.0'}
-    = stylesheet_link_tag 'main_manifest'
-    = stylesheet_link_tag "common-#{@theme}"
+    != common_css
+    - if @theme.to_sym == :dark
+      != common_dark_css
+    - else
+      != common_light_css
     =yield :description
 
   %body{:class => "style-#{@theme}"}
