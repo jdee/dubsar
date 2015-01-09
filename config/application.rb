@@ -24,6 +24,7 @@ module Dubsar
     config.active_record.schema_format = :sql
     config.assets.precompile += [
       'main_manifest.css', 'main_manifest.js',
+      'accordion_manifest.css',
       'mobile_manifest.css', 'mobile_manifest.js'
     ]
   end
