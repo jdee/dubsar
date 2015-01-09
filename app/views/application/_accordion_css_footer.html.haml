@@ -14,18 +14,8 @@
 - #  You should have received a copy of the GNU General Public License
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-- content_for :title do
-  &= params[:title] || @word.page_title
 
-- content_for :description do
-  %meta{:name => 'Description', :content => @word.meta_description}
-  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
-  != canonical_link_tag @word
-  = render partial: 'accordion_css_header'
-
-= render partial: 'home_button'
-%h1{style: 'margin-bottom: 0.8em;'} #{params[:title] || "Word"}
-.content
-  = render @word
-
-= render partial: 'accordion_css_footer'
+- if @theme.to_sym == :dark
+  = stylesheet_link_tag "accordion-light"
+- else
+  = stylesheet_link_tag "accordion-dark"

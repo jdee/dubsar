@@ -22,7 +22,7 @@
     %meta{:name => 'Description', :content => meta_description(search_title, @words)}
   %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
   != canonical_link_tag
-  =stylesheet_link_tag 'accordion_manifest'
+  = render partial: 'accordion_css_header'
 
 #search-results
   = render partial: 'home_button'
@@ -36,3 +36,5 @@
 
   - content_for :pagination do
     = will_paginate @scope == :words ? @words : @synsets
+
+  = render partial: 'accordion_css_footer'

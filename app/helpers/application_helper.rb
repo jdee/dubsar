@@ -306,6 +306,110 @@ body.style-dark #search-form {
     EOF
   end
 
+  def accordion_css
+    s = <<-EOF
+<style>
+
+.accordion-head, .accordion-head *, .accordion-body, .accordion-body * {
+  font-size: large;
+}
+
+.accordion-head {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+
+  margin-top: 5px;
+  min-height: 72px;
+  cursor: pointer;
+}
+
+.accordion-head.open {
+  border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+}
+
+.accordion-body {
+  overflow: hidden;
+
+  margin-left: 0;
+  margin-right: 0;
+
+  border-style: none solid solid solid;
+  border-width: 1px;
+  border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+}
+
+.accordion.limited .accordion-body.open {
+  max-height: 250pt;
+}
+
+</style>
+    EOF
+  end
+
+  def accordion_dark_css
+    s = <<-EOF
+<style>
+
+body.style-dark .accordion-head {
+  border-color: #ffd700;
+}
+
+body.style-dark .accordion-head:hover, body.style-dark .accordion-head.open {
+  background-color: #eedd82;
+  color: black; 
+  border-color: white;
+} 
+
+body.style-dark .accordion-body {
+  background-color: black;
+  border-color: white;
+}
+
+body.style-dark div.accordion-body table.word-links a.synonym-link:link,
+body.style-dark div.accordion-body table.word-links a.synonym-link:visited,
+body.style-dark div.accordion-body table.word-links a.synonym-link:hover,
+body.style-dark div.accordion-body table.word-links a.synonym-link:active {
+  color: white;
+}
+
+</style>
+    EOF
+  end
+
+  def accordion_light_css
+    s = <<-EOF
+<style>
+
+body.style-light .accordion-head {
+  border-color: #1c94c4;
+}
+
+body.style-light .accordion-head:hover, body.style-light .accordion-head.open {
+  background-color: #87ceeb;
+  color: black; 
+  border-color: black;
+} 
+
+body.style-light .accordion-body {
+  background-color: white;
+  border-color: black;
+}
+
+body.style-light div.accordion-body table.word-links a.synonym-link:link,
+body.style-light div.accordion-body table.word-links a.synonym-link:visited,
+body.style-light div.accordion-body table.word-links a.synonym-link:hover,
+body.style-light div.accordion-body table.word-links a.synonym-link:active {
+  color: #1c94c4;
+}
+
+</style>
+    EOF
+  end
+
   def path_to_synset_with_fragment(sense)
     synset_path sense.synset, anchor: sense.unique_name
   end

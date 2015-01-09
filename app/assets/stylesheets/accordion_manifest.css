@@ -1,7 +1,5 @@
 /*
  *= require accordion
- *= require accordion-light
- *= require accordion-dark
  */
 
 label, .pagination * {
@@ -21,18 +19,4 @@ div.accordion-body table.word-links a.info-link {
 div.accordion-body table.word-links a.synonym-link {
   text-decoration: none;
   cursor: text;
-}
-
-body.style-dark div.accordion-body table.word-links a.synonym-link:link,
-body.style-dark div.accordion-body table.word-links a.synonym-link:visited,
-body.style-dark div.accordion-body table.word-links a.synonym-link:hover,
-body.style-dark div.accordion-body table.word-links a.synonym-link:active {
-  color: white;
-}
-
-body.style-light div.accordion-body table.word-links a.synonym-link:link,
-body.style-light div.accordion-body table.word-links a.synonym-link:visited,
-body.style-light div.accordion-body table.word-links a.synonym-link:hover,
-body.style-light div.accordion-body table.word-links a.synonym-link:active {
-  color: #1c94c4;
 }

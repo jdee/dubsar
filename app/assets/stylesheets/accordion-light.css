@@ -31,3 +31,10 @@ body.style-light .accordion-body {
   background-color: white;
   border-color: black;
 }
+
+body.style-light div.accordion-body table.word-links a.synonym-link:link,
+body.style-light div.accordion-body table.word-links a.synonym-link:visited,
+body.style-light div.accordion-body table.word-links a.synonym-link:hover,
+body.style-light div.accordion-body table.word-links a.synonym-link:active {
+  color: #1c94c4;
+}
