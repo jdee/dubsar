@@ -327,7 +327,7 @@ body.style-dark #search-form {
 }
 
 body.style-dark .rounded-block {
-  border-color: white;
+  border-color: #eedd82;
 }
 
 </style>

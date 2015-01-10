@@ -47,7 +47,3 @@
 
     =render :partial => 'shared/footer'
     = javascript_include_tag 'main_manifest'
-    - if @theme.to_sym == :dark
-      != common_light_css
-    - else
-      != common_dark_css

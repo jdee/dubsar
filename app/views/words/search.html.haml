@@ -36,5 +36,3 @@
 
   - content_for :pagination do
     = will_paginate @scope == :words ? @words : @synsets
-
-  = render partial: 'accordion_css_footer'

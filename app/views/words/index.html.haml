@@ -82,3 +82,8 @@
     = link_to letter, url_for(:controller => '/words', :action => :search, :term =>"[#{letter}#{letter.downcase}]*", :match => 'glob', :title => "#{letter}"), :title => "words starting with #{letter}", :class => 'search-link alphabet-link'
   %a.alphabet-link.search-link{:href => url_for(:controller => '/words', :action => :search, :term => '[^A-Za-z]*', :match => 'glob', :title =>'...'), :title => 'words not starting with a letter'}
     &hellip;
+
+- if @theme.to_sym == :dark
+  != common_light_css
+- else
+  != common_dark_css
