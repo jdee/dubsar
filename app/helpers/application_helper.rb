@@ -157,6 +157,18 @@ a.info-link {
   font-size: x-large;
 }
 
+#resume, #resume * {
+  font-size: large;
+}
+
+.rounded-block {
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-style: solid;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
 #news-headline, #news-content {
   margin-top: 2em;
   margin-bottom: 2em;
@@ -234,6 +246,10 @@ body.style-light #search-form {
   background-color: #1c94c4;
 }
 
+body.style-light .rounded-block {
+  border-color: #1c94c4;
+}
+
 </style>
     EOF
   end
@@ -308,6 +324,10 @@ body.style-dark #amazon-light {
 body.style-dark #search-form {
   color: black;
   background-color: #eedd82;
+}
+
+body.style-dark .rounded-block {
+  border-color: white;
 }
 
 </style>

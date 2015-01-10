@@ -1,30 +1,30 @@
 - content_for :title do
   Resume for Jimmy Dee
 
+= render partial: 'home_button'
 #resume
-  = link_to 'mobile version', 'https://m.dubsar-dictionary.com/m_resume'
   %h1
     Jimmy Dee
   %strong Freelance Mobile Software Developer
   &middot;
-  = link_to 'jimmy.dee@dubsar-dictionary.com', 'mailto:jimmy.dee@dubsar-dictionary.com'
+  = link_to 'jimmy.dee@dubsar.info', 'mailto:jimmy.dee@dubsar.info'
   %br/
   %br/
 
-  #resume-tabs
-    %ol
-      %li
-        = link_to '/resume/summary' do
-          %span Summary
+  = link_to 'Summary', '#summary'
+  = link_to 'Employment', '#employment'
+  = link_to 'Education', '#education'
+  = link_to 'Apps', '#apps'
 
-      %li
-        = link_to '/resume/employment' do
-          %span Employment
-
-      %li
-        = link_to '/resume/education' do
-          %span Education
-
-      %li
-        = link_to '/resume/apps' do
-          %span Apps
+  .rounded-block#summary
+    %h2 Summary
+    = render partial: 'summary'
+  .rounded-block#employment
+    %h2 Employment
+    = render partial: 'employment'
+  .rounded-block#education
+    %h2 Education
+    = render partial: 'education'
+  .rounded-block#apps
+    %h2 Apps
+    = render partial: 'apps'

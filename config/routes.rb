@@ -56,13 +56,7 @@ Dubsar::Application.routes.draw do
   get '/m_privacy'        , to: 'words#m_privacy'
   get '/news'             , to: 'words#news'
 
-  # get '/resume'           , to: 'application#resume'
-  # get '/resume/summary'   , to: 'application#summary'
-  # get '/resume/employment', to: 'application#employment'
-  # get '/resume/education' , to: 'application#education'
-  # get '/resume/apps'      , to: 'application#apps'
-
-  # get '/m_resume'         , to: 'application#m_resume'
+  get '/resume'           , to: 'application#resume'
 
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 
