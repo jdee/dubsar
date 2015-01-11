@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   end
 
   def m_resume
-    render layout: 'mobile'
+    redirect_to resume_path, status: :moved_permanently
   end
 
   def summary

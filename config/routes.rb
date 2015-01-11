@@ -57,6 +57,7 @@ Dubsar::Application.routes.draw do
   get '/news'             , to: 'words#news'
 
   get '/resume'           , to: 'application#resume'
+  get '/m_resume'         , to: 'application#m_resume'
 
   get '/m_laertes_faq'    , to: 'words#m_laertes_faq'
 
