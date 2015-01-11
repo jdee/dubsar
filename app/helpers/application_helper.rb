@@ -51,7 +51,8 @@ hr.divider {
 
 #search-form {
   margin: 0 auto;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 100%;
   /* max-width: 320pt; */
 }
