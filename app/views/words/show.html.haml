@@ -20,6 +20,19 @@
 - content_for :description do
   %meta{:name => 'Description', :content => @word.meta_description}
   %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
+
+  / Twitter app card
+  %meta{name: 'twitter:card', content: 'app'}
+  %meta{name: 'twitter:app:id:iphone', content: '453868483'}
+  %meta{name: 'twitter:app:url:iphone', content: "dubsar:///words/#{@word.id}"}
+  %meta{name: 'twitter:app:id:ipad', content: '453868483'}
+  %meta{name: 'twitter:app:url:ipad', content: "dubsar:///words/#{@word.id}"}
+  %meta{name: 'twitter:app:id:googleplay', content: 'com.dubsar_dictionary.Dubsar'}
+  %meta{name: 'twitter:app:name:iphone', content: 'Dubsar Dictionary Project'}
+  %meta{name: 'twitter:app:name:ipad', content: 'Dubsar Dictionary Project'}
+  %meta{name: 'twitter:app:name:googleplay', content: 'Dubsar Dictionary Project'}
+  %meta{name: 'twitter:app:description', content: 'The Dubsar Project is a suite of open-source dictionary applications using content from the Princeton University WordNet® project.'}
+
   != canonical_link_tag @word
   = render partial: 'accordion_css_header'
 
