@@ -72,6 +72,11 @@ namespace :deploy do
     run "ln -nsf #{shared_config_path}/client_secrets.yml #{release_path}/config/backup_client_secrets.yml"
   end
 
+  desc "Links the twitter_credentials.yml file"
+  task :link_twitter_creds do
+    run "ln -nsf #{shared_config_path}/twitter_credentials.yml #{release_path}/config/twitter_credentials.yml"
+  end
+
   desc "Links to devise config"
   task :link_devise_config do
     run "ln -nsf #{shared_config_path}/devise_config.rb #{release_path}/config/initializers/devise.rb"
@@ -146,6 +151,7 @@ after 'deploy:update', 'deploy:link_wn31_db'
 after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_client_secrets'
+after 'deploy:update', 'deploy:link_twitter_creds'
 after 'deploy:update', 'deploy:wotd_build'
 after 'deploy:update', 'deploy:update_secret'
 after 'deploy:update', 'deploy:link_devise_config'
