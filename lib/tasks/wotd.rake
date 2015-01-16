@@ -30,16 +30,16 @@ namespace :wotd do
       xml.instruct!(:xml, :version => '1.0', :standalone => 'yes')
       xml.rss :version => '2.0', 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do |rss|
         rss.channel do |channel|
-          channel.atom :link, :href => 'https://dubsar-dictionary.com/wotd.xml', :rel => 'self', :type => 'application/rss+xml'
+          channel.atom :link, :href => 'https://dubsar.info/wotd.xml', :rel => 'self', :type => 'application/rss+xml'
           channel.title 'Dubsar Word of the Day'
           channel.description 'Dubsar Word of the Day News Feed'
-          channel.link 'https://dubsar-dictionary.com'
+          channel.link 'https://dubsar.info'
           channel.lastBuildDate build_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
           channel.pubDate DailyWord.order('created_at DESC').first.created_at.strftime("%a, %d %b %Y %H:%M:%S GMT")
           channel.image do |image|
-            image.url 'https://s.dubsar-dictionary.com/images/dubsar-link.png'
+            image.url 'https://s.dubsar.info/images/dubsar-link.png'
             image.title 'Dubsar Word of the Day'
-            image.link 'https://dubsar-dictionary.com'
+            image.link 'https://dubsar.info'
             image.description 'Dubsar Word of the Day News Feed'
             image.width '88'
             image.height '20'
@@ -55,7 +55,7 @@ namespace :wotd do
               description += "; also #{word.other_forms}" unless word.other_forms.empty?
 
               item.description description
-              item.link "https://dubsar-dictionary.com/words/#{word.id}"
+              item.link "https://dubsar.info/words/#{word.id}"
               item.guid dw.id, :isPermaLink => 'false'
               item.pubDate dw.created_at.strftime("%a, %d %b %Y %H:%M:%S GMT")
             end
@@ -85,5 +85,20 @@ namespace :wotd do
         prod.destroy
       end
     end
+  end
+
+  desc 'tweet the word of the day'
+  task tweet: :environment do
+    wotd = DailyWord.word_of_the_day.word
+    url = "https://dubsar.info/words/#{wotd.id}"
+
+    tweet = "Word of the day: #{wotd.name_and_pos} #{url}"
+
+    twitter_url = "https://api.twitter.com/1.1/statuses/update.json?status=#{CGI.escape tweet}"
+    puts twitter_url
+
+    # TODO: OAuth signature & header
+
+    # TODO: POST
   end
 end
