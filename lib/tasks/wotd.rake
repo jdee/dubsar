@@ -15,10 +15,54 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'net/https'
+require 'openssl'
+require 'net/http'
 require 'yaml'
 
 RSS_LIMIT=30
+
+def build_oauth_signature(consumer_key, consumer_secret, nonce, timestamp, token, token_secret, status)
+  base_url = "https://api.twitter.com/1.1/statuses/update.json"
+  http_method = "POST"
+
+  # puts "oauth_nonce: #{nonce.inspect}"
+  # puts "oauth_timestamp: #{timestamp}"
+
+  oauth_params = {
+    oauth_consumer_key: consumer_key,
+    oauth_nonce: nonce,
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_timestamp: timestamp,
+    oauth_token: token,
+    oauth_version: "1.0",
+    status: status
+  }
+
+  oauth_parameter_string = nil
+  oauth_params.each do |k, v|
+    key = k.to_s
+    value = v.to_s
+
+    if oauth_parameter_string.blank?
+      oauth_parameter_string = "#{percent_escape key}=#{percent_escape value}"
+    else
+      oauth_parameter_string = "#{oauth_parameter_string}&#{percent_escape key}=#{percent_escape value}"
+    end
+  end
+
+  oauth_signature_base = "#{http_method}&#{percent_escape base_url}&#{percent_escape oauth_parameter_string}"
+  oauth_signing_key = "#{percent_escape consumer_secret}&#{percent_escape token_secret}"
+
+  # puts "OAuth signature base: #{oauth_signature_base}"
+
+  digest = OpenSSL::HMAC.digest 'sha1', oauth_signing_key, oauth_signature_base
+
+  Base64.encode64(digest).chomp
+end
+
+def percent_escape(data)
+  CGI.escape(data.to_s).gsub(/\+/, "%20")
+end
 
 namespace :wotd do
   # cheat on strftime formats knowing the server is GMT
@@ -73,6 +117,7 @@ namespace :wotd do
     daily_word = DailyWord.create! :word => word
 
     Rake::Task['wotd:build'].invoke
+    Rake::Task['wotd:tweet'].invoke
   end
 
   desc 'remove any dev tokens from prod'
@@ -89,16 +134,67 @@ namespace :wotd do
 
   desc 'tweet the word of the day'
   task tweet: :environment do
-    wotd = DailyWord.word_of_the_day.word
-    url = "https://dubsar.info/words/#{wotd.id}"
+    # Take tweet from TWEET param or generate a WOTD tweet
+    tweet = ENV['TWEET']
+    unless tweet
+      wotd = DailyWord.word_of_the_day.word
+      url = "https://dubsar.info/words/#{wotd.id}"
+      tweet = "Word of the day: #{wotd.name_and_pos} #{url}"
+    end
 
-    tweet = "Word of the day: #{wotd.name_and_pos} #{url}"
+    # OAuth signature
+    base_url = "https://api.twitter.com/1.1/statuses/update.json"
 
-    twitter_url = "https://api.twitter.com/1.1/statuses/update.json?status=#{CGI.escape tweet}"
-    puts twitter_url
+    oauth_nonce = Base64.encode64(SecureRandom.random_bytes(32)).chomp
+    oauth_signature_method = "HMAC-SHA1"
+    oauth_version = "1.0"
+    oauth_timestamp = Time.now.to_i
 
-    # TODO: OAuth signature & header
+    oauth_credentials = YAML::load_file(File.join(Rails.root, 'config', 'twitter_credentials.yml')).symbolize_keys
 
-    # TODO: POST
+    oauth_consumer_key = oauth_credentials[:oauth_consumer_key]
+    oauth_consumer_secret = oauth_credentials[:oauth_consumer_secret]
+    oauth_token = oauth_credentials[:oauth_token]
+    oauth_token_secret = oauth_credentials[:oauth_token_secret]
+
+    oauth_signature = build_oauth_signature oauth_consumer_key, oauth_consumer_secret,
+      oauth_nonce, oauth_timestamp, oauth_token, oauth_token_secret, tweet
+
+    # puts "oauth_signature: #{oauth_signature.inspect}"
+
+    # OAuth (Authorization) header
+    oauth_header_params = {
+      oauth_consumer_key: oauth_consumer_key,
+      oauth_nonce: oauth_nonce,
+      oauth_signature: oauth_signature,
+      oauth_signature_method: oauth_signature_method,
+      oauth_timestamp: oauth_timestamp,
+      oauth_token: oauth_token,
+      oauth_version: oauth_version
+    }
+
+    oauth_header = "OAuth "
+    oauth_header_params.each do |k, v|
+      key = k.to_s
+      value = v.to_s
+      oauth_header = "#{oauth_header}#{percent_escape key}=\"#{percent_escape value}\", "
+    end
+    oauth_header.sub!(/, $/, '')
+
+    # puts "Authorization: #{oauth_header}"
+
+    twitter_url = "#{base_url}?status=#{percent_escape tweet}"
+
+    uri = URI(twitter_url)
+#=begin
+    resp = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      req = Net::HTTP::Post.new uri
+      req['Authorization'] = oauth_header
+
+      http.request req
+    end
+    # p resp
+    # p resp.body
+#=end
   end
 end
