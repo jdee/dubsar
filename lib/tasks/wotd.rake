@@ -21,9 +21,90 @@ require 'yaml'
 
 RSS_LIMIT=30
 
-def build_oauth_signature(consumer_key, consumer_secret, nonce, timestamp, token, token_secret, status)
+def send_tweet(tweet, oauth_header)
   base_url = "https://api.twitter.com/1.1/statuses/update.json"
-  http_method = "POST"
+  twitter_url = "#{base_url}?status=#{percent_escape tweet}"
+
+  uri = URI(twitter_url)
+
+  attempt_required = true
+  backoff = 8
+  start_time = Time.now.to_i
+  while attempt_required
+
+    begin
+      # About to make an attempt, so set this to false.
+      attempt_required = false
+
+      puts "#{DateTime.now} attempting POST to #{base_url}"
+
+      resp = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        req = Net::HTTP::Post.new uri
+        req['Authorization'] = oauth_header
+
+        http.request req
+      end
+
+      puts "#{DateTime.now} #{resp.code} #{resp.message}"
+
+      if resp.code >= 500 && resp.code < 600
+        # Retry any 5xx error.
+        attempt_required = true
+      end
+
+    # DEBT: Do SSL/TLS errors fall under either of these?
+    rescue SystemCallError, IOError => e
+      puts "#{DateTime.now} #{e.inspect}"
+
+      # Failed to connect. Retry.
+      attempt_required = true
+    rescue => e
+      puts "#{DateTime.now} irrecoverable error: #{e.inspect}"
+      return
+    end
+
+    # Cap retry at 12 hrs
+    if Time.now.to_i - start_time >= 12 * 3600
+      attempt_required = false
+      puts "#{DateTime.now} giving up after 12 hrs."
+    end
+
+    return unless attempt_required
+
+    # If we get here, we got a 5xx status code or a connection failure.
+
+    puts "#{DateTime.now} will retry in #{backoff} s"
+
+    sleep backoff
+
+    backoff *= 2
+    backoff = 120 if backoff > 120
+
+  end
+end
+
+def build_oauth_header(consumer_key, nonce, signature, timestamp, token)
+  oauth_header_params = {
+    oauth_consumer_key: consumer_key,
+    oauth_nonce: nonce,
+    oauth_signature: signature,
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_timestamp: timestamp,
+    oauth_token: token,
+    oauth_version: "1.0"
+  }
+
+  oauth_header = "OAuth "
+  oauth_header_params.each do |k, v|
+    key = k.to_s
+    value = v.to_s
+    oauth_header = "#{oauth_header}#{percent_escape key}=\"#{percent_escape value}\", "
+  end
+  oauth_header.sub(/, $/, '')
+end
+
+def build_oauth_signature(consumer_key, consumer_secret, nonce, timestamp,
+  token, token_secret, status)
 
   # puts "oauth_nonce: #{nonce.inspect}"
   # puts "oauth_timestamp: #{timestamp}"
@@ -49,6 +130,9 @@ def build_oauth_signature(consumer_key, consumer_secret, nonce, timestamp, token
       oauth_parameter_string = "#{oauth_parameter_string}&#{percent_escape key}=#{percent_escape value}"
     end
   end
+
+  base_url = "https://api.twitter.com/1.1/statuses/update.json"
+  http_method = "POST"
 
   oauth_signature_base = "#{http_method}&#{percent_escape base_url}&#{percent_escape oauth_parameter_string}"
   oauth_signing_key = "#{percent_escape consumer_secret}&#{percent_escape token_secret}"
@@ -117,7 +201,6 @@ namespace :wotd do
     daily_word = DailyWord.create! :word => word
 
     Rake::Task['wotd:build'].invoke
-    Rake::Task['wotd:tweet'].invoke
   end
 
   desc 'remove any dev tokens from prod'
@@ -134,6 +217,8 @@ namespace :wotd do
 
   desc 'tweet the word of the day'
   task tweet: :environment do
+    # 0. Gather params
+
     # Take tweet from TWEET param or generate a WOTD tweet
     tweet = ENV['TWEET']
     unless tweet
@@ -142,14 +227,9 @@ namespace :wotd do
       tweet = "Word of the day: #{wotd.name_and_pos} #{url}"
     end
 
-    # OAuth signature
-    base_url = "https://api.twitter.com/1.1/statuses/update.json"
+    # OAuth params needed for the next two steps
 
-    oauth_nonce = Base64.encode64(SecureRandom.random_bytes(32)).chomp
-    oauth_signature_method = "HMAC-SHA1"
-    oauth_version = "1.0"
-    oauth_timestamp = Time.now.to_i
-
+    # Load credentials
     oauth_credentials = YAML::load_file(File.join(Rails.root, 'config', 'twitter_credentials.yml')).symbolize_keys
 
     oauth_consumer_key = oauth_credentials[:oauth_consumer_key]
@@ -157,43 +237,24 @@ namespace :wotd do
     oauth_token = oauth_credentials[:oauth_token]
     oauth_token_secret = oauth_credentials[:oauth_token_secret]
 
+    # Generate a nonce and a timestamp, to be used in building both the signature
+    # and the OAuth header.
+    oauth_nonce = Base64.encode64(SecureRandom.random_bytes(32)).chomp
+    oauth_timestamp = Time.now.to_i
+
+    # 1. Build the OAuth signature
     oauth_signature = build_oauth_signature oauth_consumer_key, oauth_consumer_secret,
       oauth_nonce, oauth_timestamp, oauth_token, oauth_token_secret, tweet
 
     # puts "oauth_signature: #{oauth_signature.inspect}"
 
-    # OAuth (Authorization) header
-    oauth_header_params = {
-      oauth_consumer_key: oauth_consumer_key,
-      oauth_nonce: oauth_nonce,
-      oauth_signature: oauth_signature,
-      oauth_signature_method: oauth_signature_method,
-      oauth_timestamp: oauth_timestamp,
-      oauth_token: oauth_token,
-      oauth_version: oauth_version
-    }
-
-    oauth_header = "OAuth "
-    oauth_header_params.each do |k, v|
-      key = k.to_s
-      value = v.to_s
-      oauth_header = "#{oauth_header}#{percent_escape key}=\"#{percent_escape value}\", "
-    end
-    oauth_header.sub!(/, $/, '')
+    # 2. Build the OAuth (Authorization) header, including the signature
+    oauth_header = build_oauth_header oauth_consumer_key, oauth_nonce, oauth_signature,
+      oauth_timestamp, oauth_token
 
     # puts "Authorization: #{oauth_header}"
 
-    twitter_url = "#{base_url}?status=#{percent_escape tweet}"
-
-    uri = URI(twitter_url)
-#=begin
-    resp = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-      req = Net::HTTP::Post.new uri
-      req['Authorization'] = oauth_header
-
-      http.request req
-    end
-    puts "#{resp.code} #{resp.message}"
-#=end
+    # 3. Send the request
+    send_tweet tweet, oauth_header
   end
 end
