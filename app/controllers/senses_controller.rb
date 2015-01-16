@@ -17,6 +17,7 @@
 
 class SensesController < ApplicationController
   respond_to :html, :json
+  include ApplicationHelper
 
   def show
     @sense = Sense.find params[:id]
