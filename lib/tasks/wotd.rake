@@ -193,8 +193,7 @@ namespace :wotd do
 
       http.request req
     end
-    # p resp
-    # p resp.body
+    puts "#{resp.code} #{resp.message}"
 #=end
   end
 end
