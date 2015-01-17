@@ -18,7 +18,6 @@
 class WordsController < ApplicationController
   respond_to :html, :json
   before_filter :init_count
-  before_filter :setup_captions
   before_filter :munge_search_params, :only => [ :search ]
 
   def qunit
@@ -204,12 +203,6 @@ class WordsController < ApplicationController
 
   private
 
-  def setup_captions
-    @dubsar_caption = 'dub-sar cuneiform signs from the Pennsylvania' +
-      ' Sumerian Dictionary'
-    @dubsar_alt = 'dub-sar'
-  end
-
   def init_count
     @count = -1
   end
@@ -221,7 +214,7 @@ class WordsController < ApplicationController
 
     # search and index use the same URL
     unless @term
-      flash.now[:notice] = 'Welcome to the new Dubsar.'
+      flash.now[:notice] = 'The Dubsar server will be unavailable for a few hours this weekend. See the News page for details.'
       render :action => :index
       return
     end

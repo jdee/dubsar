@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project.</description>
     <link>https://dubsar.info</link>
-    <lastBuildDate>Thu, 08 Jan 2015 02:00:00 GMT</lastBuildDate>
-    <pubDate>Thu, 08 Jan 2015 01:45:00 GMT</pubDate>
+    <lastBuildDate>Sat, 17 Jan 2015 17:00:00 GMT</lastBuildDate>
+    <pubDate>Sat, 17 Jan 2015 17:00:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar.info/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,19 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Service outage</title>
+      <description>
+      The Dubsar server will be unavailable for up to a few hours starting after the
+      word of the day updates at 00:00 19-Jan-2015 UTC (Sunday evening in the U.S.).
+      The service outage will include the website, the Android app and instances of
+      the iOS app in online mode. You can synch the database to your iOS device in
+      advance of the outage. See the in-app FAQ for details.
+      </description>
+      <link>https://dubsar.info</link>
+      <guid isPermaLink="false">55</guid>
+      <pubDate>Sat, 17 Jan 2015 17:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>New Dubsar website</title>
       <description>
