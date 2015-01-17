@@ -47,7 +47,7 @@ def send_tweet(tweet, oauth_header)
 
       puts "#{DateTime.now} #{resp.code} #{resp.message}"
 
-      if resp.code >= 500 && resp.code < 600
+      if resp.code.to_i >= 500 && resp.code.to_i < 600
         # Retry any 5xx error.
         attempt_required = true
       end
