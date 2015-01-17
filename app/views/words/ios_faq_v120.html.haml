@@ -66,58 +66,6 @@
         but later change your mind, you can use the settings above to enable notifications
         from Dubsar. You can also do this after you&apos;ve removed Dubsar from the
         Notification Center, as described above.
-
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do I synch the database to my iOS device?
-      %p
-        Go to the Settings view by tapping the gear button in the upper left corner of the
-        Home view. Make sure the Offline switch there is on. If it was previously off, when
-        you turn this option on, an alert will confirm the download from the server.
-        If you tap Download, the download will begin.
-      = image_tag 'download-prompt.png', alt: 'database download prompt', width: 280, height: 497, style: 'display: block;'
- 
-      %p
-        If the Autoupdate switch is already on before the
-        Offline switch is turned on, the download will begin immediately without an alert
-        prompt when you turn on the Offline setting.
-      %p
-        You&apos;ll see the download progress in the
-        Settings view, and a download button will appear in all views until the download is
-        complete (or fails or is canceled).
-      = image_tag 'download-progress.png', alt: 'database download progress', width: 280, height: 497, style: 'display: block;'
- 
-      %p
-        Tapping that download button will take you to
-        the settings view, where you can monitor download progress or interrupt the download
-        by canceling. If you cancel the download, you can always resume later by turning
-        the Offline switch on again. Any previous download progress will be retained, and
-        the download will resume where it left off when you canceled it. This is also true
-        if the download resumes after a failure (such as when switching from Wi-Fi to a
-        mobile network or vice versa).
-      %p
-        If Autoupdate is on, you will never be prompted for any action involving the
-        database except if you turn off the Offline switch. Then you&apos;ll be prompted
-        before the database is deleted. If Offline and Autoupdate are both on, the app
-        will check for a database update whenever it enters the background, and if an
-        update is available, a download will begin immediately in the background. If the
-        app is still in the background when the download successfully completes, a local
-        notification is posted. If Offline is on, but Autoupdate is off, the app will
-        check for a database update whenever the app enters the foreground (that is,
-        whenever you launch it by tapping the icon). If an update is available, you&apos;ll
-        be prompted to download it by an alert.
-      %p
-        To check the version of the database that is installed, visit the About view from
-        the Settings view. There you can find the installed database version, the time of
-        last update check and a button to check manually.
-      = image_tag 'download-about.png', alt: 'About view with DB details', width: 280, height: 497, style: 'display: block;'
-      %p
-        All these settings are also available in the Settings app. Changes made there
-        take effect whenever the app enters the foreground. If, for example, you change
-        the settings in the Settings app while the Dubsar app is in the background so that
-        Offline is on (when it previously was not) and Autoupdate is off, you&apos;ll
-        quickly see an alert prompt when you next foreground the Dubsar app to confirm the
-        necessary database download.
      
     %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
       %h2
