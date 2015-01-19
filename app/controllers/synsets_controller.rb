@@ -43,9 +43,7 @@ class SynsetsController < ApplicationController
   end
 
   def m_show
-    @synset = Synset.includes([ { senses: [ :synset, :word ] }, { pointers: :target} ]).find params[:id]
-  rescue
-    m_error
+    redirect_to synset_path(id: params[:id]), status: :moved_permanently
   end
 
   private

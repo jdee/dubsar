@@ -27,8 +27,8 @@ class SensesController < ApplicationController
   end
 
   def m_show
-    @sense = Sense.includes([ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]).find params[:id]
-    render :layout => false
+    @sense = Sense.find params[:id]
+    redirect_to path_to_synset_with_fragment(@sense), status: :moved_permanently
   rescue
     m_error
   end

@@ -25,7 +25,7 @@ class WordsController < ApplicationController
   end
 
   def m_privacy
-    render :layout => 'mobile'
+    redirect_to privacy_path, status: :moved_permanently
   end
 
   def m_laertes_faq
@@ -85,22 +85,9 @@ class WordsController < ApplicationController
   end
 
   def m_show
-    @word = Word.includes([ :inflections, { senses: :synset }]).find params[:id]
-    render :layout => false
+    redirect_to word_path(id: params[:id]), status: :moved_permanently
   rescue
     m_error
-  end
-
-  def m_search
-    @term = params['term']
-
-    options = params.symbolize_keys
-    if @term
-      @words = Word.search options.merge(:page => params[:page], :per_page => 10,
-        :order => 'words.name ASC, words.part_of_speech ASC'
-      )
-    end
-    render :layout => 'mobile'
   end
 
   def os
