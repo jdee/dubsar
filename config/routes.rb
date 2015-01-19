@@ -34,6 +34,7 @@ Dubsar::Application.routes.draw do
 
   get '/about'            , to: 'words#about'
   get '/faq'              , to: 'words#faq'
+  get '/m_faq'            , to: 'words#m_faq'
   get '/ios_faq'          , to: 'words#ios_faq'
   get '/ios_faq_v120'     , to: 'words#ios_faq_v120'
   get '/ios_faq_v200'     , to: 'words#ios_faq_v200'
