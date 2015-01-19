@@ -40,14 +40,6 @@ class WordsController < ApplicationController
     render :layout => 'mobile'
   end
 
-  def ios_faq_v200
-    render :layout => 'mobile'
-  end
-
-  def m_faq
-    render :layout => 'mobile'
-  end
-
   def m_license
     render :layout => false
   end

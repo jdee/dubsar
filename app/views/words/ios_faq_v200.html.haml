@@ -16,567 +16,581 @@
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - content_for :title do
   Dubsar for iOS 2.0 FAQ
+
 - content_for :description do
   %link{:rel => 'canonical', :href => ios_faq_v200_url}
+  = render partial: 'accordion_css_header'
 
-%div#faq{'data-role' => 'page', 'data-title' => "Dubsar for iOS 2.0 - FAQ", 'data-theme' => 'b'}
-  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
-    %h1
-      =image_tag 'dubsar-full.png', :alt => 'Dubsar', :id => 'dubsar-mobile-image', :width => "143", :height => "52"
-    %br/
-    Dubsar for iOS 2.0 Frequently Asked Questions
-  %div{'data-role' => 'content'}
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do I turn off word of the day push notifications?
-      %p
-        A. Here&apos;s how:
+%h1 Dubsar for iOS 2.0 Frequently Asked Questions
 
-      %h3 iOS 7
+#accordion.accordion
+  .accordion-head
+    %h2
+      Q. How do I get help with a problem?
+  .accordion-body
+    A. Contact
+    =link_to 'support@dubsar.info', 'mailto:support@dubsar.info'
+    for support with Dubsar for iPhone, iPod Touch and iPad.
+  .accordion-head
+    %h2
+      Q. How do I turn off word of the day push notifications?
+  .accordion-body
+    %p
+      A. Here&apos;s how:
 
-      %p
-        Open the Settings app from the
-        device&apos;s home screen. Tap Notification Center on the master panel (iPad) or
-        the main view of the Settings app (iPhone/iPod touch). Scroll down to see a
-        list of apps to &quot;Include.&quot; Tap the row for Dubsar.
-        This will take you to a screen with a number of push-notification-related
-        settings for Dubsar. Unfortunately, there is no master switch to turn off
-        notifications altogether. You have to disable all the aspects independently
-        on this screen by turning off all the switches. When you are done, it should
-        look like this (the iPad view is similar):
-      %h3 Dubsar with all notifications disabled
-      = image_tag 'dubsar-notifications.png', alt: 'Dubsar Notifications', width: 280, height: 497, style: 'display: block;'
-      %p
-        When you have set the
-        %em Show in Notification Center, Badge App Icon, Sounds
-        and
-        %em Show on Lock Screen
-        switches to off and set the
-        %em Alert Style
-        to None, tap the Back
-        button in the navigation bar at the top.
-        This will return you to the general Notifications settings. At the bottom, under
-        &quot;Do Not Include,&quot; you&apos;ll see Dubsar:
-      %h3 Dubsar no longer in Notification Center
-      = image_tag 'notifications.png', alt: 'Dubsar not in Notification Center', width: 280, height: 497, style: 'display: block;'
+    %h3 iOS 7
 
-      %h3 iOS 8
+    %p
+      Open the Settings app from the
+      device&apos;s home screen. Tap Notification Center on the master panel (iPad) or
+      the main view of the Settings app (iPhone/iPod touch). Scroll down to see a
+      list of apps to &quot;Include.&quot; Tap the row for Dubsar.
+      This will take you to a screen with a number of push-notification-related
+      settings for Dubsar. Unfortunately, there is no master switch to turn off
+      notifications altogether. You have to disable all the aspects independently
+      on this screen by turning off all the switches. When you are done, it should
+      look like this (the iPad view is similar):
+    %h3 Dubsar with all notifications disabled
+    = image_tag 'dubsar-notifications.png', alt: 'Dubsar Notifications', width: 280, height: 497
+    %p
+      When you have set the
+      %em Show in Notification Center, Badge App Icon, Sounds
+      and
+      %em Show on Lock Screen
+      switches to off and set the
+      %em Alert Style
+      to None, tap the Back
+      button in the navigation bar at the top.
+      This will return you to the general Notifications settings. At the bottom, under
+      &quot;Do Not Include,&quot; you&apos;ll see Dubsar:
+    %h3 Dubsar no longer in Notification Center
+    = image_tag 'notifications.png', alt: 'Dubsar not in Notification Center', width: 280, height: 497
 
-      %p
-        First see the instructions for iOS 7. It&apos;s easier in iOS 8. First, there
-        is a master switch in the notification settings. You don&apos;t have to disable
-        each individual element.
-      %h3 iOS 8 notification settings with master switch
-      = image_tag 'ios8-push-settings.png', alt: 'Dubsar not in Notification Center', width: 280, height: 373, style: 'display: block;'
+    %h3 iOS 8
 
-      %p
-        Second, you can get to the settings both through the
-        Notification Center and through the settings for each app.
-      %h3 iOS 8 Dubsar settings with link to notification settings
-      = image_tag 'ios8-dubsar-settings.png', alt: 'Dubsar not in Notification Center', width: 280, height: 373, style: 'display: block;'
+    %p
+      First see the instructions for iOS 7. It&apos;s easier in iOS 8. First, there
+      is a master switch in the notification settings. You don&apos;t have to disable
+      each individual element.
+    %h3 iOS 8 notification settings with master switch
+    = image_tag 'ios8-push-settings.png', alt: 'Dubsar not in Notification Center', width: 280, height: 373
 
-      %hr/
+    %p
+      Second, you can get to the settings both through the
+      Notification Center and through the settings for each app.
+    %h3 iOS 8 Dubsar settings with link to notification settings
+    = image_tag 'ios8-dubsar-settings.png', alt: 'Dubsar not in Notification Center', width: 280, height: 373
 
-      %p
-        You can do the same for any application in the Notification Center. Of course,
-        you can also fine-tune the settings for each application there, choosing which
-        sort of notification, if any, you wish to receive, whether you want a badge on
-        the app and whether it should play a sound when a notification arrives.
-      %p
-        If you originally said no when asked if the app could send push notifications
-        but later change your mind, you can use the settings above to enable notifications
-        from Dubsar. You can also do this after you&apos;ve removed Dubsar from the
-        Notification Center, as described above.
+    %hr/
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do I synch the database to my iOS device?
-      %p
-        Go to the Settings view by tapping the gear button in the upper left corner of the
-        Home view. Make sure the Offline switch there is on. If it was previously off, when
-        you turn this option on, an alert will confirm the download from the server.
-        If you tap Download, the download will begin.
-      = image_tag 'download-prompt.png', alt: 'database download prompt', width: 280, height: 497, style: 'display: block;'
+    %p
+      You can do the same for any application in the Notification Center. Of course,
+      you can also fine-tune the settings for each application there, choosing which
+      sort of notification, if any, you wish to receive, whether you want a badge on
+      the app and whether it should play a sound when a notification arrives.
+    %p
+      If you originally said no when asked if the app could send push notifications
+      but later change your mind, you can use the settings above to enable notifications
+      from Dubsar. You can also do this after you&apos;ve removed Dubsar from the
+      Notification Center, as described above.
+
+  .accordion-head
+    %h2
+      Q. How do I synch the database to my iOS device?
+  .accordion-body
+    %p
+      Go to the Settings view by tapping the gear button in the upper left corner of the
+      Home view. Make sure the Offline switch there is on. If it was previously off, when
+      you turn this option on, an alert will confirm the download from the server.
+      If you tap Download, the download will begin.
+    = image_tag 'download-prompt.png', alt: 'database download prompt', width: 280, height: 497
  
-      %p
-        If the Autoupdate switch is already on before the
-        Offline switch is turned on, the download will begin immediately without an alert
-        prompt when you turn on the Offline setting.
-      %p
-        You&apos;ll see the download progress in the
-        Settings view, and a download button will appear in all views until the download is
-        complete (or fails or is canceled).
-      = image_tag 'download-progress.png', alt: 'database download progress', width: 280, height: 497, style: 'display: block;'
+    %p
+      If the Autoupdate switch is already on before the
+      Offline switch is turned on, the download will begin immediately without an alert
+      prompt when you turn on the Offline setting.
+    %p
+      You&apos;ll see the download progress in the
+      Settings view, and a download button will appear in all views until the download is
+      complete (or fails or is canceled).
+    = image_tag 'download-progress.png', alt: 'database download progress', width: 280, height: 497
  
-      %p
-        Tapping that download button will take you to
-        the settings view, where you can monitor download progress or interrupt the download
-        by canceling. If you cancel the download, you can always resume later by turning
-        the Offline switch on again. Any previous download progress will be retained, and
-        the download will resume where it left off when you canceled it. This is also true
-        if the download resumes after a failure (such as when switching from Wi-Fi to a
-        mobile network or vice versa).
-      %p
-        If Autoupdate is on, you will never be prompted for any action involving the
-        database except if you turn off the Offline switch. Then you&apos;ll be prompted
-        before the database is deleted. If Offline and Autoupdate are both on, the app
-        will check for a database update whenever it enters the background, and if an
-        update is available, a download will begin immediately in the background. If the
-        app is still in the background when the download successfully completes, a local
-        notification is posted. If Offline is on, but Autoupdate is off, the app will
-        check for a database update whenever the app enters the foreground (that is,
-        whenever you launch it by tapping the icon). If an update is available, you&apos;ll
-        be prompted to download it by an alert.
-      %p
-        To check the version of the database that is installed, visit the About view from
-        the Settings view. There you can find the installed database version, the time of
-        last update check and a button to check manually.
-      = image_tag 'download-about.png', alt: 'About view with DB details', width: 280, height: 497, style: 'display: block;'
-      %p
-        All these settings are also available in the Settings app. Changes made there
-        take effect whenever the app enters the foreground. If, for example, you change
-        the settings in the Settings app while the Dubsar app is in the background so that
-        Offline is on (when it previously was not) and Autoupdate is off, you&apos;ll
-        quickly see an alert prompt when you next foreground the Dubsar app to confirm the
-        necessary database download.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What&apos;s new in version 2.0.0?
-      %p
-        A. Version 2.0.0 was almost completely rewritten in Swift, updating a lot of
-        outdated code that was difficult to support and extending the app&apos;s
-        longevity. A number of new features were also added:
-      %ul
-        %li
-          Online/offline option. Now you have the option of a smaller download and
-          installation.
-        %li
-          Autocorrection. It is notoriously difficult in English to find a word in the
-          dictionary if you don&apos;t know how to spell it. Now the app can give you
-          a little help if you wish.
-        %li
-          Theming. Several themes are now available with different typefaces and color
-          schemes.
-        %li
-          Bookmarks. You can now bookmark your favorite words and view the list via
-          the search bar on the main view.
-        %li
-          Synset searching. You can now search for synsets whose glosses or
-          sample sentences match your search terms, or search for matching words as
-          before.
-        %li
-          Dynamic Type support. The app now honors the system Text Size setting.
+    %p
+      Tapping that download button will take you to
+      the settings view, where you can monitor download progress or interrupt the download
+      by canceling. If you cancel the download, you can always resume later by turning
+      the Offline switch on again. Any previous download progress will be retained, and
+      the download will resume where it left off when you canceled it. This is also true
+      if the download resumes after a failure (such as when switching from Wi-Fi to a
+      mobile network or vice versa).
+    %p
+      If Autoupdate is on, you will never be prompted for any action involving the
+      database except if you turn off the Offline switch. Then you&apos;ll be prompted
+      before the database is deleted. If Offline and Autoupdate are both on, the app
+      will check for a database update whenever it enters the background, and if an
+      update is available, a download will begin immediately in the background. If the
+      app is still in the background when the download successfully completes, a local
+      notification is posted. If Offline is on, but Autoupdate is off, the app will
+      check for a database update whenever the app enters the foreground (that is,
+      whenever you launch it by tapping the icon). If an update is available, you&apos;ll
+      be prompted to download it by an alert.
+    %p
+      To check the version of the database that is installed, visit the About view from
+      the Settings view. There you can find the installed database version, the time of
+      last update check and a button to check manually.
+    = image_tag 'download-about.png', alt: 'About view with DB details', width: 280, height: 497
+    %p
+      All these settings are also available in the Settings app. Changes made there
+      take effect whenever the app enters the foreground. If, for example, you change
+      the settings in the Settings app while the Dubsar app is in the background so that
+      Offline is on (when it previously was not) and Autoupdate is off, you&apos;ll
+      quickly see an alert prompt when you next foreground the Dubsar app to confirm the
+      necessary database download.
+  .accordion-head
+    %h2
+      Q. What&apos;s new in version 2.0.0?
+  .accordion-body
+    %p
+      A. Version 2.0.0 was almost completely rewritten in Swift, updating a lot of
+      outdated code that was difficult to support and extending the app&apos;s
+      longevity. A number of new features were also added:
+    %ul
+      %li
+        Online/offline option. Now you have the option of a smaller download and
+        installation.
+      %li
+        Autocorrection. It is notoriously difficult in English to find a word in the
+        dictionary if you don&apos;t know how to spell it. Now the app can give you
+        a little help if you wish.
+      %li
+        Theming. Several themes are now available with different typefaces and color
+        schemes.
+      %li
+        Bookmarks. You can now bookmark your favorite words and view the list via
+        the search bar on the main view.
+      %li
+        Synset searching. You can now search for synsets whose glosses or
+        sample sentences match your search terms, or search for matching words as
+        before.
+      %li
+        Dynamic Type support. The app now honors the system Text Size setting.
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What settings are available?
-      %p
-        A. There are several new settings:
-      %ul
-        %li Theme: Select the font and color scheme.
-        %li Offline: Choose whether the app should be able to work without network access.
-        %li 
-          Autoupdate: Choose whether the app should automatically install database updates
-          when the offline switch is on.
-        %li
-          Autocorrection: Choose whether the search bar on the main view autocorrects as
-          you type.
-      %p
-        See further FAQS below for more information.
-      =image_tag "dubsar-settings.png", alt: "Dubsar Settings", width: 280, height: 497, style: 'display: block;'
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What is the difference between online and offline?
+  .accordion-head
+    %h2
+      Q. What settings are available?
+  .accordion-body
+    %p
+      A. There are several new settings:
+    %ul
+      %li Theme: Select the font and color scheme.
+      %li Offline: Choose whether the app should be able to work without network access.
+      %li 
+        Autoupdate: Choose whether the app should automatically install database updates
+        when the offline switch is on.
+      %li
+        Autocorrection: Choose whether the search bar on the main view autocorrects as
+        you type.
+    %p
+      See further FAQS below for more information.
+    =image_tag "dubsar-settings.png", alt: "Dubsar Settings", width: 280, height: 497
+  .accordion-head
+    %h2
+      Q. What is the difference between online and offline?
+  .accordion-body
+    %p
+      A. There is now an offline switch in the Settings. If set to off, any local
+      database will be deleted, and all requests will be sent to the server. This
+      saves nearly 150 MB on the device; the app will require only about 12 MB.
+      Also, the download will be about 3 MB instead of more than 40 MB.
+      The response of the application will be slower. If the network (or the server)
+      is unavailable, the app will not work. While all available network security
+      is used to communicate with the server, this mode is also slightly less
+      secure to the extent that SSL/TLS can be cracked. This is a good mode if you
+      don&apos;t care much about security and are using the app on a device that
+      always has network access but has limited space.
+    %p
+      If the offline switch is set to on, a local database will be downloaded and
+      maintained. The download will be more than 40 MB, and the app will take about
+      150 MB on the device. However, in this mode, the app will only use the network
+      for three things: synching the word of the day if it is out of date, viewing
+      these FAQ and checking for updates to the database. The response of the app
+      will be much faster, since it is only accessing local data. The app will be
+      available whenever the network is not. And this mode is more secure, since
+      there is no network encryption to crack. Use this mode on devices that have
+      abundant space or intermittent network access or if you are concerned about
+      your privacy.
 
-      %p
-        A. There is now an offline switch in the Settings. If set to off, any local
-        database will be deleted, and all requests will be sent to the server. This
-        saves nearly 150 MB on the device; the app will require only about 12 MB.
-        Also, the download will be about 3 MB instead of more than 40 MB.
-        The response of the application will be slower. If the network (or the server)
-        is unavailable, the app will not work. While all available network security
-        is used to communicate with the server, this mode is also slightly less
-        secure to the extent that SSL/TLS can be cracked. This is a good mode if you
-        don&apos;t care much about security and are using the app on a device that
-        always has network access but has limited space.
-      %p
-        If the offline switch is set to on, a local database will be downloaded and
-        maintained. The download will be more than 40 MB, and the app will take about
-        150 MB on the device. However, in this mode, the app will only use the network
-        for three things: synching the word of the day if it is out of date, viewing
-        these FAQ and checking for updates to the database. The response of the app
-        will be much faster, since it is only accessing local data. The app will be
-        available whenever the network is not. And this mode is more secure, since
-        there is no network encryption to crack. Use this mode on devices that have
-        abundant space or intermittent network access or if you are concerned about
-        your privacy.
+    %p
+      Updates are infrequent but occasionally necessary. If you set the autoupdate
+      switch in the Settings to on, the app will check for updates up to once per
+      hour whenever it enters the background. Updates will be automatically downloaded
+      in the background. The user is notified via local notification if an update
+      occurs.
+    %p
+      If you set the autoupdate switch to off, the app will check for updates up to
+      once per hour whenever it enters the foreground. If an update is available,
+      the user is prompted. Downloads will continue in the background if the app
+      is backgrounded while a download is in progress.
 
-      %p
-        Updates are infrequent but occasionally necessary. If you set the autoupdate
-        switch in the Settings to on, the app will check for updates up to once per
-        hour whenever it enters the background. Updates will be automatically downloaded
-        in the background. The user is notified via local notification if an update
-        occurs.
-      %p
-        If you set the autoupdate switch to off, the app will check for updates up to
-        once per hour whenever it enters the foreground. If an update is available,
-        the user is prompted. Downloads will continue in the background if the app
-        is backgrounded while a download is in progress.
+    %p
+      The downloaded database is excluded from backups. If you restore from a backup,
+      the app will download the latest database when you run it, if so configured.
 
-      %p
-        The downloaded database is excluded from backups. If you restore from a backup,
-        the app will download the latest database when you run it, if so configured.
+  .accordion-head
+    %h2
+      Q. What does the autocorrection setting do?
+  .accordion-body
+    %p
+      A. If this switch is on, the search bar on the main view will offer
+      autocorrection options as you type. By default, the switch is off.
+   
+  .accordion-head
+    %h2
+      Q. How does Dynamic Type work?
+  .accordion-body
+    %p
+      A. You can select a preferred reading point size in the Settings app. On iOS 7,
+      it&apos;s under General &gt; Text Size; on iOS 8, it&apos;s under
+      Display &amp; Brightness &gt; Text Size. Any time the setting changes, the next
+      time you launch Dubsar, it will adjust the size of nearly all text in the app.
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What does the autocorrection setting do?
-      %p
-        A. If this switch is on, the search bar on the main view will offer
-        autocorrection options as you type. By default, the switch is off.
-     
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How does Dynamic Type work?
-      %p
-        A. You can select a preferred reading point size in the Settings app. On iOS 7,
-        it&apos;s under General &gt; Text Size; on iOS 8, it&apos;s under
-        Display &amp; Brightness &gt; Text Size. Any time the setting changes, the next
-        time you launch Dubsar, it will adjust the size of nearly all text in the app.
+  .accordion-head
+    %h2
+      Q. How do bookmarks work?
+  .accordion-body
+    %p
+      A. You can bookmark any word view in Dubsar by tapping the star-shaped button
+      in the upper right-hand corner of the view. This is a toggle button, so tap
+      it again to remove the bookmark. Bookmarking is only available for word views,
+      not synset or search views, for example.
+    %p
+      Bookmarks are readily accessible from the home view, using the bookmark button
+      in the search bar. In the bookmark list view you can tap any bookmark to visit
+      the stored word or delete any bookmark using the button at the right.
+    %h3 Bookmark List View
+    =image_tag "dubsar-bookmarks-small.png", alt: "Dubsar Bookmarks", width: 280, height: 497
+    %p
+      Optionally, you may choose to store your bookmarks securely. There is a secure
+      bookmarks switch in the Settings. This setting is off by default, since it
+      potentially risks losing bookmarks when restoring from an insecure backup. See
+      the next FAQ for more details.
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do bookmarks work?
+  .accordion-head
+    %h2
+      Q. What is the difference between word and synset searching?
+  .accordion-body
+    %p
+      A. You can now search for words or synsets that match your search terms, using
+      the scope buttons in the search bar on the main view. Searching for words is
+      the default: A full text search is performed against the inflections table. The
+      result set is all words that have at least one inflection that matches the search
+      term(s). Each word has itself as an inflection, so the root or inflected forms may
+      be matched. Hence a search for thought turns up thought, n. and think, v. Any
+      exact match is filtered to the top.
 
-      %p
-        A. You can bookmark any word view in Dubsar by tapping the star-shaped button
-        in the upper right-hand corner of the view. This is a toggle button, so tap
-        it again to remove the bookmark. Bookmarking is only available for word views,
-        not synset or search views, for example.
-      %p
-        Bookmarks are readily accessible from the home view, using the bookmark button
-        in the search bar. In the bookmark list view you can tap any bookmark to visit
-        the stored word or delete any bookmark using the button at the right.
-      %h3 Bookmark List View
-      =image_tag "dubsar-bookmarks-small.png", alt: "Dubsar Bookmarks", width: 280, height: 497, style: 'display: block;'
-      %p
-        Optionally, you may choose to store your bookmarks securely. There is a secure
-        bookmarks switch in the Settings. This setting is off by default, since it
-        potentially risks losing bookmarks when restoring from an insecure backup. See
-        the next FAQ for more details.
+    %h3 Scoped search
+    =image_tag "dubsar-scoped-search.png", alt: "Dubsar Scoped Search", width: 280, height: 497
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What is the difference between word and synset searching?
+    %p
+      If you select the synsets scope button from the search bar, a full text search
+      for your search terms will be performed against the synsets table. The field
+      used for the full text search includes the gloss for each synset as well as its
+      sample sentences (but not verb frames). The result set is all synsets whose
+      definition field (gloss + samples) matches the search term(s) in a full text
+      search.
 
-      %p
-        A. You can now search for words or synsets that match your search terms, using
-        the scope buttons in the search bar on the main view. Searching for words is
-        the default: A full text search is performed against the inflections table. The
-        result set is all words that have at least one inflection that matches the search
-        term(s). Each word has itself as an inflection, so the root or inflected forms may
-        be matched. Hence a search for thought turns up thought, n. and think, v. Any
-        exact match is filtered to the top.
+    %p
+      Note that if you search synsets, you get back a list of synsets, not a list of
+      words. This saves space in the result list if any matching synset has more
+      than one word. Also note that synset searching can be slow.
 
-      %h3 Scoped search
-      =image_tag "dubsar-scoped-search.png", alt: "Dubsar Scoped Search", width: 280, height: 497, style: 'display: block;'
+    %p
+      A segmented control in the search results lets you easily change scope for the
+      search displayed, but you&apos;ll have to go home for a new search.
 
-      %p
-        If you select the synsets scope button from the search bar, a full text search
-        for your search terms will be performed against the synsets table. The field
-        used for the full text search includes the gloss for each synset as well as its
-        sample sentences (but not verb frames). The result set is all synsets whose
-        definition field (gloss + samples) matches the search term(s) in a full text
-        search.
+    %h3 Search results with scope control
+    =image_tag "dubsar-search-trial.png", alt: "Dubsar Search Results", width: 280, height: 497
 
-      %p
-        Note that if you search synsets, you get back a list of synsets, not a list of
-        words. This saves space in the result list if any matching synset has more
-        than one word. Also note that synset searching can be slow.
+  .accordion-head
+    %h2
+      Q. How does the new Synset view work?
+  .accordion-body
+    %p
+      A. This view replaces two views from Dubsar 1.3: the Sense view and the
+      Synset view, which were largely the same and hard to distinguish.
 
-      %p
-        A segmented control in the search results lets you easily change scope for the
-        search displayed, but you&apos;ll have to go home for a new search.
+    =image_tag "dubsar-synset.png", alt: "Dubsar Synset", width: 280, height: 497
 
-      %h3 Search results with scope control
-      =image_tag "dubsar-search-trial.png", alt: "Dubsar Search Results", width: 280, height: 497, style: 'display: block;'
+    %p
+      Every synset includes at least one word, and frequently more. Of the content
+      in the synset view, some information pertains to the synset as a whole and all
+      the words it contains, while some information pertains only to certain words.
+      Mostly this involves the pointers below the sample sentences and verb frames.
+      A semantic pointer expresses relationships between one synset and another. An
+      example is the antonym; all words in a synset are antonyms of all the words in
+      an antonymous synset. A lexical pointer, on the other hand, relates one word
+      in a synset to one word in another synset (or one sense to another sense in
+      terms of Dubsar&apos;s data model). For example, the derivationally related
+      form pointer applies only to individual words. Taken is derivationally related
+      to take, but not to its synonym grab. Verb frames and adjective markers are
+      also lexical in nature, pertaining to individual words, not entire synsets.
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How does the new Synset view work?
-      %p
-        A. This view replaces two views from Dubsar 1.3: the Sense view and the
-        Synset view, which were largely the same and hard to distinguish.
+    %p
+      The list of synonyms in the synset is shown directly above any sample sentences
+      or verb frames. If one of the words in the synset is highlighted, lexical
+      information, also highlighted, will be included in the view. That is, there
+      may be other highlighted fields in the view with information pertaining only
+      to the highlighted word among the synonyms. If no word there is highlighted,
+      no other field on the page will be highlighted. Only semantic data will be
+      present, referring to the entire synset. Tap any of the synonyms to change
+      which word, if any, is highlighted. Tap the triangular button next to any
+      synonym to visit the word view for that synonym.
 
-      =image_tag "dubsar-synset.png", alt: "Dubsar Synset", width: 280, height: 497, style: 'display: block;'
+    %p
+      The frequency count in this view will be the semantic frequency count, i.e.
+      the frequency count for the entire synset, the sum of the frequency counts of
+      all synonyms, if no synonym is highlighted. If a synonym is highlighted, the
+      frequency count will also be highlighted, and the lexical frequency count
+      for that word will be displayed (along with any adjective marker).
 
-      %p
-        Every synset includes at least one word, and frequently more. Of the content
-        in the synset view, some information pertains to the synset as a whole and all
-        the words it contains, while some information pertains only to certain words.
-        Mostly this involves the pointers below the sample sentences and verb frames.
-        A semantic pointer expresses relationships between one synset and another. An
-        example is the antonym; all words in a synset are antonyms of all the words in
-        an antonymous synset. A lexical pointer, on the other hand, relates one word
-        in a synset to one word in another synset (or one sense to another sense in
-        terms of Dubsar&apos;s data model). For example, the derivationally related
-        form pointer applies only to individual words. Taken is derivationally related
-        to take, but not to its synonym grab. Verb frames and adjective markers are
-        also lexical in nature, pertaining to individual words, not entire synsets.
+    %p
+      If a synset has only one word, that word is always highlighted, and lexical
+      information is always displayed. In this case, it is not possible to show
+      semantic data separately (they are the same as the lexical data) by tapping
+      the lone word in the synset.
 
-      %p
-        The list of synonyms in the synset is shown directly above any sample sentences
-        or verb frames. If one of the words in the synset is highlighted, lexical
-        information, also highlighted, will be included in the view. That is, there
-        may be other highlighted fields in the view with information pertaining only
-        to the highlighted word among the synonyms. If no word there is highlighted,
-        no other field on the page will be highlighted. Only semantic data will be
-        present, referring to the entire synset. Tap any of the synonyms to change
-        which word, if any, is highlighted. Tap the triangular button next to any
-        synonym to visit the word view for that synonym.
+  .accordion-head
+    %h2
+      Q. Which versions of iOS are supported?
+  .accordion-body
+    A. Version 2.0.0 require iOS 7.0 or later because it&apos;s written in Swift.
+  .accordion-head
+    %h2
+      Q. Where does the database come from?
+  .accordion-body
+    A. This is the WordNet&reg; 3.1 data set from Princeton University,
+    available for free under the WordNet 3.0 License.
+  .accordion-head
+    %h2
+      Q. Which words are in the dictionary?
+  .accordion-body
+    A. The
+    WordNet&reg;
+    data set is aimed at automated text processing and
+    includes only the most numerous parts of speech: adjectives,
+    adverbs, nouns and verbs.  It does not include conjunctions,
+    interjections, prepositions or pronouns.  These words are far fewer
+    in number and are less directly related to the meaning of any text.
+    So you won't find
+    %em from
+    in Dubsar, but you will find
+    =link_to 'sedulous.', 'dubsar:///words/6171'
+  .accordion-head
+    %h2
+      Q. What do those WordNet&reg; terms mean?
+  .accordion-body
+    A. Some of them are listed here in Dubsar.  The data model used in
+    Dubsar's SQLite database uses them for its table names.
+    %h3 Word
+    A dictionary entry with a unique name and part of speech.
 
-      %p
-        The frequency count in this view will be the semantic frequency count, i.e.
-        the frequency count for the entire synset, the sum of the frequency counts of
-        all synonyms, if no synonym is highlighted. If a synonym is highlighted, the
-        frequency count will also be highlighted, and the lexical frequency count
-        for that word will be displayed (along with any adjective marker).
+    %h3
+    =link_to 'Synset', 'dubsar:///words/89098'
+    A list of synonymous words in a particular sense.  Each word can
+    belong to multiple synsets.  A synset is essentially a meaning that
+    one or more words share.  It includes a gloss and optionally one or
+    more sample sentences.
 
-      %p
-        If a synset has only one word, that word is always highlighted, and lexical
-        information is always displayed. In this case, it is not possible to show
-        semantic data separately (they are the same as the lexical data) by tapping
-        the lone word in the synset.
+    %h3 Sense
+    The intersection (or join table, in database terms) of words and
+    synsets.  Each occurrence of one word in one synset is a sense of
+    that word.  A sense is a specific meaning of a single word.
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Which versions of iOS are supported?
-      A. Version 2.0.0 require iOS 7.0 or later because it&apos;s written in Swift.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do I get help with a problem?
-      A. Contact
-      =link_to 'support@dubsar.info', 'mailto:support@dubsar.info'
-      for support with Dubsar for iPhone, iPod Touch and iPad.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Where does the database come from?
-      A. This is the WordNet&reg; 3.1 data set from Princeton University,
-      available for free under the WordNet 3.0 License.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Which words are in the dictionary?
-      A. The
-      WordNet&reg;
-      data set is aimed at automated text processing and
-      includes only the most numerous parts of speech: adjectives,
-      adverbs, nouns and verbs.  It does not include conjunctions,
-      interjections, prepositions or pronouns.  These words are far fewer
-      in number and are less directly related to the meaning of any text.
-      So you won't find
-      %em from
-      in Dubsar, but you will find
-      =link_to 'sedulous.', 'dubsar:///words/6171'
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What do those WordNet&reg; terms mean?
-      A. Some of them are listed here in Dubsar.  The data model used in
-      Dubsar's SQLite database uses them for its table names.
-      %h3 Word
-      A dictionary entry with a unique name and part of speech.
+    %h3 Pointer
+    A lexical or semantic relationship between senses or synsets.  A
+    lexical pointer points from one sense to another (one specific
+    meaning of one word to a specific meaning of another word).  A
+    semantic pointer points from one synset to another and hence
+    relates two meanings.  There are many specific pointer types.
+  .accordion-head
+    %h2
+      Q. What's all that stuff listed for each word sense?
+  .accordion-body
+    A. The different views display a number of things:
+    %dl
+      %dt lexical file name
+      %dd
+        broad categories associated with each word sense
 
-      %h3
-      =link_to 'Synset', 'dubsar:///words/89098'
-      A list of synonymous words in a particular sense.  Each word can
-      belong to multiple synsets.  A synset is essentially a meaning that
-      one or more words share.  It includes a gloss and optionally one or
-      more sample sentences.
+      %dt adjective marker
+      %dd
+        for some adjective senses, a limitation on the syntactic
+        position of the adjective when used in this sense (see below)
 
-      %h3 Sense
-      The intersection (or join table, in database terms) of words and
-      synsets.  Each occurrence of one word in one synset is a sense of
-      that word.  A sense is a specific meaning of a single word.
+      %dt frequency count
+      %dd
+        number of times this word sense occurs in a reference text
 
-      %h3 Pointer
-      A lexical or semantic relationship between senses or synsets.  A
-      lexical pointer points from one sense to another (one specific
-      meaning of one word to a specific meaning of another word).  A
-      semantic pointer points from one synset to another and hence
-      relates two meanings.  There are many specific pointer types.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What's all that stuff listed for each word sense?
-      A. The different views display a number of things:
-      %dl
-        %dt lexical file name
-        %dd
-          broad categories associated with each word sense
+      %dt verb frames
+      %dd
+        generic sentence frames applicable to this verb sense
 
-        %dt adjective marker
-        %dd
-          for some adjective senses, a limitation on the syntactic
-          position of the adjective when used in this sense (see below)
+      %dt sample sentences
+      %dd
+        sample sentences for the synset
 
-        %dt frequency count
-        %dd
-          number of times this word sense occurs in a reference text
+    %h4 Adjective markers
+    Some adjective senses may only be used in certain syntactic
+    positions:
+    %ul
+      %li
+        %strong (a) attributive
+        The
+        %em left
+        side of the road.
+      %li
+        %strong (ip) immediately postnominal
+        I live in the city
+        %em proper.
+      %li
+        %strong (p) predicate
+        It is
+        %em well
+        he did not go.
 
-        %dt verb frames
-        %dd
-          generic sentence frames applicable to this verb sense
+    Then there are lexical and semantic pointers from one word sense to
+    another sense (for lexical pointers) or synset (for semantic ones).
+    %hr/
 
-        %dt sample sentences
-        %dd
-          sample sentences for the synset
-
-      %h4 Adjective markers
-      Some adjective senses may only be used in certain syntactic
-      positions:
-      %ul
-        %li
-          %strong (a) attributive
-          The
-          %em left
-          side of the road.
-        %li
-          %strong (ip) immediately postnominal
-          I live in the city
-          %em proper.
-        %li
-          %strong (p) predicate
-          It is
-          %em well
-          he did not go.
-
-      Then there are lexical and semantic pointers from one word sense to
-      another sense (for lexical pointers) or synset (for semantic ones).
-      %hr/
-
-      %table
-        %thead
+    %table
+      %thead
+        %tr
+          %th
+            one way of saying it
+          %th
+            another way of saying it
+      %tbody
+        - Pointer.help_list.each do |ptype, help_text|
           %tr
-            %th
-              one way of saying it
-            %th
-              another way of saying it
-        %tbody
-          - Pointer.help_list.each do |ptype, help_text|
-            %tr
-              %td
-                &= ptype
-              %td
-                &= help_text
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How many entries does Dubsar have?
-      A. Here are current row counts, by table.  This list is live,
-      generated from the database tables on the server
-      whenever you load this page.
-      As Dubsar&apos;s data content evolves, this list of tables and their
-      specific row counts may change.
-      %table
-        %tbody
-          - %w{synset word sense inflection pointer}.each do |model|
-            %tr
-              %td
-                =model_count(model)
-              %td
-                =model.pluralize
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How are the autocompleter results determined?
-      %p
-        A. All search results use full text searching, similar to the
-        behavior of most search engines. See the FAQ about full text
-        searching below.
+            %td
+              &= ptype
+            %td
+              &= help_text
+  .accordion-head
+    %h2
+      Q. How many entries does Dubsar have?
+  .accordion-body
+    A. Here are current row counts, by table.  This list is live,
+    generated from the database tables on the server
+    whenever you load this page.
+    As Dubsar&apos;s data content evolves, this list of tables and their
+    specific row counts may change.
+    %table
+      %tbody
+        - %w{synset word sense inflection pointer}.each do |model|
+          %tr
+            %td
+              =model_count(model)
+            %td
+              =model.pluralize
+  .accordion-head
+    %h2
+      Q. How are the autocompleter results determined?
+  .accordion-body
+    %p
+      A. All search results use full text searching, similar to the
+      behavior of most search engines. See the FAQ about full text
+      searching below.
 
-      %p
-        When autocompleting a word search, the autocompleter results are determined
-        by looking first for an exact match, then by searching for
-        %em search terms*,
-        i.e., appending an
-        asterisk to the search terms. So if you type in
-        %em frus,
-        which has no exact match, you will see the results of searching for
-        %em frus*,
-        which returns all results containing a term beginning with
-        %em frus.
+    %p
+      When autocompleting a word search, the autocompleter results are determined
+      by looking first for an exact match, then by searching for
+      %em search terms*,
+      i.e., appending an
+      asterisk to the search terms. So if you type in
+      %em frus,
+      which has no exact match, you will see the results of searching for
+      %em frus*,
+      which returns all results containing a term beginning with
+      %em frus.
 
-      %p
-        Exact matching is case-sensitive, so if you search for
-        %em Fruit,
-        the word
-        %em fruit
-        will not appear at the top of the list. In fact, it will not show up in
-        the autocompleter at all. If you perform a search for
-        %em Fruit, fruit
-        will appear sorted in with the rest of the results.
+    %p
+      Exact matching is case-sensitive, so if you search for
+      %em Fruit,
+      the word
+      %em fruit
+      will not appear at the top of the list. In fact, it will not show up in
+      the autocompleter at all. If you perform a search for
+      %em Fruit, fruit
+      will appear sorted in with the rest of the results.
 
-      %p
-        When searching synsets, the definition field, which contains both the synset
-        gloss and its sample sentences, is used for the full text query. There is no
-        notion of an exact match. The autocompleter results are obtained by searching
-        for search terms* as above, appending an asterisk to the search terms in a
-        full text MATCH query.
+    %p
+      When searching synsets, the definition field, which contains both the synset
+      gloss and its sample sentences, is used for the full text query. There is no
+      notion of an exact match. The autocompleter results are obtained by searching
+      for search terms* as above, appending an asterisk to the search terms in a
+      full text MATCH query.
 
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Can I do wild-card searches?
-      %p
-        A. Yes. Full text searching recognizes the asterisk (*) character, which
-        will match any non-whitespace string, including the empty string.
-      %p
-        If more than 30 results are returned, the list is paginated using a page
-        control like this:
-      %p
-        =image_tag 'ios_page_control.png', :height => "138", :width => "280", :alt => "iOS page control"
-      %p
-        Tap the left side of the control to page back and the right side to
-        page forward through the search results.
-      %p
-        The app provides some built-in wild-card searches view the alphabet
-        strip on the main view.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What does Dubsar mean?
-      A. Dubsar is the Sumerian word for scribe.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How does full text searching work?
-      %p
-        A. Dubsar searches work similarly to most search engines. It works about
-        the same when searching words and synsets.
-      %p
-        When searching words, the inflections
-        table is queried, and all words with a matching inflection are returned. Each
-        word has an uninflected entry in the inflections table, so you can find man, n.
-        by searching for men, hook, n. by searching for hooks, be, v. by searching
-        for am, etc. But you can also find them, of course, by searching respectively
-        for man, hook and and be. Exact word matches are sorted to the top.
-        Word results are sorted in ASCII order, with all capital letters coming before all
-        lower-case letters. But case-sensitive exact matches (including exact inflection
-        matches) are sorted to the top.
+  .accordion-head
+    %h2
+      Q. Can I do wild-card searches?
+  .accordion-body
+    %p
+      A. Yes. Full text searching recognizes the asterisk (*) character, which
+      will match any non-whitespace string, including the empty string.
+    %p
+      If more than 30 results are returned, the list is paginated using a page
+      control like this:
+    %p
+      =image_tag 'ios_page_control.png', :height => "138", :width => "280", :alt => "iOS page control"
+    %p
+      Tap the left side of the control to page back and the right side to
+      page forward through the search results.
+    %p
+      The app provides some built-in wild-card searches view the alphabet
+      strip on the main view.
+  .accordion-head
+    %h2
+      Q. What does Dubsar mean?
+  .accordion-body
+    A. Dubsar is the Sumerian word for scribe.
+  .accordion-head
+    %h2
+      Q. How does full text searching work?
+  .accordion-body
+    %p
+      A. Dubsar searches work similarly to most search engines. It works about
+      the same when searching words and synsets.
+    %p
+      When searching words, the inflections
+      table is queried, and all words with a matching inflection are returned. Each
+      word has an uninflected entry in the inflections table, so you can find man, n.
+      by searching for men, hook, n. by searching for hooks, be, v. by searching
+      for am, etc. But you can also find them, of course, by searching respectively
+      for man, hook and and be. Exact word matches are sorted to the top.
+      Word results are sorted in ASCII order, with all capital letters coming before all
+      lower-case letters. But case-sensitive exact matches (including exact inflection
+      matches) are sorted to the top.
 
-      %p
-        When searching synsets, the definition field of the synsets table is queried,
-        which includes sample sentences (but not verb frames). Matching synsets are
-        returned. There is no notion of an exact match when searching definitions
-        (as opposed to individual words).
+    %p
+      When searching synsets, the definition field of the synsets table is queried,
+      which includes sample sentences (but not verb frames). Matching synsets are
+      returned. There is no notion of an exact match when searching definitions
+      (as opposed to individual words).
 
-      %p
-        In both cases:
+    %p
+      In both cases:
 
-      %ul
-        %li All searching is case-insensitive.
-        %li Search results will include anything that contains all search terms.
-        %li
-          An asterisk (*) stands for any non-whitespace string (including nothing).
-          So searching for
-          %em count*
-          matches anything containing a discrete term that begins with
-          %em count.
-        %li
-          Certain operators are recognized in all caps (e.g.,
-          %em law OR order
-          ).
-  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
-    &copy; 2014 Jimmy Dee &middot; WordNet&reg; &copy; 2014 The Trustees of Princeton University
+    %ul
+      %li All searching is case-insensitive.
+      %li Search results will include anything that contains all search terms.
+      %li
+        An asterisk (*) stands for any non-whitespace string (including nothing).
+        So searching for
+        %em count*
+        matches anything containing a discrete term that begins with
+        %em count.
+      %li
+        Certain operators are recognized in all caps (e.g.,
+        %em law OR order
+        ).

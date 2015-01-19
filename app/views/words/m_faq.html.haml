@@ -18,276 +18,286 @@
   Dubsar Mobile FAQ
 - content_for :description do
   %link{:rel => 'canonical', :href => m_faq_url}
+  = render partial: 'accordion_css_header'
 
-%div#faq{'data-role' => 'page', 'data-title' => "Dubsar Mobile - FAQ", 'data-theme' => 'b'}
-  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
-    = render :partial => 'shared/mobile_header'
-    %br/
-    Dubsar Mobile Frequently Asked Questions
-  %div{'data-role' => 'content'}
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do I suppress Word of the Day notifications on Android?
-      %p
-        A. Go to the app&apos;s home page by tapping the
-        %em Home
-        button in the action bar at the top of the screen, which looks like a house.
-        Once on the home page, tap the
-        %em Preferences
-        button in the action bar, which looks like an array of buttons.
-      =image_tag 'android-prefs.png'
+%h1 Dubsar Mobile Frequently Asked Questions
 
-      %p
-        That will take you to the Preferences view. In the Preferences view, the first
-        option is for Word of the day status bar notifications. You can turn them on and
-        off with that setting.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Are there native Dubsar applications for mobile devices?
-      A. Dubsar is available for iOS and Android.
-
-      %p
-        =link_to 'App Store', 'https://itunes.apple.com/us/app/dubsar/id453868483?mt=8'
-      %p
-        =link_to 'Google Play', 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar'
-      %p
-        =link_to 'Amazon App Store', 'http://www.amazon.com/gp/mas/dl/android?p=com.dubsar_dictionary.Dubsar&ref=mas_pm_app_name'
-      %p
-        =link_to 'Direct Download (APK: 591 kB)', apk_link
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How does the HTTP proxy setting work?
-      %p
-        A. Starting with Jelly Bean, Android supports a global HTTP proxy
-        setting for wi-fi connections. (Long press on a wi-fi network in the Settings app
-        and select Modify network. Then check Show advanced options to reveal the global
-        proxy setting for that network.)
-      %p
-        To override the global setting, or to use a proxy setting independent of network
-        (e.g., for the Guardian Project&apos;s Orbot gateway on the device), use the HTTP proxy
-        setting in the Preferences activity. This setting is used both for retrieving data
-        from the Dubsar server and for displaying this FAQ in the application. If it is set,
-        it overrides any global proxy setting. It does not take effect if you tap any of the
-        buttons in the About activity (to visit the Amazon App Store or the Dubsar website,
-        e.g.). Those links are handled by your browser app, which can take advantage of a global
-        proxy setting.
-      %p
-        At the moment, there is a known bug. When viewing the FAQ web view on Kit Kat
-        (Android 4.4), the application&apos;s HTTP proxy setting is ignored. In order to view
-        this FAQ in the app on Kit Kat, use a global proxy setting or connect without a proxy.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How do I get help with a problem?
-      A. Contact
-      =link_to 'support@dubsar.info', 'mailto:support@dubsar.info'
-      for support with Dubsar Mobile or a Dubsar app.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Where does the database come from?
-      A. This is the
-      %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
-      3.0 data set from Princeton University,
-      available for free under the
-      %a{:href => 'http://wordnet.princeton.edu/wordnet/license', :title => 'WordNet 3.0 License'}
-        WordNet 3.0 License.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Which words are in the dictionary?
-      A. The
-      %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
-      data set is aimed at automated text processing and
-      includes only the most numerous parts of speech: adjectives,
-      adverbs, nouns and verbs.  It does not include conjunctions,
-      interjections, prepositions or pronouns.  These words are far fewer
-      in number and are less directly related to the meaning of any text.
-      So you won't find
-      %em from
-      in Dubsar, but you will find
-      %em
-        %a{:href => url_for(:action => :m_show, :id => Word.find_by_name_and_part_of_speech('sedulous', 'adjective').id), :title => 'sedulous'}
-          sedulous.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What do those WordNet&reg; terms mean?
-      A. Some of them are listed here in Dubsar.  The data model used in
-      Dubsar's SQLite database uses them for its table names.
-      %h3 Word
-      A dictionary entry with a unique name and part of speech.
-
-      %h3
-        =link_to 'Synset', url_for(:action => :m_show, :id => Word.find_by_name_and_part_of_speech('synset', 'noun').id), :title => 'Synset'
-      A list of synonymous words in a particular sense.  Each word can
-      belong to multiple synsets.  A synset is essentially a meaning that
-      one or more words share.  It includes a gloss and optionally one or
-      more sample sentences.
-
-      %h3 Sense
-      The intersection (or join table, in database terms) of words and
-      synsets.  Each occurrence of one word in one synset is a sense of
-      that word.  A sense is a specific meaning of a single word.
-
-      %h3 Pointer
-      A lexical or semantic relationship between senses or synsets.  A
-      lexical pointer points from one sense to another (one specific
-      meaning of one word to a specific meaning of another word).  A
-      semantic pointer points from one synset to another and hence
-      relates two meanings.  There are many specific pointer types.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What's all that stuff listed for each word sense?
-      A. The tooltips display a number of things:
-      %dl
-        %dt lexical file name
-        %dd
-          broad categories associated with each word sense
-
-        %dt adjective marker
-        %dd
-          for some adjective senses, a limitation on the syntactic
-          position of the adjective when used in this sense (see below)
-
-        %dt frequency count
-        %dd
-          number of times this word sense occurs in a reference text
-
-        %dt verb frames
-        %dd
-          generic sentence frames applicable to this verb sense
-
-        %dt sample sentences
-        %dd
-          sample sentences for the synset
-
-      %h4 Adjective markers
-      Some adjective senses may only be used in certain syntactic
-      positions:
-      %ul
-        %li
-          %strong (a) attributive
-          The
-          %em left
-          side of the road.
-        %li
-          %strong (ip) immediately postnominal
-          I live in the city
-          %em proper.
-        %li
-          %strong (p) predicate
-          It is
-          %em well
-          he did not go.
-
-      Then there are lexical and semantic pointers from one word sense to
-      another sense (for lexical pointers) or synset (for semantic ones).
-      %hr/
-
-      %table
-        %thead
+#accordion.accordion
+  .accordion-head
+    %h2
+      Q. How do I suppress Word of the Day notifications on Android?
+  .accordion-body
+    %p
+      A. Go to the app&apos;s home page by tapping the
+      %em Home
+      button in the action bar at the top of the screen, which looks like a house.
+      Once on the home page, tap the
+      %em Preferences
+      button in the action bar, which looks like an array of buttons.
+    =image_tag 'android-prefs.png'
+  
+    %p
+      That will take you to the Preferences view. In the Preferences view, the first
+      option is for Word of the day status bar notifications. You can turn them on and
+      off with that setting.
+  .accordion-head
+    %h2
+      Q. Are there native Dubsar applications for mobile devices?
+  .accordion-body
+    A. Dubsar is available for iOS and Android.
+  
+    %p
+      =link_to 'App Store', 'https://itunes.apple.com/us/app/dubsar/id453868483?mt=8'
+    %p
+      =link_to 'Google Play', 'https://play.google.com/store/apps/details?id=com.dubsar_dictionary.Dubsar'
+    %p
+      =link_to 'Amazon App Store', 'http://www.amazon.com/gp/mas/dl/android?p=com.dubsar_dictionary.Dubsar&ref=mas_pm_app_name'
+    %p
+      =link_to 'Direct Download (APK: 591 kB)', apk_link
+  .accordion-head
+    %h2
+      Q. How does the HTTP proxy setting work?
+  .accordion-body
+    %p
+      A. Starting with Jelly Bean, Android supports a global HTTP proxy
+      setting for wi-fi connections. (Long press on a wi-fi network in the Settings app
+      and select Modify network. Then check Show advanced options to reveal the global
+      proxy setting for that network.)
+    %p
+      To override the global setting, or to use a proxy setting independent of network
+      (e.g., for the Guardian Project&apos;s Orbot gateway on the device), use the HTTP proxy
+      setting in the Preferences activity. This setting is used both for retrieving data
+      from the Dubsar server and for displaying this FAQ in the application. If it is set,
+      it overrides any global proxy setting. It does not take effect if you tap any of the
+      buttons in the About activity (to visit the Amazon App Store or the Dubsar website,
+      e.g.). Those links are handled by your browser app, which can take advantage of a global
+      proxy setting.
+    %p
+      At the moment, there is a known bug. When viewing the FAQ web view on Kit Kat
+      (Android 4.4), the application&apos;s HTTP proxy setting is ignored. In order to view
+      this FAQ in the app on Kit Kat, use a global proxy setting or connect without a proxy.
+  .accordion-head
+    %h2
+      Q. How do I get help with a problem?
+  .accordion-body
+    A. Contact
+    =link_to 'support@dubsar.info', 'mailto:support@dubsar.info'
+    for support with Dubsar Mobile or a Dubsar app.
+  .accordion-head
+    %h2
+      Q. Where does the database come from?
+  .accordion-body
+    A. This is the
+    %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
+    3.0 data set from Princeton University,
+    available for free under the
+    %a{:href => 'http://wordnet.princeton.edu/wordnet/license', :title => 'WordNet 3.0 License'}
+      WordNet 3.0 License.
+  .accordion-head
+    %h2
+      Q. Which words are in the dictionary?
+  .accordion-body
+    A. The
+    %a{:href => 'http://wordnet.princeton.edu'} WordNet&reg;
+    data set is aimed at automated text processing and
+    includes only the most numerous parts of speech: adjectives,
+    adverbs, nouns and verbs.  It does not include conjunctions,
+    interjections, prepositions or pronouns.  These words are far fewer
+    in number and are less directly related to the meaning of any text.
+    So you won't find
+    %em from
+    in Dubsar, but you will find
+    %em
+      %a{:href => url_for(:action => :m_show, :id => Word.find_by_name_and_part_of_speech('sedulous', 'adjective').id), :title => 'sedulous'}
+        sedulous.
+  .accordion-head
+    %h2
+      Q. What do those WordNet&reg; terms mean?
+  .accordion-body
+    A. Some of them are listed here in Dubsar.  The data model used in
+    Dubsar's SQLite database uses them for its table names.
+    %h3 Word
+    A dictionary entry with a unique name and part of speech.
+  
+    %h3
+      =link_to 'Synset', url_for(:action => :m_show, :id => Word.find_by_name_and_part_of_speech('synset', 'noun').id), :title => 'Synset'
+    A list of synonymous words in a particular sense.  Each word can
+    belong to multiple synsets.  A synset is essentially a meaning that
+    one or more words share.  It includes a gloss and optionally one or
+    more sample sentences.
+  
+    %h3 Sense
+    The intersection (or join table, in database terms) of words and
+    synsets.  Each occurrence of one word in one synset is a sense of
+    that word.  A sense is a specific meaning of a single word.
+  
+    %h3 Pointer
+    A lexical or semantic relationship between senses or synsets.  A
+    lexical pointer points from one sense to another (one specific
+    meaning of one word to a specific meaning of another word).  A
+    semantic pointer points from one synset to another and hence
+    relates two meanings.  There are many specific pointer types.
+  .accordion-head
+    %h2
+      Q. What's all that stuff listed for each word sense?
+  .accordion-body
+    A. The tooltips display a number of things:
+    %dl
+      %dt lexical file name
+      %dd
+        broad categories associated with each word sense
+  
+      %dt adjective marker
+      %dd
+        for some adjective senses, a limitation on the syntactic
+        position of the adjective when used in this sense (see below)
+  
+      %dt frequency count
+      %dd
+        number of times this word sense occurs in a reference text
+  
+      %dt verb frames
+      %dd
+        generic sentence frames applicable to this verb sense
+  
+      %dt sample sentences
+      %dd
+        sample sentences for the synset
+  
+    %h4 Adjective markers
+    Some adjective senses may only be used in certain syntactic
+    positions:
+    %ul
+      %li
+        %strong (a) attributive
+        The
+        %em left
+        side of the road.
+      %li
+        %strong (ip) immediately postnominal
+        I live in the city
+        %em proper.
+      %li
+        %strong (p) predicate
+        It is
+        %em well
+        he did not go.
+  
+    Then there are lexical and semantic pointers from one word sense to
+    another sense (for lexical pointers) or synset (for semantic ones).
+    %hr/
+  
+    %table
+      %thead
+        %tr
+          %th
+            one way of saying it
+          %th
+            another way of saying it
+      %tbody
+        - Pointer.help_list.each do |ptype, help_text|
           %tr
-            %th
-              one way of saying it
-            %th
-              another way of saying it
-        %tbody
-          - Pointer.help_list.each do |ptype, help_text|
-            %tr
-              %td
-                &= ptype
-              %td
-                &= help_text
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How many entries does Dubsar have?
-      A. Here are current row counts, by table.  This list is live,
-      generated from the database tables whenever you load this page.
-      As Dubsar&apos;s data content evolves, this list of tables and their
-      specific row counts will change.
-      %table
-        %tbody
-          - %w{synset word sense inflection pointer}.each do |model|
-            %tr
-              %td
-                =model_count(model)
-              %td
-                =model.pluralize
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How long does it take to build the Dubsar database?
-      A. Currently it takes more than three hours.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How are the autocompleter results determined?
-      %p
-        A. All search results use full text searching, similar to the
-        behavior of most search engines, against the inflections table.
-        All searching is case-insensitive.
-        Results include all search terms. An asterisk (*) may be used to
-        match any non-whitespace string, including nothing. Certain operators
-        may also be used, in all uppercase, like "law OR order." Exact matches
-        (results where the matching inflection is exactly the search term as
-        it was typed) are sorted to the top. Other results are sorted in ASCII
-        order, so all capital letters come before all lowercase letters.
-
-      %p
-        The autocompleter results are determined by looking first for an
-        exact match, then by searching for
-        %em search terms*,
-        i.e., appending an
-        asterisk to the search terms. So if you type in
-        %em frus,
-        which has no exact match, you will see the results of searching for
-        %em frus*,
-        which returns all results containing a term beginning with
-        %em frus.
-
-      %p
-        Exact matching is case-sensitive, so if you search for
-        %em Fruit,
-        the word
-        %em fruit
-        will not appear at the top of the list. In fact, it will not show up in
-        the autocompleter at all. If you perform a search for
-        %em Fruit, fruit
-        will appear sorted in with the rest of the results.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. Is Dubsar on any social networks?
-      A. Yes.  Visit
-      %p
-        =link_to 'Dubsar on Facebook', 'http://m.facebook.com/profile.php?id=155561501154946'
-      %p
-        =link_to 'Dubsar on Twitter', 'http://twitter.com/#!/dubsar', :title => 'Dubsar on Twitter'
-      %p
-        =link_to 'Dubsar on Google+', 'https://plus.google.com/111210736976423589433', :title => 'Dubsar on Google+'
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. What is OpenSearch?
-      A. The OpenSearch protocol allows some supported browsers (Internet
-      Explorer, Firefox and Google Chome) to add Dubsar to the
-      browser&apos;s list of search engines so that you can search
-      Dubsar, complete with live suggestions, from your browser&apos;s
-      search box.
-    %div{'data-role' => 'collapsible', 'data-collapsed' => 'true'}
-      %h2
-        Q. How does full text searching work?
-      %p
-        A. Dubsar searches now work similarly to most search engines.
-      %ul
-        %li All searching is case-insensitive.
-        %li Search results will include anything that contains all search terms.
-        %li
-          An asterisk (*) stands for any non-whitespace string (including nothing).
-          So searching for
-          %em count*
-          matches anything containing a discrete term that begins with
-          %em count.
-        %li
-          Certain operators are recognized in all caps (e.g.,
-          %em law OR order
-          ).
-        %li
-          Results are sorted in ASCII order, with all capital letters coming before all
-          lower-case letters. But case-sensitive exact matches (including inflections)
-          are sorted to the top.
-  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
-    &copy; 2015 Jimmy Dee &middot; WordNet&reg; &copy; 2015 The Trustees of Princeton University
+            %td
+              &= ptype
+            %td
+              &= help_text
+  .accordion-head
+    %h2
+      Q. How many entries does Dubsar have?
+  .accordion-body
+    A. Here are current row counts, by table.  This list is live,
+    generated from the database tables whenever you load this page.
+    As Dubsar&apos;s data content evolves, this list of tables and their
+    specific row counts will change.
+    %table
+      %tbody
+        - %w{synset word sense inflection pointer}.each do |model|
+          %tr
+            %td
+              =model_count(model)
+            %td
+              =model.pluralize
+  .accordion-head
+    %h2
+      Q. How long does it take to build the Dubsar database?
+  .accordion-body
+    A. Currently it takes more than three hours.
+  .accordion-head
+    %h2
+      Q. How are the autocompleter results determined?
+  .accordion-body
+    %p
+      A. All search results use full text searching, similar to the
+      behavior of most search engines, against the inflections table.
+      All searching is case-insensitive.
+      Results include all search terms. An asterisk (*) may be used to
+      match any non-whitespace string, including nothing. Certain operators
+      may also be used, in all uppercase, like "law OR order." Exact matches
+      (results where the matching inflection is exactly the search term as
+      it was typed) are sorted to the top. Other results are sorted in ASCII
+      order, so all capital letters come before all lowercase letters.
+  
+    %p
+      The autocompleter results are determined by looking first for an
+      exact match, then by searching for
+      %em search terms*,
+      i.e., appending an
+      asterisk to the search terms. So if you type in
+      %em frus,
+      which has no exact match, you will see the results of searching for
+      %em frus*,
+      which returns all results containing a term beginning with
+      %em frus.
+  
+    %p
+      Exact matching is case-sensitive, so if you search for
+      %em Fruit,
+      the word
+      %em fruit
+      will not appear at the top of the list. In fact, it will not show up in
+      the autocompleter at all. If you perform a search for
+      %em Fruit, fruit
+      will appear sorted in with the rest of the results.
+  .accordion-head
+    %h2
+      Q. Is Dubsar on any social networks?
+  .accordion-body
+    A. Yes.  Visit
+    %p
+      =link_to 'Dubsar on Facebook', 'http://m.facebook.com/profile.php?id=155561501154946'
+    %p
+      =link_to 'Dubsar on Twitter', 'http://twitter.com/#!/dubsar', :title => 'Dubsar on Twitter'
+    %p
+      =link_to 'Dubsar on Google+', 'https://plus.google.com/111210736976423589433', :title => 'Dubsar on Google+'
+  .accordion-head
+    %h2
+      Q. What is OpenSearch?
+  .accordion-body
+    A. The OpenSearch protocol allows some supported browsers (Internet
+    Explorer, Firefox and Google Chome) to add Dubsar to the
+    browser&apos;s list of search engines so that you can search
+    Dubsar, complete with live suggestions, from your browser&apos;s
+    search box.
+  .accordion-head
+    %h2
+      Q. How does full text searching work?
+  .accordion-body
+    %p
+      A. Dubsar searches now work similarly to most search engines.
+    %ul
+      %li All searching is case-insensitive.
+      %li Search results will include anything that contains all search terms.
+      %li
+        An asterisk (*) stands for any non-whitespace string (including nothing).
+        So searching for
+        %em count*
+        matches anything containing a discrete term that begins with
+        %em count.
+      %li
+        Certain operators are recognized in all caps (e.g.,
+        %em law OR order
+        ).
+      %li
+        Results are sorted in ASCII order, with all capital letters coming before all
+        lower-case letters. But case-sensitive exact matches (including inflections)
+        are sorted to the top.
