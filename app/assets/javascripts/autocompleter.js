@@ -21,6 +21,7 @@
     var acResults = $('#autocomplete-results');
     var searchField = $('#search-term');
     var acHighlighted = false;
+    var nextSequence = 0;
 
     function getScope() {
       var scope = "words";
@@ -35,10 +36,14 @@
       var scope = getScope();
 
       $.ajax({
+        beforeSend: function(jqxhr) {
+          jqxhr.dubsarSeqnum = ++ nextSequence;
+        },
         url: '/os?term=' + term + '&scope=' + scope,
         type: 'GET',
         dataType: 'html',
-        success: function(data) {
+        success: function(data, textStatus, jqxhr) {
+          if (jqxhr.dubsarSeqnum < nextSequence) return;
           acResults.html(data).show();
         },
         error: function(error) {
