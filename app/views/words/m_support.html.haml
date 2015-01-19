@@ -21,16 +21,11 @@
   %meta{:name => 'Description', :content => 'Contact Dubsar for support with mobile issues, particularly with native mobile clients.'}
   %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar support, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English, mobile, iPhone, iPad, tablet, smart phone'}
 
-%div{'data-role' => 'page', 'data-title' => "Dubsar Mobile - License", 'data-theme' => 'b'}
-  %div{'data-role' => 'header', 'data-position' => 'inline', 'data-theme' => 'b'}
-    = render :partial => 'shared/mobile_header'
-  %div{'data-role' => 'content'}
-    %h1 Mobile Support
-    %p
-      Problems with Dubsar Mobile or a Dubsar app?
-    %p
-      Contact us at:
+= render partial: 'home_button'
+%h1 Mobile Support
+%p
+  Problems with Dubsar Mobile or a Dubsar app?
+%p
+  Contact us at:
 
-    = link_to 'support@dubsar.info', 'mailto:support@dubsar.info'
-  %div.ui-bar{'data-role' => 'footer', 'data-theme' => 'b'}
-    = render :partial => 'shared/mobile_footer'
+= link_to 'support@dubsar.info', 'mailto:support@dubsar.info'
