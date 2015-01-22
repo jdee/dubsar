@@ -21,8 +21,8 @@
   %link{:rel => 'canonical', :href => 'https://dubsar.info/device_tokens/count'}
 
 = render partial: 'home_button'
-%h2 Dubsar APNS Device Token Counts
-%h3 #{DateTime.now.strftime("%Y-%b-%d %H:%M:%S %Z")}
+%h2 APNS Device Token Counts
+%span{style: 'font-size: x-large;'} #{DateTime.now.strftime("%Y-%b-%d %H:%M:%S %Z")}
 
 %table#device_counts
   %thead
