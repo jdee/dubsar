@@ -20,8 +20,17 @@ class SensesController < ApplicationController
   include ApplicationHelper
 
   def show
-    @sense = Sense.find params[:id]
-    redirect_to path_to_synset_with_fragment(@sense), status: :moved_permanently
+    respond_to do |f|
+      f.json do
+        @sense = Sense.includes([ { :synset => [ :words, { :pointers => :target } ] }, { :senses_verb_frames => :verb_frame }, { :pointers => :target } ]).find params[:id]
+        respond_with json_show_response
+      end
+
+      f.html do
+        @sense = Sense.find params[:id]
+        redirect_to path_to_synset_with_fragment(@sense), status: :moved_permanently
+      end
+    end
   rescue => e
     error
   end
