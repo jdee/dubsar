@@ -1,25 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dubsar.info</loc>
-    <lastmod>2015-01-19</lastmod>
+    <lastmod>2015-01-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>
-        https://s.dubsar.info/images/dubsar.png
-      </image:loc>
-      <image:title>
-        Dubsar
-      </image:title>
-      <image:caption>
-        Dubsar Dictionary Project
-      </image:caption>
-      <image:license>
-        https://dubsar.info/license
-      </image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://dubsar.info/about</loc>
@@ -47,7 +32,7 @@
   </url>
   <url>
     <loc>https://dubsar.info/news</loc>
-    <lastmod>2015-01-19</lastmod>
+    <lastmod>2015-01-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

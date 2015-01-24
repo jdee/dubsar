@@ -5,8 +5,8 @@
     <title>Dubsar News Feed</title>
     <description>Keep up with changes to the Dubsar Dictionary Project.</description>
     <link>https://dubsar.info</link>
-    <lastBuildDate>Mon, 19 Jan 2015 01:00:00 GMT</lastBuildDate>
-    <pubDate>Mon, 19 Jan 2015 01:00:00 GMT</pubDate>
+    <lastBuildDate>Sat, 24 Jan 2015 16:00:00 GMT</lastBuildDate>
+    <pubDate>Sat, 24 Jan 2015 16:00:00 GMT</pubDate>
     <image>
       <url>https://s.dubsar.info/images/dubsar-link.png</url>
       <title>Dubsar News Feed</title>
@@ -15,6 +15,17 @@
       <width>88</width>
       <height>20</height>
     </image>
+    <item>
+      <title>Word of the day on Twitter</title>
+      <description>
+      Dubsar now tweets the word of the day on Twitter each day, with an app card and
+      a deep link that takes you directly to the word of the day in the mobile app on
+      your iOS or Google Play device (Android 3.0 or later). Follow @dubsar for updates.
+      </description>
+      <link>https://twitter.com/dubsar</link>
+      <guid isPermaLink="false">57</guid>
+      <pubDate>Sat, 24 Jan 2015 16:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>New server</title>
       <description>

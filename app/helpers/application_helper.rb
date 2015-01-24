@@ -242,6 +242,10 @@ body.style-light #amazon-dark {
   display: none;
 }
 
+body.style-light #twitter-white {
+  display: none;
+}
+
 body.style-light #search-form {
   color: black;
   background-color: #1c94c4;
@@ -319,6 +323,10 @@ body.style-dark .synonym-link:visited {
 }
 
 body.style-dark #amazon-light { 
+  display: none;
+}
+
+body.style-dark #twitter-blue {
   display: none;
 }
 
@@ -595,6 +603,15 @@ EOF
     HTML
   end
 
+  def twitter_icon
+    s = <<-HTML
+      <a href='https://twitter.com/dubsar' target='_blank'>
+        <img src='#{image_path 'Twitter_logo_blue_48.png'}', size: '44x44', alt: 'Twitter bird'} id='twitter-blue'/>
+        <img src='#{image_path 'Twitter_logo_white_48.png'}', size: '44x44', alt: 'Twitter bird'} id='twitter-white'/>
+      </a>
+    HTML
+  end
+
   def twitter_button(twitter_handle, url, text)
     s = <<-HTML
       <a class="twitter-share-button" href="https://twitter.com/share"
@@ -614,7 +631,7 @@ EOF
   def twitter_follow_button
     <<-HTML
       <a class="twitter-follow-button"
-        href="https://twitter.com/cpyn_mobi"
+        href="https://twitter.com/dubsar"
         data-show-count="false"
         data-lang="en">
       Follow @cpyn_mobi
