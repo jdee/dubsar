@@ -15,13 +15,10 @@
 - #  along with this program; if not, write to the Free Software
 - #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - content_for :title do
-  Dubsar Privacy Statement
+  Dubsar News
 
 - content_for :description do
-  %meta{:name => 'Description', :content => "Statement from the Dubsar Dictionary Project concerning user privacy."}
-  %meta{:name => 'Keywords', :content => 'Dubsar, Dubsar Project, WordNet, thesaurus, dictionary, free dictionary, online dictionary, Ruby on Rails, jQuery, jQuery UI, SQLite, QUnit, open-source, GPL, GitHub, English'}
-  %link{:rel => 'canonical', :href => 'https://dubsar.info/privacy'}
+  %link{:rel => 'canonical', :href => 'https://dubsar.info/ios_news_v200'}
 
-#about
-  = render partial: 'home_button'
-  = render partial: 'privacy_text'
+#news
+  = render partial: 'ios_news_v200'

@@ -9,4 +9,8 @@ Disallow: /tokens
 Disallow: /users
 Disallow: /wotd
 Disallow: /resume
+Disallow: /ios_faq
+Disallow: /ios_faq_v120
+Disallow: /ios_faq_v200
+Disallow: /ios_news_v200
 Allow: /wotd.xml

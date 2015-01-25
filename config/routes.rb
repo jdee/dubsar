@@ -52,6 +52,7 @@ Dubsar::Application.routes.draw do
   get '/privacy'          , to: 'words#privacy'
   get '/m_privacy'        , to: 'words#m_privacy'
   get '/news'             , to: 'words#news'
+  get '/ios_news_v200'    , to: 'words#ios_news_v200'
 
   get '/resume'           , to: 'application#resume'
   get '/m_resume'         , to: 'application#m_resume'
