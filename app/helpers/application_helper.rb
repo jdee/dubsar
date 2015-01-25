@@ -605,7 +605,7 @@ EOF
 
   def twitter_icon
     s = <<-HTML
-      <a href='https://twitter.com/intent/follow?user_id=335105958' target='_blank'>
+      <a href='https://twitter.com/intent/follow?user_id=335105958' target='_blank' style='text-decoration: none;'>
         <img src='#{image_path 'Twitter_logo_blue_48.png'}' height='24' width='24' alt: 'Twitter bird' id='twitter-blue'/>
         <img src='#{image_path 'Twitter_logo_white_48.png'}' height='24' width='24' alt: 'Twitter bird' id='twitter-white'/>
       </a>
