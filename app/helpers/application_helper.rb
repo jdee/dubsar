@@ -225,6 +225,11 @@ body.style-light #error.notice {
   color: black;
 }
 
+body.style-light #error.error {
+  background-color: #1c94c4;
+  color: black;
+}
+
 body.style-light .lexical {
   background-color: #87ceeb;
   color: black;
