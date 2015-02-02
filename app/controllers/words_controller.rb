@@ -189,7 +189,7 @@ class WordsController < ApplicationController
 
     # search and index use the same URL
     unless @term
-      flash.now[:notice] = 'Welcome to the new Dubsar.'
+      # flash.now[:notice] = 'Welcome to the new Dubsar.'
       render :action => :index
       return
     end
