@@ -1,6 +1,6 @@
 %h2 Privacy Statement
 
-%h3 08-Sep-2014
+%h3 06-Feb-2015
 
 %p
   Dubsar has few issues related to user privacy, but it takes those seriously.
@@ -69,18 +69,16 @@
 %h4#https HTTPS
 
 %p
-  Dubsar redirects most HTTP traffic to the same HTTPS URL (e.g.,
+  Dubsar redirects all HTTP traffic to the same HTTPS URL (e.g.,
   =link_to 'http://dubsar.info', 'http://dubsar.info'
   is redirected to
   =link_to 'https://dubsar.info', 'https://dubsar.info'
-  ). The main exception is JSON requests from the 1.0.2 and earlier Android clients
-  (see
-  =link_to 'Android', '#android'
-  below). HTTPS is a secure, private transport that encrypts all
+  ).
+  HTTPS is a secure, private transport that encrypts all
   communications between the client and server using SSL or TLS. There are many ins and
   outs to SSL and TLS. Qualys has a tool for evaluating the security of any HTTPS
   site; it gives Dubsar a 
-  =link_to 'high score.', 'https://www.ssllabs.com/ssltest/analyze.html?d=https%3A%2F%2Fdubsar.info'
+  =link_to 'high score.', 'https://www.ssllabs.com/ssltest/analyze.html?d=dubsar.info'
 
 %p
   Note that Dubsar supports forward secrecy, which makes it resistant to mass
@@ -102,16 +100,9 @@
 %h3#android Android
 
 %p
-  The Android application before version 1.1.0 was not secure. It used HTTP instead
-  of HTTPS for its communications, sending all client requests across the open
-  Internet without encryption since older releases predated the adoption of HTTPS by
-  the server. Unfortunately, the Android HTTP client software used in the older versions
-  will not follow a redirect message from the server to the corresponding HTTPS URL
-  (see
-  =link_to 'HTTPS', '#https'
-  above). Hence, those older versions cannot be made secure. However, the
-  1.1.0 release of Dubsar for Android uses HTTPS for all communications with the server.
-  It also logs almost nothing about a user's activity to the Android logcat.
+  Starting with the 1.1.0 release of Dubsar for Android in 2013, the app uses HTTPS for all
+  communications with the server. It also logs almost nothing about a user's activity to
+  the Android logcat.
 
 %h3#tor Tor and anonymity
 
@@ -149,23 +140,6 @@
   buttons on the About activity that take the user to Google Play, the Amazon App Store
   or the Dubsar website. If you are careful to use the Orweb browser or have
   transparent proxying enabled, those browser requests can also be routed through Tor.
-
-%h3 External sites
-
-%p
-  Users who wish to discuss Dubsar on Facebook, Twitter or Google Plus can easily do so
-  using the Share button at the top of any Dubsar page. Some of the scripts included from
-  those vendors have the capacity to report a user&apos;s presence on any website to
-  their networks, even if the user does not click on those buttons or links. Hence, the
-  Share button uses AJAX to render those buttons and links only if the user wishes to.
-  Without clicking the Share button, no external markup is used or scripts loaded. All
-  other content on the site, without exception, is hosted by Dubsar. This protects privacy
-  and improves performance/response as well.
-
-%p
-  If you do click the Share button, even without sharing anything, your identity may be
-  sent to some social networks. This is true of every site on the Internet that displays
-  controls or content from these networks.
 
 %h3 Open source
 
