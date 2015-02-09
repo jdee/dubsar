@@ -475,7 +475,7 @@ body.style-light div.accordion-body table.word-links a.synonym-link:active {
   end
 
   def apk_link
-    "#{asset_host}/Dubsar-1.2.0.1.apk"
+    "#{asset_host}/Dubsar-1.2.1.2.apk"
   end
 
   def nsa_banner
