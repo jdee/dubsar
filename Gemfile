@@ -37,7 +37,7 @@ group :backup_dev, :development, :test do
   gem 'json'
   gem 'simplecov', require: false
   gem 'rspec-rails', '~> 2.99'
-  gem 'rvm-capistrano'
+  gem 'rvm-capistrano', require: false
   gem 'webrat'
   gem 'nokogiri'
 end
