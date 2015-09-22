@@ -84,8 +84,8 @@ namespace :deploy do
 
   desc "Links to the pingpong app"
   task :link_pingpong_app do
-    run "ln -nsf #{shared_config_path}/pingpong.plist #{current_path}/public"
-    run "ln -nsf #{shared_database_path}/pingpong.ipa #{current_path}/public"
+    run "ln -nsf /home/pingpong/pingpong.plist #{current_path}/public"
+    run "ln -nsf /home/pingpong/pingpong.ipa #{current_path}/public"
   end
 
   desc "Links the database for download"
