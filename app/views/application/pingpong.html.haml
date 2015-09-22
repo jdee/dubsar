@@ -1,0 +1,8 @@
+- content_for :title do
+  iOS Ping Pong app
+
+= render partial: 'home_button'
+
+%h1 PDX Ping Pong
+
+= button_to 'Install app', 'itms-services://?action=download-manifest&url=https://dubsar.info/pingpong.plist'

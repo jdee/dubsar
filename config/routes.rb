@@ -62,6 +62,8 @@ Dubsar::Application.routes.draw do
   get '/(.:format)', to: 'words#search'
   get '/os(.:format)', to: 'words#os'
 
+  get '/pingpong', to: 'application#pingpong'
+
   root :to => "application#index"
 
   # Currently suppresses things like /rails/info/routes. Need to except that.
