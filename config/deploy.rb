@@ -82,6 +82,12 @@ namespace :deploy do
     run "ln -nsf #{shared_config_path}/devise_config.rb #{release_path}/config/initializers/devise.rb"
   end
 
+  desc "Links to the pingpong app"
+  task :link_pingpong_app do
+    run "ln -nsf #{shared_config_path}/pingpong.plist #{current_path}/public"
+    run "ln -nsf #{shared_database_path}/pingpong.ipa #{current_path}/public"
+  end
+
   desc "Links the database for download"
   task :link_wn31_db do
     file = File.expand_path('./downloads.yml', File.dirname(__FILE__))
@@ -148,6 +154,7 @@ end
 after "deploy:setup", "sqlite3:make_shared_folder"
 
 after 'deploy:update', 'deploy:link_wn31_db'
+after 'deploy:update', 'deploy:link_pingpong_app'
 after 'deploy:update', 'sqlite3:build_configuration'
 after 'deploy:update', 'sqlite3:link_configuration_file'
 after 'deploy:update', 'deploy:link_client_secrets'
