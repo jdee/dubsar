@@ -170,13 +170,13 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
 
         if (expiration > 0)
         {
-            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":{\"title\":\"Dubsar Word of the Day\", \"body\": \"%s (%s.)\"}, \"content-available\":1, \"category\":\"wotd\"},"
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Dubsar Word of the Day: %s (%s.)\", \"content-available\":1, \"category\":\"wotd\"},"
                 "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":%ld}}",
                 wordName, pos, wordId, expiration);
         }
         else
         {
-            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":{\"title\":\"Dubsar Word of the Day\", \"body\": \"%s (%s.)\"}, \"content-available\":1, \"category\":\"wotd\"},"
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Dubsar Word of the Day: %s (%s.)\", \"content-available\":1, \"category\":\"wotd\"},"
                 "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":\"%s\"}}",
                 wordName, pos, wordId, wotdExpiration);
         }
