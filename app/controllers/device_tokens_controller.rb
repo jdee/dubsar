@@ -36,12 +36,15 @@ class DeviceTokensController < ApplicationController
       params[:device_token][:production]
 
     if @device_token
-      @device_token.update_attribute :updated_at, DateTime.now
+      @device_token.update_attributes updated_at: DateTime.now, client_version: params[:version]
       head :created, :location => @device_token
       return
     end
 
-    @device_token = DeviceToken.create token_params
+    @device_token = DeviceToken.new token_params
+    @device_token.client_version = params[:version]
+    @device_token.save!
+
     head :invalid_entity and return unless @device_token.valid?
 
     head :created, :location => @device_token
