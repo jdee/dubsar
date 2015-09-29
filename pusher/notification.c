@@ -42,7 +42,7 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
     }
 
     char sql[256];
-    sprintf(sql, "SELECT COUNT(*) FROM device_tokens WHERE production = '%s'",
+    sprintf(sql, "SELECT COUNT(*) FROM device_tokens WHERE production = '%s' ",
         (production == 1 ? "t" : "f"));
 
     sqlite3_stmt* statement = NULL;
@@ -114,7 +114,181 @@ getDeviceTokens(int production, const char* databasePath, char** buffer)
 
 static
 int
-wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpiration)
+getDeviceTokens_pre210(int production, const char* databasePath, char** buffer)
+{
+    sqlite3* database = NULL;
+    int rc = sqlite3_open_v2(databasePath, &database,
+        SQLITE_OPEN_FULLMUTEX|SQLITE_OPEN_READONLY, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
+        return -1;
+    }
+
+    char sql[256];
+    sprintf(sql, "SELECT COUNT(*) FROM device_tokens WHERE production = '%s' "
+        "AND (client_version ISNULL OR client_version LIKE '1%%' OR client_version LIKE '2.0._')",
+        (production == 1 ? "t" : "f"));
+
+    sqlite3_stmt* statement = NULL;
+    rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
+        sqlite3_close(database);
+        return -1;
+    }
+
+    int number = -1;
+    rc = sqlite3_step(statement);
+    if (rc == SQLITE_ROW)
+    {
+        number = sqlite3_column_int(statement, 0);
+    }
+    else
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error counting device tokens: %d\n", rc);
+        sqlite3_finalize(statement);
+        sqlite3_close(database);
+        return -1;
+    }
+
+    sqlite3_finalize(statement);
+
+    if (number == 0)
+    {
+        sqlite3_close(database);
+        *buffer = NULL;
+        return 0;
+    }
+
+    sprintf(sql, "SELECT token FROM device_tokens WHERE production = '%s' "
+        "AND (client_version ISNULL OR client_version LIKE '1%%' OR client_version LIKE '2.0._')",
+        (production == 1 ? "t" : "f"));
+    rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
+        sqlite3_close(database);
+        return -1;
+    }
+
+    *buffer = malloc(64 * number);
+    int count;
+    for (count=0; (rc=sqlite3_step(statement)) == SQLITE_ROW; ++count)
+    {
+        memcpy((*buffer)+64*count, sqlite3_column_text(statement, 0), 64);
+    }
+
+    if (rc != SQLITE_DONE || count != number)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error retrieving device tokens: %d\n", rc);
+        free(*buffer);
+        *buffer = NULL;
+        number = -1;
+    }
+
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+
+    return number;
+}
+
+static
+int
+getDeviceTokens_v210(int production, const char* databasePath, char** buffer)
+{
+    sqlite3* database = NULL;
+    int rc = sqlite3_open_v2(databasePath, &database,
+        SQLITE_OPEN_FULLMUTEX|SQLITE_OPEN_READONLY, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
+        return -1;
+    }
+
+    char sql[256];
+    sprintf(sql, "SELECT COUNT(*) FROM device_tokens WHERE production = '%s' "
+        "AND client_version NOTNULL AND client_version NOT LIKE '1%%' AND client_version NOT LIKE '2.0._'",
+        (production == 1 ? "t" : "f"));
+
+    sqlite3_stmt* statement = NULL;
+    rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
+        sqlite3_close(database);
+        return -1;
+    }
+
+    int number = -1;
+    rc = sqlite3_step(statement);
+    if (rc == SQLITE_ROW)
+    {
+        number = sqlite3_column_int(statement, 0);
+    }
+    else
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error counting device tokens: %d\n", rc);
+        sqlite3_finalize(statement);
+        sqlite3_close(database);
+        return -1;
+    }
+
+    sqlite3_finalize(statement);
+
+    if (number == 0)
+    {
+        sqlite3_close(database);
+        *buffer = NULL;
+        return 0;
+    }
+
+    sprintf(sql, "SELECT token FROM device_tokens WHERE production = '%s' "
+        "AND client_version NOTNULL AND client_version NOT LIKE '1%%' AND client_version NOT LIKE '2.0._'",
+        (production == 1 ? "t" : "f"));
+    rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
+        sqlite3_close(database);
+        return -1;
+    }
+
+    *buffer = malloc(64 * number);
+    int count;
+    for (count=0; (rc=sqlite3_step(statement)) == SQLITE_ROW; ++count)
+    {
+        memcpy((*buffer)+64*count, sqlite3_column_text(statement, 0), 64);
+    }
+
+    if (rc != SQLITE_DONE || count != number)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error retrieving device tokens: %d\n", rc);
+        free(*buffer);
+        *buffer = NULL;
+        number = -1;
+    }
+
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+
+    return number;
+}
+
+static
+int
+wotdPayload_pre210(const char* databasePath, char* payloadBuffer, const char* wotdExpiration)
 {
     sqlite3* database = NULL;
     int rc = sqlite3_open_v2(databasePath, &database,
@@ -170,13 +344,94 @@ wotdPayload(const char* databasePath, char* payloadBuffer, const char* wotdExpir
 
         if (expiration > 0)
         {
-            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Word of the day: %s (%s.)\", \"content-available\":1, \"category\":\"wotd\"},"
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Word of the day: %s (%s.)\"},"
                 "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":%ld}}",
                 wordName, pos, wordId, expiration);
         }
         else
         {
-            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Word of the day: %s (%s.)\", \"content-available\":1, \"category\":\"wotd\"},"
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":\"Word of the day: %s (%s.)\"},"
+                "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":\"%s\"}}",
+                wordName, pos, wordId, wotdExpiration);
+        }
+    }
+    else
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "failed to find WOTD in the DB: %d", rc);
+    }
+
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+
+    return payloadLength;
+}
+
+static
+int
+wotdPayload_v210(const char* databasePath, char* payloadBuffer, const char* wotdExpiration)
+{
+    sqlite3* database = NULL;
+    int rc = sqlite3_open_v2(databasePath, &database,
+        SQLITE_OPEN_FULLMUTEX|SQLITE_OPEN_READONLY, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
+        return -1;
+    }
+
+    const char* sql = "SELECT w.id, w.name, w.part_of_speech, dw.created_at FROM words w "
+        "INNER JOIN daily_words dw ON dw.word_id = w.id "
+        "ORDER BY dw.created_at DESC LIMIT 1";
+
+    sqlite3_stmt* statement = NULL;
+    rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_prepare_v2\n", rc);
+        sqlite3_close(database);
+        return -1;
+    }
+
+    int wordId = 0;
+    const char* wordName = NULL, *wordPartOfSpeech = NULL;
+    const char* dailyWordCreatedAt = NULL;
+    int payloadLength = -1;
+
+    if ((rc=sqlite3_step(statement)) == SQLITE_ROW)
+    {
+        wordId = sqlite3_column_int(statement, 0);
+        wordName = (const char*)sqlite3_column_text(statement, 1);
+        wordPartOfSpeech = (const char*)sqlite3_column_text(statement, 2);
+        dailyWordCreatedAt = (const char*)sqlite3_column_text(statement, 3);
+
+        time_t expiration = 0;
+        if (wotdExpiration == NULL || wotdExpiration[0] == '\0')
+        {
+            char buffer[32];
+            strcpy(buffer, dailyWordCreatedAt);
+            char* period = strchr(buffer, '.');
+            if (period) *period = '\0';
+            expiration = parseTimestamp(buffer, "%Y-%m-%d %T") + 86400;
+        }
+
+        const char* pos = NULL;
+        if (!strcmp(wordPartOfSpeech, "noun")) pos = "n";
+        else if (!strcmp(wordPartOfSpeech, "verb")) pos = "v";
+        else if (!strcmp(wordPartOfSpeech, "adjective")) pos = "adj";
+        else pos = "adv";
+
+        if (expiration > 0)
+        {
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":{\"title\":\"Dubsar Word of the Day\", \"body\": \"%s, %s.\"}, \"content-available\":1, \"category\":\"wotd\"},"
+                "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":%ld}}",
+                wordName, pos, wordId, expiration);
+        }
+        else
+        {
+            payloadLength = snprintf(payloadBuffer, 256, "{\"aps\":{\"alert\":{\"title\":\"Dubsar Word of the Day\", \"body\": \"%s, %s.\"}, \"content-available\":1, \"category\":\"wotd\"},"
                 "\"dubsar\":{\"type\":\"wotd\",\"url\":\"dubsar:///wotd/%d\",\"expiration\":\"%s\"}}",
                 wordName, pos, wordId, wotdExpiration);
         }
@@ -241,12 +496,171 @@ buildNotification(unsigned char* notification, const char* deviceToken, const ch
     memcpy(&notification[45], payloadBuffer, n);
 }
 
+const char*
+appVersionForDeviceToken(const char* deviceToken, const char* databasePath)
+{
+    sqlite3* database = NULL;
+    int rc = sqlite3_open_v2(databasePath, &database,
+        SQLITE_OPEN_FULLMUTEX|SQLITE_OPEN_READONLY, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_open_v2\n", rc);
+        return NULL;
+    }
+
+    const char* sql = "SELECT client_version FROM device_tokens WHERE token = ? LIMIT 1";
+    sqlite3_stmt* statement;
+
+    rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
+    if (rc != SQLITE_OK)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_prepare_v2(%s)\n", rc, sql);
+        sqlite3_close(database);
+        return NULL;
+    }
+
+    const char* clientVersion = NULL;
+    rc = sqlite3_step(statement);
+    if (rc == SQLITE_ROW)
+    {
+        clientVersion = (const char*)sqlite3_column_text(statement, 1);
+    }
+    else
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "error %d from sqlite3_step(%s)\n", rc, sql);
+    }
+
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+
+    return clientVersion;
+}
+
+int
+buildBroadcastWotdPayload(int production, const char* databasePath, const char* wotdExpiration,
+    int apnsExpiration, void** buffer, size_t* bufsiz)
+{
+    char payloadBuffer[256];
+    int n = -1;
+    int numDevices = 1;
+    char* deviceTokens = NULL;
+
+    // 1. Get all tokens for pre 2.1.0 and build that payload for them.
+    numDevices = getDeviceTokens_pre210(production, databasePath, &deviceTokens);
+
+    if (numDevices < 0)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "failed to build device list\n");
+        return 1;
+    }
+
+    size_t firstBufferSize = 0;
+    void* notificationBuffer = NULL;
+    if (numDevices > 0)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "sending to %d pre-2.1.0 devices", numDevices);
+
+        n = wotdPayload_pre210(databasePath, payloadBuffer, wotdExpiration);
+
+        timestamp_f(stderr);
+        fprintf(stderr, "pre-2.1.0 payload (%d): %s\n", n, payloadBuffer);
+
+        // don't ask
+        firstBufferSize = (45 + n) * numDevices;
+        notificationBuffer = malloc(firstBufferSize);
+
+        int j;
+        int count = 0;
+        for (j=0; j<numDevices; ++j)
+        {
+            char token[128];
+            strncpy(token, &deviceTokens[j*64], 64);
+            token[64] = '\0';
+            if (strlen(token) != 64 || strspn(token, "0123456789abcdefABCDEF") != 64) {
+                timestamp_f(stderr);
+                fprintf(stderr, "invalid device token \"%s\", skipping\n", token);
+                continue;
+            }
+
+            unsigned char* notification = &((unsigned char*) notificationBuffer)[(45+n)*j];
+            buildNotification(notification, token, payloadBuffer, n, apnsExpiration);
+            ++ count;
+        }
+        firstBufferSize = (45 + n) * count;
+
+        free(deviceTokens);
+    }
+
+    // 2. Get all tokens for v 2.1.0 and build that payload for them.
+    numDevices = getDeviceTokens_v210(production, databasePath, &deviceTokens);
+
+    if (numDevices < 0)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "failed to build device list\n");
+        if (notificationBuffer) free(notificationBuffer);
+        return 1;
+    }
+
+    size_t secondBufferSize = 0;
+    if (numDevices > 0)
+    {
+        timestamp_f(stderr);
+        fprintf(stderr, "sending to %d v-2.1.0 devices", numDevices);
+
+        n = wotdPayload_v210(databasePath, payloadBuffer, wotdExpiration);
+
+        timestamp_f(stderr);
+        fprintf(stderr, "v-2.1.0 payload (%d): %s\n", n, payloadBuffer);
+
+        // don't ask
+        secondBufferSize = (45 + n) * numDevices;
+        notificationBuffer = realloc(notificationBuffer, firstBufferSize + secondBufferSize);
+
+        int j;
+        int count = 0;
+        for (j=0; j<numDevices; ++j)
+        {
+            char token[128];
+            strncpy(token, &deviceTokens[j*64], 64);
+            token[64] = '\0';
+            if (strlen(token) != 64 || strspn(token, "0123456789abcdefABCDEF") != 64) {
+                timestamp_f(stderr);
+                fprintf(stderr, "invalid device token \"%s\", skipping\n", token);
+                continue;
+            }
+
+            unsigned char* notification = &((unsigned char*) notificationBuffer)[(45+n)*j+firstBufferSize];
+            buildNotification(notification, token, payloadBuffer, n, apnsExpiration);
+            ++ count;
+        }
+        secondBufferSize = (45 + n) * count;
+
+        free(deviceTokens);
+    }
+
+    *buffer = notificationBuffer;
+    *bufsiz = firstBufferSize + secondBufferSize;
+    return 0;
+}
+
 int
 buildNotificationPayload(int wotd, int broadcast, int production,
     const char* deviceToken, const char* databasePath, const char* message,
     const char* url, const char* wotdExpiration, int apnsExpiration,
     void** buffer, size_t* bufsiz)
 {
+    if (broadcast && wotd)
+    {
+        return buildBroadcastWotdPayload(production, databasePath, wotdExpiration,
+            apnsExpiration, buffer, bufsiz);
+    }
+
     char payloadBuffer[256];
     int n = -1;
     int numDevices = 1;
@@ -274,7 +688,7 @@ buildNotificationPayload(int wotd, int broadcast, int production,
 
     if (wotd)
     {
-        n = wotdPayload(databasePath, payloadBuffer, wotdExpiration);
+        // TODO: Build the right payload based on the version of this DT.
     }
     else
     {
