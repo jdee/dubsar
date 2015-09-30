@@ -563,7 +563,7 @@ buildBroadcastWotdPayload(int production, const char* databasePath, const char* 
     if (numDevices > 0)
     {
         timestamp_f(stderr);
-        fprintf(stderr, "sending to %d pre-2.1.0 devices", numDevices);
+        fprintf(stderr, "sending to %d pre-2.1.0 devices\n", numDevices);
 
         n = wotdPayload_pre210(databasePath, payloadBuffer, wotdExpiration);
 
@@ -611,7 +611,7 @@ buildBroadcastWotdPayload(int production, const char* databasePath, const char* 
     if (numDevices > 0)
     {
         timestamp_f(stderr);
-        fprintf(stderr, "sending to %d v-2.1.0 devices", numDevices);
+        fprintf(stderr, "sending to %d v-2.1.0 devices\n", numDevices);
 
         n = wotdPayload_v210(databasePath, payloadBuffer, wotdExpiration);
 
