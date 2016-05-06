@@ -4,7 +4,7 @@
         "details": [
             {
                 "appID": "KDZ8XAA4C9.com.dubsar-dictionary.Dubsar",
-                "paths": [ "/words/*" ]
+                "paths": [ "/", "/words/*" ]
             }
         ]
     }
